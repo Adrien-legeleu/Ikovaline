@@ -11,10 +11,11 @@ import {
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { IconBuildingStore } from "@tabler/icons-react";
 
 export default function Services() {
   return (
-    <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
+    <BentoGrid className="max-w-5xl py-32 mx-auto md:auto-rows-[25rem]">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
@@ -35,8 +36,8 @@ const SkeletonOne = () => {
       x: 0,
     },
     animate: {
-      x: 10,
-      rotate: 5,
+      x: 6,
+      rotate: 2,
       transition: {
         duration: 0.2,
       },
@@ -47,8 +48,8 @@ const SkeletonOne = () => {
       x: 0,
     },
     animate: {
-      x: -10,
-      rotate: -5,
+      x: -6,
+      rotate: -2,
       transition: {
         duration: 0.2,
       },
@@ -59,27 +60,57 @@ const SkeletonOne = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className=" w-full h-auto py-4 gap-4 text-gray-400 text-xs grid grid-cols-2 dark:bg-dot-white/[0.2] bg-dot-black/[0.1] flex-col space-y-2"
     >
-      <motion.div
-        variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
-      >
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+      <motion.div variants={variantsSecond} className="space-y-4">
+        <div className="w-full text-sm bg-white rounded-full shadow-lg py-1 px-2 border">
+          recherche
+        </div>
+        <div className="space-y-2">
+          <div className="space-y-1 flex flex-col  border border-red-300 rounded-xl p-1">
+            <span className="text-sm flex gap-1 items-center ">
+              {" "}
+              <div className="h-3 w-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+              Ikovaline
+            </span>
+            <span className="text-xs">Lorem ipsum dolor sit amet.</span>
+          </div>
+          <div className="space-y-1 flex flex-col">
+            <div className="w-1/2 bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+            <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+          </div>
+          <div className="space-y-1 flex flex-col">
+            <div className="w-1/2 bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+            <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+          </div>
+        </div>
       </motion.div>
-      <motion.div
-        variants={variantsSecond}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
-      >
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-      </motion.div>
-      <motion.div
-        variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 bg-white dark:bg-black"
-      >
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+      <motion.div variants={variants} className="border-l pl-2">
+        <div>
+          <IconBuildingStore
+            stroke={2}
+            width={50}
+            height={50}
+            className="mx-auto"
+          />
+        </div>
+        <div>
+          <span className="text-base flex gap-2 items-center">
+            {" "}
+            <div className="h-5 w-5 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+            Ikovaline
+          </span>
+        </div>
+        <div className="flex text-sm ">
+          <span>⭐</span>
+          <span>⭐</span>
+          <span>⭐</span>
+          <span>⭐</span>
+          <span>⭐</span>
+          <span>(87)</span>
+        </div>
+        <div className="text-xs">buisness développement</div>
+        <div className="w-full border my-2" />
         <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
       </motion.div>
     </motion.div>
@@ -296,10 +327,11 @@ const SkeletonFive = () => {
 };
 const items = [
   {
-    title: "AI Content Generation",
+    title: "Google My Business & Avis Clients",
     description: (
       <span className="text-sm">
-        Experience the power of AI in generating unique content.
+        Ikovaline vous aide à optimiser votre présence sur Google My Business et
+        à gérer les avis clients pour améliorer votre visibilité en ligne.
       </span>
     ),
     header: <SkeletonOne />,
@@ -307,10 +339,12 @@ const items = [
     icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Automated Proofreading",
+    title: "Stratégie de Contenu & Réseaux Sociaux",
     description: (
       <span className="text-sm">
-        Let AI handle the proofreading of your documents.
+        Développez votre stratégie de contenu sur des plateformes comme
+        Instagram, Facebook, TikTok, et LinkedIn pour engager votre audience et
+        renforcer votre image de marque.
       </span>
     ),
     header: <SkeletonTwo />,
@@ -318,10 +352,12 @@ const items = [
     icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Contextual Suggestions",
+    title: "Création & Optimisation de Sites Internet",
     description: (
       <span className="text-sm">
-        Get AI-powered suggestions based on your writing context.
+        Nous créons des sites web vitrine et e-commerce adaptés à vos besoins,
+        optimisés pour offrir une expérience utilisateur fluide et responsive
+        sur tous les appareils.
       </span>
     ),
     header: <SkeletonThree />,
@@ -329,10 +365,12 @@ const items = [
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Sentiment Analysis",
+    title: "Lancement de Campagnes Publicitaires",
     description: (
       <span className="text-sm">
-        Understand the sentiment of your text with AI analysis.
+        Profitez des meilleures pratiques en publicité en ligne avec des
+        campagnes Google Ads et Social Ads pour atteindre vos objectifs
+        commerciaux et maximiser votre ROI.
       </span>
     ),
     header: <SkeletonFour />,
@@ -341,10 +379,11 @@ const items = [
   },
 
   {
-    title: "Text Summarization",
+    title: "Consulting en Développement Commercial",
     description: (
       <span className="text-sm">
-        Summarize your lengthy documents with AI technology.
+        Nous vous accompagnons dans le développement commercial en optimisant
+        vos processus et stratégies pour atteindre une croissance durable.
       </span>
     ),
     header: <SkeletonFive />,

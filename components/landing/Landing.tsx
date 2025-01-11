@@ -1,27 +1,26 @@
 import { BackgroundBeamsWithCollision } from "../ui/background-beams-with-collision";
 import { Button } from "../ui/button";
+import { Cover } from "../ui/cover";
+import { TextAnimate } from "../ui/text-animate";
 
 export default function Landing() {
   return (
     <BackgroundBeamsWithCollision>
-      <h2 className="text-2xl relative max-w-3xl z-20 md:text-4xl lg:text-6xl font-bold text-center text-black dark:text-white font-sans tracking-tight">
-        What&apos;s cooler than Beams?{" "}
-        <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
-          <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
-            <span className="">Exploding beams.</span>
-          </div>
-          <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 py-4">
-            <span className="">Exploding beams.</span>
-          </div>
-        </div>
-      </h2>
-      <p>
-        La start-up étudiante dolor sit amet consectetur adipisicing elit. In
-        eos perspiciatis tempora.
-      </p>
+      <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+        Votre succès commence ici avec <br /> <Cover>Ikovaline</Cover>
+      </h1>
+
+      <TextAnimate
+        animation="blurInUp"
+        by="word"
+        className="text-muted-foreground max-w-lg text-center text-lg"
+      >
+        Ikovaline, expert en marketing digital, transforme vos ambitions en
+        réalités en boostant votre visibilité et vos performances en ligne.
+      </TextAnimate>
       <div className="flex gap-4">
-        <Button>Prendre rendez-vous</Button>
-        <Button>Voir nos services</Button>
+        <Button>Nous-contactez</Button>
+        <Button variant={"secondary"}>Explorer nos services</Button>
       </div>
     </BackgroundBeamsWithCollision>
   );
