@@ -8,7 +8,7 @@ export function CallToAction() {
   return (
     <div className="relative flex  p-16 mb-10 mx-auto  gap-10 max-w-5xl   w-full flex-col items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
       <h2 className="text-3xl font-semibold text-white">
-        Alord pret à passer à l'action ?{" "}
+        Alors pret à passer à l'action ?{" "}
       </h2>
       <p className="text-center text-neutral-200 max-w-3xl txt-lg">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
