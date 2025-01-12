@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "../ui/navbar-menu";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
+import Image from "next/image";
+import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
 
 // export function NavbarDemo() {
 //   return (
@@ -17,19 +19,40 @@ import { Button } from "../ui/button";
 
 export function Header({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
+  const [upToZero, setUpToZero] = useState(false);
+
+  useEffect(() => {
+    const handleHeader = () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 0) {
+        setUpToZero(true);
+      } else {
+        setUpToZero(false);
+      }
+    };
+    window.addEventListener("scroll", handleHeader);
+  }, []);
+
   return (
     <div
       className={cn(
-        "fixed top-4 inset-x-0  flex items-center justify-center mx-auto z-50  ",
+        "fixed font-poppins  inset-x-0 duration-500 ease-in-out flex items-center justify-center mx-auto z-[10000]  ",
+        upToZero ? "top-4" : "top-0",
         className
       )}
     >
-      <Menu setActive={setActive}>
+      <Menu setActive={setActive} upToZero={upToZero}>
         <div className="flex items-center justify-center">
-          <span>Ikovaline</span>
+          <Image
+            src={IkovalineLogo}
+            alt="logo de la start-up Ikovaline"
+            width={50}
+            height={50}
+            className="min-h-10 min-w-28 object-contain"
+          />
         </div>
         <div className="flex items-center gap-10 justify-center">
-          <MenuItem setActive={setActive} active={active} item="Services">
+          <MenuItem setActive={setActive} active={active} item="Home">
             <div className="flex flex-col space-y-4 text-sm">
               <HoveredLink href="/web-dev">Web Development</HoveredLink>
               <HoveredLink href="/interface-design">
@@ -39,7 +62,7 @@ export function Header({ className }: { className?: string }) {
               <HoveredLink href="/branding">Branding</HoveredLink>
             </div>
           </MenuItem>
-          <MenuItem setActive={setActive} active={active} item="Products">
+          <MenuItem setActive={setActive} active={active} item="Service">
             <div className="  text-sm grid grid-cols-2 gap-10 p-4">
               <ProductItem
                 title="Algochurn"
@@ -67,7 +90,7 @@ export function Header({ className }: { className?: string }) {
               />
             </div>
           </MenuItem>
-          <MenuItem setActive={setActive} active={active} item="Pricing">
+          <MenuItem setActive={setActive} active={active} item="About">
             <div className="flex flex-col space-y-4 text-sm">
               <HoveredLink href="/hobby">Hobby</HoveredLink>
               <HoveredLink href="/individual">Individual</HoveredLink>

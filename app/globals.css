@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,75 +14,49 @@ body {
 }
 
 @layer base {
-  :root {
-      /* Fond général */
-      --background: 0 0% 100%;
-      /* Reste blanc pour la clarté du design */
-      --foreground: 0 0% 3.9%;
-      /* Texte sombre pour une bonne lisibilité */
-  
-      /* Couleurs des cartes et des popups */
-      --card: 0 0% 100%;
-      /* Fond très clair pour les cartes */
-      --card-foreground: 0 0% 3.9%;
-      /* Texte sombre sur les cartes */
-      --popover: 0 0% 100%;
-      /* Fond clair pour les popovers */
-      --popover-foreground: 0 0% 3.9%;
-      /* Texte sombre sur les popovers */
-  
-      /* Couleurs principales (Ikovaline) */
-      --primary: 178 100% 58%;
-      /* Teal clair #1FDED7 en HSL */
-      --primary-foreground: 0 0% 100%;
-      /* Texte clair pour le fond primaire */
-  
-      --secondary: 170 100% 58%;
-      /* Teal foncé #0AF0B9 en HSL */
-      --secondary-foreground: 0 0% 100%;
-      /* Texte clair sur fond secondaire */
-  
-      /* Couleurs secondaires et atténuées */
-      --muted: 0 0% 96.1%;
-      /* Fond très clair pour les éléments secondaires */
-      --muted-foreground: 0 0% 45.1%;
-      /* Texte atténué pour les éléments secondaires */
-  
-      --accent: 170 100% 58%;
-      /* Accent similaire à la couleur secondaire */
-      --accent-foreground: 0 0% 100%;
-      /* Texte clair pour l'accentuation */
-  
-      /* Couleur destructrice pour les erreurs */
-      --destructive: 0 84.2% 60.2%;
-      /* Rouge pour les erreurs */
-      --destructive-foreground: 0 0% 100%;
-      /* Texte clair sur les erreurs */
-  
-      /* Bordures et autres éléments de UI */
-      --border: 0 0% 89.8%;
-      /* Bordure claire */
-      --input: 0 0% 89.8%;
-      /* Fond clair pour les champs de saisie */
-      --ring: 0 0% 3.9%;
-      /* Couleur pour les anneaux (focus, etc.) */
-  
-      /* Couleurs pour les graphiques */
-      --chart-1: 170 100% 58%;
-      /* Teal primaire pour les graphiques */
-      --chart-2: 140 100% 47%;
-      /* Teal plus doux pour les graphiques */
-      --chart-3: 197 37% 24%;
-      /* Bleu pour les graphiques */
-      --chart-4: 43 74% 66%;
-      /* Jaune doux pour les graphiques */
-      --chart-5: 27 87% 67%;
-      /* Rouge doux pour les graphiques */
-  
-      /* Rayon des bordures */
-      --radius: 0.5rem;
-      /* Rayon pour les bordures arrondies */
-    }
+:root {
+    /* Fond général */
+    /* --background: 220 20% 95%; */
+    --background: 0% 0% 100% ;
+    --foreground: 220 15% 15%;
+
+    /* Couleurs des cartes et des popups */
+    --card: 220 20% 98%;
+    --card-foreground: 220 15% 10%;
+    --popover: 220 20% 98%;
+    --popover-foreground: 220 15% 10%;
+
+    /* Couleurs principales */
+    --primary: 210 90% 50%;
+    --primary-foreground: 220 20% 95%;
+
+    --secondary: 210 80% 40%;
+    --secondary-foreground: 220 20% 95%;
+
+    /* Couleurs secondaires et atténuées */
+    --muted: 220 15% 90%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 200 70% 50%;
+    --accent-foreground: 220 20% 95%;
+
+    /* Couleur destructrice pour les erreurs */
+    --destructive: 0 84% 58%;
+    --destructive-foreground: 220 20% 95%;
+
+    /* Bordures et autres éléments de UI */
+    --border: 220 20% 85%;
+    --input: 220 20% 85%;
+    --ring: 221.2 83.2% 53.3%;
+      --chart-1: 221.2 83.2% 53.3%;
+      --chart-2: 212 95% 68%;
+      --chart-3: 216 92% 60%;
+      --chart-4: 210 98% 78%;
+      --chart-5: 212 97% 87%;
+
+    /* Rayon des bordures */
+    --radius: 0.5rem;
+  }
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;

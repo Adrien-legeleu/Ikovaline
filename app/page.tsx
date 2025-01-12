@@ -1,7 +1,8 @@
-import About from "@/components/about/About";
-import Landing from "@/components/landing/Landing";
-import { Review } from "@/components/review/Review";
-import Services from "@/components/servicesSection/Services";
+import { CallToAction } from "@/components/callToAction/CallToAction";
+import About from "@/components/LandingPage/about/About";
+import Landing from "@/components/LandingPage/landing/Landing";
+import { Review } from "@/components/LandingPage/review/Review";
+import Services from "@/components/LandingPage/servicesSection/Services";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <Landing />
       <About />
       <Services />
+      <CallToAction />
       <Review />
     </div>
   );

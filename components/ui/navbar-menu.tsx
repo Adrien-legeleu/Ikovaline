@@ -62,15 +62,19 @@ export const MenuItem = ({
 
 export const Menu = ({
   setActive,
+  upToZero,
   children,
 }: {
   setActive: (item: string | null) => void;
+  upToZero: boolean;
   children: React.ReactNode;
 }) => {
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full border gap-28  justify-between dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex space-x-4 px-6 py-4 "
+      className={`relative rounded-full  gap-10 max-w-[1400px]   justify-between  bg-white shadow-input flex space-x-4 px-6 py-4 duration-500 ease-in-out ${
+        upToZero ? "w-[55%] border " : "w-full border border-black/0"
+      } `}
     >
       {children}
     </nav>
@@ -98,7 +102,7 @@ export const ProductItem = ({
         className="flex-shrink-0 rounded-md shadow-2xl"
       />
       <div>
-        <h4 className="text-xl font-bold mb-1 text-black dark:text-white">
+        <h4 className="text-xl font-bold mb-1  text-black dark:text-white">
           {title}
         </h4>
         <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">

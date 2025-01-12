@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { AnimatedTooltip } from "../ui/animated-tooltip";
-import { Button } from "../ui/button";
-import { TextGenerateEffect } from "../ui/text-generate-effect";
+import { AnimatedTooltip } from "../../ui/animated-tooltip";
+import { Button } from "../../ui/button";
+import { TextGenerateEffect } from "../../ui/text-generate-effect";
 
 export default function About() {
   const people = [
@@ -48,7 +48,10 @@ export default function About() {
         "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3534&q=80",
     },
   ];
-  const words = `mettre le surligneur la  dolor sit amet consectetur adipisicing elit. Similique perferendis assumenda, rerum at veniam voluptatibus vel sapiente nulla eos modi aliquam maiores pariatur molestias, deleniti qui dolorem, aspernatur vero est optio ipsa!`;
+  const words = `
+Ikovaline est une start-up étudiante spécialisée en marketing digital. Nous accompagnons les entreprises dans le renforcement de leur image et de leur visibilité en ligne. Grâce à une approche créative et sur mesure, nous aidons nos clients à atteindre leurs objectifs avec efficacité.
+`;
+
   return (
     <div className="py-20 gap-5 flex flex-col max-w-3xl mx-auto items-center justify-center">
       <TextGenerateEffect words={words} />
