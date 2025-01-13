@@ -2,21 +2,20 @@ import { HeroHighlight } from "@/components/ui/hero-highlight";
 import React from "react";
 import { useId } from "react";
 
-export function Service1() {
+export function Service2() {
   return (
-    <HeroHighlight className="pb-16 pt-10 lg:pb-28 max-w-4xl mb-2 mx-auto space-y-8">
+    <HeroHighlight className="py-16 lg:py-28 max-w-4xl mx-auto space-y-8 ">
       <h2 className="text-4xl font-semibold text-center">
-        Business Développement
+        Développement de la Présence en Ligne
       </h2>
       <p className="text-center max-w-3xl leading-relaxed tracking-wider mx-auto">
-        Le développement commercial est au cœur de la croissance d’une
-        entreprise. Nos services sont conçus pour identifier les opportunités
-        stratégiques, optimiser vos processus internes et externes, et maximiser
-        vos performances. Que ce soit par des analyses détaillées, des
-        formations ou des partenariats, nous vous aidons à transformer vos
-        objectifs en résultats concrets.
+        Cette catégorie regroupe les services destinés à améliorer votre
+        visibilité en ligne, à engager votre audience, et à optimiser vos
+        plateformes digitales. Que ce soit par les réseaux sociaux, les sites
+        web ou des contenus percutants, nous faisons en sorte que votre marque
+        se démarque et attire vos clients.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-10 md:gap-3 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3  gap-10 md:gap-3 max-w-7xl mx-auto">
         {grid.map((feature) => (
           <div
             key={feature.title}
@@ -26,8 +25,9 @@ export function Service1() {
             <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
               {feature.title}
             </p>
-
-            {feature.description}
+            <p className="text-neutral-600 dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+              {feature.description}
+            </p>
           </div>
         ))}
       </div>
@@ -37,90 +37,61 @@ export function Service1() {
 
 const grid = [
   {
-    title: "Audit et suivi analytique",
+    title: "Gestion de votre image en ligne (Avis Google & Google My Business)",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Analyse complète de votre présence en ligne pour identifier les axes
-          d’amélioration.
+          Surveillance et gestion proactive des avis clients, avec des réponses
+          personnalisées pour renforcer votre crédibilité.
         </li>
         <li>
-          Mise en place de Google Analytics et rapports détaillés pour suivre
-          vos performances et ajuster vos actions.
+          Optimisation de votre fiche Google My Business (photos, horaires,
+          informations) pour un meilleur référencement local.
         </li>
       </ul>
     ),
   },
   {
-    title: "Formation et conseil stratégique",
+    title: "Stratégie de contenu et gestion des réseaux sociaux",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Sessions de formation en marketing digital adaptées aux besoins de vos
-          équipes.
+          Création de calendriers éditoriaux adaptés à votre stratégie
+          marketing.
         </li>
         <li>
-          Sessions de formation en marketing digital adaptées aux besoins de vos
-          équipes.
+          Contenus engageants (posts, stories, vidéos) sur les réseaux sociaux
+          tels que Facebook, Instagram, LinkedIn, TikTok.
         </li>
       </ul>
     ),
   },
   {
-    title: "Gestion de partenariats et e-réputation",
+    title: "Création et optimisation de sites web",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Sessions de formation en marketing digital adaptées aux besoins de vos
-          équipes.
+          Développement de sites vitrine ou e-commerce modernes, responsives et
+          centrés sur l’expérience utilisateur.
         </li>
         <li>
-          Sessions de formation en marketing digital adaptées aux besoins de vos
-          équipes.
+          Optimisation SEO avancée pour garantir une meilleure visibilité de
+          votre site sur les moteurs de recherche.
         </li>
       </ul>
     ),
   },
   {
-    title: "Email marketing et service client digital",
+    title: "Rédaction et création de contenu",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Création de campagnes e-mailing performantes pour fidéliser vos
-          clients.
+          Production d’articles de blog, pages web et newsletters optimisés pour
+          le SEO.
         </li>
         <li>
-          Optimisation des interactions client via messageries, réseaux sociaux
-          et Google My Business.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Réalisation de landing pages et publicité locale",
-    description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
-        <li>
-          Création de pages d’atterrissage efficaces et adaptées à vos
-          campagnes.
-        </li>
-        <li>
-          Campagnes locales pour capter des clients dans votre zone
-          géographique.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Campagnes publicitaires en ligne (Google Ads & Social Ads)",
-    description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
-        <li>
-          Création et gestion de campagnes publicitaires sur Google, Facebook,
-          Instagram et TikTok.
-        </li>
-        <li>
-          Optimisation des annonces pour maximiser le retour sur investissement.
+          Création de visuels et vidéos courtes pour enrichir vos réseaux
+          sociaux et campagnes publicitaires.
         </li>
       </ul>
     ),
