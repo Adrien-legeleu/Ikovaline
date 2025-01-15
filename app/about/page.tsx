@@ -60,7 +60,7 @@ const ikovalineContent = [
         >
           Fondée par <Highlight className="p-2">Florent Ghizzoni</Highlight>,
           Ikovaline est une start-up spécialisée en marketing digital née de la
-          volonté d'aider les entreprises à réussir leur transformation
+          volonté d&lsquo;aider les entreprises à réussir leur transformation
           numérique. Grâce à son expertise en business développement et en
           marketing stratégique, Florent a su répondre aux besoins des petites
           et moyennes entreprises, en proposant des solutions personnalisées et
