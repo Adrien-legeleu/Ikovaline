@@ -10,7 +10,7 @@ interface ICallToAction {
 
 export function CallToAction({ title, desc, textBtn }: ICallToAction) {
   return (
-    <div className="flex items-center justify-center md:px-10 lg:px-0 px-5">
+    <div className="flex items-center justify-center md:px-10 lg:px-0 xs:px-5 px-2">
       <div className="relative flex  md:p-16 p-10 mb-10  md:gap-10 gap-8 max-w-5xl   w-full flex-col items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
         <h2 className="md:text-3xl  text-2xl text-center font-semibold text-white">
           {title}

@@ -1,19 +1,27 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { HeroHighlight } from "@/components/ui/hero-highlight";
 import React from "react";
 import { useId } from "react";
+import { motion } from "framer-motion";
 
 export function Service2() {
   return (
     <HeroHighlight className="py-16 lg:py-28 max-w-4xl mx-auto md:px-0 px-5 space-y-8 ">
-      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent">
+      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 bg-clip-text text-transparent">
         Développement de la Présence en Ligne
       </h2>
-      <p className="text-center max-w-3xl leading-relaxed tracking-wider mx-auto">
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: [20, -5, 0] }}
+        transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+        viewport={{ amount: 0.5 }}
+        className="text-center max-w-3xl leading-relaxed tracking-wider mx-auto"
+      >
         Optimisez votre visibilité et votre image en ligne avec des stratégies
         personnalisées. Notre équipe vous accompagne pour renforcer votre
         présence sur les moteurs de recherche et les réseaux sociaux.
-      </p>
+      </motion.p>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
         id="developpement-digital"

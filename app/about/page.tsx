@@ -66,7 +66,7 @@ const ikovalineContent = [
           et moyennes entreprises, en proposant des solutions personnalisées et
           accessibles.
         </motion.p>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid sm:grid-cols-2 grid-cols-1 gap-8">
           <Image
             src={ImageHistory}
             alt="Présentation d'Ikovaline"
@@ -79,7 +79,7 @@ const ikovalineContent = [
             alt="Présentation d'Ikovaline"
             width={200}
             height={200}
-            className="rounded-3xl w-full aspect-square object-cover"
+            className="rounded-3xl w-full max-sm:hidden aspect-square object-cover"
           />
         </div>
         <motion.p

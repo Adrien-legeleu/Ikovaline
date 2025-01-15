@@ -13,7 +13,7 @@ export default function Landing() {
       <TextAnimate
         animation="blurInUp"
         by="word"
-        className="text-muted-foreground font-poppins  max-w-lg text-center xs:text-xs md:text-lg"
+        className="text-muted-foreground font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
       >
         Ikovaline, expert en marketing digital, transforme vos ambitions en
         réalités en boostant votre visibilité et vos performances en ligne.

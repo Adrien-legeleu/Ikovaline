@@ -18,7 +18,10 @@ const config: Config = {
         poppins: ["Poppins"],
       },
       screens: {
-        xs: "400px",
+        xs: "450px",
+      },
+      gridTemplateColumns: {
+        "40/60": "40% 60%",
       },
       colors: {
         background: "hsl(var(--background))",
