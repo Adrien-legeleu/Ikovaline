@@ -1,32 +1,37 @@
 "use client";
-
-import { useState } from "react";
 import Particles from "../ui/particles";
 import { Button } from "../ui/button";
 
-export function CallToAction() {
+interface ICallToAction {
+  title: string;
+  desc: string;
+  textBtn: string;
+}
+
+export function CallToAction({ title, desc, textBtn }: ICallToAction) {
   return (
-    <div className="relative flex  p-16 mb-10 mx-auto  gap-10 max-w-5xl   w-full flex-col items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
-      <h2 className="text-3xl font-semibold text-white">
-        Alors pret à passer à l'action ?{" "}
-      </h2>
-      <p className="text-center text-neutral-200 max-w-3xl txt-lg">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-        accusantium voluptate delectus distinctio aut possimus vel.
-      </p>
-      <Button
-        variant={"destructive"}
-        className="text-lg py-6 rounded-xl px-6 z-20"
-      >
-        Contactez-nous dès maintenant !
-      </Button>
-      <Particles
-        className="absolute inset-0 z-0 h-full w-full"
-        quantity={100}
-        ease={80}
-        color={"#ffffff"}
-        refresh
-      />
+    <div className="flex items-center justify-center md:px-10 lg:px-0 px-5">
+      <div className="relative flex  md:p-16 p-10 mb-10  md:gap-10 gap-8 max-w-5xl   w-full flex-col items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
+        <h2 className="md:text-3xl  text-2xl text-center font-semibold text-white">
+          {title}
+        </h2>
+        <p className="text-center text-neutral-200 max-w-xl text-sm md:text-lg">
+          {desc}
+        </p>
+        <Button
+          variant={"destructive"}
+          className="md:text-lg text-base py-6 rounded-xl px-6  z-20"
+        >
+          {textBtn}
+        </Button>
+        <Particles
+          className="absolute inset-0 z-0 h-full w-full"
+          quantity={100}
+          ease={80}
+          color={"#ffffff"}
+          refresh
+        />
+      </div>
     </div>
   );
 }

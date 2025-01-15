@@ -11,9 +11,13 @@ export default function page() {
       <Landing />
       <Service1 />
       <Service2 />
-      <Result />
+      {/* <Result /> */}
       <Why />
-      <CallToAction />
+      <CallToAction
+        title="Transformez votre business aujourd'hui"
+        desc="Vous êtes prêt à passer à l&lsquo;étape suivante ?  Contactez-nous pour propulser votre entreprise."
+        textBtn="Contactez-nous maintenant !"
+      />
     </div>
   );
 }

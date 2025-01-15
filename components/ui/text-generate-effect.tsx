@@ -13,7 +13,7 @@ export const TextGenerateEffect = ({
   filter?: boolean;
   duration?: number;
 }) => {
-  let wordsArray = words.split(" ");
+  const wordsArray = words.split(" ");
 
   const renderWords = () => {
     return (
@@ -45,7 +45,7 @@ export const TextGenerateEffect = ({
   return (
     <div className={cn("font-bold", className)}>
       <div className="mt-4">
-        <div className="dark:text-white text-center text-black text-2xl leading-relaxed tracking-wide">
+        <div className="dark:text-white text-center text-black md:text-2xl sm:text-xl stext-lg md:px-0 px-5 leading-relaxed tracking-wide">
           {renderWords()}
         </div>
       </div>

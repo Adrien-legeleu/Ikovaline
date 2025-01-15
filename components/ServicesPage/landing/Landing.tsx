@@ -1,22 +1,14 @@
 import { Button } from "@/components/ui/button";
+import { Cover } from "@/components/ui/cover";
 import { SparklesCore } from "@/components/ui/sparkles";
-import { TextAnimate } from "@/components/ui/text-animate";
 import React from "react";
 
 export default function Landing() {
   return (
     <div className="h-screen flex-col flex items-center justify-center">
-      {/* <TextAnimate
-        animation="blurInUp"
-        by="word"
-        className="text-muted-foreground font-poppins  max-w-lg text-center text-lg"
-      >
-        Ikovaline, expert en marketing digital, transforme vos ambitions en
-        réalités en boostant votre visibilité et vos performances en ligne.
-      </TextAnimate> */}
-
-      <h1 className="text-4xl font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
-        Nos services POur vous seront toujours les bienvenurs , rester avec nous
+      <h1 className="text-3xl md:px-0 px-5 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+        Transformez vos défis en opportunités avec nos <br />{" "}
+        <Cover>services</Cover>
       </h1>
       <div className="w-[40rem] h-28 relative">
         {/* Gradients */}
@@ -40,7 +32,7 @@ export default function Landing() {
       </div>
       <div className="font-poppins mt-10 space-x-5">
         <Button>Business Développement</Button>
-        <Button>Présenc en ligne</Button>
+        <Button>Développement digitale</Button>
       </div>
     </div>
   );

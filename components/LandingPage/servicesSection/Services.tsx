@@ -4,8 +4,6 @@ import React from "react";
 import { BentoGrid, BentoGridItem } from "../../ui/bento-grid";
 import {
   IconBoxAlignRightFilled,
-  IconCircleDashedNumber1,
-  IconClipboardCopy,
   IconFileBroken,
   IconMapPin,
   IconSignature,
@@ -21,7 +19,14 @@ import { SkeletonFiveComponent } from "./SkeletonFive";
 
 export default function Services() {
   return (
-    <BentoGrid className="max-w-5xl  py-32 mx-auto md:auto-rows-[28rem]">
+    <BentoGrid className="md:max-w-5xl max-w-sm  py-32 mx-auto md:auto-rows-[28rem]">
+      <h2
+        className={
+          "max-md:flex hidden sm:text-4xl text-3xl items-center justify-center  mb-12 font-semibold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent "
+        }
+      >
+        Nos Services
+      </h2>
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
@@ -94,7 +99,7 @@ const SkeletonOne = () => {
         </div>
       </motion.div>
       <div className="h-full border border-neutral-100 absolute top-0 left-1/2 -translate-x-1/2" />
-      <motion.div variants={variants} className="">
+      <motion.div variants={variants}>
         <div>
           <IconBuildingStore
             stroke={2}
@@ -126,24 +131,6 @@ const SkeletonOne = () => {
   );
 };
 const SkeletonTwo = () => {
-  const variants = {
-    initial: {
-      width: 0,
-    },
-    animate: {
-      width: "100%",
-      transition: {
-        duration: 0.2,
-      },
-    },
-    hover: {
-      width: ["0%", "100%"],
-      transition: {
-        duration: 2,
-      },
-    },
-  };
-  const arr = new Array(6).fill(0);
   return (
     <motion.div
       initial="initial"
@@ -181,26 +168,6 @@ const SkeletonThree = () => {
   );
 };
 const SkeletonFour = () => {
-  const first = {
-    initial: {
-      x: 20,
-      rotate: -5,
-    },
-    hover: {
-      x: 0,
-      rotate: 0,
-    },
-  };
-  const second = {
-    initial: {
-      x: -20,
-      rotate: 5,
-    },
-    hover: {
-      x: 0,
-      rotate: 0,
-    },
-  };
   return (
     <motion.div
       initial="initial"
@@ -213,31 +180,6 @@ const SkeletonFour = () => {
   );
 };
 const SkeletonFive = () => {
-  const variants = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: 10,
-      rotate: 5,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
-  const variantsSecond = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: -10,
-      rotate: -5,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
-
   return (
     <motion.div
       initial="initial"

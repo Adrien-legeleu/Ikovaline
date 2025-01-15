@@ -4,7 +4,7 @@ import Image from "next/image";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Team } from "@/components/AboutPage/Team";
 import ImageHistory from "@/public/images/About/ikovaline-about.jpeg";
-import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
+import { Highlight } from "@/components/ui/hero-highlight";
 import { motion } from "framer-motion";
 import { Cover } from "@/components/ui/cover";
 import { IconQuote } from "@tabler/icons-react";
@@ -12,12 +12,12 @@ import { CallToAction } from "@/components/callToAction/CallToAction";
 
 export default function Page() {
   return (
-    <div>
+    <div className="max-w-[1400px] mx-auto">
       {" "}
       <TracingBeam className="px-6 my-20 ">
-        <div className="max-w-2xl mx-auto antialiased pt-4 relative">
+        <div className="max-w-3xl mx-auto antialiased pt-4 relative max-lg:px-5">
           {ikovalineContent.map((item, index) => (
-            <div key={`content-${index}`} className="mb-10">
+            <div key={`content-${index}`} className="mb-10" id={item.id}>
               <p className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
                 {item.badge}
               </p>
@@ -30,14 +30,18 @@ export default function Page() {
                 {item.title}
               </h2>
 
-              <div className="text-lg space-y-5 text-center leading-loose  prose prose-sm dark:prose-invert">
+              <div className="sm:text-lg text-base space-y-5 text-center leading-loose  prose prose-sm dark:prose-invert">
                 {item.description}
               </div>
             </div>
           ))}
         </div>
       </TracingBeam>
-      <CallToAction />
+      <CallToAction
+        title="Passez à l&lsquo;action avec Ikovaline"
+        desc="Notre expertise en marketing digital est à votre service. Discutez avec nous pour développer des solutions adaptées à vos besoins."
+        textBtn="Prenez contact !"
+      />
     </div>
   );
 }
@@ -45,135 +49,98 @@ export default function Page() {
 const ikovalineContent = [
   {
     title: "Les Origines d’Ikovaline",
+    id: "notre-histoire",
     description: (
       <>
         <motion.p
-          id="history"
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: [20, -5, 0],
-          }}
-          transition={{
-            duration: 0.5,
-            ease: [0.4, 0.0, 0.2, 1],
-          }}
-          viewport={{
-            amount: 0.5, // 50% de l'élément doit être visible pour déclencher l'animation
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: [20, -5, 0] }}
+          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+          viewport={{ amount: 0.5 }}
         >
           Fondée par <Highlight className="p-2">Florent Ghizzoni</Highlight>,
-          Ikovaline est née de l’ambition de proposer des solutions marketing
-          digital abordables et personnalisées. Étudiant en alternance, Florent
-          a su transformer son expertise en business développement et marketing
-          stratégique pour répondre aux besoins des petites et moyennes
-          entreprises.
+          Ikovaline est une start-up spécialisée en marketing digital née de la
+          volonté d'aider les entreprises à réussir leur transformation
+          numérique. Grâce à son expertise en business développement et en
+          marketing stratégique, Florent a su répondre aux besoins des petites
+          et moyennes entreprises, en proposant des solutions personnalisées et
+          accessibles.
         </motion.p>
-        <div className="flex justify-center items-center gap-8">
+        <div className="grid grid-cols-2 gap-8">
           <Image
             src={ImageHistory}
-            alt="Ikovaline-photo-présentation"
-            width={300}
-            height={300}
-            className="rounded-3xl aspect-square object-cover"
+            alt="Présentation d'Ikovaline"
+            width={200}
+            height={200}
+            className="rounded-3xl w-full  aspect-square object-cover"
           />
           <Image
             src={ImageHistory}
-            alt="Ikovaline-photo-présentation"
-            width={300}
-            height={300}
-            className="rounded-3xl aspect-square object-cover"
+            alt="Présentation d'Ikovaline"
+            width={200}
+            height={200}
+            className="rounded-3xl w-full aspect-square object-cover"
           />
         </div>
         <motion.p
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: [20, -5, 0],
-          }}
-          transition={{
-            duration: 0.5,
-            ease: [0.4, 0.0, 0.2, 1],
-          }}
-          viewport={{
-            amount: 1, // 50% de l'élément doit être visible pour déclencher l'animation
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: [20, -5, 0] }}
+          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+          viewport={{ amount: 1 }}
         >
-          Ikovaline, c’est avant tout l’histoire d’une vision :
-          <Highlight className="p-2">aider les entreprises</Highlight> à se
-          démarquer dans un monde numérique en constante évolution, en offrant
-          des services à forte valeur ajoutée accessibles à tous.
+          Ikovaline se démarque par une mission claire :{" "}
+          <Highlight className="p-2">accompagner les entreprises</Highlight> à
+          se développer dans un écosystème numérique en constante évolution,
+          grâce à des services à forte valeur ajoutée.
         </motion.p>
       </>
     ),
     badge: "Histoire",
   },
+
   {
     title: "Une Équipe Passionnée",
+    id: "notre-equipe",
     description: (
       <>
         <motion.p
-          id="team"
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: [20, -5, 0],
-          }}
-          transition={{
-            duration: 0.5,
-            ease: [0.4, 0.0, 0.2, 1],
-          }}
-          viewport={{
-            amount: 1, // 50% de l'élément doit être visible pour déclencher l'animation
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: [20, -5, 0] }}
+          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+          viewport={{ amount: 1 }}
         >
-          L’équipe d’Ikovaline est composée de jeunes talents motivés, chacun
-          ayant un rôle clé : Florent Ghizzoni (Fondateur et CEO), Samuel Garrel
-          (Directeur Web-Marketing), Nathan Paré (Directeur Commercial), Adam
-          Sauneron (Responsable Commercial), et bien d’autres.
+          Chez Ikovaline, nous aidons nos clients à réussir grâce à{" "}
+          <Highlight className="p-2">une équipe passionnée</Highlight>et
+          engagée. Avec nos compétences en marketing digital, développement
+          commercial et gestion de projets, nous créons des solutions adaptées à
+          chaque entreprise pour les aider à atteindre leurs objectifs.
         </motion.p>
 
-        <motion.p
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: [20, -5, 0],
-          }}
-          transition={{
-            duration: 0.5,
-            ease: [0.4, 0.0, 0.2, 1],
-          }}
-          viewport={{
-            amount: 1, // 50% de l'élément doit être visible pour déclencher l'animation
-          }}
-        >
-          Ensemble, ils allient créativité, expertise et passion pour fournir un
-          service exceptionnel, garantissant des résultats concrets pour chaque
-          projet.
-        </motion.p>
         <Team />
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: [20, -5, 0] }}
+          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+          viewport={{ amount: 1 }}
+        >
+          Ensemble, nous partageons une vision commune : accompagner les
+          entreprises dans leur transition numérique, tout en garantissant des
+          <Highlight className="p-2">
+            résultats concrets et mesurables
+          </Highlight>{" "}
+          . Nous mettons un point d’honneur à maintenir une approche humaine et
+          personnalisée dans chacun de nos projets.
+        </motion.p>
       </>
     ),
     badge: "Équipe",
   },
   {
     title: "Une Vision Ambitieuse",
+    id: "notre-vision",
     description: (
       <>
         <motion.p
-          id="vision"
           initial={{
             opacity: 0,
             y: 20,
@@ -191,9 +158,9 @@ const ikovalineContent = [
           }}
         >
           Ikovaline vise un objectif ambitieux : atteindre{" "}
-          <Cover>300 000 € </Cover> de chiffre d’affaires avant 2026. Avec une
-          approche centrée sur la satisfaction client, l’équipe travaille sans
-          relâche pour offrir des services innovants, rapides et efficaces.
+          <Cover>300 000 € </Cover> de chiffre d’affaires avant 2026. Notre
+          engagement envers nos clients repose sur une satisfaction maximale
+          grâce à des services performants et innovants.
         </motion.p>
         <motion.p
           initial={{

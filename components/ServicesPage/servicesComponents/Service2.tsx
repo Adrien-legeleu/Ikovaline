@@ -1,21 +1,23 @@
+import { Button } from "@/components/ui/button";
 import { HeroHighlight } from "@/components/ui/hero-highlight";
 import React from "react";
 import { useId } from "react";
 
 export function Service2() {
   return (
-    <HeroHighlight className="py-16 lg:py-28 max-w-4xl mx-auto space-y-8 ">
-      <h2 className="text-4xl font-semibold text-center">
+    <HeroHighlight className="py-16 lg:py-28 max-w-4xl mx-auto md:px-0 px-5 space-y-8 ">
+      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent">
         Développement de la Présence en Ligne
       </h2>
       <p className="text-center max-w-3xl leading-relaxed tracking-wider mx-auto">
-        Cette catégorie regroupe les services destinés à améliorer votre
-        visibilité en ligne, à engager votre audience, et à optimiser vos
-        plateformes digitales. Que ce soit par les réseaux sociaux, les sites
-        web ou des contenus percutants, nous faisons en sorte que votre marque
-        se démarque et attire vos clients.
+        Optimisez votre visibilité et votre image en ligne avec des stratégies
+        personnalisées. Notre équipe vous accompagne pour renforcer votre
+        présence sur les moteurs de recherche et les réseaux sociaux.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3  gap-10 md:gap-3 max-w-7xl mx-auto">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
+        id="developpement-digital"
+      >
         {grid.map((feature) => (
           <div
             key={feature.title}
@@ -30,6 +32,11 @@ export function Service2() {
             </p>
           </div>
         ))}
+      </div>
+      <div className="w-full flex items-center justify-center">
+        <Button variant={"destructive"} className="text-lg">
+          Contactez-nous !
+        </Button>
       </div>
     </HeroHighlight>
   );
@@ -113,15 +120,15 @@ export const Grid = ({
     [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
   ];
   return (
-    <div className="pointer-events-none absolute left-1/2 top-0  -ml-20 -mt-2 h-full w-full [mask-image:linear-gradient(white,transparent)]">
-      <div className="absolute inset-0 bg-gradient-to-r  [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:from-zinc-900/30 from-blue-100/30 to-blue-300/30 dark:to-zinc-900/30 opacity-100">
+    <div className="pointer-events-none absolute left-1/2 top-0 -ml-20 -mt-2 h-full w-full [mask-image:linear-gradient(white,transparent)]">
+      <div className="absolute inset-0 bg-gradient-to-r [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:from-zinc-900/30 from-blue-100/30 to-blue-300/30 dark:to-zinc-900/30 opacity-100">
         <GridPattern
           width={size ?? 20}
           height={size ?? 20}
           x="-12"
           y="4"
           squares={p}
-          className="absolute inset-0 h-full w-full  mix-blend-overlay dark:fill-white/10 dark:stroke-white/10 stroke-black/10 fill-black/10"
+          className="absolute inset-0 h-full w-full mix-blend-overlay dark:fill-white/10 dark:stroke-white/10 stroke-black/10 fill-black/10"
         />
       </div>
     </div>

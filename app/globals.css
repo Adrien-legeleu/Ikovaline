@@ -3,8 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+html,body {
+  scroll-behavior: smooth;
 }
 
 @layer utilities {
@@ -14,48 +14,63 @@ body {
 }
 
 @layer base {
+          /* --primary: 210 90% 50%;
+        --primary-foreground: 220 20% 95%;
+    
+        --secondary: 210 80% 40%;
+        --secondary-foreground: 220 20% 95%; */
 :root {
     /* Fond général */
-    /* --background: 220 20% 95%; */
-    --background: 0% 0% 100% ;
-    --foreground: 220 15% 15%;
+    --background: 193 50% 97%;
+    /* Un bleu clair doux pour le fond général */
+    --foreground: 210 30% 20%;
+    /* Un bleu foncé pour le texte principal */
 
     /* Couleurs des cartes et des popups */
-    --card: 220 20% 98%;
-    --card-foreground: 220 15% 10%;
-    --popover: 220 20% 98%;
-    --popover-foreground: 220 15% 10%;
+    --card: 193 45% 95%;
+    --card-foreground: 210 30% 15%;
+    --popover: 193 45% 95%;
+    --popover-foreground: 210 30% 15%;
 
     /* Couleurs principales */
-    --primary: 210 90% 50%;
-    --primary-foreground: 220 20% 95%;
+    --primary: 176 80% 65%;
+    /* Dégradé tirant vers #06F3B7 */
+    --primary-foreground: 0% 0% 100%;
+    /* Blanc pur pour le contraste */
 
-    --secondary: 210 80% 40%;
-    --secondary-foreground: 220 20% 95%;
+    --secondary: 190 85% 65%;
+    /* Dégradé tirant vers #1BE0E0 */
+    --secondary-foreground: 0% 0% 100%;
 
     /* Couleurs secondaires et atténuées */
-    --muted: 220 15% 90%;
-    --muted-foreground: 220 10% 40%;
+    --muted: 193 30% 90%;
+    --muted-foreground: 210 15% 40%;
 
-    --accent: 200 70% 50%;
-    --accent-foreground: 220 20% 95%;
+    --accent: 190 85% 60%;
+    /* Accent mettant en avant le bleu */
+    --accent-foreground: 0% 0% 100%;
 
     /* Couleur destructrice pour les erreurs */
     --destructive: 0 84% 58%;
     --destructive-foreground: 220 20% 95%;
 
     /* Bordures et autres éléments de UI */
-    --border: 220 20% 85%;
-    --input: 220 20% 85%;
-    --ring: 221.2 83.2% 53.3%;
-      --chart-1: 221.2 83.2% 53.3%;
-      --chart-2: 212 95% 68%;
-      --chart-3: 216 92% 60%;
-      --chart-4: 210 98% 78%;
-      --chart-5: 212 97% 87%;
+    --border: 193 30% 85%;
+    --input: 193 30% 85%;
+    --ring: 190 85% 65%;
+    /* Bleu pour les focus */
+    --chart-1: 190 85% 65%;
+    /* Chart utilisant la couleur bleue */
+    --chart-2: 176 80% 65%;
+    --chart-3: 176 80% 70%;
+    --chart-4: 176 80% 50%;
+    --chart-5: 190 85% 75%;
 
     /* Rayon des bordures */
     --radius: 0.5rem;
+
+    /* Dégradé global (fond ou accents majeurs) */
+    --gradient: linear-gradient(90deg, #1BE0E0, #06F3B7);
   }
   .dark {
     --background: 0 0% 3.9%;

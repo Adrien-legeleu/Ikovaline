@@ -6,11 +6,17 @@ import Services from "@/components/LandingPage/servicesSection/Services";
 
 export default function Home() {
   return (
-    <div>
+    <div className="max-w-[1400px] mx-auto">
       <Landing />
       <About />
-      <Services />
-      <CallToAction />
+      <section id="services">
+        <Services />
+      </section>
+      <CallToAction
+        title="Boostez votre visibilité maintenant !"
+        desc="Ikovaline vous aide à atteindre vos objectifs marketing. Prenez contact dès aujourd'hui et démarrez votre transformation digitale."
+        textBtn="Contactez-nous"
+      />
       <Review />
     </div>
   );

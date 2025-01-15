@@ -1,7 +1,7 @@
 "use client";
-import React from "react";
+import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 import Image from "next/image";
 
 const transition = {
@@ -18,20 +18,24 @@ export const MenuItem = ({
   active,
   item,
   children,
+  link,
 }: {
   setActive: (item: string) => void;
   active: string | null;
   item: string;
   children?: React.ReactNode;
+  link: string;
 }) => {
   return (
     <div onMouseEnter={() => setActive(item)} className="relative ">
-      <motion.p
-        transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
-      >
-        {item}
-      </motion.p>
+      <Link href={link}>
+        <motion.p
+          transition={{ duration: 0.3 }}
+          className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
+        >
+          {item}
+        </motion.p>
+      </Link>
       {active !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
@@ -72,8 +76,8 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className={`relative rounded-full  gap-10 max-w-[1400px]   justify-between  bg-white shadow-input flex space-x-4 px-6 py-4 duration-500 ease-in-out ${
-        upToZero ? "w-[55%] border " : "w-full border border-black/0"
+      className={`relative rounded-full  gap-10 max-w-[1400px]   justify-between  bg-[#F4FAFB] shadow-input flex space-x-4 px-6 py-4 duration-500 ease-in-out ${
+        upToZero ? "lg:w-[70%]  border " : "w-full border border-black/0"
       } `}
     >
       {children}
@@ -113,7 +117,10 @@ export const ProductItem = ({
   );
 };
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+export const HoveredLink = ({
+  children,
+  ...rest
+}: LinkProps & { children: ReactNode }) => {
   return (
     <Link
       {...rest}

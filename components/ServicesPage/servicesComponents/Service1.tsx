@@ -1,22 +1,25 @@
+import { Button } from "@/components/ui/button";
 import { HeroHighlight } from "@/components/ui/hero-highlight";
 import React from "react";
 import { useId } from "react";
 
 export function Service1() {
   return (
-    <HeroHighlight className="pb-16 pt-10 lg:pb-28 max-w-4xl mb-2 mx-auto space-y-8">
-      <h2 className="text-4xl font-semibold text-center">
+    <HeroHighlight className="pb-16 pt-10 lg:pb-28 max-w-4xl mb-2 md:px-0 px-5 mx-auto space-y-8">
+      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center  mb-12 font-bold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent">
         Business Développement
       </h2>
       <p className="text-center max-w-3xl leading-relaxed tracking-wider mx-auto">
-        Le développement commercial est au cœur de la croissance d’une
-        entreprise. Nos services sont conçus pour identifier les opportunités
-        stratégiques, optimiser vos processus internes et externes, et maximiser
-        vos performances. Que ce soit par des analyses détaillées, des
-        formations ou des partenariats, nous vous aidons à transformer vos
-        objectifs en résultats concrets.
+        Notre expertise en développement commercial vous permet de propulser
+        votre entreprise à de nouveaux sommets. Grâce à des stratégies sur
+        mesure, nous optimisons vos processus pour booster vos ventes et
+        améliorer votre rentabilité. Découvrez comment nos solutions peuvent
+        transformer vos objectifs en résultats concrets.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-10 md:gap-3 max-w-7xl mx-auto">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
+        id="buisness-developpement"
+      >
         {grid.map((feature) => (
           <div
             key={feature.title}
@@ -30,6 +33,11 @@ export function Service1() {
             {feature.description}
           </div>
         ))}
+      </div>
+      <div className="w-full flex items-center justify-center">
+        <Button variant={"destructive"} className="text-lg">
+          Contactez-nous !
+        </Button>
       </div>
     </HeroHighlight>
   );
@@ -60,8 +68,8 @@ const grid = [
           équipes.
         </li>
         <li>
-          Sessions de formation en marketing digital adaptées aux besoins de vos
-          équipes.
+          Conseils personnalisés pour élaborer des stratégies marketing
+          efficaces.
         </li>
       </ul>
     ),
@@ -71,12 +79,12 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Sessions de formation en marketing digital adaptées aux besoins de vos
-          équipes.
+          Amélioration de votre image en ligne par une gestion proactive de
+          votre e-réputation.
         </li>
         <li>
-          Sessions de formation en marketing digital adaptées aux besoins de vos
-          équipes.
+          Création et gestion de partenariats stratégiques pour renforcer votre
+          présence en ligne.
         </li>
       </ul>
     ),

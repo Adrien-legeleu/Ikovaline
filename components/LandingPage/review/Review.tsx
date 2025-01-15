@@ -92,7 +92,9 @@ const ReviewCard = ({
         // "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
-      <blockquote className="mb-5 font-semibold">"{body}"</blockquote>
+      <blockquote className="mb-5 font-semibold max-sm:text-sm">
+        &ldquo;{body}&ldquo;
+      </blockquote>
       <div className="flex flex-row items-center gap-2">
         <Image
           className="rounded-full"
@@ -114,11 +116,11 @@ const ReviewCard = ({
 
 export function Review() {
   return (
-    <div className="py-20 space-y-10">
-      <h2 className="text-4xl font-semibold tracking-wider text-center">
+    <div className="py-20 space-y-10" id="review">
+      <h2 className="sm:text-4xl text-3xl max-sm:px-5 text-center font-semibold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent">
         Ce que nos clients disent sur nous !
       </h2>
-      <div className="relative flex h-[500px]  w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background ">
+      <div className="relative flex sm:h-[500px] h-[400px]  w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background ">
         <Marquee pauseOnHover className="[--duration:20s] flex-1">
           {firstRow.map((review) => (
             <ReviewCard key={review.username} {...review} />

@@ -53,7 +53,10 @@ Ikovaline est une start-up étudiante spécialisée en marketing digital. Nous a
 `;
 
   return (
-    <div className="py-20 gap-5 flex flex-col max-w-3xl mx-auto items-center justify-center">
+    <div
+      className="py-20 gap-5 flex flex-col max-w-3xl mx-auto items-center justify-center"
+      id="about"
+    >
       <TextGenerateEffect words={words} />
       <div className="flex flex-row items-center justify-center  w-full">
         <AnimatedTooltip items={people} />
