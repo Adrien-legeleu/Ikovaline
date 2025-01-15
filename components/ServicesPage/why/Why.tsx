@@ -10,33 +10,34 @@ import {
 export default function Why() {
   const features = [
     {
-      title: "Meilleur rapport qualité-prix du marché",
+      title: "Meilleur rapport qualité-prix",
       description: "Des prestations haut de gamme à des tarifs compétitifs.",
       icon: <IconTerminal2 />,
     },
     {
-      title: "• Satisfait ou remboursé",
-      description: "La garantie d’un service qui répond à vos attentes",
+      title: "Satisfait ou remboursé",
+      description: "La garantie d’un service conforme à vos attentes.",
       icon: <IconEaseInOut />,
     },
     {
-      title: "Délais rapides d’exécution",
+      title: "Délais d’exécution rapides",
       description:
         "Projets livrés dans les temps, sans compromis sur la qualité.",
       icon: <IconCurrencyDollar />,
     },
     {
-      title: "• Communication fluide et transparente :",
+      title: "Communication fluide et transparente",
       description:
-        " suivi client ecace, avec des points réguliers pour garantir votre satisfaction.",
+        "Un suivi client efficace, avec des points réguliers pour garantir votre satisfaction.",
       icon: <IconCloud />,
     },
     {
       title: "Équipe expérimentée et passionnée",
-      description: "Des professionnels dédiés à votre réussite",
+      description: "Des professionnels dévoués à votre réussite.",
       icon: <IconRouteAltLeft />,
     },
   ];
+
   return (
     <div className=" max-w-4xl z-10 py-20  mx-auto" id="pourquoi-nous">
       <h2 className="text-4xl font-semibold text-center">

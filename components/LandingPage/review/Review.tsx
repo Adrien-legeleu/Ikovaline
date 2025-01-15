@@ -3,26 +3,28 @@ import Marquee from "@/components/ui/marquee";
 import Review1 from "@/public/images/logo/frewinglas-logo.png";
 import Review2 from "@/public/images/logo/jean-cristophe-Lelandais.jpeg";
 import Review3 from "@/public/images/logo/logo-lelandais.png";
+import Review4 from "@/public/images/logo/hl-horner-logo.jpg";
+import Review5 from "@/public/images/logo/logo-lora.png";
 import Image, { StaticImageData } from "next/image";
 
 const reviews = [
   {
-    name: "Lora Fashion Paris",
+    name: "L’Ora Fashion Paris",
     username: "Optimisation Instagram - Google Shopping",
     body: "Grâce à Ikovaline, nous avons considérablement augmenté notre visibilité en ligne. Leur expertise sur Instagram et Google Shopping a dynamisé nos ventes.",
-    img: "https://avatar.vercel.sh/james",
+    img: Review5,
   },
   {
     name: "L’Émotion",
     username: "Gestion Google My Business - Consulting",
     body: "Ils ont transformé notre image en ligne et apporté des conseils stratégiques pour développer notre activité. Une équipe très réactive !",
-    img: "https://avatar.vercel.sh/james",
+    img: "https://avatar.vercel.sh/rauchg",
   },
   {
     name: "Lelandais Fermetures",
     username: "Gestion Google My Business - Leads locaux",
     body: "Depuis qu’Ikovaline gère notre Google My Business, nous recevons beaucoup plus de demandes locales pertinentes. Excellent service !",
-    img: Review2,
+    img: Review3,
   },
   {
     name: "Frewinglas",
@@ -34,37 +36,37 @@ const reviews = [
     name: "Need Money For Shop",
     username: "Création site web - Publicité - Développement commercial",
     body: "Ikovaline a su adapter ses services à nos besoins précis. Leur approche marketing a boosté nos campagnes publicitaires.",
-    img: "https://avatar.vercel.sh/james",
+    img: "https://avatar.vercel.sh/rauchg",
   },
   {
     name: "L’Art du Bonsaï",
     username: "Création site web - Contenu visuel - Publicité",
     body: "Leur travail créatif et stratégique a fait passer notre entreprise à un autre niveau. Nos clients adorent notre nouveau site et visuel !",
-    img: "https://avatar.vercel.sh/james",
+    img: "https://avatar.vercel.sh/rauchg",
   },
   {
-    name: "Jules Sandwich",
+    name: "HL CORNER",
     username: "Création site web - Visibilité locale",
     body: "Un grand merci à Ikovaline pour notre site fonctionnel et attrayant. Nous sommes désormais plus visibles localement.",
-    img: "https://avatar.vercel.sh/james",
+    img: Review4,
   },
   {
     name: "Jardin Auto",
     username: "Création site web - Publicité saisonnière",
     body: "Leur travail nous a permis de générer plus de ventes en période de forte demande. Ils gèrent tout avec professionnalisme.",
-    img: "https://avatar.vercel.sh/james",
+    img: "https://avatar.vercel.sh/rauchg",
   },
   {
     name: "Jean-Christophe Lelandais",
     username: "Accompagnement marketing - Recrutement",
     body: "Ikovaline a été un partenaire clé pour structurer nos besoins en marketing et en recrutement. Une équipe compétente et proactive.",
-    img: Review3,
+    img: Review2,
   },
   {
     name: "Simon Corbin",
     username: "Stratégies marketing et commerciales sur mesure",
     body: "Leur approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.",
-    img: "https://avatar.vercel.sh/james",
+    img: "https://avatar.vercel.sh/rauchg",
   },
 ];
 

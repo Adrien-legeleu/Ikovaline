@@ -3,7 +3,8 @@ import React from "react";
 import Image from "next/image";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Team } from "@/components/AboutPage/Team";
-import ImageHistory from "@/public/images/About/ikovaline-about.jpeg";
+import ImageHistory1 from "@/public/images/About/team-ikovaline (3).jpg";
+import ImageHistory2 from "@/public/images/About/team-ikovaline (4).jpg";
 import { Highlight } from "@/components/ui/hero-highlight";
 import { motion } from "framer-motion";
 import { Cover } from "@/components/ui/cover";
@@ -18,7 +19,7 @@ export default function Page() {
         <div className="max-w-3xl mx-auto antialiased pt-4 relative max-lg:px-5">
           {ikovalineContent.map((item, index) => (
             <div key={`content-${index}`} className="mb-10" id={item.id}>
-              <p className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
+              <p className="bg-[#2B92C6] text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
                 {item.badge}
               </p>
 
@@ -68,18 +69,18 @@ const ikovalineContent = [
         </motion.p>
         <div className="grid sm:grid-cols-2 grid-cols-1 gap-8">
           <Image
-            src={ImageHistory}
+            src={ImageHistory1}
             alt="Présentation d'Ikovaline"
             width={200}
             height={200}
-            className="rounded-3xl w-full  aspect-square object-cover"
+            className="rounded-3xl w-full  aspect-square object-cover object-center"
           />
           <Image
-            src={ImageHistory}
+            src={ImageHistory2}
             alt="Présentation d'Ikovaline"
             width={200}
             height={200}
-            className="rounded-3xl w-full max-sm:hidden aspect-square object-cover"
+            className="rounded-3xl w-full max-sm:hidden aspect-square object-cover object-bottom"
           />
         </div>
         <motion.p

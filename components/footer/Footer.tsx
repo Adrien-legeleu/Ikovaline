@@ -1,6 +1,8 @@
 import React from "react";
 import { TextHoverEffect } from "../ui/text-hover-effect";
 import Link from "next/link";
+import Image from "next/image";
+import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
 
 export default function Footer() {
   // Tableau des sections avec leurs liens
@@ -46,15 +48,24 @@ export default function Footer() {
   ];
 
   return (
-    <div className="py-16">
+    <div className="py-16 px-2">
       <div className="lg:h-[16rem] h-[12rem] hidden md:flex items-center justify-center">
         <TextHoverEffect text="IKOVALINE" />
       </div>
 
-      <div className="grid grid-cols-40/60 justify-center">
+      <div className="grid sm:grid-cols-40/60 grid-cols-1 max-sm:gap-10 max-sm:text-center  max-lg:items-center justify-center">
         <div className="flex justify-center w-full">
           <div className="space-y-5">
-            <h2 className="text-3xl font-semibold">Ikovaline</h2>
+            <h2 className="text-4xl font-semibold">
+              {" "}
+              <Image
+                src={IkovalineLogo}
+                alt="logo de la start-up Ikovaline"
+                width={50}
+                height={50}
+                className="min-h-10 min-w-28 object-contain"
+              />
+            </h2>
             <div className="space-y-2">
               <p className="text-neutral-600">06 50 73 37 37</p>
               <p className="text-neutral-600">adrienlelege@gmal.com</p>
@@ -62,7 +73,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <ul className="grid grid-cols-4 gap-5">
+        <ul className="grid lg:grid-cols-4 xs:grid-cols-2 grid-cols-1 gap-5">
           {footerLinks.map((section, index) => (
             <ul key={index} className="space-y-2">
               <li className="text-neutral-600 font-bold">

@@ -19,7 +19,7 @@ import { SkeletonFiveComponent } from "./SkeletonFive";
 
 export default function Services() {
   return (
-    <BentoGrid className="md:max-w-5xl max-w-sm py-32 mx-auto md:auto-rows-[28rem]">
+    <BentoGrid className="md:max-w-5xl  max-w-sm py-32 relative mx-auto md:auto-rows-[28rem]">
       <h2
         className={
           "max-md:flex hidden sm:text-4xl text-3xl items-center justify-center  mb-12 font-semibold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent "
