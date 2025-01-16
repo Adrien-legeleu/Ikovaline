@@ -52,7 +52,7 @@ export default function ContactFormStudent() {
   return (
     <div className="max-w-lg w-full mx-auto  rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-extrabold text-2xl text-neutral-800 dark:text-neutral-100">
-        Rejoignez l'aventure Ikovaline !
+        Rejoignez l&lsquo;aventure Ikovaline !
       </h2>
       <p className="text-neutral-600 text-base max-w-md mt-3 leading-relaxed dark:text-neutral-300">
         Vous êtes étudiant et passionné par le digital ? Contactez-nous pour en

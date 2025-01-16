@@ -2,7 +2,6 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 import { TextAnimate } from "@/components/ui/text-animate";
-import { LucideNetwork } from "lucide-react";
 import Link from "next/link";
 
 export default function Landing() {
