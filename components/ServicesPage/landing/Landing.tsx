@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 import { SparklesCore } from "@/components/ui/sparkles";
+import Link from "next/link";
 import React from "react";
 
 export default function Landing() {
@@ -31,8 +32,13 @@ export default function Landing() {
         <div className="absolute inset-0 w-full  h-full bg-[#F4FAFB] [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
       </div>
       <div className="font-poppins mt-10 flex max-sm:flex-col items-center justify-center max-sm:gap-3 gap-5">
-        <Button>Business Développement</Button>
-        <Button>Développement digitale</Button>
+        <Link href="/nos-services/#buisness-developpement">
+          {" "}
+          <Button>Business Développement</Button>
+        </Link>
+        <Link href="/nos-services/#developpement-digital">
+          <Button>Développement digitale</Button>
+        </Link>
       </div>
     </div>
   );

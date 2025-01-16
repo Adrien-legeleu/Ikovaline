@@ -2,6 +2,8 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 import { TextAnimate } from "@/components/ui/text-animate";
+import { LucideNetwork } from "lucide-react";
+import Link from "next/link";
 
 export default function Landing() {
   return (
@@ -19,8 +21,14 @@ export default function Landing() {
         réalités en boostant votre visibilité et vos performances en ligne.
       </TextAnimate>
       <div className="flex gap-4 font-poppins ">
-        <Button>Nous-contactez</Button>
-        <Button variant={"secondary"}>Explorer nos services</Button>
+        <Link href={"/contact"}>
+          {" "}
+          <Button>Nous-contactez</Button>
+        </Link>
+
+        <Link href={"/nos-services"}>
+          <Button variant={"secondary"}>Explorer nos services</Button>
+        </Link>
       </div>
     </BackgroundBeamsWithCollision>
   );

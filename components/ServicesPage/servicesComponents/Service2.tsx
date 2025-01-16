@@ -4,6 +4,7 @@ import { HeroHighlight } from "@/components/ui/hero-highlight";
 import React from "react";
 import { useId } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export function Service2() {
   return (
@@ -42,9 +43,12 @@ export function Service2() {
         ))}
       </div>
       <div className="w-full flex items-center justify-center">
-        <Button variant={"destructive"} className="text-lg">
-          Contactez-nous !
-        </Button>
+        <Link href="/contact">
+          {" "}
+          <Button variant={"destructive"} className="text-lg">
+            Contactez-nous !
+          </Button>
+        </Link>
       </div>
     </HeroHighlight>
   );

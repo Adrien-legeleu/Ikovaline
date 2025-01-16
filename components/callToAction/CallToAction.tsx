@@ -1,6 +1,7 @@
 "use client";
 import Particles from "../ui/particles";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 interface ICallToAction {
   title: string;
@@ -18,12 +19,14 @@ export function CallToAction({ title, desc, textBtn }: ICallToAction) {
         <p className="text-center text-neutral-200 max-w-xl text-sm md:text-lg">
           {desc}
         </p>
-        <Button
-          variant={"destructive"}
-          className="md:text-lg text-base py-6 rounded-xl px-6  z-20"
-        >
-          {textBtn}
-        </Button>
+        <Link href={"/contact"}>
+          <Button
+            variant={"destructive"}
+            className="md:text-lg text-base py-6 rounded-xl px-6  z-20"
+          >
+            {textBtn}
+          </Button>
+        </Link>
         <Particles
           className="absolute inset-0 z-0 h-full w-full"
           quantity={100}

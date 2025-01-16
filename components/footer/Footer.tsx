@@ -48,15 +48,15 @@ export default function Footer() {
   ];
 
   return (
-    <div className="py-16 px-2">
+    <div className="md:py-16 py-32 px-2">
       <div className="lg:h-[16rem] h-[12rem] hidden md:flex items-center justify-center">
         <TextHoverEffect text="IKOVALINE" />
       </div>
 
       <div className="grid sm:grid-cols-40/60 grid-cols-1 max-sm:gap-10 max-sm:text-center  max-lg:items-center justify-center">
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full max-sm:order-2">
           <div className="space-y-5">
-            <h2 className="text-4xl font-semibold">
+            <h2 className="text-4xl font-semibold flex items-center max-sm:justify-center">
               {" "}
               <Image
                 src={IkovalineLogo}
@@ -73,7 +73,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <ul className="grid lg:grid-cols-4 xs:grid-cols-2 grid-cols-1 gap-5">
+        <ul className="grid lg:grid-cols-4 xs:grid-cols-2 max-sm:order-1 grid-cols-1 gap-5">
           {footerLinks.map((section, index) => (
             <ul key={index} className="space-y-2">
               <li className="text-neutral-600 font-bold">

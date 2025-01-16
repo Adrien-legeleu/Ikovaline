@@ -107,9 +107,11 @@ export function Header({ className }: { className?: string }) {
                   </HoveredLink>
                 </div>
               </MenuItem>
-              <Button variant={"destructive"} className="rounded-2xl py-5">
-                Contactez-nous
-              </Button>
+              <Link href={"/contact"}>
+                <Button variant={"destructive"} className="rounded-2xl py-5">
+                  Contactez-nous
+                </Button>
+              </Link>
             </div>
           </Menu>
         </div>
