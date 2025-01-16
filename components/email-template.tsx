@@ -1,4 +1,3 @@
-import LogoImg from "@/public/images/logo/ikovaline_logo.png";
 import Image from "next/image";
 
 interface EmailTemplateProps {
