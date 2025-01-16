@@ -2,10 +2,13 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { IconBrandGithub } from "@tabler/icons-react";
 import { useState } from "react";
 
-export default function ContactFormBuisness() {
+export default function ContactFormBuisness({
+  handleForm,
+}: {
+  handleForm: () => void;
+}) {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -26,7 +29,7 @@ export default function ContactFormBuisness() {
     console.log(formData);
 
     try {
-      const response = await fetch("/api/send", {
+      const response = await fetch("https://ikovaline.netlify.app/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -52,7 +55,7 @@ export default function ContactFormBuisness() {
     }
   };
   return (
-    <div className="max-w-lg w-full mx-auto  rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+    <div className="max-w-lg w-full mx-auto font-poppins  rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-extrabold text-2xl text-neutral-800 dark:text-neutral-100">
         Une question ? Un projet ?
       </h2>
@@ -65,22 +68,22 @@ export default function ContactFormBuisness() {
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
-            <Label htmlFor="firstname">First name</Label>
+            <Label htmlFor="firstname">Prénom</Label>
             <Input
               required
               id="firstname"
-              placeholder="Tyler"
+              placeholder="Adrien"
               value={formData.firstname}
               type="text"
               onChange={handleChangeValue}
             />
           </LabelInputContainer>
           <LabelInputContainer>
-            <Label htmlFor="lastname">Last name</Label>
+            <Label htmlFor="lastname">Prénom</Label>
             <Input
               required
               id="lastname"
-              placeholder="Durden"
+              placeholder="Legeleux"
               value={formData.lastname}
               type="text"
               onChange={handleChangeValue}
@@ -88,12 +91,12 @@ export default function ContactFormBuisness() {
           </LabelInputContainer>
         </div>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
+          <Label htmlFor="email">Adresse mail</Label>
           <Input
             required
             value={formData.email}
             id="email"
-            placeholder="projectmayhem@fc.com"
+            placeholder="adrienlegeleu@gmail.com"
             type="email"
             onChange={handleChangeValue}
           />
@@ -123,11 +126,10 @@ export default function ContactFormBuisness() {
         <div className="flex flex-col space-y-4">
           <button
             className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
+            onClick={handleForm}
           >
-            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              Vous ou êtes étudiants ?
+              Étudiant
             </span>
             <BottomGradient />
           </button>

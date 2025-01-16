@@ -40,7 +40,7 @@ export default function Why() {
 
   return (
     <div className=" max-w-4xl z-10 py-20  mx-auto" id="pourquoi-nous">
-      <h2 className="text-4xl font-semibold text-center">
+      <h2 className="text-4xl font-semibold px-2 text-center">
         Pourquoi Nous choisir ?
       </h2>
       <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 py-20 relative ">

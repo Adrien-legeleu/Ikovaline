@@ -67,8 +67,8 @@ export default function Footer() {
               />
             </h2>
             <div className="space-y-2">
-              <p className="text-neutral-600">06 50 73 37 37</p>
-              <p className="text-neutral-600">adrienlelege@gmal.com</p>
+              <p className="text-neutral-600">07 85 90 22 38</p>
+              <p className="text-neutral-600">contact@ikovaline.com</p>
               <p>© {new Date().getFullYear()} Ikovaline</p>
             </div>
           </div>
