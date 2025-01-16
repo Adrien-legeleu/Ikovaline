@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import LogoImg from "@/public/images/logo/ikovaline_logo.png";
 interface EmailTemplateProps {
   firstName: string;
   lastName: string;
@@ -64,3 +64,18 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
     </div>
   </div>
 );
+
+// import * as React from "react";
+// import { Html, Button } from "@react-email/components";
+
+// export function Email(props) {
+//   const { url } = props;
+
+//   return (
+//     <Html lang="en">
+//       <Button href={url}>Click me</Button>
+//     </Html>
+//   );
+// }
+
+// export default Email;
