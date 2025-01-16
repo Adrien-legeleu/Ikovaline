@@ -14,8 +14,8 @@ export async function POST(request: Request) {
       );
     }
     const { data, error } = await resend.emails.send({
-      from: "contact@ikovaline.com",
-      to: ["contact@ikovaline.com"],
+      from: "onboarding@resend.dev",
+      to: ["adrienlegeleu@gmail.com"],
 
       //   to: ["adrienlegeleu@gmail.com"],
       subject: category + ": " + firstname + " vous a envoyé un message",
