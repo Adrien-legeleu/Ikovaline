@@ -106,8 +106,8 @@ export default function ScriptCopyBtn({
             </div>
           )}
         </div>
-        <div className="relative flex items-center">
-          <div className="w-full grow font-mono">
+        <div className="relative flex items-center ">
+          <div className="w-full grow font-mono sm:text-base text-sm ">
             {highlightedCode ? (
               <div
                 className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-2 [&>pre]:px-4 [&>pre]:font-mono ${

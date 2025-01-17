@@ -1,4 +1,4 @@
-import { EmailTemplate } from "@/components/email-template";
+import IkovalineEmail from "@/emails/IkovalineEmail";
 import { Resend } from "resend";
 console.log(process.env.RESEND_API_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
       //   to: ["adrienlegeleu@gmail.com"],
       subject: category + ": " + firstname + " vous a envoyé un message",
-      react: EmailTemplate({
+      react: IkovalineEmail({
         firstName: firstname,
         lastName: lastname,
         email,

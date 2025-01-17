@@ -56,8 +56,8 @@ export default function ContactFormBuisness({
     }
   };
   return (
-    <div className="max-w-lg w-full mx-auto font-poppins  rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-      <h2 className="font-extrabold text-2xl text-neutral-800 dark:text-neutral-100">
+    <div className="max-w-lg w-full mx-auto font-poppins  rounded-3xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+      <h2 className="font-extrabold text-2xl text-neutral-800 sm:text-left text-center dark:text-neutral-100">
         Une question ? Un projet ?
       </h2>
       <p className="text-neutral-600 text-base max-w-md mt-3 leading-relaxed dark:text-neutral-300">
