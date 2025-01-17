@@ -42,8 +42,8 @@ export default function Footer() {
     },
     {
       title: "Legal",
-      href: "/legal",
-      links: [{ label: "Mentions Légales", href: "/legal/mentions-legales" }],
+      href: "/mention-legal",
+      links: [{ label: "Mentions Légales", href: "/mentions-legales" }],
     },
   ];
 
