@@ -20,7 +20,7 @@ export default function Page() {
   };
 
   return (
-    <div className="grid lg:grid-cols-60/40 font-poppins max-sm:px-4 grid-cols-1 md:mt-24 max-lg:mt-8 max-lg:gap-10 justify-center items-center max-w-[1400px] mx-auto">
+    <div className="grid lg:grid-cols-60/40 font-poppins max-sm:px-4 grid-cols-1 md:mt-24 max-lg:mt-8 max-lg:gap-10 justify-center items-start max-w-[1400px] mx-auto">
       <div className=" max-lg:order-2">
         {isBuisnessForm ? (
           <ContactFormBuisness handleForm={handleForm} />

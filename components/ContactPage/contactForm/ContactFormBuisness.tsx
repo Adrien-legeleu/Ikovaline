@@ -1,6 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -12,10 +13,13 @@ export default function ContactFormBuisness({
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
+    buisnessname: "",
+    etude: "",
     email: "",
     tel: "",
     message: "",
     category: "Entreprise",
+    secteur: "",
   });
 
   const handleChangeValue = (
@@ -40,10 +44,13 @@ export default function ContactFormBuisness({
         setFormData({
           firstname: "",
           lastname: "",
+          buisnessname: "",
+          etude: "",
           email: "",
           tel: "",
           message: "",
           category: "Entreprise",
+          secteur: "",
         });
       } else {
         console.log(response);
@@ -69,7 +76,7 @@ export default function ContactFormBuisness({
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
-            <Label htmlFor="firstname">Prénom</Label>
+            <Label htmlFor="firstname">Nom</Label>
             <Input
               required
               id="firstname"
@@ -103,6 +110,17 @@ export default function ContactFormBuisness({
           />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
+          <Label htmlFor="buisnessname">Nom Entreprise</Label>
+          <Input
+            required
+            value={formData.buisnessname}
+            id="buisnessname"
+            placeholder="IKovaline"
+            type="text"
+            onChange={handleChangeValue}
+          />
+        </LabelInputContainer>
+        <LabelInputContainer className="mb-4">
           <Label htmlFor="tel">Téléphone</Label>
           <Input
             required
@@ -113,6 +131,23 @@ export default function ContactFormBuisness({
             onChange={handleChangeValue}
           />
         </LabelInputContainer>
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="secteur">Secteur</Label>
+          <Input
+            required
+            id="secteur"
+            value={formData.secteur}
+            placeholder="architecture"
+            type="text"
+            onChange={handleChangeValue}
+          />
+        </LabelInputContainer>
+        <Textarea
+          name="message"
+          id="message"
+          onChange={handleChangeValue}
+          value={formData.message}
+        />
 
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"

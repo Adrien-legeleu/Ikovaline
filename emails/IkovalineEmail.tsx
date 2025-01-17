@@ -13,11 +13,13 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
-// import ImgLogo from "@/public/images/logo/ikovaline_logo.png";
 
 interface IkovalineEmailProps {
   firstName: string;
   lastName: string;
+  buisnessname?: string;
+  secteur?: string;
+  etude?: string;
   email: string;
   tel: string;
   message: string;
@@ -31,6 +33,9 @@ const baseUrl = process.env.VERCEL_URL
 export const IkovalineEmail = ({
   firstName,
   lastName,
+  buisnessname,
+  secteur,
+  etude,
   email,
   tel,
   message,
@@ -50,7 +55,7 @@ export const IkovalineEmail = ({
     <Html>
       <Head />
       <Preview>
-        Message de {firstName} {lastName} pour la catégorie {category}
+        Nouveau message de {firstName} {lastName} ({category})
       </Preview>
       <Body className="bg-white font-sans">
         <Container
@@ -59,13 +64,6 @@ export const IkovalineEmail = ({
             backgroundImage: `url("${baseUrl}/static/ikovaline-bg.png")`,
           }}
         >
-          {/* <Img
-            src={ImgLogo}
-            width={48}
-            height={48}
-            alt="Ikovaline"
-            className="mx-auto"
-          /> */}
           <Heading className="text-2xl font-bold mt-12 text-center">
             Nouveau message de {firstName} {lastName}
           </Heading>
@@ -73,6 +71,22 @@ export const IkovalineEmail = ({
             <Text className="text-lg leading-7">
               <strong>Catégorie :</strong> {category}
             </Text>
+            {category === "Entreprise" && (
+              <>
+                <Text className="text-lg leading-7">
+                  <strong>Nom de l'entreprise :</strong>{" "}
+                  {buisnessname || "Non spécifié"}
+                </Text>
+                <Text className="text-lg leading-7">
+                  <strong>Secteur :</strong> {secteur || "Non spécifié"}
+                </Text>
+              </>
+            )}
+            {category === "Étudiant" && (
+              <Text className="text-lg leading-7">
+                <strong>Étude :</strong> {etude || "Non spécifié"}
+              </Text>
+            )}
             <Text className="text-lg leading-7">
               <strong>Prénom :</strong> {firstName}
             </Text>
