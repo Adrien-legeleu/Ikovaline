@@ -3,12 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html,body {
+html,
+body {
   scroll-behavior: smooth;
-
 }
-*{
-    box-sizing: border-box;
+
+* {
+  box-sizing: border-box;
 }
 
 @layer utilities {
@@ -18,17 +19,10 @@ html,body {
 }
 
 @layer base {
-          /* --primary: 210 90% 50%;
-        --primary-foreground: 220 20% 95%;
-    
-        --secondary: 210 80% 40%;
-        --secondary-foreground: 220 20% 95%; */
-:root {
+  :root {
     /* Fond général */
     --background: 193 50% 97%;
-    /* Un bleu clair doux pour le fond général */
     --foreground: 210 30% 20%;
-    /* Un bleu foncé pour le texte principal */
 
     /* Couleurs des cartes et des popups */
     --card: 193 45% 95%;
@@ -38,12 +32,9 @@ html,body {
 
     /* Couleurs principales */
     --primary: 176 80% 65%;
-    /* Dégradé tirant vers #06F3B7 */
     --primary-foreground: 0% 0% 100%;
-    /* Blanc pur pour le contraste */
 
     --secondary: 190 85% 65%;
-    /* Dégradé tirant vers #1BE0E0 */
     --secondary-foreground: 0% 0% 100%;
 
     /* Couleurs secondaires et atténuées */
@@ -51,20 +42,19 @@ html,body {
     --muted-foreground: 210 15% 40%;
 
     --accent: 190 85% 60%;
-    /* Accent mettant en avant le bleu */
     --accent-foreground: 0% 0% 100%;
 
-    /* Couleur destructrice pour les erreurs */
+    /* Couleur destructrice */
     --destructive: 0 84% 58%;
     --destructive-foreground: 220 20% 95%;
 
-    /* Bordures et autres éléments de UI */
+    /* Bordures et autres */
     --border: 193 30% 85%;
     --input: 193 30% 85%;
     --ring: 190 85% 65%;
-    /* Bleu pour les focus */
+
+    /* Graphiques */
     --chart-1: 190 85% 65%;
-    /* Chart utilisant la couleur bleue */
     --chart-2: 176 80% 65%;
     --chart-3: 176 80% 70%;
     --chart-4: 176 80% 50%;
@@ -73,34 +63,50 @@ html,body {
     /* Rayon des bordures */
     --radius: 0.5rem;
 
-    /* Dégradé global (fond ou accents majeurs) */
+    /* Dégradé global */
     --gradient: linear-gradient(90deg, #1BE0E0, #06F3B7);
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Fond général */
+    --background: 210 30% 5%;
+    --foreground: 193 50% 90%;
+
+    /* Couleurs des cartes et des popups */
+    --card: 210 30% 15%;
+    --card-foreground: 193 50% 95%;
+    --popover: 210 30% 15%;
+    --popover-foreground: 193 50% 95%;
+
+    /* Couleurs principales */
+    --primary: 176 80% 65%;
+    --primary-foreground: 210 30% 10%;
+
+    --secondary: 190 85% 55%;
+    --secondary-foreground: 210 30% 10%;
+
+    /* Couleurs secondaires et atténuées */
+    --muted: 210 30% 20%;
+    --muted-foreground: 193 50% 70%;
+
+    --accent: 190 85% 60%;
+    --accent-foreground: 193 50% 90%;
+
+    /* Couleur destructrice */
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 210 30% 95%;
+
+    /* Bordures et autres */
+    --border: 210 30% 20%;
+    --input: 210 30% 20%;
+    --ring: 190 85% 65%;
+
+    /* Graphiques */
+    --chart-1: 190 85% 65%;
+    --chart-2: 176 80% 60%;
+    --chart-3: 176 80% 50%;
+    --chart-4: 176 80% 40%;
+    --chart-5: 190 85% 55%;
   }
 }
 
@@ -108,6 +114,7 @@ html,body {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

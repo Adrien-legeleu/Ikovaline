@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Favicon from "@/app/ikovaline_logo-favicon.png";
+import { ThemeProvider } from "@/components/theme.provider";
 
 export const metadata: Metadata = {
   title:
@@ -54,13 +55,20 @@ export default function RootLayout({
         <link rel="icon" href={Favicon.src} type="image/png" />
       </head>
       <body className={`antialiased`}>
-        <header>
-          <Header />
-        </header>
-        <main>{children}</main>
-        <footer>
-          <Footer />
-        </footer>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <header>
+            <Header />
+          </header>
+          <main>{children}</main>
+          <footer>
+            <Footer />
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
   );

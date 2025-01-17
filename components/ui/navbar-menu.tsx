@@ -76,8 +76,10 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className={`relative rounded-full  gap-10 max-w-[1400px]   justify-between  bg-[#F4FAFB]  flex space-x-4 px-6 py-4 duration-500 ease-in-out ${
-        upToZero ? "lg:w-[70%]  border " : "w-full border border-black/0"
+      className={`relative rounded-full  gap-10 max-w-[1400px]   justify-between  bg-[#F4FAFB] dark:bg-black  flex space-x-4 px-6 py-4 duration-500 ease-in-out ${
+        upToZero
+          ? "lg:w-[70%]  border dark:border-white/20 "
+          : "w-full border border-black/0"
       } `}
     >
       {children}

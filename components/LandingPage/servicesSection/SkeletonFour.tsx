@@ -37,12 +37,12 @@ const chartConfig = {
 
 export function SkeletonFourComponent() {
   return (
-    <Card className="border-none bg-white w-full shadow-none ">
+    <Card className="border-none bg-white dark:bg-neutral-800 w-full shadow-none ">
       <CardHeader className="p-2">
-        <CardTitle className="text-gray-500 text-sm">
+        <CardTitle className="text-neutral-500 dark:text-neutral-400 text-sm">
           Graphique - Clics et Impressions
         </CardTitle>
-        <CardDescription className="text-gray-400 text-xs">
+        <CardDescription className="text-neutral-400 dark:text-neutral-500 text-xs">
           Janvier - Juin 2025
         </CardDescription>
       </CardHeader>

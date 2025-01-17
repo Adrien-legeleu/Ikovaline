@@ -87,14 +87,14 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-96 cursor-pointer overflow-hidden flex flex-col justify-between bg-gray-50 rounded-xl  p-8"
+        "relative w-96 cursor-pointer overflow-hidden flex flex-col justify-between bg-gray-50 dark:bg-neutral-800 rounded-xl  p-8"
         // light styles
         // "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // // dark styles
         // "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
-      <blockquote className="mb-5 font-semibold max-sm:text-sm">
+      <blockquote className="mb-5 dark:text-neutral-300 font-semibold max-sm:text-sm">
         &ldquo;{body}&ldquo;
       </blockquote>
       <div className="flex flex-row items-center gap-2">
@@ -106,7 +106,7 @@ const ReviewCard = ({
           src={img}
         />
         <div className="flex flex-col">
-          <figcaption className="text-sm font-medium text-gray-600">
+          <figcaption className="text-sm font-medium text-gray-600 dark:text-neutral-300">
             {name}
           </figcaption>
           <p className="text-xs font-medium text-foreground">{username}</p>

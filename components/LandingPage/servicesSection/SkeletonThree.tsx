@@ -37,7 +37,7 @@ export function SkeletonThreeComponent({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative flex h-auto w-full items-center justify-center overflow-hidden bg-white  ",
+        "relative flex h-auto w-full items-center justify-center overflow-hidden bg-white dark:bg-neutral-800  ",
         className
       )}
       ref={containerRef}

@@ -5,13 +5,17 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
+import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
 import Link from "next/link";
 import { HeaderResponsive } from "./HeaderResponsive";
+import { ModeToggle } from "../toggle-darkmode";
+import { useTheme } from "next-themes";
 
 export function Header({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   const [upToZero, setUpToZero] = useState(false);
   const [isResponsive, setIsResponsive] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     if (window.innerWidth < 768) {
@@ -50,7 +54,9 @@ export function Header({ className }: { className?: string }) {
             >
               <Link href="/">
                 <Image
-                  src={IkovalineLogo}
+                  src={
+                    theme.theme == "dark" ? IkovalineLogoDark : IkovalineLogo
+                  }
                   alt="logo de la start-up Ikovaline"
                   width={50}
                   height={50}
@@ -107,11 +113,14 @@ export function Header({ className }: { className?: string }) {
                   </HoveredLink>
                 </div>
               </MenuItem>
-              <Link href={"/contact"}>
-                <Button variant={"destructive"} className="rounded-2xl py-5">
-                  Contactez-nous
-                </Button>
-              </Link>
+              <div className="flex items-center gap-4">
+                <ModeToggle />
+                <Link href={"/contact"}>
+                  <Button variant={"destructive"} className="rounded-2xl py-5">
+                    Contactez-nous
+                  </Button>
+                </Link>
+              </div>
             </div>
           </Menu>
         </div>

@@ -10,12 +10,14 @@ import {
   IconTableColumn,
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
+import ImgLogoUnique from "@/public/images/logo/ikovaline_logo_unique.png";
 
 import { IconBuildingStore } from "@tabler/icons-react";
 import { SkeletonThreeComponent } from "./SkeletonThree";
 import { SkeletonTwoComponent } from "./SkeletonTwo";
 import { SkeletonFourComponent } from "./SkeletonFour";
 import { SkeletonFiveComponent } from "./SkeletonFive";
+import Image from "next/image";
 
 export default function Services() {
   return (
@@ -74,14 +76,20 @@ const SkeletonOne = () => {
       className=" w-full  relative h-auto  pt-2 gap-4  text-xs grid grid-cols-2 dark:bg-dot-white/[0.2] bg-dot-black/[0.1] flex-col "
     >
       <motion.div variants={variantsSecond} className="space-y-4">
-        <div className="w-full text-sm bg-white text-neutral-400 rounded-full shadow-lg py-1 px-2 border">
+        <div className="w-full text-sm bg-white dark:bg-neutral-700 text-neutral-400 rounded-full shadow-lg py-1 px-2 border">
           recherche
         </div>
         <div className="space-y-2">
           <div className="space-y-1 flex flex-col  border border-red-300 rounded-xl p-1">
             <span className="text-sm text-neutral-500 flex gap-1 items-center ">
               {" "}
-              <div className="h-3 w-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+              <Image
+                width={30}
+                height={30}
+                src={ImgLogoUnique}
+                alt="ikovaline logo"
+                className="w-3 h-3"
+              />
               Ikovaline
             </span>
             <span className="text-xs text-neutral-400">
@@ -98,20 +106,26 @@ const SkeletonOne = () => {
           </div>
         </div>
       </motion.div>
-      <div className="h-full border border-neutral-100 absolute top-0 left-1/2 -translate-x-1/2" />
+      <div className="h-full border border-neutral-100 dark:border-neutral-700 absolute top-0 left-1/2 -translate-x-1/2" />
       <motion.div variants={variants}>
         <div>
           <IconBuildingStore
             stroke={2}
             width={55}
             height={55}
-            className="mx-auto text-neutral-300"
+            className="mx-auto text-neutral-300 dark:text-neutral-700"
           />
         </div>
         <div>
           <span className="text-base flex  text-neutral-500 gap-2 items-center">
             {" "}
-            <div className="h-5 w-5  rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+            <Image
+              width={50}
+              height={50}
+              src={ImgLogoUnique}
+              alt="ikovaline logo"
+              className="h-5 w-5"
+            />
             Ikovaline
           </span>
         </div>
