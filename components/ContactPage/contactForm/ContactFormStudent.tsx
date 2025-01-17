@@ -118,7 +118,7 @@ export default function ContactFormStudent({
           />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="etude">Niveau d'étude</Label>
+          <Label htmlFor="etude">Niveau d&apos;étude</Label>
           <Input
             required
             id="etude"
