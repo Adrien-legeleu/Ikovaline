@@ -18,12 +18,13 @@ import { IconMenuDeep } from "@tabler/icons-react";
 import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
 
 import { ModeToggle } from "../toggle-darkmode";
+import { useTheme } from "next-themes";
 
 export function HeaderResponsive() {
   const theme = useTheme();
   return (
     <Drawer>
-      <div className="fixed bottom-5 left-1/2 flex gap-12 bg-white dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 rounded-3xl -translate-x-1/2 z-[50] ">
+      <div className="fixed bottom-5 left-1/2 flex gap-6 bg-white dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 rounded-3xl -translate-x-1/2 z-[50] ">
         <div className="flex items-center justify-center ">
           <Link href="/">
             <Image

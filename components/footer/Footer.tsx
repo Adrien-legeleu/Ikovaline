@@ -1,11 +1,14 @@
+"use client";
 import React from "react";
 import { TextHoverEffect } from "../ui/text-hover-effect";
 import Link from "next/link";
 import Image from "next/image";
 import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
+import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
+import { useTheme } from "next-themes";
 
 export default function Footer() {
-  // Tableau des sections avec leurs liens
+  const { theme } = useTheme();
   const footerLinks = [
     {
       title: "Home",
@@ -59,7 +62,7 @@ export default function Footer() {
             <h2 className="text-4xl font-semibold flex items-center max-sm:justify-center">
               {" "}
               <Image
-                src={IkovalineLogo}
+                src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
                 alt="logo de la start-up Ikovaline"
                 width={50}
                 height={50}
@@ -67,8 +70,12 @@ export default function Footer() {
               />
             </h2>
             <div className="space-y-2">
-              <p className="text-neutral-600">07 85 90 22 38</p>
-              <p className="text-neutral-600">contact@ikovaline.com</p>
+              <p className="text-neutral-600 dark:text-neutral-500">
+                07 85 90 22 38
+              </p>
+              <p className="text-neutral-600 dark:text-neutral-500">
+                contact@ikovaline.com
+              </p>
               <p>© {new Date().getFullYear()} Ikovaline</p>
             </div>
           </div>
@@ -76,8 +83,11 @@ export default function Footer() {
         <ul className="grid lg:grid-cols-4 xs:grid-cols-2 max-sm:order-1 grid-cols-1 gap-5">
           {footerLinks.map((section, index) => (
             <ul key={index} className="space-y-2">
-              <li className="text-neutral-600 font-bold">
-                <Link href={section.href} className="hover:text-neutral-800">
+              <li className="text-neutral-600 dark:text-neutral-500 font-bold">
+                <Link
+                  href={section.href}
+                  className="hover:text-neutral-800 dark:hover:text-neutral-600"
+                >
                   {section.title}
                 </Link>
               </li>
@@ -85,7 +95,7 @@ export default function Footer() {
                 <li key={linkIndex}>
                   <Link
                     href={link.href}
-                    className="text-neutral-500 hover:text-neutral-800"
+                    className="text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-700"
                   >
                     {link.label}
                   </Link>

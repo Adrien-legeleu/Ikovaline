@@ -30,7 +30,7 @@ export default function Page() {
       </div>
       <div className="space-y-10 max-w-md mx-auto font-poppins max-lg:order-1 w-full">
         <div className="flex flex-col items-center justify-center gap-4">
-          <p className="text-center text-neutral-800  font-semibold">
+          <p className="text-center text-neutral-800 dark:text-neutral-300  font-semibold">
             {isBuisnessForm
               ? "Vous êtes une entreprise souhaitant optimiser sa présence en ligne et accélérer sa croissance ? Ikovaline vous accompagne dans votre transformation numérique pour booster votre visibilité et vos performances."
               : "Vous êtes étudiant et passionné par le digital ? Rejoignez Ikovaline pour contribuer à la transformation numérique des entreprises tout en développant vos compétences dans un environnement innovant."}

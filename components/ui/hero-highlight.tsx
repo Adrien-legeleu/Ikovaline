@@ -34,24 +34,27 @@ export const HeroHighlight = ({
       )}
       onMouseMove={handleMouseMove}
     >
-      <div className="absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800  pointer-events-none" />
+      {/* Background neutre avec le motif */}
+      <div className="absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800 pointer-events-none" />
+
+      {/* Motif dynamique avec les couleurs d'Ikovaline */}
       <motion.div
-        className="pointer-events-none bg-dot-thick-indigo-500 dark:bg-dot-thick-indigo-500   absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
+        className="pointer-events-none bg-dot-thick-[#6db8ff] dark:bg-dot-thick-[#0cb4f7] absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           WebkitMaskImage: useMotionTemplate`
-            radial-gradient(
-              200px circle at ${mouseX}px ${mouseY}px,
-              black 0%,
-              transparent 100%
-            )
-          `,
+        radial-gradient(
+          200px circle at ${mouseX}px ${mouseY}px,
+          black 0%,
+          transparent 100%
+        )
+      `,
           maskImage: useMotionTemplate`
-            radial-gradient(
-              200px circle at ${mouseX}px ${mouseY}px,
-              black 0%,
-              transparent 100%
-            )
-          `,
+        radial-gradient(
+          200px circle at ${mouseX}px ${mouseY}px,
+          black 0%,
+          transparent 100%
+        )
+      `,
         }}
       />
 

@@ -15,7 +15,7 @@ export function Header({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   const [upToZero, setUpToZero] = useState(false);
   const [isResponsive, setIsResponsive] = useState(false);
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (window.innerWidth < 768) {
@@ -54,9 +54,7 @@ export function Header({ className }: { className?: string }) {
             >
               <Link href="/">
                 <Image
-                  src={
-                    theme.theme == "dark" ? IkovalineLogoDark : IkovalineLogo
-                  }
+                  src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
                   alt="logo de la start-up Ikovaline"
                   width={50}
                   height={50}

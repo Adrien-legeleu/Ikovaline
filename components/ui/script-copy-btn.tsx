@@ -107,19 +107,10 @@ export default function ScriptCopyBtn({
           )}
         </div>
         <div className="relative flex items-center ">
-          <div className="w-full grow font-mono sm:text-base text-sm ">
-            {highlightedCode ? (
-              <div
-                className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-2 [&>pre]:px-4 [&>pre]:font-mono ${
-                  theme === "dark" ? "dark" : "light"
-                }`}
-                dangerouslySetInnerHTML={{ __html: highlightedCode }}
-              />
-            ) : (
-              <pre className="rounded-md border border-border bg-white p-2 px-4  font-mono dark:bg-black">
-                {command}
-              </pre>
-            )}
+          <div className="w-full  grow font-mono sm:text-base text-sm ">
+            <pre className="rounded-md border border-border bg-white p-2 px-4 dark:text-neutral-200 text-neutral-800 font-mono dark:bg-black">
+              {command}
+            </pre>
           </div>
           <Button
             variant="outline"
