@@ -20,8 +20,8 @@ export default function Page() {
   };
 
   return (
-    <div className="grid lg:grid-cols-60/40 font-poppins grid-cols-1 md:mt-24 max-lg:mt-8 max-lg:gap-10 justify-center items-center max-w-[1400px]">
-      <div className="max-sm:px-2 max-lg:order-2">
+    <div className="grid lg:grid-cols-60/40 font-poppins max-sm:px-2 grid-cols-1 md:mt-24 max-lg:mt-8 max-lg:gap-10 justify-center items-center max-w-[1400px]">
+      <div className=" max-lg:order-2">
         {isBuisnessForm ? (
           <ContactFormBuisness handleForm={handleForm} />
         ) : (
@@ -30,7 +30,7 @@ export default function Page() {
       </div>
       <div className="space-y-10 max-w-md mx-auto font-poppins max-lg:order-1">
         <div className="flex flex-col items-center justify-center gap-4">
-          <p className="text-center text-neutral-800 max-sm:px-2 font-semibold">
+          <p className="text-center text-neutral-800  font-semibold">
             {isBuisnessForm
               ? "Vous êtes une entreprise souhaitant optimiser sa présence en ligne et accélérer sa croissance ? Ikovaline vous accompagne dans votre transformation numérique pour booster votre visibilité et vos performances."
               : "Vous êtes étudiant et passionné par le digital ? Rejoignez Ikovaline pour contribuer à la transformation numérique des entreprises tout en développant vos compétences dans un environnement innovant."}
@@ -43,7 +43,7 @@ export default function Page() {
             {isBuisnessForm ? "Étudiant ?" : "Entreprise ?"}
           </Button>
         </div>
-        <div className="relative flex p-10 w-full flex-col max-sm:px-2 items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
+        <div className="relative flex p-10 w-full flex-col  items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
           <ScriptCopyBtn
             showMultiplePackageOptions={false}
             codeLanguage="shell"
