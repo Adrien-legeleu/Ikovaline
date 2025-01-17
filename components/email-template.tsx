@@ -1,4 +1,4 @@
-import Image from "next/image";
+import * as React from "react";
 
 interface EmailTemplateProps {
   firstName: string;
@@ -17,31 +17,18 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   message,
   category,
 }) => (
-  <div className="max-w-2xl font-poppins mx-auto p-6">
-    <div className="bg-white shadow-lg rounded-lg p-6">
-      {/* Logo Ikovaline */}
-      <div className="mb-4">
-        <Image
-          src="/static/ikovaline_logo.png" // Assure-toi que le logo est dans le dossier public
-          alt="Ikovaline"
-          className="w-32"
-          width={50}
-          height={50}
-        />
-      </div>
-
-      {/* Header */}
-      <h1 className="text-2xl font-bold font-poppins text-gray-800">
-        Nouveau message reçu de {firstName} {lastName}
+  <div className="bg-gray-100 p-6 rounded-lg font-sans">
+    <div className="bg-white shadow-md rounded-lg p-6">
+      <h1 className="text-2xl font-bold text-gray-800">
+        Nouveau message de {firstName} {lastName}
       </h1>
       <p className="text-gray-600 mt-2">
         Catégorie : <span className="font-semibold">{category}</span>
       </p>
 
-      {/* Détails du contact */}
-      <div className="mt-6 bg-neutral-200 rounded-2xl p-4">
+      <div className="mt-4">
         <h2 className="text-xl font-semibold text-gray-800">
-          Détails du client :
+          Détails du contact :
         </h2>
         <ul className="mt-2 text-gray-700">
           <li>
@@ -71,7 +58,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       <div className="mt-6">
         <h2 className="text-xl font-semibold text-gray-800">Message :</h2>
         <p className="mt-2 text-gray-700">
-          {message ? message : "Aucun message fourni"}
+          {message ? message : "aucun message fournit"}
         </p>
       </div>
     </div>

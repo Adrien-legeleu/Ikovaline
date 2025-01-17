@@ -27,9 +27,10 @@ export default function ContactFormBuisness({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
+    console.log(formData.email);
 
     try {
-      const response = await fetch("https://ikovaline.netlify.app/api/send", {
+      const response = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
