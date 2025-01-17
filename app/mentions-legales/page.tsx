@@ -25,8 +25,8 @@ export default function LegalMentions() {
           </a>
           <br />
           Téléphone :{" "}
-          <a href="tel:+33123456789" className="text-blue-600 hover:underline">
-            +33 1 23 45 67 89
+          <a href="tel:+33785902238" className="text-blue-600 hover:underline">
+            07 85 90 22 38
           </a>
           <br />
           Numéro SIRET :938 062 239 00018
