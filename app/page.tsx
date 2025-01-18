@@ -13,10 +13,11 @@ export default function Home() {
         <Services />
       </section>
       <CallToAction
-        title="Boostez votre visibilité maintenant !"
-        desc="Ikovaline vous aide à atteindre vos objectifs marketing. Prenez contact dès aujourd'hui et démarrez votre transformation digitale."
-        textBtn="Contactez-nous"
+        title="Augmentez votre visibilité dès aujourd'hui !"
+        desc="Ikovaline est votre partenaire pour atteindre vos objectifs marketing et réussir votre transformation digitale. Prenez contact sans attendre !"
+        textBtn="Commencez maintenant !"
       />
+
       <Review />
     </div>
   );

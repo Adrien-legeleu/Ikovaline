@@ -58,7 +58,7 @@ export function Header({ className }: { className?: string }) {
                   alt="logo de la start-up Ikovaline"
                   width={150}
                   height={150}
-                  className="h-10 w-28 object-contain"
+                  className="h-10 w-3é object-contain"
                 />
               </Link>
             </div>

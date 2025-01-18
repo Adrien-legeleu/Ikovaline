@@ -51,7 +51,7 @@ export function Service1() {
         <Link href="/contact">
           {" "}
           <Button variant={"destructive"} className="text-lg">
-            Contactez-nous !
+            Passez à l’action !
           </Button>
         </Link>
       </div>

@@ -4,6 +4,7 @@ import { Header } from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Favicon from "@/app/ikovaline_logo-favicon.png";
 import { ThemeProvider } from "@/components/theme.provider";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title:
@@ -65,6 +66,7 @@ export default function RootLayout({
             <Header />
           </header>
           <main>{children}</main>
+          <Toaster />
           <footer>
             <Footer />
           </footer>

@@ -2,6 +2,8 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -10,6 +12,7 @@ export default function ContactFormStudent({
 }: {
   handleForm: () => void;
 }) {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -33,13 +36,18 @@ export default function ContactFormStudent({
     console.log(formData);
 
     try {
-      const response = await fetch("https://ikovaline.netlify.app/api/send", {
+      const response = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       if (response.ok) {
         console.log("message envoyé");
+        toast({
+          title: "Votre message a été envoyé avec succès.",
+          description:
+            "Nous traiterons votre message dans les plus brefs délais.",
+        });
         setFormData({
           firstname: "",
           lastname: "",
@@ -52,11 +60,22 @@ export default function ContactFormStudent({
           secteur: "",
         });
       } else {
-        alert("une erreur est survenue");
+        toast({
+          variant: "destructive",
+          title: "une erreur est survenue",
+          description:
+            "Une erreur est survenue durant l'envoie de votre message",
+          action: <ToastAction altText="Try again">Réessayer</ToastAction>,
+        });
       }
     } catch (error) {
       console.error("error lors de l'envoie", error);
-      alert(error);
+      toast({
+        variant: "destructive",
+        title: "une erreur est survenue",
+        description: "Une erreur est survenue durant l'envoie de votre message",
+        action: <ToastAction altText="Try again">Réessayer</ToastAction>,
+      });
     }
   };
   return (
@@ -123,17 +142,21 @@ export default function ContactFormStudent({
             required
             id="etude"
             value={formData.etude}
-            placeholder="architecture"
+            placeholder="master"
             type="text"
             onChange={handleChangeValue}
           />
         </LabelInputContainer>
-        <Textarea
-          name="message"
-          id="message"
-          onChange={handleChangeValue}
-          value={formData.message}
-        />
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="message">Message</Label>
+          <Textarea
+            placeholder="Entrez votre message"
+            name="message"
+            id="message"
+            onChange={handleChangeValue}
+            value={formData.message}
+          />
+        </LabelInputContainer>
 
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"

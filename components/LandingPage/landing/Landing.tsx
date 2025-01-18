@@ -18,8 +18,8 @@ export default function Landing() {
         by="word"
         className="text-muted-foreground dark:text-neutral-400 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
       >
-        Ikovaline, expert en marketing digital, transforme vos ambitions en
-        réalités en boostant votre visibilité et vos performances en ligne.
+        Ikovaline, la start-up étudiante d’avenir, réinvente le marketing
+        digital avec des solutions innovantes et des résultats garantis.
       </TextAnimate>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

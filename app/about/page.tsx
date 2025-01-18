@@ -39,9 +39,9 @@ export default function Page() {
         </div>
       </TracingBeam>
       <CallToAction
-        title="Passez à l&lsquo;action avec Ikovaline"
-        desc="Notre expertise en marketing digital est à votre service. Discutez avec nous pour développer des solutions adaptées à vos besoins."
-        textBtn="Prenez contact !"
+        title="Faites passer votre business au niveau supérieur avec Ikovaline"
+        desc="Profitez de notre expertise en marketing digital pour transformer vos idées en succès. Contactez-nous et développons des solutions sur mesure."
+        textBtn="Contactez-nous dès maintenant !"
       />
     </div>
   );

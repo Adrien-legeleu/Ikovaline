@@ -13,9 +13,9 @@ export default function page() {
       {/* <Result /> */}
       <Why />
       <CallToAction
-        title="Transformez votre business aujourd'hui"
-        desc="Vous êtes prêt à passer à l&lsquo;étape suivante ?  Contactez-nous pour propulser votre entreprise."
-        textBtn="Contactez-nous maintenant !"
+        title="Boostez votre entreprise dès aujourd'hui !"
+        desc="Prêt à franchir un cap décisif ? Contactez-nous dès maintenant pour accélérer la croissance de votre business."
+        textBtn="Prenez contact avec nous !"
       />
     </div>
   );

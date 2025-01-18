@@ -13,6 +13,7 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
+import ImgLogo from "@/public/images/logo/ikovaline_logo.png";
 
 interface IkovalineEmailProps {
   firstName: string;
@@ -68,7 +69,7 @@ export const IkovalineEmail = ({
             Nouveau message de {firstName} {lastName}
           </Heading>
           <Section className="my-6">
-            <Text className="text-lg leading-7">
+            <Text className="text-xl leading-7">
               <strong>Catégorie :</strong> {category}
             </Text>
             {category === "Entreprise" && (
@@ -122,25 +123,15 @@ export const IkovalineEmail = ({
             </Text>
           </Section>
 
-          <Text className="text-lg leading-7">
-            Bien à vous,
-            <br />- L'équipe Ikovaline
-          </Text>
-
           <Hr className="border-t border-gray-300 mt-12" />
           <Img
-            src={`${baseUrl}/static/ikovaline-logo.png`}
+            src={ImgLogo}
             width={32}
             height={32}
             alt="Ikovaline Logo Grayscale"
             className="mx-auto mt-5 filter grayscale"
           />
-          <Text className="text-gray-500 text-sm text-center">
-            Ikovaline Technologies Inc.
-          </Text>
-          <Text className="text-gray-500 text-sm text-center">
-            2093 Philadelphia Pike #3222, Claymont, DE 19703
-          </Text>
+          <Text className="text-gray-500 text-sm text-center">Ikovaline</Text>
         </Container>
       </Body>
     </Html>

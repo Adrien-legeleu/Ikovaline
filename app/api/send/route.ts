@@ -5,8 +5,18 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const { firstname, lastname, email, tel, message, category } =
-      await request.json();
+    const {
+      firstname,
+      lastname,
+      buisnessname,
+      secteur,
+      etude,
+      email,
+      tel,
+      message,
+      category,
+    } = await request.json();
+
     if (!firstname || !lastname || !email || !tel) {
       return new Response(
         JSON.stringify({ error: "Tous les champs sont requis." }),
@@ -14,8 +24,8 @@ export async function POST(request: Request) {
       );
     }
     const { data, error } = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: ["adrienlegeleu@gmail.com"],
+      from: "contact@ikovaline.com",
+      to: ["contact@ikovaline.com"],
 
       //   to: ["adrienlegeleu@gmail.com"],
       subject: category + ": " + firstname + " vous a envoyé un message",
@@ -26,6 +36,9 @@ export async function POST(request: Request) {
         tel,
         message,
         category,
+        buisnessname,
+        secteur,
+        etude,
       }),
     });
 
