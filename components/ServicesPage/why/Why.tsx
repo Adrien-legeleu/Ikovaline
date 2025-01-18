@@ -41,8 +41,8 @@ export default function Why() {
   ];
 
   return (
-    <div className=" max-w-4xl z-10 py-20  mx-auto" id="pourquoi-nous">
-      <h2 className="text-4xl font-semibold px-2 text-center">
+    <div className=" max-w-5xl z-10 py-20  mx-auto" id="pourquoi-nous">
+      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
         Pourquoi Nous choisir ?
       </h2>
       <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 py-20 relative ">
@@ -87,7 +87,7 @@ const Feature = ({
         {icon}
       </div>
       <div className="text-lg font-bold mb-2 relative z-10 px-10">
-        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
+        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-[#77DEF3] transition-all duration-200 origin-center" />
         <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-800 dark:text-neutral-100">
           {title}
         </span>

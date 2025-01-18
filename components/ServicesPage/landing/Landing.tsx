@@ -47,7 +47,7 @@ export default function Landing() {
           <Button>Business Développement</Button>
         </Link>
         <Link href="/nos-services/#developpement-digital">
-          <Button>Développement digitale</Button>
+          <Button>Développement digital</Button>
         </Link>
       </motion.div>
     </div>

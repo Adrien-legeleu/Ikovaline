@@ -30,7 +30,7 @@ export default function Landing() {
       >
         <Link href={"/contact"}>
           {" "}
-          <Button>Nous-contactez</Button>
+          <Button>Contactez-nous</Button>
         </Link>
 
         <Link href={"/nos-services"}>

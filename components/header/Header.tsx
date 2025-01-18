@@ -10,6 +10,18 @@ import Link from "next/link";
 import { HeaderResponsive } from "./HeaderResponsive";
 import { ModeToggle } from "../toggle-darkmode";
 import { useTheme } from "next-themes";
+import {
+  IconApps,
+  IconChartLine,
+  IconDeviceLaptop,
+  IconEye,
+  IconHelpHexagon,
+  IconHistory,
+  IconMessage,
+  IconThumbUp,
+  IconUser,
+  IconUsersGroup,
+} from "@tabler/icons-react";
 
 export function Header({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
@@ -70,9 +82,19 @@ export function Header({ className }: { className?: string }) {
                 link="/"
               >
                 <div className="flex flex-col space-y-4 text-sm">
-                  <HoveredLink href="/#about">A Propos</HoveredLink>
-                  <HoveredLink href="/#services">Nos Services</HoveredLink>
-                  <HoveredLink href="/#review">Témoignages</HoveredLink>
+                  <HoveredLink href="/#about">
+                    <IconUser stroke={2} />A Propos
+                  </HoveredLink>
+                  <HoveredLink href="/#services">
+                    {" "}
+                    <IconApps stroke={2} />
+                    Nos Services
+                  </HoveredLink>
+                  <HoveredLink href="/#review">
+                    {" "}
+                    <IconMessage stroke={2} />
+                    Témoignages
+                  </HoveredLink>
                 </div>
               </MenuItem>
               <MenuItem
@@ -83,13 +105,18 @@ export function Header({ className }: { className?: string }) {
               >
                 <div className="flex flex-col space-y-4 text-sm">
                   <HoveredLink href="/nos-services/#buisness-developpement">
-                    Business Développement
+                    <IconChartLine stroke={2} /> Business Développement
                   </HoveredLink>
                   <HoveredLink href="/nos-services/#developpement-digital">
-                    Développement digital
+                    <IconDeviceLaptop stroke={2} /> Développement digital
                   </HoveredLink>
                   <HoveredLink href="/nos-services/#pourquoi-nous">
-                    Pourquoi-Nous ?
+                    <IconThumbUp stroke={2} /> Pourquoi-Nous ?
+                  </HoveredLink>
+                  <HoveredLink href="/nos-services/#faq">
+                    {" "}
+                    <IconHelpHexagon stroke={2} />
+                    Notre FAQ
                   </HoveredLink>
                 </div>
               </MenuItem>
@@ -97,24 +124,26 @@ export function Header({ className }: { className?: string }) {
                 setActive={setActive}
                 active={active}
                 item="A Propos"
-                link="about"
+                link="/about"
               >
                 <div className="flex flex-col space-y-4 text-sm">
                   <HoveredLink href="/about/#notre-histoire">
+                    <IconHistory stroke={2} />
                     Notre Histoire
                   </HoveredLink>
                   <HoveredLink href="/about/#notre-equipe">
+                    <IconUsersGroup stroke={2} />
                     Notre Equipe
                   </HoveredLink>
                   <HoveredLink href="/about/#notre-vision">
-                    Notre Vision
+                    <IconEye stroke={2} /> Notre Vision
                   </HoveredLink>
                 </div>
               </MenuItem>
               <div className="flex items-center gap-4">
                 <ModeToggle />
                 <Link href={"/contact"}>
-                  <Button variant={"destructive"} className="rounded-2xl py-5">
+                  <Button variant={"secondary"} className="rounded-2xl py-5">
                     Contactez-nous
                   </Button>
                 </Link>

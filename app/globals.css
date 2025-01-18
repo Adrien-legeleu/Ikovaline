@@ -18,6 +18,38 @@ body {
   }
 }
 
+/* Personnalisation de la barre de défilement */
+::-webkit-scrollbar {
+  width: 10px;
+  /* Largeur de la barre de défilement */
+  height: 8px;
+  /* Hauteur pour la barre de défilement horizontale */
+}
+
+/* Style de la partie qui défile */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  /* Couleur de la barre de défilement */
+  border-radius: 10px;
+  /* Bordures arrondies */
+  border: 2px solid #fff;
+  /* Une bordure pour donner du relief */
+}
+
+/* Style lorsque la barre de défilement est survolée */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+  /* Couleur plus sombre au survol */
+}
+
+/* Personnalisation de la piste de défilement */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  /* Couleur de fond de la piste */
+  border-radius: 10px;
+  /* Bordures arrondies */
+}
+
 @layer base {
   :root {
     /* Fond général */
