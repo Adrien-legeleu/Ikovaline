@@ -177,9 +177,9 @@ const SkeletonThree = () => {
         repeat: Infinity,
         repeatType: "reverse",
       }}
-      className="flex flex-1 w-full h-full pt-4  rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full mt-4  rounded-lg  flex-col space-y-2"
     >
-      <SkeletonThreeComponent className="p-1 " />
+      <SkeletonThreeComponent className=" " />
     </motion.div>
   );
 };
