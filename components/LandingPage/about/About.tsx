@@ -22,15 +22,15 @@ export default function About() {
     },
     {
       id: 2,
-      name: "Léa Moura Pinto",
-      designation: "Directrice Communication",
-      image: Img4,
+      name: "Chiara Pinto Perez",
+      designation: "Directrice marketing",
+      image: Img2,
     },
     {
       id: 3,
-      name: "Adrien Legeleux",
-      designation: "Directeur Web Developpement",
-      image: Img6,
+      name: "Léa Moura Pinto",
+      designation: "Directrice Communication",
+      image: Img4,
     },
     {
       id: 4,
@@ -41,9 +41,9 @@ export default function About() {
 
     {
       id: 5,
-      name: "Chiara Pinto Perez",
-      designation: "Directrice marketing",
-      image: Img2,
+      name: "Adrien Legeleux",
+      designation: "Directeur Web Developpement",
+      image: Img6,
     },
   ];
 
