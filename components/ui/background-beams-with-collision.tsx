@@ -70,7 +70,7 @@ export const BackgroundBeamsWithCollision = ({
     <div
       ref={parentRef}
       className={cn(
-        "h-screen  gap-10 pt-5 dark:to-neutral-800 relative flex flex-col items-center w-full justify-center overflow-hidden",
+        "h-screen  gap-10 md:pt-5 pt-20 dark:to-neutral-800 relative flex flex-col items-center w-full md:justify-center justify-start overflow-hidden",
         // h-screen if you want bigger
         className
       )}
@@ -154,7 +154,7 @@ const CollisionMechanism = React.forwardRef<
     const animationInterval = setInterval(checkCollision, 50);
 
     return () => clearInterval(animationInterval);
-  }, [cycleCollisionDetected, containerRef]);
+  }, [cycleCollisionDetected, containerRef, parentRef]);
 
   useEffect(() => {
     if (collision.detected && collision.coordinates) {

@@ -33,7 +33,7 @@ export function HeaderResponsive() {
                 alt="logo de la start-up Ikovaline"
                 width={150}
                 height={150}
-                className="h-10 w-28 object-contain"
+                className="h-10 min-w-24 object-contain"
               />
             </Link>
           </DrawerClose>

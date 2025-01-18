@@ -10,12 +10,12 @@ import { motion } from "framer-motion";
 export default function Landing() {
   const { theme } = useTheme();
   return (
-    <div className="h-screen flex-col flex items-center justify-center">
-      <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+    <div className="h-screen flex-col flex items-center md:justify-center justify-start pt-20">
+      <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
         Transformez vos défis en opportunités avec nos <br />{" "}
         <Cover>services</Cover>
       </h1>
-      <div className="sm:w-[40rem] w-full h-28 relative bg-[#F4FAFB]">
+      <div className="sm:w-[40rem] w-full h-28 relative bg-[#F4FAFB] dark:bg-[#090D11]">
         {/* Gradients */}
         <div className="absolute sm:inset-x-20 max-sm:left-1/2 max-sm:-translate-x-1/2 top-0 bg-gradient-to-r from-transparent via-[#D1A3FF] to-transparent h-[2px] w-3/4 blur-sm dark:via-[#A682FF]" />
         <div className="absolute sm:inset-x-20 max-sm:left-1/2 max-sm:-translate-x-1/2 top-0 bg-gradient-to-r from-transparent via-[#7AB8FF] to-transparent h-px w-3/4 dark:via-[#2E95FF]" />

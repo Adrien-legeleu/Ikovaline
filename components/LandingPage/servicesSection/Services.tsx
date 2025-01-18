@@ -21,25 +21,27 @@ import Image from "next/image";
 
 export default function Services() {
   return (
-    <BentoGrid className="md:max-w-5xl  max-w-sm py-32 relative mx-auto md:auto-rows-[28rem]">
+    <div className="py-32">
       <h2
         className={
-          "max-md:flex hidden sm:text-4xl text-3xl items-center justify-center  mb-12 font-semibold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent "
+          "max-md:flex hidden sm:text-4xl text-3xl items-center justify-center mb-12  font-semibold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent "
         }
       >
         Nos Services
       </h2>
-      {items.map((item, i) => (
-        <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          className={cn("[&>p:text-lg]", item.className)}
-          icon={item.icon}
-        />
-      ))}
-    </BentoGrid>
+      <BentoGrid className="md:max-w-5xl  max-w-sm relative mx-auto md:auto-rows-[28rem]  auto-rows-[29rem]">
+        {items.map((item, i) => (
+          <BentoGridItem
+            key={i}
+            title={item.title}
+            description={item.description}
+            header={item.header}
+            className={cn("[&>p:text-lg]", item.className)}
+            icon={item.icon}
+          />
+        ))}
+      </BentoGrid>
+    </div>
   );
 }
 
@@ -73,7 +75,7 @@ const SkeletonOne = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className=" w-full  relative h-auto  pt-2 gap-4  text-xs grid grid-cols-2 dark:bg-dot-white/[0.15] bg-dot-black/[0.1] flex-col "
+      className=" w-full  relative h-auto  pt-5 gap-4  text-xs grid grid-cols-2 dark:bg-dot-white/[0.15] bg-dot-black/[0.1] flex-col "
     >
       <motion.div variants={variantsSecond} className="space-y-4">
         <div className="w-full text-sm bg-white dark:bg-neutral-700 text-neutral-400 rounded-full shadow-lg py-1 px-2 border">
@@ -209,8 +211,9 @@ const items = [
     title: "Google My Business & Avis Clients",
     description: (
       <span className="text-sm">
-        Ikovaline vous aide à optimiser votre présence sur Google My Business et
-        à gérer les avis clients pour améliorer votre visibilité en ligne.
+        Ikovaline optimise votre présence sur Google My Business et gère les
+        avis clients pour améliorer votre visibilité en ligne, renforcer votre
+        réputation et attirer davantage de clients.
       </span>
     ),
     header: <SkeletonOne />,
@@ -259,7 +262,7 @@ const items = [
   {
     title: "Consulting en Développement Commercial",
     description: (
-      <span className="text-sm mb-5">
+      <span className="text-sm">
         Nous vous accompagnons dans le développement commercial en optimisant
         vos processus et stratégies pour atteindre une croissance
       </span>

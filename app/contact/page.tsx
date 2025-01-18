@@ -20,7 +20,10 @@ export default function Page() {
   };
 
   return (
-    <div className="grid lg:grid-cols-60/40 font-poppins max-sm:px-4 grid-cols-1 md:mt-24 max-lg:mt-8 max-lg:gap-10 justify-center items-start max-w-[1400px] mx-auto">
+    <div className="grid lg:grid-cols-60/40 font-poppins max-sm:px-4 grid-cols-1 md:mt-24 mt-20  max-lg:gap-10 justify-center items-start max-w-[1400px] mx-auto">
+      <h1 className="text-3xl  px-6 font-poppins  lg:hidden font-semibold max-w-4xl mx-auto text-center  relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+        Contactez-nous pour discuter de vos projets !
+      </h1>
       <div className=" max-lg:order-2">
         {isBuisnessForm ? (
           <ContactFormBuisness handleForm={handleForm} />

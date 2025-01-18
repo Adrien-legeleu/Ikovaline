@@ -45,7 +45,7 @@ export default function Footer() {
     },
     {
       title: "Legal",
-      href: "/mention-legal",
+      href: "/mentions-legals",
       links: [{ label: "Mentions Légales", href: "/mentions-legales" }],
     },
   ];
@@ -81,7 +81,7 @@ export default function Footer() {
         <ul className="grid lg:grid-cols-4 xs:grid-cols-2 max-sm:order-1 grid-cols-1 gap-5">
           {footerLinks.map((section, index) => (
             <ul key={index} className="space-y-2">
-              <li className="text-neutral-600 dark:text-neutral-500 font-bold">
+              <li className="text-neutral-600 dark:text-neutral-300 font-bold">
                 <Link
                   href={section.href}
                   className="hover:text-neutral-800 dark:hover:text-neutral-600"

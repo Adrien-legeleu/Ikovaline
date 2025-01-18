@@ -1,13 +1,15 @@
+"use client";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 import { TextAnimate } from "@/components/ui/text-animate";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Landing() {
   return (
     <BackgroundBeamsWithCollision>
-      <h1 className="text-3xl sm:px-0 px-5 font-poppins  md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center md:mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+      <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center  relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
         Boostez votre présence en ligne et atteignez <Cover>le succès !</Cover>
       </h1>
 
@@ -19,7 +21,13 @@ export default function Landing() {
         Ikovaline, expert en marketing digital, transforme vos ambitions en
         réalités en boostant votre visibilité et vos performances en ligne.
       </TextAnimate>
-      <div className="flex gap-4 font-poppins ">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+        viewport={{ amount: 0.5 }}
+        className="font-poppins mt-10 flex max-sm:flex-col-reverse items-center justify-center max-sm:gap-3 gap-5"
+      >
         <Link href={"/contact"}>
           {" "}
           <Button>Nous-contactez</Button>
@@ -28,7 +36,7 @@ export default function Landing() {
         <Link href={"/nos-services"}>
           <Button variant={"secondary"}>Explorer nos services</Button>
         </Link>
-      </div>
+      </motion.div>
     </BackgroundBeamsWithCollision>
   );
 }
