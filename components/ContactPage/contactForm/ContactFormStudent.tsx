@@ -44,7 +44,7 @@ export default function ContactFormStudent({
       if (response.ok) {
         console.log("message envoyé");
         toast({
-          title: "Votre message a été envoyé avec succès.",
+          title: "Votre message a été envoyé avec succès !",
           description:
             "Nous traiterons votre message dans les plus brefs délais.",
         });
