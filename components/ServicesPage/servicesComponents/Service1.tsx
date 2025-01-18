@@ -50,7 +50,7 @@ export function Service1() {
       <div className="w-full flex items-center justify-center">
         <Link href="/contact">
           {" "}
-          <Button variant={"destructive"} className="text-lg">
+          <Button variant={"secondary"} className="text-lg">
             Passez à l’action !
           </Button>
         </Link>
