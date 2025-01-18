@@ -125,7 +125,7 @@ export const IkovalineEmail = ({
 
           <Hr className="border-t border-gray-300 mt-12" />
           <Img
-            src={ImgLogo}
+            src={"/images/logo/ikovaline_logo.png"}
             width={32}
             height={32}
             alt="Ikovaline Logo Grayscale"
