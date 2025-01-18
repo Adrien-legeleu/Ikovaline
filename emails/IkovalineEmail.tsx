@@ -131,7 +131,9 @@ export const IkovalineEmail = ({
             alt="Ikovaline Logo Grayscale"
             className="mx-auto mt-5 filter grayscale"
           />
-          <Text className="text-gray-500 text-sm text-center">Ikovaline</Text>
+          <Text className="text-gray-500 text-sm text-center">
+            Ikovaline Start-up
+          </Text>
         </Container>
       </Body>
     </Html>
