@@ -2,11 +2,12 @@ import Link from "next/link";
 import { AnimatedTooltip } from "../../ui/animated-tooltip";
 import { Button } from "../../ui/button";
 import { TextGenerateEffect } from "../../ui/text-generate-effect";
-import Img1 from "@/public/images/About/team-ikovaline (4).jpg";
-import Img2 from "@/public/images/About/team-ikovaline (1).jpg";
-import Img3 from "@/public/images/About/team-ikovaline (5).jpg";
-import Img4 from "@/public/images/About/team-ikovaline (7).jpg";
-import Img5 from "@/public/images/About/team-ikovaline (10).jpg";
+import Img1 from "@/public/images/About/team-florent-profil.jpg";
+import Img2 from "@/public/images/About/team-chiara-profil.jpg";
+import Img3 from "@/public/images/About/team-adam-profil.jpg";
+import Img4 from "@/public/images/About/team-lea-profil.jpg";
+import Img5 from "@/public/images/About/team-lucille-profil.jpg";
+import Img6 from "@/public/images/About/team-adrien-profil.jpg";
 export default function About() {
   const people = [
     {
@@ -17,33 +18,33 @@ export default function About() {
     },
     {
       id: 2,
-      name: "Robert Johnson",
-      designation: "Product Manager",
+      name: "Chiara Pinto Perez",
+      designation: "Directrice marketing",
       image: Img2,
     },
     {
       id: 3,
-      name: "Jane Smith",
-      designation: "Data Scientist",
+      name: "Adam Sauneron",
+      designation: "Manager Principal",
       image: Img3,
     },
     {
       id: 4,
-      name: "Emily Davis",
-      designation: "UX Designer",
+      name: "Léa Moura Pinto",
+      designation: "Directrice Communication",
       image: Img4,
     },
     {
       id: 5,
-      name: "Tyler Durden",
-      designation: "Soap Developer",
+      name: "Lucille Legoaec",
+      designation: "Directrice R&D Technologique",
       image: Img5,
     },
     {
       id: 6,
-      name: "Dora",
-      designation: "The Explorer",
-      image: Img5,
+      name: "Adrien Legeleux",
+      designation: "Directeur Web Developpement",
+      image: Img6,
     },
   ];
   const words = `

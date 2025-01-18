@@ -64,16 +64,14 @@ export default function Footer() {
               <Image
                 src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
                 alt="logo de la start-up Ikovaline"
-                width={50}
-                height={50}
-                className="min-h-10 min-w-28 object-contain"
+                width={150}
+                height={150}
+                className="min-h-10 w-36 object-contain"
               />
             </h2>
             <div className="space-y-2">
-              <p className="text-neutral-600 dark:text-neutral-500">
-                07 85 90 22 38
-              </p>
-              <p className="text-neutral-600 dark:text-neutral-500">
+              <p className="text-neutral-600 dark:text-white">07 85 90 22 38</p>
+              <p className="text-neutral-600 dark:text-white">
                 contact@ikovaline.com
               </p>
               <p>© {new Date().getFullYear()} Ikovaline</p>

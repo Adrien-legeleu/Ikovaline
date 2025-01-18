@@ -5,6 +5,7 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function Landing() {
   const { theme } = useTheme();
@@ -34,7 +35,13 @@ export default function Landing() {
         {/* Radial Gradient to prevent sharp edges */}
         <div className="absolute inset-0 w-full  h-full bg-[#F4FAFB] dark:bg-[#090D11] [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
       </div>
-      <div className="font-poppins mt-10 flex max-sm:flex-col items-center justify-center max-sm:gap-3 gap-5">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+        viewport={{ amount: 0.5 }}
+        className="font-poppins mt-10 flex max-sm:flex-col items-center justify-center max-sm:gap-3 gap-5"
+      >
         <Link href="/nos-services/#buisness-developpement">
           {" "}
           <Button>Business Développement</Button>
@@ -42,7 +49,7 @@ export default function Landing() {
         <Link href="/nos-services/#developpement-digital">
           <Button>Développement digitale</Button>
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 }

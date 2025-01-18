@@ -28,7 +28,11 @@ export function Service2() {
         id="developpement-digital"
       >
         {grid.map((feature) => (
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+            viewport={{ amount: 0.5 }}
             key={feature.title}
             className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
           >
@@ -39,7 +43,7 @@ export function Service2() {
             <p className="text-neutral-600 dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
               {feature.description}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
       <div className="w-full flex items-center justify-center">

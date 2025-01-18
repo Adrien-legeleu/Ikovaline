@@ -21,7 +21,7 @@ export function CallToAction({ title, desc, textBtn }: ICallToAction) {
         </p>
         <Link href="/contact">
           <Button
-            variant={"destructive"}
+            variant={"secondary"}
             className="md:text-lg text-base py-6 rounded-xl px-6  z-20"
           >
             {textBtn}

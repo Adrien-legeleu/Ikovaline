@@ -30,7 +30,11 @@ export function Service1() {
         id="buisness-developpement"
       >
         {grid.map((feature) => (
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+            viewport={{ amount: 0.5 }}
             key={feature.title}
             className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
           >
@@ -40,7 +44,7 @@ export function Service1() {
             </p>
 
             {feature.description}
-          </div>
+          </motion.div>
         ))}
       </div>
       <div className="w-full flex items-center justify-center">

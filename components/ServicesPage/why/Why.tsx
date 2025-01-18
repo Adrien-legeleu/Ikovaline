@@ -1,4 +1,6 @@
+"use client";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import {
   IconCloud,
   IconCurrencyDollar,
@@ -64,7 +66,11 @@ const Feature = ({
   index: number;
 }) => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+      viewport={{ amount: 0.5 }}
       className={cn(
         "flex flex-col lg:border-r  py-10 relative group/feature dark:border-neutral-800",
         (index === 0 || index === 4) && "lg:border-l dark:border-neutral-800",
@@ -89,6 +95,6 @@ const Feature = ({
       <p className="text-sm text-neutral-600 dark:text-neutral-300 max-w-xs relative z-10 px-10">
         {description}
       </p>
-    </div>
+    </motion.div>
   );
 };

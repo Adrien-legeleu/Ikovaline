@@ -18,7 +18,7 @@ export default function ContactFormStudent({
     email: "",
     tel: "",
     message: "",
-    category: "Entreprise",
+    category: "Étudiant",
     secteur: "",
   });
 
@@ -48,7 +48,7 @@ export default function ContactFormStudent({
           email: "",
           tel: "",
           message: "",
-          category: "Entreprise",
+          category: "Étudiant",
           secteur: "",
         });
       } else {

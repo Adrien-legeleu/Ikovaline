@@ -26,15 +26,17 @@ export function HeaderResponsive() {
     <Drawer>
       <div className="fixed bottom-5 left-1/2 flex gap-6 bg-white dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 rounded-3xl -translate-x-1/2 z-[50] ">
         <div className="flex items-center justify-center ">
-          <Link href="/">
-            <Image
-              src={theme.theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
-              alt="logo de la start-up Ikovaline"
-              width={50}
-              height={50}
-              className="min-h-10 min-w-28 object-contain"
-            />
-          </Link>
+          <DrawerClose asChild>
+            <Link href="/">
+              <Image
+                src={theme.theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                alt="logo de la start-up Ikovaline"
+                width={150}
+                height={150}
+                className="h-10 w-28 object-contain"
+              />
+            </Link>
+          </DrawerClose>
         </div>
         <ModeToggle />
         <DrawerTrigger asChild>
@@ -47,8 +49,8 @@ export function HeaderResponsive() {
             <Image
               src={theme.theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
               alt="logo de la start-up Ikovaline"
-              width={50}
-              height={50}
+              width={150}
+              height={150}
               className="min-h-10 min-w-28 mx-auto object-contain"
             />
           </DrawerHeader>
@@ -79,7 +81,7 @@ export function HeaderResponsive() {
           <DrawerFooter>
             <DrawerClose asChild>
               <Link href="/contact">
-                <Button variant="destructive" className="w-full">
+                <Button variant="secondary" className="w-full">
                   Contactez-nous !
                 </Button>
               </Link>

@@ -73,7 +73,7 @@ const SkeletonOne = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className=" w-full  relative h-auto  pt-2 gap-4  text-xs grid grid-cols-2 dark:bg-dot-white/[0.2] bg-dot-black/[0.1] flex-col "
+      className=" w-full  relative h-auto  pt-2 gap-4  text-xs grid grid-cols-2 dark:bg-dot-white/[0.15] bg-dot-black/[0.1] flex-col "
     >
       <motion.div variants={variantsSecond} className="space-y-4">
         <div className="w-full text-sm bg-white dark:bg-neutral-700 text-neutral-400 rounded-full shadow-lg py-1 px-2 border">
@@ -150,7 +150,7 @@ const SkeletonTwo = () => {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 w-full h-full dark:bg-dot-white/[0.2] bg-dot-black/[0.1] flex-col space-y-2"
+      className="flex flex-1 w-full h-full dark:bg-dot-white/[0.15] bg-dot-black/[0.1] flex-col space-y-2"
     >
       <SkeletonTwoComponent />
     </motion.div>
@@ -175,7 +175,7 @@ const SkeletonThree = () => {
         repeat: Infinity,
         repeatType: "reverse",
       }}
-      className="flex flex-1 w-full h-full  rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full pt-4  rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
     >
       <SkeletonThreeComponent className="p-1 " />
     </motion.div>
@@ -198,7 +198,7 @@ const SkeletonFive = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full items-center justify-center  bg-dot-black/[0.1] flex-col space-y-2"
+      className="flex flex-1 w-full h-full items-center justify-center pt-4  bg-dot-black/[0.1]  flex-col space-y-2"
     >
       <SkeletonFiveComponent />
     </motion.div>
@@ -256,13 +256,12 @@ const items = [
     className: "md:col-span-2",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
-
   {
     title: "Consulting en Développement Commercial",
     description: (
-      <span className="text-sm">
+      <span className="text-sm mb-5">
         Nous vous accompagnons dans le développement commercial en optimisant
-        vos processus et stratégies pour atteindre une croissance durable.
+        vos processus et stratégies pour atteindre une croissance
       </span>
     ),
     header: <SkeletonFive />,

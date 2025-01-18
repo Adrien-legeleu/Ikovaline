@@ -56,9 +56,9 @@ export function Header({ className }: { className?: string }) {
                 <Image
                   src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
                   alt="logo de la start-up Ikovaline"
-                  width={50}
-                  height={50}
-                  className="min-h-10 min-w-28 object-contain"
+                  width={150}
+                  height={150}
+                  className="h-10 w-28 object-contain"
                 />
               </Link>
             </div>
