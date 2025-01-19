@@ -92,10 +92,10 @@ const ikovalineContent = [
           viewport={{ amount: 1 }}
           className="leading-9"
         >
-          Ikovaline se démarque par une mission claire :
-          <Highlight className="p-2 m-1">accompagner les entreprises</Highlight>
-          à se développer dans un écosystème numérique en constante évolution,
-          grâce à des services à forte valeur ajoutée.
+          Ikovaline <Highlight className="p-2 m-1">se démarque</Highlight> par
+          une mission claire : accompagner les entreprises à se développer dans
+          un écosystème numérique en constante évolution, grâce à des services à
+          forte valeur ajoutée.
         </motion.p>
       </>
     ),
@@ -133,7 +133,7 @@ const ikovalineContent = [
           Ensemble, nous partageons une vision commune : accompagner les
           entreprises dans leur transition numérique, tout en garantissant des
           résultats
-          <Highlight className="p-2 m-1 ">concrets</Highlight> et
+          <Highlight className="p-2 m-1 ">concrets</Highlight> et{" "}
           <Highlight className="p-2 m-1 "> mesurables</Highlight>. Nous mettons
           un point d’honneur à maintenir une approche humaine et personnalisée
           dans chacun de nos projets.

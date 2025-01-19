@@ -75,7 +75,7 @@ export const Highlight = ({
       initial={{
         backgroundSize: "0% 100%",
       }}
-      animate={{
+      whileInView={{
         backgroundSize: "100% 100%",
       }}
       transition={{
@@ -83,13 +83,14 @@ export const Highlight = ({
         ease: "linear",
         delay: 0.5,
       }}
+      viewport={{ once: true }} // L'animation ne s'exécute qu'une seule fois
       style={{
         backgroundRepeat: "no-repeat",
         backgroundPosition: "left center",
         display: "inline",
       }}
       className={cn(
-        `relative inline-block py-1   px-1 rounded-lg bg-gradient-to-t from-[#6ECFF6] to-[#78ddf1] dark:from-[#2B92C6] dark:to-[#2B92C6]`,
+        `relative inline-block py-1 px-1 rounded-lg bg-gradient-to-t from-[#6ECFF6] to-[#78ddf1] dark:from-[#2B92C6] dark:to-[#2B92C6]`,
         className
       )}
     >
