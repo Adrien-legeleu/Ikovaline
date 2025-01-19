@@ -152,7 +152,7 @@ export function HeaderResponsive() {
               >
                 <AccordionTrigger className="text-neutral-600 space-x-3 dark:text-neutral-300 font-bold">
                   <DrawerClose asChild>
-                    <Link href="/">
+                    <Link href={section.href}>
                       <Button variant="ghost" className="w-full text-lg">
                         {section.title}
                       </Button>
