@@ -12,6 +12,7 @@ import Img7 from "@/public/images/About/team-samuel-profil.jpg";
 import Img8 from "@/public/images/About/team-victor-profil.jpg";
 import Img9 from "@/public/images/About/team-ronan-profil.jpg";
 import Img10 from "@/public/images/About/team-victor-pifferi-profil.jpg";
+import Img11 from "@/public/images/About/team-saif-profil.jpg";
 export default function About() {
   const people1 = [
     {
@@ -77,6 +78,12 @@ export default function About() {
       name: "Adam Sauneron",
       designation: "Manager Principal",
       image: Img3,
+    },
+    {
+      id: 6,
+      name: "Saif Ul Islam",
+      designation: "Google Ads Manager",
+      image: Img11,
     },
   ];
   const words = `

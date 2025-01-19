@@ -5,6 +5,7 @@ import Img2 from "@/public/images/About/team-victor-biauhaud.jpg";
 import Img4 from "@/public/images/About/team-ronan.jpg";
 import Img5 from "@/public/images/About/team-samuel.jpg";
 import Img6 from "@/public/images/About/team-victor-pifferi.jpg";
+import Img7 from "@/public/images/About/team-saif.jpg";
 
 export function Team() {
   const testimonials = [
@@ -40,9 +41,15 @@ export function Team() {
     },
     {
       quote: "",
-      name: "Ronan Alexandre",
-      designation: "Commercial Junior",
+      name: "Victor Pifferi",
+      designation: "Commercial Senior",
       src: Img6,
+    },
+    {
+      quote: "",
+      name: "Saif Ul Islam",
+      designation: "Google Ads Manager",
+      src: Img7,
     },
   ];
   return <AnimatedTestimonials testimonials={testimonials} />;

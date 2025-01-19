@@ -13,7 +13,6 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
-import ImgLogo from "@/public/images/logo/ikovaline_logo.png";
 
 interface IkovalineEmailProps {
   firstName: string;
