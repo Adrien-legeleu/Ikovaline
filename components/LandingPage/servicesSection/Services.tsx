@@ -256,7 +256,7 @@ const items = [
       </span>
     ),
     header: <SkeletonThree />,
-    className: "md:col-span-2",
+    className: "md:col-span-2 md:order-5",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
@@ -268,7 +268,7 @@ const items = [
       </span>
     ),
     header: <SkeletonFive />,
-    className: "md:col-span-1",
+    className: "md:col-span-1 md:order-4 ",
     icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
   },
 ];
