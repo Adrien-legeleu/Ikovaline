@@ -58,10 +58,11 @@ const ikovalineContent = [
           whileInView={{ opacity: 1, y: [20, -5, 0] }}
           transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
           viewport={{ amount: 0.5 }}
+          className="leading-9"
         >
-          Fondée par <Highlight className="p-2">Florent Ghizzoni</Highlight>,
-          Ikovaline est une start-up spécialisée en marketing digital née de la
-          volonté d&lsquo;aider les entreprises à réussir leur transformation
+          Fondée par <Highlight className="p-2 m-1">Florent Ghizzoni</Highlight>
+          , Ikovaline est une start-up spécialisée en marketing digital née de
+          la volonté d&lsquo;aider les entreprises à réussir leur transformation
           numérique. Grâce à son expertise en business développement et en
           marketing stratégique, Florent a su répondre aux besoins des petites
           et moyennes entreprises, en proposant des solutions personnalisées et
@@ -89,10 +90,11 @@ const ikovalineContent = [
           whileInView={{ opacity: 1, y: [20, -5, 0] }}
           transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
           viewport={{ amount: 1 }}
+          className="leading-9"
         >
-          Ikovaline se démarque par une mission claire :{" "}
-          <Highlight className="p-2">accompagner les entreprises</Highlight> à
-          se développer dans un écosystème numérique en constante évolution,
+          Ikovaline se démarque par une mission claire :
+          <Highlight className="p-2 m-1">accompagner les entreprises</Highlight>
+          à se développer dans un écosystème numérique en constante évolution,
           grâce à des services à forte valeur ajoutée.
         </motion.p>
       </>
@@ -110,12 +112,14 @@ const ikovalineContent = [
           whileInView={{ opacity: 1, y: [20, -5, 0] }}
           transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
           viewport={{ amount: 1 }}
+          className="leading-9"
         >
-          Chez Ikovaline, nous aidons nos clients à réussir grâce à{" "}
-          <Highlight className="p-2">une équipe passionnée</Highlight>et
-          engagée. Avec nos compétences en marketing digital, développement
-          commercial et gestion de projets, nous créons des solutions adaptées à
-          chaque entreprise pour les aider à atteindre leurs objectifs.
+          Chez Ikovaline, nous aidons nos clients à réussir grâce à une équipe
+          <Highlight className="p-2 m-1">passionnée</Highlight>et{" "}
+          <Highlight className="p-2 m-1">engagée</Highlight>. Avec nos
+          compétences en marketing digital, développement commercial et gestion
+          de projets, nous créons des solutions adaptées à chaque entreprise
+          pour les aider à atteindre leurs objectifs.
         </motion.p>
 
         <Team />
@@ -124,14 +128,15 @@ const ikovalineContent = [
           whileInView={{ opacity: 1, y: [20, -5, 0] }}
           transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
           viewport={{ amount: 1 }}
+          className="leading-9"
         >
           Ensemble, nous partageons une vision commune : accompagner les
           entreprises dans leur transition numérique, tout en garantissant des
-          <Highlight className="p-2">
-            résultats concrets et mesurables
-          </Highlight>{" "}
-          . Nous mettons un point d’honneur à maintenir une approche humaine et
-          personnalisée dans chacun de nos projets.
+          résultats
+          <Highlight className="p-2 m-1 ">concrets</Highlight> et
+          <Highlight className="p-2 m-1 "> mesurables</Highlight>. Nous mettons
+          un point d’honneur à maintenir une approche humaine et personnalisée
+          dans chacun de nos projets.
         </motion.p>
       </>
     ),
@@ -158,6 +163,7 @@ const ikovalineContent = [
           viewport={{
             amount: 1, // 50% de l'élément doit être visible pour déclencher l'animation
           }}
+          className="leading-9"
         >
           Ikovaline vise un objectif ambitieux : atteindre{" "}
           <Cover>300 000 € </Cover> de chiffre d’affaires avant 2026. Notre
@@ -180,6 +186,7 @@ const ikovalineContent = [
           viewport={{
             amount: 1, // 50% de l'élément doit être visible pour déclencher l'animation
           }}
+          className="leading-8"
         >
           <IconQuote
             stroke={2}

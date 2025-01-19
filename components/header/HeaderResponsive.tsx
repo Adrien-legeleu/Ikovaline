@@ -140,7 +140,7 @@ export function HeaderResponsive() {
           </DrawerHeader>
           <Accordion
             type="single"
-            className="gap-4 py-8  flex  flex-col items-center justify-center"
+            className="gap-4 py-8  flex  flex-col max-w-[250px] mx-auto justify-center"
             collapsible
           >
             {" "}
@@ -153,7 +153,7 @@ export function HeaderResponsive() {
                 <AccordionTrigger className="text-neutral-600 space-x-3 dark:text-neutral-300 font-bold">
                   <DrawerClose asChild>
                     <Link href={section.href}>
-                      <Button variant="ghost" className="w-full text-lg">
+                      <Button variant="ghost" className="w-full text-xl">
                         {section.title}
                       </Button>
                     </Link>
