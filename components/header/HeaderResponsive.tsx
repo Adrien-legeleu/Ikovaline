@@ -108,7 +108,7 @@ export function HeaderResponsive() {
   ];
   return (
     <Drawer>
-      <div className="fixed bottom-5 left-1/2 flex gap-6 bg-white dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 rounded-3xl -translate-x-1/2 z-[50] ">
+      <div className="fixed bottom-5 left-1/2 flex gap-6 bg-white dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 rounded-3xl -translate-x-1/2 z-[10000] ">
         <div className="flex items-center justify-center ">
           <DrawerClose asChild>
             <Link href="/">
