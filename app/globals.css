@@ -1,4 +1,7 @@
+/* Importation des polices Google */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Tailwind base, components et utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,122 +21,94 @@ body {
   }
 }
 
-/* Personnalisation de la barre de défilement */
+/* Personnalisation de la barre de défilement (Mode clair) */
 ::-webkit-scrollbar {
   width: 10px;
-  /* Largeur de la barre de défilement */
   height: 8px;
-  /* Hauteur pour la barre de défilement horizontale */
 }
 
-/* Style de la partie qui défile */
 ::-webkit-scrollbar-thumb {
   background-color: #888;
-  /* Couleur de la barre de défilement */
   border-radius: 10px;
-  /* Bordures arrondies */
   border: 2px solid #fff;
-  /* Une bordure pour donner du relief */
 }
 
-/* Style lorsque la barre de défilement est survolée */
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555;
-  /* Couleur plus sombre au survol */
 }
 
-/* Personnalisation de la piste de défilement */
 ::-webkit-scrollbar-track {
   background-color: #f1f1f1;
-  /* Couleur de fond de la piste */
   border-radius: 10px;
-  /* Bordures arrondies */
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 10px;
+  border: 2px solid #1e1e1e;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #666;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+}
+
+/* Définition des couleurs par défaut (Mode clair) */
 @layer base {
   :root {
-    /* Fond général */
     --background: 193 50% 97%;
     --foreground: 210 30% 20%;
-
-    /* Couleurs des cartes et des popups */
     --card: 193 45% 95%;
     --card-foreground: 210 30% 15%;
     --popover: 193 45% 95%;
     --popover-foreground: 210 30% 15%;
-
-    /* Couleurs principales */
     --primary: 176 80% 65%;
     --primary-foreground: 0% 0% 100%;
-
     --secondary: 190 85% 65%;
     --secondary-foreground: 0% 0% 100%;
-
-    /* Couleurs secondaires et atténuées */
     --muted: 193 30% 90%;
     --muted-foreground: 210 15% 40%;
-
     --accent: 190 85% 60%;
     --accent-foreground: 0% 0% 100%;
-
-    /* Couleur destructrice */
     --destructive: 0 84% 58%;
     --destructive-foreground: 220 20% 95%;
-
-    /* Bordures et autres */
     --border: 193 30% 85%;
     --input: 193 30% 85%;
     --ring: 190 85% 65%;
-
-    /* Graphiques */
     --chart-1: 190 85% 65%;
     --chart-2: 176 80% 65%;
     --chart-3: 176 80% 70%;
     --chart-4: 176 80% 50%;
     --chart-5: 190 85% 75%;
-
-    /* Rayon des bordures */
     --radius: 0.5rem;
-
-    /* Dégradé global */
     --gradient: linear-gradient(90deg, #1BE0E0, #06F3B7);
   }
 
+  /* Définition des couleurs pour le Mode sombre */
   .dark {
-    /* Fond général */
     --background: 210 30% 5%;
     --foreground: 193 50% 90%;
-
-    /* Couleurs des cartes et des popups */
     --card: 210 30% 15%;
     --card-foreground: 193 50% 95%;
     --popover: 210 30% 15%;
     --popover-foreground: 193 50% 95%;
-
-    /* Couleurs principales */
     --primary: 176 80% 65%;
     --primary-foreground: 210 30% 10%;
-
     --secondary: 190 85% 55%;
     --secondary-foreground: 210 30% 10%;
-
-    /* Couleurs secondaires et atténuées */
     --muted: 210 30% 20%;
     --muted-foreground: 193 50% 70%;
-
     --accent: 190 85% 60%;
     --accent-foreground: 193 50% 90%;
-
-    /* Couleur destructrice */
     --destructive: 0 62% 40%;
     --destructive-foreground: 210 30% 95%;
-
-    /* Bordures et autres */
     --border: 210 30% 20%;
     --input: 210 30% 20%;
     --ring: 190 85% 65%;
-
-    /* Graphiques */
     --chart-1: 190 85% 65%;
     --chart-2: 176 80% 60%;
     --chart-3: 176 80% 50%;
