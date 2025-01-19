@@ -10,6 +10,7 @@ type Testimonial = {
   name: string;
   designation: string;
   src: string | StaticImageData;
+  alt: string;
 };
 export const AnimatedTestimonials = ({
   testimonials,
@@ -81,7 +82,7 @@ export const AnimatedTestimonials = ({
                 >
                   <Image
                     src={testimonial.src}
-                    alt={testimonial.name}
+                    alt={testimonial.alt}
                     width={500}
                     height={500}
                     draggable={false}
