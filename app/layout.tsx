@@ -54,6 +54,7 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <link rel="icon" href={Favicon.src} type="image/png" />
+        <link rel="canonical" href="https://www.ikovaline.com/" />
       </head>
       <body className={`antialiased`}>
         <ThemeProvider
