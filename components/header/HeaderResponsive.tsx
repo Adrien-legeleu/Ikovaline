@@ -19,9 +19,93 @@ import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
 
 import { ModeToggle } from "../toggle-darkmode";
 import { useTheme } from "next-themes";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../ui/accordion";
+import {
+  IconApps,
+  IconChartLine,
+  IconDeviceLaptop,
+  IconEye,
+  IconHelpHexagon,
+  IconHistory,
+  IconMessage,
+  IconThumbUp,
+  IconUser,
+  IconUsersGroup,
+} from "@tabler/icons-react";
 
 export function HeaderResponsive() {
   const theme = useTheme();
+  const headerLinks = [
+    {
+      title: "Home",
+      href: "/",
+      links: [
+        { label: "À Propos", href: "/#about", icon: <IconUser stroke={2} /> },
+        {
+          label: "Nos Services",
+          href: "/#services",
+          icon: <IconApps stroke={2} />,
+        },
+        {
+          label: "Témoignages",
+          href: "/#review",
+          icon: <IconMessage stroke={2} />,
+        },
+      ],
+    },
+    {
+      title: "Nos Services",
+      href: "/nos-services",
+      links: [
+        {
+          label: "Business Développement",
+          href: "/nos-services/#buisness-developpement",
+          icon: <IconChartLine stroke={2} />,
+        },
+        {
+          label: "Développement Digital",
+          href: "/nos-services/#developpement-digital",
+          icon: <IconDeviceLaptop stroke={2} />,
+        },
+        {
+          label: "Pourquoi-Nous ?",
+          href: "/nos-services/#pourquoi-nous",
+          icon: <IconThumbUp stroke={2} />,
+        },
+        {
+          label: "Notre FAQ",
+          href: "/nos-services/#faq",
+          icon: <IconHelpHexagon stroke={2} />,
+        },
+      ],
+    },
+    {
+      title: "À Propos",
+      href: "/about",
+      links: [
+        {
+          label: "Notre Histoire",
+          href: "/about/#notre-histoire",
+          icon: <IconHistory stroke={2} />,
+        },
+        {
+          label: "Notre Équipe",
+          href: "/about/#notre-equipe",
+          icon: <IconUsersGroup stroke={2} />,
+        },
+        {
+          label: "Notre Vision",
+          href: "/about/#notre-vision",
+          icon: <IconEye stroke={2} />,
+        },
+      ],
+    },
+  ];
   return (
     <Drawer>
       <div className="fixed bottom-5 left-1/2 flex gap-6 bg-white dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 rounded-3xl -translate-x-1/2 z-[50] ">
@@ -54,30 +138,45 @@ export function HeaderResponsive() {
               className="min-h-10 min-w-28 mx-auto object-contain"
             />
           </DrawerHeader>
-          <div className="gap-2 py-5 flex  flex-col items-center justify-center">
-            <DrawerClose asChild>
-              <Link href="/">
-                <Button variant="ghost" className="w-full text-lg">
-                  Home
-                </Button>
-              </Link>
-            </DrawerClose>
-            <DrawerClose asChild>
-              <Link href="/nos-services">
-                <Button variant="ghost" className="w-full text-lg">
-                  Nos Services
-                </Button>
-              </Link>
-            </DrawerClose>
-            <DrawerClose asChild>
-              <Link href="/about">
-                <Button variant="ghost" className="w-full text-lg">
-                  A Propos
-                </Button>
-              </Link>
-            </DrawerClose>
-          </div>
-
+          <Accordion
+            type="single"
+            className="gap-4 py-8  flex  flex-col items-center justify-center"
+            collapsible
+          >
+            {" "}
+            {headerLinks.map((section, index) => (
+              <AccordionItem
+                value={`item-${index + 1}`}
+                key={index}
+                className="space-y-2"
+              >
+                <AccordionTrigger className="text-neutral-600 space-x-3 dark:text-neutral-300 font-bold">
+                  <DrawerClose asChild>
+                    <Link href="/">
+                      <Button variant="ghost" className="w-full text-lg">
+                        {section.title}
+                      </Button>
+                    </Link>
+                  </DrawerClose>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-2">
+                  {section.links.map((link, linkIndex) => (
+                    <li key={linkIndex} className="list-none">
+                      <DrawerClose asChild>
+                        <Link
+                          href={link.href}
+                          className="text-neutral-500 flex items-center gap-2 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-700"
+                        >
+                          {link.icon}
+                          {link.label}
+                        </Link>
+                      </DrawerClose>
+                    </li>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>{" "}
           <DrawerFooter>
             <DrawerClose asChild>
               <Link href="/contact">

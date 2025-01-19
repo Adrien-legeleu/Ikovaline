@@ -47,8 +47,12 @@ export default function FAQ() {
       </h2>
       <Accordion type="single" className="gap-2 flex flex-col" collapsible>
         {faqData.map((faq, index) => (
-          <AccordionItem value={`item-${index + 1}`} key={index}>
-            <AccordionTrigger>{faq.question}</AccordionTrigger>
+          <AccordionItem
+            value={`item-${index + 1}`}
+            key={index}
+            className="bg-[#5ad9f230] p-2 dark:bg-[#141c25]"
+          >
+            <AccordionTrigger className="py-4">{faq.question}</AccordionTrigger>
             <AccordionContent>{faq.answer}</AccordionContent>
           </AccordionItem>
         ))}
