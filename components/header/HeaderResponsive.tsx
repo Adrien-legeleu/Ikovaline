@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
-import { IconMenu3, IconMenuDeep } from "@tabler/icons-react";
+import { IconMenu3 } from "@tabler/icons-react";
 import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
 
 import { ModeToggle } from "../toggle-darkmode";
