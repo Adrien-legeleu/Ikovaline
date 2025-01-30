@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
-import { IconMenuDeep } from "@tabler/icons-react";
+import { IconMenu3, IconMenuDeep } from "@tabler/icons-react";
 import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
 
 import { ModeToggle } from "../toggle-darkmode";
@@ -108,8 +108,11 @@ export function HeaderResponsive() {
   ];
   return (
     <Drawer>
-      <div className="fixed bottom-5 left-1/2 flex gap-6 bg-white dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 rounded-3xl -translate-x-1/2 z-[10000] ">
-        <div className="flex items-center justify-center ">
+      <div className="fixed bottom-0 max-xs:w-full xs:left-1/2 xs:-translate-x-1/2  flex xs:gap-6 gap-2 bg-white [320px]:justify-between justify-around dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 xs:rounded-3xl rounded-t-2xl z-[10000] ">
+        <DrawerTrigger asChild>
+          <IconMenu3 stroke={2} className="[360px]:min-w-9 min-w-7 min-h-9 " />
+        </DrawerTrigger>
+        <div className="flex items-center max-[320px]:hidden  justify-center ">
           <DrawerClose asChild>
             <Link href="/">
               <Image
@@ -117,15 +120,20 @@ export function HeaderResponsive() {
                 alt="logo de la start-up Ikovaline"
                 width={150}
                 height={150}
-                className="h-10 min-w-24 object-contain"
+                className="h-10 w-24 min-w-12 xs:min-w-24 object-contain"
               />
             </Link>
           </DrawerClose>
         </div>
+        <Link href={"/contact"}>
+          <Button
+            variant={"secondary"}
+            className="rounded-xl max-[360px]:p-3 max-[320px]:px-5 max-[320px]:text-sm text-xs"
+          >
+            Contactez-nous
+          </Button>
+        </Link>
         <ModeToggle />
-        <DrawerTrigger asChild>
-          <IconMenuDeep stroke={2} className="w-8 h-8" />
-        </DrawerTrigger>
       </div>
       <DrawerContent>
         <div className="mx-auto w-full  max-w-sm">

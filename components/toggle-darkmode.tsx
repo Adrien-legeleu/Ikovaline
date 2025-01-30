@@ -14,14 +14,14 @@ export function ModeToggle() {
   return (
     <Button
       variant="ghost"
-      size="icon"
       onClick={toggleTheme}
       aria-label="Toggle theme"
+      className=" p-0"
     >
       {theme === "dark" ? (
-        <Sun className="h-[1.2rem] w-[1.2rem]" />
+        <Sun className="[360px]:min-w-6 min-w-5 min-h-6" />
       ) : (
-        <Moon className="h-[1.2rem] w-[1.2rem]" />
+        <Moon className="[360px]:min-w-6 min-w-5 min-h-6" />
       )}
     </Button>
   );

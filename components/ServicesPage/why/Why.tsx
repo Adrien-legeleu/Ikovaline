@@ -2,11 +2,11 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
-  IconCloud,
-  IconCurrencyDollar,
-  IconEaseInOut,
-  IconRouteAltLeft,
-  IconTerminal2,
+  IconDiscountCheck,
+  IconCash,
+  IconClock,
+  IconMessage2,
+  IconUsersGroup,
 } from "@tabler/icons-react";
 
 export default function Why() {
@@ -14,38 +14,38 @@ export default function Why() {
     {
       title: "Meilleur rapport qualité-prix",
       description: "Des prestations haut de gamme à des tarifs compétitifs.",
-      icon: <IconTerminal2 />,
+      icon: <IconDiscountCheck />,
     },
     {
       title: "Satisfait ou remboursé",
       description: "La garantie d’un service conforme à vos attentes.",
-      icon: <IconEaseInOut />,
+      icon: <IconCash />,
     },
     {
       title: "Délais d’exécution rapides",
       description:
         "Projets livrés dans les temps, sans compromis sur la qualité.",
-      icon: <IconCurrencyDollar />,
+      icon: <IconClock />,
     },
     {
       title: "Communication fluide et transparente",
       description:
         "Un suivi client efficace, avec des points réguliers pour garantir votre satisfaction.",
-      icon: <IconCloud />,
+      icon: <IconMessage2 />,
     },
     {
       title: "Équipe expérimentée et passionnée",
       description: "Des professionnels dévoués à votre réussite.",
-      icon: <IconRouteAltLeft />,
+      icon: <IconUsersGroup />,
     },
   ];
 
   return (
     <div className=" max-w-5xl z-10 py-20  mx-auto" id="pourquoi-nous">
-      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
         Pourquoi Nous choisir ?
       </h2>
-      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 py-20 relative ">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xs:py-20 py-16 relative ">
         {features.map((feature, index) => (
           <Feature key={feature.title} {...feature} index={index} />
         ))}
@@ -72,7 +72,7 @@ const Feature = ({
       transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
       viewport={{ amount: 0.5 }}
       className={cn(
-        "flex flex-col lg:border-r  py-10 relative group/feature dark:border-neutral-800",
+        "flex flex-col lg:border-r py-4 xs:py-10 relative group/feature dark:border-neutral-800",
         (index === 0 || index === 4) && "lg:border-l dark:border-neutral-800",
         index < 4 && "lg:border-b dark:border-neutral-800"
       )}
@@ -83,7 +83,7 @@ const Feature = ({
       {index >= 4 && (
         <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
       )}
-      <div className="mb-4 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
+      <div className="xs:mb-4 mb-2 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
         {icon}
       </div>
       <div className="text-lg font-bold mb-2 relative z-10 px-10">
