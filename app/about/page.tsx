@@ -71,14 +71,14 @@ const ikovalineContent = [
         <div className="grid sm:grid-cols-2 grid-cols-1 gap-8">
           <Image
             src={ImageHistory1}
-            alt="L'équipe d'Ikovaline en pleine collaboration sur des projets de transformation numérique, spécialisée dans le marketing digital et la stratégie web, offrant des solutions innovantes pour améliorer la visibilité en ligne des entreprises"
+            alt="Équipe Ikovaline en collaboration sur projets de transformation numérique et marketing digital"
             width={500}
             height={500}
             className="rounded-3xl w-full aspect-square object-cover object-center"
           />
           <Image
             src={ImageHistory2}
-            alt="Présentation de l'équipe d'Ikovaline, start-up innovante en marketing digital et optimisation SEO, dédiée à la gestion de la e-réputation, au développement de sites web et à la publicité en ligne, pour booster la croissance des entreprises"
+            alt="Équipe Ikovaline en réunion de stratégie digitale"
             width={500}
             height={500}
             className="rounded-3xl w-full max-sm:hidden aspect-square object-cover object-bottom"

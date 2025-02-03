@@ -7,24 +7,24 @@ import { ThemeProvider } from "@/components/theme.provider";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title:
-    "Ikovaline - Votre Partenaire en Marketing Digital et Transformation Numérique",
+  title: "Ikovaline - Expert Marketing Digital et Transformation",
   description:
-    "Ikovaline, la start-up étudiante spécialisée en marketing digital, vous accompagne dans votre transformation numérique : SEO, gestion Google My Business, publicité en ligne et plus encore. Boostez votre visibilité et votre croissance avec des solutions personnalisées.",
+    "Ikovaline, start-up étudiante experte en marketing digital, booste votre visibilité avec SEO, publicité, Google My Business et des stratégies sur mesure.",
   keywords: [
     "marketing digital",
     "transformation numérique",
     "SEO",
     "publicité en ligne",
-    "gestion Google My Business",
+    "Google My Business",
     "création de contenu",
     "Ikovaline",
     "site web",
+    "stratégies digitales",
   ],
   openGraph: {
-    title: "Ikovaline - Votre Partenaire en Marketing Digital",
+    title: "Ikovaline - Expert Marketing Digital et Transformation",
     description:
-      "Spécialistes du marketing digital et de la transformation numérique, nous aidons les entreprises à améliorer leur visibilité en ligne.",
+      "Start-up étudiante experte en marketing digital, Ikovaline accompagne votre transformation numérique et booste votre visibilité en ligne.",
     url: "https://www.ikovaline.com",
     type: "website",
     images: [
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ikovaline - Votre Partenaire en Marketing Digital",
+    title: "Ikovaline - Expert Marketing Digital et Transformation",
     description:
-      "Boostez votre visibilité en ligne et votre croissance avec Ikovaline, spécialiste du marketing digital.",
+      "Boostez votre visibilité avec Ikovaline, start-up étudiante experte en marketing digital et stratégies de transformation numérique.",
     images: ["/images/logo/ikovaline_logo.png"],
   },
 };
