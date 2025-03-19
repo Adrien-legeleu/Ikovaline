@@ -4,21 +4,20 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  IconBulb,
   IconChartBar,
-  IconHeartHandshake,
-  IconLeaf,
   IconMapPin,
   IconShield,
   IconUsers,
 } from "@tabler/icons-react";
+import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
+import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
 
 export default function page() {
   const [valueIdText, setValueIdText] = useState("visibilité accrue");
   return (
     <div>
       <div className="min-h-screen h-full items-center justify-center flex pt-24 flex-col">
-        <h1 className=" sm:text-4xl text-3xl max-w-2xl items-center justify-center text-center py-2  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+        <h1 className=" sm:text-4xl md:text-5xl max-w-3xl mx-auto text-3xl items-center justify-center text-center py-2  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
           Gestion de votre image en ligne : Maximisez votre crédibilité sur
           Google
         </h1>
@@ -41,31 +40,42 @@ export default function page() {
           alt="mobile service"
         />
       </div>
-      <div className="py-24">
-        <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+      <div className="py-24 flex items-center space-y-12 justify-center flex-col">
+        <h2 className=" sm:text-4xl max-w-xl mx-auto text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
           Des questions sur notre service ? <br /> Nous avons les réponses !
         </h2>
-        <p>
+        <p className="text-muted-foreground  dark:text-neutral-400 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg">
           91 % des consommateurs consultent les avis en ligne avant de faire un
           achat. Des retours positifs augmentent votre crédibilité et améliorent
           votre référencement local. Inversement, un mauvais score peut faire
           fuir vos prospects.
         </p>
+        <NeonGradientCard className="max-w-sm items-center justify-center text-center">
+          <AnimatedShinyText className="inline-flex text-8xl font-extrabold items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-50">
+            <span>91%</span>
+          </AnimatedShinyText>
+          <span className="inline-block text-muted-foreground dark:text-neutral-400  font-poppins ">
+            des consommateurs se fient aux avis en ligne.{" "}
+          </span>
+        </NeonGradientCard>
       </div>
-      <div className="md:px-10 py-24 px-5">
-        <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+      <div className="md:px-10 py-24 space-y-12 px-5">
+        <h2 className=" sm:text-4xl max-w-xl mx-auto text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
           Surveillance, analyse et réponses personnalisées
         </h2>
-        <div className="grid grid-cols-3 w-full gap-6">
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 w-full gap-6">
           {cards.map((card, index) => (
-            <div key={index} className="outer aspect-square">
+            <div
+              key={index}
+              className="outer aspect-square last:col-span-2 last:mx-auto"
+            >
               <div className="dot"></div>
               <div className="card">
                 <div className="ray"></div>
                 <div
                   className="text-3xl pt-[15%] text-center mx-[10%] font-bold 
-          bg-[linear-gradient(45deg,_#ffffff_4%,_#000000,_#ffffff)] 
-          dark:bg-[linear-gradient(45deg,_#000000_4%,_#ffffff,_#000000)] 
+          bg-[linear-gradient(45deg,_#cacaca_4%,_#000000,_#ffffff)] 
+          dark:bg-[linear-gradient(45deg,_#2b2b2b_4%,_#ffffff,_#000000)] 
           bg-clip-text text-transparent"
                 >
                   {card.text}
@@ -86,13 +96,13 @@ export default function page() {
         <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
           Les bénéfices pour votre entreprise
         </h2>
-        <div className="flex flex-col pt-10 gap-10 items-center justify-center">
+        <div className="flex flex-col pt-12 gap-10 items-center justify-center">
           <div className="relative p-2 bg-[#F4F4F4] rounded-3xl shadow-product flex  justify-center">
-            <ul className="relative flex  gap-2 w-full ">
+            <ul className="relative flex flex-row flex-wrap items-center justify-center  gap-2 w-full ">
               {valuesData.map((value) => (
                 <motion.li
                   key={value.title}
-                  className="p-2 font-semibold  flex w-full  gap-2 cursor-pointer relative rounded-full"
+                  className="p-2 font-semibold  flex w-auto  gap-2 cursor-pointer relative rounded-full"
                   onClick={() => setValueIdText(value.title.toLowerCase())}
                 >
                   {value.title.toLowerCase() === valueIdText && (
@@ -106,7 +116,7 @@ export default function page() {
                       }}
                     />
                   )}
-                  <span className="relative whitespace-nowrap flex w-full text-sm gap-2 px-3 ">
+                  <span className="relative whitespace-nowrap flex w-full text-xs sm:text-sm gap-2 px-3 ">
                     {value.icon}
                     {value.title}
                   </span>
@@ -125,7 +135,7 @@ export default function page() {
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: -50, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 150, damping: 12 }}
-                    className=" w-full p-5 space-y-2 bg-white rounded-3xl shadow-product"
+                    className=" w-full p-5 max-w-md space-y-2 bg-white rounded-3xl shadow-product"
                   >
                     <div className="flex gap-1 items-start flex-col">
                       <span className="inline-block text-sm  bg-orange-100 px-2 py-[2px] text-orange-400 rounded-lg">
@@ -136,7 +146,7 @@ export default function page() {
                       </span>
                     </div>
 
-                    <h3 className="font-semibold text-lg md:text-xl">
+                    <h3 className="font-semibold  text-lg md:text-xl">
                       {value.title}
                     </h3>
 
