@@ -3,10 +3,18 @@ import { TextAnimate } from "@/components/ui/text-animate";
 import Image from "next/image";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { IconBulb, IconHeartHandshake, IconLeaf } from "@tabler/icons-react";
+import {
+  IconBulb,
+  IconChartBar,
+  IconHeartHandshake,
+  IconLeaf,
+  IconMapPin,
+  IconShield,
+  IconUsers,
+} from "@tabler/icons-react";
 
 export default function page() {
-  const [valueIdText, setValueIdText] = useState("innovation");
+  const [valueIdText, setValueIdText] = useState("visibilité accrue");
   return (
     <div>
       <div className="min-h-screen h-full items-center justify-center flex pt-24 flex-col">
@@ -78,9 +86,9 @@ export default function page() {
         <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
           Les bénéfices pour votre entreprise
         </h2>
-        <div className="space-y-10 sm:grid sm:grid-cols-2 sm:gap-10 items-center justify-center">
-          <div className="relative p-5 bg-[#F4F4F4] rounded-3xl shadow-product flex justify-center">
-            <ul className="relative flex flex-col gap-2 w-full ">
+        <div className="flex flex-col pt-10 gap-10 items-center justify-center">
+          <div className="relative p-2 bg-[#F4F4F4] rounded-3xl shadow-product flex  justify-center">
+            <ul className="relative flex  gap-2 w-full ">
               {valuesData.map((value) => (
                 <motion.li
                   key={value.title}
@@ -98,7 +106,7 @@ export default function page() {
                       }}
                     />
                   )}
-                  <span className="relative flex w-full justify-center items-center text-sm gap-2 px-3 ">
+                  <span className="relative whitespace-nowrap flex w-full text-sm gap-2 px-3 ">
                     {value.icon}
                     {value.title}
                   </span>
@@ -121,7 +129,7 @@ export default function page() {
                   >
                     <div className="flex gap-1 items-start flex-col">
                       <span className="inline-block text-sm  bg-orange-100 px-2 py-[2px] text-orange-400 rounded-lg">
-                        {value.subdesc}
+                        {value.subdesc1}
                       </span>
                       <span className="inline-block text-sm  bg-blue-100 px-2 py-[2px] text-blue-400 rounded-lg">
                         {value.subdesc2}
@@ -129,11 +137,11 @@ export default function page() {
                     </div>
 
                     <h3 className="font-semibold text-lg md:text-xl">
-                      {value.subtitle}
+                      {value.title}
                     </h3>
 
                     <p className="text-sm text-darkgrey md:text-base">
-                      {value.desc}
+                      {value.description}
                     </p>
                   </motion.div>
                 )
@@ -165,27 +173,36 @@ const cards = [
 
 const valuesData = [
   {
-    title: "Innovation",
-    icon: <IconBulb />,
-    desc: "Chaque projet chez Lynelec est une opportunité d’explorer de nouvelles solutions, d’adopter les meilleures technologies et d’anticiper les besoins de demain.",
-    subtitle: "Innover pour transformer",
-    subdesc: "Repousser les limites",
-    subdesc2: "Des technologies de pointe",
+    title: "Visibilité accrue",
+    description:
+      "Améliorez votre classement sur Google Maps et attirez plus de clients locaux.",
+
+    subdesc1: "Google Maps",
+    subdesc2: "SEO local",
+    icon: <IconMapPin className="text-blue-600 dark:text-blue-400 w-6 h-6" />,
   },
   {
-    title: "Engagement",
-    icon: <IconHeartHandshake />,
-    desc: "Nous nous engageons à offrir des solutions durables et adaptées, en accompagnant chaque client avec écoute et professionnalisme.",
-    subtitle: "Un partenaire de confiance",
-    subdesc: "Fiabilité et expertise",
-    subdesc2: "Proximité avec nos clients",
+    title: "Crédibilité renforcée",
+    description:
+      "Des avis positifs rassurent vos prospects et augmentent votre taux de conversion.",
+    subdesc1: "Confiance",
+    subdesc2: "Réputation",
+    icon: <IconShield className="text-blue-600 dark:text-blue-400 w-6 h-6" />,
   },
   {
-    title: "Durabilité",
-    icon: <IconLeaf />,
-    desc: "Chez Lynelec, chaque innovation est pensée pour réduire l’impact environnemental et favoriser un développement plus respectueux de la planète.",
-    subtitle: "Un futur plus vert",
-    subdesc: "Énergies responsables",
-    subdesc2: "Une vision éco-conçue",
+    title: "Fidélisation optimisée",
+    description:
+      "Une relation client positive encourage les clients à revenir et à recommander votre entreprise.",
+    subdesc1: "Expérience client",
+    subdesc2: "Recommandations",
+    icon: <IconUsers className="text-blue-600 dark:text-blue-400 w-6 h-6" />,
+  },
+  {
+    title: "Plus de trafic",
+    description:
+      "Augmentez les visites en boutique et le trafic vers votre site web.",
+    subdesc1: "Points de vente",
+    subdesc2: "Site web",
+    icon: <IconChartBar className="text-blue-600 dark:text-blue-400 w-6 h-6" />,
   },
 ];
