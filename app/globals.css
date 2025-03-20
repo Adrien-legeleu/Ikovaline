@@ -133,7 +133,7 @@ body {
 }
 
 .dark .card {
-  border: solid 1px #202222;
+  border: solid 1px #2d2e2e;
   background: radial-gradient(circle 280px at 0% 0%, #444444, #0c0d0d);
   color: #fff;
 }

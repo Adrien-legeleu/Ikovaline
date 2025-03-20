@@ -33,10 +33,10 @@ export default function page() {
           notoriété.
         </TextAnimate>
         <Image
-          className="object-cover w-full"
+          className="object-cover w-1/2 relative bottom-20"
           width={1800}
           height={1600}
-          src={"/images/services/service-mobile.png"}
+          src={"/images/services/service-mobile (1).png"}
           alt="mobile service"
         />
       </div>
@@ -63,17 +63,21 @@ export default function page() {
         <h2 className=" sm:text-4xl max-w-xl mx-auto text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
           Surveillance, analyse et réponses personnalisées
         </h2>
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 w-full gap-6">
+        <div className="grid xl:grid-cols-3 sm:grid-cols-4 grid-cols-1 w-full gap-6">
           {cards.map((card, index) => (
             <div
               key={index}
-              className="outer aspect-square last:col-span-2 last:mx-auto"
+              className={`outer aspect-square ${
+                index === cards.length - 1
+                  ? "sm:col-span-2 sm:col-start-2 xl:col-span-1" // Centrage en sm et normal en xl
+                  : "sm:col-span-2 xl:col-span-1"
+              }`}
             >
               <div className="dot"></div>
               <div className="card">
                 <div className="ray"></div>
                 <div
-                  className="text-3xl pt-[15%] text-center mx-[10%] font-bold 
+                  className="text-3xl pt-[15%] text-center mx-[15%] font-bold 
           bg-[linear-gradient(45deg,_#cacaca_4%,_#000000,_#ffffff)] 
           dark:bg-[linear-gradient(45deg,_#2b2b2b_4%,_#ffffff,_#000000)] 
           bg-clip-text text-transparent"
@@ -97,7 +101,7 @@ export default function page() {
           Les bénéfices pour votre entreprise
         </h2>
         <div className="flex flex-col pt-12 gap-10 items-center justify-center">
-          <div className="relative p-2 bg-[#F4F4F4] rounded-3xl shadow-product flex  justify-center">
+          <div className="relative p-2 bg-[#F4F4F4] dark:bg-neutral-800 rounded-3xl shadow-product flex  justify-center">
             <ul className="relative flex flex-row flex-wrap items-center justify-center  gap-2 w-full ">
               {valuesData.map((value) => (
                 <motion.li
@@ -108,11 +112,11 @@ export default function page() {
                   {value.title.toLowerCase() === valueIdText && (
                     <motion.div
                       layoutId="activeBg"
-                      className="absolute w-full inset-0 shadow-neumorphic2 bg-white rounded-full"
+                      className="absolute w-full inset-0 shadow-neumorphic2 bg-white dark:bg-neutral-900 rounded-full"
                       transition={{
                         type: "spring",
                         stiffness: 200,
-                        damping: 15,
+                        damping: 20,
                       }}
                     />
                   )}
@@ -135,13 +139,13 @@ export default function page() {
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: -50, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 150, damping: 12 }}
-                    className=" w-full p-5 max-w-md space-y-2 bg-white rounded-3xl shadow-product"
+                    className=" w-full p-5 max-w-md space-y-2 bg-white dark:bg-neutral-800 rounded-3xl shadow-product"
                   >
                     <div className="flex gap-1 items-start flex-col">
-                      <span className="inline-block text-sm  bg-orange-100 px-2 py-[2px] text-orange-400 rounded-lg">
+                      <span className="inline-block text-sm  bg-emerald-100 px-2 py-[2px] text-emerald-400 dark:bg-emerald-800 dark:text-emerald-500 rounded-lg">
                         {value.subdesc1}
                       </span>
-                      <span className="inline-block text-sm  bg-blue-100 px-2 py-[2px] text-blue-400 rounded-lg">
+                      <span className="inline-block text-sm  bg-cyan-100 px-2 py-[2px] text-cyan-400  dark:bg-cyan-800 dark:text-cyan-500 rounded-lg">
                         {value.subdesc2}
                       </span>
                     </div>
@@ -189,7 +193,7 @@ const valuesData = [
 
     subdesc1: "Google Maps",
     subdesc2: "SEO local",
-    icon: <IconMapPin className="text-blue-600 dark:text-blue-400 w-6 h-6" />,
+    icon: <IconMapPin className="text-secondary w-6 h-6" />,
   },
   {
     title: "Crédibilité renforcée",
@@ -197,7 +201,7 @@ const valuesData = [
       "Des avis positifs rassurent vos prospects et augmentent votre taux de conversion.",
     subdesc1: "Confiance",
     subdesc2: "Réputation",
-    icon: <IconShield className="text-blue-600 dark:text-blue-400 w-6 h-6" />,
+    icon: <IconShield className="text-secondary w-6 h-6" />,
   },
   {
     title: "Fidélisation optimisée",
@@ -205,7 +209,7 @@ const valuesData = [
       "Une relation client positive encourage les clients à revenir et à recommander votre entreprise.",
     subdesc1: "Expérience client",
     subdesc2: "Recommandations",
-    icon: <IconUsers className="text-blue-600 dark:text-blue-400 w-6 h-6" />,
+    icon: <IconUsers className="text-secondary w-6 h-6" />,
   },
   {
     title: "Plus de trafic",
@@ -213,6 +217,6 @@ const valuesData = [
       "Augmentez les visites en boutique et le trafic vers votre site web.",
     subdesc1: "Points de vente",
     subdesc2: "Site web",
-    icon: <IconChartBar className="text-blue-600 dark:text-blue-400 w-6 h-6" />,
+    icon: <IconChartBar className="text-secondary w-6 h-6" />,
   },
 ];
