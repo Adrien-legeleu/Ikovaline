@@ -45,9 +45,11 @@ export default function Page() {
           </p>
           <NeonGradientCard className="max-w-sm items-center flex flex-col justify-center text-center">
             <AnimatedShinyText className="inline-block text-8xl font-extrabold items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-50">
-              <span>{service.section2NumberImportant}</span>
+              <span className="inline-block">
+                {service.section2NumberImportant}
+              </span>
             </AnimatedShinyText>
-            <span className="inline-block text-muted-foreground dark:text-neutral-400 font-poppins">
+            <span className="block text-muted-foreground dark:text-neutral-400 font-poppins">
               {service.section2TextImportant}
             </span>
           </NeonGradientCard>
@@ -58,11 +60,11 @@ export default function Page() {
             {service.section3Title}
           </h2>
           <div className="grid xl:grid-cols-3 sm:grid-cols-4 grid-cols-1 w-full gap-6">
-            {service.section3Cards.map((card, idx) => (
+            {service.section3Cards.map((card, index) => (
               <div
-                key={idx}
+                key={index}
                 className={`outer aspect-square ${
-                  idx === service.section3Cards.length - 1
+                  index === service.section3Cards.length - 1
                     ? "sm:col-span-2 sm:col-start-2 xl:col-span-1"
                     : "sm:col-span-2 xl:col-span-1"
                 }`}
@@ -70,12 +72,21 @@ export default function Page() {
                 <div className="dot"></div>
                 <div className="card">
                   <div className="ray"></div>
-                  <div className="text-3xl pt-[15%] text-center mx-[15%] font-bold text-gray-600 dark:text-neutral-400  bg-clip-text text-transparent">
+                  <div
+                    className="text-3xl pt-[15%] text-center mx-[15%] font-bold 
+          bg-[linear-gradient(45deg,_#cacaca_4%,_#000000,_#ffffff)] 
+          dark:bg-[linear-gradient(45deg,_#2b2b2b_4%,_#ffffff,_#000000)] 
+          bg-clip-text text-transparent"
+                  >
                     {card.text}
                   </div>
                   <p className="text-center text-gray-600 dark:text-neutral-400 text-sm px-4 mt-8 mx-[10%]">
                     {card.subtext}
                   </p>
+                  <div className="line topl"></div>
+                  <div className="line leftl"></div>
+                  <div className="line bottoml"></div>
+                  <div className="line rightl"></div>
                 </div>
               </div>
             ))}
