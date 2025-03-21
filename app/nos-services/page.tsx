@@ -11,7 +11,7 @@ export default function page() {
       <Landing />
       <Service1 />
       <Service2 />
-      {/* <Result /> */}
+
       <Why />
       <CallToAction
         title="Boostez votre entreprise dès aujourd'hui !"

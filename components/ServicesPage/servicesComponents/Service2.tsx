@@ -28,27 +28,28 @@ export function Service2() {
         id="developpement-digital"
       >
         {grid.map((feature) => (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-            viewport={{ amount: 0.5 }}
-            key={feature.title}
-            className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
-          >
-            <Grid size={20} />
-            <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
-              {feature.title}
-            </p>
-            <p className="text-neutral-600 dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
-              {feature.description}
-            </p>
-          </motion.div>
+          <Link href={`nos-services/${feature.slug}`}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+              viewport={{ amount: 0.5 }}
+              key={feature.title}
+              className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
+            >
+              <Grid size={20} />
+              <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
+                {feature.title}
+              </p>
+              <p className="text-neutral-600 dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+                {feature.description}
+              </p>
+            </motion.div>
+          </Link>
         ))}
       </div>
       <div className="w-full flex items-center justify-center">
         <Link href="/contact">
-          {" "}
           <Button variant={"secondary"} className="text-lg">
             Faites le premier pas !
           </Button>
@@ -61,6 +62,7 @@ export function Service2() {
 const grid = [
   {
     title: "Gestion de votre image en ligne (Avis Google & Google My Business)",
+    slug: "gestion-de-votre-image-en-ligne",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -76,6 +78,8 @@ const grid = [
   },
   {
     title: "Stratégie de contenu et gestion des réseaux sociaux",
+    slug: "strategie-de-contenu-reseaux",
+
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -91,6 +95,7 @@ const grid = [
   },
   {
     title: "Création et optimisation de sites web",
+    slug: "creation-optimisation-de-sites-web",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -106,6 +111,7 @@ const grid = [
   },
   {
     title: "Rédaction et création de contenu",
+    slug: "redaction-creation-de-contenu",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>

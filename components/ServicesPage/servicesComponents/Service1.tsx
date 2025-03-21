@@ -30,21 +30,23 @@ export function Service1() {
         id="buisness-developpement"
       >
         {grid.map((feature) => (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-            viewport={{ amount: 0.5 }}
-            key={feature.title}
-            className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
-          >
-            <Grid size={20} />
-            <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
-              {feature.title}
-            </p>
+          <Link href={`nos-services/${feature.slug}`}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+              viewport={{ amount: 0.5 }}
+              key={feature.title}
+              className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
+            >
+              <Grid size={20} />
+              <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
+                {feature.title}
+              </p>
 
-            {feature.description}
-          </motion.div>
+              {feature.description}
+            </motion.div>
+          </Link>
         ))}
       </div>
       <div className="w-full flex items-center justify-center">
@@ -62,6 +64,7 @@ export function Service1() {
 const grid = [
   {
     title: "Audit et suivi analytique",
+    slug: "audit-suivi-analytique",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -77,6 +80,7 @@ const grid = [
   },
   {
     title: "Formation et conseil stratégique",
+    slug: "formation-conseil-strategique",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -92,6 +96,7 @@ const grid = [
   },
   {
     title: "Gestion de partenariats et e-réputation",
+    slug: "gestion-de-partenariats-e-reputation",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -107,6 +112,7 @@ const grid = [
   },
   {
     title: "Email marketing et service client digital",
+    slug: "email-marketing-service-client-digital",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -122,6 +128,7 @@ const grid = [
   },
   {
     title: "Réalisation de landing pages et publicité locale",
+    slug: "landing-pages-pub-locale",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -137,6 +144,7 @@ const grid = [
   },
   {
     title: "Campagnes publicitaires en ligne (Google Ads & Social Ads)",
+    slug: "campagnes-publicitaires-en-ligne",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
