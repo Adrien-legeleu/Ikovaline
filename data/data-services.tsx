@@ -269,10 +269,10 @@ const dataService = [
       "Analysez vos données pour optimiser vos performances digitales et prendre des décisions éclairées.",
     section1Image: (
       <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-audit.png"}
+        className="mx-auto rounded-2xl object-cover h-full object-left-top"
+        width={3000}
+        height={3000}
+        src={"/images/services/audit.jpg"}
         alt="Audit analytique"
       />
     ),

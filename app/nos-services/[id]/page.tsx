@@ -1,8 +1,11 @@
 "use client";
 import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
+import { DotPattern } from "@/components/magicui/dot-pattern";
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { TextAnimate } from "@/components/ui/text-animate";
 import dataService from "@/data/data-services";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,29 +25,41 @@ export default function Page() {
   return (
     <div>
       <div>
-        <div className="min-h-screen h-full items-center justify-center flex pt-24 flex-col">
-          <h1 className="sm:text-4xl md:text-5xl max-w-3xl mx-auto text-3xl text-center py-2 mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
-            {service.section1Title}
-          </h1>
-          <TextAnimate
-            animation="blurInUp"
-            by="word"
-            className="text-muted-foreground dark:text-neutral-400 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
-          >
-            {service.section1Desc}
-          </TextAnimate>
-          {service.section1Image}
+        <div className="min-h-screen h-full rounded-b-3xl items-center bg-gradient-to-t from-50% from-primary/70 to-transparent to-75% justify-center flex pt-24 flex-col">
+          <div className="flex w-full flex-col  overflow-hidden">
+            <ContainerScroll
+              titleComponent={
+                <>
+                  <TextAnimate
+                    animation="blurInUp"
+                    by="word"
+                    className="text-muted-foreground mx-auto dark:text-neutral-400 z-10 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
+                  >
+                    {service.section1Desc}
+                  </TextAnimate>
+                  <h1 className="sm:text-5xl md:text-6xl max-w-3xl mx-auto text-4xl text-center z-10 py-2  font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+                    {service.section1Title}
+                  </h1>
+                </>
+              }
+            >
+              {service.section1Image}
+            </ContainerScroll>
+          </div>
         </div>
 
         <div className="py-24 flex items-center space-y-12 justify-center flex-col">
-          <h2 className="sm:text-4xl max-w-xl mx-auto text-3xl text-center font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+          <h2 className="sm:text-4xl py-2 max-w-xl mx-auto text-3xl text-center font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
             {service.section2Title}
           </h2>
           <p className="text-muted-foreground dark:text-neutral-400 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg">
             {service.section2Desc}
           </p>
           <NeonGradientCard className="max-w-sm items-center flex flex-col justify-center text-center">
-            <AnimatedShinyText className="inline-block text-8xl font-extrabold items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-50">
+            <AnimatedShinyText
+              className="
+            inline-block text-8xl font-extrabold items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-50"
+            >
               <span className="inline-block">
                 {service.section2NumberImportant}
               </span>
@@ -56,7 +71,7 @@ export default function Page() {
         </div>
 
         <div className="md:px-10 py-24 space-y-12 px-5">
-          <h2 className="sm:text-4xl max-w-xl mx-auto text-3xl text-center font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+          <h2 className="sm:text-4xl max-w-xl mx-auto py-2 text-3xl text-center font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
             {service.section3Title}
           </h2>
           <div className="grid xl:grid-cols-3 sm:grid-cols-4 grid-cols-1 w-full gap-6">
@@ -93,8 +108,14 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="md:px-10 py-24 px-5">
-          <h2 className="sm:text-4xl text-3xl text-center font-bold bg-clip-text text-transparent">
+        <div className="md:px-10 relative py-24 px-5">
+          <DotPattern
+            glow={true}
+            className={cn(
+              "[mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
+            )}
+          />
+          <h2 className="sm:text-4xl max-w-xl mx-auto py-2 text-3xl text-center font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
             {service.section4Title}
           </h2>
           <div className="flex flex-col pt-12 gap-10 items-center justify-center">
@@ -134,7 +155,7 @@ export default function Page() {
                         stiffness: 150,
                         damping: 12,
                       }}
-                      className="w-full p-5 max-w-md space-y-2 bg-white dark:bg-neutral-800 rounded-3xl shadow-product"
+                      className="w-full p-5 max-w-md space-y-2 bg-white shadow-2xl shadow-black/20 dark:shadow-white/20 dark:bg-neutral-800 rounded-3xl shadow-product"
                     >
                       <h3 className="font-semibold text-lg md:text-xl">
                         {value.title}
@@ -142,6 +163,8 @@ export default function Page() {
                       <p className="text-sm text-darkgrey md:text-base">
                         {value.description}
                       </p>
+                      <div className="w-4 h-4 bg-white rounded-full border-[3px] border-black absolute top-1/2   -translate-y-1/2 -left-2" />
+                      <div className="w-4 h-4 bg-white rounded-full border-[3px] border-black absolute top-1/2 -translate-y-1/2 -right-2" />
                     </motion.div>
                   )
               )}
@@ -149,7 +172,6 @@ export default function Page() {
           </div>
         </div>
       </div>
-      );
     </div>
   );
 }

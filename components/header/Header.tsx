@@ -100,7 +100,7 @@ export function Header({ className }: { className?: string }) {
               <MenuItem
                 setActive={setActive}
                 active={active}
-                item="Nos Service"
+                item="Nos Services"
                 link="/nos-services"
               >
                 <div className="flex flex-col space-y-4 text-sm">
