@@ -61,66 +61,73 @@ export function Service2() {
 
 const grid = [
   {
-    title: "Gestion de votre image en ligne (Avis Google & Google My Business)",
-    slug: "gestion-de-votre-image-en-ligne",
+    title: "Optimisation SEO et Référencement Naturel",
+    slug: "seo-referencement-naturel",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Surveillance et gestion proactive des avis clients, avec des réponses
-          personnalisées pour renforcer votre crédibilité.
-        </li>
-        <li>
-          Optimisation de votre fiche Google My Business (photos, horaires,
-          informations) pour un meilleur référencement local.
+          Audit SEO, optimisation on-site/off-site et stratégie de contenu pour
+          améliorer votre visibilité organique.
         </li>
       </ul>
     ),
   },
   {
-    title: "Stratégie de contenu et gestion des réseaux sociaux",
-    slug: "strategie-de-contenu-reseaux",
-
+    title: "Gestion de Campagnes SEA Performantes",
+    slug: "gestion-campagnes-sea-performantes",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Création de calendriers éditoriaux adaptés à votre stratégie
-          marketing.
-        </li>
-        <li>
-          Contenus engageants (posts, stories, vidéos) sur les réseaux sociaux
-          tels que Facebook, Instagram, LinkedIn, TikTok.
+          Création et gestion de campagnes publicitaires payantes pour générer
+          du trafic et des leads qualifiés.
         </li>
       </ul>
     ),
   },
   {
-    title: "Création et optimisation de sites web",
-    slug: "creation-optimisation-de-sites-web",
+    title: "E-réputation & Gestion des Avis Google",
+    slug: "e-reputation-gestion-avis-google",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Développement de sites vitrine ou e-commerce modernes, responsives et
-          centrés sur l’expérience utilisateur.
-        </li>
-        <li>
-          Optimisation SEO avancée pour garantir une meilleure visibilité de
-          votre site sur les moteurs de recherche.
+          Optimisation de l’image en ligne grâce à une gestion proactive et la
+          collecte d’avis clients qualifiés.
         </li>
       </ul>
     ),
   },
   {
-    title: "Rédaction et création de contenu",
-    slug: "redaction-creation-de-contenu",
+    title: "Automatisation & Solutions IA pour le Marketing",
+    slug: "automatisation-solutions-ia-marketing",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Production d’articles de blog, pages web et newsletters optimisés pour
-          le SEO.
+          Intégration d’outils IA pour optimiser vos actions marketing et
+          automatiser vos processus.
         </li>
+      </ul>
+    ),
+  },
+  {
+    title: "Création de Contenus & Supports Marketing",
+    slug: "creation-contenus-supports-marketing",
+    description: (
+      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Création de visuels et vidéos courtes pour enrichir vos réseaux
-          sociaux et campagnes publicitaires.
+          Production de visuels, vidéos, présentations et autres contenus
+          marketing sur-mesure.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: "Étude de Marché & Pilotage de Projet Global",
+    slug: "etude-marche-pilotage-projet-global",
+    description: (
+      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+        <li>
+          Analyse stratégique et coordination de projets pour optimiser le
+          développement et la pénétration du marché.
         </li>
       </ul>
     ),

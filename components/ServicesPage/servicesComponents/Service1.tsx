@@ -63,96 +63,85 @@ export function Service1() {
 
 const grid = [
   {
-    title: "Audit et suivi analytique",
-    slug: "audit-suivi-analytique",
+    title: "Études de Marché Sur Mesure",
+    slug: "etudes-marche-sur-mesure",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Analyse complète de votre présence en ligne pour identifier les axes
-          d’amélioration.
-        </li>
-        <li>
-          Mise en place de Google Analytics et rapports détaillés pour suivre
-          vos performances et ajuster vos actions.
+          Analyse approfondie du marché, segmentation client, étude
+          concurrentielle et analyse des tendances sectorielles.
         </li>
       </ul>
     ),
   },
   {
-    title: "Formation et conseil stratégique",
-    slug: "formation-conseil-strategique",
+    title: "Sondages de Marché & Enquêtes Terrain",
+    slug: "sondages-marche-enquetes-terrain",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Sessions de formation en marketing digital adaptées aux besoins de vos
-          équipes.
-        </li>
-        <li>
-          Conseils personnalisés pour élaborer des stratégies marketing
-          efficaces.
+          Collecte et analyse de données qualitatives et quantitatives pour
+          obtenir des insights précis (B2B ou B2C).
         </li>
       </ul>
     ),
   },
   {
-    title: "Gestion de partenariats et e-réputation",
-    slug: "gestion-de-partenariats-e-reputation",
+    title: "Stratégie Commerciale & Développement Business",
+    slug: "strategie-commerciale-developpement-business",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Amélioration de votre image en ligne par une gestion proactive de
-          votre e-réputation.
-        </li>
-        <li>
-          Création et gestion de partenariats stratégiques pour renforcer votre
-          présence en ligne.
+          Définition et déploiement d’une stratégie commerciale opérationnelle
+          pour booster vos ventes.
         </li>
       </ul>
     ),
   },
   {
-    title: "Email marketing et service client digital",
-    slug: "email-marketing-service-client-digital",
+    title: "Pilotage & Gestion de Projet Stratégique",
+    slug: "pilotage-gestion-projet-strategique",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Création de campagnes e-mailing performantes pour fidéliser vos
-          clients.
-        </li>
-        <li>
-          Optimisation des interactions client via messageries, réseaux sociaux
-          et Google My Business.
+          Coordination experte pour le pilotage et le suivi de projets de
+          développement ou de lancement.
         </li>
       </ul>
     ),
   },
   {
-    title: "Réalisation de landing pages et publicité locale",
-    slug: "landing-pages-pub-locale",
+    title: "Plan Go-to-Market & Accompagnement Opérationnel",
+    slug: "plan-go-to-market-accompagnement-operational",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Création de pages d’atterrissage efficaces et adaptées à vos
-          campagnes.
-        </li>
-        <li>
-          Campagnes locales pour capter des clients dans votre zone
-          géographique.
+          Structuration du lancement de nouveaux produits/services et
+          pénétration efficace du marché.
         </li>
       </ul>
     ),
   },
   {
-    title: "Campagnes publicitaires en ligne (Google Ads & Social Ads)",
-    slug: "campagnes-publicitaires-en-ligne",
+    title: "Prospection & Lead Generation Multicanal",
+    slug: "prospection-lead-generation-multicanal",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Création et gestion de campagnes publicitaires sur Google, Facebook,
-          Instagram et TikTok.
+          Mise en place de processus de prospection et accompagnement des
+          équipes de vente pour booster vos leads.
         </li>
+      </ul>
+    ),
+  },
+  {
+    title: "Création de Sites Web Vitrine & E-commerce",
+    slug: "creation-sites-web-vitrine-e-commerce",
+    description: (
+      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Optimisation des annonces pour maximiser le retour sur investissement.
+          Conception et développement de sites optimisés pour la conversion et
+          l'expérience utilisateur.
         </li>
       </ul>
     ),

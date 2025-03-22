@@ -19,6 +19,7 @@ const config: Config = {
       },
       screens: {
         xs: "450px",
+        xss: "400px",
       },
       gridTemplateColumns: {
         "40/60": "40% 60%",
@@ -28,7 +29,11 @@ const config: Config = {
         input:
           "`0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`",
         servicepc: "0 0px 400px 100px #ffffff",
+        servicepcDark: "0 0px 400px 100px #000000",
         servicemobile: "0 0 200px 50px #ffffff",
+        servicemobileDark: "0 0 200px 50px #000000",
+        serviceIconlight: "20px -20px 60px #bebebe, 20px 20px 60px #ffffff",
+        serviceIconDark: " -28px -28px 55px #292929,   28px 28px 55px #373737",
       },
       colors: {
         background: "hsl(var(--background))",

@@ -104,7 +104,7 @@ export function DotPattern({
         delay: Math.random() * 5,
         duration: Math.random() * 3 + 2,
       };
-    },
+    }
   );
 
   return (
@@ -112,8 +112,8 @@ export function DotPattern({
       ref={containerRef}
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0 h-full w-full",
-        className,
+        "pointer-events-none absolute left-0 bottom-0   h-screen w-full",
+        className
       )}
       {...props}
     >
@@ -123,7 +123,7 @@ export function DotPattern({
           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </radialGradient>
       </defs>
-      {dots.map((dot, index) => (
+      {dots.map((dot) => (
         <motion.circle
           key={`${dot.x}-${dot.y}`}
           cx={dot.x}

@@ -1,657 +1,871 @@
-import Image from "next/image";
-import { IconShield, IconUsers, IconChartBar } from "@tabler/icons-react";
+import {
+  IconActivity,
+  IconAdjustments,
+  IconAutomation,
+  IconBook,
+  IconBulb,
+  IconChartBar,
+  IconChartLine,
+  IconClock,
+  IconCpu,
+  IconCpu2,
+  IconCurrencyDollar,
+  IconEye,
+  IconFileAnalytics,
+  IconHeadset,
+  IconHeart,
+  IconLayersIntersect,
+  IconLock,
+  IconMapPin,
+  IconMessageCircle,
+  IconPencil,
+  IconPhone,
+  IconRefresh,
+  IconRocket,
+  IconSearch,
+  IconSettings,
+  IconShare,
+  IconShield,
+  IconTarget,
+  IconTool,
+  IconTools,
+  IconTrendingUp,
+  IconUser,
+  IconUserCheck,
+  IconUsers,
+} from "@tabler/icons-react";
 
-const dataService = [
+export const dataService = [
   {
-    section1Title: "Gestion de votre image en ligne",
-    slug: "gestion-de-votre-image-en-ligne",
+    section1Title: "Études de Marché Sur Mesure",
+    slug: "etudes-marche-sur-mesure",
     section1Desc:
-      "Optimisez votre réputation avec une gestion experte de vos avis Google et Google My Business.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-image-en-ligne.png"}
-        alt="Image en ligne"
-      />
-    ),
-    section2Title: "Maîtrisez votre e-réputation",
+      "Analyse approfondie du marché, segmentation client, étude concurrentielle et analyse des tendances sectorielles.",
+    section2Title: "Insights Stratégiques du Marché",
     section2Desc:
-      "Nos solutions transforment vos avis en leviers de croissance, renforçant votre crédibilité en ligne.",
-    section2NumberImportant: "100+",
-    section2TextImportant: "entreprises accompagnées",
-    section3Title: "Pourquoi nous choisir ?",
+      "Découvrez des analyses détaillées pour identifier les opportunités de croissance et ajuster votre stratégie.",
+    section2NumberImportant: "65 %",
+    section2TextImportant:
+      "L'analyse de marché permet aux entreprises de rester compétitives et d'anticiper les évolutions sectorielles.",
+    section3Title: "Atouts de Nos Études",
     section3Cards: [
       {
-        text: "Impact visuel",
-        subtext:
-          "Des images retravaillées pour capter l'attention dès le premier regard.",
+        text: "Analyse Sectorielle",
+        subtext: "Identification des tendances clés",
       },
       {
-        text: "SEO intégré",
-        subtext:
-          "Optimisation avancée pour booster votre référencement local et digital.",
+        text: "Segmentation Client",
+        subtext: "Définition précise des profils consommateurs",
       },
       {
-        text: "Crédibilité forte",
-        subtext:
-          "Une gestion experte qui valorise votre réputation et attire de nouveaux clients.",
+        text: "Étude Concurrentielle",
+        subtext: "Benchmarking et positionnement stratégique",
+      },
+      {
+        text: "Veille du Marché",
+        subtext: "Surveillance continue des évolutions",
       },
     ],
-    section4Title: "Nos garanties et engagements",
+    section4Title: "Nos Engagements Qualité",
     section4Content: [
       {
-        title: "Sécurité",
-        description:
-          "Nous garantissons une protection maximale de votre image en ligne.",
-        subdesc1: "Protocoles avancés",
-        subdesc2: "Veille continue",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Expertise",
-        description:
-          "Un accompagnement personnalisé et des conseils stratégiques adaptés.",
-        subdesc1: "Support expert",
-        subdesc2: "Suivi sur-mesure",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Résultats",
-        description:
-          "Des indicateurs précis pour mesurer l'évolution de votre e-réputation.",
-        subdesc1: "Analyses régulières",
-        subdesc2: "Optimisation continue",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
-      },
-    ],
-  },
-  {
-    section1Title: "Stratégie de contenu & réseaux",
-    slug: "strategie-de-contenu-reseaux",
-    section1Desc:
-      "Créez et diffusez des contenus engageants pour renforcer votre présence sur les réseaux sociaux.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-reseaux.png"}
-        alt="Stratégie de contenu"
-      />
-    ),
-    section2Title: "Optimisez votre visibilité",
-    section2Desc:
-      "Nous élaborons des stratégies sur mesure pour maximiser l'engagement de votre audience digitale.",
-    section2NumberImportant: "120+",
-    section2TextImportant: "stratégies déployées",
-    section3Title: "Nos atouts clés",
-    section3Cards: [
-      {
-        text: "Créativité pure",
-        subtext:
-          "Des contenus innovants pour se démarquer et captiver votre audience.",
-      },
-      {
-        text: "Plan agile",
-        subtext:
-          "Calendriers éditoriaux précis pour une communication efficace et régulière.",
-      },
-      {
-        text: "Engagement fort",
-        subtext:
-          "Techniques éprouvées pour booster l'interaction et la fidélisation client.",
-      },
-    ],
-    section4Title: "Nos garanties et engagements",
-    section4Content: [
-      {
-        title: "Créativité",
-        description:
-          "Une équipe dédiée à la conception de contenus percutants et innovants.",
-        subdesc1: "Idées novatrices",
-        subdesc2: "Conception sur-mesure",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Suivi",
-        description:
-          "Un accompagnement complet avec analyses et rapports réguliers.",
-        subdesc1: "Support constant",
+        title: "Expertise Sectorielle",
+        description: "Analyse rigoureuse et conseils personnalisés.",
+        subdesc1: "Approche sur-mesure",
         subdesc2: "Rapports détaillés",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
+        icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        title: "Impact",
-        description:
-          "Des KPI clairs pour mesurer et optimiser l’efficacité de votre stratégie.",
-        subdesc1: "Analyses précises",
-        subdesc2: "Optimisation continue",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
-      },
-    ],
-  },
-  {
-    section1Title: "Création & optimisation de sites web",
-    slug: "creation-optimisation-de-sites-web",
-    section1Desc:
-      "Des sites web modernes et performants, conçus pour attirer et convertir vos visiteurs.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-web.png"}
-        alt="Création de site web"
-      />
-    ),
-    section2Title: "Sites sur-mesure",
-    section2Desc:
-      "Nous créons des sites responsive, optimisés pour le SEO et offrant une UX exceptionnelle.",
-    section2NumberImportant: "80+",
-    section2TextImportant: "sites développés",
-    section3Title: "Atouts essentiels",
-    section3Cards: [
-      {
-        text: "Design moderne",
-        subtext:
-          "Interfaces épurées et attractives pour séduire vos visiteurs dès l'arrivée.",
+        title: "Innovation Méthodologique",
+        description: "Utilisation d'outils modernes d'analyse.",
+        subdesc1: "Méthodologie avancée",
+        subdesc2: "Veille technologique",
+        icon: <IconSearch className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        text: "SEO performant",
-        subtext:
-          "Optimisation technique pointue pour un référencement naturel optimal.",
+        title: "Accompagnement Dédié",
+        description: "Support constant pour guider chaque projet.",
+        subdesc1: "Conseils experts",
+        subdesc2: "Suivi personnalisé",
+        icon: <IconUsers className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        text: "UX fluide",
-        subtext:
-          "Navigation intuitive et temps de chargement réduits pour une expérience premium.",
-      },
-    ],
-    section4Title: "Nos garanties et engagements",
-    section4Content: [
-      {
-        title: "Innovation",
-        description:
-          "Des concepts visuels créatifs qui valorisent votre image de marque.",
-        subdesc1: "Interfaces uniques",
-        subdesc2: "Ergonomie étudiée",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Optimisation",
-        description:
-          "Techniques avancées pour booster votre visibilité en ligne et vos conversions.",
-        subdesc1: "SEO technique",
-        subdesc2: "Contenu optimisé",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Accompagnement",
-        description:
-          "Un suivi personnalisé pour garantir le succès et la pérennité de votre site.",
-        subdesc1: "Support constant",
-        subdesc2: "Conseils experts",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
+        title: "Résultats Garantis",
+        description: "Optimisation et performance mesurable.",
+        subdesc1: "ROI prouvé",
+        subdesc2: "Stratégies gagnantes",
+        icon: (
+          <IconTrendingUp className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
       },
     ],
   },
   {
-    section1Title: "Rédaction & création de contenu",
-    slug: "redaction-creation-de-contenu",
+    section1Title: "Sondages de Marché & Enquêtes Terrain",
+    slug: "sondages-marche-enquetes-terrain",
     section1Desc:
-      "Des contenus écrits et visuels engageants, optimisés pour renforcer votre marque et améliorer votre SEO.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-contenu.png"}
-        alt="Création de contenu"
-      />
-    ),
-    section2Title: "Contenus percutants",
+      "Collecte et analyse de données qualitatives et quantitatives pour obtenir des insights précis (B2B ou B2C).",
+    section2Title: "Données Fiables pour Décisions Stratégiques",
     section2Desc:
-      "Nous concevons des articles, vidéos et infographies qui captivent, informent et convertissent.",
-    section2NumberImportant: "300+",
-    section2TextImportant: "contenus créés",
-    section3Title: "Atouts clés",
+      "Optimisez vos choix grâce à des enquêtes terrain menées avec rigueur.",
+    section2NumberImportant: "72 %",
+    section2TextImportant:
+      "Les sondages terrain offrent des informations essentielles pour orienter vos stratégies.",
+    section3Title: "Avantages de Nos Enquêtes",
     section3Cards: [
       {
-        text: "Idées fraîches",
-        subtext:
-          "Concepts innovants pour se démarquer et engager votre audience efficacement.",
+        text: "Collecte Qualitative",
+        subtext: "Feedbacks clients authentiques",
       },
+      { text: "Analyse Quantitative", subtext: "Données statistiques solides" },
+      { text: "Insights Actionnables", subtext: "Recommandations concrètes" },
       {
-        text: "SEO optimisé",
-        subtext:
-          "Contenus travaillés pour améliorer votre positionnement sur les moteurs de recherche.",
-      },
-      {
-        text: "Engagement fort",
-        subtext:
-          "Techniques narratives qui incitent à l'action et renforcent la fidélité client.",
+        text: "Adaptabilité Terrain",
+        subtext: "Méthodes flexibles et personnalisées",
       },
     ],
-    section4Title: "Nos garanties et engagements",
+    section4Title: "Nos Méthodes Innovantes",
     section4Content: [
       {
-        title: "Créativité",
+        title: "Méthodologie Précise",
         description:
-          "Des contenus originaux et sur-mesure pour une communication unique.",
-        subdesc1: "Approche innovante",
-        subdesc2: "Storytelling percutant",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
+          "Techniques éprouvées pour une collecte et analyse de qualité.",
+        subdesc1: "Outils analytiques",
+        subdesc2: "Contrôle rigoureux",
+        icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        title: "Optimisation",
-        description:
-          "Chaque contenu est optimisé pour atteindre vos objectifs SEO et marketing.",
-        subdesc1: "Recherche de mots-clés",
-        subdesc2: "Structure travaillée",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
+        title: "Approche Terrain",
+        description: "Collecte de données directement auprès de vos cibles.",
+        subdesc1: "Interviews sur site",
+        subdesc2: "Feedback immédiat",
+        icon: <IconMapPin className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        title: "Engagement",
-        description:
-          "Nous créons du contenu qui capte l'attention et incite à l'interaction.",
-        subdesc1: "Interaction client",
-        subdesc2: "Feedback positif",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
+        title: "Rapidité d'Exécution",
+        description: "Des résultats rapides pour des décisions agiles.",
+        subdesc1: "Collecte efficace",
+        subdesc2: "Livraison express",
+        icon: <IconClock className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Analyse Approfondie",
+        description: "Des insights détaillés pour orienter votre stratégie.",
+        subdesc1: "Données pertinentes",
+        subdesc2: "Rapports clairs",
+        icon: (
+          <IconFileAnalytics className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
       },
     ],
   },
   {
-    section1Title: "Audit & suivi analytique",
-    slug: "audit-suivi-analytique",
+    section1Title: "Stratégie Commerciale & Développement Business",
+    slug: "strategie-commerciale-developpement-business",
     section1Desc:
-      "Analysez vos données pour optimiser vos performances digitales et prendre des décisions éclairées.",
-    section1Image: (
-      <Image
-        className="mx-auto rounded-2xl object-cover h-full object-left-top"
-        width={3000}
-        height={3000}
-        src={"/images/services/audit.jpg"}
-        alt="Audit analytique"
-      />
-    ),
-    section2Title: "Décisions data",
+      "Définition et déploiement d’une stratégie commerciale opérationnelle pour booster vos ventes.",
+    section2Title: "Stratégies Innovantes pour Croissance",
     section2Desc:
-      "Nos audits précis et suivis analytiques vous aident à identifier les leviers de croissance.",
-    section2NumberImportant: "50+",
-    section2TextImportant: "audits réalisés",
-    section3Title: "Avantages clés",
+      "Accélérez vos ventes grâce à des actions commerciales sur-mesure et performantes.",
+    section2NumberImportant: "58 %",
+    section2TextImportant:
+      "Une stratégie commerciale efficace transforme significativement la performance des ventes.",
+    section3Title: "Piliers de Notre Approche",
     section3Cards: [
       {
-        text: "Data claire",
-        subtext:
-          "Analyse structurée pour une vision globale et des décisions basées sur les données.",
+        text: "Analyse de Performance",
+        subtext: "Mesure des indicateurs clés",
       },
       {
-        text: "KPI précis",
-        subtext:
-          "Mesurez vos performances grâce à des indicateurs clés pertinents et fiables.",
+        text: "Déploiement Tactique",
+        subtext: "Actions opérationnelles concrètes",
       },
       {
-        text: "Optimisation continue",
-        subtext:
-          "Recommandations concrètes pour booster votre ROI et améliorer vos actions.",
+        text: "Suivi et Ajustements",
+        subtext: "Réactivité face aux évolutions",
+      },
+      {
+        text: "Optimisation Continue",
+        subtext: "Amélioration des process commerciaux",
       },
     ],
-    section4Title: "Nos garanties et engagements",
+    section4Title: "Valeur Ajoutée de Nos Stratégies",
     section4Content: [
       {
-        title: "Analyse",
-        description:
-          "Une étude détaillée pour déceler les opportunités et améliorer vos performances.",
-        subdesc1: "Données segmentées",
-        subdesc2: "Rapports précis",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
+        title: "Conseil Expert",
+        description: "Accompagnement par des professionnels aguerris.",
+        subdesc1: "Analyse approfondie",
+        subdesc2: "Stratégies personnalisées",
+        icon: (
+          <IconUserCheck className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
       },
       {
-        title: "Suivi",
-        description:
-          "Un accompagnement personnalisé pour suivre l'évolution de vos indicateurs.",
-        subdesc1: "Support expert",
-        subdesc2: "Conseils réguliers",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
+        title: "Innovation Tactique",
+        description: "Approches modernes pour booster vos ventes.",
+        subdesc1: "Méthodes disruptives",
+        subdesc2: "Exécution dynamique",
+        icon: <IconRocket className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        title: "Impact",
-        description:
-          "Des outils performants pour mesurer et visualiser l'impact de vos actions.",
-        subdesc1: "Tableaux interactifs",
-        subdesc2: "Optimisation continue",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
+        title: "Suivi Rigoureux",
+        description: "Mesure constante des performances commerciales.",
+        subdesc1: "Indicateurs précis",
+        subdesc2: "Rapports réguliers",
+        icon: (
+          <IconChartLine className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+      {
+        title: "Optimisation Stratégique",
+        description: "Ajustement permanent pour maximiser le ROI.",
+        subdesc1: "Analyse continue",
+        subdesc2: "Actions correctives",
+        icon: <IconRefresh className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
   },
   {
-    section1Title: "Formation & conseil stratégique",
-    slug: "formation-conseil-strategique",
+    section1Title: "Pilotage & Gestion de Projet Stratégique",
+    slug: "pilotage-gestion-projet-strategique",
     section1Desc:
-      "Développez les compétences de vos équipes et adoptez les meilleures pratiques du marketing digital.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-formation.png"}
-        alt="Formation et conseil"
-      />
-    ),
-    section2Title: "Compétences digitales",
+      "Coordination experte pour le pilotage et le suivi de projets de développement ou de lancement.",
+    section2Title: "Gestion de Projet Agile",
     section2Desc:
-      "Nos formations et conseils stratégiques vous permettent d'innover et de rester compétitif dans l'environnement numérique.",
-    section2NumberImportant: "30+",
-    section2TextImportant: "sessions réalisées",
-    section3Title: "Atouts forts",
+      "Assurez la réussite de vos projets avec un pilotage rigoureux et une coordination optimale.",
+    section2NumberImportant: "80 %",
+    section2TextImportant:
+      "Une gestion de projet efficace garantit l’atteinte des objectifs fixés.",
+    section3Title: "Outils et Méthodologies",
     section3Cards: [
       {
-        text: "Expertise pointue",
-        subtext:
-          "Des formateurs reconnus pour leur savoir-faire et leur expérience terrain.",
+        text: "Planification Structurée",
+        subtext: "Organisation détaillée des étapes",
       },
       {
-        text: "Méthodes agiles",
-        subtext:
-          "Approches pédagogiques flexibles pour une montée en compétences rapide et efficace.",
+        text: "Suivi en Temps Réel",
+        subtext: "Monitoring constant des performances",
       },
       {
-        text: "Résultats tangibles",
-        subtext:
-          "Des formations qui transforment vos équipes et améliorent vos performances.",
+        text: "Gestion des Risques",
+        subtext: "Anticipation et mitigation des imprévus",
+      },
+      {
+        text: "Reporting Transparent",
+        subtext: "Communication régulière et claire",
       },
     ],
-    section4Title: "Nos garanties et engagements",
+    section4Title: "Engagements de Pilotage",
     section4Content: [
       {
-        title: "Formation",
-        description:
-          "Des sessions sur-mesure adaptées aux besoins spécifiques de votre entreprise.",
-        subdesc1: "Programme personnalisé",
-        subdesc2: "Experts certifiés",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
+        title: "Expertise Confirmée",
+        description: "Une équipe expérimentée pour guider vos projets.",
+        subdesc1: "Compétences avérées",
+        subdesc2: "Support continu",
+        icon: <IconShield className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        title: "Suivi",
-        description:
-          "Un accompagnement complet avant, pendant et après la formation.",
-        subdesc1: "Support constant",
-        subdesc2: "Feedback régulier",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
+        title: "Innovation Méthodologique",
+        description: "Adoptez des méthodes de gestion modernes et efficaces.",
+        subdesc1: "Techniques avancées",
+        subdesc2: "Formation continue",
+        icon: <IconBulb className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        title: "Impact",
+        title: "Transparence",
+        description: "Communication claire pour un suivi optimal.",
+        subdesc1: "Rapports réguliers",
+        subdesc2: "Feedback constant",
+        icon: <IconEye className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Adaptabilité",
+        description: "Réactivité face aux changements du projet.",
+        subdesc1: "Ajustements rapides",
+        subdesc2: "Suivi personnalisé",
+        icon: (
+          <IconAdjustments className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+    ],
+  },
+  {
+    section1Title: "Plan Go-to-Market & Accompagnement Opérationnel",
+    slug: "plan-go-to-market-accompagnement-operational",
+    section1Desc:
+      "Structuration du lancement de nouveaux produits/services et pénétration efficace du marché.",
+    section2Title: "Lancement à Fort Impact",
+    section2Desc:
+      "Déployez un plan de mise sur le marché solide pour maximiser l'impact dès le lancement.",
+    section2NumberImportant: "47 %",
+    section2TextImportant:
+      "Un lancement bien orchestré accélère la croissance et booste les ventes.",
+    section3Title: "Composants du Go-to-Market",
+    section3Cards: [
+      {
+        text: "Positionnement Stratégique",
+        subtext: "Définir une offre différenciante",
+      },
+      {
+        text: "Plan d’Action Opérationnel",
+        subtext: "Déploiement de stratégies concrètes",
+      },
+      {
+        text: "Suivi de Performance",
+        subtext: "Mesure en temps réel des résultats",
+      },
+      {
+        text: "Optimisation Continue",
+        subtext: "Ajustements pour améliorer l'efficacité",
+      },
+    ],
+    section4Title: "Accompagnement et Expertise",
+    section4Content: [
+      {
+        title: "Conseil Stratégique",
+        description: "Accompagnement personnalisé pour un lancement réussi.",
+        subdesc1: "Expertise sectorielle",
+        subdesc2: "Solutions adaptées",
+        icon: (
+          <IconUserCheck className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+      {
+        title: "Exécution Opérationnelle",
+        description: "Support complet pour la mise en œuvre de votre plan.",
+        subdesc1: "Process optimisés",
+        subdesc2: "Suivi constant",
+        icon: <IconTool className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Mesure d’Impact",
         description:
-          "Des outils d'analyse pour mesurer les progrès et optimiser vos actions.",
+          "Évaluation précise des performances pour ajuster la stratégie.",
         subdesc1: "Indicateurs clairs",
         subdesc2: "Rapports détaillés",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
-      },
-    ],
-  },
-  {
-    section1Title: "Gestion de partenariats & e-réputation",
-    slug: "gestion-de-partenariats-e-reputation",
-    section1Desc:
-      "Boostez votre notoriété et créez des synergies grâce à des partenariats stratégiques et une gestion experte de votre e-réputation.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-partenariat.png"}
-        alt="Partenariats et e-réputation"
-      />
-    ),
-    section2Title: "Alliances stratégiques",
-    section2Desc:
-      "Nous établissons des partenariats solides pour amplifier votre image de marque et sécuriser votre réputation en ligne.",
-    section2NumberImportant: "40+",
-    section2TextImportant: "partenariats établis",
-    section3Title: "Atouts clés",
-    section3Cards: [
-      {
-        text: "Impact fort",
-        subtext:
-          "Des partenariats qui renforcent votre crédibilité et élargissent votre audience.",
+        icon: (
+          <IconChartLine className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
       },
       {
-        text: "Image saine",
-        subtext:
-          "Gestion proactive pour protéger et valoriser votre réputation en ligne.",
-      },
-      {
-        text: "Croissance rapide",
-        subtext:
-          "Des synergies efficaces qui stimulent le développement de votre entreprise.",
-      },
-    ],
-    section4Title: "Nos garanties et engagements",
-    section4Content: [
-      {
-        title: "Sécurité",
-        description:
-          "Nous assurons la protection de votre réputation grâce à des outils avancés.",
-        subdesc1: "Surveillance 24/7",
-        subdesc2: "Alertes instantanées",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Accompagnement",
-        description:
-          "Un suivi personnalisé pour chaque partenariat établi et durable.",
-        subdesc1: "Support dédié",
-        subdesc2: "Conseils stratégiques",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Performance",
-        description:
-          "Des indicateurs clairs pour mesurer l'impact de vos collaborations.",
-        subdesc1: "Analyses régulières",
-        subdesc2: "Optimisation continue",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
-      },
-    ],
-  },
-  {
-    section1Title: "Email marketing & service client digital",
-    slug: "email-marketing-service-client-digital",
-    section1Desc:
-      "Augmentez votre taux de conversion grâce à des campagnes emailing percutantes et un service client digital réactif.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-email.png"}
-        alt="Email marketing"
-      />
-    ),
-    section2Title: "Conversion boost",
-    section2Desc:
-      "Des campagnes d'emailing personnalisées et un service client digital pour fidéliser et engager votre audience.",
-    section2NumberImportant: "70+",
-    section2TextImportant: "campagnes réussies",
-    section3Title: "Atouts clés",
-    section3Cards: [
-      {
-        text: "Design soigné",
-        subtext:
-          "Des emails esthétiques et bien structurés pour capter l'attention immédiatement.",
-      },
-      {
-        text: "Auto efficace",
-        subtext:
-          "Systèmes automatisés assurant un suivi client réactif et personnalisé.",
-      },
-      {
-        text: "ROI élevé",
-        subtext:
-          "Campagnes optimisées pour maximiser votre retour sur investissement.",
-      },
-    ],
-    section4Title: "Nos garanties et engagements",
-    section4Content: [
-      {
-        title: "Performance",
-        description:
-          "Des outils avancés pour mesurer et améliorer l'efficacité de vos campagnes.",
-        subdesc1: "Suivi précis",
-        subdesc2: "Analyses détaillées",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Expertise",
-        description:
-          "Une équipe dédiée à la conception de campagnes percutantes et performantes.",
-        subdesc1: "Stratégies sur-mesure",
-        subdesc2: "Optimisation continue",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Sécurité",
-        description:
-          "Protection de vos données et respect des normes RGPD les plus strictes.",
-        subdesc1: "Chiffrement avancé",
-        subdesc2: "Veille constante",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
-      },
-    ],
-  },
-  {
-    section1Title: "Landing pages & pub locale",
-    slug: "landing-pages-pub-locale",
-    section1Desc:
-      "Attirez des prospects qualifiés avec des landing pages optimisées et des campagnes publicitaires locales ciblées.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-landing.png"}
-        alt="Landing pages"
-      />
-    ),
-    section2Title: "Conversion locale",
-    section2Desc:
-      "Des landing pages sur-mesure et des publicités ciblées pour générer un maximum de leads dans votre zone de chalandise.",
-    section2NumberImportant: "90+",
-    section2TextImportant: "projets livrés",
-    section3Title: "Atouts clés",
-    section3Cards: [
-      {
-        text: "Design épuré",
-        subtext:
-          "Pages claires et impactantes conçues pour convertir vos visiteurs rapidement.",
-      },
-      {
-        text: "Ciblage précis",
-        subtext:
-          "Campagnes locales finement ciblées pour toucher directement votre audience.",
-      },
-      {
-        text: "ROI optimal",
-        subtext:
-          "Stratégies efficaces qui maximisent votre retour sur investissement.",
-      },
-    ],
-    section4Title: "Nos garanties et engagements",
-    section4Content: [
-      {
-        title: "Performance",
-        description:
-          "Des indicateurs précis pour suivre l'efficacité de vos campagnes publicitaires.",
+        title: "Optimisation Post-Lancement",
+        description: "Ajustements stratégiques pour maintenir la dynamique.",
         subdesc1: "Analyse continue",
-        subdesc2: "Optimisation régulière",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Expertise",
-        description:
-          "Une équipe spécialisée dans la conception de landing pages percutantes et efficaces.",
-        subdesc1: "Créativité innovante",
-        subdesc2: "Conception sur-mesure",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Fiabilité",
-        description:
-          "Nous garantissons des résultats mesurables et une gestion optimale de vos campagnes.",
-        subdesc1: "Suivi constant",
-        subdesc2: "Rapports clairs",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
+        subdesc2: "Feedback client",
+        icon: <IconRefresh className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
   },
   {
-    section1Title: "Campagnes publicitaires en ligne",
-    slug: "campagnes-publicitaires-en-ligne",
+    section1Title: "Prospection & Lead Generation Multicanal",
+    slug: "prospection-lead-generation-multicanal",
     section1Desc:
-      "Maximisez votre ROI avec des campagnes Google Ads et Social Ads parfaitement ciblées.",
-    section1Image: (
-      <Image
-        className="object-cover w-1/2 relative bottom-20"
-        width={1800}
-        height={1600}
-        src={"/images/services/service-publicite.png"}
-        alt="Campagnes publicitaires"
-      />
-    ),
-    section2Title: "Visibilité immédiate",
+      "Mise en place de processus de prospection et accompagnement des équipes de vente pour booster vos leads.",
+    section2Title: "Génération de Leads Qualifiés",
     section2Desc:
-      "Nous créons des campagnes publicitaires performantes pour une visibilité instantanée et mesurable.",
-    section2NumberImportant: "110+",
-    section2TextImportant: "campagnes lancées",
-    section3Title: "Atouts clés",
+      "Optimisez votre prospection commerciale avec des techniques modernes et ciblées.",
+    section2NumberImportant: "55 %",
+    section2TextImportant:
+      "Des méthodes de prospection éprouvées transforment la génération de leads.",
+    section3Title: "Stratégies de Prospection",
     section3Cards: [
       {
-        text: "Ciblage fin",
-        subtext:
-          "Des annonces ciblées pour atteindre précisément votre audience et maximiser l'impact.",
+        text: "Segmentation de Marché",
+        subtext: "Identifier et cibler vos prospects",
       },
       {
-        text: "ROI élevé",
-        subtext:
-          "Optimisation continue pour garantir un retour sur investissement optimal.",
+        text: "Automation des Processus",
+        subtext: "Intégration d’outils automatisés",
       },
       {
-        text: "Créativité forte",
-        subtext:
-          "Des visuels percutants et des messages accrocheurs pour capter l'attention immédiatement.",
+        text: "Suivi Personnalisé",
+        subtext: "Approche individualisée et réactive",
+      },
+      {
+        text: "Optimisation des Processus",
+        subtext: "Amélioration continue du funnel commercial",
       },
     ],
-    section4Title: "Nos garanties et engagements",
+    section4Title: "Notre Expertise en Lead Generation",
     section4Content: [
       {
-        title: "Performance",
+        title: "Outils de Prospection",
         description:
-          "Des campagnes mesurées avec des outils avancés pour assurer un ROI optimal.",
-        subdesc1: "Analyses approfondies",
-        subdesc2: "Optimisation régulière",
-        icon: <IconChartBar className="text-secondary w-6 h-6" />,
+          "Utilisation des technologies les plus récentes pour générer des leads.",
+        subdesc1: "Solutions innovantes",
+        subdesc2: "Intégration CRM",
+        icon: <IconTools className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        title: "Expertise",
+        title: "Stratégie Multicanale",
         description:
-          "Une équipe d'experts dédiés à la réussite de vos campagnes publicitaires.",
-        subdesc1: "Stratégies éprouvées",
+          "Combinaison de canaux digitaux et traditionnels pour une prospection efficace.",
+        subdesc1: "Approche holistique",
+        subdesc2: "Couverture diversifiée",
+        icon: (
+          <IconLayersIntersect className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+      {
+        title: "Analyse et Optimisation",
+        description:
+          "Suivi des performances et ajustements continus pour maximiser le ROI.",
+        subdesc1: "Data analytics",
+        subdesc2: "Rapports réguliers",
+        icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Accompagnement Commercial",
+        description:
+          "Support dédié pour booster l'efficacité des équipes de vente.",
+        subdesc1: "Coaching personnalisé",
+        subdesc2: "Formation continue",
+        icon: <IconUser className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+    ],
+  },
+  {
+    section1Title: "Création de Sites Web Vitrine & E-commerce",
+    slug: "creation-sites-web-vitrine-e-commerce",
+    section1Desc:
+      "Conception et développement de sites optimisés pour la conversion et l'expérience utilisateur.",
+    section2Title: "Solutions Web Innovantes",
+    section2Desc:
+      "Boostez votre présence en ligne avec des sites web performants et adaptés à vos besoins.",
+    section2NumberImportant: "62 %",
+    section2TextImportant:
+      "Un site web bien conçu est essentiel pour attirer et convertir vos visiteurs.",
+    section3Title: "Caractéristiques Clés",
+    section3Cards: [
+      { text: "Design Responsive", subtext: "Adaptabilité sur tous supports" },
+      {
+        text: "Optimisation SEO",
+        subtext: "Structure optimisée pour les moteurs de recherche",
+      },
+      {
+        text: "Sécurité Renforcée",
+        subtext: "Protection des données et transactions sécurisées",
+      },
+      {
+        text: "Expérience Utilisateur",
+        subtext: "Interface intuitive et ergonomique",
+      },
+    ],
+    section4Title: "Avantages de Nos Solutions Web",
+    section4Content: [
+      {
+        title: "Technologie de Pointe",
+        description:
+          "Utilisation des dernières technologies pour des performances optimales.",
+        subdesc1: "Innovations constantes",
+        subdesc2: "Maintenance proactive",
+        icon: <IconCpu className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Expérience Utilisateur",
+        description: "Création d'interfaces intuitives et engageantes.",
+        subdesc1: "Design ergonomique",
+        subdesc2: "Parcours fluide",
+        icon: <IconPhone className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Performance & Sécurité",
+        description:
+          "Sites rapides et sécurisés pour garantir la confiance des visiteurs.",
+        subdesc1: "Optimisation technique",
+        subdesc2: "Certifications SSL",
+        icon: <IconLock className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Support et Maintenance",
+        description:
+          "Accompagnement continu pour assurer la pérennité de votre site.",
+        subdesc1: "Assistance réactive",
+        subdesc2: "Mises à jour régulières",
+        icon: <IconHeadset className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+    ],
+  },
+  {
+    section1Title: "Optimisation SEO et Référencement Naturel",
+    slug: "seo-referencement-naturel",
+    section1Desc:
+      "Audit SEO, optimisation on-site/off-site et stratégie de contenu pour améliorer votre visibilité organique.",
+    section2Title: "Stratégies SEO Performantes",
+    section2Desc:
+      "Augmentez votre trafic organique avec des techniques d'optimisation éprouvées.",
+    section2NumberImportant: "68 %",
+    section2TextImportant:
+      "Le référencement naturel est un levier clé pour une visibilité durable.",
+    section3Title: "Le Processus SEO en 4 Étapes",
+    section3Cards: [
+      { text: "Audit Complet", subtext: "Diagnostic approfondi du site" },
+      {
+        text: "Optimisation Technique",
+        subtext: "Amélioration des performances on-site",
+      },
+      { text: "Stratégie de Contenu", subtext: "Création de contenu optimisé" },
+      {
+        text: "Suivi & Reporting",
+        subtext: "Analyse des résultats et ajustements",
+      },
+    ],
+    section4Title: "Notre Expertise SEO",
+    section4Content: [
+      {
+        title: "Analyse Avancée",
+        description: "Utilisation d'outils performants pour une analyse fine.",
+        subdesc1: "Outils de pointe",
+        subdesc2: "Rapports détaillés",
+        icon: <IconActivity className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Optimisation Technique",
+        description: "Interventions ciblées pour améliorer le classement.",
+        subdesc1: "Audit complet",
+        subdesc2: "Actions concrètes",
+        icon: <IconSettings className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Stratégie de Contenu",
+        description: "Création de contenu pertinent pour attirer et fidéliser.",
+        subdesc1: "Recherche de mots-clés",
+        subdesc2: "Plan éditorial structuré",
+        icon: <IconPencil className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Suivi Continu",
+        description:
+          "Analyse régulière pour adapter et optimiser la stratégie.",
+        subdesc1: "KPI mesurables",
+        subdesc2: "Ajustements stratégiques",
+        icon: (
+          <IconTrendingUp className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+    ],
+  },
+  {
+    section1Title: "Gestion de Campagnes SEA Performantes",
+    slug: "gestion-campagnes-sea-google-ads-linkedin-ads",
+    section1Desc:
+      "Création et gestion de campagnes publicitaires payantes pour générer du trafic et des leads qualifiés.",
+    section2Title: "Campagnes SEA Ciblées",
+    section2Desc:
+      "Optimisez votre budget publicitaire avec des stratégies SEA adaptées à votre marché.",
+    section2NumberImportant: "49 %",
+    section2TextImportant:
+      "Les campagnes SEA offrent un retour sur investissement rapide et mesurable.",
+    section3Title: "Les Clés du Succès en SEA",
+    section3Cards: [
+      { text: "Ciblage Précis", subtext: "Atteindre les bonnes audiences" },
+      {
+        text: "Optimisation des Enchères",
+        subtext: "Maximiser l'efficacité budgétaire",
+      },
+      { text: "Analyse des Performances", subtext: "Suivi régulier des KPI" },
+      {
+        text: "Ajustements Stratégiques",
+        subtext: "Optimisation continue des campagnes",
+      },
+    ],
+    section4Title: "Notre Approche SEA",
+    section4Content: [
+      {
+        title: "Audit Publicitaire",
+        description:
+          "Examen complet de vos campagnes existantes pour identifier les axes d'amélioration.",
+        subdesc1: "Analyse détaillée",
+        subdesc2: "Recommandations ciblées",
+        icon: <IconSearch className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Stratégie Ciblée",
+        description:
+          "Définition d'une stratégie personnalisée pour maximiser les conversions.",
+        subdesc1: "Segmentation précise",
+        subdesc2: "Messages adaptés",
+        icon: <IconTarget className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Suivi et Optimisation",
+        description:
+          "Monitorage constant pour ajuster vos campagnes en temps réel.",
+        subdesc1: "KPI surveillés",
+        subdesc2: "Rapports réguliers",
+        icon: <IconActivity className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Optimisation Budgétaire",
+        description:
+          "Réallocation intelligente des budgets pour maximiser le ROI.",
+        subdesc1: "Analyse coûts/bénéfices",
+        subdesc2: "Stratégie agile",
+        icon: (
+          <IconCurrencyDollar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+    ],
+  },
+  {
+    section1Title: "E-réputation & Gestion des Avis Google",
+    slug: "e-reputation-gestion-avis-google",
+    section1Desc:
+      "Optimisation de l’image en ligne grâce à une gestion proactive et la collecte d’avis clients qualifiés.",
+    section2Title: "Valorisation de Votre Image",
+    section2Desc:
+      "Renforcez votre réputation en ligne avec des stratégies adaptées à votre secteur.",
+    section2NumberImportant: "70 %",
+    section2TextImportant:
+      "Une e-réputation positive est essentielle pour instaurer la confiance auprès des consommateurs.",
+    section3Title: "Stratégies d'E-réputation",
+    section3Cards: [
+      {
+        text: "Collecte d'Avis",
+        subtext: "Recueillir des feedbacks authentiques",
+      },
+      {
+        text: "Monitoring Continu",
+        subtext: "Surveillance constante des mentions",
+      },
+      {
+        text: "Gestion de Crise",
+        subtext: "Réponse proactive aux avis négatifs",
+      },
+      {
+        text: "Optimisation de l'Image",
+        subtext: "Stratégies pour améliorer la perception",
+      },
+    ],
+    section4Title: "Approches Innovantes",
+    section4Content: [
+      {
+        title: "Stratégies de Réputation",
+        description:
+          "Techniques éprouvées pour améliorer et protéger votre image de marque.",
+        subdesc1: "Méthodes innovantes",
+        subdesc2: "Suivi en temps réel",
+        icon: <IconShield className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Engagement Client",
+        description: "Interaction proactive pour fidéliser votre clientèle.",
+        subdesc1: "Communication transparente",
+        subdesc2: "Support dédié",
+        icon: (
+          <IconMessageCircle className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+      {
+        title: "Analyse de Sentiment",
+        description:
+          "Outils d'analyse pour comprendre les perceptions en ligne.",
+        subdesc1: "Data analytics",
+        subdesc2: "Rapports structurés",
+        icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Optimisation de l'Engagement",
+        description:
+          "Stratégies pour renforcer la relation client et améliorer la réputation.",
+        subdesc1: "Feedback constant",
+        subdesc2: "Actions ciblées",
+        icon: <IconHeart className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+    ],
+  },
+  {
+    section1Title: "Automatisation & Solutions IA pour le Marketing",
+    slug: "automatisation-solutions-ia-marketing",
+    section1Desc:
+      "Intégration d’outils IA (chatbots, CRM automatisé, automatisation de la leadgen) pour optimiser vos actions marketing.",
+    section2Title: "Marketing Intelligent et Automatisé",
+    section2Desc:
+      "Révolutionnez votre stratégie marketing grâce à l'automatisation et l'intelligence artificielle.",
+    section2NumberImportant: "64 %",
+    section2TextImportant:
+      "L'automatisation améliore l'efficacité et la réactivité de vos campagnes.",
+    section3Title: "Bénéfices de l'Automatisation",
+    section3Cards: [
+      {
+        text: "Gain de Temps",
+        subtext: "Automatisation des tâches répétitives",
+      },
+      {
+        text: "Personnalisation de Masse",
+        subtext: "Ciblage précis et adapté",
+      },
+      {
+        text: "Analyse Prédictive",
+        subtext: "Anticiper les comportements consommateurs",
+      },
+      {
+        text: "Optimisation des Processus",
+        subtext: "Amélioration continue des workflows",
+      },
+    ],
+    section4Title: "Innovation par l'IA",
+    section4Content: [
+      {
+        title: "Technologies Avancées",
+        description: "Mise en œuvre d'outils IA de dernière génération.",
+        subdesc1: "Solutions innovantes",
+        subdesc2: "Adaptabilité maximale",
+        icon: <IconCpu2 className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Automatisation Optimisée",
+        description: "Optimisation des workflows marketing par l'IA.",
+        subdesc1: "Processus automatisés",
+        subdesc2: "Réduction des erreurs",
+        icon: (
+          <IconAutomation className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+      {
+        title: "Analyse et Reporting",
+        description:
+          "Suivi précis des performances pour des ajustements stratégiques.",
+        subdesc1: "Tableaux de bord dynamiques",
+        subdesc2: "Insights actionnables",
+        icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Support et Formation",
+        description:
+          "Accompagnement pour une intégration réussie des solutions IA.",
+        subdesc1: "Assistance dédiée",
+        subdesc2: "Formations sur-mesure",
+        icon: <IconBook className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+    ],
+  },
+  {
+    section1Title: "Création de Contenus & Supports Marketing",
+    slug: "creation-contenus-supports-marketing",
+    section1Desc:
+      "Production de visuels, vidéos, présentations et autres contenus marketing sur-mesure pour booster votre communication.",
+    section2Title: "Contenus Impactants et Personnalisés",
+    section2Desc:
+      "Captivez votre audience avec des supports visuels et éditoriaux de haute qualité.",
+    section2NumberImportant: "75 %",
+    section2TextImportant:
+      "Un contenu stratégique augmente l'engagement et la fidélisation de vos clients.",
+    section3Title: "Éléments Clés de Nos Créations",
+    section3Cards: [
+      { text: "Design Créatif", subtext: "Esthétique et originalité" },
+      { text: "Production Vidéo", subtext: "Storytelling visuel captivant" },
+      {
+        text: "Supports Multimédias",
+        subtext: "Formats diversifiés adaptés à votre marque",
+      },
+      {
+        text: "Stratégie Editoriale",
+        subtext: "Cohérence et impact de la communication",
+      },
+    ],
+    section4Title: "Notre Expertise en Création de Contenus",
+    section4Content: [
+      {
+        title: "Stratégie de Contenu",
+        description:
+          "Planification et exécution de campagnes de contenu efficaces.",
+        subdesc1: "Calendrier éditorial précis",
+        subdesc2: "Cohérence de marque",
+        icon: <IconPencil className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Créativité et Innovation",
+        description:
+          "Approche originale pour des contenus uniques et percutants.",
+        subdesc1: "Idées novatrices",
+        subdesc2: "Adaptation aux tendances",
+        icon: <IconBulb className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Diffusion et Impact",
+        description:
+          "Distribution efficace pour maximiser la portée de vos messages.",
+        subdesc1: "Stratégies de diffusion",
+        subdesc2: "Engagement mesurable",
+        icon: <IconShare className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Optimisation SEO",
+        description:
+          "Contenu optimisé pour améliorer votre visibilité en ligne.",
+        subdesc1: "Recherche de mots-clés",
+        subdesc2: "Optimisation continue",
+        icon: <IconSearch className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+    ],
+  },
+  {
+    section1Title: "Étude de Marché & Pilotage de Projet Global",
+    slug: "etude-marche-pilotage-projet-global",
+    section1Desc:
+      "Analyse stratégique et coordination de projets pour optimiser le développement et la pénétration du marché.",
+
+    section2Title: "Stratégie Globale Intégrée",
+    section2Desc:
+      "Une approche combinée pour analyser le marché et piloter vos projets vers le succès.",
+    section2NumberImportant: "77 %",
+    section2TextImportant:
+      "L'association d'une analyse de marché fine et d'un pilotage rigoureux garantit des résultats optimaux.",
+    section3Title: "Composants Clés de Notre Approche",
+    section3Cards: [
+      {
+        text: "Analyse de Marché",
+        subtext: "Évaluation approfondie du secteur",
+      },
+      {
+        text: "Planification Stratégique",
+        subtext: "Définition claire des étapes clés",
+      },
+      {
+        text: "Gestion de Projet",
+        subtext: "Coordination et suivi opérationnel",
+      },
+      {
+        text: "Suivi de Performance",
+        subtext: "Mesure continue des résultats",
+      },
+    ],
+    section4Title: "Solutions Complètes pour Votre Croissance",
+    section4Content: [
+      {
+        title: "Expertise Pluridisciplinaire",
+        description:
+          "Combinaison d'analyses de marché et de pilotage de projet pour une stratégie robuste.",
+        subdesc1: "Approche globale",
+        subdesc2: "Compétences diversifiées",
+        icon: <IconUsers className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Méthodologie Agile",
+        description:
+          "Adaptabilité et réactivité au cœur de notre approche stratégique.",
+        subdesc1: "Méthodes agiles",
+        subdesc2: "Flexibilité opérationnelle",
+        icon: <IconActivity className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Performance Mesurable",
+        description:
+          "Suivi régulier des indicateurs pour assurer le succès de vos projets.",
+        subdesc1: "Tableaux de bord personnalisés",
+        subdesc2: "Rapports précis",
+        icon: (
+          <IconChartLine className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+      {
+        title: "Accompagnement Continu",
+        description: "Support constant pour piloter efficacement vos projets.",
+        subdesc1: "Conseils réguliers",
         subdesc2: "Suivi personnalisé",
-        icon: <IconUsers className="text-secondary w-6 h-6" />,
-      },
-      {
-        title: "Sécurité",
-        description:
-          "Protection de vos données et respect strict des normes en vigueur.",
-        subdesc1: "Protocoles robustes",
-        subdesc2: "Surveillance constante",
-        icon: <IconShield className="text-secondary w-6 h-6" />,
+        icon: <IconHeadset className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
   },
 ];
-
-export default dataService;
