@@ -97,22 +97,22 @@ body {
     right: 10%;
   }
 
-  25% {
-    top: 10%;
-    right: calc(100% - 30px);
-    transform: translateX(12px);
-  }
-
-  50% {
-    top: calc(100% - 30px);
-    right: calc(100% - 30px);
-    transform: translateX(12px) translateY(-12px);
-  }
+        25% {
+          top: 10%;
+          right: 90%;
+          transform: translateX(2.5px);
+        }
+    
+        50% {
+          top: 90%;
+          right: 90%;
+          transform: translateX(2.5px) translateY(-2.5px);
+        }
 
   75% {
-    top: calc(100% - 30px);
+    top: 90%;
     right: 10%;
-    transform: translateY(-12px);
+    transform: translateY(-2.5px);
   }
 }
 
@@ -186,7 +186,7 @@ body {
   left: 10%;
   width: 1px;
   height: 100%;
-  background: linear-gradient(180deg, #bbbbbb 30%, #f0f0f0 70%);
+  background: linear-gradient(180deg, #bbbbbb 30%, #e4e4e4 70%);
 }
 
 .dark .leftl {
