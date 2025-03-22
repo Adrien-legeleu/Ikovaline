@@ -21,8 +21,10 @@ export default function Page() {
   const service = dataService.find((service) => service.slug == id);
   const [valueIdText, setValueIdText] = useState("");
   useEffect(() => {
-    setValueIdText(service.section4Content[0].title.toLocaleLowerCase());
-  }, [id, service.section4Content]);
+    if (service) {
+      setValueIdText(service.section4Content[0].title.toLocaleLowerCase());
+    }
+  }, [id, service?.section4Content]);
   if (!service) {
     return <p>service doesn&apos;t find</p>;
   }
