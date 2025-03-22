@@ -27,8 +27,8 @@ export function Service2() {
         className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
         id="developpement-digital"
       >
-        {grid.map((feature) => (
-          <Link href={`nos-services/${feature.slug}`}>
+        {grid.map((feature, index) => (
+          <Link href={`nos-services/${feature.slug}`} key={index}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

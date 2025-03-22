@@ -29,8 +29,8 @@ export function Service1() {
         className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
         id="buisness-developpement"
       >
-        {grid.map((feature) => (
-          <Link href={`nos-services/${feature.slug}`}>
+        {grid.map((feature, index) => (
+          <Link href={`nos-services/${feature.slug}`} key={index}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -141,7 +141,7 @@ const grid = [
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
           Conception et développement de sites optimisés pour la conversion et
-          l'expérience utilisateur.
+          l&apos;expérience utilisateur.
         </li>
       </ul>
     ),

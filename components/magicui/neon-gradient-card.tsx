@@ -64,7 +64,14 @@ interface NeonGradientCardProps {
    * */
   neonColors?: NeonColorsProps;
 
-  [key: string]: any;
+  [key: string]:
+    | string
+    | boolean
+    | undefined
+    | number
+    | NeonColorsProps
+    | ReactElement
+    | ReactNode;
 }
 
 export const NeonGradientCard: React.FC<NeonGradientCardProps> = ({
