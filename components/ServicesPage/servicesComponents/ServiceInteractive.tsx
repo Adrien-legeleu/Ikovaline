@@ -89,7 +89,7 @@ export default function ServiceInteractive({
                       <IconArrowNarrowLeft className=" text-neutral-800 dark:text-neutral-300 stroke-[1.2px]" />
                       <div className="lg:w-52 md:w-28 sm:w-12 max-sm:hidden h-[1.2px] bg-gradient-to-r dark:bg-gradient-to-l relative right-2 from-neutral-800 from-10% via-60% to-80% via-neutral-200 dark:via-neutral-400 to-neutral-100 dark:to-neutral-300" />
                     </div>
-                    <div className="absolute top-1/2 max-xs:hidden -translate-y-1/2 flex flex-row-reverse items-center  lg:-left-64 md:-left-36 sm:-left-20 -left-8">
+                    <div className="absolute top-1/2 max-xss:hidden -translate-y-1/2 flex flex-row-reverse items-center  lg:-left-64 md:-left-36 sm:-left-20 -left-8">
                       <IconArrowNarrowRight className=" text-neutral-800 dark:text-neutral-300  stroke-[1.2px]" />
                       <div className="lg:w-52 md:w-28 w-12 max-sm:hidden h-[1.2px] bg-gradient-to-l dark:bg-gradient-to-r relative left-2 from-neutral-800 from-10% via-60% to-80%  dark:via-neutral-400 to-neutral-100 dark:to-neutral-300" />
                     </div>

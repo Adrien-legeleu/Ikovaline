@@ -21,7 +21,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <div>
-      <div className="min-h-screen h-full relative rounded-b-3xl items-center bg-gradient-to-t from-10% from-primary/60 dark:from-primary/35 dark:from-5% to-transparent to-40%  justify-center flex md:pt-24 gap-8  md:px-10 px-5 flex-col">
+      <div className="min-h-screen h-full relative rounded-b-3xl items-center bg-gradient-to-t from-10% from-primary/60 dark:from-primary/35 dark:from-5% to-transparent to-40%  justify-center flex md:pt-24 xs:gap-8 gap-5 max-md:pb-10  md:px-10 px-5 flex-col">
         <GridPattern
           width={25}
           height={25}
@@ -35,17 +35,17 @@ export default function Page({ params }: PageProps) {
         <TextAnimate
           animation="blurInUp"
           by="word"
-          className="text-muted-foreground z-10 mx-auto dark:text-neutral-400  font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
+          className="text-muted-foreground z-10 mx-auto dark:text-neutral-300  font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
         >
           {service.section1Desc}
         </TextAnimate>
-        <h1 className="sm:text-5xl -10 md:text-6xl max-w-3xl mx-auto text-4xl text-center z-10 py-2  font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+        <h1 className="sm:text-5xl -10 md:text-6xl max-w-3xl mx-auto text-4xl text-center z-10 py-2  font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-300 dark:from-neutral-100 bg-clip-text text-transparent">
           {service.section1Title}
         </h1>
         <Button className="sm:shadow-servicepc z-10 shadow-servicemobile dark:shadow-servicemobileDark sm:dark:shadow-servicepcDark text-lg px-5 py-6 rounded-3xl">
           Contactez-nous
         </Button>
-        <div className="w-32 h-32 flex items-center bg-gradient-to-br absolute md:top-1/4 top-[15%] left-[15%] rounded-3xl from-[#cacaca] dark:from-[#202020] to-[#f0f0f0] dark:to-[#282828] justify-center shadow-serviceIconlight dark:shadow-serviceIconDark ">
+        <div className="w-32 h-32 flex items-center bg-gradient-to-br absolute md:top-1/4 top-[8%] left-[15%] rounded-3xl from-[#cacaca] dark:from-[#202020] to-[#f0f0f0] dark:to-[#282828] justify-center shadow-serviceIconlight dark:shadow-serviceIconDark ">
           <IconRocket className="w-20 h-20 text-secondary" stroke={2} />
         </div>
         <div className="w-32 h-32 flex items-center bg-gradient-to-br absolute md:top-2/3 top-[75%] right-[15%] rounded-3xl from-[#cacaca]  dark:from-[#202020] to-[#f0f0f0] dark:to-[#282828] justify-center shadow-serviceIconlight dark:shadow-serviceIconDark ">

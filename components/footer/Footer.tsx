@@ -56,8 +56,8 @@ export default function Footer() {
         <TextHoverEffect text="IKOVALINE" />
       </div>
 
-      <div className="grid sm:grid-cols-40/60 grid-cols-1 max-sm:gap-10 max-sm:text-center  max-lg:items-center justify-center">
-        <div className="flex justify-center w-full max-sm:order-2">
+      <div className="grid sm:grid-cols-40/60 grid-cols-1 px-2 max-sm:gap-10 text-left  max-lg:items-center justify-center">
+        <div className="flex justify-left w-full ">
           <div className="space-y-5">
             <h2 className="text-4xl font-semibold flex items-center max-sm:justify-center">
               {" "}
@@ -66,7 +66,7 @@ export default function Footer() {
                 alt="logo de la start-up Ikovaline"
                 width={150}
                 height={150}
-                className="min-h-10 w-36 object-contain"
+                className="min-h-10 w-auto relative right-1 object-contain"
               />
             </h2>
             <div className="space-y-2">
@@ -78,7 +78,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <ul className="grid lg:grid-cols-4 xs:grid-cols-2 max-sm:order-1 grid-cols-1 gap-5">
+        <ul className="grid lg:grid-cols-4 grid-cols-2 text-left gap-3 xs:gap-5">
           {footerLinks.map((section, index) => (
             <ul key={index} className="space-y-2">
               <li className="text-neutral-600 dark:text-neutral-300 font-bold">
