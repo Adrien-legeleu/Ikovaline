@@ -7,9 +7,9 @@ import {
 
 const faqData = [
   {
-    question: "Quest-ce qu'Ikovaline ?",
+    question: "Qu'est-ce qu'Ikovaline ?",
     answer:
-      "Ikovaline est une start-up spécialisée dans le marketing digital et la transformation numérique. Nous aidons les entreprises à améliorer leur visibilité en ligne, à optimiser leur présence sur Google My Business, à gérer les avis clients, et à développer des solutions adaptées pour booster leur croissance.",
+      "Ikovaline est une start-up spécialisée dans le marketing digital et la transformation numérique. Nous aidons les entreprises à améliorer leur visibilité en ligne, à optimiser leur présence sur Google My Business, à gérer les avis clients, et à développer des solutions adaptées pour booster leur croissance. Ikovaline est également votre partenaire pour lé développement de vos projets, réaliser des études de marché et stratégie adapter, et un partenaire de confi ance pour piloter vos projets vers le succès.",
   },
   {
     question: "Comment Ikovaline peut-elle aider mon entreprise ?",
@@ -30,7 +30,7 @@ const faqData = [
   {
     question: "Quels services proposez-vous exactement ?",
     answer:
-      "Nous proposons une gamme complète de services digitaux, incluant :\n- Optimisation de la présence sur Google My Business\n- Stratégies SEO et SEM\n- Gestion des réseaux sociaux (Instagram, Facebook, LinkedIn, TikTok)\n- Création et optimisation de sites web (vitrine et e-commerce)\n- Lancement et gestion de campagnes publicitaires (Google Ads, Social Ads)\n- Consulting en développement commercial et stratégie",
+      "Nous proposons une gamme complète de services digitaux, incluant :\n- Optimisation de la présence sur Google My Business\n- Stratégies SEO et SEM\n- Gestion des réseaux sociaux (Instagram, Facebook, LinkedIn, TikTok)\n- Création et optimisation de sites web (vitrine et e-commerce)\n- Lancement et gestion de campagnes publicitaires (Google Ads, Social Ads)\n- Consulting en développement commercial et stratégie , ainsi que pilotage de projet, études de marché, sondages, développement commercial et consulting stratégique.",
   },
   {
     question: "Comment débuter avec Ikovaline ?",
@@ -45,12 +45,13 @@ export default function FAQ() {
       <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
         Des questions sur notre service ? <br /> Nous avons les réponses !
       </h2>
-      <Accordion type="single" className="gap-2 flex flex-col" collapsible>
+      <Accordion type="single" className="gap-3 flex flex-col" collapsible>
         {faqData.map((faq, index) => (
           <AccordionItem
             value={`item-${index + 1}`}
             key={index}
-            className="bg-[#5ad9f230] p-2 dark:bg-[#141c25]"
+            className="bg-[#5ad9f230] py-2  shadow-inner  shadow-[#0000000c] dark:shadow-[#e5f8fd1a] px-5 dark:bg-[#141c25]"
+            style={{ zIndex: index }}
           >
             <AccordionTrigger className="py-4">{faq.question}</AccordionTrigger>
             <AccordionContent>{faq.answer}</AccordionContent>

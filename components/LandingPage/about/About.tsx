@@ -100,8 +100,7 @@ export default function About() {
   ];
 
   const words = `
-Ikovaline est une start-up étudiante spécialisée en marketing digital. Nous accompagnons les entreprises dans le renforcement de leur image et de leur visibilité en ligne. Grâce à une approche créative et sur mesure, nous aidons nos clients à atteindre leurs objectifs avec efficacité.
-`;
+Ikovaline est une start-up agile spécialisée en stratégie, pilotage de projet et marketing digital. Nous accompagnons les entreprises dans le développement, l’optimisation et la commercialisation de leurs projets. Grâce à une approche sur mesure et orientée résultats, nous aidons nos clients à renforcer leur visibilité et à accélérer leur croissance`;
 
   return (
     <div

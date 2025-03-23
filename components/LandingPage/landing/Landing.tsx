@@ -10,7 +10,8 @@ export default function Landing() {
   return (
     <BackgroundBeamsWithCollision>
       <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center  relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
-        Boostez votre présence en ligne et atteignez <Cover>le succès !</Cover>
+        Votre partenaire pour développer, piloter et propulser vos projets en
+        <Cover>toute confiance !</Cover>
       </h1>
 
       <TextAnimate
@@ -18,8 +19,8 @@ export default function Landing() {
         by="word"
         className="text-muted-foreground dark:text-neutral-400 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
       >
-        Ikovaline, la start-up étudiante d’avenir, réinvente le marketing
-        digital avec des solutions innovantes et des résultats garantis.
+        Ikovaline, la start-up qui combine stratégie, pilotage de projet et
+        marketing digital pour propulser votre business.
       </TextAnimate>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

@@ -7,6 +7,7 @@ import {
   IconClock,
   IconMessage2,
   IconUsersGroup,
+  IconShieldCheck,
 } from "@tabler/icons-react";
 
 export default function Why() {
@@ -14,29 +15,35 @@ export default function Why() {
     {
       title: "Meilleur rapport qualité-prix",
       description: "Des prestations haut de gamme à des tarifs compétitifs.",
-      icon: <IconDiscountCheck />,
+      icon: <IconDiscountCheck className="text-secondary" />,
     },
     {
       title: "Satisfait ou remboursé",
       description: "La garantie d’un service conforme à vos attentes.",
-      icon: <IconCash />,
+      icon: <IconCash className="text-secondary" />,
     },
     {
       title: "Délais d’exécution rapides",
       description:
         "Projets livrés dans les temps, sans compromis sur la qualité.",
-      icon: <IconClock />,
+      icon: <IconClock className="text-secondary" />,
     },
     {
       title: "Communication fluide et transparente",
       description:
         "Un suivi client efficace, avec des points réguliers pour garantir votre satisfaction.",
-      icon: <IconMessage2 />,
+      icon: <IconMessage2 className="text-secondary" />,
     },
     {
       title: "Équipe expérimentée et passionnée",
       description: "Des professionnels dévoués à votre réussite.",
-      icon: <IconUsersGroup />,
+      icon: <IconUsersGroup className="text-secondary" />,
+    },
+    {
+      title: "Un développement encadré en toute confiance",
+      description:
+        "Un accompagnement sur-mesure, avec un cadre clair pour avancer sereinement et en toute confiance.",
+      icon: <IconShieldCheck className="text-secondary" />,
     },
   ];
 
