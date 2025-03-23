@@ -123,7 +123,7 @@ const grid = [
     ),
   },
   {
-    title: "Prospection & Lead Generation Multicanal",
+    title: "Prospection & Lead Generation (B2B, B2C, B2B2C)",
     slug: "prospection-lead-generation-multicanal",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
