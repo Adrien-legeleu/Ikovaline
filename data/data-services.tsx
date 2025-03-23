@@ -1205,7 +1205,7 @@ export const dataService = [
           "Nous créons des contenus visuels et rédactionnels qui captent l'attention de votre audience tout en renforçant l'image de votre marque. Chaque contenu est conçu pour être engageant et adapté aux attentes de votre public.",
         subdesc1: "Contenus visuels uniques",
         subdesc2: "Rédaction créative et percutante",
-        icon: "<IconPencil className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+        icon: <IconPencil className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Engagement Communautaire",
@@ -1213,7 +1213,7 @@ export const dataService = [
           "Nous gérons les interactions avec votre communauté pour créer un lien fort avec vos abonnés. Cela inclut la gestion des commentaires et la réponse rapide aux messages pour maintenir un engagement constant.",
         subdesc1: "Gestion des commentaires",
         subdesc2: "Réponses rapides et personnalisées",
-        icon: "<IconUsers className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+        icon: <IconUsers className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Publicité Ciblée",
@@ -1221,7 +1221,9 @@ export const dataService = [
           "Nous élaborons des campagnes publicitaires efficaces sur les réseaux sociaux, adaptées à vos objectifs, pour toucher vos prospects avec précision et maximiser l'impact de vos annonces.",
         subdesc1: "Campagnes Facebook & Instagram",
         subdesc2: "Publicité sur LinkedIn et Twitter",
-        icon: "<IconTargetArrow className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+        icon: (
+          <IconTargetArrow className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
       },
       {
         title: "Suivi et Optimisation",
@@ -1229,7 +1231,9 @@ export const dataService = [
           "Nous suivons les performances de vos campagnes pour ajuster les stratégies et optimiser continuellement l'impact de vos actions sur les réseaux sociaux.",
         subdesc1: "Suivi des performances",
         subdesc2: "Ajustements stratégiques pour améliorer les résultats",
-        icon: "<IconTrendingUp className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+        icon: (
+          <IconTrendingUp className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
       },
     ],
   },
@@ -1275,7 +1279,7 @@ export const dataService = [
           "Tous nos sites sont conçus pour être parfaitement visibles et fonctionnels sur mobile, tablette et ordinateur.",
         subdesc1: "Design mobile-first",
         subdesc2: "Optimisation pour tous les écrans",
-        icon: "<IconPhone className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+        icon: <IconPhone className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Optimisation SEO",
@@ -1283,7 +1287,7 @@ export const dataService = [
           "Chaque site que nous créons est optimisé pour les moteurs de recherche, garantissant une bonne visibilité dès le lancement.",
         subdesc1: "Optimisation des balises",
         subdesc2: "Stratégie SEO sur-mesure",
-        icon: "<IconSearch className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+        icon: <IconSearch className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Sécurité Maximale",
@@ -1291,7 +1295,9 @@ export const dataService = [
           "Des protocoles de sécurité de pointe pour protéger vos données et celles de vos visiteurs.",
         subdesc1: "Certificat SSL",
         subdesc2: "Protection contre les cyberattaques",
-        icon: "<IconShieldLock className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+        icon: (
+          <IconShieldLock className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
       },
       {
         title: "Maintenance et Suivi",
@@ -1299,7 +1305,7 @@ export const dataService = [
           "Nous vous accompagnons après la mise en ligne avec des mises à jour régulières et un support technique dédié.",
         subdesc1: "Mises à jour régulières",
         subdesc2: "Assistance continue",
-        icon: "<IconTools className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+        icon: <IconTools className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
   },
