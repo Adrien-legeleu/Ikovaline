@@ -39,8 +39,8 @@ export default function ServiceInteractive({
           {service.section4Title}
         </h2>
         <div className="flex flex-col pt-12 gap-10 items-center justify-center">
-          <div className="relative p-2 bg-[#F4F4F4] dark:bg-neutral-800 w-full rounded-3xl shadow-product flex justify-center">
-            <ul className="relative flex flex-row flex-wrap items-center justify-center gap-2 w-full">
+          <div className="relative p-2 bg-[#F4F4F4] dark:bg-neutral-800 rounded-3xl shadow-product flex justify-center w-fit mx-auto">
+            <ul className="relative flex flex-row flex-wrap items-center justify-center gap-2 w-auto">
               {service.section4Content.map((value) => (
                 <motion.li
                   key={value.title}
@@ -83,7 +83,7 @@ export default function ServiceInteractive({
                     <p className="text-sm text-darkgrey md:text-base">
                       {value.description}
                     </p>
-                    <div className="sm:w-4 sm:h-4 w-3 h-3 bg-white dark:bg-black rounded-full sm:border-[3px] border-2 border-black dark:border-neutral-200 absolute top-1/2   -translate-y-1/2 -left-2" />
+                    <div className="sm:w-4 sm:h-4 w-3 h-3 bg-white dark:bg-black rounded-full sm:border-[3px] border-2 border-black dark:border-neutral-300 absolute top-1/2   -translate-y-1/2 sm:-left-2 -left-[6px]" />
 
                     <div className="absolute top-1/2 max-xss:hidden -translate-y-1/2 flex items-center -right-8 sm:-right-20 md:-right-36   lg:-right-64">
                       <IconArrowNarrowLeft className=" text-neutral-800 dark:text-neutral-300 stroke-[1.2px]" />
@@ -94,7 +94,7 @@ export default function ServiceInteractive({
                       <div className="lg:w-52 md:w-28 w-12 max-sm:hidden h-[1.2px] bg-gradient-to-l dark:bg-gradient-to-r relative left-2 from-neutral-800 from-10% via-60% to-80%  dark:via-neutral-400 to-neutral-100 dark:to-neutral-300" />
                     </div>
 
-                    <div className="sm:w-4 sm:h-4 w-3 h-3 bg-white dark:bg-black rounded-full sm:border-[3px] border-2 border-black dark:border-neutral-200 absolute top-1/2 -translate-y-1/2 -right-2" />
+                    <div className="sm:w-4 sm:h-4 w-3 h-3 bg-white dark:bg-black rounded-full sm:border-[3px] border-2 border-black dark:border-neutral-300 absolute top-1/2 -translate-y-1/2 sm:-right-2 -right-[6px]" />
                   </motion.div>
                 )
             )}

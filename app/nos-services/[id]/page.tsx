@@ -1,3 +1,4 @@
+import { CallToAction } from "@/components/callToAction/CallToAction";
 import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
@@ -45,7 +46,7 @@ export default function Page({ params }: PageProps) {
         <Button className="sm:shadow-servicepc z-10 shadow-servicemobile dark:shadow-servicemobileDark sm:dark:shadow-servicepcDark text-lg px-5 py-6 rounded-3xl">
           Contactez-nous
         </Button>
-        <div className="w-32 h-32 flex items-center bg-gradient-to-br absolute md:top-1/4 top-[8%] left-[15%] rounded-3xl from-[#cacaca] dark:from-[#202020] to-[#f0f0f0] dark:to-[#282828] justify-center shadow-serviceIconlight dark:shadow-serviceIconDark ">
+        <div className="w-32 h-32 flex items-center bg-gradient-to-br absolute md:top-1/4 sm:top-[10%] top-[6%] left-[15%] rounded-3xl from-[#cacaca] dark:from-[#202020] to-[#f0f0f0] dark:to-[#282828] justify-center shadow-serviceIconlight dark:shadow-serviceIconDark ">
           <IconRocket className="w-20 h-20 text-secondary" stroke={2} />
         </div>
         <div className="w-32 h-32 flex items-center bg-gradient-to-br absolute md:top-2/3 top-[75%] right-[15%] rounded-3xl from-[#cacaca]  dark:from-[#202020] to-[#f0f0f0] dark:to-[#282828] justify-center shadow-serviceIconlight dark:shadow-serviceIconDark ">
@@ -75,7 +76,7 @@ export default function Page({ params }: PageProps) {
         </NeonGradientCard>
       </div>
 
-      <div className="md:px-10 py-24 space-y-12 px-5">
+      <div className="md:px-10 py-24 space-y-12 px-5 max-w-7xl mx-auto">
         <h2 className="sm:text-4xl max-w-xl mx-auto py-2 text-3xl text-center font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
           {service.section3Title}
         </h2>
@@ -106,6 +107,11 @@ export default function Page({ params }: PageProps) {
         </div>
       </div>
       <ServiceInteractive service={service} />
+      <CallToAction
+        title="Donnez à votre entreprise l'élan qu'elle mérite."
+        desc="Nos solutions sur-mesure transforment vos ambitions en résultats concrets. Parlons de vos objectifs et voyons comment aller plus loin ensemble."
+        textBtn="Discutons de votre projet"
+      />
     </div>
   );
 }
