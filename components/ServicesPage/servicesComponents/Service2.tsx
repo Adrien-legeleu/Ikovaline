@@ -145,8 +145,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          L'IA personnalise vos campagnes emailing en temps réel, réduisant de
-          70 % le temps de gestion et boostant l'efficacité.
+          L&apos;IA personnalise vos campagnes emailing en temps réel, réduisant
+          de 70 % le temps de gestion et boostant l&apos;efficacité.
         </li>
       </ul>
     ),
@@ -158,7 +158,7 @@ const grid = [
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
           Optimisation de votre présence sur les réseaux sociaux pour atteindre
-          un public plus large et améliorer l'engagement avec vos clients.
+          un public plus large et améliorer l&apos;engagement avec vos clients.
         </li>
       </ul>
     ),
@@ -169,8 +169,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Conception d'un site web unique, répondant parfaitement à vos besoins
-          spécifiques et à l'image de votre entreprise.
+          Conception d&apos;un site web unique, répondant parfaitement à vos
+          besoins spécifiques et à l&apos;image de votre entreprise.
         </li>
       </ul>
     ),
