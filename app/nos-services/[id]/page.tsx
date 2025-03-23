@@ -64,7 +64,7 @@ export default function Page({ params }: PageProps) {
         <NeonGradientCard className="max-w-sm items-center flex flex-col justify-center text-center">
           <AnimatedShinyText
             className="
-            inline-block md:text-8xl sm:text-7xl  text-6xl font-extrabold items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-50"
+            inline-block md:text-8xl text-7xl  font-extrabold items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-50"
           >
             <span className="inline-block">
               {service.section2NumberImportant}
