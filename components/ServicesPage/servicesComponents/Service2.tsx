@@ -81,7 +81,7 @@ const grid = [
   },
   {
     title: "Gestion de Campagnes SEA Performantes",
-    slug: "gestion-campagnes-sea-google-ads-linkedin-ads",
+    slug: "gestion-campagnes-sea",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>

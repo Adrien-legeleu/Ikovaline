@@ -751,7 +751,7 @@ export const dataService = [
   },
   {
     section1Title: "Gestion de Campagnes SEA Performantes",
-    slug: "gestion-campagnes-sea-google-ads-linkedin-ads",
+    slug: "gestion-campagnes-sea",
     section1Desc:
       "Création, gestion et optimisation de campagnes publicitaires payantes sur Google Ads, LinkedIn Ads et autres plateformes pour générer du trafic ciblé et des leads qualifiés.",
     section2Title: "Campagnes SEA Ciblées",
