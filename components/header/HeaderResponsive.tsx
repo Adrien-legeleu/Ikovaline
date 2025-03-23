@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
-import { IconMenu3 } from "@tabler/icons-react";
+import { IconMenu3, IconShieldCheck } from "@tabler/icons-react";
 import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
 
 import { ModeToggle } from "../toggle-darkmode";
@@ -102,6 +102,11 @@ export function HeaderResponsive() {
           label: "Notre Vision",
           href: "/about/#notre-vision",
           icon: <IconEye stroke={2} />,
+        },
+        {
+          label: "Notre Garantie",
+          href: "/about/#notre-garantie",
+          icon: <IconShieldCheck stroke={2} />,
         },
       ],
     },

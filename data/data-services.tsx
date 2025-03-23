@@ -12,21 +12,27 @@ import {
   IconCurrencyDollar,
   IconEye,
   IconFileAnalytics,
+  IconGlobe,
   IconHeadset,
   IconHeart,
   IconLayersIntersect,
   IconLock,
+  IconMail,
   IconMapPin,
   IconMessageCircle,
   IconPencil,
   IconPhone,
+  IconPhoneCall,
   IconRefresh,
   IconRocket,
   IconSearch,
+  IconSend,
   IconSettings,
   IconShare,
   IconShield,
+  IconShieldLock,
   IconTarget,
+  IconTargetArrow,
   IconTool,
   IconTools,
   IconTrendingUp,
@@ -534,6 +540,146 @@ export const dataService = [
     ],
   },
   {
+    section1Title: "Prospection Automatisée & Standard Téléphonique IA",
+    slug: "prospection-automatisee-telephone-ia",
+    section1Desc:
+      "Profitez d’une intelligence artificielle avancée capable de répondre aux appels, tenir une conversation fluide et adaptée avec différents accents, tout en automatisant la prospection et la relance clients.",
+    section2Title: "Automatisez Votre Prospection et Gagnez en Efficacité",
+    section2Desc:
+      "Boostez votre développement commercial grâce à une IA qui gère appels, prises de contact et relances, tout en adaptant le discours selon chaque interlocuteur pour maximiser l’impact et la conversion.",
+    section2NumberImportant: "75 %",
+    section2TextImportant:
+      "des entreprises utilisant l’automatisation constatent un gain de productivité significatif",
+    section3Title: "Un Processus Intelligent et Efficace en 4 Étapes",
+    section3Cards: [
+      {
+        text: "Prise d’Appels Automatisée",
+        subtext:
+          "L’IA répond aux appels entrants avec un discours naturel et contextualisé",
+      },
+      {
+        text: "Prospection Ciblée",
+        subtext:
+          "Envoi automatique de messages personnalisés selon la typologie des prospects",
+      },
+      {
+        text: "Suivi et Relance",
+        subtext:
+          "Relances intelligentes programmées pour augmenter vos chances de conversion",
+      },
+      {
+        text: "Analyse des Échanges",
+        subtext:
+          "Rapports détaillés pour suivre les performances et ajuster les scripts",
+      },
+    ],
+    section4Title: "Des Avantages Concrets pour Votre Entreprise",
+    section4Content: [
+      {
+        title: "Standard Intelligent",
+        description:
+          "Un assistant téléphonique IA capable de gérer de multiples appels simultanément, avec un langage adapté et des scénarios prédéfinis pour répondre aux besoins de vos prospects et clients.",
+        subdesc1: "Conversations naturelles",
+        subdesc2: "Multilingue & multi-accent",
+        icon: (
+          <IconPhoneCall className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+      {
+        title: "Automatisation des Campagnes",
+        description:
+          "Nous mettons en place des séquences automatiques de prospection (email, SMS, appels IA) avec personnalisation et adaptation selon la réaction des prospects.",
+        subdesc1: "Campagnes multi-canaux",
+        subdesc2: "Personnalisation avancée",
+        icon: <IconSend className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Suivi et Reporting",
+        description:
+          "Tableaux de bord détaillés pour suivre les échanges, mesurer les taux de conversion et ajuster les stratégies de prospection en temps réel.",
+        subdesc1: "Indicateurs clés",
+        subdesc2: "Rapports automatisés",
+        icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Optimisation Continue",
+        description:
+          "Nous analysons régulièrement les performances de l’IA et ajustons les scripts pour garantir des interactions toujours plus performantes et naturelles.",
+        subdesc1: "Analyse comportementale",
+        subdesc2: "Ajustements stratégiques",
+        icon: <IconSettings className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+    ],
+  },
+  {
+    section1Title: "Accompagnement pour votre Développement à l’International",
+    slug: "accompagnement-developpement-international",
+    section1Desc:
+      "Nous aidons votre entreprise à se lancer sur de nouveaux marchés internationaux grâce à des analyses poussées et des stratégies sur mesure.",
+    section2Title: "Réussissez votre expansion à l'échelle mondiale",
+    section2Desc:
+      "Bénéficiez de notre expertise pour identifier les bonnes opportunités, adapter votre offre et déployer une stratégie d'entrée réussie dans chaque pays visé.",
+    section2NumberImportant: "64 %",
+    section2TextImportant:
+      "des entreprises françaises ayant fait le choix de se développer à l'international ont observé une croissance de leur chiffre d'affaires dans les trois premières années.",
+    section3Title: "Notre méthode d’accompagnement en 4 étapes",
+    section3Cards: [
+      {
+        text: "Étude de Marché",
+        subtext: "Analyse des tendances locales et des opportunités",
+      },
+      {
+        text: "Stratégie sur Mesure",
+        subtext: "Définition d’un plan d’entrée adapté à votre activité",
+      },
+      {
+        text: "Mise en Œuvre",
+        subtext: "Lancement opérationnel et suivi des premiers résultats",
+      },
+      {
+        text: "Optimisation Continue",
+        subtext: "Ajustements stratégiques pour assurer la réussite",
+      },
+    ],
+    section4Title: "Un accompagnement international complet",
+    section4Content: [
+      {
+        title: "Analyse des Opportunités",
+        description:
+          "Nous réalisons une étude approfondie des marchés étrangers pour identifier les meilleures opportunités de croissance pour votre entreprise.",
+        subdesc1: "Veille concurrentielle",
+        subdesc2: "Étude locale détaillée",
+        icon: <IconSearch className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Adaptation Culturelle",
+        description:
+          "Nous vous aidons à adapter votre offre et votre communication aux attentes et spécificités culturelles de chaque marché.",
+        subdesc1: "Positionnement local",
+        subdesc2: "Communication ciblée",
+        icon: <IconGlobe className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Déploiement Structuré",
+        description:
+          "Mise en place d’un plan d’action opérationnel pour un lancement progressif et maîtrisé à l’international.",
+        subdesc1: "Plan détaillé",
+        subdesc2: "Suivi opérationnel",
+        icon: <IconTarget className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Suivi & Ajustements",
+        description:
+          "Analyse des performances et ajustements constants pour pérenniser votre présence internationale et optimiser vos résultats.",
+        subdesc1: "KPI mesurables",
+        subdesc2: "Optimisation continue",
+        icon: (
+          <IconTrendingUp className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+    ],
+  },
+  {
     section1Title: "Optimisation SEO et Référencement Naturel",
     slug: "seo-referencement-naturel",
     section1Desc:
@@ -941,6 +1087,219 @@ export const dataService = [
         subdesc1: "Conseils réguliers",
         subdesc2: "Suivi personnalisé",
         icon: <IconHeadset className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+    ],
+  },
+  {
+    title: "Automatisation IA d'Emailing",
+    slug: "automatisation-ia-emailing",
+    section1Desc:
+      "Optimisez vos campagnes emailing grâce à l'intelligence artificielle. Personnalisation, segmentation avancée et envoi automatique pour maximiser l'impact.",
+    section2Title: "Générer un Impact Accéléré",
+    section2Desc:
+      "L'automatisation IA permet une gestion des campagnes plus rapide, plus précise et plus efficace, augmentant ainsi votre retour sur investissement.",
+    section2NumberImportant: "97 %",
+    section2TextImportant:
+      "des responsables marketing déclarent que l’intelligence artificielle et l’automatisation sont des priorités absolues pour améliorer les stratégies numériques",
+
+    section3Cards: [
+      {
+        text: "Segmentation Avancée",
+        subtext:
+          "L'IA analyse vos contacts pour créer des segments plus précis et personnalisés.",
+      },
+      {
+        text: "Personnalisation de Contenu",
+        subtext:
+          "L'IA adapte les messages pour chaque contact, améliorant ainsi l'engagement.",
+      },
+      {
+        text: "Envoi Automatique",
+        subtext:
+          "Les campagnes sont envoyées au moment optimal, maximisant ainsi les taux d'ouverture.",
+      },
+      {
+        text: "Analyse et Optimisation",
+        subtext:
+          "L'IA analyse les résultats pour continuellement améliorer vos prochaines campagnes.",
+      },
+    ],
+    section4Title: "Notre Expertise en Automatisation IA d'Emailing",
+    section4Content: [
+      {
+        title: "Segmentation Précise et Ciblée",
+        description:
+          "Grâce à l'IA, nous segmentons votre base de données de manière ultra-précise, permettant de cibler exactement les bonnes personnes au bon moment, ce qui améliore considérablement le taux d'ouverture et de conversion.",
+        subdesc1: "Analyse comportementale des utilisateurs",
+        subdesc2: "Création de profils de clients dynamiques",
+        icon: <IconUsers className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Personnalisation Dynamique",
+        description:
+          "L'IA permet de personnaliser chaque email en fonction des préférences et comportements passés des utilisateurs, garantissant des messages plus pertinents et engageants.",
+        subdesc1: "Contenu automatisé et dynamique",
+        subdesc2: "Réponses instantanées personnalisées",
+        icon: <IconMail className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+      {
+        title: "Optimisation Continue des Campagnes",
+        description:
+          "Nous utilisons l'IA pour surveiller et analyser les performances de vos campagnes en temps réel. Cela permet d'adapter et d'améliorer automatiquement chaque campagne en fonction des résultats obtenus.",
+        subdesc1: "Analyse des taux d'ouverture",
+        subdesc2: "Amélioration des taux de conversion",
+        icon: (
+          <IconChartLine className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
+        ),
+      },
+      {
+        title: "Réduction du Temps de Gestion",
+        description:
+          "L'automatisation de l'emailing avec l'IA permet de réduire de manière significative le temps passé à gérer les campagnes, ce qui libère du temps pour se concentrer sur d'autres aspects de votre activité.",
+        subdesc1: "Envoi automatisé des campagnes",
+        subdesc2: "Gestion centralisée des contacts",
+        icon: <IconClock className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
+      },
+    ],
+  },
+  {
+    section1Title: "Gestion et Développement de Réseaux Sociaux",
+    slug: "gestion-developpement-reseaux-sociaux",
+    section1Desc:
+      "Création et gestion de stratégies sociales sur mesure pour maximiser l'impact de vos campagnes sur les plateformes sociales.",
+    section2Title: "Engagement et Croissance",
+    section2Desc:
+      "Augmentez votre visibilité et fidélisez vos clients grâce à des publications engageantes et des interactions régulières.",
+    section2NumberImportant: "70 %",
+    section2TextImportant:
+      "des entreprises ayant renforcé leur engagement sur les réseaux sociaux ont observé une hausse significative de l'engagement client.",
+
+    section3Title: "Les Clés du Succès sur les Réseaux Sociaux",
+    section3Cards: [
+      {
+        text: "Création de Contenu Impactant",
+        subtext:
+          "Des publications adaptées aux attentes de votre audience cible.",
+      },
+      {
+        text: "Planification et Cohérence",
+        subtext:
+          "Des calendriers de publication pour maintenir une présence régulière.",
+      },
+      {
+        text: "Publicité Ciblée",
+        subtext:
+          "Des campagnes publicitaires optimisées pour atteindre les bons prospects.",
+      },
+      {
+        text: "Analyse et Suivi",
+        subtext:
+          "Des rapports détaillés pour suivre la performance de vos actions.",
+      },
+    ],
+    section4Title: "Notre Expertise en Gestion de Réseaux Sociaux",
+    section4Content: [
+      {
+        title: "Création de Contenu",
+        description:
+          "Nous créons des contenus visuels et rédactionnels qui captent l'attention de votre audience tout en renforçant l'image de votre marque. Chaque contenu est conçu pour être engageant et adapté aux attentes de votre public.",
+        subdesc1: "Contenus visuels uniques",
+        subdesc2: "Rédaction créative et percutante",
+        icon: "<IconPencil className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+      },
+      {
+        title: "Engagement Communautaire",
+        description:
+          "Nous gérons les interactions avec votre communauté pour créer un lien fort avec vos abonnés. Cela inclut la gestion des commentaires et la réponse rapide aux messages pour maintenir un engagement constant.",
+        subdesc1: "Gestion des commentaires",
+        subdesc2: "Réponses rapides et personnalisées",
+        icon: "<IconUsers className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+      },
+      {
+        title: "Publicité Ciblée",
+        description:
+          "Nous élaborons des campagnes publicitaires efficaces sur les réseaux sociaux, adaptées à vos objectifs, pour toucher vos prospects avec précision et maximiser l'impact de vos annonces.",
+        subdesc1: "Campagnes Facebook & Instagram",
+        subdesc2: "Publicité sur LinkedIn et Twitter",
+        icon: "<IconTargetArrow className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+      },
+      {
+        title: "Suivi et Optimisation",
+        description:
+          "Nous suivons les performances de vos campagnes pour ajuster les stratégies et optimiser continuellement l'impact de vos actions sur les réseaux sociaux.",
+        subdesc1: "Suivi des performances",
+        subdesc2: "Ajustements stratégiques pour améliorer les résultats",
+        icon: "<IconTrendingUp className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+      },
+    ],
+  },
+  {
+    section1Title: "Création de Sites Web Sur-Mesure",
+    slug: "creation-site-web-sur-mesure",
+    section1Desc:
+      "Développement de sites internet personnalisés, adaptés à l'image et aux objectifs spécifiques de votre entreprise.",
+    section2Title: "Optimisation de l'Expérience Utilisateur",
+    section2Desc:
+      "Conception de sites web intuitifs, rapides et fluides, offrant une expérience de navigation optimale sur tous les appareils.",
+    section2NumberImportant: "88 %",
+    section2TextImportant:
+      "des utilisateurs ne reviendront pas sur un site mal conçu, soulignant l'importance d'une expérience fluide.",
+    section3Title: "Les Étapes de Création de Votre Site Web",
+    section3Cards: [
+      {
+        text: "Analyse des Besoins",
+        subtext:
+          "Compréhension approfondie de vos besoins pour définir un site qui vous correspond réellement.",
+      },
+      {
+        text: "Conception du Design",
+        subtext:
+          "Création d'une interface moderne et adaptée à votre identité visuelle, avec un design responsive.",
+      },
+      {
+        text: "Développement Technique",
+        subtext:
+          "Implémentation des fonctionnalités et technologies les plus récentes, garantissant performance et sécurité.",
+      },
+      {
+        text: "Test et Déploiement",
+        subtext:
+          "Tests rigoureux sur différentes plateformes avant la mise en ligne pour garantir une expérience parfaite.",
+      },
+    ],
+    section4Title: "Notre Expertise en Création de Sites Web",
+    section4Content: [
+      {
+        title: "Design Responsive",
+        description:
+          "Tous nos sites sont conçus pour être parfaitement visibles et fonctionnels sur mobile, tablette et ordinateur.",
+        subdesc1: "Design mobile-first",
+        subdesc2: "Optimisation pour tous les écrans",
+        icon: "<IconPhone className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+      },
+      {
+        title: "Optimisation SEO",
+        description:
+          "Chaque site que nous créons est optimisé pour les moteurs de recherche, garantissant une bonne visibilité dès le lancement.",
+        subdesc1: "Optimisation des balises",
+        subdesc2: "Stratégie SEO sur-mesure",
+        icon: "<IconSearch className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+      },
+      {
+        title: "Sécurité Maximale",
+        description:
+          "Des protocoles de sécurité de pointe pour protéger vos données et celles de vos visiteurs.",
+        subdesc1: "Certificat SSL",
+        subdesc2: "Protection contre les cyberattaques",
+        icon: "<IconShieldLock className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
+      },
+      {
+        title: "Maintenance et Suivi",
+        description:
+          "Nous vous accompagnons après la mise en ligne avec des mises à jour régulières et un support technique dédié.",
+        subdesc1: "Mises à jour régulières",
+        subdesc2: "Assistance continue",
+        icon: "<IconTools className='text-secondary w-4 h-4 lg:w-6 lg:h-6' />",
       },
     ],
   },

@@ -18,6 +18,7 @@ import {
   IconHelpHexagon,
   IconHistory,
   IconMessage,
+  IconShieldCheck,
   IconThumbUp,
   IconUser,
   IconUsersGroup,
@@ -137,6 +138,9 @@ export function Header({ className }: { className?: string }) {
                   </HoveredLink>
                   <HoveredLink href="/about/#notre-vision">
                     <IconEye stroke={2} /> Notre Vision
+                  </HoveredLink>
+                  <HoveredLink href="/about/#notre-garantie">
+                    <IconShieldCheck stroke={2} /> Notre Garantie
                   </HoveredLink>
                 </div>
               </MenuItem>

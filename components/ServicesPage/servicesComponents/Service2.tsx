@@ -5,6 +5,7 @@ import React from "react";
 import { useId } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { IconArrowRight } from "@tabler/icons-react";
 
 export function Service2() {
   return (
@@ -44,6 +45,12 @@ export function Service2() {
               <p className="text-neutral-600 dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
                 {feature.description}
               </p>
+              <Button
+                variant={"outline"}
+                className="rounded-full  w-12 h-10 mt-4 p-1"
+              >
+                <IconArrowRight />
+              </Button>
             </motion.div>
           </Link>
         ))}
@@ -74,7 +81,7 @@ const grid = [
   },
   {
     title: "Gestion de Campagnes SEA Performantes",
-    slug: "gestion-campagnes-sea-performantes",
+    slug: "gestion-campagnes-sea-google-ads-linkedin-ads",
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
@@ -128,6 +135,42 @@ const grid = [
         <li>
           Analyse stratégique et coordination de projets pour optimiser le
           développement et la pénétration du marché.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: "Automatisation IA d'Emailing",
+    slug: "automatisation-ia-emailing",
+    description: (
+      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+        <li>
+          L'IA personnalise vos campagnes emailing en temps réel, réduisant de
+          70 % le temps de gestion et boostant l'efficacité.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: "Gestion et Développement de Réseaux Sociaux",
+    slug: "gestion-developpement-reseaux-sociaux",
+    description: (
+      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+        <li>
+          Optimisation de votre présence sur les réseaux sociaux pour atteindre
+          un public plus large et améliorer l'engagement avec vos clients.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: "Création de Site Web Sur-Mesure",
+    slug: "creation-site-web-sur-mesure",
+    description: (
+      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+        <li>
+          Conception d'un site web unique, répondant parfaitement à vos besoins
+          spécifiques et à l'image de votre entreprise.
         </li>
       </ul>
     ),

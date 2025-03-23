@@ -5,6 +5,7 @@ import React from "react";
 import { useId } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { IconArrowRight } from "@tabler/icons-react";
 
 export function Service1() {
   return (
@@ -30,7 +31,11 @@ export function Service1() {
         id="buisness-developpement"
       >
         {grid.map((feature, index) => (
-          <Link href={`nos-services/${feature.slug}`} key={index}>
+          <Link
+            href={`nos-services/${feature.slug}`}
+            key={index}
+            className="group"
+          >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -45,6 +50,12 @@ export function Service1() {
               </p>
 
               {feature.description}
+              <Button
+                variant={"outline"}
+                className="rounded-full  w-12 h-10 mt-4 p-1"
+              >
+                <IconArrowRight />
+              </Button>
             </motion.div>
           </Link>
         ))}
@@ -142,6 +153,30 @@ const grid = [
         <li>
           Conception et développement de sites optimisés pour la conversion et
           l&apos;expérience utilisateur.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: "Prospection & Téléphone IA",
+    slug: "prospection-telephone-ia",
+    description: (
+      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+        <li>
+          Une IA qui gère appels et prospection automatisée avec suivi et
+          relances personnalisées.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: "Développement International",
+    slug: "developpement-international",
+    description: (
+      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+        <li>
+          Nous vous aidons à structurer et réussir votre entrée sur de nouveaux
+          marchés internationaux.
         </li>
       </ul>
     ),

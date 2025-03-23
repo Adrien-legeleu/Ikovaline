@@ -207,6 +207,39 @@ const ikovalineContent = [
         </motion.p>
       </>
     ),
-    badge: "Vision",
+    badge: "remboursement",
+  },
+  {
+    title: "Garantie de Résultats ou Remboursement",
+    id: "notre-garantie",
+    description: (
+      <>
+        <motion.p
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: [20, -5, 0],
+          }}
+          transition={{
+            duration: 0.5,
+            ease: [0.4, 0.0, 0.2, 1],
+          }}
+          viewport={{
+            amount: 1, // 50% de l'élément doit être visible pour déclencher l'animation
+          }}
+          className="leading-9"
+        >
+          Chez Ikovaline, nous croyons en des résultats concrets. Si nos
+          solutions ne répondent pas aux objectifs que nous avons définis
+          ensemble, nous vous remboursons{" "}
+          <Highlight className="p-2 m-1 ">intégralement</Highlight>. Votre
+          satisfaction est notre priorité.
+        </motion.p>
+      </>
+    ),
+    badge: "Remboursement garanti",
   },
 ];
