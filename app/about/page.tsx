@@ -25,7 +25,7 @@ export default function Page() {
 
               <h2
                 className={
-                  "text-5xl mb-12 text-center font-semibold bg-gradient-to-t from-neutral-300 to-neutral-600 bg-clip-text text-transparent "
+                  "md:text-5xl xs:text-4xl text-3xl  mb-12 text-center font-semibold bg-gradient-to-t from-neutral-300 to-neutral-600 bg-clip-text text-transparent "
                 }
               >
                 {item.title}
@@ -207,7 +207,7 @@ const ikovalineContent = [
         </motion.p>
       </>
     ),
-    badge: "remboursement",
+    badge: "Vision",
   },
   {
     title: "Garantie de Résultats ou Remboursement",
@@ -228,7 +228,7 @@ const ikovalineContent = [
             ease: [0.4, 0.0, 0.2, 1],
           }}
           viewport={{
-            amount: 1, // 50% de l'élément doit être visible pour déclencher l'animation
+            amount: 1,
           }}
           className="leading-9"
         >
