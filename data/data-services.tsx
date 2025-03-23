@@ -540,8 +540,8 @@ export const dataService = [
     ],
   },
   {
-    section1Title: "Prospection Automatisée & Standard Téléphonique IA",
-    slug: "prospection-automatisee-telephone-ia",
+    title: "Prospection & Téléphone IA",
+    slug: "prospection-telephone-ia",
     section1Desc:
       "Profitez d’une intelligence artificielle avancée capable de répondre aux appels, tenir une conversation fluide et adaptée avec différents accents, tout en automatisant la prospection et la relance clients.",
     section2Title: "Automatisez Votre Prospection et Gagnez en Efficacité",
@@ -612,13 +612,13 @@ export const dataService = [
     ],
   },
   {
-    section1Title: "Accompagnement pour votre Développement à l’International",
-    slug: "accompagnement-developpement-international",
+    title: "Développement International",
+    slug: "developpement-international",
     section1Desc:
       "Nous aidons votre entreprise à se lancer sur de nouveaux marchés internationaux grâce à des analyses poussées et des stratégies sur mesure.",
     section2Title: "Réussissez votre expansion à l'échelle mondiale",
     section2Desc:
-      "Bénéficiez de notre expertise pour identifier les bonnes opportunités, adapter votre offre et déployer une stratégie d'entrée réussie dans chaque pays visé.",
+      "Bénéficiez de notre expertise pour identifier les bonnes opportunités, adapter votre offre et déployer une stratégie d'entrée réussie dans chaque pays visé. Nous accompagnons vos ambitions, et les nôtres ne s’arrêtent pas aux frontières : notre équipe travaille également avec des partenaires et clients à l’international.",
     section2NumberImportant: "64 %",
     section2TextImportant:
       "des entreprises françaises ayant fait le choix de se développer à l'international ont observé une croissance de leur chiffre d'affaires dans les trois premières années.",
