@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ikovaline.com
+
+# Sitemaps
+Sitemap: https://ikovaline.com/sitemap.xml
