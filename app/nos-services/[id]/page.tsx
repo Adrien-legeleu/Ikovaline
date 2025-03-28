@@ -8,10 +8,34 @@ import { TextAnimate } from "@/components/ui/text-animate";
 import { dataService } from "@/data/data-services";
 import { cn } from "@/lib/utils";
 import { IconRocket, IconTrendingUp } from "@tabler/icons-react";
+import { Metadata } from "next";
 
 type PageProps = {
   params: { id: string };
 };
+
+export function generateMetadata({ params }: PageProps): Metadata {
+  const service = dataService.find((data) => data.slug === params.id);
+
+  if (!service) {
+    return {
+      title: "Article non trouvé - Blog",
+      description: "L'article demandé n'existe pas ou a été supprimé.",
+    };
+  }
+
+  return {
+    title: `${service.title} - Service`,
+    description: service.section1Desc.substring(0, 150), // Meta description (150 caractères max)
+    openGraph: {
+      title: service.title,
+      description: service.section1Desc.substring(0, 150),
+      url: `https://ton-site.com/nos-services/${service.slug}`,
+      type: "website",
+    },
+  };
+}
+
 export default function Page({ params }: PageProps) {
   const service = dataService.find((service) => service.slug == params.id);
 
