@@ -25,10 +25,10 @@ export function generateMetadata({ params }: PageProps): Metadata {
   }
 
   return {
-    title: `${service.title} - Service`,
-    description: service.section1Desc.substring(0, 150), // Meta description (150 caractères max)
+    title: `${service.section1Title} - Service`,
+    description: service.section1Desc.substring(0, 150),
     openGraph: {
-      title: service.title,
+      title: service.section1Title,
       description: service.section1Desc.substring(0, 150),
       url: `https://ton-site.com/nos-services/${service.slug}`,
       type: "website",
