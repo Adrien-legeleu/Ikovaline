@@ -7,7 +7,7 @@ import Img2 from "@/public/images/About/team-chiara-profil.jpg";
 import Img3 from "@/public/images/About/team-adam-profil.jpg";
 import Img4 from "@/public/images/About/team-lea-profil.jpg";
 import Img5 from "@/public/images/About/team-lucille-profil.jpg";
-import Img6 from "@/public/images/About/team-adrien-profil.jpg";
+import Img6 from "@/public/images/About/team-adrien-profil.png";
 import Img7 from "@/public/images/About/team-samuel-profil.jpg";
 import Img8 from "@/public/images/About/team-victor-profil.jpg";
 import Img9 from "@/public/images/About/team-ronan-profil.jpg";
