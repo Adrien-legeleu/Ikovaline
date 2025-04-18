@@ -2,6 +2,7 @@ import Image from "next/image";
 import { OrbitingCircles } from "../../ui/orbiting-circles";
 import InstaLogo from "@/public/images/logo/insta-logo.png";
 import TiktokLogo from "@/public/images/logo/tiktok-logo.jpg";
+import XLogo from "@/public/images/logo/logo-x.avif";
 
 export function SkeletonTwoComponent() {
   return (
@@ -14,7 +15,7 @@ export function SkeletonTwoComponent() {
         <Icons.insta />
         <Icons.tiktok />
         <Icons.linkedin />
-        <Icons.insta />
+        <Icons.x />
         <Icons.facebook />
       </OrbitingCircles>
     </div>
@@ -27,6 +28,15 @@ const Icons = {
       className="rounded-full"
       src={InstaLogo}
       alt="insta-logo"
+      width={40}
+      height={40}
+    />
+  ),
+  x: () => (
+    <Image
+      className="rounded-full"
+      src={XLogo}
+      alt="x-logo"
       width={40}
       height={40}
     />

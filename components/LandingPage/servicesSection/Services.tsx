@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "../../ui/bento-grid";
 import {
-  IconBoxAlignRightFilled,
-  IconFileBroken,
+  IconBrandInstagram,
+  IconBriefcase,
+  IconChartBar,
+  IconDeviceLaptop,
   IconMapPin,
-  IconSignature,
-  IconTableColumn,
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import ImgLogoUnique from "@/public/images/logo/ikovaline_logo_unique.png";
@@ -231,7 +231,7 @@ const items = [
     ),
     header: <SkeletonTwo />,
     className: "md:col-span-1",
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+    icon: <IconBrandInstagram className="h-4 w-4 text-neutral-500" />,
   },
   {
     title: "Lancement de Campagnes Publicitaires",
@@ -244,7 +244,7 @@ const items = [
     ),
     header: <SkeletonFour />,
     className: "md:col-span-1",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+    icon: <IconChartBar className="h-4 w-4 text-neutral-500" />,
   },
   {
     title: "Création & Optimisation de Sites Internet",
@@ -257,7 +257,7 @@ const items = [
     ),
     header: <SkeletonThree />,
     className: "md:col-span-2 md:order-5",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    icon: <IconDeviceLaptop className="h-4 w-4 text-neutral-500" />,
   },
   {
     title: "Consulting en Développement Commercial",
@@ -269,6 +269,6 @@ const items = [
     ),
     header: <SkeletonFive />,
     className: "md:col-span-1 md:order-4 ",
-    icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+    icon: <IconBriefcase className="h-4 w-4 text-neutral-500" />,
   },
 ];

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { GlowingEffect } from "./glowing-effect";
 
 export const BentoGrid = ({
   className,
@@ -33,25 +34,37 @@ export const BentoGridItem = ({
   icon?: React.ReactNode;
 }) => {
   return (
-    <div
-      className={cn(
-        "row-span-1 rounded-3xl font-poppins grid-rows-2 grid   group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none px-4  bg-white dark:bg-neutral-800 border border-transparent justify-center  space-y-12",
-        className
-      )}
-    >
-      {header}
-      <div className="group-hover/bento:translate-x-2 transition duration-200">
-        <div className="font-poppins relative   font-bold text-neutral-600 dark:text-neutral-200 ">
-          <span className="pr-6">{title} </span>
-          <span className="absolute top-1/2 -translate-y-1/2 right-0">
-            {" "}
-            {icon}
-          </span>
-        </div>
-        <div className="font-poppins  font-normal text-neutral-600 text-xs dark:text-neutral-300">
-          {description}
+    <div className="relative rounded-3xl  group/bento hover:shadow-xl transition duration-200  border shadow-input dark:shadow-none px-4  bg-white dark:bg-neutral-800">
+      <div
+        className={cn(
+          "row-span-1 rounded-3xl font-poppins grid-rows-2 grid relative  h-full  group/bento   justify-center  space-y-12",
+          className
+        )}
+      >
+        {header}
+
+        <div className="group-hover/bento:translate-x-2 transition  duration-200">
+          <div className="font-poppins relative   font-bold text-neutral-600 dark:text-neutral-200 ">
+            <span className="pr-6">{title} </span>
+            <span className="absolute top-1/2 -translate-y-1/2 right-0">
+              {" "}
+              {icon}
+            </span>
+          </div>
+          <div className="font-poppins  font-normal text-neutral-600 text-xs dark:text-neutral-300">
+            {description}
+          </div>
         </div>
       </div>
+      <GlowingEffect
+        spread={60}
+        blur={3}
+        borderWidth={4}
+        glow={true}
+        disabled={false}
+        proximity={64}
+        inactiveZone={0.01}
+      />
     </div>
   );
 };
