@@ -70,7 +70,7 @@ export default function ScriptCopyBtn({
         <div className="mb-2 flex items-center justify-between">
           {showMultiplePackageOptions && (
             <div className="relative">
-              <div className="inline-flex overflow-hidden rounded-md border border-border text-xs">
+              <div className="inline-flex overflow-hidden rounded-3xl border border-border text-xs">
                 {packageManagers.map((pm, index) => (
                   <div key={pm} className="flex items-center">
                     {index > 0 && (
@@ -108,7 +108,7 @@ export default function ScriptCopyBtn({
         </div>
         <div className="relative flex items-center ">
           <div className="w-full  grow font-mono sm:text-base text-sm ">
-            <pre className="rounded-md border border-border bg-white p-2 px-4 dark:text-neutral-200 text-neutral-800 font-mono dark:bg-black">
+            <pre className="rounded-2xl border border-border bg-white p-2 px-4 dark:text-neutral-200 text-neutral-800 font-mono dark:bg-black">
               {command}
             </pre>
             <div className="hidden">{highlightedCode}</div>
@@ -116,7 +116,7 @@ export default function ScriptCopyBtn({
           <Button
             variant="outline"
             size="icon"
-            className="relative ml-2 rounded-md"
+            className="relative ml-2 p-2 rounded-xl"
             onClick={copyToClipboard}
             aria-label={copied ? "Copied" : "Copy to clipboard"}
           >

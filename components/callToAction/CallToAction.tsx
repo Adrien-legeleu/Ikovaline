@@ -22,7 +22,7 @@ export function CallToAction({ title, desc, textBtn }: ICallToAction) {
         <Link href="/contact" className="inline-block z-20">
           <Button
             variant={"secondary"}
-            className="md:text-lg text-base py-6 rounded-xl px-6  z-30"
+            className="md:text-lg text-base py-6 rounded-3xl px-6  z-30"
           >
             {textBtn}
           </Button>

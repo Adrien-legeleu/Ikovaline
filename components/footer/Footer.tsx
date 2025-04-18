@@ -51,12 +51,12 @@ export default function Footer() {
   ];
 
   return (
-    <div className="md:py-16 py-32 px-2">
+    <div className="md:py-16 py-32 px-2 ">
       <div className="lg:h-[16rem] h-[12rem] hidden md:flex items-center justify-center">
         <TextHoverEffect text="IKOVALINE" />
       </div>
 
-      <div className="grid sm:grid-cols-40/60 grid-cols-1 px-2 max-sm:gap-10 text-left  max-lg:items-center justify-center">
+      <div className="grid sm:grid-cols-40/60 max-w-5xl mx-auto grid-cols-1 px-2 max-sm:gap-10 text-left  max-lg:items-center justify-center">
         <div className="flex justify-left w-full ">
           <div className="space-y-5">
             <h2 className="text-4xl font-semibold flex items-center max-sm:justify-center">
