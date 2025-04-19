@@ -198,6 +198,7 @@ export function SmoothCursor({
         stiffness: 400,
         damping: 30,
       }}
+      className="max-xl:hidden"
     >
       {cursor}
     </motion.div>

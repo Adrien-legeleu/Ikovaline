@@ -5,7 +5,6 @@ import Footer from "@/components/footer/Footer";
 import Favicon from "@/app/ikovaline_logo-favicon.png";
 import { ThemeProvider } from "@/components/theme.provider";
 import { Toaster } from "@/components/ui/toaster";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 export const metadata: Metadata = {
   title: "Ikovaline - Expert Marketing Digital et Transformation",
@@ -73,7 +72,7 @@ export default function RootLayout({
             <Footer />
           </footer>
         </ThemeProvider>
-        <SmoothCursor />
+        {/* <SmoothCursor /> */}
       </body>
     </html>
   );
