@@ -13,7 +13,10 @@ export default function Landing() {
   return (
     <BackgroundBeamsWithCollision>
       <div className="flex flex-col">
-        <div className="group relative mx-auto flex items-center justify-center rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] ">
+        <Link
+          href="/about/#notre-garantie"
+          className="group relative mx-auto flex items-center justify-center rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] "
+        >
           <span
             className={cn(
               "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:300%_100%] p-[1px]"
@@ -35,7 +38,7 @@ export default function Landing() {
           <AnimatedGradientText className="text-sm font-medium">
             Satisfait ou remboursé.
           </AnimatedGradientText>
-        </div>
+        </Link>
         <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center  relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
           Votre partenaire pour développer, piloter et propulser vos projets en
           <Cover>toute confiance !</Cover>
