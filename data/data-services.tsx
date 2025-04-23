@@ -46,34 +46,34 @@ export const dataService = [
     section1Title: "Études de Marché Sur Mesure",
     slug: "etudes-marche-sur-mesure",
     section1Desc:
-      "Analyse approfondie du marché, segmentation client, étude concurrentielle et analyse des tendances sectorielles.",
+      "Analyse de marché personnalisée, segmentation client avancée, étude concurrentielle détaillée et identification des tendances sectorielles clés.",
     section2Title: "Insights Stratégiques du Marché",
     section2Desc:
-      "Découvrez comment faire une analyse de marché efficace en combinant segmentation client et benchmarking pour identifier des opportunités concrètes et ajuster votre stratégie marketing.",
+      "Découvrez comment réussir votre étude de marché grâce à une approche combinant analyse sectorielle, segmentation client précise et benchmarking concurrentiel. Une méthodologie éprouvée pour identifier les meilleures opportunités et orienter votre stratégie marketing digitale.",
     section2NumberImportant: "30 jours",
     section2TextImportant:
-      "de délai moyen pour livrer une analyse de marché marketing complète et exploitable.",
+      "de délai moyen pour livrer une étude de marché complète, pertinente et directement exploitable pour vos prises de décision stratégiques.",
     section3Title: "Atouts de Nos Études",
     section3Cards: [
       {
         text: "Analyse Sectorielle",
         subtext:
-          "Identification précise des tendances du marché et analyse de marché approfondie.",
+          "Identification des tendances clés, veille concurrentielle et cartographie du marché ciblé.",
       },
       {
         text: "Segmentation Client",
         subtext:
-          "Définition et client segmentation fine pour mieux cibler vos prospects.",
+          "Ciblage précis grâce à des personas et à une segmentation démographique, comportementale et psychographique.",
       },
       {
         text: "Étude Concurrentielle",
         subtext:
-          "Benchmarking stratégique pour comparer l'offre et améliorer votre analyse de marché marketing.",
+          "Analyse SWOT concurrentielle, évaluation de positionnement et différenciateurs du marché.",
       },
       {
         text: "Veille du Marché",
         subtext:
-          "Surveillance continue et actualisée pour suivre l'évolution des segments clients et du marché.",
+          "Surveillance continue des évolutions du secteur, innovations et comportements des consommateurs.",
       },
     ],
     section4Title: "Nos Engagements Qualité",
@@ -81,7 +81,7 @@ export const dataService = [
       {
         title: "Expertise Sectorielle",
         description:
-          "Nous réalisons une analyse de marché approfondie intégrant segmentation client et évaluation des tendances pour offrir des conseils sur-mesure et des rapports détaillés, garantissant des insights pertinents pour votre stratégie marketing.",
+          "Nous réalisons une étude de marché sur mesure avec segmentation client approfondie, benchmark concurrentiel et analyse des tendances sectorielles pour vous fournir des rapports décisionnels stratégiques.",
         subdesc1: "Approche sur-mesure",
         subdesc2: "Rapports détaillés",
         icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -89,7 +89,7 @@ export const dataService = [
       {
         title: "Innovation Méthodologique",
         description:
-          "En utilisant des outils digitaux avancés et des méthodologies innovantes, nous effectuons une analyse de marché marketing fiable, optimisant l’étude de marché et la segmentation client pour des résultats opérationnels et stratégiques.",
+          "Nos outils digitaux et méthodes d’analyse avancées garantissent une fiabilité optimale dans l’étude de marché marketing et la modélisation des segments clients à fort potentiel.",
         subdesc1: "Méthodologie avancée",
         subdesc2: "Veille technologique",
         icon: <IconSearch className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -97,7 +97,7 @@ export const dataService = [
       {
         title: "Accompagnement Dédié",
         description:
-          "Notre équipe d’experts accompagne chaque projet en proposant des conseils personnalisés et un suivi sur-mesure pour réaliser une analyse de marché pertinente et une segmentation client efficace, adaptée à vos objectifs.",
+          "Nos consultants spécialisés vous accompagnent à chaque étape pour traduire les données collectées en actions concrètes, avec un suivi régulier et personnalisé de votre stratégie marketing.",
         subdesc1: "Conseils experts",
         subdesc2: "Suivi personnalisé",
         icon: <IconUsers className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -105,7 +105,7 @@ export const dataService = [
       {
         title: "Résultats Garantis",
         description:
-          "Grâce à une approche rigoureuse et à l’utilisation de techniques d’analyse de marché éprouvées, nous assurons des résultats mesurables et un positionnement stratégique optimal, favorisant votre croissance digitale.",
+          "Nous livrons une analyse de marché stratégique avec des recommandations concrètes pour optimiser votre ROI, affiner votre positionnement et booster votre visibilité.",
         subdesc1: "ROI prouvé",
         subdesc2: "Stratégies gagnantes",
         icon: (
@@ -113,39 +113,44 @@ export const dataService = [
         ),
       },
     ],
+    seoTitle:
+      "Étude de Marché sur Mesure & Analyse Concurrentielle – Ikovaline",
+    seoDescription:
+      "Réalisez une étude de marché efficace : segmentation client, veille concurrentielle et analyse sectorielle. Obtenez des insights concrets pour booster votre stratégie.",
   },
 
   {
     section1Title: "Sondages de Marché & Enquêtes Terrain",
     slug: "sondages-marche-enquetes-terrain",
     section1Desc:
-      "Collecte et analyse de données qualitatives et quantitatives pour obtenir des insights précis (B2B ou B2C).",
+      "Collecte et analyse de données qualitatives et quantitatives issues d’enquêtes terrain (B2B, B2C) pour fournir des insights exploitables et orienter vos décisions stratégiques.",
     section2Title: "Données Fiables pour Décisions Stratégiques",
     section2Desc:
-      "Optimisez vos décisions stratégiques grâce à une analyse de données rigoureuse et une collecte de données terrain effectuée via des enquêtes de terrain personnalisées et fiables.",
+      "Prenez des décisions éclairées grâce à une analyse de données rigoureuse et une collecte d’informations terrain personnalisée. Nos sondages et enquêtes sur mesure vous permettent d'identifier les attentes clients, d’évaluer la satisfaction et d’ajuster votre stratégie commerciale.",
     section2NumberImportant: "80 %",
     section2TextImportant:
-      "des entreprises ont constaté une augmentation de leurs revenus grâce à l'analyse des données en temps réel, permettant ainsi d'orienter efficacement leurs stratégies commerciales.",
+      "des entreprises ont constaté une hausse de revenus grâce à l’exploitation de données collectées en temps réel, via des enquêtes terrain fiables et bien structurées.",
     section3Title: "Avantages de Nos Enquêtes",
     section3Cards: [
       {
         text: "Collecte Qualitative",
-        subtext: "Feedbacks clients authentiques issus d’enquêtes sur terrain",
+        subtext:
+          "Feedbacks clients détaillés et authentiques issus d’interviews et de questionnaires de terrain.",
       },
       {
         text: "Analyse Quantitative",
         subtext:
-          "Données statistiques solides pour une analyse de données précise",
+          "Exploitation de données statistiques robustes pour affiner vos orientations stratégiques.",
       },
       {
         text: "Insights Actionnables",
         subtext:
-          "Recommandations concrètes basées sur une collecte de données rigoureuse",
+          "Recommandations concrètes issues d’une analyse de données croisée et segmentée.",
       },
       {
         text: "Adaptabilité Terrain",
         subtext:
-          "Méthodes flexibles et personnalisées pour une enquête terrain sur-mesure",
+          "Méthodes flexibles et ciblées selon votre secteur et votre public (B2B, B2C).",
       },
     ],
     section4Title: "Nos Méthodes Innovantes",
@@ -153,7 +158,7 @@ export const dataService = [
       {
         title: "Méthodologie Précise",
         description:
-          "Nous utilisons des techniques d'analyse de données avancées et une collecte de données méthodique pour garantir la fiabilité de nos enquêtes terrain. Nos outils analytiques de pointe assurent une vérification rigoureuse et un reporting détaillé.",
+          "Nous combinons des outils de data analytics avancés avec une collecte méthodique pour produire des résultats fiables. Chaque enquête terrain bénéficie d’un processus de validation rigoureux et d’une restitution claire.",
         subdesc1: "Outils analytiques",
         subdesc2: "Contrôle rigoureux",
         icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -161,7 +166,7 @@ export const dataService = [
       {
         title: "Approche Terrain",
         description:
-          "Nous menons des enquêtes de terrain en collectant des données directement auprès de vos cibles via des interviews sur site et des questionnaires personnalisés, garantissant ainsi des feedbacks immédiats et précis.",
+          "Nos experts réalisent vos sondages directement sur le terrain, par interviews ou formulaires ciblés, assurant la pertinence des données recueillies et leur contextualisation.",
         subdesc1: "Interviews sur site",
         subdesc2: "Feedback immédiat",
         icon: <IconMapPin className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -169,7 +174,7 @@ export const dataService = [
       {
         title: "Rapidité d'Exécution",
         description:
-          "Grâce à une méthodologie optimisée et à des outils digitaux performants, nous assurons une collecte et une analyse d’enquêtes terrain en temps record, permettant une livraison express de résultats pour des décisions agiles.",
+          "Nos processus optimisés permettent une collecte de données rapide et une analyse efficace. Vous recevez vos résultats dans des délais courts pour adapter rapidement votre stratégie.",
         subdesc1: "Collecte efficace",
         subdesc2: "Livraison express",
         icon: <IconClock className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -177,7 +182,7 @@ export const dataService = [
       {
         title: "Analyse Approfondie",
         description:
-          "Notre approche d'analyse approfondie combine une collecte de données rigoureuse et des techniques statistiques avancées pour fournir des insights détaillés, permettant de calibrer vos stratégies commerciales et d’optimiser votre positionnement sur le marché.",
+          "Nous croisons données quantitatives et qualitatives pour vous livrer des insights détaillés, exploitables pour ajuster votre positionnement et orienter vos campagnes marketing.",
         subdesc1: "Données pertinentes",
         subdesc2: "Rapports clairs",
         icon: (
@@ -185,36 +190,40 @@ export const dataService = [
         ),
       },
     ],
+    seoTitle:
+      "Sondages de Marché & Enquêtes Terrain B2B/B2C – Données Actionnables",
+    seoDescription:
+      "Améliorez vos décisions grâce à nos enquêtes terrain et sondages B2B/B2C : collecte de données, analyse qualitative et quantitative, insights pour booster vos performances.",
   },
 
   {
     section1Title: "Stratégie Commerciale & Développement Business",
     slug: "strategie-commerciale-developpement-business",
     section1Desc:
-      "Définition et déploiement d’une stratégie commerciale opérationnelle pour booster vos ventes.",
+      "Définition et mise en œuvre d’une stratégie commerciale performante pour augmenter vos ventes et accélérer votre développement business.",
     section2Title: "Stratégies Innovantes pour Booster les Ventes",
     section2Desc:
-      "Boostez vos ventes et développez votre business avec des actions commerciales sur-mesure, conçues pour optimiser votre business développement et transformer votre approche commerciale.",
+      "Augmentez votre chiffre d'affaires avec une stratégie commerciale sur-mesure. Nos actions ciblées visent à optimiser votre développement business et améliorer durablement vos performances commerciales.",
     section2NumberImportant: "58 %",
     section2TextImportant:
-      "Selon des études récentes, une stratégie commerciale bien définie peut augmenter les ventes de 58 %, offrant des leviers puissants pour stimuler le business développement et développer son business de manière exponentielle.",
+      "Une stratégie commerciale claire peut générer jusqu’à 58 % de croissance, en activant des leviers puissants pour développer son business efficacement.",
     section3Title: "Piliers de Notre Approche",
     section3Cards: [
       {
         text: "Analyse de Performance",
-        subtext: "Mesure des indicateurs clés",
+        subtext: "Suivi précis des KPI et performance des actions commerciales",
       },
       {
         text: "Déploiement Tactique",
-        subtext: "Actions opérationnelles concrètes",
+        subtext: "Mise en œuvre opérationnelle de votre stratégie commerciale",
       },
       {
         text: "Suivi et Ajustements",
-        subtext: "Réactivité face aux évolutions",
+        subtext: "Adaptation continue selon les évolutions du marché",
       },
       {
         text: "Optimisation Continue",
-        subtext: "Amélioration des process commerciaux",
+        subtext: "Amélioration constante de vos processus de vente",
       },
     ],
     section4Title: "Valeur Ajoutée de Nos Stratégies",
@@ -222,7 +231,7 @@ export const dataService = [
       {
         title: "Conseil Expert",
         description:
-          "Nos experts vous accompagnent avec une analyse approfondie de votre marché et une stratégie personnalisée pour augmenter vos ventes et booster votre business développement, en vous guidant sur comment développer votre business de façon efficace.",
+          "Nos consultants définissent avec vous une stratégie commerciale adaptée à votre secteur, orientée ROI, pour booster les ventes et structurer votre développement business.",
         subdesc1: "Analyse approfondie",
         subdesc2: "Stratégies personnalisées",
         icon: (
@@ -232,7 +241,7 @@ export const dataService = [
       {
         title: "Innovation Tactique",
         description:
-          "Nous appliquons des méthodes disruptives et innovantes pour booster vos ventes et dynamiser votre business développement. Grâce à une exécution dynamique, nous vous aidons à identifier de nouvelles opportunités et à optimiser vos actions commerciales pour développer votre business.",
+          "Nous mettons en œuvre des approches commerciales innovantes et disruptives pour dynamiser vos résultats et détecter de nouvelles opportunités de développement business.",
         subdesc1: "Méthodes disruptives",
         subdesc2: "Exécution dynamique",
         icon: <IconRocket className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -240,7 +249,7 @@ export const dataService = [
       {
         title: "Suivi Rigoureux",
         description:
-          "Nous assurons un suivi rigoureux en mesurant constamment les performances commerciales à l’aide d’indicateurs précis. Nos rapports réguliers vous offrent une vision détaillée pour ajuster vos actions et booster vos ventes de manière continue.",
+          "Nous analysons chaque campagne à l’aide d’indicateurs clés de performance. Cette analyse permet d’ajuster vos actions commerciales en temps réel pour maximiser les ventes.",
         subdesc1: "Indicateurs précis",
         subdesc2: "Rapports réguliers",
         icon: (
@@ -250,42 +259,46 @@ export const dataService = [
       {
         title: "Optimisation Stratégique",
         description:
-          "Nous mettons en place un processus d'optimisation stratégique continu pour maximiser le ROI. Notre analyse constante permet d’ajuster et d’améliorer vos process commerciaux, favorisant ainsi le business développement et l’augmentation des ventes.",
+          "Nous assurons une optimisation continue de votre stratégie commerciale pour renforcer l’efficacité de votre développement business et améliorer durablement votre ROI.",
         subdesc1: "Analyse continue",
         subdesc2: "Actions correctives",
         icon: <IconRefresh className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle:
+      "Stratégie Commerciale & Développement Business – Booster vos Ventes",
+    seoDescription:
+      "Déployez une stratégie commerciale performante pour augmenter vos ventes et accélérer votre développement business. Optimisation, conseils experts, suivi stratégique.",
   },
 
   {
     section1Title: "Pilotage & Gestion de Projet Stratégique",
     slug: "pilotage-gestion-projet-strategique",
     section1Desc:
-      "Coordination experte pour le pilotage et le suivi de projets de développement ou de lancement, assurant une gestion agile et une exécution optimale des initiatives stratégiques.",
+      "Coordination experte pour piloter vos projets de développement, garantir leur succès stratégique et améliorer l’efficacité opérationnelle.",
     section2Title: "Gestion de Projet Agile",
     section2Desc:
-      "Assurez la réussite de vos projets grâce à une approche agile et un pilotage rigoureux, qui allient planification structurée et réactivité pour maximiser l'atteinte de vos objectifs stratégiques.",
+      "Pilotez vos projets avec agilité grâce à une méthodologie innovante. Combinez planification structurée et suivi en temps réel pour atteindre vos objectifs stratégiques avec efficacité.",
     section2NumberImportant: "80 %",
     section2TextImportant:
-      "d'amélioration de l'efficacité opérationnelle constatée lorsque des méthodes de gestion de projet innovantes sont mises en œuvre, garantissant l'atteinte des objectifs fixés.",
+      "des entreprises améliorent leur efficacité opérationnelle grâce à des méthodes agiles de gestion de projet stratégique.",
     section3Title: "Outils et Méthodologies",
     section3Cards: [
       {
         text: "Planification Structurée",
-        subtext: "Organisation détaillée des étapes critiques",
+        subtext: "Découpage clair et priorisation des étapes critiques",
       },
       {
         text: "Suivi en Temps Réel",
-        subtext: "Monitoring constant des performances et indicateurs",
+        subtext: "Analyse instantanée des KPIs et progression des livrables",
       },
       {
         text: "Gestion des Risques",
-        subtext: "Anticipation et mitigation proactive des imprévus",
+        subtext: "Identification et anticipation proactive des imprévus",
       },
       {
         text: "Reporting Transparent",
-        subtext: "Communication régulière et claire pour un pilotage optimal",
+        subtext: "Suivi de projet clair et communication continue",
       },
     ],
     section4Title: "Engagements de Pilotage",
@@ -293,7 +306,7 @@ export const dataService = [
       {
         title: "Expertise Confirmée",
         description:
-          "Notre équipe chevronnée intervient avec une expertise éprouvée pour orienter et soutenir vos projets stratégiques. En combinant compétences analytiques et connaissance du terrain, nous garantissons un accompagnement sur-mesure qui optimise chaque phase de pilotage et assure la réussite de vos initiatives.",
+          "Nous pilotons vos projets stratégiques avec méthode et efficacité. Notre expertise assure une gestion proactive, orientée résultats, avec un accompagnement personnalisé à chaque étape.",
         subdesc1: "Compétences avérées",
         subdesc2: "Support continu",
         icon: <IconShield className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -301,7 +314,7 @@ export const dataService = [
       {
         title: "Innovation Méthodologique",
         description:
-          "Nous intégrons des méthodes de gestion modernes et des outils technologiques avancés pour transformer votre pilotage de projet. Notre approche innovante permet d'identifier rapidement les leviers de performance, de former vos équipes aux meilleures pratiques et de déployer des techniques disruptives pour un développement commercial optimal.",
+          "Nous exploitons les dernières technologies et les méthodes agiles pour optimiser la gestion de projet. Formation, outils avancés et pilotage dynamique garantissent des résultats concrets.",
         subdesc1: "Techniques avancées",
         subdesc2: "Formation continue",
         icon: <IconBulb className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -309,7 +322,7 @@ export const dataService = [
       {
         title: "Transparence",
         description:
-          "La transparence est au cœur de notre démarche de gestion de projet. Nous assurons une communication claire et régulière, avec des rapports détaillés qui permettent de suivre chaque étape et d'ajuster la stratégie en temps réel. Cette visibilité totale favorise une collaboration efficace et une prise de décision éclairée.",
+          "Avec des tableaux de bord clairs et des rapports réguliers, nous garantissons une transparence totale dans le pilotage de vos projets, pour une collaboration fluide et des ajustements réactifs.",
         subdesc1: "Rapports réguliers",
         subdesc2: "Feedback constant",
         icon: <IconEye className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -317,7 +330,7 @@ export const dataService = [
       {
         title: "Adaptabilité",
         description:
-          "Conscients que chaque projet évolue dans un environnement dynamique, nous mettons en place un système d'adaptabilité qui vous permet de réagir rapidement aux changements. Grâce à des ajustements agiles et un suivi personnalisé, nous assurons la continuité et l'optimisation de vos processus de gestion, même en cas de perturbations.",
+          "Nous adaptons en temps réel notre gestion de projet aux changements de contexte. Flexibilité, agilité et suivi personnalisé assurent la réussite de vos projets même dans l'incertitude.",
         subdesc1: "Ajustements rapides",
         subdesc2: "Suivi personnalisé",
         icon: (
@@ -325,38 +338,40 @@ export const dataService = [
         ),
       },
     ],
+    seoTitle:
+      "Pilotage & Gestion de Projet Stratégique - Méthodes Agiles et Efficaces",
+    seoDescription:
+      "Optimisez vos projets grâce à une gestion stratégique agile. Pilotage rigoureux, planification structurée, suivi en temps réel et outils innovants pour atteindre vos objectifs.",
   },
 
   {
     section1Title: "Plan Go-to-Market & Accompagnement Opérationnel",
     slug: "plan-go-to-market-accompagnement-operational",
     section1Desc:
-      "Structuration du lancement de nouveaux produits/services et pénétration efficace du marché.",
+      "Structuration de votre lancement produit ou service pour réussir votre entrée sur le marché avec un impact maximal.",
     section2Title: "Lancement à Fort Impact",
     section2Desc:
-      "Déployez un plan go-to-market solide pour augmenter les ventes et accélérer votre business développement dès le lancement, en combinant stratégie et exécution opérationnelle.",
+      "Accélérez vos ventes dès le lancement grâce à un plan go-to-market sur mesure, alliant stratégie marketing et exécution opérationnelle agile.",
     section2NumberImportant: "47 %",
     section2TextImportant:
-      "Selon des études sectorielles, 47 % des lancements bien orchestrés contribuent à booster significativement les ventes et à stimuler un business développement durable.",
+      "des lancements bien orchestrés entraînent une hausse significative des ventes et du business développement.",
     section3Title: "Composants Clés pour Développer Son Business",
     section3Cards: [
       {
         text: "Positionnement Stratégique",
-        subtext: "Définir une offre différenciante",
+        subtext: "Définir une offre unique et différenciante",
       },
       {
         text: "Plan d’Action Opérationnel",
-        subtext:
-          "Déploiement de stratégies opérationnelles pour booster les ventes",
+        subtext: "Déploiement tactique pour générer rapidement des ventes",
       },
       {
         text: "Suivi de Performance",
-        subtext: "Mesure en temps réel des performances commerciales",
+        subtext: "Mesure continue des résultats commerciaux",
       },
       {
         text: "Optimisation Continue",
-        subtext:
-          "Ajustements permanents pour augmenter les ventes et améliorer l'efficacité",
+        subtext: "Amélioration constante des actions post-lancement",
       },
     ],
     section4Title: "Accompagnement et Expertise",
@@ -364,7 +379,7 @@ export const dataService = [
       {
         title: "Conseil Stratégique",
         description:
-          "Accompagnement personnalisé pour un lancement réussi, avec des conseils stratégiques visant à augmenter les ventes et booster le business développement. Nos experts vous guident pour développer votre business grâce à des solutions innovantes et adaptées.",
+          "Nos experts élaborent avec vous un plan go-to-market performant, personnalisé à votre secteur, pour maximiser vos ventes dès la mise sur le marché.",
         subdesc1: "Expertise sectorielle",
         subdesc2: "Solutions adaptées",
         icon: (
@@ -374,7 +389,7 @@ export const dataService = [
       {
         title: "Exécution Opérationnelle",
         description:
-          "Support complet pour la mise en œuvre de votre plan go-to-market, en optimisant chaque étape opérationnelle pour booster les ventes et assurer une pénétration rapide et efficace du marché. Nous déployons des process éprouvés pour transformer vos objectifs en résultats concrets.",
+          "Nous déployons chaque étape du plan avec rigueur : organisation, suivi, optimisations. Objectif : transformer les intentions en résultats tangibles.",
         subdesc1: "Process optimisés",
         subdesc2: "Suivi constant",
         icon: <IconTool className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -382,7 +397,7 @@ export const dataService = [
       {
         title: "Mesure d’Impact",
         description:
-          "Évaluation précise des performances du lancement à l'aide d'indicateurs clairs et de rapports détaillés. Cette approche vous permet d'ajuster rapidement votre stratégie pour maximiser l'impact sur les ventes et renforcer votre business développement.",
+          "Évaluation précise des résultats commerciaux et indicateurs de performance pour ajuster et renforcer la stratégie à chaque étape.",
         subdesc1: "Indicateurs clairs",
         subdesc2: "Rapports détaillés",
         icon: (
@@ -392,44 +407,45 @@ export const dataService = [
       {
         title: "Optimisation Post-Lancement",
         description:
-          "Ajustements stratégiques continus pour maintenir l'élan post-lancement. En analysant les feedbacks clients et les performances du marché, nous optimisons votre plan go-to-market pour booster durablement vos ventes et développer votre business de manière exponentielle.",
+          "Nous analysons vos retours terrain pour ajuster votre stratégie go-to-market et booster durablement votre business développement.",
         subdesc1: "Analyse continue",
         subdesc2: "Feedback client",
         icon: <IconRefresh className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle: "Plan Go-to-Market & Lancement Produit - Stratégie et Exécution",
+    seoDescription:
+      "Optimisez votre lancement avec un plan go-to-market sur mesure. Stratégie, accompagnement opérationnel et suivi pour générer des ventes rapidement.",
   },
-
   {
     section1Title: "Prospection & Lead Generation (B2B, B2C, B2B2C)",
     slug: "prospection-lead-generation-multicanal",
     section1Desc:
-      "Implémentation de stratégies de prospection digitale et accompagnement des équipes de vente pour booster vos leads qualifiés et renforcer votre pipeline commercial.",
+      "Stratégies avancées de prospection digitale et génération de leads pour renforcer votre pipeline commercial.",
     section2Title: "Génération de Leads Qualifiés et Conversion",
     section2Desc:
-      "Boostez votre prospection commerciale grâce à des techniques d'inbound marketing, à l'automatisation CRM et à une segmentation de marché pointue, attirant des prospects à fort potentiel.",
+      "Misez sur une prospection multicanale et des outils performants pour attirer des leads qualifiés, automatiser le suivi et maximiser les conversions.",
     section2NumberImportant: "55 %",
     section2TextImportant:
-      "Des méthodes de lead generation éprouvées augmentent de 55 % la conversion de prospects en clients, optimisant ainsi votre ROI.",
+      "d'augmentation du taux de conversion grâce à des méthodes éprouvées de lead generation digitale.",
     section3Title: "Stratégies SEO et Prospection Commerciale",
     section3Cards: [
       {
         text: "Segmentation de Marché",
-        subtext: "Identifier et cibler vos prospects avec précision",
+        subtext: "Cibler les bons prospects avec précision",
       },
       {
         text: "Automation des Processus",
-        subtext: "Intégration d’outils automatisés pour un suivi efficace",
+        subtext:
+          "Utiliser des outils d’automatisation pour le suivi et la relance",
       },
       {
         text: "Suivi Personnalisé",
-        subtext:
-          "Approche individualisée et réactive pour maximiser la conversion",
+        subtext: "Approche individualisée pour améliorer la conversion",
       },
       {
         text: "Optimisation des Processus",
-        subtext:
-          "Amélioration continue du funnel commercial pour augmenter le ROI",
+        subtext: "Amélioration continue du tunnel de conversion",
       },
     ],
     section4Title: "Notre Expertise en Lead Generation & Prospection",
@@ -437,7 +453,7 @@ export const dataService = [
       {
         title: "Outils de Prospection",
         description:
-          "Exploitation des technologies de pointe et solutions CRM innovantes pour automatiser et optimiser la génération de leads dans un environnement digital en constante évolution.",
+          "Nous intégrons des outils CRM et d'automatisation pour accélérer votre prospection digitale et suivre efficacement les leads qualifiés.",
         subdesc1: "Solutions innovantes",
         subdesc2: "Intégration CRM",
         icon: <IconTools className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -445,9 +461,9 @@ export const dataService = [
       {
         title: "Stratégie Multicanale",
         description:
-          "Combinaison efficace des canaux digitaux (SEO, SEA, email marketing, réseaux sociaux) et traditionnels pour une couverture omnicanale qui maximise l’impact de votre prospection.",
+          "Nous combinons SEO, SEA, email, réseaux sociaux et prospection téléphonique pour générer des leads sur tous les canaux.",
         subdesc1: "Approche omnicanale",
-        subdesc2: "Couverture diversifiée",
+        subdesc2: "Couverture complète",
         icon: (
           <IconLayersIntersect className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
         ),
@@ -455,7 +471,7 @@ export const dataService = [
       {
         title: "Analyse et Optimisation",
         description:
-          "Utilisation avancée de data analytics et reporting régulier pour affiner vos campagnes de lead generation, améliorer le funnel commercial et maximiser votre retour sur investissement.",
+          "Chaque campagne est analysée avec précision pour améliorer le ROI. Nos dashboards vous permettent d’optimiser en continu.",
         subdesc1: "Data analytics",
         subdesc2: "Rapports réguliers",
         icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
@@ -463,44 +479,45 @@ export const dataService = [
       {
         title: "Accompagnement Commercial",
         description:
-          "Support dédié et coaching personnalisé pour former vos équipes de vente et booster l'efficacité de votre prospection commerciale, assurant ainsi une meilleure conversion des leads.",
+          "Nous formons vos équipes commerciales à l'utilisation des outils et à l’approche multicanale pour générer plus de clients potentiels.",
         subdesc1: "Coaching personnalisé",
         subdesc2: "Formation continue",
         icon: <IconUser className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle: "Prospection & Génération de Leads - Multicanal et Automatisée",
+    seoDescription:
+      "Générez des leads qualifiés avec notre approche multicanale : prospection digitale, automation CRM, SEO, SEA, et outils d’analyse pour booster votre pipeline.",
   },
 
   {
     section1Title: "Création de Sites Web Vitrine & E-commerce",
     slug: "creation-sites-web-vitrine-e-commerce",
     section1Desc:
-      "Conception et développement sur mesure de sites vitrines et e-commerce, optimisés pour la conversion, l'expérience utilisateur et le référencement naturel.",
+      "Création sur mesure de sites vitrines et boutiques en ligne, pensés pour la conversion, l'expérience utilisateur et le SEO.",
     section2Title: "Solutions Web Innovantes",
     section2Desc:
-      "Boostez votre présence en ligne avec des sites performants et personnalisés, conçus pour améliorer la conversion, renforcer l'engagement et optimiser votre SEO.",
+      "Augmentez votre visibilité et vos ventes grâce à un site performant, responsive, sécurisé et optimisé pour les moteurs de recherche.",
     section2NumberImportant: "62 %",
     section2TextImportant:
-      "Selon des études, 62 % des visiteurs sont plus enclins à convertir sur un site web bien conçu et optimisé pour le SEO.",
+      "des visiteurs se convertissent plus facilement sur un site bien conçu et optimisé pour le référencement naturel.",
     section3Title: "Caractéristiques Clés",
     section3Cards: [
       {
         text: "Design Responsive",
-        subtext: "Adaptabilité sur tous supports pour une expérience fluide",
+        subtext: "Compatibilité mobile, tablette et desktop garantie",
       },
       {
         text: "Optimisation SEO",
-        subtext:
-          "Structure et contenus optimisés pour les moteurs de recherche",
+        subtext: "Structure, balisage et contenu optimisés pour Google",
       },
       {
         text: "Sécurité Renforcée",
-        subtext: "Protection avancée des données et transactions sécurisées",
+        subtext: "Certificat SSL et protection avancée des données",
       },
       {
         text: "Expérience Utilisateur",
-        subtext:
-          "Interface intuitive et ergonomique pour maximiser la conversion",
+        subtext: "Navigation fluide et design orienté conversion",
       },
     ],
     section4Title: "Avantages de Nos Solutions Web",
@@ -508,69 +525,73 @@ export const dataService = [
       {
         title: "Technologie de Pointe",
         description:
-          "Utilisation des dernières technologies web pour garantir des performances optimales, une rapidité d'exécution et une maintenance proactive assurant la stabilité et l'évolutivité de votre site.",
-        subdesc1: "Innovations constantes",
-        subdesc2: "Maintenance proactive",
+          "Sites développés avec les frameworks modernes pour des performances maximales, un temps de chargement optimisé et une maintenance simplifiée.",
+        subdesc1: "Développement Next.js",
+        subdesc2: "Performance supérieure",
         icon: <IconCpu className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Expérience Utilisateur",
         description:
-          "Création d'interfaces intuitives et engageantes, conçues pour offrir une navigation fluide, favoriser l'engagement des visiteurs et améliorer le taux de conversion.",
-        subdesc1: "Design ergonomique",
-        subdesc2: "Parcours utilisateur optimisé",
+          "Chaque site est pensé pour maximiser l'engagement des visiteurs et les inciter à l'action : prise de contact, achat, inscription.",
+        subdesc1: "Interface fluide",
+        subdesc2: "Conversion facilitée",
         icon: <IconPhone className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Performance & Sécurité",
         description:
-          "Des sites web rapides et sécurisés, optimisés pour le SEO et protégés par des certifications SSL, garantissant la confiance de vos visiteurs et la pérennité de vos transactions.",
-        subdesc1: "Optimisation technique",
-        subdesc2: "Certifications SSL",
+          "Sites ultra-rapides, sécurisés, avec une architecture SEO-friendly qui rassure les utilisateurs et améliore votre positionnement sur Google.",
+        subdesc1: "HTTPS & RGPD",
+        subdesc2: "Code propre & optimisé",
         icon: <IconLock className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Support et Maintenance",
         description:
-          "Accompagnement continu avec une assistance technique dédiée pour assurer la pérennité de votre site, grâce à des mises à jour régulières et un support réactif qui anticipe et résout rapidement tout problème.",
+          "Un accompagnement proactif, des mises à jour régulières et un support technique réactif pour garantir la pérennité de votre site web.",
         subdesc1: "Assistance réactive",
-        subdesc2: "Mises à jour régulières",
+        subdesc2: "Mises à jour garanties",
         icon: <IconHeadset className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle: "Création de Site Vitrine & E-commerce - Site Web Optimisé SEO",
+    seoDescription:
+      "Créez un site vitrine ou e-commerce performant, responsive et optimisé SEO. Design sur mesure, rapidité, sécurité et conversion assurée.",
   },
+
   {
-    title: "Prospection & Téléphone IA",
+    section1Title: "Prospection & Téléphone IA",
     slug: "prospection-telephone-ia",
     section1Desc:
-      "Profitez d’une intelligence artificielle avancée capable de répondre aux appels, tenir une conversation fluide et adaptée avec différents accents, tout en automatisant la prospection et la relance clients.",
+      "Solution d’intelligence artificielle pour automatiser vos appels, optimiser vos relances et améliorer votre prospection client.",
     section2Title: "Automatisez Votre Prospection et Gagnez en Efficacité",
     section2Desc:
-      "Boostez votre développement commercial grâce à une IA qui gère appels, prises de contact et relances, tout en adaptant le discours selon chaque interlocuteur pour maximiser l’impact et la conversion.",
+      "L’IA vocale répond, relance et interagit automatiquement avec vos prospects pour augmenter votre taux de conversion tout en réduisant le temps de traitement.",
     section2NumberImportant: "75 %",
     section2TextImportant:
-      "des entreprises utilisant l’automatisation constatent un gain de productivité significatif",
+      "des entreprises utilisant des systèmes d’IA pour la prospection constatent un gain de productivité significatif.",
     section3Title: "Un Processus Intelligent et Efficace en 4 Étapes",
     section3Cards: [
       {
         text: "Prise d’Appels Automatisée",
         subtext:
-          "L’IA répond aux appels entrants avec un discours naturel et contextualisé",
+          "Assistant IA qui répond aux appels avec un ton naturel et un discours personnalisé",
       },
       {
         text: "Prospection Ciblée",
         subtext:
-          "Envoi automatique de messages personnalisés selon la typologie des prospects",
+          "Messages vocaux ou écrits personnalisés selon les segments de prospects",
       },
       {
         text: "Suivi et Relance",
         subtext:
-          "Relances intelligentes programmées pour augmenter vos chances de conversion",
+          "Rappels automatiques, relances programmées et taux de rappel maximisés",
       },
       {
         text: "Analyse des Échanges",
         subtext:
-          "Rapports détaillés pour suivre les performances et ajuster les scripts",
+          "Données collectées et tableaux de bord détaillés pour affiner les scripts",
       },
     ],
     section4Title: "Des Avantages Concrets pour Votre Entreprise",
@@ -578,9 +599,9 @@ export const dataService = [
       {
         title: "Standard Intelligent",
         description:
-          "Un assistant téléphonique IA capable de gérer de multiples appels simultanément, avec un langage adapté et des scénarios prédéfinis pour répondre aux besoins de vos prospects et clients.",
-        subdesc1: "Conversations naturelles",
-        subdesc2: "Multilingue & multi-accent",
+          "Un assistant IA multilingue qui gère simultanément plusieurs appels, comprend les accents et adapte son discours en temps réel.",
+        subdesc1: "Multi-appels simultanés",
+        subdesc2: "Langage naturel & contextualisé",
         icon: (
           <IconPhoneCall className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
         ),
@@ -588,31 +609,35 @@ export const dataService = [
       {
         title: "Automatisation des Campagnes",
         description:
-          "Nous mettons en place des séquences automatiques de prospection (email, SMS, appels IA) avec personnalisation et adaptation selon la réaction des prospects.",
-        subdesc1: "Campagnes multi-canaux",
-        subdesc2: "Personnalisation avancée",
+          "Automatisez vos campagnes d’appels, d’emails ou de SMS selon le comportement des leads, avec un haut niveau de personnalisation.",
+        subdesc1: "Séquences personnalisées",
+        subdesc2: "Scénarios automatisés",
         icon: <IconSend className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Suivi et Reporting",
         description:
-          "Tableaux de bord détaillés pour suivre les échanges, mesurer les taux de conversion et ajuster les stratégies de prospection en temps réel.",
+          "Des dashboards clairs vous permettent de piloter votre prospection IA et d’améliorer le taux de conversion en continu.",
         subdesc1: "Indicateurs clés",
-        subdesc2: "Rapports automatisés",
+        subdesc2: "Rapports en temps réel",
         icon: <IconChartBar className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Optimisation Continue",
         description:
-          "Nous analysons régulièrement les performances de l’IA et ajustons les scripts pour garantir des interactions toujours plus performantes et naturelles.",
-        subdesc1: "Analyse comportementale",
-        subdesc2: "Ajustements stratégiques",
+          "Nous améliorons régulièrement les scripts, les réponses IA et les relances automatiques en fonction des performances enregistrées.",
+        subdesc1: "Amélioration IA continue",
+        subdesc2: "Optimisation basée sur les data",
         icon: <IconSettings className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle: "Prospection IA & Appels Automatisés - Boostez Vos Conversions",
+    seoDescription:
+      "Automatisez votre prospection avec l’IA : appels téléphoniques intelligents, relances ciblées, analyse des échanges et gain de productivité garanti.",
   },
+
   {
-    title: "Développement International",
+    section1Title: "Développement International",
     slug: "developpement-international",
     section1Desc:
       "Nous aidons votre entreprise à se lancer sur de nouveaux marchés internationaux grâce à des analyses poussées et des stratégies sur mesure.",
@@ -678,6 +703,10 @@ export const dataService = [
         ),
       },
     ],
+    seoTitle:
+      "Développement international | Expansion d’entreprise à l’étranger",
+    seoDescription:
+      "Développez votre activité à l'international avec une stratégie d’entrée sur mesure, adaptée à chaque marché. Étude, planification, exécution et optimisation.",
   },
   {
     section1Title: "Optimisation SEO et Référencement Naturel",
@@ -748,6 +777,9 @@ export const dataService = [
         ),
       },
     ],
+    seoTitle: "Optimisation SEO : Boostez votre visibilité sur Google",
+    seoDescription:
+      "Découvrez notre service d’optimisation SEO complet : audit, technique, contenu et netlinking pour améliorer durablement votre référencement naturel.",
   },
   {
     section1Title: "Gestion de Campagnes SEA Performantes",
@@ -817,6 +849,9 @@ export const dataService = [
         ),
       },
     ],
+    seoTitle: "Gestion de campagnes SEA : Google Ads, LinkedIn & plus",
+    seoDescription:
+      "Augmentez vos conversions avec nos campagnes SEA ciblées : création, optimisation et suivi sur Google Ads, LinkedIn Ads, et plus encore.",
   },
   {
     section1Title: "E-réputation & Gestion des Avis Google",
@@ -889,6 +924,10 @@ export const dataService = [
         icon: <IconHeart className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle:
+      "E-réputation : Boostez votre image avec une gestion proactive des avis",
+    seoDescription:
+      "Gérez efficacement votre réputation en ligne et vos avis Google pour renforcer la confiance des clients et valoriser votre image de marque.",
   },
   {
     section1Title: "Automatisation & Solutions IA pour le Marketing",
@@ -960,6 +999,9 @@ export const dataService = [
         icon: <IconBook className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle: "Marketing automatisé : Boostez vos performances avec l’IA",
+    seoDescription:
+      "Automatisez vos campagnes marketing avec des outils IA pour générer plus de leads, personnaliser vos messages et améliorer votre ROI.",
   },
   {
     section1Title: "Création de Contenus & Supports Marketing",
@@ -1020,8 +1062,10 @@ export const dataService = [
         icon: <IconSearch className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle: "Création de Contenus Marketing | Supports Visuels & Vidéos",
+    seoDescription:
+      "Boostez votre communication avec des visuels, vidéos et présentations sur mesure. Stratégie éditoriale, créativité et SEO au service de votre image de marque.",
   },
-
   {
     section1Title: "Étude de Marché & Pilotage de Projet Global",
     slug: "etude-marche-pilotage-projet-global",
@@ -1089,10 +1133,18 @@ export const dataService = [
         icon: <IconHeadset className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
+    seoTitle:
+      "Étude de Marché et Pilotage de Projet | Développement Stratégique",
+    seoDescription:
+      "Analyse de marché, planification stratégique et gestion de projet pour piloter votre croissance avec efficacité. Approche intégrée et résultats mesurables.",
   },
   {
     title: "Automatisation IA d'Emailing",
     slug: "automatisation-ia-emailing",
+    seoTitle:
+      "Automatisation Emailing IA – Boostez l'efficacité de vos campagnes",
+    seoDescription:
+      "Générez plus de conversions grâce à l'automatisation IA : segmentation intelligente, envois personnalisés et analyse en temps réel pour optimiser vos emails marketing.",
     section1Desc:
       "Optimisez vos campagnes emailing grâce à l'intelligence artificielle. Personnalisation, segmentation avancée et envoi automatique pour maximiser l'impact.",
     section2Title: "Générer un Impact Accéléré",
@@ -1100,8 +1152,7 @@ export const dataService = [
       "L'automatisation IA permet une gestion des campagnes plus rapide, plus précise et plus efficace, augmentant ainsi votre retour sur investissement.",
     section2NumberImportant: "97 %",
     section2TextImportant:
-      "des responsables marketing déclarent que l’intelligence artificielle et l’automatisation sont des priorités absolues pour améliorer les stratégies numériques",
-
+      "des responsables marketing déclarent que l’intelligence artificielle et l’automatisation sont des priorités absolues pour améliorer les stratégies numériques.",
     section3Cards: [
       {
         text: "Segmentation Avancée",
@@ -1116,12 +1167,12 @@ export const dataService = [
       {
         text: "Envoi Automatique",
         subtext:
-          "Les campagnes sont envoyées au moment optimal, maximisant ainsi les taux d'ouverture.",
+          "Les campagnes sont envoyées au moment optimal, maximisant les taux d'ouverture.",
       },
       {
         text: "Analyse et Optimisation",
         subtext:
-          "L'IA analyse les résultats pour continuellement améliorer vos prochaines campagnes.",
+          "L'IA analyse les résultats pour améliorer continuellement vos campagnes.",
       },
     ],
     section4Title: "Notre Expertise en Automatisation IA d'Emailing",
@@ -1129,42 +1180,46 @@ export const dataService = [
       {
         title: "Segmentation Précise et Ciblée",
         description:
-          "Grâce à l'IA, nous segmentons votre base de données de manière ultra-précise, permettant de cibler exactement les bonnes personnes au bon moment, ce qui améliore considérablement le taux d'ouverture et de conversion.",
+          "Grâce à l'IA, nous segmentons votre base de données de manière ultra-précise, permettant de cibler exactement les bonnes personnes au bon moment.",
         subdesc1: "Analyse comportementale des utilisateurs",
-        subdesc2: "Création de profils de clients dynamiques",
+        subdesc2: "Création de profils clients dynamiques",
         icon: <IconUsers className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Personnalisation Dynamique",
         description:
-          "L'IA permet de personnaliser chaque email en fonction des préférences et comportements passés des utilisateurs, garantissant des messages plus pertinents et engageants.",
-        subdesc1: "Contenu automatisé et dynamique",
-        subdesc2: "Réponses instantanées personnalisées",
+          "L'IA permet de personnaliser chaque email selon les préférences de vos contacts, pour des messages plus pertinents et engageants.",
+        subdesc1: "Contenu automatisé",
+        subdesc2: "Réponses personnalisées",
         icon: <IconMail className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
-        title: "Optimisation Continue des Campagnes",
+        title: "Optimisation Continue",
         description:
-          "Nous utilisons l'IA pour surveiller et analyser les performances de vos campagnes en temps réel. Cela permet d'adapter et d'améliorer automatiquement chaque campagne en fonction des résultats obtenus.",
-        subdesc1: "Analyse des taux d'ouverture",
-        subdesc2: "Amélioration des taux de conversion",
+          "Nous utilisons l'IA pour suivre vos performances en temps réel et améliorer chaque campagne selon les résultats observés.",
+        subdesc1: "Analyse des taux d’ouverture",
+        subdesc2: "Amélioration du ROI",
         icon: (
           <IconChartLine className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
         ),
       },
       {
-        title: "Réduction du Temps de Gestion",
+        title: "Gain de Temps",
         description:
-          "L'automatisation de l'emailing avec l'IA permet de réduire de manière significative le temps passé à gérer les campagnes, ce qui libère du temps pour se concentrer sur d'autres aspects de votre activité.",
-        subdesc1: "Envoi automatisé des campagnes",
-        subdesc2: "Gestion centralisée des contacts",
+          "Réduisez significativement le temps de gestion des campagnes grâce à l’automatisation intelligente.",
+        subdesc1: "Envois automatiques",
+        subdesc2: "Centralisation des actions",
         icon: <IconClock className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],
   },
+
   {
     section1Title: "Gestion et Développement de Réseaux Sociaux",
     slug: "gestion-developpement-reseaux-sociaux",
+    seoTitle: "Gestion Réseaux Sociaux – Boostez votre visibilité & engagement",
+    seoDescription:
+      "Développez votre présence en ligne grâce à une stratégie réseaux sociaux efficace : contenu impactant, publicité ciblée et interactions engageantes.",
     section1Desc:
       "Création et gestion de stratégies sociales sur mesure pour maximiser l'impact de vos campagnes sur les plateformes sociales.",
     section2Title: "Engagement et Croissance",
@@ -1173,7 +1228,6 @@ export const dataService = [
     section2NumberImportant: "70 %",
     section2TextImportant:
       "des entreprises ayant renforcé leur engagement sur les réseaux sociaux ont observé une hausse significative de l'engagement client.",
-
     section3Title: "Les Clés du Succès sur les Réseaux Sociaux",
     section3Cards: [
       {
@@ -1188,13 +1242,11 @@ export const dataService = [
       },
       {
         text: "Publicité Ciblée",
-        subtext:
-          "Des campagnes publicitaires optimisées pour atteindre les bons prospects.",
+        subtext: "Des campagnes optimisées pour atteindre les bons prospects.",
       },
       {
         text: "Analyse et Suivi",
-        subtext:
-          "Des rapports détaillés pour suivre la performance de vos actions.",
+        subtext: "Des rapports détaillés pour évaluer l’impact de vos actions.",
       },
     ],
     section4Title: "Notre Expertise en Gestion de Réseaux Sociaux",
@@ -1202,35 +1254,35 @@ export const dataService = [
       {
         title: "Création de Contenu",
         description:
-          "Nous créons des contenus visuels et rédactionnels qui captent l'attention de votre audience tout en renforçant l'image de votre marque. Chaque contenu est conçu pour être engageant et adapté aux attentes de votre public.",
-        subdesc1: "Contenus visuels uniques",
-        subdesc2: "Rédaction créative et percutante",
+          "Nous produisons des contenus visuels et éditoriaux engageants pour valoriser votre marque et capter l’attention de votre communauté.",
+        subdesc1: "Visuels attractifs",
+        subdesc2: "Rédaction percutante",
         icon: <IconPencil className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Engagement Communautaire",
         description:
-          "Nous gérons les interactions avec votre communauté pour créer un lien fort avec vos abonnés. Cela inclut la gestion des commentaires et la réponse rapide aux messages pour maintenir un engagement constant.",
-        subdesc1: "Gestion des commentaires",
-        subdesc2: "Réponses rapides et personnalisées",
+          "Nous gérons les interactions en temps réel pour fidéliser votre audience et construire une communauté solide.",
+        subdesc1: "Commentaires modérés",
+        subdesc2: "Réactivité assurée",
         icon: <IconUsers className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Publicité Ciblée",
         description:
-          "Nous élaborons des campagnes publicitaires efficaces sur les réseaux sociaux, adaptées à vos objectifs, pour toucher vos prospects avec précision et maximiser l'impact de vos annonces.",
-        subdesc1: "Campagnes Facebook & Instagram",
-        subdesc2: "Publicité sur LinkedIn et Twitter",
+          "Nous concevons et pilotons des campagnes publicitaires performantes, sur Facebook, Instagram, LinkedIn et plus.",
+        subdesc1: "Segmentation poussée",
+        subdesc2: "Annonces performantes",
         icon: (
           <IconTargetArrow className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
         ),
       },
       {
-        title: "Suivi et Optimisation",
+        title: "Optimisation Continue",
         description:
-          "Nous suivons les performances de vos campagnes pour ajuster les stratégies et optimiser continuellement l'impact de vos actions sur les réseaux sociaux.",
-        subdesc1: "Suivi des performances",
-        subdesc2: "Ajustements stratégiques pour améliorer les résultats",
+          "Nous analysons vos résultats pour ajuster votre stratégie et garantir des performances durables sur vos réseaux sociaux.",
+        subdesc1: "KPI suivis en temps réel",
+        subdesc2: "Rapports d'amélioration",
         icon: (
           <IconTrendingUp className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
         ),
@@ -1240,6 +1292,9 @@ export const dataService = [
   {
     section1Title: "Création de Sites Web Sur-Mesure",
     slug: "creation-site-web-sur-mesure",
+    seoTitle: "Création de Site Web Sur-Mesure – Design, SEO et Performance",
+    seoDescription:
+      "Créez un site internet à votre image : responsive, rapide, sécurisé et optimisé SEO. Offrez une expérience utilisateur exceptionnelle sur tous les appareils.",
     section1Desc:
       "Développement de sites internet personnalisés, adaptés à l'image et aux objectifs spécifiques de votre entreprise.",
     section2Title: "Optimisation de l'Expérience Utilisateur",
@@ -1253,22 +1308,22 @@ export const dataService = [
       {
         text: "Analyse des Besoins",
         subtext:
-          "Compréhension approfondie de vos besoins pour définir un site qui vous correspond réellement.",
+          "Compréhension approfondie de vos objectifs pour un site parfaitement aligné à votre activité.",
       },
       {
         text: "Conception du Design",
         subtext:
-          "Création d'une interface moderne et adaptée à votre identité visuelle, avec un design responsive.",
+          "Design responsive, moderne et aligné à votre charte graphique.",
       },
       {
         text: "Développement Technique",
         subtext:
-          "Implémentation des fonctionnalités et technologies les plus récentes, garantissant performance et sécurité.",
+          "Technologies performantes, site rapide et sécurisé dès le lancement.",
       },
       {
         text: "Test et Déploiement",
         subtext:
-          "Tests rigoureux sur différentes plateformes avant la mise en ligne pour garantir une expérience parfaite.",
+          "Vérification multi-plateformes avant publication pour garantir une expérience utilisateur optimale.",
       },
     ],
     section4Title: "Notre Expertise en Création de Sites Web",
@@ -1276,25 +1331,25 @@ export const dataService = [
       {
         title: "Design Responsive",
         description:
-          "Tous nos sites sont conçus pour être parfaitement visibles et fonctionnels sur mobile, tablette et ordinateur.",
+          "Tous nos sites sont pensés pour s’adapter parfaitement à tous les formats : desktop, tablette et mobile. L’ergonomie est au cœur de notre démarche.",
         subdesc1: "Design mobile-first",
-        subdesc2: "Optimisation pour tous les écrans",
+        subdesc2: "Navigation fluide multi-écrans",
         icon: <IconPhone className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Optimisation SEO",
         description:
-          "Chaque site que nous créons est optimisé pour les moteurs de recherche, garantissant une bonne visibilité dès le lancement.",
-        subdesc1: "Optimisation des balises",
-        subdesc2: "Stratégie SEO sur-mesure",
+          "Nous intégrons les meilleures pratiques SEO dès la conception : structure, vitesse, balises, et contenu pour assurer votre visibilité sur Google.",
+        subdesc1: "Structure optimisée pour le SEO",
+        subdesc2: "Recherche de mots-clés ciblés",
         icon: <IconSearch className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
       {
         title: "Sécurité Maximale",
         description:
-          "Des protocoles de sécurité de pointe pour protéger vos données et celles de vos visiteurs.",
-        subdesc1: "Certificat SSL",
-        subdesc2: "Protection contre les cyberattaques",
+          "Nos sites sont protégés par des certificats SSL, des mises à jour régulières et des systèmes de sécurité renforcés contre les menaces web.",
+        subdesc1: "Connexion sécurisée HTTPS",
+        subdesc2: "Protection contre les attaques",
         icon: (
           <IconShieldLock className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />
         ),
@@ -1302,9 +1357,9 @@ export const dataService = [
       {
         title: "Maintenance et Suivi",
         description:
-          "Nous vous accompagnons après la mise en ligne avec des mises à jour régulières et un support technique dédié.",
-        subdesc1: "Mises à jour régulières",
-        subdesc2: "Assistance continue",
+          "Nous assurons un accompagnement post-lancement avec support technique, mises à jour et suivi des performances pour garantir la pérennité de votre site.",
+        subdesc1: "Support réactif",
+        subdesc2: "Évolution continue",
         icon: <IconTools className="text-secondary w-4 h-4 lg:w-6 lg:h-6" />,
       },
     ],

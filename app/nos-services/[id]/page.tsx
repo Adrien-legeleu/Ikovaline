@@ -25,11 +25,11 @@ export function generateMetadata({ params }: PageProps): Metadata {
   }
 
   return {
-    title: `${service.section1Title} - Service`,
-    description: service.section1Desc.substring(0, 150),
+    title: service.seoTitle,
+    description: service.seoDescription,
     openGraph: {
-      title: service.section1Title,
-      description: service.section1Desc.substring(0, 150),
+      title: service.seoTitle,
+      description: service.seoDescription,
       url: `https://ton-site.com/nos-services/${service.slug}`,
       type: "website",
     },
