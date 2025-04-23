@@ -1,10 +1,9 @@
 import { MetadataRoute } from "next";
 import { dataService } from "@/data/data-services";
 
-export async function GET(): Promise<MetadataRoute.Sitemap> {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://ikovaline.com";
 
-  // Pages statiques
   const staticRoutes = [
     "",
     "/about",
@@ -20,7 +19,6 @@ export async function GET(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Pages dynamiques des services
   const dynamicUrls = dataService.map((service) => ({
     url: `${baseUrl}/nos-services/${service.slug}`,
     lastModified: new Date().toISOString(),
