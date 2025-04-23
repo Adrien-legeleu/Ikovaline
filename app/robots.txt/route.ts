@@ -1,11 +1,13 @@
-import { MetadataRoute } from "next";
+export async function GET() {
+  const content = `
+    User-agent: *
+    Allow: /
+    Sitemap: https://ikovaline.com/sitemap.xml
+  `.trim();
 
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
+  return new Response(content, {
+    headers: {
+      "Content-Type": "text/plain",
     },
-    sitemap: "https://ikovaline.com/sitemap.xml",
-  };
+  });
 }
