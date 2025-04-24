@@ -51,7 +51,10 @@ export default function Why() {
   ];
 
   return (
-    <div className=" max-w-5xl z-10 py-20  mx-auto" id="pourquoi-nous">
+    <div
+      className=" max-w-5xl z-10 py-20 overflow-hidden  mx-auto"
+      id="pourquoi-nous"
+    >
       <h2 className="sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
         6 raisons de faire équipe avec Ikovaline
       </h2>

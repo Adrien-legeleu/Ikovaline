@@ -91,10 +91,15 @@ export default function ContactFormBusiness({
       <p className="text-neutral-600 text-base max-w-md mt-3 leading-relaxed dark:text-neutral-300">
         Remplissez le formulaire ci-dessous pour être recontacté par notre
         équipe. Ensemble, nous allons{" "}
-        <strong>booster votre visibilité en ligne</strong>,
-        <strong>générer plus de leads</strong> et accélérer la{" "}
-        <strong>croissance de votre entreprise</strong> grâce à une stratégie
-        digitale sur mesure.
+        <strong className="font-semibold">
+          booster votre visibilité en ligne
+        </strong>
+        ,<strong className="font-semibold">générer plus de leads</strong> et
+        accélérer la{" "}
+        <strong className="font-semibold">
+          croissance de votre entreprise
+        </strong>{" "}
+        grâce à une stratégie digitale sur mesure.
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>

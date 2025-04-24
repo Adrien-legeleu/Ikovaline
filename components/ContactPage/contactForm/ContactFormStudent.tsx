@@ -88,9 +88,12 @@ export default function ContactFormStudent({
       </h1>
       <p className="text-neutral-600 text-base max-w-md mt-3 leading-relaxed dark:text-neutral-300">
         Passionné par le digital et curieux d’en apprendre plus sur le métier ?
-        <strong>Ikovaline recrute des étudiants motivés</strong> pour contribuer
-        à des projets concrets et participer activement à la{" "}
-        <strong>transformation numérique</strong> des entreprises.
+        <strong className="font-semibold">
+          Ikovaline recrute des étudiants motivés
+        </strong>{" "}
+        pour contribuer à des projets concrets et participer activement à la{" "}
+        <strong className="font-semibold">transformation numérique</strong> des
+        entreprises.
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>

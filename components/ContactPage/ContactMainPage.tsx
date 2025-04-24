@@ -35,20 +35,28 @@ export default function ContactMainPage() {
       </div>
       <div className="space-y-10 max-w-md mx-auto font-poppins max-lg:order-1 w-full">
         <div className="flex flex-col items-center justify-center gap-4">
-          <p className="text-center text-neutral-800 dark:text-neutral-300 font-semibold">
+          <p className="text-center text-neutral-800 dark:text-neutral-300 font-mdium">
             {isBuisnessForm ? (
               <>
                 Vous êtes une entreprise à la recherche d&apos;une{" "}
-                <strong>agence de marketing digital</strong> fiable ? Ikovaline
-                vous aide à <strong>optimiser votre présence en ligne</strong>,
-                générer plus de prospects qualifiés et réussir votre{" "}
-                <strong>transformation numérique</strong>.
+                <strong className="font-semibold">
+                  agence de marketing digital
+                </strong>{" "}
+                fiable ? Ikovaline vous aide à{" "}
+                <strong className="font-semibold">
+                  optimiser votre présence en ligne
+                </strong>
+                , générer plus de prospects qualifiés et réussir votre{" "}
+                <strong className="font-semibold">
+                  transformation numérique
+                </strong>
+                .
               </>
             ) : (
               <>
                 Étudiant passionné par le digital ? Rejoignez une équipe
                 dynamique et
-                <strong>
+                <strong className="font-semibold">
                   {" "}
                   boostez vos compétences en marketing numérique
                 </strong>{" "}

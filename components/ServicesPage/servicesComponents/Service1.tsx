@@ -64,7 +64,10 @@ export function Service1() {
       <div className="w-full flex items-center justify-center">
         <Link href="/contact">
           {" "}
-          <Button variant={"secondary"} className="text-lg">
+          <Button
+            variant={"secondary"}
+            className=" xs:text-base text-sm sm:text-lg"
+          >
             Lancez votre croissance dès aujourd&apos;hui
           </Button>
         </Link>
