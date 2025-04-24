@@ -1,10 +1,11 @@
 "use client";
-import ContactFormBuisness from "@/components/ContactPage/contactForm/ContactFormBuisness";
-import ContactFormStudent from "@/components/ContactPage/contactForm/ContactFormStudent";
+
 import { Button } from "@/components/ui/button";
 import Particles from "@/components/ui/particles";
 import ScriptCopyBtn from "@/components/ui/script-copy-btn";
 import { useState } from "react";
+import ContactFormBuisness from "./contactForm/ContactFormBuisness";
+import ContactFormStudent from "./contactForm/ContactFormStudent";
 
 export default function ContactMainPage() {
   const [isBuisnessForm, setIsBuisnessForm] = useState(true);
