@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import Particles from "@/components/ui/particles";
 import ScriptCopyBtn from "@/components/ui/script-copy-btn";
 import { useState } from "react";
-import ContactFormBuisness from "./contactForm/ContactFormBuisness";
 import ContactFormStudent from "./contactForm/ContactFormStudent";
+import ContactFormBusiness from "./contactForm/ContactFormBusiness";
 
 export default function ContactMainPage() {
   const [isBuisnessForm, setIsBuisnessForm] = useState(true);
@@ -27,7 +27,7 @@ export default function ContactMainPage() {
       </h1>
       <div className=" max-lg:order-2">
         {isBuisnessForm ? (
-          <ContactFormBuisness handleForm={handleForm} />
+          <ContactFormBusiness handleForm={handleForm} />
         ) : (
           <ContactFormStudent handleForm={handleForm} />
         )}

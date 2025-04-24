@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-export default function ContactFormBuisness({
+export default function ContactFormBusiness({
   handleForm,
 }: {
   handleForm: () => void;
