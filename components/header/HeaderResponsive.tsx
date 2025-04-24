@@ -63,22 +63,22 @@ export function HeaderResponsive() {
       href: "/nos-services",
       links: [
         {
-          label: "Business Développement",
+          label: "Accélérez votre croissance",
           href: "/nos-services/#buisness-developpement",
           icon: <IconChartLine stroke={2} />,
         },
         {
-          label: "Développement Digital",
+          label: "Modernisez votre présence en lignel",
           href: "/nos-services/#developpement-digital",
           icon: <IconDeviceLaptop stroke={2} />,
         },
         {
-          label: "Pourquoi-Nous ?",
+          label: "Ce qui fait notre différence",
           href: "/nos-services/#pourquoi-nous",
           icon: <IconThumbUp stroke={2} />,
         },
         {
-          label: "Notre FAQ",
+          label: "Foire aux questions",
           href: "/nos-services/#faq",
           icon: <IconHelpHexagon stroke={2} />,
         },

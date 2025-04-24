@@ -6,7 +6,7 @@ import Particles from "@/components/ui/particles";
 import { useState } from "react";
 import ContactFormStudent from "./contactForm/ContactFormStudent";
 import ContactFormBusiness from "./contactForm/ContactFormBusiness";
-// import ScriptCopyBtn from "../ui/script-copy-btn";
+import ScriptCopyBtn from "../ui/script-copy-btn";
 
 export default function ContactMainPage() {
   const [isBuisnessForm, setIsBuisnessForm] = useState(true);
@@ -14,12 +14,12 @@ export default function ContactMainPage() {
     setIsBuisnessForm(!isBuisnessForm);
   };
 
-  // const telData = {
-  //   tel: "07 85 90 22 38",
-  // };
-  // const emailData = {
-  //   email: "contact@ikovaline.com",
-  // };
+  const telData = {
+    tel: "07 85 90 22 38",
+  };
+  const emailData = {
+    email: "contact@ikovaline.com",
+  };
 
   return (
     <div className="grid lg:grid-cols-60/40 font-poppins max-sm:px-4 grid-cols-1 md:mt-24 mt-20  max-lg:gap-10 justify-center items-start max-w-[1400px] mx-auto">
@@ -75,20 +75,8 @@ export default function ContactMainPage() {
           </Button>
         </div>
         <div className="relative flex p-10 w-full flex-col  items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
-          {/* <ScriptCopyBtn
-            showMultiplePackageOptions={false}
-            codeLanguage="shell"
-            lightTheme="nord"
-            darkTheme="vitesse-dark"
-            commandMap={telData}
-          />
-          <ScriptCopyBtn
-            showMultiplePackageOptions={false}
-            codeLanguage="shell"
-            lightTheme="nord"
-            darkTheme="vitesse-dark"
-            commandMap={emailData}
-          /> */}
+          <ScriptCopyBtn commandMap={telData} />
+          <ScriptCopyBtn commandMap={emailData} />
           <Particles
             className="absolute inset-0 z-0 h-full w-full"
             quantity={100}
