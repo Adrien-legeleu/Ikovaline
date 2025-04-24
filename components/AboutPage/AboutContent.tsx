@@ -137,12 +137,13 @@ const ikovalineContent = [
           viewport={{ amount: 1 }}
           className="leading-9"
         >
-          Ikovaline porte une vision claire : atteindre un chiffre d'affaires de{" "}
-          <Cover>300 000 €</Cover> d&apos;ici 2026. Cette ambition s&apos;appuie
-          sur notre capacité à proposer des services digitaux{" "}
-          <Highlight className="p-2 m-1">performants</Highlight> et à offrir un
-          accompagnement <Highlight className="p-2 m-1">personnalisé</Highlight>{" "}
-          pour chaque entreprise.
+          Ikovaline porte une vision claire : atteindre un chiffre
+          d&apos;`affaires de <Cover>300 000 €</Cover> d&apos;ici 2026. Cette
+          ambition s&apos;appuie sur notre capacité à proposer des services
+          digitaux <Highlight className="p-2 m-1">performants</Highlight> et à
+          offrir un accompagnement{" "}
+          <Highlight className="p-2 m-1">personnalisé</Highlight> pour chaque
+          entreprise.
         </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
