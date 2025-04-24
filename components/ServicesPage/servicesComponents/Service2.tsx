@@ -111,8 +111,9 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Gagnez en efficacité avec des outils d'automatisation et d'IA : CRM
-          intelligent, segmentation automatisée et scénarios de conversion.
+          Gagnez en efficacité avec des outils d&apos;automatisation et
+          d&apos;IA : CRM intelligent, segmentation automatisée et scénarios de
+          conversion.
         </li>
       </ul>
     ),
@@ -148,7 +149,8 @@ const grid = [
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
           Réduisez votre temps de gestion et augmentez vos conversions grâce à
-          l’emailing automatisé piloté par l’intelligence artificielle.
+          l&apos;emailing automatisé piloté par l&apos;intelligence
+          artificielle.
         </li>
       </ul>
     ),
@@ -160,7 +162,8 @@ const grid = [
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
           Développez votre communauté avec une stratégie éditoriale adaptée à
-          chaque plateforme et des publications optimisées pour l’engagement.
+          chaque plateforme et des publications optimisées pour
+          l&apos;engagement.
         </li>
       </ul>
     ),

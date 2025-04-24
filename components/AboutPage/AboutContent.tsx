@@ -45,10 +45,10 @@ const ikovalineContent = [
         >
           Fondée par <Highlight className="p-2 m-1">Florent Ghizzoni</Highlight>
           , Ikovaline est une start-up spécialisée dans le marketing digital et
-          la transformation numérique. Née d’une volonté forte d’accompagner les
-          entreprises dans leur croissance, elle propose des solutions digitales
-          personnalisées pour améliorer la visibilité, le développement
-          commercial et les performances globales.
+          la transformation numérique. Née d&apos;une volonté forte
+          d&apos;accompagner les entreprises dans leur croissance, elle propose
+          des solutions digitales personnalisées pour améliorer la visibilité,
+          le développement commercial et les performances globales.
         </motion.p>
 
         <div className="grid sm:grid-cols-2 grid-cols-1 gap-8">
@@ -78,8 +78,8 @@ const ikovalineContent = [
           Ikovaline <Highlight className="p-2 m-1">se distingue</Highlight> par
           sa mission : accélérer la digitalisation des entreprises avec des
           services innovants et sur-mesure. Grâce à une approche orientée
-          résultats, l’équipe aide chaque client à franchir un cap stratégique
-          dans un environnement numérique en constante évolution.
+          résultats, l&apos;équipe aide chaque client à franchir un cap
+          stratégique dans un environnement numérique en constante évolution.
         </motion.p>
       </>
     ),
@@ -118,7 +118,7 @@ const ikovalineContent = [
           dans leur transformation numérique. Notre objectif ? Fournir des
           résultats <Highlight className="p-2 m-1">durables</Highlight> et{" "}
           <Highlight className="p-2 m-1">mesurables</Highlight>, en plaçant
-          l’humain au cœur de chaque stratégie.
+          l&apos;humain au cœur de chaque stratégie.
         </motion.p>
       </>
     ),
@@ -138,8 +138,8 @@ const ikovalineContent = [
           className="leading-9"
         >
           Ikovaline porte une vision claire : atteindre un chiffre d'affaires de{" "}
-          <Cover>300 000 €</Cover> d’ici 2026. Cette ambition s’appuie sur notre
-          capacité à proposer des services digitaux{" "}
+          <Cover>300 000 €</Cover> d&apos;ici 2026. Cette ambition s&apos;appuie
+          sur notre capacité à proposer des services digitaux{" "}
           <Highlight className="p-2 m-1">performants</Highlight> et à offrir un
           accompagnement <Highlight className="p-2 m-1">personnalisé</Highlight>{" "}
           pour chaque entreprise.
@@ -196,8 +196,8 @@ const ikovalineContent = [
         >
           Chez Ikovaline, nous misons sur la performance digitale et des
           résultats <Highlight className="p-2 m-1">concrets</Highlight>. Si nos
-          solutions personnalisées ne permettent pas d’atteindre les objectifs
-          fixés ensemble, nous vous remboursons{" "}
+          solutions personnalisées ne permettent pas d&apos;atteindre les
+          objectifs fixés ensemble, nous vous remboursons{" "}
           <Highlight className="p-2 m-1">intégralement</Highlight>. Votre
           satisfaction est au cœur de notre engagement.
         </motion.p>

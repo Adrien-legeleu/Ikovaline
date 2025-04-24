@@ -25,7 +25,7 @@ export function Service1() {
         en <strong>stratégie business</strong>, nous vous aidons à structurer
         votre croissance. Études de marché, prospection multicanale,
         accompagnement stratégique : découvrez nos leviers pour générer plus de
-        leads et améliorer durablement votre chiffre d'affaires.
+        leads et améliorer durablement votre chiffre d&apos;affaires.
       </motion.p>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
@@ -65,7 +65,7 @@ export function Service1() {
         <Link href="/contact">
           {" "}
           <Button variant={"secondary"} className="text-lg">
-            Lancez votre croissance dès aujourd’hui
+            Lancez votre croissance dès aujourd&apos;hui
           </Button>
         </Link>
       </div>
@@ -106,8 +106,9 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Mise en place d’une stratégie commerciale performante et alignée sur
-          vos objectifs pour augmenter vos ventes et votre chiffre d’affaires.
+          Mise en place d&apos;une stratégie commerciale performante et alignée
+          sur vos objectifs pour augmenter vos ventes et votre chiffre
+          d&apos;affaires.
         </li>
       </ul>
     ),
@@ -155,7 +156,8 @@ const grid = [
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
           Conception de sites performants, pensés pour la conversion, le
-          référencement naturel (SEO) et l'expérience utilisateur mobile-first.
+          référencement naturel (SEO) et l&apos;expérience utilisateur
+          mobile-first.
         </li>
       </ul>
     ),
