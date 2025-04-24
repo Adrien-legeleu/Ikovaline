@@ -1,4 +1,4 @@
-// import ContactMainPage from "@/components/ContactPage/ContactMainPage";
+import ContactMainPage from "@/components/ContactPage/ContactMainPage";
 // import type { Metadata } from "next";
 
 // export const metadata: Metadata = {
@@ -15,5 +15,5 @@
 // };
 
 export default function Page() {
-  return <div>dsds</div>;
+  return <ContactMainPage />;
 }
