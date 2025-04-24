@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-// import Particles from "@/components/ui/particles";
-// import ScriptCopyBtn from "@/components/ui/script-copy-btn";
+import Particles from "@/components/ui/particles";
+import ScriptCopyBtn from "@/components/ui/script-copy-btn";
 import { useState } from "react";
 import ContactFormStudent from "./contactForm/ContactFormStudent";
 import ContactFormBusiness from "./contactForm/ContactFormBusiness";
@@ -13,12 +13,12 @@ export default function ContactMainPage() {
     setIsBuisnessForm(!isBuisnessForm);
   };
 
-  // const telData = {
-  //   tel: "07 85 90 22 38",
-  // };
-  // const emailData = {
-  //   email: "contact@ikovaline.com",
-  // };
+  const telData = {
+    tel: "07 85 90 22 38",
+  };
+  const emailData = {
+    email: "contact@ikovaline.com",
+  };
 
   return (
     <div className="grid lg:grid-cols-60/40 font-poppins max-sm:px-4 grid-cols-1 md:mt-24 mt-20  max-lg:gap-10 justify-center items-start max-w-[1400px] mx-auto">
@@ -65,12 +65,11 @@ export default function ContactMainPage() {
               : "Vous êtes une entreprise ?"}
           </Button>
         </div>
-        {/* <div className="relative flex p-10 w-full flex-col  items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
+        <div className="relative flex p-10 w-full flex-col  items-center justify-center overflow-hidden rounded-3xl border bg-black md:shadow-xl">
           <ScriptCopyBtn
             showMultiplePackageOptions={false}
             codeLanguage="shell"
             lightTheme="nord"
-            title="Numéro de téléphone de l'agence"
             darkTheme="vitesse-dark"
             commandMap={telData}
           />
@@ -78,7 +77,6 @@ export default function ContactMainPage() {
             showMultiplePackageOptions={false}
             codeLanguage="shell"
             lightTheme="nord"
-            title="Adresse email de contact Ikovaline"
             darkTheme="vitesse-dark"
             commandMap={emailData}
           />
@@ -89,7 +87,7 @@ export default function ContactMainPage() {
             color={"#ffffff"}
             refresh
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );
