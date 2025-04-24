@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Check, Copy } from "lucide-react";
 import { useTheme } from "next-themes";
 import { HTMLAttributes, useEffect, useState } from "react";
