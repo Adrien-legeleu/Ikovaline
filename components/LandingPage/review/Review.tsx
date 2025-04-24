@@ -120,8 +120,9 @@ export function Review() {
   return (
     <div className="py-20 space-y-10" id="review">
       <h2 className="sm:text-4xl text-3xl max-sm:px-5 text-center font-semibold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent">
-        Ce que nos clients disent sur nous !
+        Comment Ikovaline a boosté leur visibilité en ligne
       </h2>
+
       <div className="relative flex sm:h-[500px] h-[400px]  w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background ">
         <Marquee pauseOnHover className="[--duration:20s] flex-1">
           {firstRow.map((review) => (

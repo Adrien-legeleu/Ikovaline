@@ -40,8 +40,8 @@ export default function Landing() {
           </AnimatedGradientText>
         </Link>
         <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center  relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
-          Votre partenaire pour développer, piloter et propulser vos projets en
-          <Cover>toute confiance !</Cover>
+          Votre partenaire pour créer, optimiser et accélérer vos projets en{" "}
+          <Cover>marketing digital !</Cover>
         </h1>
       </div>
 
@@ -50,8 +50,9 @@ export default function Landing() {
         by="word"
         className="text-muted-foreground dark:text-neutral-400 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
       >
-        Ikovaline, la start-up qui combine stratégie, pilotage de projet et
-        marketing digital pour propulser votre business.
+        Ikovaline, la start-up spécialisée en SEO, création de site web et
+        publicité en ligne, pour booster votre visibilité et vos performances
+        digitales.
       </TextAnimate>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -61,12 +62,13 @@ export default function Landing() {
         className="font-poppins mt-10 flex max-sm:flex-col-reverse items-center justify-center max-sm:gap-3 gap-5"
       >
         <Link href={"/contact"}>
-          {" "}
-          <Button>Contactez-nous</Button>
+          <Button>Discuter de votre stratégie digitale</Button>
         </Link>
 
         <Link href={"/nos-services"}>
-          <Button variant={"secondary"}>Explorer nos services</Button>
+          <Button variant={"secondary"}>
+            Voir nos services marketing et digitaux
+          </Button>
         </Link>
       </motion.div>
     </BackgroundBeamsWithCollision>

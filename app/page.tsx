@@ -52,8 +52,8 @@ export default function Home() {
         <Services />
       </section>
       <CallToAction
-        title="Augmentez votre visibilité dès aujourd'hui !"
-        desc="Ikovaline est votre partenaire pour atteindre vos objectifs marketing et réussir votre transformation digitale. Prenez contact sans attendre !"
+        title="Améliorez votre visibilité en ligne dès aujourd'hui !"
+        desc="Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets."
         textBtn="Commencez maintenant !"
       />
 

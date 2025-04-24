@@ -211,9 +211,9 @@ const items = [
     title: "Google My Business & Avis Clients",
     description: (
       <span className="text-sm">
-        Ikovaline optimise votre présence sur Google My Business et gère les
-        avis clients pour améliorer votre visibilité en ligne, renforcer votre
-        réputation et attirer davantage de clients.
+        Améliorez votre positionnement local grâce à une gestion stratégique de
+        votre fiche Google My Business et des avis clients. Gagnez en
+        visibilité, en crédibilité, et attirez plus de prospects.
       </span>
     ),
     header: <SkeletonOne />,
@@ -224,9 +224,9 @@ const items = [
     title: "Stratégie de Contenu & Réseaux Sociaux",
     description: (
       <span className="text-sm">
-        Développez votre stratégie de contenu sur des plateformes comme
-        Instagram, Facebook, TikTok, et LinkedIn pour engager votre audience et
-        renforcer votre image de marque.
+        Déployez des campagnes engageantes sur Instagram, Facebook, TikTok et
+        LinkedIn avec une stratégie de contenu SEO-friendly. Renforcez votre
+        notoriété et générez du trafic qualifié.
       </span>
     ),
     header: <SkeletonTwo />,
@@ -237,9 +237,9 @@ const items = [
     title: "Lancement de Campagnes Publicitaires",
     description: (
       <span className="text-sm">
-        Profitez des meilleures pratiques en publicité en ligne avec des
-        campagnes Google Ads et Social Ads pour atteindre vos objectifs
-        commerciaux et maximiser votre ROI.
+        Lancez des campagnes Google Ads et Social Ads ciblées pour booster vos
+        conversions. Augmentez votre retour sur investissement (ROI) grâce à une
+        stratégie publicitaire maîtrisée.
       </span>
     ),
     header: <SkeletonFour />,
@@ -250,8 +250,8 @@ const items = [
     title: "Création & Optimisation de Sites Internet",
     description: (
       <span className="text-sm">
-        Nous créons des sites web vitrine et e-commerce adaptés à vos besoins,
-        optimisés pour offrir une expérience utilisateur fluide et responsive
+        Conception de sites vitrines et e-commerce performants, optimisés SEO,
+        mobile-first et rapides. Offrez à vos visiteurs une expérience fluide
         sur tous les appareils.
       </span>
     ),
@@ -263,8 +263,8 @@ const items = [
     title: "Consulting en Développement Commercial",
     description: (
       <span className="text-sm">
-        Nous vous accompagnons dans le développement commercial en optimisant
-        vos processus et stratégies pour atteindre une croissance
+        Bénéficiez de conseils stratégiques pour structurer votre prospection,
+        améliorer vos ventes et automatiser votre croissance grâce au digital.
       </span>
     ),
     header: <SkeletonFive />,

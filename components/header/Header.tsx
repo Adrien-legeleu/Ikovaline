@@ -147,7 +147,7 @@ export function Header({ className }: { className?: string }) {
               <div className="flex items-center gap-4">
                 <ModeToggle />
                 <Link href={"/contact"}>
-                  <Button variant={"secondary"} className="rounded-2xl py-5">
+                  <Button variant={"secondary"} className="rounded-3xl py-5">
                     Contactez-nous
                   </Button>
                 </Link>
