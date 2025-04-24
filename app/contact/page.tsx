@@ -1,5 +1,5 @@
-import ContactMainPage from "@/components/ContactPage/ContactMainPage";
-import type { Metadata } from "next";
+// import ContactMainPage from "@/components/ContactPage/ContactMainPage";
+// import type { Metadata } from "next";
 
 // export const metadata: Metadata = {
 //   title: "Contact - Ikovaline | Discutons de votre projet digital",
