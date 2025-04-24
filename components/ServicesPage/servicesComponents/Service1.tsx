@@ -10,8 +10,8 @@ import { IconArrowRight } from "@tabler/icons-react";
 export function Service1() {
   return (
     <HeroHighlight className="pb-16 pt-10 lg:pb-28 max-w-5xl mb-2 md:px-0 px-5 mx-auto space-y-8">
-      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
-        Développement Commercial & Stratégies de Croissance
+      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+        Propulsez votre Business avec une Stratégie Commerciale Efficace
       </h2>
 
       <motion.p
@@ -65,7 +65,7 @@ export function Service1() {
         <Link href="/contact">
           {" "}
           <Button variant={"secondary"} className="text-lg">
-            Passez à l’action !
+            Lancez votre croissance dès aujourd’hui
           </Button>
         </Link>
       </div>

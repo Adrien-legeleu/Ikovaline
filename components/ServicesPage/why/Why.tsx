@@ -13,46 +13,51 @@ import {
 export default function Why() {
   const features = [
     {
-      title: "Meilleur rapport qualité-prix",
-      description: "Des prestations haut de gamme à des tarifs compétitifs.",
+      title: "Un excellent rapport qualité/prix",
+      description:
+        "Des services digitaux performants à des tarifs étudiés, accessibles même pour les petites entreprises.",
       icon: <IconDiscountCheck className="text-secondary" />,
     },
     {
-      title: "Satisfait ou remboursé",
-      description: "La garantie d’un service conforme à vos attentes.",
+      title: "Garantie satisfait ou remboursé",
+      description:
+        "	Si nos solutions ne répondent pas à vos objectifs, nous vous remboursons intégralement.",
       icon: <IconCash className="text-secondary" />,
     },
     {
-      title: "Délais d’exécution rapides",
+      title: "Des résultats rapides et mesurables",
       description:
-        "Projets livrés dans les temps, sans compromis sur la qualité.",
+        "Livraison rapide des projets, avec indicateurs clairs et impact mesurable.",
       icon: <IconClock className="text-secondary" />,
     },
     {
-      title: "Communication fluide et transparente",
+      title: "Suivi personnalisé & communication fluide",
       description:
-        "Un suivi client efficace, avec des points réguliers pour garantir votre satisfaction.",
+        "Un accompagnement digital transparent, avec points réguliers et réponses rapides.",
       icon: <IconMessage2 className="text-secondary" />,
     },
     {
-      title: "Équipe expérimentée et passionnée",
-      description: "Des professionnels dévoués à votre réussite.",
+      title: "Une équipe engagée et expérimentée",
+      description:
+        "	Des spécialistes passionnés en marketing digital et développement commercial.",
       icon: <IconUsersGroup className="text-secondary" />,
     },
     {
-      title: "Un développement encadré en toute confiance",
+      title: "Confiance et cadre sur-mesure",
       description:
-        "Un accompagnement sur-mesure, avec un cadre clair pour avancer sereinement et en toute confiance.",
+        "Chaque mission est encadrée avec un plan d’action clair et une vraie relation de confiance.",
       icon: <IconShieldCheck className="text-secondary" />,
     },
   ];
 
   return (
     <div className=" max-w-5xl z-10 py-20  mx-auto" id="pourquoi-nous">
-      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center   font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
-        Pourquoi Nous choisir ?
+      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+        6 raisons de faire équipe avec Ikovaline
       </h2>
+
       <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xs:py-20 py-16 relative ">
+        <div className="absolute h-60 w-60 dark:blur-[150px] blur-[100px] bg-secondary top-1/4 left-2/3  opacity-65" />
         {features.map((feature, index) => (
           <Feature key={feature.title} {...feature} index={index} />
         ))}
@@ -85,10 +90,10 @@ const Feature = ({
       )}
     >
       {index < 4 && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-25 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
       )}
       {index >= 4 && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-25 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
       )}
       <div className="xs:mb-4 mb-2 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
         {icon}

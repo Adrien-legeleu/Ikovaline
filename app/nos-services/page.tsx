@@ -42,10 +42,11 @@ export default function Page() {
       <Service2 />
       <Why />
       <CallToAction
-        title="Boostez votre entreprise dès aujourd'hui !"
-        desc="Prêt à franchir un cap décisif ? Contactez-nous dès maintenant pour accélérer la croissance de votre business."
-        textBtn="Prenez contact avec nous !"
+        title="Passez à l’action maintenant !"
+        desc="Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible."
+        textBtn="Lancez votre projet"
       />
+
       <FAQ />
     </div>
   );

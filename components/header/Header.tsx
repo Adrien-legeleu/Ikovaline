@@ -113,8 +113,9 @@ export function Header({ className }: { className?: string }) {
                     ligne
                   </HoveredLink>
                   <HoveredLink href="/nos-services/#pourquoi-nous">
-                    <IconThumbUp stroke={2} /> Pourquoi nous choisir ?
+                    <IconThumbUp stroke={2} /> Ce qui fait notre différence
                   </HoveredLink>
+
                   <HoveredLink href="/nos-services/#faq">
                     <IconHelpHexagon stroke={2} /> Foire aux questions
                   </HoveredLink>

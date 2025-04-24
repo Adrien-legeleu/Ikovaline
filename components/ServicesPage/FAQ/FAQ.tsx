@@ -9,42 +9,48 @@ const faqData = [
   {
     question: "Qu'est-ce qu'Ikovaline ?",
     answer:
-      "Ikovaline est une start-up spécialisée dans le marketing digital et la transformation numérique. Nous aidons les entreprises à améliorer leur visibilité en ligne, à optimiser leur présence sur Google My Business, à gérer les avis clients, et à développer des solutions adaptées pour booster leur croissance. Ikovaline est également votre partenaire pour lé développement de vos projets, réaliser des études de marché et stratégie adapter, et un partenaire de confi ance pour piloter vos projets vers le succès.",
+      "	Ikovaline est une start-up spécialisée en marketing digital et transformation numérique. Nous aidons les entreprises à améliorer leur visibilité en ligne, optimiser leur Google My Business, gérer leur e-réputation et piloter leurs projets de croissance. Notre force : des solutions sur-mesure pour chaque étape de votre développement.",
   },
   {
     question: "Comment Ikovaline peut-elle aider mon entreprise ?",
     answer:
-      "Nous offrons des services personnalisés pour accompagner votre entreprise dans sa digitalisation. Cela inclut l'optimisation de votre site web, la gestion de vos campagnes publicitaires, le SEO, la gestion de vos réseaux sociaux, et bien plus. Notre objectif est de vous aider à augmenter votre visibilité et à atteindre vos objectifs commerciaux.",
+      "Grâce à une approche personnalisée, nous vous accompagnons dans votre digitalisation : refonte de site web, SEO/SEA, réseaux sociaux, publicité en ligne, contenu... Notre objectif ? Augmenter votre visibilité, votre trafic et vos résultats commerciaux.",
   },
   {
     question:
       "Quels résultats puis-je attendre en travaillant avec Ikovaline ?",
     answer:
-      "En travaillant avec Ikovaline, vous pouvez espérer une amélioration significative de votre visibilité en ligne, un accroissement du trafic sur votre site, une gestion efficace de votre e-réputation, et une augmentation de votre chiffre d'affaires grâce à une stratégie digitale bien ciblée.En fonction des profils, nous garantissons une croissance comprise entre 15% et 70%.",
+      "En moyenne, nos clients constatent une hausse de leur visibilité en ligne, un trafic qualifié en progression, et une nette amélioration de leur notoriété. Résultat : une croissance du chiffre d'affaires pouvant atteindre +70% selon les cas.",
   },
   {
     question: "Quels types d'entreprises pouvez-vous aider ?",
     answer:
-      "Nous travaillons avec des entreprises de toutes tailles et de divers secteurs d’activité. Que vous soyez une PME, une start-up ou une grande entreprise, nous adaptons nos services à vos besoins spécifiques pour vous aider à réussir dans votre transformation numérique.",
+      "Nous travaillons avec PME, start-up et grandes entreprises de tous secteurs : commerce, services, industrie, tech, santé, etc. Chaque mission est adaptée à vos objectifs et à vos enjeux spécifiques.",
   },
   {
     question: "Quels services proposez-vous exactement ?",
     answer:
-      "Nous proposons une gamme complète de services digitaux, incluant :\n- Optimisation de la présence sur Google My Business\n- Stratégies SEO et SEM\n- Gestion des réseaux sociaux (Instagram, Facebook, LinkedIn, TikTok)\n- Création et optimisation de sites web (vitrine et e-commerce)\n- Lancement et gestion de campagnes publicitaires (Google Ads, Social Ads)\n- Consulting en développement commercial et stratégie , ainsi que pilotage de projet, études de marché, sondages, développement commercial et consulting stratégique.",
+      "- Référencement naturel (SEO) & publicitaire (SEA)\n" +
+      "- Gestion Google My Business & e-réputation\n" +
+      "- Social media (LinkedIn, TikTok, Insta…)\n" +
+      "- Création de sites vitrine et e-commerce\n" +
+      "- Lancement de campagnes Google Ads & Social Ads\n" +
+      "- Consulting en développement commercial, stratégie et gestion de projet",
   },
   {
     question: "Comment débuter avec Ikovaline ?",
     answer:
-      "Commencez par prendre contact avec nous via notre page 'Contact'. Nous discuterons de vos objectifs et déterminerons ensemble la meilleure stratégie pour propulser votre entreprise vers le succès.",
+      "C’est simple : rendez-vous sur la page Contact ! Nous échangeons ensemble sur vos objectifs pour vous proposer une stratégie adaptée et un accompagnement efficace.",
   },
 ];
 
 export default function FAQ() {
   return (
     <div id="faq" className="max-w-5xl  py-20 space-y-12 mx-auto px-5">
-      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
-        Des questions sur notre service ? <br /> Nous avons les réponses !
+      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+        Une question sur nos services digitaux ?<br /> Toutes les réponses ici
       </h2>
+
       <Accordion type="single" className="gap-3 flex flex-col" collapsible>
         {faqData.map((faq, index) => (
           <AccordionItem
