@@ -80,13 +80,17 @@ export default function ContactFormStudent({
   };
   return (
     <div className="max-w-lg w-full mx-auto font-poppins  rounded-3xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-      <h2 className="font-extrabold text-2xl sm:text-left text-center text-neutral-800 dark:text-neutral-100">
+      <h2 className="font-extrabold lg:hidden text-2xl sm:text-left text-center text-neutral-800 dark:text-neutral-100">
         Rejoignez l&lsquo;aventure Ikovaline !
       </h2>
+      <h1 className="font-extrabold max-lg:hidden text-2xl sm:text-left text-center text-neutral-800 dark:text-neutral-100">
+        Rejoignez l&lsquo;aventure Ikovaline !
+      </h1>
       <p className="text-neutral-600 text-base max-w-md mt-3 leading-relaxed dark:text-neutral-300">
-        Vous êtes étudiant et passionné par le digital ? Contactez-nous pour en
-        savoir plus sur nos opportunités et participez à la transformation
-        numérique des entreprises.
+        Passionné par le digital et curieux d’en apprendre plus sur le métier ?
+        <strong>Ikovaline recrute des étudiants motivés</strong> pour contribuer
+        à des projets concrets et participer activement à la{" "}
+        <strong>transformation numérique</strong> des entreprises.
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>

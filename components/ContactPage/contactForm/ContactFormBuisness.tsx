@@ -82,13 +82,19 @@ export default function ContactFormBuisness({
   };
   return (
     <div className="max-w-lg w-full mx-auto font-poppins  rounded-3xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-      <h2 className="font-extrabold text-2xl text-neutral-800 sm:text-left text-center dark:text-neutral-100">
+      <h2 className="font-extrabold lg:hidden text-2xl text-neutral-800 sm:text-left text-center dark:text-neutral-100">
         Une question ? Un projet ?
       </h2>
+      <h1 className="font-extrabold max-lg:hidden text-2xl text-neutral-800 sm:text-left text-center dark:text-neutral-100">
+        Une question ? Un projet ?
+      </h1>
       <p className="text-neutral-600 text-base max-w-md mt-3 leading-relaxed dark:text-neutral-300">
-        Remplissez le formulaire ci-dessous et découvrez comment Ikovaline peut
-        booster votre visibilité en ligne et accélérer la croissance de votre
-        entreprise.
+        Remplissez le formulaire ci-dessous pour être recontacté par notre
+        équipe. Ensemble, nous allons{" "}
+        <strong>booster votre visibilité en ligne</strong>,
+        <strong>générer plus de leads</strong> et accélérer la{" "}
+        <strong>croissance de votre entreprise</strong> grâce à une stratégie
+        digitale sur mesure.
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>
