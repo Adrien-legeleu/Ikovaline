@@ -1,3 +1,23 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mentions légales - Ikovaline",
+  description:
+    "Consultez les mentions légales du site Ikovaline : éditeur, hébergeur, propriété intellectuelle, traitement des données personnelles et politique de cookies.",
+  openGraph: {
+    title: "Mentions légales - Ikovaline",
+    description:
+      "Toutes les informations légales concernant le site Ikovaline : éditeur, données personnelles, propriété intellectuelle, hébergement et plus encore.",
+    url: "https://www.ikovaline.com/mentions-legales",
+    type: "article",
+  },
+  twitter: {
+    card: "summary",
+    title: "Mentions légales - Ikovaline",
+    description:
+      "Découvrez les informations légales d’Ikovaline : données personnelles, éditeur, droits, cookies et hébergement du site.",
+  },
+};
 export default function LegalMentions() {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-neutral-800 max-lg:mx-2 shadow-md rounded-2xl md:mt-28">

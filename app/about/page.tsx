@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Team } from "@/components/AboutPage/Team";
@@ -11,10 +12,37 @@ import { Cover } from "@/components/ui/cover";
 import { IconQuote } from "@tabler/icons-react";
 import { CallToAction } from "@/components/callToAction/CallToAction";
 
+export const metadata: Metadata = {
+  title: "À propos d'Ikovaline - Notre Histoire et Équipe",
+  description:
+    "Découvrez l'histoire, les valeurs et l'équipe passionnée qui se cache derrière Ikovaline, la start-up étudiante experte en marketing digital.",
+  openGraph: {
+    title: "À propos d'Ikovaline - Notre Histoire et Équipe",
+    description:
+      "Plongez dans les coulisses d'Ikovaline : notre parcours, notre vision et les personnes qui façonnent l'accompagnement digital de demain.",
+    url: "https://www.ikovaline.com/about",
+    type: "website",
+    images: [
+      {
+        url: "/images/logo/ikovaline_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Ikovaline Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "À propos d'Ikovaline - Notre Histoire et Équipe",
+    description:
+      "Découvrez qui se cache derrière Ikovaline et comment notre équipe vous accompagne dans votre transformation digitale.",
+    images: ["/images/logo/ikovaline_logo.png"],
+  },
+};
+
 export default function Page() {
   return (
     <div className="max-w-[1400px] mx-auto">
-      {" "}
       <TracingBeam className="px-6 my-20 ">
         <div className="max-w-3xl mx-auto antialiased pt-4 relative max-lg:px-5">
           {ikovalineContent.map((item, index) => (
@@ -22,16 +50,10 @@ export default function Page() {
               <p className="bg-[#2B92C6] text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
                 {item.badge}
               </p>
-
-              <h2
-                className={
-                  "md:text-5xl xs:text-4xl text-3xl  mb-12 text-center font-semibold bg-gradient-to-t from-neutral-300 to-neutral-600 bg-clip-text text-transparent "
-                }
-              >
+              <h2 className="md:text-5xl xs:text-4xl text-3xl mb-12 text-center font-semibold bg-gradient-to-t from-neutral-300 to-neutral-600 bg-clip-text text-transparent">
                 {item.title}
               </h2>
-
-              <div className="sm:text-lg text-base space-y-5 text-center leading-loose  prose prose-sm dark:prose-invert">
+              <div className="sm:text-lg text-base space-y-5 text-center leading-loose prose prose-sm dark:prose-invert">
                 {item.description}
               </div>
             </div>
