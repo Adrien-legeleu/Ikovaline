@@ -12,8 +12,8 @@ export default function Landing() {
   return (
     <div className="h-screen flex-col flex items-center md:justify-center justify-start pt-20">
       <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
-        Transformez vos défis en opportunités avec nos <br />{" "}
-        <Cover>services</Cover>
+        Donnez un nouveau souffle à votre entreprise avec nos
+        <Cover>solutions digitales</Cover>
       </h1>
       <div className="sm:w-[40rem] w-full h-28 relative bg-[#F4FAFB] dark:bg-[#090D11]">
         {/* Gradients */}
@@ -43,11 +43,10 @@ export default function Landing() {
         className="font-poppins mt-10 flex max-sm:flex-col items-center justify-center max-sm:gap-3 gap-5"
       >
         <Link href="/nos-services/#buisness-developpement">
-          {" "}
-          <Button>Business Développement</Button>
+          <Button>Accélérez votre croissance</Button>
         </Link>
         <Link href="/nos-services/#developpement-digital">
-          <Button>Développement digital</Button>
+          <Button>Modernisez votre présence digitale</Button>
         </Link>
       </motion.div>
     </div>

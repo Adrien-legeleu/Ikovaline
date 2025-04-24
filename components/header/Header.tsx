@@ -106,18 +106,17 @@ export function Header({ className }: { className?: string }) {
               >
                 <div className="flex flex-col space-y-4 text-sm">
                   <HoveredLink href="/nos-services/#buisness-developpement">
-                    <IconChartLine stroke={2} /> Business Développement
+                    <IconChartLine stroke={2} /> Accélérez votre croissance
                   </HoveredLink>
                   <HoveredLink href="/nos-services/#developpement-digital">
-                    <IconDeviceLaptop stroke={2} /> Développement digital
+                    <IconDeviceLaptop stroke={2} /> Modernisez votre présence en
+                    ligne
                   </HoveredLink>
                   <HoveredLink href="/nos-services/#pourquoi-nous">
-                    <IconThumbUp stroke={2} /> Pourquoi-Nous ?
+                    <IconThumbUp stroke={2} /> Pourquoi nous choisir ?
                   </HoveredLink>
                   <HoveredLink href="/nos-services/#faq">
-                    {" "}
-                    <IconHelpHexagon stroke={2} />
-                    Notre FAQ
+                    <IconHelpHexagon stroke={2} /> Foire aux questions
                   </HoveredLink>
                 </div>
               </MenuItem>

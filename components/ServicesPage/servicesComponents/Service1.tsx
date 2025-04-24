@@ -10,9 +10,10 @@ import { IconArrowRight } from "@tabler/icons-react";
 export function Service1() {
   return (
     <HeroHighlight className="pb-16 pt-10 lg:pb-28 max-w-5xl mb-2 md:px-0 px-5 mx-auto space-y-8">
-      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
-        Business Développement
+      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center  mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+        Développement Commercial & Stratégies de Croissance
       </h2>
+
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: [20, -5, 0] }}
@@ -20,11 +21,11 @@ export function Service1() {
         viewport={{ amount: 0.5 }}
         className="text-center max-w-3xl leading-relaxed tracking-wider mx-auto"
       >
-        Notre expertise en développement commercial vous permet de propulser
-        votre entreprise à de nouveaux sommets. Grâce à des stratégies sur
-        mesure, nous optimisons vos processus pour booster vos ventes et
-        améliorer votre rentabilité. Découvrez comment nos solutions peuvent
-        transformer vos objectifs en résultats concrets.
+        Grâce à notre expertise en <strong>développement commercial</strong> et
+        en <strong>stratégie business</strong>, nous vous aidons à structurer
+        votre croissance. Études de marché, prospection multicanale,
+        accompagnement stratégique : découvrez nos leviers pour générer plus de
+        leads et améliorer durablement votre chiffre d'affaires.
       </motion.p>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
@@ -79,8 +80,9 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Analyse approfondie du marché, segmentation client, étude
-          concurrentielle et analyse des tendances sectorielles.
+          Analyse poussée du marché, identification de vos cibles, veille
+          concurrentielle et tendances sectorielles pour orienter votre
+          stratégie commerciale.
         </li>
       </ul>
     ),
@@ -91,8 +93,9 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Collecte et analyse de données qualitatives et quantitatives pour
-          obtenir des insights précis (B2B ou B2C).
+          Collecte et analyse de données précises (qualitatives et
+          quantitatives) pour obtenir des insights clients B2B/B2C fiables et
+          actionnables.
         </li>
       </ul>
     ),
@@ -103,8 +106,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Définition et déploiement d’une stratégie commerciale opérationnelle
-          pour booster vos ventes.
+          Mise en place d’une stratégie commerciale performante et alignée sur
+          vos objectifs pour augmenter vos ventes et votre chiffre d’affaires.
         </li>
       </ul>
     ),
@@ -115,8 +118,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Coordination experte pour le pilotage et le suivi de projets de
-          développement ou de lancement.
+          Accompagnement dans la coordination et le suivi de vos projets
+          marketing ou business, avec une approche orientée résultats.
         </li>
       </ul>
     ),
@@ -127,8 +130,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Structuration du lancement de nouveaux produits/services et
-          pénétration efficace du marché.
+          Structuration de vos lancements produits ou services avec une
+          stratégie de pénétration efficace sur vos marchés cibles.
         </li>
       </ul>
     ),
@@ -139,8 +142,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Mise en place de processus de prospection et accompagnement des
-          équipes de vente pour booster vos leads.
+          Stratégies de prospection multicanale et outils de lead generation
+          pour booster la conversion et remplir votre pipeline commercial.
         </li>
       </ul>
     ),
@@ -151,8 +154,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Conception et développement de sites optimisés pour la conversion et
-          l&apos;expérience utilisateur.
+          Conception de sites performants, pensés pour la conversion, le
+          référencement naturel (SEO) et l'expérience utilisateur mobile-first.
         </li>
       </ul>
     ),
@@ -163,8 +166,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Une IA qui gère appels et prospection automatisée avec suivi et
-          relances personnalisées.
+          IA de prospection intelligente : appels automatisés, suivi
+          personnalisé et relance optimisée pour générer des leads efficacement.
         </li>
       </ul>
     ),
@@ -175,8 +178,9 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Nous vous aidons à structurer et réussir votre entrée sur de nouveaux
-          marchés internationaux.
+          Accompagnement stratégique pour réussir votre implantation sur de
+          nouveaux marchés internationaux, avec analyse locale et adaptation
+          commerciale.
         </li>
       </ul>
     ),

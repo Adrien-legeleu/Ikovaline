@@ -10,9 +10,10 @@ import { IconArrowRight } from "@tabler/icons-react";
 export function Service2() {
   return (
     <HeroHighlight className="py-16 lg:py-28 max-w-5xl mx-auto md:px-0 px-5 space-y-8 ">
-      <h2 className=" sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200  bg-clip-text text-transparent">
-        Développement de la Présence en Ligne
+      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+        Développez votre présence en ligne & boostez votre visibilité
       </h2>
+
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: [20, -5, 0] }}
@@ -20,9 +21,9 @@ export function Service2() {
         viewport={{ amount: 0.5 }}
         className="text-center max-w-3xl leading-relaxed tracking-wider mx-auto"
       >
-        Optimisez votre visibilité et votre image en ligne avec des stratégies
-        personnalisées. Notre équipe vous accompagne pour renforcer votre
-        présence sur les moteurs de recherche et les réseaux sociaux.
+        Attirez plus de clients grâce à une stratégie digitale sur-mesure. SEO,
+        SEA, réseaux sociaux et contenus : nous activons les bons leviers pour
+        améliorer votre visibilité sur Google et renforcer votre image en ligne.
       </motion.p>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
@@ -73,8 +74,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Audit SEO, optimisation on-site/off-site et stratégie de contenu pour
-          améliorer votre visibilité organique.
+          Boostez votre visibilité organique grâce à un audit complet, une
+          optimisation technique et une stratégie de contenu SEO performante.
         </li>
       </ul>
     ),
@@ -85,8 +86,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Création et gestion de campagnes publicitaires payantes pour générer
-          du trafic et des leads qualifiés.
+          Générez des leads qualifiés avec des campagnes Google Ads ciblées, une
+          optimisation du Quality Score et un pilotage axé sur le ROI.
         </li>
       </ul>
     ),
@@ -97,8 +98,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Optimisation de l’image en ligne grâce à une gestion proactive et la
-          collecte d’avis clients qualifiés.
+          Renforcez votre image avec une stratégie proactive de gestion des avis
+          clients et une présence maîtrisée sur Google My Business.
         </li>
       </ul>
     ),
@@ -109,8 +110,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Intégration d’outils IA pour optimiser vos actions marketing et
-          automatiser vos processus.
+          Gagnez en efficacité avec des outils d'automatisation et d'IA : CRM
+          intelligent, segmentation automatisée et scénarios de conversion.
         </li>
       </ul>
     ),
@@ -121,8 +122,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Production de visuels, vidéos, présentations et autres contenus
-          marketing sur-mesure.
+          Créez des visuels, vidéos et contenus engageants pour améliorer votre
+          image de marque et soutenir vos campagnes marketing.
         </li>
       </ul>
     ),
@@ -133,8 +134,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Analyse stratégique et coordination de projets pour optimiser le
-          développement et la pénétration du marché.
+          Identifiez les opportunités de croissance avec une analyse de marché
+          précise et un pilotage agile de vos projets digitaux.
         </li>
       </ul>
     ),
@@ -145,8 +146,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          L&apos;IA personnalise vos campagnes emailing en temps réel, réduisant
-          de 70 % le temps de gestion et boostant l&apos;efficacité.
+          Réduisez votre temps de gestion et augmentez vos conversions grâce à
+          l’emailing automatisé piloté par l’intelligence artificielle.
         </li>
       </ul>
     ),
@@ -157,8 +158,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Optimisation de votre présence sur les réseaux sociaux pour atteindre
-          un public plus large et améliorer l&apos;engagement avec vos clients.
+          Développez votre communauté avec une stratégie éditoriale adaptée à
+          chaque plateforme et des publications optimisées pour l’engagement.
         </li>
       </ul>
     ),
@@ -169,8 +170,8 @@ const grid = [
     description: (
       <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
         <li>
-          Conception d&apos;un site web unique, répondant parfaitement à vos
-          besoins spécifiques et à l&apos;image de votre entreprise.
+          Concevez un site web moderne, responsive et optimisé SEO, aligné sur
+          votre image et pensé pour convertir vos visiteurs.
         </li>
       </ul>
     ),
