@@ -54,7 +54,7 @@ export function Header({ className }: { className?: string }) {
       ) : (
         <div
           className={cn(
-            "fixed font-poppins  inset-x-0 duration-500 ease-in-out flex items-center justify-center mx-auto z-[10000]  ",
+            "fixed font-poppins bg-transparent  inset-x-0 duration-500 ease-in-out flex items-center justify-center mx-auto z-[10000]  ",
             upToZero ? "top-4" : "top-0",
             className
           )}

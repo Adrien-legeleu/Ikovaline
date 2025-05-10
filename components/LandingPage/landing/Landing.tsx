@@ -1,5 +1,4 @@
 "use client";
-import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 import { TextAnimate } from "@/components/ui/text-animate";
@@ -8,10 +7,17 @@ import { motion } from "framer-motion";
 import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text";
 import { cn } from "@/lib/utils";
 import { IconShieldCheck } from "@tabler/icons-react";
+import { Glow } from "@/components/ui/glow";
 
 export default function Landing() {
   return (
-    <BackgroundBeamsWithCollision>
+    <div className="relative flex justify-center items-center flex-col gap-10  py-20 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <Glow
+          variant="above"
+          className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
+        />
+      </div>
       <div className="flex flex-col">
         <Link
           href="/about/#notre-garantie"
@@ -19,7 +25,7 @@ export default function Landing() {
         >
           <span
             className={cn(
-              "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:300%_100%] p-[1px]"
+              "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#94cbff]/50 via-[#42fdf7]/50 to-[#0196fa]/50 bg-[length:300%_100%] p-[1px]"
             )}
             style={{
               WebkitMask:
@@ -71,6 +77,6 @@ export default function Landing() {
           </Button>
         </Link>
       </motion.div>
-    </BackgroundBeamsWithCollision>
+    </div>
   );
 }
