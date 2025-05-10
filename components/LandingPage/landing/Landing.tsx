@@ -71,7 +71,6 @@ export default function Landing() {
           <MagnetizeButton
             particleCount={30}
             icon={<IconMessage2 />}
-            attractRadius={50}
             typeBtn={"default"}
             text={"Discuter de votre stratégie digitale"}
           />
@@ -81,7 +80,6 @@ export default function Landing() {
           <MagnetizeButton
             icon={<IconApps />}
             particleCount={30}
-            attractRadius={50}
             text={"Voir nos services marketing et digitaux"}
             typeBtn={"secondary"}
           />

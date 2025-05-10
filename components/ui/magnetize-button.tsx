@@ -11,8 +11,6 @@ import { Button } from "@/components/ui/button";
 interface MagnetizeButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   particleCount?: number;
-  attractRadius?: number;
-
   text: string;
   typeBtn:
     | "default"
@@ -33,7 +31,7 @@ interface Particle {
 function MagnetizeButton({
   className,
   particleCount = 80,
-  attractRadius = 100,
+
   text,
   typeBtn,
   icon,
