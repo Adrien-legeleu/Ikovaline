@@ -98,7 +98,7 @@ function MagnetizeButton({
           initial={{ x: particles[index].x, y: particles[index].y }}
           animate={particlesControl}
           className={cn(
-            "absolute w-[3px] h-[3px] rounded-full",
+            "absolute w-[3px] h-[3px] max-sm:hidden rounded-full",
             "bg-blue-400 dark:bg-blue-300",
             "transition-opacity duration-300",
             isAttracting ? "opacity-80" : "opacity-60 dark:opacity-50"
