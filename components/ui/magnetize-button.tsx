@@ -12,6 +12,7 @@ interface MagnetizeButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   particleCount?: number;
   attractRadius?: number;
+
   text: string;
   typeBtn:
     | "default"
@@ -20,6 +21,7 @@ interface MagnetizeButtonProps
     | "secondary"
     | "ghost"
     | "link";
+  icon: JSX.Element;
 }
 
 interface Particle {
@@ -30,10 +32,11 @@ interface Particle {
 
 function MagnetizeButton({
   className,
-  particleCount = 40,
+  particleCount = 80,
   attractRadius = 100,
   text,
   typeBtn,
+  icon,
   ...props
 }: MagnetizeButtonProps) {
   const [isAttracting, setIsAttracting] = useState(false);
@@ -44,7 +47,7 @@ function MagnetizeButton({
     const newParticles = Array.from({ length: particleCount }, (_, i) => ({
       id: i,
       x: Math.random() * 360 - 180,
-      y: Math.random() * 360 - 180,
+      y: Math.random() * 360 - 250,
     }));
     setParticles(newParticles);
   }, [particleCount]);
@@ -97,20 +100,15 @@ function MagnetizeButton({
           initial={{ x: particles[index].x, y: particles[index].y }}
           animate={particlesControl}
           className={cn(
-            "absolute w-[2px] h-[2px] rounded-full",
+            "absolute w-[3px] h-[3px] rounded-full",
             "bg-blue-400 dark:bg-blue-300",
             "transition-opacity duration-300",
-            isAttracting ? "opacity-100" : "opacity-80"
+            isAttracting ? "opacity-80" : "opacity-60 dark:opacity-50"
           )}
         />
       ))}
       <span className="relative w-full flex items-center justify-center gap-2">
-        <Magnet
-          className={cn(
-            "w-4 h-4 transition-transform duration-300",
-            isAttracting && "scale-110"
-          )}
-        />
+        {icon}
         {text}
       </span>
     </Button>

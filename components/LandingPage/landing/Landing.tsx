@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text";
 import { cn } from "@/lib/utils";
-import { IconShieldCheck } from "@tabler/icons-react";
+import { IconApps, IconMessage2, IconShieldCheck } from "@tabler/icons-react";
 import { Glow } from "@/components/ui/glow";
 import { MagnetizeButton } from "@/components/ui/magnetize-button";
 
@@ -70,8 +70,9 @@ export default function Landing() {
       >
         <Link href={"/contact"}>
           <MagnetizeButton
-            particleCount={44}
-            attractRadius={40}
+            particleCount={30}
+            icon={<IconMessage2 />}
+            attractRadius={50}
             typeBtn={"default"}
             text={"Discuter de votre stratégie digitale"}
           />
@@ -79,8 +80,9 @@ export default function Landing() {
 
         <Link href={"/nos-services"}>
           <MagnetizeButton
-            particleCount={20}
-            attractRadius={40}
+            icon={<IconApps />}
+            particleCount={30}
+            attractRadius={50}
             text={"Voir nos services marketing et digitaux"}
             typeBtn={"secondary"}
           />
