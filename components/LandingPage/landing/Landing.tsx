@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 import { TextAnimate } from "@/components/ui/text-animate";
 import Link from "next/link";
