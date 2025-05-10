@@ -8,6 +8,7 @@ import { AnimatedGradientText } from "@/components/magicui/animated-gradient-tex
 import { cn } from "@/lib/utils";
 import { IconShieldCheck } from "@tabler/icons-react";
 import { Glow } from "@/components/ui/glow";
+import { MagnetizeButton } from "@/components/ui/magnetize-button";
 
 export default function Landing() {
   return (
@@ -25,7 +26,7 @@ export default function Landing() {
         >
           <span
             className={cn(
-              "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#94cbff]/50 via-[#42fdf7]/50 to-[#0196fa]/50 bg-[length:300%_100%] p-[1px]"
+              "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#94cbff]/50 via-[#42fdf7]/50 to-[#5fb8f3]/50 bg-[length:300%_100%] p-[1px]"
             )}
             style={{
               WebkitMask:
@@ -45,7 +46,7 @@ export default function Landing() {
             Satisfait ou remboursé.
           </AnimatedGradientText>
         </Link>
-        <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center  relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+        <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center  relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-400 dark:via-white dark:to-white">
           Votre partenaire pour créer, optimiser et accélérer vos projets en{" "}
           <Cover>marketing digital !</Cover>
         </h1>
@@ -68,13 +69,21 @@ export default function Landing() {
         className="font-poppins mt-10 flex max-sm:flex-col-reverse items-center justify-center max-sm:gap-3 gap-5"
       >
         <Link href={"/contact"}>
-          <Button>Discuter de votre stratégie digitale</Button>
+          <MagnetizeButton
+            particleCount={44}
+            attractRadius={40}
+            typeBtn={"default"}
+            text={"Discuter de votre stratégie digitale"}
+          />
         </Link>
 
         <Link href={"/nos-services"}>
-          <Button variant={"secondary"}>
-            Voir nos services marketing et digitaux
-          </Button>
+          <MagnetizeButton
+            particleCount={20}
+            attractRadius={40}
+            text={"Voir nos services marketing et digitaux"}
+            typeBtn={"secondary"}
+          />
         </Link>
       </motion.div>
     </div>
