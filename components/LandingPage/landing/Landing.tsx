@@ -11,7 +11,7 @@ import { AnimatedText } from "@/components/ui/hand-writing-text";
 
 export default function Landing() {
   return (
-    <div className="relative flex justify-center items-center flex-col gap-10  py-20 overflow-hidden">
+    <div className="relative flex justify-center items-center flex-col gap-8  py-20 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <Glow
           variant="above"
@@ -45,7 +45,7 @@ export default function Landing() {
             Satisfait ou remboursé.
           </AnimatedGradientText>
         </Link>
-        <h1 className="text-4xl md:px-0 px-6 leading-[30px] font-poppins font-bold md:text-5xl lg:text-6xl max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-400 dark:via-white dark:to-white">
+        <h1 className="text-4xl md:px-0 px-6 lg:!leading-[70px] md:leading-[60px] leading-[50px] font-poppins font-bold md:text-5xl lg:text-6xl max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-400 dark:via-white dark:to-white">
           Ikovaline,
           <span className="inline-flex p-2">
             <AnimatedText

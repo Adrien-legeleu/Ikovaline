@@ -231,7 +231,7 @@ const items = [
     ),
     header: <SkeletonTwo />,
     className: "md:col-span-1",
-    icon: <IconBrandInstagram className="h-4 w-4 text-neutral-500" />,
+    icon: <IconBrandInstagram className=" text-neutral-500" />,
   },
   {
     title: "Lancement de Campagnes Publicitaires",
@@ -244,7 +244,7 @@ const items = [
     ),
     header: <SkeletonFour />,
     className: "md:col-span-1",
-    icon: <IconChartBar className="h-4 w-4 text-neutral-500" />,
+    icon: <IconChartBar className=" text-neutral-500" />,
   },
   {
     title: "Création & Optimisation de Sites Internet",
@@ -256,8 +256,8 @@ const items = [
       </span>
     ),
     header: <SkeletonThree />,
-    className: "md:col-span-2 md:row-span-2 md:order-5",
-    icon: <IconDeviceLaptop className="h-4 w-4 text-neutral-500" />,
+    className: "md:col-span-3  md:order-5",
+    icon: <IconDeviceLaptop className=" text-neutral-500" />,
   },
   {
     title: "Consulting en Développement Commercial",
@@ -269,6 +269,6 @@ const items = [
     ),
     header: <SkeletonFive />,
     className: "md:col-span-1 md:order-4 ",
-    icon: <IconBriefcase className="h-4 w-4 text-neutral-500" />,
+    icon: <IconBriefcase className=" text-neutral-500" />,
   },
 ];
