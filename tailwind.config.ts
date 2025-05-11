@@ -35,6 +35,8 @@ const config: Config = {
         serviceIconlight: "20px -20px 60px #bebebe, 20px 20px 60px #ffffff",
         serviceIconDark: " -28px -28px 55px #292929,   28px 28px 55px #373737",
         glow: "0 -16px 128px 0 rgba(88,211,236, 0.5) inset, 0 -30px 32px 0 rgba(88, 211, 236, 0.55) inset",
+        glowMobile:
+          "0 -15px 58px 0 rgba(88,211,236, 0.7) inset, 0 -20px 20px 0 rgba(88, 211, 236, 0.5) inset",
       },
       colors: {
         brand: {
