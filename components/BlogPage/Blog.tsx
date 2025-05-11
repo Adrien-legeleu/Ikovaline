@@ -31,6 +31,7 @@ function Blog() {
           {dataBlog.map((bl, index) => {
             return (
               <div
+                key={index}
                 className={`flex flex-col gap-4 hover:opacity-75 cursor-pointer ${index == 0 && "md:col-span-2 lg:col-span-3"}`}
               >
                 <div className="bg-muted rounded-3xl aspect-video"></div>

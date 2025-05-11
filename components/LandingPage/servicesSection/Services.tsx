@@ -24,7 +24,7 @@ export default function Services() {
     <div className="py-32">
       <h2
         className={
-          "max-md:flex hidden sm:text-4xl text-3xl items-center justify-center mb-12  font-semibold bg-gradient-to-t from-neutral-400 to-neutral-700 bg-clip-text text-transparent "
+          "max-md:flex hidden sm:text-4xl text-3xl items-center justify-center mb-12  font-semibold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-400 dark:to-neutral-100  bg-clip-text text-transparent "
         }
       >
         Nos Services
