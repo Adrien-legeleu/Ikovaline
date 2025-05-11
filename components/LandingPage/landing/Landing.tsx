@@ -6,7 +6,6 @@ import { AnimatedGradientText } from "@/components/magicui/animated-gradient-tex
 import { cn } from "@/lib/utils";
 import { IconApps, IconMessage2, IconShieldCheck } from "@tabler/icons-react";
 import { Glow } from "@/components/ui/glow";
-import { MagnetizeButton } from "@/components/ui/magnetize-button";
 import { AnimatedText } from "@/components/ui/hand-writing-text";
 import { Button } from "@/components/ui/button";
 
