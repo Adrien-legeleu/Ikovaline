@@ -6,7 +6,7 @@ import Services from "@/components/LandingPage/servicesSection/Services";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Ikovaline - Votre partenaire en marketing digital sur-mesure",
+  title: "Ikovaline - L'agence digitale qui propulse votre business !",
   description:
     "Découvrez comment Ikovaline vous aide à booster votre visibilité et votre croissance grâce au SEO, publicité, création de sites web et bien plus.",
   keywords: [
@@ -17,10 +17,12 @@ export const metadata: Metadata = {
     "stratégies digitales",
     "Ikovaline",
     "site vitrine",
+    "site web",
+    "agence web",
     "référencement naturel",
   ],
   openGraph: {
-    title: "Ikovaline - Votre partenaire en marketing digital sur-mesure",
+    title: "Ikovaline - L'agence web qui propulse votre business !",
     description:
       "Stratégies digitales personnalisées pour les entreprises ambitieuses. SEO, publicité, contenu, IA : faites passer votre croissance au niveau supérieur.",
     url: "https://ikovaline.com",
