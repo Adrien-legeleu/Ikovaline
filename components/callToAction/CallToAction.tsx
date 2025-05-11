@@ -36,7 +36,7 @@ export function CallToAction({ title, desc, textBtn }: ICallToAction) {
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.7 }}
           className="pointer-events-none absolute inset-0 rounded-3xl shadow-glowMobile sm:shadow-glow"
         />
-        <div className="absolute -top-4 md:-top-5 w-[110%] h-12 md:h-24 z-10 bg-[#F4FAFB] dark:bg-black/80 blur-md md:blur-lg" />
+        <div className="absolute -top-4 md:-top-5 w-[110%] h-12 md:h-24 z-10 bg-[#F4FAFB] dark:bg-[#090D11] blur-md md:blur-lg" />
       </div>
     </section>
   );
