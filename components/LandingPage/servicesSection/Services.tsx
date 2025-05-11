@@ -29,7 +29,7 @@ export default function Services() {
       >
         Nos Services
       </h2>
-      <BentoGrid className="md:max-w-5xl  max-w-sm relative mx-auto md:auto-rows-[28rem]  auto-rows-[29rem]">
+      <BentoGrid className="md:max-w-6xl  max-w-sm relative mx-auto md:auto-rows-[28rem]  auto-rows-[29rem]">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
@@ -256,7 +256,7 @@ const items = [
       </span>
     ),
     header: <SkeletonThree />,
-    className: "md:col-span-2 md:order-5",
+    className: "md:col-span-2 md:row-span-2 md:order-5",
     icon: <IconDeviceLaptop className="h-4 w-4 text-neutral-500" />,
   },
   {

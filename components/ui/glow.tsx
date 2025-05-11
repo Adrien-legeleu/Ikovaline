@@ -23,7 +23,7 @@ export function Glow({ variant = "center", className }: GlowProps) {
           "absolute",
           "rounded-full",
           "opacity-70 blur-[100px]",
-          "bg-brand/30",
+          "bg-brand/60 dark:bg-brand/40",
           {
             "left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2":
               variant === "above",

@@ -1,5 +1,4 @@
 "use client";
-import { Cover } from "@/components/ui/cover";
 import { TextAnimate } from "@/components/ui/text-animate";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -8,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { IconApps, IconMessage2, IconShieldCheck } from "@tabler/icons-react";
 import { Glow } from "@/components/ui/glow";
 import { MagnetizeButton } from "@/components/ui/magnetize-button";
+import { AnimatedText } from "@/components/ui/hand-writing-text";
 
 export default function Landing() {
   return (
@@ -25,7 +25,7 @@ export default function Landing() {
         >
           <span
             className={cn(
-              "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#94cbff]/50 via-[#42fdf7]/50 to-[#5fb8f3]/50 bg-[length:300%_100%] p-[1px]"
+              "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#8bacff]/50 via-[#42b8fd]/50 to-[#5fb8f3]/50 bg-[length:300%_100%] p-[1px]"
             )}
             style={{
               WebkitMask:
@@ -37,7 +37,7 @@ export default function Landing() {
             }}
           />
           <IconShieldCheck
-            className="ml-1 size-4 stroke-neutral-500 transition-transform
+            className="ml-1 size-4 stroke-blue-400 transition-transform
  duration-300 ease-in-out group-hover:translate-x-0.5"
           />
           <hr className="mx-2 h-4 w-px shrink-0 bg-neutral-500" />
@@ -45,9 +45,18 @@ export default function Landing() {
             Satisfait ou remboursé.
           </AnimatedGradientText>
         </Link>
-        <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center  relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-400 dark:via-white dark:to-white">
-          Votre partenaire pour créer, optimiser et accélérer vos projets en{" "}
-          <Cover>marketing digital !</Cover>
+        <h1 className="text-4xl md:px-0 px-6 leading-[30px] font-poppins font-bold md:text-5xl lg:text-6xl max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-400 dark:via-white dark:to-white">
+          Ikovaline,
+          <span className="inline-flex p-2">
+            <AnimatedText
+              text="l'agence"
+              textClassName="text-neutral-800 dark:text-neutral-300"
+              underlinePath="M 0,10 Q 75,0 150,10 Q 225,20 300,10"
+              underlineHoverPath="M 0,10 Q 75,20 150,10 Q 225,0 300,10"
+              underlineDuration={1.5}
+            />
+          </span>
+          digitale qui propulse votre business !
         </h1>
       </div>
 
@@ -60,6 +69,7 @@ export default function Landing() {
         publicité en ligne, pour booster votre visibilité et vos performances
         digitales.
       </TextAnimate>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -69,7 +79,7 @@ export default function Landing() {
       >
         <Link href={"/contact"}>
           <MagnetizeButton
-            particleCount={30}
+            particleCount={0}
             icon={<IconMessage2 />}
             typeBtn={"default"}
             text={"Discuter de votre stratégie digitale"}
@@ -79,7 +89,7 @@ export default function Landing() {
         <Link href={"/nos-services"}>
           <MagnetizeButton
             icon={<IconApps />}
-            particleCount={30}
+            particleCount={0}
             text={"Voir nos services marketing et digitaux"}
             typeBtn={"secondary"}
           />
