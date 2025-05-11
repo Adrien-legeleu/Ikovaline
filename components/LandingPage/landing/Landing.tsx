@@ -8,6 +8,7 @@ import { IconApps, IconMessage2, IconShieldCheck } from "@tabler/icons-react";
 import { Glow } from "@/components/ui/glow";
 import { MagnetizeButton } from "@/components/ui/magnetize-button";
 import { AnimatedText } from "@/components/ui/hand-writing-text";
+import { Button } from "@/components/ui/button";
 
 export default function Landing() {
   return (
@@ -40,7 +41,7 @@ export default function Landing() {
             className="ml-1 size-4 stroke-blue-400 transition-transform
  duration-300 ease-in-out group-hover:translate-x-0.5"
           />
-          <hr className="mx-2 h-4 w-px shrink-0 bg-neutral-500" />
+          <hr className="mx-2 h-4 w-px shrink-0 bg-blue-400" />
           <AnimatedGradientText className="text-sm font-medium">
             Satisfait ou remboursé.
           </AnimatedGradientText>
@@ -78,21 +79,27 @@ export default function Landing() {
         className="font-poppins mt-10 flex max-sm:flex-col-reverse items-center justify-center max-sm:gap-3 gap-5"
       >
         <Link href={"/contact"}>
-          <MagnetizeButton
-            particleCount={0}
-            icon={<IconMessage2 />}
-            typeBtn={"default"}
-            text={"Discuter de votre stratégie digitale"}
-          />
+          <Button
+            className={"min-w-40 relative touch-none"}
+            variant={"default"}
+          >
+            <span className="relative w-full flex items-center justify-center gap-2">
+              <IconMessage2 />
+              Discuter de votre stratégie digitale
+            </span>
+          </Button>
         </Link>
 
         <Link href={"/nos-services"}>
-          <MagnetizeButton
-            icon={<IconApps />}
-            particleCount={0}
-            text={"Voir nos services marketing et digitaux"}
-            typeBtn={"secondary"}
-          />
+          <Button
+            className={"min-w-40 relative touch-none"}
+            variant={"secondary"}
+          >
+            <span className="relative w-full flex items-center justify-center gap-2">
+              <IconApps />
+              Voir nos services marketing et digitaux
+            </span>
+          </Button>
         </Link>
       </motion.div>
     </div>

@@ -189,7 +189,7 @@ const SkeletonFour = () => {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex pt-4 w-full h-full bg-dot-black/[0.1] flex-row space-x-2"
+      className="flex py-2  md:px-9 lg:px-0 px-0  h-auto bg-dot-black/[0.1] flex-row space-x-2"
     >
       <SkeletonFourComponent />
     </motion.div>
@@ -247,6 +247,18 @@ const items = [
     icon: <IconChartBar className=" text-neutral-500" />,
   },
   {
+    title: "Consulting en Développement Commercial",
+    description: (
+      <span className="text-sm">
+        Bénéficiez de conseils stratégiques pour structurer votre prospection,
+        améliorer vos ventes et automatiser votre croissance grâce au digital.
+      </span>
+    ),
+    header: <SkeletonFive />,
+    className: "md:col-span-1  ",
+    icon: <IconBriefcase className=" text-neutral-500" />,
+  },
+  {
     title: "Création & Optimisation de Sites Internet",
     description: (
       <span className="text-sm">
@@ -256,19 +268,7 @@ const items = [
       </span>
     ),
     header: <SkeletonThree />,
-    className: "md:col-span-3  md:order-5",
+    className: "md:!col-span-2 ",
     icon: <IconDeviceLaptop className=" text-neutral-500" />,
-  },
-  {
-    title: "Consulting en Développement Commercial",
-    description: (
-      <span className="text-sm">
-        Bénéficiez de conseils stratégiques pour structurer votre prospection,
-        améliorer vos ventes et automatiser votre croissance grâce au digital.
-      </span>
-    ),
-    header: <SkeletonFive />,
-    className: "md:col-span-1 md:order-4 ",
-    icon: <IconBriefcase className=" text-neutral-500" />,
   },
 ];

@@ -26,8 +26,8 @@ export function SkeletonFiveComponent() {
       max={100}
       min={0}
       value={value}
-      gaugePrimaryColor="rgba(39, 209, 17, 0.9)"
-      gaugeSecondaryColor="rgba(197, 10, 10, 0.08)"
+      gaugePrimaryColor="#5AD7F1"
+      gaugeSecondaryColor="#5ce8df81"
     />
   );
 }

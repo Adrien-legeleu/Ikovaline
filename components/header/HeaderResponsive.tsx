@@ -113,7 +113,7 @@ export function HeaderResponsive() {
   ];
   return (
     <Drawer>
-      <div className="fixed bottom-0 max-xs:w-full xs:left-1/2 xs:-translate-x-1/2  flex xs:gap-6 gap-2 bg-white [320px]:justify-between justify-around dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 xs:rounded-[2rem] rounded-t-3xl z-[10000] ">
+      <div className="fixed bottom-0 max-xs:w-full md:hidden xs:left-1/2 xs:-translate-x-1/2  flex xs:gap-6 gap-2 bg-white [320px]:justify-between justify-around dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 xs:rounded-[2rem] rounded-t-3xl z-[10000] ">
         <DrawerTrigger asChild>
           <IconMenu3 stroke={2} className="[360px]:min-w-9 min-w-7 min-h-9 " />
         </DrawerTrigger>
