@@ -133,6 +133,12 @@ export function Header({ className }: { className?: string }) {
                 </HoveredLink>
               </div>
             </MenuItem>
+            <MenuItem
+              setActive={setActive}
+              active={active}
+              item="Conseils Digitaux"
+              link="/blog"
+            ></MenuItem>
             <div className="flex items-center gap-4">
               <ModeToggle />
               <Link href={"/contact"}>

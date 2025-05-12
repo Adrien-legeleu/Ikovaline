@@ -110,6 +110,11 @@ export function HeaderResponsive() {
         },
       ],
     },
+    {
+      title: "Conseils Digitaux",
+      href: "/blog",
+      links: [],
+    },
   ];
   return (
     <Drawer>
@@ -163,7 +168,10 @@ export function HeaderResponsive() {
                 key={index}
                 className="space-y-2"
               >
-                <AccordionTrigger className="text-neutral-600 space-x-3 dark:text-neutral-300 font-bold">
+                <AccordionTrigger
+                  links={section.links}
+                  className="text-neutral-600 space-x-3 dark:text-neutral-300 font-bold"
+                >
                   <DrawerClose asChild>
                     <Link href={section.href}>
                       <Button variant="ghost" className="w-full px-0 text-xl">

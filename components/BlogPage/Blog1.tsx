@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { CallToAction } from "../callToAction/CallToAction";
 
 const faqData = [
   {
@@ -97,6 +98,11 @@ export default function Blog1() {
             vous pouvez aussi déployer via GitHub ou Vercel.
           </p>
         </li>
+        <CallToAction
+          title="Vous avez un projet de site web ?"
+          desc="Chez Ikovaline, on ne fait pas que vous expliquer comment héberger un site : on le fait pour vous, avec un site rapide, optimisé et clé en main."
+          textBtn="Lancez votre projet maintenant"
+        />
         <li className="space-y-5">
           <h2 className="text-2xl  lg:text-3xl 2xl:text-4xl font-semibold">
             3. Solutions d’hébergement populaires
