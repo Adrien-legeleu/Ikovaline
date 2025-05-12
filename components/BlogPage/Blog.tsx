@@ -44,7 +44,7 @@ function Blog() {
                   height={500}
                   src={bl.img}
                   alt={bl.slug}
-                  className="rounded-3xl w-full object-contain aspect-video"
+                  className="rounded-3xl w-full object-cover aspect-video"
                 />
 
                 <div className="flex flex-row gap-4 items-center">
