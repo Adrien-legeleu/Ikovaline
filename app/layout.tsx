@@ -7,19 +7,20 @@ import { ThemeProvider } from "@/components/theme.provider";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Ikovaline - Expert Marketing Digital et Transformation",
+  title: "Ikovaline - L'agence digitale qui propulse votre business !",
   description:
-    "Ikovaline, start-up étudiante experte en marketing digital, booste votre visibilité avec SEO, publicité, Google My Business et des stratégies sur mesure.",
+    "Découvrez comment Ikovaline vous aide à booster votre visibilité et votre croissance grâce au SEO, publicité, création de sites web et bien plus.",
   keywords: [
     "marketing digital",
-    "transformation numérique",
     "SEO",
     "publicité en ligne",
-    "Google My Business",
-    "création de contenu",
-    "Ikovaline",
-    "site web",
+    "transformation numérique",
     "stratégies digitales",
+    "Ikovaline",
+    "site vitrine",
+    "site web",
+    "agence web",
+    "référencement naturel",
   ],
   openGraph: {
     title: "Ikovaline - Expert Marketing Digital et Transformation",
