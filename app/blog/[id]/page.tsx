@@ -1,4 +1,4 @@
-import { blogMetadata } from "@/lig/blogMetadata";
+import { blogMetadata } from "@/lib/blogMetadata";
 import { notFound } from "next/navigation";
 import { ComponentType } from "react";
 
