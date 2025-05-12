@@ -19,10 +19,14 @@ const AccordionItem = React.forwardRef<
   />
 ));
 AccordionItem.displayName = "AccordionItem";
-
+interface LinkItem {
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+}
 interface AccordionTriggerProps
   extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> {
-  links?: any[]; // ou le type exact si tu l’as (ex: LinkType[])
+  links?: LinkItem[]; // ou le type exact si tu l’as (ex: LinkType[])
 }
 
 const AccordionTrigger = React.forwardRef<
