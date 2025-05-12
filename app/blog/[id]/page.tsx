@@ -1,4 +1,3 @@
-// app/products/[id]/page.tsx
 import { notFound } from "next/navigation";
 import { ComponentType } from "react";
 
@@ -10,7 +9,7 @@ const componentsMap: Record<
   string,
   () => Promise<{ default: ComponentType<unknown> }>
 > = {
-  "...": () => import("@/components/BlogPage/Blog1"),
+  "comment-heberger-un-site-web": () => import("@/components/BlogPage/Blog1"),
 };
 
 export default async function Blog({ params }: ProductPageProps) {
