@@ -16,7 +16,7 @@ const dataBlog = [
     date: "12 mai 2025",
     title: "Comment héberger un site web en 2025 : guide complet",
     desc: "Vous avez un site mais ne savez pas comment le mettre en ligne ? Ce guide vous explique comment héberger un site web étape par étape, avec les meilleures solutions en 2025.",
-    img: "/blog/blog1/6551283.jpg",
+    img: "/blog/blog1/comment-heberger-un-site.jpg",
     by: "Ikovaline",
     slug: "comment-heberger-un-site-web",
   },
