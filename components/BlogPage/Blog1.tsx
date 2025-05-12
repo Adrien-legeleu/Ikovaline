@@ -44,11 +44,11 @@ export default function Blog1() {
           alt="Illustration hébergement web"
           width={600}
           height={400}
-          className="rounded-3xl "
+          className="rounded-3xl aspect-video w-full object-cover"
         />
       </div>
-      <ul className="space-y-20 text-center sm:text-left">
-        <li className="space-y-5">
+      <ul className="space-y-24 text-center sm:text-left">
+        <li className="space-y-8">
           <h2 className="text-2xl  lg:text-3xl 2xl:text-4xl font-semibold">
             1. Qu’est-ce que l’hébergement web ?
           </h2>
@@ -72,7 +72,7 @@ export default function Blog1() {
             className="w-full rounded-3xl shadow-2xl"
           />
         </li>
-        <li className="space-y-5">
+        <li className="space-y-8">
           <h2 className="text-2xl  lg:text-3xl 2xl:text-4xl font-semibold">
             2. Les étapes pour héberger son site
           </h2>
@@ -103,7 +103,7 @@ export default function Blog1() {
           desc="Chez Ikovaline, on ne fait pas que vous expliquer comment héberger un site : on le fait pour vous, avec un site rapide, optimisé et clé en main."
           textBtn="Lancez votre projet maintenant"
         />
-        <li className="space-y-5">
+        <li className="space-y-8">
           <h2 className="text-2xl  lg:text-3xl 2xl:text-4xl font-semibold">
             3. Solutions d’hébergement populaires
           </h2>
@@ -129,7 +129,7 @@ export default function Blog1() {
           />
         </li>
       </ul>
-      <div className="space-y-5">
+      <div className="space-y-8">
         <h2 className="text-2xl  lg:text-3xl 2xl:text-4xl font-semibold">
           FAQ : réponses aux questions fréquentes
         </h2>
@@ -149,7 +149,7 @@ export default function Blog1() {
           ))}
         </Accordion>
       </div>
-      <div className="space-y-5">
+      <div className="space-y-8">
         <h2 className="text-2xl  lg:text-3xl 2xl:text-4xl font-semibold">
           Conclusion
         </h2>
