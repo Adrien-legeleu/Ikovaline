@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "../ui/badge";
 
 interface BlogType {
   date: string;
@@ -13,7 +13,6 @@ interface BlogType {
 }
 
 const currentYear = new Date().getFullYear();
-const now = new Date();
 
 const dataBlog: BlogType[] = [
   {
@@ -63,6 +62,7 @@ function Blog() {
                 />
 
                 <div className="flex flex-row gap-4 items-center">
+                  <Badge>Nouveau</Badge>
                   <p className="flex flex-row gap-2 text-sm items-center">
                     <span className="text-muted-foreground">Par</span>{" "}
                     <Avatar className="h-6 w-6">
