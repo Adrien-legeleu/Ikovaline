@@ -129,7 +129,7 @@ export default function BLog2() {
             <br />- Mentions légales
           </p>
           <Image
-            src="/blog/blog2/exemple-arborescence-site-vitrine.jpg"
+            src="/blog/blog2/exemple-arborescence-site-e-commerce.jpg"
             alt="Exemple d'arborescence site web"
             width={600}
             height={400}

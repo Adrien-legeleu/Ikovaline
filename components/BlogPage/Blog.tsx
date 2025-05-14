@@ -11,17 +11,21 @@ interface BlogType {
   by: string;
   slug: string;
 }
-const dataBlog = [
+
+const currentYear = new Date().getFullYear();
+const now = new Date();
+
+const dataBlog: BlogType[] = [
   {
-    date: "12 avril 2025",
-    title: "Comment héberger un site web en 2025 : guide complet",
+    date: "2024-04-05",
+    title: `Comment héberger un site web en ${currentYear} : guide complet`,
     desc: "Vous avez un site mais ne savez pas comment le mettre en ligne ? Ce guide vous explique comment héberger un site web étape par étape, avec les meilleures solutions en 2025.",
     img: "/blog/blog1/comment-heberger-un-site.jpg",
     by: "Ikovaline",
     slug: "comment-heberger-un-site-web",
   },
   {
-    date: "15 mai 2025",
+    date: "2024-05-15",
     title:
       "Arborescence site web : guide complet pour structurer votre site efficacement",
     desc: "Comprenez comment organiser votre site pour un meilleur SEO et une navigation optimale : exemples, bonnes pratiques et schéma visuel inclus.",
@@ -42,6 +46,11 @@ function Blog() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {dataBlog.map((bl: BlogType, index) => {
+            const blogDateObj = new Date(bl.date); // pour les calculs
+            const isNew =
+              (now.getTime() - blogDateObj.getTime()) / (1000 * 3600 * 24) <=
+              30;
+
             return (
               <Link
                 key={bl.slug}
@@ -57,7 +66,7 @@ function Blog() {
                 />
 
                 <div className="flex flex-row gap-4 items-center">
-                  <Badge>Nouveau</Badge>
+                  {isNew && <Badge>Nouveau</Badge>}
                   <p className="flex flex-row gap-2 text-sm items-center">
                     <span className="text-muted-foreground">Par</span>{" "}
                     <Avatar className="h-6 w-6">
