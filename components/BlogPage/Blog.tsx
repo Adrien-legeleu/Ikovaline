@@ -13,12 +13,21 @@ interface BlogType {
 }
 const dataBlog = [
   {
-    date: "12 mai 2025",
+    date: "12 avril 2025",
     title: "Comment héberger un site web en 2025 : guide complet",
     desc: "Vous avez un site mais ne savez pas comment le mettre en ligne ? Ce guide vous explique comment héberger un site web étape par étape, avec les meilleures solutions en 2025.",
     img: "/blog/blog1/comment-heberger-un-site.jpg",
     by: "Ikovaline",
     slug: "comment-heberger-un-site-web",
+  },
+  {
+    date: "15 mai 2025",
+    title:
+      "Arborescence site web : guide complet pour structurer votre site efficacement",
+    desc: "Comprenez comment organiser votre site pour un meilleur SEO et une navigation optimale : exemples, bonnes pratiques et schéma visuel inclus.",
+    img: "/blog/blog2/arborescence-site-web-illustration.jpeg",
+    by: "Ikovaline",
+    slug: "arborescence-site-web",
   },
 ];
 
@@ -50,9 +59,9 @@ function Blog() {
                 <div className="flex flex-row gap-4 items-center">
                   <Badge>Nouveau</Badge>
                   <p className="flex flex-row gap-2 text-sm items-center">
-                    <span className="text-muted-foreground">By</span>{" "}
+                    <span className="text-muted-foreground">Par</span>{" "}
                     <Avatar className="h-6 w-6">
-                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarImage src="/images/logo/ikovaline_logo_unique.png" />
                       <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <span>{bl.by}</span>

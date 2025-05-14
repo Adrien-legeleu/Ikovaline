@@ -12,9 +12,11 @@ export const blogMetadata: Record<
       "Découvrez notre guide complet pour apprendre à héberger un site web : types d'hébergement, étapes essentielles et meilleures plateformes en 2025.",
     ogImage: "/blog/blog1/comment-heberger-un-site.jpg",
   },
-  "autre-article": {
-    title: "Titre de l'autre article",
-    description: "Sa description...",
-    ogImage: "/blog/blog2/image.jpg",
+  "arborescence-site-web": {
+    title:
+      "Arborescence site web : guide complet pour structurer votre site efficacement",
+    description:
+      "Tout savoir sur l’arborescence d’un site web : structure hiérarchique, SEO, UX, exemples concrets et outils pour mieux organiser vos pages.",
+    ogImage: "/blog/blog2/arborescence-site-web-illustration.jpg",
   },
 };

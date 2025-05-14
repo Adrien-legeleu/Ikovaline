@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "référencement naturel",
   ],
   openGraph: {
-    title: "Ikovaline - Expert Marketing Digital et Transformation",
+    title: "Ikovaline - L'agence web qui propulse votre business !",
     description:
       "Start-up étudiante experte en marketing digital, Ikovaline accompagne votre transformation numérique et booste votre visibilité en ligne.",
     url: "https://www.ikovaline.com",

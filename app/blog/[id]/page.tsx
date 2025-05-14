@@ -11,6 +11,7 @@ const componentsMap: Record<
   () => Promise<{ default: ComponentType<unknown> }>
 > = {
   "comment-heberger-un-site-web": () => import("@/components/BlogPage/Blog1"),
+  "arborescence-site-web": () => import("@/components/BlogPage/Blog2"),
 };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
