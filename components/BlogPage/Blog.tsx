@@ -17,7 +17,7 @@ const now = new Date();
 
 const dataBlog: BlogType[] = [
   {
-    date: "2024-04-05",
+    date: "2025-04-05",
     title: `Comment héberger un site web en ${currentYear} : guide complet`,
     desc: "Vous avez un site mais ne savez pas comment le mettre en ligne ? Ce guide vous explique comment héberger un site web étape par étape, avec les meilleures solutions en 2025.",
     img: "/blog/blog1/comment-heberger-un-site.jpg",
@@ -25,7 +25,7 @@ const dataBlog: BlogType[] = [
     slug: "comment-heberger-un-site-web",
   },
   {
-    date: "2024-05-15",
+    date: "2025-05-15",
     title:
       "Arborescence site web : guide complet pour structurer votre site efficacement",
     desc: "Comprenez comment organiser votre site pour un meilleur SEO et une navigation optimale : exemples, bonnes pratiques et schéma visuel inclus.",
@@ -37,7 +37,7 @@ const dataBlog: BlogType[] = [
 
 function Blog() {
   return (
-    <div className="w-full py-20 px-10  max-w-[1400px] max-auto">
+    <div className="w-full py-20 px-10 max-w-[1400px] max-auto">
       <div className="container mx-auto flex flex-col gap-14">
         <div className="flex w-full flex-col sm:flex-row sm:justify-between sm:items-center gap-8">
           <h2 className="text-3xl md:text-5xl tracking-tighter max-w-xl font-regular">
@@ -46,16 +46,13 @@ function Blog() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {dataBlog.map((bl: BlogType, index) => {
-            const blogDateObj = new Date(bl.date); // pour les calculs
-            const isNew =
-              (now.getTime() - blogDateObj.getTime()) / (1000 * 3600 * 24) <=
-              30;
-
             return (
               <Link
                 key={bl.slug}
                 href={`blog/${bl.slug}`}
-                className={`flex flex-col gap-4 hover:opacity-75 cursor-pointer ${index == 0 && "md:col-span-2 lg:col-span-3"}`}
+                className={`flex flex-col gap-4 hover:opacity-75 cursor-pointer ${
+                  index === 0 ? "md:col-span-2 lg:col-span-3" : ""
+                }`}
               >
                 <Image
                   width={500}
@@ -66,12 +63,11 @@ function Blog() {
                 />
 
                 <div className="flex flex-row gap-4 items-center">
-                  {isNew && <Badge>Nouveau</Badge>}
                   <p className="flex flex-row gap-2 text-sm items-center">
                     <span className="text-muted-foreground">Par</span>{" "}
                     <Avatar className="h-6 w-6">
                       <AvatarImage src="/images/logo/ikovaline_logo_unique.png" />
-                      <AvatarFallback>CN</AvatarFallback>
+                      <AvatarFallback>IK</AvatarFallback>
                     </Avatar>
                     <span>{bl.by}</span>
                   </p>
