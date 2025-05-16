@@ -24,13 +24,22 @@ const dataBlog: BlogType[] = [
     slug: "comment-heberger-un-site-web",
   },
   {
-    date: "2025-05-15",
+    date: "2025-05-12",
     title:
       "Arborescence site web : guide complet pour structurer votre site efficacement",
     desc: "Comprenez comment organiser votre site pour un meilleur SEO et une navigation optimale : exemples, bonnes pratiques et schéma visuel inclus.",
     img: "/blog/blog2/arborescence-site-web-illustration.jpeg",
     by: "Ikovaline",
     slug: "arborescence-site-web",
+  },
+  {
+    date: "2025-05-16",
+    title:
+      "comment être référencé sur google gratuitement: 3 étapes pour visibilité optimale",
+    desc: "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",
+    img: "/blog/blog3/comment-etre-reference-sur-google-gratuitement-illustration.jpg",
+    by: "Ikovaline",
+    slug: "comment-etre-reference-sur-google-gratuitement",
   },
 ];
 

@@ -1,7 +1,9 @@
+import Buttons from "@/components/BlogPage/Buttons";
+import Parralax from "@/components/BlogPage/Parralax";
+import { ScrollProgress } from "@/components/magicui/scroll-progress";
 import { blogMetadata } from "@/lib/blogMetadata";
 import { notFound } from "next/navigation";
 import { ComponentType } from "react";
-
 interface ProductPageProps {
   params: Promise<{ id: string }>;
 }
@@ -12,6 +14,8 @@ const componentsMap: Record<
 > = {
   "comment-heberger-un-site-web": () => import("@/components/BlogPage/Blog1"),
   "arborescence-site-web": () => import("@/components/BlogPage/Blog2"),
+  "comment-etre-reference-sur-google-gratuitement": () =>
+    import("@/components/BlogPage/Blog3"),
 };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
@@ -31,9 +35,13 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: `https://tonsite.fr/blog/${id}`,
+      url: `https://www.ikovaline.com//blog/${id}`,
       images: [
-        { url: `https://tonsite.fr${meta.ogImage}`, width: 1200, height: 630 },
+        {
+          url: `https://www.ikovaline.com${meta.ogImage}`,
+          width: 1200,
+          height: 630,
+        },
       ],
       type: "article",
     },
@@ -41,7 +49,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
-      images: [`https://tonsite.fr${meta.ogImage}`],
+      images: [`https://www.ikovaline.com${meta.ogImage}`],
     },
   };
 }
@@ -58,8 +66,13 @@ export default async function Blog({ params }: ProductPageProps) {
   const Component = mod.default;
 
   return (
-    <div className="lg:py-24 py-12 px-2 max-w-[1400px] mx-auto sm:px-10 ">
+    <div className="lg:py-24 py-12 px-2 sm:px-10 ">
+      {/* <div className="fixed top-1/3 left-1/2 z-0 ">
+        <Parralax />
+      </div> */}
+      <ScrollProgress />
       <Component />
+      <Buttons />
     </div>
   );
 }

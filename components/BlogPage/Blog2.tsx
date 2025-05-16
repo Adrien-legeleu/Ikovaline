@@ -50,7 +50,7 @@ export default function BLog2() {
         />
       </div>
 
-      <ul className="space-y-24 text-center sm:text-left">
+      <ul className="space-y-24 text-left">
         <li className="space-y-8">
           <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             1. C’est quoi une arborescence de site web ?

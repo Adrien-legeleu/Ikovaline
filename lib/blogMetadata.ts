@@ -19,4 +19,12 @@ export const blogMetadata: Record<
       "Tout savoir sur l’arborescence d’un site web : structure hiérarchique, SEO, UX, exemples concrets et outils pour mieux organiser vos pages.",
     ogImage: "/blog/blog2/arborescence-site-web-illustration.jpg",
   },
+  "comment-etre-reference-sur-google-gratuitement": {
+    title:
+      "comment être référencé sur google gratuitement: 3 étapes pour visibilité optimale",
+    description:
+      "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",
+    ogImage:
+      "/blog/blog3/comment-etre-reference-sur-google-gratuitement-illustration.jpg",
+  },
 };
