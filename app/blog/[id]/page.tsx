@@ -68,6 +68,7 @@ export default async function Blog({ params }: ProductPageProps) {
 
   return (
     <div className="lg:py-24 relative py-12 px-2 sm:px-10 ">
+      <Buttons />
       <div
         className={cn(
           "absolute inset-0",
@@ -78,7 +79,6 @@ export default async function Blog({ params }: ProductPageProps) {
       />
       <ScrollProgress />
       <Component />
-      <Buttons />
     </div>
   );
 }

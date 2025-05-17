@@ -10,7 +10,7 @@ export default function Buttons() {
   };
 
   return (
-    <div className="fixed bottom-24  sm:bottom-5 space-y-2 right-2 sm:right-5">
+    <div className="fixed bottom-24  z-10 sm:bottom-5 space-y-2 right-2 sm:right-5">
       <Button
         className=" w-12 h-12  flex items-center justify-center "
         variant={"secondary"}
