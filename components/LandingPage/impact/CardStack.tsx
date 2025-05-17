@@ -41,7 +41,7 @@ const CardSticky = React.forwardRef<HTMLDivElement, CardStickyProps>(
     },
     ref
   ) => {
-    const y = index * incrementY + 120;
+    const y = index * incrementY + 1;
     const z = index * incrementZ;
 
     return (
