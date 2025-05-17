@@ -180,7 +180,7 @@ const MarqueeDemoVertical = () => (
 
 const Review = () => {
   return (
-    <section className="bg-background my-20 relative overflow-hidden pt-32">
+    <section className="bg-background my-20 relative max-sm:overflow-hidden pt-32">
       <div className="container z-10 relative mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

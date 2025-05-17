@@ -30,7 +30,7 @@ const faqData = [
 
 export default function Blog3() {
   return (
-    <div className="md:px-20  px-5 z-10 relative bg-transparent py-20 max-w-5xl mx-auto space-y-20">
+    <div className="md:px-20  px-5 z-10 relative bg-transparent py-20 max-w-5xl mx-auto space-y-40">
       {/* INTRO + H1 */}
       <div className="flex flex-col gap-12 justify-center  items-center">
         <h1 className="sm:text-4xl lg:text-5xl 2xl:text-6xl text-3xl text-center font-bold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-400 dark:to-neutral-100 bg-clip-text text-transparent">
@@ -56,8 +56,8 @@ export default function Blog3() {
       </div>
 
       {/* SOMMAIRE */}
-      <ul className="space-y-24 text-center sm:text-left">
-        <li className="space-y-8">
+      <ul className="space-y-36 text-center sm:text-left">
+        <li className="space-y-12">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             Sommaire
           </h2>
@@ -112,7 +112,7 @@ export default function Blog3() {
             </li>
           </ol>
         </li>
-        <li className="space-y-8" id="comprendre-le-référencement">
+        <li className="space-y-12" id="comprendre-le-référencement">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             1. Comprendre le référencement sur Google
           </h2>
@@ -156,8 +156,8 @@ export default function Blog3() {
             d’apparaître dans les premiers résultats.
           </p>
 
-          <div className="overflow-auto max-w-full rounded-3xl border border-neutral-300 dark:border-neutral-700">
-            <table className="w-full text-sm text-left">
+          <div className="overflow-auto max-w-full rounded-3xl border bg-white dark:bg-black border-neutral-300 dark:border-neutral-700">
+            <table className="w-full text-sm text-left bg-white dark:bg-black">
               <caption className="text-base font-semibold p-4">
                 Différents types de mots-clés et leur pertinence SEO
               </caption>
@@ -251,7 +251,7 @@ export default function Blog3() {
             clics (CTR) et la compréhension par les moteurs.
           </p>
         </li>
-        <li className="space-y-8" id="créer-un-contenu-de-qualité">
+        <li className="space-y-12" id="créer-un-contenu-de-qualité">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             2. Créer un contenu de qualité pour Google
           </h2>
@@ -368,7 +368,7 @@ export default function Blog3() {
             </ul>
           </p>
         </li>
-        <li className="space-y-8" id="optimiser-la-structure">
+        <li className="space-y-12" id="optimiser-la-structure">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             3. Optimiser la structure de son site web
           </h2>
@@ -464,7 +464,7 @@ export default function Blog3() {
             espacés sont des critères essentiels.
           </p>
         </li>
-        <li className="space-y-8" id="développer-une-stratégie-de-backlinks">
+        <li className="space-y-12" id="développer-une-stratégie-de-backlinks">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             4. Développer une stratégie de backlinks efficace
           </h2>
@@ -500,8 +500,8 @@ export default function Blog3() {
             l’attribut “follow” (ou non).
           </p>
 
-          <div className="overflow-auto max-w-full rounded-3xl border border-neutral-300 dark:border-neutral-700">
-            <table className="w-full text-sm text-left">
+          <div className="overflow-auto max-w-full rounded-3xl border bg-white dark:bg-black border-neutral-300 dark:border-neutral-700">
+            <table className="w-full text-sm text-left bg-white dark:bg-black">
               <caption className="text-base font-semibold p-4">
                 Les sources de backlinks et leur impact SEO
               </caption>
@@ -624,7 +624,7 @@ export default function Blog3() {
             .
           </p>
         </li>
-        <li className="space-y-8" id="mesurer-et-améliorer-ses-résultats">
+        <li className="space-y-12" id="mesurer-et-améliorer-ses-résultats">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             5. Mesurer et améliorer ses résultats de référencement
           </h2>
@@ -746,7 +746,7 @@ export default function Blog3() {
         textBtn="Demander mon audit SEO gratuit"
       />
 
-      <div className="space-y-8">
+      <div className="space-y-12">
         <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
           FAQ : réponses aux questions fréquentes
         </h2>
@@ -768,7 +768,7 @@ export default function Blog3() {
       </div>
 
       {/* Conclusion */}
-      <div className="space-y-8">
+      <div className="space-y-12">
         <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
           Conclusion
         </h2>

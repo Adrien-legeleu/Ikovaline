@@ -2,6 +2,7 @@ import Buttons from "@/components/BlogPage/Buttons";
 
 import { ScrollProgress } from "@/components/magicui/scroll-progress";
 import { blogMetadata } from "@/lib/blogMetadata";
+import { cn } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import { ComponentType } from "react";
 interface ProductPageProps {
@@ -66,7 +67,15 @@ export default async function Blog({ params }: ProductPageProps) {
   const Component = mod.default;
 
   return (
-    <div className="lg:py-24 py-12 px-2 sm:px-10 ">
+    <div className="lg:py-24 relative py-12 px-2 sm:px-10 ">
+      <div
+        className={cn(
+          "absolute inset-0",
+          "[background-size:20px_20px]",
+          "[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]",
+          "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"
+        )}
+      />
       <ScrollProgress />
       <Component />
       <Buttons />
