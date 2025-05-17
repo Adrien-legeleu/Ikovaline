@@ -72,8 +72,8 @@ export default async function Blog({ params }: ProductPageProps) {
         className={cn(
           "absolute inset-0",
           "[background-size:20px_20px]",
-          "[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]",
-          "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"
+          "[background-image:radial-gradient(#d4d4d4a0_1.2px,transparent_1px)]",
+          "dark:[background-image:radial-gradient(#404040da_1.2px,transparent_1px)]"
         )}
       />
       <ScrollProgress />
