@@ -1,5 +1,6 @@
 import { CallToAction } from "@/components/callToAction/CallToAction";
 import About from "@/components/LandingPage/about/About";
+import { Methodologie } from "@/components/LandingPage/impact/Impact";
 import Landing from "@/components/LandingPage/landing/Landing";
 import { Review } from "@/components/LandingPage/review/Review";
 import Services from "@/components/LandingPage/servicesSection/Services";
@@ -53,13 +54,15 @@ export default function Home() {
       <section id="services">
         <Services />
       </section>
+
+      <Review />
+      <Methodologie />
+      {/* <Achievements /> */}
       <CallToAction
         title="Améliorez votre visibilité en ligne dès aujourd'hui !"
         desc="Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets."
         textBtn="Commencez maintenant !"
       />
-
-      <Review />
     </div>
   );
 }

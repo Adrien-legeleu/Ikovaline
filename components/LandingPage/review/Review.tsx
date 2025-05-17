@@ -119,7 +119,7 @@ const ReviewCard = ({
 export function Review() {
   return (
     <div className="py-20 space-y-10" id="review">
-      <h2 className="sm:text-4xl text-3xl max-sm:px-5 text-center font-semibold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-400 dark:to-neutral-100 bg-clip-text text-transparent">
+      <h2 className="sm:text-4xl font-bold text-3xl max-sm:px-5 text-center  bg-gradient-to-t py-2 from-neutral-700 to-neutral-900 dark:from-neutral-200 dark:to-neutral-100 bg-clip-text text-transparent">
         Comment Ikovaline a boosté leur visibilité en ligne
       </h2>
 
