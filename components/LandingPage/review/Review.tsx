@@ -192,7 +192,7 @@ const Review = () => {
           <div className="flex justify-center">
             <div className="border py-1 px-4 rounded-3xl">Avis clients</div>
           </div>
-          <h2 className=" text-center text-4xl xl:text-5xl font-bold text-neutral-200 z-10 tracking-tighter mt-5">
+          <h2 className=" text-center text-4xl xl:text-5xl font-bold text-neutral-900 dark:text-neutral-200 z-10 tracking-tighter mt-5">
             Ce que nos clients disent de nous
           </h2>
           <p className="text-center mt-5 opacity-75">
