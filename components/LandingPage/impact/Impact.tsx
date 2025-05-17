@@ -33,7 +33,7 @@ const METHODOLOGIE_PHASES = [
 const Methodologie = () => {
   const { theme } = useTheme();
   return (
-    <div className="container min-h-svh place-content-center mx-auto  px-6 pb-32  xl:px-12">
+    <div className="container min-h-svh place-content-center mx-auto  px-6  xl:px-12">
       <div className="grid md:grid-cols-2 md:gap-12 xl:gap-16">
         <div className="left-0 top-36 md:sticky md:h-svh">
           <h2 className="mb-6 mt-4 text-4xl max-md:text-center text-neutral-900 dark:text-neutral-100 font-bold tracking-tight">
@@ -56,7 +56,7 @@ const Methodologie = () => {
             />
           </div>
         </div>
-        <ContainerScroll className="min-h-[400vh] space-y-8 py-12">
+        <ContainerScroll className="min-h-[220vh] space-y-8 py-12">
           {METHODOLOGIE_PHASES.map((phase, index) => (
             <CardSticky
               key={phase.id}

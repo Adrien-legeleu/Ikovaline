@@ -180,7 +180,7 @@ const MarqueeDemoVertical = () => (
 
 const Review = () => {
   return (
-    <section className="bg-background my-20 relative">
+    <section className="bg-background my-20 relative overflow-hidden pt-32">
       <div className="container z-10 relative mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -207,7 +207,7 @@ const Review = () => {
         initial={{ scale: 0, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute -top-10 left-1/2 h-48 w-48 bg-secondary z-0 blur-[150px] -translate-x-1/2"
+        className="absolute top-32 left-1/2 md:h-48 h-36 w-36 md:w-48 bg-secondary z-0 blur-[110px] md:blur-[150px]  -translate-x-1/2"
       />
     </section>
   );

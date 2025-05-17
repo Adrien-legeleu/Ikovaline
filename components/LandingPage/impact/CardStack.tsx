@@ -28,6 +28,19 @@ const ContainerScroll = React.forwardRef<
 });
 ContainerScroll.displayName = "ContainerScroll";
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
 const CardSticky = React.forwardRef<HTMLDivElement, CardStickyProps>(
   (
     {
@@ -41,7 +54,8 @@ const CardSticky = React.forwardRef<HTMLDivElement, CardStickyProps>(
     },
     ref
   ) => {
-    const y = index * incrementY + 1;
+    const isMobile = useIsMobile();
+    const y = index * incrementY + (isMobile ? 10 : 120);
     const z = index * incrementZ;
 
     return (

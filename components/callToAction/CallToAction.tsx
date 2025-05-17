@@ -12,8 +12,8 @@ interface ICallToAction {
 
 export function CallToAction({ title, desc, textBtn }: ICallToAction) {
   return (
-    <section className="overflow-hidden pt-0 md:pt-0  ">
-      <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 xss:px-8 px-4 py-12 pt-16 text-center sm:gap-8 md:py-24">
+    <section className="overflow-hidden  ">
+      <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 xss:px-8 px-4 pb-12 md:pb-24 pt-24 md:pt-36 text-center sm:gap-8 ">
         <h2 className="md:text-4xl max-w-xl lg:text-5xl 2xl:text-6xl text-3xl text-center font-bold text-neutral-900 dark:text-neutral-100">
           {title}
         </h2>
