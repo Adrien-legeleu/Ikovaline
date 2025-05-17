@@ -30,9 +30,9 @@ const faqData = [
 
 export default function Blog3() {
   return (
-    <div className="md:px-20  px-5 z-10 relative bg-transparent py-20 max-w-5xl mx-auto space-y-40">
+    <div className="md:px-20   z-10 relative bg-transparent py-20 max-w-5xl mx-auto space-y-40">
       {/* INTRO + H1 */}
-      <div className="flex flex-col gap-12 justify-center  items-center">
+      <div className="flex flex-col px-5 gap-12 justify-center  items-center">
         <h1 className="sm:text-4xl lg:text-5xl 2xl:text-6xl text-3xl text-center font-bold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-400 dark:to-neutral-100 bg-clip-text text-transparent">
           Comment être référencé sur Google gratuitement: SEO pour améliorer son
           site
@@ -56,7 +56,7 @@ export default function Blog3() {
       </div>
 
       {/* SOMMAIRE */}
-      <ul className="space-y-36 text-center sm:text-left">
+      <ul className="space-y-36 px-5 text-center sm:text-left">
         <li className="space-y-12">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             Sommaire
@@ -746,7 +746,7 @@ export default function Blog3() {
         textBtn="Demander mon audit SEO gratuit"
       />
 
-      <div className="space-y-12">
+      <div className="space-y-12 px-5">
         <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
           FAQ : réponses aux questions fréquentes
         </h2>
@@ -768,7 +768,7 @@ export default function Blog3() {
       </div>
 
       {/* Conclusion */}
-      <div className="space-y-12">
+      <div className="space-y-12 px-5">
         <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
           Conclusion
         </h2>

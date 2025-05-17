@@ -67,7 +67,7 @@ export default async function Blog({ params }: ProductPageProps) {
   const Component = mod.default;
 
   return (
-    <div className="lg:py-24 relative py-12 px-2 sm:px-10 ">
+    <div className="lg:py-24 relative py-12  ">
       <Buttons />
       <div
         className={cn(
@@ -78,7 +78,9 @@ export default async function Blog({ params }: ProductPageProps) {
         )}
       />
       <ScrollProgress />
-      <Component />
+      <div className="px-2 sm:px-10">
+        <Component />
+      </div>
     </div>
   );
 }

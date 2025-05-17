@@ -31,7 +31,7 @@ export function CallToAction({ title, desc, textBtn }: ICallToAction) {
 
         {/* Animation au scroll */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0.4, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.7 }}
           className="pointer-events-none absolute inset-0 rounded-3xl shadow-glowMobile sm:shadow-glow"
