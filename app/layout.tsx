@@ -7,23 +7,24 @@ import { ThemeProvider } from "@/components/theme.provider";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Ikovaline - L'agence digitale qui propulse votre business !",
+  title: "Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs",
   description:
-    "Découvrez comment Ikovaline vous aide à booster votre visibilité et votre croissance grâce au SEO, publicité, création de sites web et bien plus.",
+    "Agence digitale à taille humaine, Ikovaline accompagne les PME et indépendants pour améliorer leur présence en ligne : référencement local, création de site web performant, gestion Google Business Profile et stratégie sur-mesure.",
   keywords: [
-    "marketing digital",
-    "SEO",
-    "publicité en ligne",
-    "transformation numérique",
-    "stratégies digitales",
+    "agence digitale PME",
+    "visibilité en ligne",
+    "création site internet",
+    "SEO local",
+    "accompagnement digital",
+    "Google Business Profile",
+    "stratégie web",
     "Ikovaline",
-    "site vitrine",
-    "site web",
-    "agence web",
-    "référencement naturel",
+    "croissance digitale",
+    "agence marketing numérique",
   ],
   openGraph: {
-    title: "Ikovaline - L'agence web qui propulse votre business !",
+    title:
+      "Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs",
     description:
       "Start-up étudiante experte en marketing digital, Ikovaline accompagne votre transformation numérique et booste votre visibilité en ligne.",
     url: "https://www.ikovaline.com",

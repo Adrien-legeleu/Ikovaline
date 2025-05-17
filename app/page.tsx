@@ -57,7 +57,6 @@ export default function Home() {
 
       <Review />
       <Methodologie />
-      {/* <Achievements /> */}
       <CallToAction
         title="Améliorez votre visibilité en ligne dès aujourd'hui !"
         desc="Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets."
