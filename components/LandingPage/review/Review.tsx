@@ -1,4 +1,5 @@
 "use client";
+
 import Review1 from "@/public/images/logo/frewinglas-logo.png";
 import Review2 from "@/public/images/logo/jean-cristophe-Lelandais.jpeg";
 import Review3 from "@/public/images/logo/logo-lelandais.png";
@@ -6,10 +7,17 @@ import Review4 from "@/public/images/logo/hl-horner-logo.jpg";
 import Review5 from "@/public/images/logo/logo-lora.png";
 
 import { motion } from "framer-motion";
+import Marquee from "@/components/ui/marquee";
+import Image, { StaticImageData } from "next/image";
 
-import { TestimonialsColumn } from "./TestimonialsColumns";
+interface ReviewType {
+  name: string;
+  role: string;
+  text: string;
+  image: string | StaticImageData;
+}
 
-const reviews = [
+const reviews: ReviewType[] = [
   {
     name: "L’Ora Fashion Paris",
     role: "Optimisation Instagram - Google Shopping",
@@ -73,8 +81,102 @@ const reviews = [
 ];
 
 const firstColumn = reviews.slice(0, 3);
+const firstColumnResponsive = reviews.slice(0, 5);
 const secondColumn = reviews.slice(3, 6);
+const secondColumnResonsive = reviews.slice(5, 10);
 const thirdColumn = reviews.slice(6, 10);
+
+const ReviewCard = ({
+  image,
+  name,
+  role,
+  text,
+}: {
+  image: string | StaticImageData;
+  name: string;
+  role: string;
+  text: string;
+}) => (
+  <div className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-sm w-full bg-white dark:bg-neutral-900">
+    <div className="mb-4 text-base">{text}</div>
+    <div className="flex items-center gap-2 mt-5">
+      {typeof image === "string" ? (
+        <img
+          width={40}
+          height={40}
+          src={image}
+          alt={name}
+          className="h-10 w-10 rounded-full object-cover"
+        />
+      ) : (
+        <Image
+          width={40}
+          height={40}
+          src={image.src}
+          alt={name}
+          className="h-10 w-10 rounded-full object-cover"
+        />
+      )}
+      <div className="flex flex-col ml-2">
+        <div className="font-medium tracking-tight leading-5">{name}</div>
+        <div className="leading-5 opacity-60 tracking-tight text-xs">
+          {role}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const MarqueeDemoVertical = () => (
+  <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden">
+    <Marquee pauseOnHover vertical className="[--duration:20s] max-lg:hidden">
+      {firstColumn.map((review) => (
+        <ReviewCard key={review.name} {...review} />
+      ))}
+    </Marquee>
+    <Marquee
+      reverse
+      pauseOnHover
+      vertical
+      className="[--duration:20s] max-lg:hidden "
+    >
+      {secondColumn.map((review) => (
+        <ReviewCard key={review.name} {...review} />
+      ))}
+    </Marquee>
+    <Marquee pauseOnHover vertical className="[--duration:20s] max-lg:hidden">
+      {thirdColumn.map((review) => (
+        <ReviewCard key={review.name} {...review} />
+      ))}
+    </Marquee>
+    <Marquee
+      pauseOnHover
+      vertical
+      className="[--duration:20s] lg:hidden max-sm:hidden"
+    >
+      {firstColumnResponsive.map((review) => (
+        <ReviewCard key={review.name} {...review} />
+      ))}
+    </Marquee>
+    <Marquee
+      pauseOnHover
+      vertical
+      reverse
+      className="[--duration:20s] lg:hidden max-sm:hidden"
+    >
+      {secondColumnResonsive.map((review) => (
+        <ReviewCard key={review.name} {...review} />
+      ))}
+    </Marquee>
+    <Marquee pauseOnHover vertical className="[--duration:20s] sm:hidden">
+      {reviews.map((review) => (
+        <ReviewCard key={review.name} {...review} />
+      ))}
+    </Marquee>
+    <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background"></div>
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background"></div>
+  </div>
+);
 
 const Review = () => {
   return (
@@ -88,29 +190,17 @@ const Review = () => {
           className="flex flex-col z-10 items-center justify-center max-w-[540px] mx-auto"
         >
           <div className="flex justify-center">
-            <div className="border py-1 px-4   rounded-3xl">Avis clients</div>
+            <div className="border py-1 px-4 rounded-3xl">Avis clients</div>
           </div>
-
-          <h2 className="text-xl sm:text-2xl text-center md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
+          <h2 className=" text-center text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
             Ce que nos clients disent de nous
           </h2>
           <p className="text-center mt-5 opacity-75">
             Découvrez les avis et retours d&apos;expérience de nos clients.
           </p>
         </motion.div>
-
         <div className="flex justify-center z-10 gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
-          <TestimonialsColumn testimonials={firstColumn} duration={15} />
-          <TestimonialsColumn
-            testimonials={secondColumn}
-            className="hidden md:block"
-            duration={19}
-          />
-          <TestimonialsColumn
-            testimonials={thirdColumn}
-            className="hidden lg:block"
-            duration={17}
-          />
+          <MarqueeDemoVertical />
         </div>
       </div>
       <motion.div

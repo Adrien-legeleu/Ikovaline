@@ -33,14 +33,14 @@ const METHODOLOGIE_PHASES = [
 const Methodologie = () => {
   const { theme } = useTheme();
   return (
-    <div className="container min-h-svh place-content-center  px-6 pb-10  xl:px-12">
+    <div className="container min-h-svh place-content-center mx-auto  px-6 pb-32  xl:px-12">
       <div className="grid md:grid-cols-2 md:gap-12 xl:gap-16">
         <div className="left-0 top-36 md:sticky md:h-svh">
-          <h2 className="mb-6 mt-4 text-4xl text-neutral-900 dark:text-neutral-100 font-bold tracking-tight">
+          <h2 className="mb-6 mt-4 text-4xl max-md:text-center text-neutral-900 dark:text-neutral-100 font-bold tracking-tight">
             Une méthode claire pour{" "}
             <span className="">booster votre visibilité en ligne</span>
           </h2>
-          <p className="max-w-prose md:text-sm lg:text-base text-neutral-700 dark:text-neutral-300">
+          <p className="max-w-prose md:text-sm  max-md:text-center lg:text-base text-neutral-700 dark:text-neutral-300">
             Chez Ikovaline, nous accompagnons les entreprises dans leur
             transformation digitale à travers une méthode structurée, pensée
             pour des résultats concrets. Chaque étape est optimisée pour le
