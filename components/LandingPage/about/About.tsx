@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { AnimatedTooltip } from "../../ui/animated-tooltip";
 import { Button } from "../../ui/button";
-import { TextGenerateEffect } from "../../ui/text-generate-effect";
 import Img1 from "@/public/images/About/team-florent-profil.jpg";
 import Img2 from "@/public/images/About/team-chiara-profil.jpg";
 import Img3 from "@/public/images/About/team-adam-profil.jpg";
@@ -14,6 +13,7 @@ import Img8 from "@/public/images/About/team-victor-profil.jpg";
 import Img9 from "@/public/images/About/team-ronan-profil.jpg";
 import Img10 from "@/public/images/About/team-victor-pifferi-profil.jpg";
 import Img11 from "@/public/images/About/team-saif-profil.jpg";
+import { MagicText } from "@/components/magicui/MagicText";
 
 export default function About() {
   const people1 = [
@@ -101,14 +101,17 @@ export default function About() {
   ];
 
   const words = `
-Ikovaline est une start-up innovante spécialisée en stratégie digitale, marketing numérique et gestion de projet. Nous accompagnons les entreprises dans la création, l’optimisation et la promotion de leurs solutions digitales. Grâce à une approche personnalisée axée sur la performance, nous aidons nos clients à améliorer leur visibilité en ligne et à générer une croissance durable.`;
+  🚀 Ikovaline est une start-up innovante spécialisée en stratégie digitale, marketing numérique et gestion de projet.
+  🤝 Nous accompagnons les entreprises dans la création, l’optimisation et la promotion de leurs solutions digitales.
+  📈 Grâce à une approche personnalisée axée sur la performance, nous aidons nos clients à améliorer leur visibilité en ligne et à générer une croissance durable.
+  `;
 
   return (
     <div
       className="py-20 gap-10  max-w-3xl flex flex-col mx-auto relative items-center justify-center"
       id="about"
     >
-      <TextGenerateEffect words={words} />
+      <MagicText text={words} />
       <div className="space-y-2 ">
         <div className="flex sm:flex-row items-center justify-center  gap-2  w-full">
           <AnimatedTooltip items={people1} />
