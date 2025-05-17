@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { AnimatedTooltip } from "../../ui/animated-tooltip";
 import { Button } from "../../ui/button";
@@ -13,6 +14,7 @@ import Img8 from "@/public/images/About/team-victor-profil.jpg";
 import Img9 from "@/public/images/About/team-ronan-profil.jpg";
 import Img10 from "@/public/images/About/team-victor-pifferi-profil.jpg";
 import Img11 from "@/public/images/About/team-saif-profil.jpg";
+import { motion } from "framer-motion";
 
 export default function About() {
   const people1 = [
@@ -104,11 +106,11 @@ Ikovaline est une start-up innovante spécialisée en stratégie digitale, marke
 
   return (
     <div
-      className="py-20 gap-5 flex flex-col max-w-3xl mx-auto items-center justify-center"
+      className="py-20 gap-10  max-w-3xl flex flex-col mx-auto relative items-center justify-center"
       id="about"
     >
       <TextGenerateEffect words={words} />
-      <div className="space-y-2">
+      <div className="space-y-2 ">
         <div className="flex sm:flex-row items-center justify-center  gap-2  w-full">
           <AnimatedTooltip items={people1} />
         </div>

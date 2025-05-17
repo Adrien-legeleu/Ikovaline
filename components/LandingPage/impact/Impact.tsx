@@ -40,7 +40,7 @@ const Methodologie = () => {
             Une méthode claire pour{" "}
             <span className="">booster votre visibilité en ligne</span>
           </h2>
-          <p className="max-w-prose  text-neutral-700 dark:text-neutral-300">
+          <p className="max-w-prose md:text-sm lg:text-base text-neutral-700 dark:text-neutral-300">
             Chez Ikovaline, nous accompagnons les entreprises dans leur
             transformation digitale à travers une méthode structurée, pensée
             pour des résultats concrets. Chaque étape est optimisée pour le
@@ -72,7 +72,7 @@ const Methodologie = () => {
                 </h3>
               </div>
 
-              <p className="text-neutral-700 dark:text-neutral-300 ">
+              <p className="text-neutral-700 md:text-sm lg:text-base dark:text-neutral-300 ">
                 {phase.description}
               </p>
             </CardSticky>

@@ -91,7 +91,7 @@ const Review = () => {
             <div className="border py-1 px-4   rounded-3xl">Avis clients</div>
           </div>
 
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
+          <h2 className="text-xl sm:text-2xl text-center md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
             Ce que nos clients disent de nous
           </h2>
           <p className="text-center mt-5 opacity-75">
@@ -113,7 +113,12 @@ const Review = () => {
           />
         </div>
       </div>
-      <div className="absolute -top-10 left-1/2 h-48 w-48 bg-secondary z-0 blur-[150px] -translate-x-1/2" />
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="absolute -top-10 left-1/2 h-48 w-48 bg-secondary z-0 blur-[150px] -translate-x-1/2"
+      />
     </section>
   );
 };

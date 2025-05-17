@@ -22,7 +22,7 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className="dark:text-neutral-200 text-black opacity-0"
+              className="dark:text-neutral-200 tracking-wider leading-relaxed text-black opacity-0"
               initial={{ opacity: 0, filter: "blur(10px)" }}
               whileInView={{
                 opacity: 1,
