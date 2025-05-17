@@ -1,142 +1,121 @@
-import { cn } from "@/lib/utils";
-import Marquee from "@/components/ui/marquee";
+"use client";
 import Review1 from "@/public/images/logo/frewinglas-logo.png";
 import Review2 from "@/public/images/logo/jean-cristophe-Lelandais.jpeg";
 import Review3 from "@/public/images/logo/logo-lelandais.png";
 import Review4 from "@/public/images/logo/hl-horner-logo.jpg";
 import Review5 from "@/public/images/logo/logo-lora.png";
-import Image, { StaticImageData } from "next/image";
+
+import { motion } from "framer-motion";
+
+import { TestimonialsColumn } from "./TestimonialsColumns";
 
 const reviews = [
   {
     name: "L’Ora Fashion Paris",
-    username: "Optimisation Instagram - Google Shopping",
-    body: "Grâce à Ikovaline, nous avons considérablement augmenté notre visibilité en ligne. Leur expertise sur Instagram et Google Shopping a dynamisé nos ventes.",
-    img: Review5,
+    role: "Optimisation Instagram - Google Shopping",
+    text: "Grâce à Ikovaline, nous avons considérablement augmenté notre visibilité en ligne. Leur expertise sur Instagram et Google Shopping a dynamisé nos ventes.",
+    image: Review5,
   },
   {
     name: "L’Émotion",
-    username: "Gestion Google My Business - Consulting",
-    body: "Ils ont transformé notre image en ligne et apporté des conseils stratégiques pour développer notre activité. Une équipe très réactive !",
-    img: "https://avatar.vercel.sh/rauchg",
+    role: "Gestion Google My Business - Consulting",
+    text: "Ils ont transformé notre image en ligne et apporté des conseils stratégiques pour développer notre activité. Une équipe très réactive !",
+    image: "https://avatar.vercel.sh/rauchg",
   },
   {
     name: "Lelandais Fermetures",
-    username: "Gestion Google My Business - Leads locaux",
-    body: "Depuis qu’Ikovaline gère notre Google My Business, nous recevons beaucoup plus de demandes locales pertinentes. Excellent service !",
-    img: Review3,
+    role: "Gestion Google My Business - Leads locaux",
+    text: "Depuis qu’Ikovaline gère notre Google My Business, nous recevons beaucoup plus de demandes locales pertinentes. Excellent service !",
+    image: Review3,
   },
   {
     name: "Frewinglas",
-    username: "Création site web - SEO - LinkedIn",
-    body: "Le site qu’ils ont créé est moderne et bien référencé. Nos profils LinkedIn sont désormais des outils de prospection efficaces.",
-    img: Review1,
+    role: "Création site web - SEO - LinkedIn",
+    text: "Le site qu’ils ont créé est moderne et bien référencé. Nos profils LinkedIn sont désormais des outils de prospection efficaces.",
+    image: Review1,
   },
   {
     name: "Need Money For Shop",
-    username: "Création site web - Publicité - Développement commercial",
-    body: "Ikovaline a su adapter ses services à nos besoins précis. Leur approche marketing a boosté nos campagnes publicitaires.",
-    img: "https://avatar.vercel.sh/rauchg",
+    role: "Création site web - Publicité - Développement commercial",
+    text: "Ikovaline a su adapter ses services à nos besoins précis. Leur approche marketing a boosté nos campagnes publicitaires.",
+    image: "https://avatar.vercel.sh/rauchg",
   },
   {
     name: "L’Art du Bonsaï",
-    username: "Création site web - Contenu visuel - Publicité",
-    body: "Leur travail créatif et stratégique a fait passer notre entreprise à un autre niveau. Nos clients adorent notre nouveau site et visuel !",
-    img: "https://avatar.vercel.sh/rauchg",
+    role: "Création site web - Contenu visuel - Publicité",
+    text: "Leur travail créatif et stratégique a fait passer notre entreprise à un autre niveau. Nos clients adorent notre nouveau site et visuel !",
+    image: "https://avatar.vercel.sh/rauchg",
   },
   {
     name: "HL CORNER",
-    username: "Création site web - Visibilité locale",
-    body: "Un grand merci à Ikovaline pour notre site fonctionnel et attrayant. Nous sommes désormais plus visibles localement.",
-    img: Review4,
+    role: "Création site web - Visibilité locale",
+    text: "Un grand merci à Ikovaline pour notre site fonctionnel et attrayant. Nous sommes désormais plus visibles localement.",
+    image: Review4,
   },
   {
     name: "Jardin Auto",
-    username: "Création site web - Publicité saisonnière",
-    body: "Leur travail nous a permis de générer plus de ventes en période de forte demande. Ils gèrent tout avec professionnalisme.",
-    img: "https://avatar.vercel.sh/rauchg",
+    role: "Création site web - Publicité saisonnière",
+    text: "Leur travail nous a permis de générer plus de ventes en période de forte demande. Ils gèrent tout avec professionnalisme.",
+    image: "https://avatar.vercel.sh/rauchg",
   },
   {
     name: "Jean-Christophe Lelandais",
-    username: "Accompagnement marketing - Recrutement",
-    body: "Ikovaline a été un partenaire clé pour structurer nos besoins en marketing et en recrutement. Une équipe compétente et proactive.",
-    img: Review2,
+    role: "Accompagnement marketing - Recrutement",
+    text: "Ikovaline a été un partenaire clé pour structurer nos besoins en marketing et en recrutement. Une équipe compétente et proactive.",
+    image: Review2,
   },
   {
     name: "Simon Corbin",
-    username: "Stratégies marketing et commerciales sur mesure",
-    body: "Leur approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.",
-    img: "https://avatar.vercel.sh/rauchg",
+    role: "Stratégies marketing et commerciales sur mesure",
+    text: "Leur approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.",
+    image: "https://avatar.vercel.sh/rauchg",
   },
 ];
 
-const firstRow = reviews.slice(0, reviews.length / 2);
-const secondRow = reviews.slice(reviews.length / 2);
+const firstColumn = reviews.slice(0, 3);
+const secondColumn = reviews.slice(3, 6);
+const thirdColumn = reviews.slice(6, 10);
 
-const ReviewCard = ({
-  img,
-  name,
-  username,
-  body,
-}: {
-  img: string | StaticImageData;
-  name: string;
-  username: string;
-  body: string;
-}) => {
+const Review = () => {
   return (
-    <figure
-      className={cn(
-        "relative w-96 cursor-pointer overflow-hidden flex flex-col justify-between bg-gray-50 dark:bg-neutral-800 rounded-xl  p-8"
-        // light styles
-        // "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-        // // dark styles
-        // "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
-      )}
-    >
-      <blockquote className="mb-5 dark:text-neutral-300 font-semibold max-sm:text-sm">
-        &ldquo;{body}&ldquo;
-      </blockquote>
-      <div className="flex flex-row items-center gap-2">
-        <Image
-          className="rounded-full"
-          width="40"
-          height="40"
-          alt="logo entreprise"
-          src={img}
-        />
-        <div className="flex flex-col">
-          <figcaption className="text-sm font-medium text-gray-600 dark:text-neutral-300">
-            {name}
-          </figcaption>
-          <p className="text-xs font-medium text-foreground">{username}</p>
+    <section className="bg-background my-20 relative">
+      <div className="container z-10 mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="flex flex-col z-10 items-center justify-center max-w-[540px] mx-auto"
+        >
+          <div className="flex justify-center">
+            <div className="border py-1 px-4   rounded-3xl">Avis clients</div>
+          </div>
+
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
+            Ce que nos clients disent de nous
+          </h2>
+          <p className="text-center mt-5 opacity-75">
+            Découvrez les avis et retours d'expérience de nos clients.
+          </p>
+        </motion.div>
+
+        <div className="flex justify-center z-10 gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
+          <TestimonialsColumn testimonials={firstColumn} duration={15} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            className="hidden md:block"
+            duration={19}
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            className="hidden lg:block"
+            duration={17}
+          />
         </div>
       </div>
-    </figure>
+      <div className="absolute -top-10 left-1/2 h-48 w-48 bg-secondary z-0 blur-[150px] -translate-x-1/2" />
+    </section>
   );
 };
 
-export function Review() {
-  return (
-    <div className="py-20 space-y-10" id="review">
-      <h2 className="sm:text-4xl font-bold text-3xl max-sm:px-5 text-center  bg-gradient-to-t py-2 from-neutral-700 to-neutral-900 dark:from-neutral-200 dark:to-neutral-100 bg-clip-text text-transparent">
-        Comment Ikovaline a boosté leur visibilité en ligne
-      </h2>
-
-      <div className="relative flex sm:h-[500px] h-[400px]  w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background ">
-        <Marquee pauseOnHover className="[--duration:20s] flex-1">
-          {firstRow.map((review) => (
-            <ReviewCard key={review.username} {...review} />
-          ))}
-        </Marquee>
-        <Marquee reverse pauseOnHover className="[--duration:20s] flex-1">
-          {secondRow.map((review) => (
-            <ReviewCard key={review.username} {...review} />
-          ))}
-        </Marquee>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#F4FAFB] dark:from-background"></div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-[#F4FAFB] dark:from-background"></div>
-      </div>
-    </div>
-  );
-}
+export default Review;

@@ -2,7 +2,7 @@ import { CallToAction } from "@/components/callToAction/CallToAction";
 import About from "@/components/LandingPage/about/About";
 import { Methodologie } from "@/components/LandingPage/impact/Impact";
 import Landing from "@/components/LandingPage/landing/Landing";
-import { Review } from "@/components/LandingPage/review/Review";
+import Review from "@/components/LandingPage/review/Review";
 import Services from "@/components/LandingPage/servicesSection/Services";
 import type { Metadata } from "next";
 
