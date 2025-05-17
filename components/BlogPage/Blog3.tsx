@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { CallToAction } from "../callToAction/CallToAction";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 const faqData = [
   {
@@ -46,6 +47,9 @@ export default function Blog3() {
           codes du SEO pour transformer votre site en véritable moteur de
           visibilité.
         </p>
+        <Link href="/contact">
+          <Button>Besoin de booster votre SEO ?</Button>
+        </Link>
         <Image
           src="/blog/blog3/comment-etre-reference-sur-google-gratuitement-illustration.jpg"
           alt="Illustration du référencement Google"
@@ -56,7 +60,7 @@ export default function Blog3() {
       </div>
 
       {/* SOMMAIRE */}
-      <ul className="space-y-36 px-5 text-center sm:text-left">
+      <ul className="space-y-36 px-5 text-left">
         <li className="space-y-12">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             Sommaire
@@ -112,6 +116,7 @@ export default function Blog3() {
             </li>
           </ol>
         </li>
+
         <li className="space-y-12" id="comprendre-le-référencement">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             1. Comprendre le référencement sur Google
@@ -368,6 +373,11 @@ export default function Blog3() {
             </ul>
           </p>
         </li>
+        <CallToAction
+          title="Passez à l’action !"
+          desc="Recevez une analyse SEO gratuite de votre site par Ikovaline. Profitez-en, c’est sans engagement !"
+          textBtn="Obtenir mon audit gratuit"
+        />
         <li className="space-y-12" id="optimiser-la-structure">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             3. Optimiser la structure de son site web
@@ -741,9 +751,9 @@ export default function Blog3() {
       </ul>
 
       <CallToAction
-        title="Besoin d’un accompagnement SEO ?"
-        desc="L'équipe Ikovaline vous aide à gagner en visibilité sur Google avec une stratégie de référencement naturel adaptée à vos objectifs."
-        textBtn="Demander mon audit SEO gratuit"
+        title="Envie d’apparaître en première page Google ?"
+        desc="Découvrez comment nos experts peuvent vous aider."
+        textBtn="Réserver un appel"
       />
 
       <div className="space-y-12 px-5">
