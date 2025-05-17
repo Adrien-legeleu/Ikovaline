@@ -181,18 +181,18 @@ const MarqueeDemoVertical = () => (
 const Review = () => {
   return (
     <section className="bg-background my-20 relative">
-      <div className="container z-10 mx-auto">
+      <div className="container z-10 relative mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="flex flex-col z-10 items-center justify-center max-w-[540px] mx-auto"
+          className="flex flex-col z-10 px-5 items-center justify-center max-w-[540px] mx-auto"
         >
           <div className="flex justify-center">
             <div className="border py-1 px-4 rounded-3xl">Avis clients</div>
           </div>
-          <h2 className=" text-center text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
+          <h2 className=" text-center text-4xl xl:text-5xl font-bold text-neutral-200 z-10 tracking-tighter mt-5">
             Ce que nos clients disent de nous
           </h2>
           <p className="text-center mt-5 opacity-75">

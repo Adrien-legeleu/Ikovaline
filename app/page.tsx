@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="max-w-[1400px] mx-auto">
+    <div className="max-w-[1400px] mx-auto overflow-hidden">
       <Landing />
       <About />
       <section id="services">
