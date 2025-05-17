@@ -95,7 +95,7 @@ const Review = () => {
             Ce que nos clients disent de nous
           </h2>
           <p className="text-center mt-5 opacity-75">
-            Découvrez les avis et retours d'expérience de nos clients.
+            Découvrez les avis et retours d&apos;expérience de nos clients.
           </p>
         </motion.div>
 

@@ -1,5 +1,5 @@
 import Buttons from "@/components/BlogPage/Buttons";
-import Parralax from "@/components/BlogPage/Parralax";
+
 import { ScrollProgress } from "@/components/magicui/scroll-progress";
 import { blogMetadata } from "@/lib/blogMetadata";
 import { notFound } from "next/navigation";
@@ -67,9 +67,6 @@ export default async function Blog({ params }: ProductPageProps) {
 
   return (
     <div className="lg:py-24 py-12 px-2 sm:px-10 ">
-      {/* <div className="fixed top-1/3 left-1/2 z-0 ">
-        <Parralax />
-      </div> */}
       <ScrollProgress />
       <Component />
       <Buttons />

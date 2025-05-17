@@ -39,8 +39,8 @@ export default function Blog3() {
         </h1>
         <p className="text-center lg:text-lg">
           Vous rêvez de voir votre site en tête des résultats Google ? Le
-          référencement naturel n'a plus de secrets pour nous ! Découvrez les
-          techniques simples et efficaces pour{" "}
+          référencement naturel n&apos;a plus de secrets pour nous ! Découvrez
+          les techniques simples et efficaces pour{" "}
           <strong>améliorer votre visibilité sur Google</strong>, optimiser vos
           pages web et attirer plus de trafic qualifié. On vous dévoile les
           codes du SEO pour transformer votre site en véritable moteur de
@@ -148,7 +148,7 @@ export default function Blog3() {
           </p>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            L'importance des mots-clés dans le référencement
+            L&apos;importance des mots-clés dans le référencement
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les mots-clés relient les requêtes des internautes aux contenus des
@@ -164,7 +164,7 @@ export default function Blog3() {
               <thead className="bg-neutral-100 dark:bg-neutral-800">
                 <tr>
                   <th className="px-4 py-2">Type de mot-clé</th>
-                  <th className="px-4 py-2">Intention de l'utilisateur</th>
+                  <th className="px-4 py-2">Intention de l&apos;utilisateur</th>
                   <th className="px-4 py-2">Caractéristiques SEO</th>
                 </tr>
               </thead>
@@ -179,10 +179,10 @@ export default function Blog3() {
                 </tr>
                 <tr className="border-t">
                   <td className="px-4 py-2">Mots-clés informationnels</td>
-                  <td className="px-4 py-2">Recherche d'informations</td>
+                  <td className="px-4 py-2">Recherche d&apos;informations</td>
                   <td className="px-4 py-2">
                     Permettent de répondre aux questions fréquentes et renforcer
-                    l'autorité.
+                    l&apos;autorité.
                   </td>
                 </tr>
                 <tr className="border-t">
@@ -197,7 +197,9 @@ export default function Blog3() {
                 </tr>
                 <tr className="border-t">
                   <td className="px-4 py-2">Mots-clés transactionnels</td>
-                  <td className="px-4 py-2">Intention d'achat ou d'action</td>
+                  <td className="px-4 py-2">
+                    Intention d&apos;achat ou d&apos;action
+                  </td>
                   <td className="px-4 py-2">
                     À placer sur les pages produits ou services. Taux de
                     conversion élevé.
@@ -261,7 +263,7 @@ export default function Blog3() {
             className="rounded-3xl w-full md:w-2/3 object-cover"
           />
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            L'importance du contenu pertinent dans le référencement
+            L&apos;importance du contenu pertinent dans le référencement
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Google valorise le contenu de haute qualité. Son objectif ? Proposer
@@ -270,10 +272,10 @@ export default function Blog3() {
             résultats de recherche.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            Le contenu est l'élément central d'une stratégie SEO. Selon une mise
-            à jour récente, Google accentue encore son attention sur la qualité.
-            Un article bien structuré, original et utile attire plus de trafic
-            naturel et renforce la crédibilité d’un site.
+            Le contenu est l&apos;élément central d&apos;une stratégie SEO.
+            Selon une mise à jour récente, Google accentue encore son attention
+            sur la qualité. Un article bien structuré, original et utile attire
+            plus de trafic naturel et renforce la crédibilité d’un site.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Le{" "}
@@ -339,7 +341,7 @@ export default function Blog3() {
           </p>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            L'utilisation stratégique des mots-clés
+            L&apos;utilisation stratégique des mots-clés
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Évitez le bourrage de mots-clés ! Écrivez naturellement, comme si
@@ -407,7 +409,7 @@ export default function Blog3() {
               URLs doivent être courtes, lisibles et contenir un mot-clé
               principal
             </strong>
-            . Cela aide à mieux classer vos pages et améliore l'expérience
+            . Cela aide à mieux classer vos pages et améliore l&apos;expérience
             utilisateur.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
@@ -467,7 +469,7 @@ export default function Blog3() {
             4. Développer une stratégie de backlinks efficace
           </h2>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Comprendre l'importance des backlinks
+            Comprendre l&apos;importance des backlinks
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les backlinks sont des liens externes pointant vers votre site. Pour
@@ -628,7 +630,7 @@ export default function Blog3() {
           </h2>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Les outils d'analyse SEO essentiels
+            Les outils d&apos;analyse SEO essentiels
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Suivre l’évolution de votre positionnement SEO est indispensable
@@ -690,7 +692,7 @@ export default function Blog3() {
           </p>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Suivre les mises à jour de l'algorithme
+            Suivre les mises à jour de l&apos;algorithme
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Google améliore constamment son algorithme. En 2024, pas moins de{" "}

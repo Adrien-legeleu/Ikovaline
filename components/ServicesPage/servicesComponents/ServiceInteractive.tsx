@@ -25,7 +25,7 @@ export default function ServiceInteractive({
     if (service) {
       setValueIdText(service.section4Content[0].title.toLocaleLowerCase());
     }
-  }, [service?.section4Content]);
+  }, [service?.section4Content, service]);
   return (
     <div>
       <div className="md:px-10 relative overflow-x-hidden py-24 px-5">

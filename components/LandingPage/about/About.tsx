@@ -14,7 +14,6 @@ import Img8 from "@/public/images/About/team-victor-profil.jpg";
 import Img9 from "@/public/images/About/team-ronan-profil.jpg";
 import Img10 from "@/public/images/About/team-victor-pifferi-profil.jpg";
 import Img11 from "@/public/images/About/team-saif-profil.jpg";
-import { motion } from "framer-motion";
 
 export default function About() {
   const people1 = [
