@@ -1,4 +1,7 @@
+"use client";
+import { useTheme } from "next-themes";
 import { CardSticky, ContainerScroll } from "./CardStack";
+import { Sparkles } from "./Sparkles";
 
 const METHODOLOGIE_PHASES = [
   {
@@ -28,6 +31,7 @@ const METHODOLOGIE_PHASES = [
 ];
 
 const Methodologie = () => {
+  const { theme } = useTheme();
   return (
     <div className="container min-h-svh place-content-center  px-6 pb-10  xl:px-12">
       <div className="grid md:grid-cols-2 md:gap-12 xl:gap-16">
@@ -42,6 +46,15 @@ const Methodologie = () => {
             pour des résultats concrets. Chaque étape est optimisée pour le
             référencement naturel, la visibilité locale et la performance.
           </p>
+          <div className="relative -mt-32 h-96 w-full overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]">
+            <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#5AD8F2,transparent_99%)] before:opacity-40" />
+            <div className="absolute -left-1/2 top-1/2 aspect-[1/0.7] z-10 w-[200%] rounded-[100%] border-t border-zinc-900/20 dark:border-white/20 bg-white dark:bg-zinc-900" />
+            <Sparkles
+              density={1200}
+              className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
+              color={theme === "dark" ? "#ffffff" : "#000000"}
+            />
+          </div>
         </div>
         <ContainerScroll className="min-h-[400vh] space-y-8 py-12">
           {METHODOLOGIE_PHASES.map((phase, index) => (
