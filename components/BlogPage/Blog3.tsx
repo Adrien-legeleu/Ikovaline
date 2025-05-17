@@ -68,7 +68,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "http://localhost:3000/blog/comment-etre-reference-sur-google-gratuitement/#comprendre-le-référencement"
+                  "/blog/comment-etre-reference-sur-google-gratuitement/#comprendre-le-référencement"
                 }
               >
                 Comprendre le référencement sur Google
@@ -77,7 +77,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "http://localhost:3000/blog/comment-etre-reference-sur-google-gratuitement/#créer-un-contenu-de-qualité"
+                  "/blog/comment-etre-reference-sur-google-gratuitement/#créer-un-contenu-de-qualité"
                 }
               >
                 Créer un contenu de qualité pour Google
@@ -86,7 +86,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "http://localhost:3000/blog/comment-etre-reference-sur-google-gratuitement/#optimiser-la-structure"
+                  "/blog/comment-etre-reference-sur-google-gratuitement/#optimiser-la-structure"
                 }
               >
                 Optimiser la structure de son site web
@@ -95,7 +95,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "http://localhost:3000/blog/comment-etre-reference-sur-google-gratuitement/#développer-une-stratégie-de-backlinks"
+                  "/blog/comment-etre-reference-sur-google-gratuitement/#développer-une-stratégie-de-backlinks"
                 }
               >
                 Développer une stratégie de backlinks efficace
@@ -104,7 +104,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "http://localhost:3000/blog/comment-etre-reference-sur-google-gratuitement/#mesurer-et-améliorer-ses-résultats"
+                  "/blog/comment-etre-reference-sur-google-gratuitement/#mesurer-et-améliorer-ses-résultats"
                 }
               >
                 Mesurer et améliorer ses résultats de référencement
@@ -383,13 +383,13 @@ export default function Blog3() {
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Une{" "}
-            <a
-              href="https://www.ikovaline.com/nos-services/creation-sites-web-vitrine-e-commerce"
+            <Link
+              href="/nos-services/creation-sites-web-vitrine-e-commerce"
               className="text-blue-600 underline"
               target="_blank"
             >
               architecture de site bien conçue
-            </a>{" "}
+            </Link>{" "}
             facilite l’exploration par les robots d’indexation. Google analyse
             l’arborescence, les liens internes et la hiérarchie de vos contenus.
           </p>
@@ -614,13 +614,13 @@ export default function Blog3() {
 
           <p className="lg:text-lg 2xl:text-xl">
             Vous pouvez aussi renforcer votre stratégie de netlinking avec des{" "}
-            <a
-              href="https://www.ikovaline.com/nos-services"
+            <Link
+              href="/nos-services"
               className="text-blue-600 underline"
               target="_blank"
             >
               outils professionnels proposés par Ikovaline
-            </a>
+            </Link>
             .
           </p>
         </li>
