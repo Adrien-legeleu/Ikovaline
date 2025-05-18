@@ -17,6 +17,7 @@ const componentsMap: Record<
   "arborescence-site-web": () => import("@/components/BlogPage/Blog2"),
   "comment-etre-reference-sur-google-gratuitement": () =>
     import("@/components/BlogPage/Blog3"),
+  "creation-digital-guide": () => import("@/components/BlogPage/Blog4"),
 };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {

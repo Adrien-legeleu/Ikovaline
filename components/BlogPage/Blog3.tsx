@@ -47,7 +47,7 @@ export default function Blog3() {
           codes du SEO pour transformer votre site en véritable moteur de
           visibilité.
         </p>
-        <Link href="/contact">
+        <Link href={"/contact"}>
           <Button>Besoin de booster votre SEO ?</Button>
         </Link>
         <Image
