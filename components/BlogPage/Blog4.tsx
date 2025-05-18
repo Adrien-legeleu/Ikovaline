@@ -167,11 +167,11 @@ export default function Blog4() {
             </li>
           </ul>
           <Image
-            src="/blog/blog4/creation-digital.jpg"
+            src="/blog/blog4/les Piliers de la Création.png"
             alt="Illustration création digitale"
             width={600}
             height={400}
-            className="rounded-3xl aspect-video w-full object-cover"
+            className="rounded-3xl aspect-auto w-full object-cover"
           />
           <p className="lg:text-lg 2xl:text-xl">
             La technologie, le design et le marketing forment un trio
@@ -312,10 +312,10 @@ export default function Blog4() {
           </p>
         </li>
         <Image
-          src="/blog/blog4/creation-digital.jpg"
+          src="/blog/blog4/communication-social-media-creation-digital.jpg"
           alt="Illustration création digitale"
-          width={600}
-          height={400}
+          width={1000}
+          height={1000}
           className="rounded-3xl aspect-video w-full object-cover"
         />
         <li className="space-y-12" id="comprendre-creation-digitale">
@@ -509,7 +509,7 @@ export default function Blog4() {
             <strong>déterminants dans le classement</strong> de votre site.
           </p>
           <Image
-            src="/blog/blog4/creation-digital.jpg"
+            src="/blog/blog4/les fondements du SEO.png"
             alt="Illustration création digitale"
             width={600}
             height={400}
@@ -628,7 +628,7 @@ export default function Blog4() {
             conception des projets digitaux.
           </p>
           <Image
-            src="/blog/blog4/creation-digital.jpg"
+            src="/blog/blog4/Évolution des Attentes Utilisateurs.png"
             alt="Illustration création digitale"
             width={600}
             height={400}

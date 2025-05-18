@@ -157,8 +157,9 @@ export default function Blog3() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les mots-clés relient les requêtes des internautes aux contenus des
-            sites. En choisissant les bons termes, vous augmentez vos chances
-            d’apparaître dans les premiers résultats.
+            sites. En ciblant les bons termes,
+            <strong> vous augmenterez votre visibilité</strong>
+            sur les moteurs de recherche.
           </p>
 
           <div className="overflow-auto max-w-full rounded-3xl border bg-white dark:bg-black border-neutral-300 dark:border-neutral-700">
@@ -235,19 +236,29 @@ export default function Blog3() {
             Les critères techniques du référencement
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            Un site rapide améliore l’expérience utilisateur et les classements.
-            Plus de 50 % des visiteurs quittent un site qui met plus de 3
-            secondes à charger. L’optimisation mobile est aujourd’hui
-            essentielle : la majorité du trafic vient des smartphones.
+            <strong> Un site rapide améliore l’expérience utilisateur</strong>{" "}
+            et les classements. Plus de 50 % des visiteurs quittent un site qui
+            met plus de 3 secondes à charger. L’optimisation mobile est
+            aujourd’hui essentielle : la majorité du trafic vient des
+            smartphones.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Les outils incontournables pour auditer votre site :
           </p>
           <ul className="list-disc list-inside lg:text-lg 2xl:text-xl space-y-1">
-            <li>Google Search Console</li>
-            <li>Screaming Frog</li>
-            <li>PageSpeed Insights</li>
-            <li>Bing Webmaster Tools</li>
+            <li>
+              <strong>Google Search Console</strong>
+            </li>
+            <li>
+              <strong>Screaming Frog</strong>pour l’audit technique
+            </li>
+            <li>
+              {" "}
+              <strong>PageSpeed Insights </strong>pour les performances
+            </li>
+            <li>
+              <strong>Bing Webmaster Tools</strong>
+            </li>
           </ul>
           <p className="lg:text-lg 2xl:text-xl">
             Les balises <code>title</code>, <code>meta description</code> et{" "}
