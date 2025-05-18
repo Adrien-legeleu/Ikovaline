@@ -127,9 +127,9 @@ export default function Blog4() {
             </a>{" "}
             avec <strong>une croissance annuelle estimée</strong> à 13,9 %
             d&apos;ici 2030. Cette évolution constante intègre les dernières
-            technologies, avec un accent sur l&apos;innovation et l'adaptation
-            aux nouveaux outils. Les professionnels doivent s&apos;adapter aux
-            évolutions du web et des usages.
+            technologies, avec un accent sur l&apos;innovation et
+            l&apos;`adaptation aux nouveaux outils. Les professionnels doivent
+            s&apos;adapter aux évolutions du web et des usages.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             La création digitale recouvre les arts visuels numériques, la
@@ -208,7 +208,7 @@ export default function Blog4() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les plateformes digitales interagissent grâce à des logiques
-            d'interconnexion basées sur l&apos;infrastructure cloud. Les
+            d&apos;`interconnexion basées sur l&apos;infrastructure cloud. Les
             entreprises adoptent une stratégie omnicanale pour offrir une
             expérience fluide sur tous les canaux. Une marque rencontrée sur les
             réseaux sociaux, en magasin ou en ligne doit délivrer un message
@@ -309,11 +309,12 @@ export default function Blog4() {
             création digitale. Le Digital Analytics collecte, mesure et
             interprète les données d&apos;un site ou d&apos;une application. Ces
             informations permettent d&apos;affiner la stratégie numérique,
-            d'optimiser les campagnes et de développer la présence en ligne. Les
-            indicateurs clés à surveiller incluent le taux de conversion, le
-            coût par acquisition et le retour sur investissement. L&apos;analyse
-            des données améliore la stratégie de contenu, optimise le contenu
-            existant et guide la création de nouveaux supports.
+            d&apos;`optimiser les campagnes et de développer la présence en
+            ligne. Les indicateurs clés à surveiller incluent le taux de
+            conversion, le coût par acquisition et le retour sur investissement.
+            L&apos;analyse des données améliore la stratégie de contenu,
+            optimise le contenu existant et guide la création de nouveaux
+            supports.
           </p>
         </li>
         <Image
