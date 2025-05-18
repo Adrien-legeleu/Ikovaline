@@ -38,11 +38,11 @@ export default function Blog4() {
           Création digitale : Clés pour une stratégie réussie
         </h1>
         <p className="text-center lg:text-lg">
-          Vous vous sentez perdu face à l'univers de la création digitale ?
-          Comment créer un contenu digital percutant qui captera l'attention de
-          votre audience sur les réseaux sociaux ? Cette introduction vous
-          dévoile les fondamentaux de la création digitale, en vous guidant vers
-          une{" "}
+          Vous vous sentez perdu face à l&apos;univers de la création digitale ?
+          Comment créer un contenu digital percutant qui captera
+          l&apos;attention de votre audience sur les réseaux sociaux ? Cette
+          introduction vous dévoile les fondamentaux de la création digitale, en
+          vous guidant vers une{" "}
           <strong>
             stratégie de communication digitale claire et efficace
           </strong>
@@ -106,16 +106,17 @@ export default function Blog4() {
             1. Comprendre la création digitale : définition et fondamentaux
           </h2>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Qu'est-ce que la création digitale aujourd'hui ?
+            Qu&apos;est-ce que la création digitale aujourd&apos;hui ?
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             La création digitale consiste à produire et diffuser des contenus et
-            expériences à l'aide d'outils numériques. Elle englobe des supports
-            visuels comme les sites web, les applications et les animations. Il
-            s'agit de communiquer visuellement à travers des éléments
-            graphiques. La création digitale redéfinit l'expérience culturelle à
-            l'ère numérique. Selon une étude de Grand View Research, le marché
-            mondial de la création de contenu numérique était évalué à{" "}
+            expériences à l&apos;aide d&apos;outils numériques. Elle englobe des
+            supports visuels comme les sites web, les applications et les
+            animations. Il s&apos;agit de communiquer visuellement à travers des
+            éléments graphiques. La création digitale redéfinit
+            l&apos;expérience culturelle à l&apos;ère numérique. Selon une étude
+            de Grand View Research, le marché mondial de la création de contenu
+            numérique était évalué à{" "}
             <a
               href="https://www.grandviewresearch.com/industry-analysis/digital-content-creation-market-report"
               className="text-blue-600 underline"
@@ -124,11 +125,11 @@ export default function Blog4() {
             >
               32,28 milliards de dollars en 2024
             </a>{" "}
-            avec <strong>une croissance annuelle estimée</strong> à 13,9 % d'ici
-            2030. Cette évolution constante intègre les dernières technologies,
-            avec un accent sur l'innovation et l'adaptation aux nouveaux outils.
-            Les professionnels doivent s'adapter aux évolutions du web et des
-            usages.
+            avec <strong>une croissance annuelle estimée</strong> à 13,9 %
+            d&apos;ici 2030. Cette évolution constante intègre les dernières
+            technologies, avec un accent sur l&apos;innovation et l'adaptation
+            aux nouveaux outils. Les professionnels doivent s&apos;adapter aux
+            évolutions du web et des usages.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             La création digitale recouvre les arts visuels numériques, la
@@ -139,22 +140,24 @@ export default function Blog4() {
             présenter des produits et communiquer avec une audience ciblée. Les
             formats de création numérique incluent les articles de blog, les
             vidéos, les infographies, les podcasts et les publications sur les
-            réseaux sociaux. La diversification des formats permet d'atteindre
-            différents types d'apprenants, certains préférant le contenu écrit,
-            d'autres étant plus visuels ou auditifs. Le numérique représente 3 à
-            4 % des émissions de gaz à effet de serre, soulignant{" "}
-            <strong>l'importance d'une approche responsable</strong> dans la
-            création de contenu.
+            réseaux sociaux. La diversification des formats permet
+            d&apos;atteindre différents types d&apos;apprenants, certains
+            préférant le contenu écrit, d&apos;autres étant plus visuels ou
+            auditifs. Le numérique représente 3 à 4 % des émissions de gaz à
+            effet de serre, soulignant{" "}
+            <strong>l&apos;importance d&apos;une approche responsable</strong>{" "}
+            dans la création de contenu.
           </p>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             Les piliers fondamentaux de la création digitale
           </h3>
           <ul className="list-disc list-inside lg:text-lg 2xl:text-xl space-y-2">
             <li>
-              <strong>Le design graphique</strong> pour l'identité visuelle
+              <strong>Le design graphique</strong> pour l&apos;identité visuelle
             </li>
             <li>
-              <strong>L'expérience utilisateur (UX)</strong> pour l'ergonomie
+              <strong>L&apos;expérience utilisateur (UX)</strong> pour
+              l&apos;ergonomie
             </li>
             <li>
               <strong>Le référencement (SEO)</strong> pour la visibilité
@@ -163,7 +166,7 @@ export default function Blog4() {
               <strong>Le marketing digital</strong> pour la promotion
             </li>
             <li>
-              <strong>La gestion de projet</strong> pour l'organisation
+              <strong>La gestion de projet</strong> pour l&apos;organisation
             </li>
           </ul>
           <Image
@@ -176,39 +179,41 @@ export default function Blog4() {
           <p className="lg:text-lg 2xl:text-xl">
             La technologie, le design et le marketing forment un trio
             indissociable de la création digitale. La technologie fournit les
-            outils et les plateformes pour créer. Le design façonne l'expérience
-            utilisateur et l'interface, rendant l'interaction fluide. Le
-            marketing assure la diffusion et la performance des contenus. Ces
-            trois domaines doivent être{" "}
+            outils et les plateformes pour créer. Le design façonne
+            l&apos;expérience utilisateur et l&apos;interface, rendant
+            l&apos;interaction fluide. Le marketing assure la diffusion et la
+            performance des contenus. Ces trois domaines doivent être{" "}
             <strong>équilibrés pour une stratégie efficace</strong>. Un bon
             équilibre entre ces éléments génère une expérience utilisateur
             optimale et un retour sur investissement pertinent. Le marketing
-            digital, quant à lui, permet aux entreprises d'atteindre des clients
-            potentiels via les canaux en ligne.
+            digital, quant à lui, permet aux entreprises d&apos;atteindre des
+            clients potentiels via les canaux en ligne.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            L'UX et l'UI sont au cœur de la conception digitale. Une bonne
-            interface utilisateur rend l'expérience sans friction, réduisant les
-            taux de rebond. L'expérience utilisateur façonne le parcours client
-            à travers les services numériques. Ces éléments sont complémentaires
-            : l'UX améliore l'accessibilité tandis que{" "}
-            <strong>l'UI rend l'outil plus esthétique</strong>. Les entreprises
-            interagissent avec leurs clients via des sites web ou applications,
-            soulignant l'importance de ces aspects. Les principes de base
-            incluent la cohérence, l'ergonomie, les tests d'utilisabilité et
-            l'adaptation aux attentes des utilisateurs.
+            L&apos;UX et l&apos;UI sont au cœur de la conception digitale. Une
+            bonne interface utilisateur rend l&apos;expérience sans friction,
+            réduisant les taux de rebond. L&apos;expérience utilisateur façonne
+            le parcours client à travers les services numériques. Ces éléments
+            sont complémentaires : l&apos;UX améliore l&apos;accessibilité
+            tandis que{" "}
+            <strong>l&apos;UI rend l&apos;outil plus esthétique</strong>. Les
+            entreprises interagissent avec leurs clients via des sites web ou
+            applications, soulignant l&apos;importance de ces aspects. Les
+            principes de base incluent la cohérence, l&apos;ergonomie, les tests
+            d&apos;utilisabilité et l&apos;adaptation aux attentes des
+            utilisateurs.
           </p>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            L'écosystème digital et ses interactions
+            L&apos;écosystème digital et ses interactions
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les plateformes digitales interagissent grâce à des logiques
-            d'interconnexion basées sur l'infrastructure cloud. Les entreprises
-            adoptent une stratégie omnicanale pour offrir une expérience fluide
-            sur tous les canaux. Une marque rencontrée sur les réseaux sociaux,
-            en magasin ou en ligne doit délivrer un message cohérent.{" "}
-            <strong>Cette approche unifiée</strong> renforce la fidélité et
-            l'engagement des utilisateurs.
+            d'interconnexion basées sur l&apos;infrastructure cloud. Les
+            entreprises adoptent une stratégie omnicanale pour offrir une
+            expérience fluide sur tous les canaux. Une marque rencontrée sur les
+            réseaux sociaux, en magasin ou en ligne doit délivrer un message
+            cohérent. <strong>Cette approche unifiée</strong> renforce la
+            fidélité et l&apos;engagement des utilisateurs.
           </p>
           {/* TABLEAU PLATEFORMES */}
           <div className="overflow-auto max-w-full rounded-3xl border bg-white dark:bg-black border-neutral-300 dark:border-neutral-700">
@@ -288,26 +293,26 @@ export default function Blog4() {
             </table>
           </div>
           <p className="lg:text-lg 2xl:text-xl">
-            La création digitale s'intègre à la transformation numérique en
-            permettant aux entreprises d'adopter un modèle économique axé sur
-            les technologies numériques. Elle implique{" "}
+            La création digitale s&apos;intègre à la transformation numérique en
+            permettant aux entreprises d&apos;adopter un modèle économique axé
+            sur les technologies numériques. Elle implique{" "}
             <strong>la digitalisation des processus</strong> internes et
-            l'adoption de nouveaux outils technologiques. Cette transition
-            repense la stratégie de l'entreprise, touchant ses modèles
+            l&apos;adoption de nouveaux outils technologiques. Cette transition
+            repense la stratégie de l&apos;entreprise, touchant ses modèles
             économiques et sa culture. Plus de la moitié des entreprises
             considèrent le digital comme un levier pour développer le commerce
             local. Le CNC soutient financièrement la création numérique,
             notamment la vidéo en ligne et la réalité virtuelle.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            Les données jouent un rôle important dans l'optimisation de la
+            Les données jouent un rôle important dans l&apos;optimisation de la
             création digitale. Le Digital Analytics collecte, mesure et
-            interprète les données d'un site ou d'une application. Ces
-            informations permettent d'affiner la stratégie numérique,
+            interprète les données d&apos;un site ou d&apos;une application. Ces
+            informations permettent d&apos;affiner la stratégie numérique,
             d'optimiser les campagnes et de développer la présence en ligne. Les
             indicateurs clés à surveiller incluent le taux de conversion, le
-            coût par acquisition et le retour sur investissement. L'analyse des
-            données améliore la stratégie de contenu, optimise le contenu
+            coût par acquisition et le retour sur investissement. L&apos;analyse
+            des données améliore la stratégie de contenu, optimise le contenu
             existant et guide la création de nouveaux supports.
           </p>
         </li>
@@ -323,7 +328,8 @@ export default function Blog4() {
             2. Les compétences importantes en création digitale
           </h2>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Vue d'ensemble des compétences techniques et créatives nécessaires
+            Vue d&apos;ensemble des compétences techniques et créatives
+            nécessaires
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les compétences en création digitale combinent technique et
@@ -336,11 +342,12 @@ export default function Blog4() {
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Le design graphique, la programmation et le marketing digital
-            constituent des compétences clés. Le design façonne l'expérience
-            utilisateur. La programmation assure la technique. Le marketing
-            permet la diffusion. <strong>Ces compétences interagissent</strong>{" "}
-            pour créer des solutions numériques pertinentes. L'équilibre dépend
-            des objectifs, mais l'innovation et la résolution de problèmes
+            constituent des compétences clés. Le design façonne
+            l&apos;expérience utilisateur. La programmation assure la technique.
+            Le marketing permet la diffusion.{" "}
+            <strong>Ces compétences interagissent</strong> pour créer des
+            solutions numériques pertinentes. L&apos;équilibre dépend des
+            objectifs, mais l&apos;innovation et la résolution de problèmes
             restent des priorités. Les compétences en gestion de projet digital
             renforcent la cohérence.
           </p>
