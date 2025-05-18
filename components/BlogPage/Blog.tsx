@@ -45,7 +45,7 @@ const dataBlog: BlogType[] = [
     date: "2025-05-19",
     title: "creation digital : 10 tendances et outils pour projet réussi",
     desc: "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",
-    img: "/blog/blog3/comment-etre-reference-sur-google-gratuitement-illustration.jpg",
+    src: "/blog/blog4/creation-digital.png",
     by: "Ikovaline",
     slug: "creation-digital-guide",
   },

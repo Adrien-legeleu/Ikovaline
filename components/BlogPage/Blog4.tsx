@@ -54,7 +54,7 @@ export default function Blog4() {
           <Button>Lancer mon projet digital</Button>
         </Link>
         <Image
-          src="/blog/blog4/creation-digital.jpg"
+          src="/blog/blog4/creation-digital.png"
           alt="Illustration création digitale"
           width={600}
           height={400}
@@ -318,7 +318,7 @@ export default function Blog4() {
           </p>
         </li>
         <Image
-          src="/blog/blog4/communication-social-media-creation-digital.jpg"
+          src="/blog/blog4/Comparatif Plateformes Création Digitale.png"
           alt="Illustration création digitale"
           width={1000}
           height={1000}
@@ -640,7 +640,7 @@ export default function Blog4() {
             alt="Illustration création digitale"
             width={600}
             height={400}
-            className="rounded-3xl aspect-video w-full object-cover"
+            className="rounded-3xl aspect-auto w-full object-cover"
           />
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             Compétences futures et formation
