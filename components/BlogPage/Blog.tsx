@@ -16,6 +16,14 @@ const currentYear = new Date().getFullYear();
 
 const dataBlog: BlogType[] = [
   {
+    date: "2025-05-14",
+    title: "creation digital : 10 tendances et outils pour un projet réussi",
+    desc: "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",
+    img: "/blog/blog4/creation-digital.png",
+    by: "Ikovaline",
+    slug: "creation-digital-guide",
+  },
+  {
     date: "2025-05-18",
     title: "Site institutionnel définition : définition, rôle et exemples clés",
     desc: "Découvrez ce qu’est un site institutionnel, un levier clé pour vos valeurs et votre crédibilité. Optimisez votre présence en ligne avec un site web efficace.",
@@ -49,14 +57,6 @@ const dataBlog: BlogType[] = [
     by: "Ikovaline",
     slug: "comment-etre-reference-sur-google-gratuitement",
   },
-  {
-    date: "2025-05-14",
-    title: "creation digital : 10 tendances et outils pour un projet réussi",
-    desc: "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",
-    img: "/blog/blog4/creation-digital.png",
-    by: "Ikovaline",
-    slug: "creation-digital-guide",
-  },
 ];
 
 function Blog() {
@@ -79,8 +79,8 @@ function Blog() {
                 }`}
               >
                 <Image
-                  width={500}
-                  height={500}
+                  width={1000}
+                  height={1000}
                   src={bl.img}
                   alt={bl.slug}
                   className="rounded-3xl w-full object-cover aspect-video"

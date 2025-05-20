@@ -51,7 +51,7 @@ export default function Blog5() {
           <ol className="list-decimal list-inside lg:text-lg 2xl:text-xl space-y-2">
             <li className="underline">
               <Link href="/blog/definition-site-institutionnel/#definition-site-institutionnel">
-                Qu'est-ce qu'un site institutionnel ?
+                Qu&apos;est-ce qu&apos;un site institutionnel ?
               </Link>
             </li>
             <li className="underline">
@@ -315,10 +315,10 @@ export default function Blog5() {
 
           <p className="lg:text-lg 2xl:text-xl">
             Il est important de maintenir un contenu régulièrement mis à jour.
-            Vous profitez ainsi d'une image dynamique et engagée. Les actualités
-            de votre organisation doivent être diffusées en temps réel.
-            L’ensemble des informations partagées doit refléter votre identité
-            avec authenticité. La cohérence et la précision{" "}
+            Vous profitez ainsi d&apos;une image dynamique et engagée. Les
+            actualités de votre organisation doivent être diffusées en temps
+            réel. L’ensemble des informations partagées doit refléter votre
+            identité avec authenticité. La cohérence et la précision{" "}
             <strong>renforcent l’image professionnelle</strong> de votre
             organisation.
           </p>
@@ -399,8 +399,8 @@ export default function Blog5() {
           />
           <p className="lg:text-lg 2xl:text-xl">
             Une structure claire facilite le travail des moteurs de recherche et
-            améliore l'expérience des visiteurs. Vous bénéficiez d’un maillage
-            interne logique qui guide les utilisateurs et les robots
+            améliore l&apos;expérience des visiteurs. Vous bénéficiez d’un
+            maillage interne logique qui guide les utilisateurs et les robots
             d’indexation. Vous profitez d’
             <strong>
               une meilleure visibilité grâce à une organisation cohérente

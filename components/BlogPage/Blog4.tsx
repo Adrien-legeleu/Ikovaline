@@ -54,11 +54,11 @@ export default function Blog4() {
           <Button>Lancer mon projet digital</Button>
         </Link>
         <Image
-          src="/blog/blog4/creation-digital.png"
+          src="/blog/blog4/creation-digitale.png"
           alt="Illustration création digitale"
           width={600}
           height={400}
-          className="rounded-3xl aspect-video w-full object-cover"
+          className="rounded-3xl aspect-video shadow-2xl w-full object-cover"
         />
       </div>
 
