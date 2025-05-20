@@ -31,8 +31,7 @@ export const blogMetadata: Record<
     title: "creation digital : 10 tendances et outils pour projet réussi",
     description:
       "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",
-    ogImage:
-      "/blog/blog4/comment-etre-reference-sur-google-gratuitement-illustration.jpg",
+    ogImage: "/blog/blog4/creation-digitale.png",
   },
   "definition-site-institutionnel": {
     title: "Site institutionnel définition : définition, rôle et exemples clés",
