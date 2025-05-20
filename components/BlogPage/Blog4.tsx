@@ -171,10 +171,10 @@ export default function Blog4() {
           </ul>
           <Image
             src="/blog/blog4/les Piliers de la Création.png"
-            alt="Illustration création digitale"
+            alt="Les 5 piliers de la création digitale"
             width={600}
             height={400}
-            className="rounded-3xl aspect-auto w-full object-cover"
+            className="rounded-3xl aspect-auto shadow-2xl w-full object-cover"
           />
           <p className="lg:text-lg 2xl:text-xl">
             La technologie, le design et le marketing forment un trio
@@ -319,10 +319,10 @@ export default function Blog4() {
         </li>
         <Image
           src="/blog/blog4/Comparatif Plateformes Création Digitale.png"
-          alt="Illustration création digitale"
+          alt="Comparatif des principales plateformes de création digitale"
           width={1000}
           height={1000}
-          className="rounded-3xl aspect-video w-full object-cover"
+          className="rounded-3xl aspect-video   shadow-2xl w-full object-cover"
         />
         <li className="space-y-12" id="comprendre-creation-digitale">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
@@ -518,10 +518,10 @@ export default function Blog4() {
           </p>
           <Image
             src="/blog/blog4/les fondements du SEO.png"
-            alt="Illustration création digitale"
+            alt="Les fondements du SEO"
             width={600}
             height={400}
-            className="rounded-3xl aspect-video w-full object-cover"
+            className="rounded-3xl aspect-video w-full shadow-2xl object-cover"
           />
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             L&apos;analyse et l&apos;amélioration continue
@@ -637,10 +637,10 @@ export default function Blog4() {
           </p>
           <Image
             src="/blog/blog4/Évolution des Attentes Utilisateurs.png"
-            alt="Illustration création digitale"
+            alt="Évolution des attentes utilisateurs"
             width={600}
             height={400}
-            className="rounded-3xl aspect-auto w-full object-cover"
+            className="rounded-3xl aspect-auto w-full shadow-2xl object-cover"
           />
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             Compétences futures et formation

@@ -16,6 +16,14 @@ const currentYear = new Date().getFullYear();
 
 const dataBlog: BlogType[] = [
   {
+    date: "2025-05-18",
+    title: "Site institutionnel définition : définition, rôle et exemples clés",
+    desc: "Découvrez ce qu’est un site institutionnel, un levier clé pour vos valeurs et votre crédibilité. Optimisez votre présence en ligne avec un site web efficace.",
+    img: "/blog/blog5/Page Couverture Agence Web.png",
+    by: "Ikovaline",
+    slug: "definition-site-institutionnel",
+  },
+  {
     date: "2025-04-05",
     title: `Comment héberger un site web en ${currentYear} : guide complet`,
     desc: "Vous avez un site mais ne savez pas comment le mettre en ligne ? Ce guide vous explique comment héberger un site web étape par étape, avec les meilleures solutions en 2025.",
@@ -24,7 +32,7 @@ const dataBlog: BlogType[] = [
     slug: "comment-heberger-un-site-web",
   },
   {
-    date: "2025-05-12",
+    date: "2025-05-06",
     title:
       "Arborescence site web : guide complet pour structurer votre site efficacement",
     desc: "Comprenez comment organiser votre site pour un meilleur SEO et une navigation optimale : exemples, bonnes pratiques et schéma visuel inclus.",
@@ -33,17 +41,17 @@ const dataBlog: BlogType[] = [
     slug: "arborescence-site-web",
   },
   {
-    date: "2025-05-16",
+    date: "2025-05-10",
     title:
-      "comment être référencé sur google gratuitement: 3 étapes pour visibilité optimale",
+      "comment être référencé sur google gratuitement: 3 étapes pour une visibilité optimale",
     desc: "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",
     img: "/blog/blog3/comment-etre-reference-sur-google-gratuitement-illustration.jpg",
     by: "Ikovaline",
     slug: "comment-etre-reference-sur-google-gratuitement",
   },
   {
-    date: "2025-05-19",
-    title: "creation digital : 10 tendances et outils pour projet réussi",
+    date: "2025-05-14",
+    title: "creation digital : 10 tendances et outils pour un projet réussi",
     desc: "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",
     img: "/blog/blog4/creation-digital.png",
     by: "Ikovaline",
@@ -90,7 +98,7 @@ function Blog() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h3 className="max-w-3xl text-2xl tracking-tight">
+                  <h3 className="max-w-3xl capitalize text-2xl tracking-tight">
                     {bl.title}
                   </h3>
                   <p className="max-w-3xl text-muted-foreground text-base">
