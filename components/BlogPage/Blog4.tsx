@@ -33,7 +33,7 @@ export default function Blog4() {
   return (
     <div className="md:px-20 z-10 relative bg-transparent py-20 max-w-5xl mx-auto space-y-40">
       {/* INTRO + H1 */}
-      <div className="flex flex-col px-5 gap-12 justify-center items-center">
+      <div className="flex flex-col px-2 gap-12 justify-center items-center">
         <h1 className="sm:text-4xl lg:text-5xl 2xl:text-6xl text-3xl text-center font-bold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-400 dark:to-neutral-100 bg-clip-text text-transparent">
           Création digitale : Clés pour une stratégie réussie
         </h1>
@@ -63,7 +63,7 @@ export default function Blog4() {
       </div>
 
       {/* SOMMAIRE */}
-      <ul className="space-y-36 px-5 text-left">
+      <ul className="space-y-36 px-2 text-left">
         <li className="space-y-12">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             Sommaire
@@ -689,7 +689,7 @@ export default function Blog4() {
         </li>
 
         {/* FAQ */}
-        <div className="space-y-12 px-5">
+        <div className="space-y-12 px-2">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             FAQ : les questions fréquentes sur la création digitale
           </h2>
@@ -698,7 +698,7 @@ export default function Blog4() {
               <AccordionItem
                 value={`item-${index + 1}`}
                 key={index}
-                className="bg-[#5ad9f230] py-2 shadow-inner shadow-[#0000000c] dark:shadow-[#e5f8fd1a] px-5 dark:bg-[#141c25]"
+                className="bg-[#5ad9f230] py-2 shadow-inner shadow-[#0000000c] dark:shadow-[#e5f8fd1a] px-2 dark:bg-[#141c25]"
                 style={{ zIndex: index }}
               >
                 <AccordionTrigger className="py-4">
@@ -711,7 +711,7 @@ export default function Blog4() {
         </div>
 
         {/* CONCLUSION */}
-        <div className="space-y-12 px-5">
+        <div className="space-y-12 px-2">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
             Conclusion
           </h2>

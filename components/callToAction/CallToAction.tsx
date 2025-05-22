@@ -12,9 +12,9 @@ interface ICallToAction {
 
 export function CallToAction({ title, desc, textBtn }: ICallToAction) {
   return (
-    <section className="overflow-hidden  ">
-      <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 xss:px-8 px-4 pb-12 md:pb-24 pt-24 md:pt-36 text-center sm:gap-8 ">
-        <h2 className="md:text-4xl max-w-xl lg:text-5xl 2xl:text-6xl text-3xl text-center font-bold text-neutral-900 dark:text-neutral-100">
+    <section className="overflow-hidden   ">
+      <div className="relative mx-auto flex bg-[#F4FAFB] dark:bg-[#090D11] max-w-5xl flex-col items-center gap-6 xss:px-8 px-4 pb-12 md:pb-24 pt-24 md:pt-36 text-center sm:gap-8 ">
+        <h2 className="md:text-4xl max-w-xl lg:text-5xl 2xl:text-6xl text-3xl text-center  font-bold text-neutral-900 dark:text-neutral-100">
           {title}
         </h2>
         <p className="text-center max-w-2xl text-neutral-800 dark:text-neutral-300 text-sm xss:text-base md:text-lg xl:text-xl 2xl:text-2xl">

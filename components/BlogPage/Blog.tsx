@@ -57,6 +57,14 @@ const dataBlog: BlogType[] = [
     by: "Ikovaline",
     slug: "comment-etre-reference-sur-google-gratuitement",
   },
+  {
+    date: "2025-05-23",
+    title: "agence seo seine marne, visibilité locale entreprises 77",
+    desc: "agence seo seine marne : boostez la visibilité avec un référencement sur mesure pour PME, artisans & commerçants. Expertise en enjeux locaux du 77.",
+    img: "/blog/blog6/En-tête Digital SEO Élégant.png",
+    by: "Ikovaline",
+    slug: "agence-seo-seine-marne",
+  },
 ];
 
 function Blog() {
@@ -98,7 +106,7 @@ function Blog() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h3 className="max-w-3xl capitalize text-2xl tracking-tight">
+                  <h3 className="max-w-3xl capitalize text-2xl font-semibold tracking-tight">
                     {bl.title}
                   </h3>
                   <p className="max-w-3xl text-muted-foreground text-base">

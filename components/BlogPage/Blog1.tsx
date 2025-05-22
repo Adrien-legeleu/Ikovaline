@@ -26,7 +26,7 @@ const faqData = [
 
 export default function Blog1() {
   return (
-    <div className="md:px-20 px-5 py-20 space-y-20">
+    <div className="md:px-20 px-2 py-20 space-y-20">
       <div className="flex flex-col gap-12 jsutify-center items-center">
         <h1 className=" sm:text-4xl lg:text-5xl 2xl:text-6xl text-3xl text-center font-bold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-400 dark:to-neutral-100  bg-clip-text text-transparent">
           Comment héberger un site web en 2025 : guide complet pour débutants
@@ -138,7 +138,7 @@ export default function Blog1() {
             <AccordionItem
               value={`item-${index + 1}`}
               key={index}
-              className="bg-[#5ad9f230] py-2  shadow-inner  shadow-[#0000000c] dark:shadow-[#e5f8fd1a] px-5 dark:bg-[#141c25]"
+              className="bg-[#5ad9f230] py-2  shadow-inner  shadow-[#0000000c] dark:shadow-[#e5f8fd1a] px-2 dark:bg-[#141c25]"
               style={{ zIndex: index }}
             >
               <AccordionTrigger className="py-4">

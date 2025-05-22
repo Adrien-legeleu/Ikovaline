@@ -39,4 +39,10 @@ export const blogMetadata: Record<
       "Découvrez ce qu’est un site institutionnel, un levier clé pour vos valeurs et votre crédibilité. Optimisez votre présence en ligne avec un site web efficace.",
     ogImage: "/blog/blog5/Page Couverture Agence Web.png",
   },
+  "agence-seo-seine-marne": {
+    title: "Site institutionnel définition : définition, rôle et exemples clés",
+    description:
+      "Découvrez ce qu’est un site institutionnel, un levier clé pour vos valeurs et votre crédibilité. Optimisez votre présence en ligne avec un site web efficace.",
+    ogImage: "/blog/blog5/Page Couverture Agence Web.png",
+  },
 };
