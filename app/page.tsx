@@ -1,10 +1,30 @@
-import { CallToAction } from "@/components/callToAction/CallToAction";
-import About from "@/components/LandingPage/about/About";
-import { Methodologie } from "@/components/LandingPage/impact/Impact";
 import Landing from "@/components/LandingPage/landing/Landing";
-import Review from "@/components/LandingPage/review/Review";
-import Services from "@/components/LandingPage/servicesSection/Services";
+const Review = dynamic(() => import("@/components/LandingPage/review/Review"), {
+  ssr: false,
+});
+const Services = dynamic(
+  () => import("@/components/LandingPage/servicesSection/Services"),
+  {
+    ssr: false,
+  }
+);
+const About = dynamic(() => import("@/components/LandingPage/about/About"), {
+  ssr: false,
+});
+const Methodologie = dynamic(
+  () =>
+    import("@/components/LandingPage/impact/Impact").then((mod) => mod.default),
+  { ssr: false }
+);
+
+const CallToAction = dynamic(
+  () =>
+    import("@/components/callToAction/CallToAction").then((mod) => mod.default),
+  { ssr: false }
+);
+
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 
 export const metadata: Metadata = {

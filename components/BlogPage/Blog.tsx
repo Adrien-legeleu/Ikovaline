@@ -59,8 +59,9 @@ const dataBlog: BlogType[] = [
   },
   {
     date: "2025-05-23",
-    title: "agence seo seine marne, visibilité locale entreprises 77",
-    desc: "agence seo seine marne : boostez la visibilité avec un référencement sur mesure pour PME, artisans & commerçants. Expertise en enjeux locaux du 77.",
+    title:
+      "Agence SEO Seine-et-Marne : visibilité locale pour PME, commerçants & artisans",
+    desc: "Boostez votre visibilité dans le 77 grâce à une agence SEO experte en référencement local. Stratégies sur mesure pour les entreprises de Seine-et-Marne.",
     img: "/blog/blog6/En-tête Digital SEO Élégant.png",
     by: "Ikovaline",
     slug: "agence-seo-seine-marne",

@@ -53,10 +53,10 @@ export default function Landing() {
           </motion.div>
         </Link>
         <motion.h1
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:px-0 px-6 lg:!leading-[70px] md:leading-[60px] leading-[50px] font-poppins font-bold md:text-5xl lg:text-6xl max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-300 dark:via-white dark:to-white"
+          initial={false} // ✅ Pas d’animation retardée
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }} // ✅ Très léger fondu seulement
+          className="text-4xl md:px-0 px-6 lg:!leading-[70px] md:leading-[60px] leading-[50px]  font-bold md:text-5xl lg:text-6xl max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-300 dark:via-white dark:to-white"
         >
           Ikovaline,
           <span className="inline-flex p-2">
@@ -75,44 +75,49 @@ export default function Landing() {
       <TextAnimate
         animation="blurInUp"
         by="word"
-        className="text-muted-foreground dark:text-neutral-400 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
+        className="text-muted-foreground dark:text-neutral-400  max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
       >
         Ikovaline, la start-up spécialisée en SEO, création de site web et
         publicité en ligne, pour booster votre visibilité et vos performances
         digitales.
       </TextAnimate>
 
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.4, 0.0, 0.2, 1] }}
-        viewport={{ amount: 0.5 }}
-        className="font-poppins mt-10 flex max-sm:flex-col-reverse items-center justify-center max-sm:gap-3 gap-5"
-      >
-        <Link href={"/contact"}>
-          <Button
-            className={"min-w-40 relative touch-none"}
-            variant={"default"}
-          >
-            <span className="relative w-full flex items-center justify-center gap-2">
-              <IconMessage2 />
-              Discuter de votre stratégie digitale
-            </span>
-          </Button>
-        </Link>
+      <div className="mt-10 flex max-sm:flex-col-reverse items-center justify-center max-sm:gap-3 gap-5">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
+          <Link href="/contact">
+            <Button className="min-w-40 relative touch-none" variant="default">
+              <span className="flex items-center justify-center gap-2">
+                <IconMessage2 />
+                Discuter de votre stratégie digitale
+              </span>
+            </Button>
+          </Link>
+        </motion.div>
 
-        <Link href={"/nos-services"}>
-          <Button
-            className={"min-w-40 relative touch-none"}
-            variant={"secondary"}
-          >
-            <span className="relative w-full flex items-center justify-center gap-2">
-              <IconApps />
-              Voir nos services marketing et digitaux
-            </span>
-          </Button>
-        </Link>
-      </motion.div>
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <Link href="/nos-services">
+            <Button
+              className="min-w-40 relative touch-none"
+              variant="secondary"
+            >
+              <span className="flex items-center justify-center gap-2">
+                <IconApps />
+                Voir nos services marketing et digitaux
+              </span>
+            </Button>
+          </Link>
+        </motion.div>
+      </div>
     </div>
   );
 }

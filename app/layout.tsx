@@ -5,6 +5,13 @@ import Footer from "@/components/footer/Footer";
 import Favicon from "@/app/ikovaline_logo-favicon.png";
 import { ThemeProvider } from "@/components/theme.provider";
 import { Toaster } from "@/components/ui/toaster";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700", "800"],
+  display: "swap", // ✅ important pour éviter les blocages
+});
 
 export const metadata: Metadata = {
   title: "Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs",
@@ -53,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={poppins.className}>
       <head>
         <link rel="icon" href={Favicon.src} type="image/png" />
         <link rel="canonical" href="https://www.ikovaline.com/" />

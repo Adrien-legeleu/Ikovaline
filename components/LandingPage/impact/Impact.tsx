@@ -30,7 +30,7 @@ const METHODOLOGIE_PHASES = [
   },
 ];
 
-const Methodologie = () => {
+export default function Methodologie() {
   const { theme } = useTheme();
   return (
     <div className="container min-h-svh place-content-center mx-auto  px-6  xl:px-12">
@@ -81,7 +81,7 @@ const Methodologie = () => {
       </div>
     </div>
   );
-};
+}
 
 const ACHIEVEMENTS = [
   {
@@ -134,4 +134,3 @@ const Achievements = () => {
     </ContainerScroll>
   );
 };
-export { Methodologie, Achievements };

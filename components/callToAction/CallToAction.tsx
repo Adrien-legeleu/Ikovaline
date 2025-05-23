@@ -10,7 +10,7 @@ interface ICallToAction {
   textBtn: string;
 }
 
-export function CallToAction({ title, desc, textBtn }: ICallToAction) {
+export default function CallToAction({ title, desc, textBtn }: ICallToAction) {
   return (
     <section className="overflow-hidden   ">
       <div className="relative mx-auto flex bg-[#F4FAFB] dark:bg-[#090D11] max-w-5xl flex-col items-center gap-6 xss:px-8 px-4 pb-12 md:pb-24 pt-24 md:pt-36 text-center sm:gap-8 ">

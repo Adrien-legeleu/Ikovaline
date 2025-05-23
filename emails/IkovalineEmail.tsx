@@ -12,6 +12,7 @@ import {
   Tailwind,
   Text,
 } from "@react-email/components";
+import Image from "next/image";
 import * as React from "react";
 
 interface IkovalineEmailProps {
@@ -123,7 +124,7 @@ export const IkovalineEmail = ({
           </Section>
 
           <Hr className="border-t border-gray-300 mt-12" />
-          <Img
+          <Image
             src={"/images/logo/ikovaline_logo.png"}
             width={32}
             height={32}

@@ -91,7 +91,7 @@ export default function Page({ params }: PageProps) {
           <TextAnimate
             animation="blurInUp"
             by="word"
-            className="text-muted-foreground z-10 mx-auto dark:text-neutral-300  font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
+            className="text-muted-foreground z-10 mx-auto dark:text-neutral-300   max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
           >
             {service.section1Desc}
           </TextAnimate>
@@ -113,7 +113,7 @@ export default function Page({ params }: PageProps) {
           <h2 className="sm:text-4xl py-2 max-w-xl mx-auto text-3xl text-center font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
             {service.section2Title}
           </h2>
-          <p className="text-muted-foreground dark:text-neutral-400 font-poppins max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg">
+          <p className="text-muted-foreground dark:text-neutral-400 max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg">
             {service.section2Desc}
           </p>
           <NeonGradientCard className="max-w-sm items-center flex flex-col justify-center text-center">
@@ -125,7 +125,7 @@ export default function Page({ params }: PageProps) {
                 {service.section2NumberImportant}
               </span>
             </AnimatedShinyText>
-            <span className="block text-muted-foreground dark:text-neutral-400 font-poppins">
+            <span className="block text-muted-foreground dark:text-neutral-400 ">
               {service.section2TextImportant}
             </span>
           </NeonGradientCard>

@@ -81,7 +81,7 @@ export default function ContactFormBusiness({
     }
   };
   return (
-    <div className="max-w-lg w-full mx-auto font-poppins  rounded-3xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+    <div className="max-w-lg w-full mx-auto   rounded-3xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-extrabold lg:hidden text-2xl text-neutral-800 sm:text-left text-center dark:text-neutral-100">
         Une question ? Un projet ?
       </h2>

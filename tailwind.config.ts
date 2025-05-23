@@ -14,9 +14,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        poppins: ["Poppins"],
-      },
+      // fontFamily: {
+      //   poppins: ["Poppins"],
+      // },
       screens: {
         xs: "450px",
         xss: "400px",

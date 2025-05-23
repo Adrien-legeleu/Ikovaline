@@ -11,7 +11,7 @@ export default function Landing() {
   const { theme } = useTheme();
   return (
     <div className="h-screen flex-col flex items-center md:justify-center justify-start pt-20">
-      <h1 className="text-3xl md:px-0 px-6 font-poppins  md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+      <h1 className="text-3xl md:px-0 px-6   md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
         Donnez un nouveau souffle à votre entreprise avec nos
         <Cover>solutions digitales</Cover>
       </h1>
@@ -40,7 +40,7 @@ export default function Landing() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
         viewport={{ amount: 0.5 }}
-        className="font-poppins mt-10 flex max-sm:flex-col items-center justify-center max-sm:gap-3 gap-5"
+        className=" mt-10 flex max-sm:flex-col items-center justify-center max-sm:gap-3 gap-5"
       >
         <Link href="/nos-services/#buisness-developpement">
           <Button>Accélérez votre croissance</Button>

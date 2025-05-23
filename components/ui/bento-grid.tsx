@@ -42,21 +42,21 @@ export const BentoGridItem = ({
     >
       <div
         className={cn(
-          "row-span-1 rounded-3xl font-poppins grid-rows-2  grid relative  h-full  group/bento   justify-center  space-y-12",
+          "row-span-1 rounded-3xl  grid-rows-2  grid relative  h-full  group/bento   justify-center  space-y-12",
           className
         )}
       >
         {header}
 
         <div className="group-hover/bento:translate-x-2 transition   duration-200">
-          <div className="font-poppins relative  text-lg lg:text-xl pr-6  font-bold text-neutral-600 dark:text-neutral-200 ">
+          <div className=" relative  text-lg lg:text-xl pr-6  font-bold text-neutral-600 dark:text-neutral-200 ">
             <span>{title} </span>
             <span className="absolute top-1/2 -translate-y-1/2 right-0">
               {" "}
               {icon}
             </span>
           </div>
-          <div className="font-poppins pt-2 font-normal text-neutral-600 text-sm dark:text-neutral-300">
+          <div className=" pt-2 font-normal text-neutral-600 text-sm dark:text-neutral-300">
             {description}
           </div>
         </div>
