@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CallToAction } from "../callToAction/CallToAction";
+import CallToAction  from "../callToAction/CallToAction";
 
 // On prépare la FAQ
 const faqData = [

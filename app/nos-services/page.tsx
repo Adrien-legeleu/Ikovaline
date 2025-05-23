@@ -1,4 +1,4 @@
-import { CallToAction } from "@/components/callToAction/CallToAction";
+import CallToAction from "@/components/callToAction/CallToAction";
 import FAQ, { faqData } from "@/components/ServicesPage/FAQ/FAQ";
 import Landing from "@/components/ServicesPage/landing/Landing";
 import { Service1 } from "@/components/ServicesPage/servicesComponents/Service1";

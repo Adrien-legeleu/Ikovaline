@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CallToAction } from "../callToAction/CallToAction";
+import CallToAction from "../callToAction/CallToAction";
 
 export default function Blog5() {
   return (

@@ -1,4 +1,4 @@
-import { CallToAction } from "@/components/callToAction/CallToAction";
+import CallToAction from "@/components/callToAction/CallToAction";
 import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";

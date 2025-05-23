@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CallToAction } from "../callToAction/CallToAction";
+import CallToAction from "../callToAction/CallToAction";
 import Link from "next/link";
 import { Button } from "../ui/button";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Head from "next/head";
-import { CallToAction } from "@/components/callToAction/CallToAction";
+import CallToAction from "@/components/callToAction/CallToAction";
 import AboutContent from "@/components/AboutPage/AboutContent";
 
 export const metadata: Metadata = {
