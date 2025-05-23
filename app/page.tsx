@@ -5,11 +5,12 @@ import Landing from "@/components/LandingPage/landing/Landing";
 import Review from "@/components/LandingPage/review/Review";
 import Services from "@/components/LandingPage/servicesSection/Services";
 import type { Metadata } from "next";
+import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "Ikovaline - L'agence digitale qui propulse votre business !",
+  title: "Ikovaline – L’agence digitale qui propulse votre business",
   description:
-    "Découvrez comment Ikovaline vous aide à booster votre visibilité et votre croissance grâce au SEO, publicité, création de sites web et bien plus.",
+    "Boostez votre visibilité avec Ikovaline : SEO, publicité, création de sites web, stratégie digitale. Une agence qui propulse votre croissance en ligne.",
   keywords: [
     "marketing digital",
     "SEO",
@@ -48,20 +49,66 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="max-w-[1400px] mx-auto">
-      <Landing />
-      <About />
-      <section id="services">
-        <Services />
-      </section>
+    <>
+      <Head>
+        {/* Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Ikovaline",
+              url: "https://www.ikovaline.com",
+              logo: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+33 7 85 90 22 38",
+                contactType: "customer service",
+                areaServed: "FR",
+              },
+              sameAs: [
+                "https://www.linkedin.com/company/ikovaline",
+                "https://www.instagram.com/ikovaline",
+              ],
+            }),
+          }}
+        />
 
-      <Methodologie />
-      <Review />
-      <CallToAction
-        title="Améliorez votre visibilité en ligne dès aujourd'hui !"
-        desc="Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets."
-        textBtn="Commencez maintenant !"
-      />
-    </div>
+        {/* WebSite */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Ikovaline",
+              url: "https://www.ikovaline.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target:
+                  "https://www.ikovaline.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+      </Head>
+
+      <div className="max-w-[1400px] mx-auto">
+        <Landing />
+        <About />
+        <section id="services">
+          <Services />
+        </section>
+        <Methodologie />
+        <Review />
+        <CallToAction
+          title="Améliorez votre visibilité en ligne dès aujourd'hui !"
+          desc="Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets."
+          textBtn="Commencez maintenant !"
+        />
+      </div>
+    </>
   );
 }

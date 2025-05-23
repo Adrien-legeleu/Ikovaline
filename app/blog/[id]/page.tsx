@@ -3,6 +3,7 @@ import Buttons from "@/components/BlogPage/Buttons";
 import { ScrollProgress } from "@/components/magicui/scroll-progress";
 import { blogMetadata } from "@/lib/blogMetadata";
 import { cn } from "@/lib/utils";
+import Head from "next/head";
 import { notFound } from "next/navigation";
 import { ComponentType } from "react";
 interface ProductPageProps {
@@ -68,22 +69,53 @@ export default async function Blog({ params }: ProductPageProps) {
 
   const mod = await loader();
   const Component = mod.default;
+  const meta = blogMetadata[id];
 
   return (
-    <div className="lg:py-24 relative py-12  ">
-      <Buttons />
-      <div
-        className={cn(
-          "absolute inset-0",
-          "[background-size:20px_20px]",
-          "[background-image:radial-gradient(#d4d4d4a0_1.2px,transparent_1px)]",
-          "dark:[background-image:radial-gradient(#404040da_1.2px,transparent_1px)]"
-        )}
-      />
-      <ScrollProgress />
-      <div className="px-2 sm:px-10">
-        <Component />
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: meta.title,
+              description: meta.description,
+              author: {
+                "@type": "Organization",
+                name: "Ikovaline",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Ikovaline",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+                },
+              },
+              datePublished: meta.date, // ex: "2025-05-20"
+              image: `https://www.ikovaline.com${meta.ogImage}`,
+              url: `https://www.ikovaline.com/blog/${id}`,
+            }),
+          }}
+        />
+      </Head>
+      <div className="lg:py-24 relative py-12  ">
+        <Buttons />
+        <div
+          className={cn(
+            "absolute inset-0",
+            "[background-size:20px_20px]",
+            "[background-image:radial-gradient(#d4d4d4a0_1.2px,transparent_1px)]",
+            "dark:[background-image:radial-gradient(#404040da_1.2px,transparent_1px)]"
+          )}
+        />
+        <ScrollProgress />
+        <div className="px-2 sm:px-10">
+          <Component />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

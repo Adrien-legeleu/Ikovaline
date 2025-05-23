@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Head from "next/head";
 import { CallToAction } from "@/components/callToAction/CallToAction";
 import AboutContent from "@/components/AboutPage/AboutContent";
 
@@ -33,13 +34,31 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="max-w-[1400px] mx-auto">
-      <AboutContent />
-      <CallToAction
-        title="Faites passer votre activité au niveau supérieur avec Ikovaline"
-        desc="Bénéficiez de notre expertise en marketing digital, SEO, publicité et stratégie sur-mesure pour booster votre visibilité et atteindre vos objectifs business."
-        textBtn="Contactez-nous dès maintenant !"
-      />
-    </div>
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              name: "À propos d'Ikovaline",
+              url: "https://www.ikovaline.com/about",
+              description:
+                "Découvrez l’histoire, les valeurs et l’équipe qui porte Ikovaline, la start-up étudiante au service de votre visibilité digitale.",
+            }),
+          }}
+        />
+      </Head>
+
+      <div className="max-w-[1400px] mx-auto">
+        <AboutContent />
+        <CallToAction
+          title="Faites passer votre activité au niveau supérieur avec Ikovaline"
+          desc="Bénéficiez de notre expertise en marketing digital, SEO, publicité et stratégie sur-mesure pour booster votre visibilité et atteindre vos objectifs business."
+          textBtn="Contactez-nous dès maintenant !"
+        />
+      </div>
+    </>
   );
 }

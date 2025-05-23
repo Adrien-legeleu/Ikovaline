@@ -1,4 +1,5 @@
 import ContactMainPage from "@/components/ContactPage/ContactMainPage";
+import Head from "next/head";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,5 +16,36 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ContactMainPage />;
+  return (
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ContactPage",
+              name: "Page de contact - Ikovaline",
+              url: "https://www.ikovaline.com/contact",
+              about: {
+                "@type": "Organization",
+                name: "Ikovaline",
+                url: "https://www.ikovaline.com",
+                logo: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  telephone: "+33 7 85 90 22 38",
+                  contactType: "customer service",
+                  areaServed: "FR",
+                },
+              },
+              description:
+                "Contactez-nous pour discuter de votre stratégie digitale, obtenir un devis ou en savoir plus sur nos services.",
+            }),
+          }}
+        />
+      </Head>
+      <ContactMainPage />
+    </>
+  );
 }

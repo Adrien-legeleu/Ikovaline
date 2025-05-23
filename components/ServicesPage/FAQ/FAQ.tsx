@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const faqData = [
+export const faqData = [
   {
     question: "Qu'est-ce qu'Ikovaline ?",
     answer:

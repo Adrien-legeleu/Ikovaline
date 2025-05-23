@@ -57,6 +57,28 @@ export default function RootLayout({
       <head>
         <link rel="icon" href={Favicon.src} type="image/png" />
         <link rel="canonical" href="https://www.ikovaline.com/" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Ikovaline",
+              url: "https://www.ikovaline.com",
+              logo: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+33 7 85 90 22 38",
+                contactType: "customer service",
+                areaServed: "FR",
+              },
+              sameAs: [
+                "https://www.linkedin.com/company/ikovaline",
+                "https://www.instagram.com/ikovaline",
+              ],
+            }),
+          }}
+        />
       </head>
       <body className={`antialiased`}>
         <ThemeProvider
@@ -74,7 +96,6 @@ export default function RootLayout({
             <Footer />
           </footer>
         </ThemeProvider>
-        {/* <SmoothCursor /> */}
       </body>
     </html>
   );

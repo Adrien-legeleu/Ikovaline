@@ -1,10 +1,11 @@
 import { CallToAction } from "@/components/callToAction/CallToAction";
-import FAQ from "@/components/ServicesPage/FAQ/FAQ";
+import FAQ, { faqData } from "@/components/ServicesPage/FAQ/FAQ";
 import Landing from "@/components/ServicesPage/landing/Landing";
 import { Service1 } from "@/components/ServicesPage/servicesComponents/Service1";
 import { Service2 } from "@/components/ServicesPage/servicesComponents/Service2";
 import Why from "@/components/ServicesPage/why/Why";
 import type { Metadata } from "next";
+import Head from "next/head"; // 👈 nécessaire pour intégrer les scripts JSON-LD
 
 export const metadata: Metadata = {
   title: "Nos Services - Solutions Digitales sur Mesure | Ikovaline",
@@ -34,20 +35,60 @@ export const metadata: Metadata = {
   },
 };
 
+// ✅ Génération des données structurées FAQ
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqData.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer.replace(/\n/g, "<br>"),
+    },
+  })),
+};
+
+// ✅ Donnée structurée WebPage
+const webPageStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Nos services",
+  url: "https://www.ikovaline.com/nos-services",
+  description:
+    "Découvrez les services digitaux proposés par Ikovaline : SEO, création de site, publicité, IA, réseaux sociaux et stratégie de visibilité.",
+};
+
 export default function Page() {
   return (
-    <div>
-      <Landing />
-      <Service1 />
-      <Service2 />
-      <Why />
-      <CallToAction
-        title="Passez à l’action maintenant !"
-        desc="Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible."
-        textBtn="Lancez votre projet"
-      />
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webPageStructuredData),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqStructuredData),
+          }}
+        />
+      </Head>
 
-      <FAQ />
-    </div>
+      <div>
+        <Landing />
+        <Service1 />
+        <Service2 />
+        <Why />
+        <CallToAction
+          title="Passez à l’action maintenant !"
+          desc="Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible."
+          textBtn="Lancez votre projet"
+        />
+        <FAQ />
+      </div>
+    </>
   );
 }
