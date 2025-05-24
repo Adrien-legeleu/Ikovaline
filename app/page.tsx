@@ -8,6 +8,12 @@ const Services = dynamic(
     ssr: false,
   }
 );
+const Blog = dynamic(
+  () => import("@/components/LandingPage/Blog/BlogLanding"),
+  {
+    ssr: false,
+  }
+);
 const About = dynamic(() => import("@/components/LandingPage/about/About"), {
   ssr: false,
 });
@@ -128,6 +134,7 @@ export default function Home() {
           desc="Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets."
           textBtn="Commencez maintenant !"
         />
+        <Blog />
       </div>
     </>
   );

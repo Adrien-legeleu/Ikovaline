@@ -24,7 +24,7 @@ const Word: React.FC<WordProps> = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1]);
 
   return (
-    <span className="relative mt-[12px] mr-1 text-lg lg:text-xl  font-semibold">
+    <span className="relative mt-[16px] mr-1 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl  font-semibold">
       <span className="absolute opacity-20">{children}</span>
       <motion.span style={{ opacity: opacity }}>{children}</motion.span>
     </span>
@@ -37,14 +37,14 @@ export const MagicText: React.FC<MagicTextProps> = ({ text }) => {
   const { scrollYProgress } = useScroll({
     target: container,
 
-    offset: ["start 0.8", "start 0.05"],
+    offset: ["start 0.7", "start 0.1"],
   });
   const words = text.split(" ");
 
   return (
     <p
       ref={container}
-      className="flex  flex-wrap items-center justify-center leading-[0.5] p-4"
+      className="flex   flex-wrap items-center justify-center leading-[5rem] p-4"
     >
       {words.map((word, i) => {
         const start = i / words.length;

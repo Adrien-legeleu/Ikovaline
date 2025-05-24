@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 
-interface BlogType {
+export interface BlogType {
   date: string;
   title: string;
   desc: string;
@@ -14,7 +14,7 @@ interface BlogType {
 
 const currentYear = new Date().getFullYear();
 
-const dataBlog: BlogType[] = [
+export const dataBlog: BlogType[] = [
   {
     date: "2025-05-14",
     title: "creation digital : 10 tendances et outils pour un projet réussi",
@@ -81,7 +81,7 @@ function Blog() {
           {dataBlog.map((bl: BlogType, index) => {
             return (
               <Link
-                key={bl.slug}
+                key={bl.date + bl.slug}
                 href={`blog/${bl.slug}`}
                 className={`flex flex-col gap-4 hover:opacity-75 cursor-pointer ${
                   index === 0 ? "md:col-span-2 lg:col-span-3" : ""
