@@ -18,10 +18,12 @@ import { SkeletonTwoComponent } from "./SkeletonTwo";
 import { SkeletonFourComponent } from "./SkeletonFour";
 import { SkeletonFiveComponent } from "./SkeletonFive";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Services() {
   return (
-    <div className="py-32">
+    <div className="pt-32 pb-10 lg:px-10 flex items-center flex-col">
       <h2
         className={
           "max-md:flex hidden sm:text-4xl text-3xl items-center justify-center mb-12  font-semibold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-400 dark:to-neutral-100  bg-clip-text text-transparent "
@@ -29,18 +31,22 @@ export default function Services() {
       >
         Nos Services
       </h2>
-      <BentoGrid className="md:max-w-6xl  max-w-sm relative mx-auto md:auto-rows-[28rem]  auto-rows-[29rem]">
+      <BentoGrid className="md:max-w-[1400px]  max-w-sm relative mx-auto md:auto-rows-[28rem] xl:auto-rows-[31rem] 2xl:auto-rows-[32rem]  auto-rows-[29rem]">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
             title={item.title}
             description={item.description}
             header={item.header}
+            link={item.link}
             className={cn("[&>p:text-lg]", item.className)}
             icon={item.icon}
           />
         ))}
       </BentoGrid>
+      <Link href="/nos-services" className="mt-10   mx-auto">
+        <Button>Voir tous nos services</Button>
+      </Link>
     </div>
   );
 }
@@ -210,64 +216,69 @@ const items = [
   {
     title: "Google My Business & Avis Clients",
     description: (
-      <span className="text-sm">
+      <span className="text-sm xl:text-base ">
         Améliorez votre positionnement local grâce à une gestion stratégique de
         votre fiche Google My Business et des avis clients. Gagnez en
         visibilité, en crédibilité, et attirez plus de prospects.
       </span>
     ),
     header: <SkeletonOne />,
+    link: "/nos-services/e-reputation-gestion-avis-google",
     className: "md:col-span-1",
     icon: <IconMapPin stroke={2} className="text-neutral-500" />,
   },
   {
     title: "Stratégie de Contenu & Réseaux Sociaux",
     description: (
-      <span className="text-sm">
+      <span className="text-sm xl:text-base ">
         Déployez des campagnes engageantes sur Instagram, Facebook, TikTok et
         LinkedIn avec une stratégie de contenu SEO-friendly. Renforcez votre
         notoriété et générez du trafic qualifié.
       </span>
     ),
     header: <SkeletonTwo />,
+    link: "/nos-services/gestion-developpement-reseaux-sociaux",
     className: "md:col-span-1",
     icon: <IconBrandInstagram className=" text-neutral-500" />,
   },
   {
     title: "Lancement de Campagnes Publicitaires",
     description: (
-      <span className="text-sm">
+      <span className="text-sm xl:text-base ">
         Lancez des campagnes Google Ads et Social Ads ciblées pour booster vos
         conversions. Augmentez votre retour sur investissement (ROI) grâce à une
         stratégie publicitaire maîtrisée.
       </span>
     ),
     header: <SkeletonFour />,
+    link: "/nos-services/gestion-campagnes-sea",
     className: "md:col-span-1",
     icon: <IconChartBar className=" text-neutral-500" />,
   },
   {
     title: "Consulting en Développement Commercial",
     description: (
-      <span className="text-sm">
+      <span className="text-sm xl:text-base ">
         Bénéficiez de conseils stratégiques pour structurer votre prospection,
         améliorer vos ventes et automatiser votre croissance grâce au digital.
       </span>
     ),
     header: <SkeletonFive />,
+    link: "/nos-services#buisness-developpement",
     className: "md:col-span-1  ",
     icon: <IconBriefcase className=" text-neutral-500" />,
   },
   {
     title: "Création & Optimisation de Sites Internet",
     description: (
-      <span className="text-sm">
+      <span className="text-sm xl:text-base ">
         Conception de sites vitrines et e-commerce performants, optimisés SEO,
         mobile-first et rapides. Offrez à vos visiteurs une expérience fluide
         sur tous les appareils.
       </span>
     ),
     header: <SkeletonThree />,
+    link: "/nos-services/creation-sites-web-vitrine-e-commerce",
     className: "md:!col-span-2 ",
     icon: <IconDeviceLaptop className=" text-neutral-500" />,
   },

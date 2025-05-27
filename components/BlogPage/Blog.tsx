@@ -16,6 +16,15 @@ const currentYear = new Date().getFullYear();
 
 export const dataBlog: BlogType[] = [
   {
+    date: "2025-05-27",
+    title:
+      "Agence SEA : +70 % de chiffre d'affaires avec des campagnes Google Ads optimisées",
+    desc: "Ikovaline, agence SEA certifiée : créez des campagnes Google Ads efficaces, améliorez votre rentabilité et attirez un trafic réellement qualifié.",
+    img: "/blog/blog7/agence-sea-google-ads.png",
+    by: "Ikovaline",
+    slug: "agence-sea-expertise",
+  },
+  {
     date: "2025-05-14",
     title: "creation digital : 10 tendances et outils pour un projet réussi",
     desc: "Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.",

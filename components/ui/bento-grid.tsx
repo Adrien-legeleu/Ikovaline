@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { GlowingEffect } from "./glowing-effect";
+import Link from "next/link";
 
 export const BentoGrid = ({
   className,
@@ -11,7 +12,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid md:auto-rows-[18rem]  px-2  grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto ",
+        "grid md:auto-rows-[18rem]  px-2  grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4 2xl:gap-8 max-w-[1400px] mx-auto ",
         className
       )}
     >
@@ -25,16 +26,19 @@ export const BentoGridItem = ({
   title,
   description,
   header,
+  link,
   icon,
 }: {
   className?: string;
+  link: string;
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
   header?: React.ReactNode;
   icon?: React.ReactNode;
 }) => {
   return (
-    <div
+    <Link
+      href={link}
       className={cn(
         "relative rounded-3xl   group/bento hover:shadow-xl transition duration-200  border shadow-input dark:shadow-none px-4  bg-white dark:bg-neutral-800",
         className
@@ -49,27 +53,27 @@ export const BentoGridItem = ({
         {header}
 
         <div className="group-hover/bento:translate-x-2 transition   duration-200">
-          <div className=" relative  text-lg lg:text-xl pr-6  font-bold text-neutral-600 dark:text-neutral-200 ">
+          <div className=" relative  text-lg lg:text-xl 2xl:text-2xl pr-6  font-bold text-neutral-600 dark:text-neutral-200 ">
             <span>{title} </span>
             <span className="absolute top-1/2 -translate-y-1/2 right-0">
               {" "}
               {icon}
             </span>
           </div>
-          <div className=" pt-2 font-normal text-neutral-600 text-sm dark:text-neutral-300">
+          <div className=" pt-2  font-normal text-neutral-600 text-sm dark:text-neutral-300">
             {description}
           </div>
         </div>
       </div>
       <GlowingEffect
-        spread={60}
+        spread={80}
         blur={3}
-        borderWidth={4}
+        borderWidth={6}
         glow={true}
         disabled={false}
-        proximity={64}
+        proximity={80}
         inactiveZone={0.01}
       />
-    </div>
+    </Link>
   );
 };

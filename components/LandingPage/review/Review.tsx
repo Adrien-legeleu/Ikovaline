@@ -97,7 +97,7 @@ const ReviewCard = ({
   role: string;
   text: string;
 }) => (
-  <div className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-sm w-full bg-white dark:bg-neutral-900">
+  <div className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-md w-full bg-white dark:bg-neutral-900">
     <div className="mb-4 text-base">{text}</div>
     <div className="flex items-center gap-2 mt-5">
       {typeof image === "string" ? (
@@ -128,7 +128,7 @@ const ReviewCard = ({
 );
 
 const MarqueeDemoVertical = () => (
-  <div className="relative flex h-[700px] sm:h-[500px] w-full flex-row items-center justify-center overflow-hidden">
+  <div className="relative flex h-[700px] sm:h-[500px] 2xl:h-[600px] w-full flex-row items-center justify-center overflow-hidden">
     <Marquee pauseOnHover vertical className="[--duration:20s] max-lg:hidden">
       {firstColumn.map((review) => (
         <ReviewCard key={review.name} {...review} />

@@ -169,7 +169,6 @@ export const Blog = ({
         <BlurImage
           src={blog.img}
           alt={blog.title}
-          fill
           className="absolute inset-0 z-10 object-cover"
         />
       </motion.button>
@@ -188,9 +187,8 @@ export const BlurImage = ({
   const [isLoading, setLoading] = useState(true);
   return (
     <Image
-      height={height}
-      width={width}
-      unoptimized
+      height={500}
+      width={500}
       className={cn(
         "h-full w-full brightness-75 transition duration-300",
         isLoading ? "blur-sm" : "blur-0",

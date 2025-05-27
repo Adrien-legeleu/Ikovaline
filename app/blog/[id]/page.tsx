@@ -21,6 +21,7 @@ const componentsMap: Record<
   "creation-digital-guide": () => import("@/components/BlogPage/Blog4"),
   "definition-site-institutionnel": () => import("@/components/BlogPage/Blog5"),
   "agence-seo-seine-marne": () => import("@/components/BlogPage/Blog6"),
+  "agence-sea-expertise": () => import("@/components/BlogPage/Blog7"),
 };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {

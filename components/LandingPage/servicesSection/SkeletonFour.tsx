@@ -57,10 +57,10 @@ export function SkeletonFourComponent() {
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
             />
-            <ChartTooltip
+            {/* <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="line" />}
-            />
+            /> */}
             <Bar
               dataKey="impressions"
               fill="var(--color-impressions)"

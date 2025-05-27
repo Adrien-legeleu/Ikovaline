@@ -1,4 +1,5 @@
 import Landing from "@/components/LandingPage/landing/Landing";
+
 const Review = dynamic(() => import("@/components/LandingPage/review/Review"), {
   ssr: true,
 });
@@ -8,6 +9,9 @@ const Services = dynamic(
     ssr: true,
   }
 );
+const Map = dynamic(() => import("@/components/LandingPage/map/Map"), {
+  ssr: true,
+});
 const Blog = dynamic(
   () => import("@/components/LandingPage/Blog/BlogLanding"),
   {
@@ -127,8 +131,10 @@ export default function Home() {
         <section id="services">
           <Services />
         </section>
+        <Map />
         <Methodologie />
         <Review />
+
         <CallToAction
           title="Améliorez votre visibilité en ligne dès aujourd'hui !"
           desc="Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets."

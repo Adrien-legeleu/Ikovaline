@@ -53,4 +53,12 @@ export const blogMetadata: Record<
       "Boostez votre visibilité dans le 77 grâce à une agence SEO experte en référencement local. Stratégies sur mesure pour les entreprises de Seine-et-Marne.",
     ogImage: "/blog/blog5/Page Couverture Agence Web.png",
   },
+  "agence-sea-expertise": {
+    date: "2025-05-27",
+    title:
+      "Agence SEA : +70 % de chiffre d'affaires avec des campagnes Google Ads optimisées",
+    description:
+      "Ikovaline, agence SEA certifiée : créez des campagnes Google Ads efficaces, améliorez votre rentabilité et attirez un trafic réellement qualifié.",
+    ogImage: "/blog/blog7/agence-sea-google-ads.png",
+  },
 };
