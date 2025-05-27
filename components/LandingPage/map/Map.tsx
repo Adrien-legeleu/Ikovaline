@@ -96,7 +96,7 @@ export default function Map() {
         </div>
       </div>
 
-      <div className="max-w-7xl px-5 mx-auto text-center space-y-4 md:space-y-8">
+      <div className="max-w-7xl px-2 mx-auto text-center flex flex-col items-center justify-center space-y-4 md:space-y-8">
         <h3 className="text-2xl md:text-4xl font-semibold">
           Besoin d’un audit rapide ?
         </h3>
