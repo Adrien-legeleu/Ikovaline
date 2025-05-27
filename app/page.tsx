@@ -1,32 +1,32 @@
 import Landing from "@/components/LandingPage/landing/Landing";
 const Review = dynamic(() => import("@/components/LandingPage/review/Review"), {
-  ssr: false,
+  ssr: true,
 });
 const Services = dynamic(
   () => import("@/components/LandingPage/servicesSection/Services"),
   {
-    ssr: false,
+    ssr: true,
   }
 );
 const Blog = dynamic(
   () => import("@/components/LandingPage/Blog/BlogLanding"),
   {
-    ssr: false,
+    ssr: true,
   }
 );
 const About = dynamic(() => import("@/components/LandingPage/about/About"), {
-  ssr: false,
+  ssr: true,
 });
 const Methodologie = dynamic(
   () =>
     import("@/components/LandingPage/impact/Impact").then((mod) => mod.default),
-  { ssr: false }
+  { ssr: true }
 );
 
 const CallToAction = dynamic(
   () =>
     import("@/components/callToAction/CallToAction").then((mod) => mod.default),
-  { ssr: false }
+  { ssr: true }
 );
 
 import type { Metadata } from "next";
