@@ -96,11 +96,11 @@ export default function Map() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto text-center space-y-4 md:space-y-8">
+      <div className="max-w-7xl px-5 mx-auto text-center space-y-4 md:space-y-8">
         <h3 className="text-2xl md:text-4xl font-semibold">
           Besoin d’un audit rapide ?
         </h3>
-        <Button className="md:text-lg py-6">
+        <Button className="max-sm:text-sm md:text-lg py-6">
           Contactez-nous et recevez un retour sous 24h.
         </Button>
       </div>
