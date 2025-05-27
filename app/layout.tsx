@@ -86,6 +86,11 @@ export default function RootLayout({
             }),
           }}
         />
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="4SH1YnVFNKyaaU3AE50yFg"
+          async
+        ></script>
       </head>
       <body className={`antialiased`}>
         <ThemeProvider
