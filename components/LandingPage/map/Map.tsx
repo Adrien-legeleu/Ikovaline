@@ -27,76 +27,80 @@ export default function Map() {
           ]}
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="absolute top-20 left-32 z-20 max-w-md"
-        >
-          <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
-            <h3 className="text-xl font-semibold">
-              ❓Votre site vous apporte-t-il vraiment des clients ?
-            </h3>
-            <p className="text-sm">
-              Nous concevons des sites clairs, modernes et pensés pour
-              convertir.
-            </p>
-          </div>
-        </motion.div>
+        <div className="max-md:grid max-sm:grid-cols-1 px-5  max-md:grid-cols-2 max-md:place-items-center gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="md:absolute relative xl:top-5 md:top-10 md:left-5 lg:left-10 xl:left-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
+          >
+            <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
+              <h3 className="text-sm lg:text-md xl:text-x font-semibold">
+                ❓Votre site vous apporte-t-il vraiment des clients ?
+              </h3>
+              <p className=" text-xs xl:text-sm">
+                Nous concevons des sites clairs, modernes et pensés pour
+                convertir.
+              </p>
+            </div>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-          className="absolute top-32 right-20 z-20 max-w-md"
-        >
-          <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
-            <h3 className="text-xl font-semibold">
-              ❓Personne ne vous trouve sur Google ?
-            </h3>
-            <p className="text-sm">
-              On booste votre visibilité avec des stratégies SEO & SEA
-              efficaces.
-            </p>
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-          className="absolute bottom-40 right-32 z-20 max-w-md"
-        >
-          <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
-            <h3 className="text-xl font-semibold">
-              ❓Vous passez trop de temps sur des tâches répétitives ?
-            </h3>
-            <p className="text-sm">
-              Automatisations sur mesure pour gagner du temps et scaler sans
-              stress.
-            </p>
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-          className="absolute bottom-[40%] left-20 z-20  max-w-md"
-        >
-          <div className="p-5 bg-transparent backdrop-blur-[4px]  bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
-            <h3 className="text-xl font-semibold">
-              ❓Pas de stratégie digitale claire ?
-            </h3>
-            <p className="text-sm">
-              On vous guide étape par étape, avec des actions concrètes et
-              mesurables.
-            </p>
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            className="md:absolute relative  md:top-28 xl:top-32 xl:right-20 md:right-10 lg:right-16 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
+          >
+            <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
+              <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
+                ❓Personne ne vous trouve sur Google ?
+              </h3>
+              <p className=" text-xs xl:text-sm">
+                On booste votre visibilité avec des stratégies SEO & SEA
+                efficaces.
+              </p>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            className="md:absolute relative md:bottom-20 xl:bottom-40 md:right-16 lg:right-24 xl:right-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
+          >
+            <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
+              <h3 className="text-sm lg:text-md xl:text-x font-semibold">
+                ❓Vous passez trop de temps sur des tâches répétitives ?
+              </h3>
+              <p className=" text-xs xl:text-sm">
+                Automatisations sur mesure pour gagner du temps et scaler sans
+                stress.
+              </p>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+            className="md:absolute relative  md:bottom-[35%] lg:bottom-[40%] md:left-12 lg:left-20 z-20  max-w-[295px] lg:max-w-sm xl:max-w-md"
+          >
+            <div className="p-5 bg-transparent backdrop-blur-[4px]  bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
+              <h3 className="text-sm lg:text-md xl:text-x font-semibold">
+                ❓Pas de stratégie digitale claire ?
+              </h3>
+              <p className=" text-xs xl:text-sm">
+                On vous guide étape par étape, avec des actions concrètes et
+                mesurables.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto text-center space-y-8">
-        <h3 className="text-4xl font-semibold">Besoin d’un audit rapide ?</h3>
-        <Button className="text-lg py-6">
+      <div className="max-w-7xl mx-auto text-center space-y-4 md:space-y-8">
+        <h3 className="text-2xl md:text-4xl font-semibold">
+          Besoin d’un audit rapide ?
+        </h3>
+        <Button className="md:text-lg py-6">
           Contactez-nous et recevez un retour sous 24h.
         </Button>
       </div>

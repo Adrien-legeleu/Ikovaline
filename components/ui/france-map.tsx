@@ -43,20 +43,23 @@ export function FranceMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
     <div className="w-full aspect-[1.6/1] rounded-lg relative font-sans">
       {theme === "dark" ? (
         <Image
-          src="/images/map/france-dots-dark.png"
-          alt="France Map Dark"
-          fill
-          className="object-cover rounded-lg"
+          src="/france-dots-map-dark.svg"
+          className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
+          alt="Carte pointillée France"
+          height="495"
+          width="1056"
+          draggable={false}
         />
       ) : (
         <Image
-          src="/images/map/france-dots.png"
-          alt="France Map Light"
-          fill
-          className="object-cover rounded-lg"
+          src="/france-dots-map.svg"
+          className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
+          alt="Carte pointillée France"
+          height="495"
+          width="1056"
+          draggable={false}
         />
       )}
-
       <svg
         ref={svgRef}
         viewBox="0 0 800 500"
