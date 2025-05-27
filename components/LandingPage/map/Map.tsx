@@ -101,7 +101,7 @@ export default function Map() {
           Besoin d’un audit rapide ?
         </h3>
         <Button className="max-sm:text-sm md:text-lg py-6">
-          Contactez-nous et recevez un retour sous 24h.
+          Contactez-nous — réponse sous 24h
         </Button>
       </div>
     </div>
