@@ -151,7 +151,7 @@ export const Blog = ({
   layout?: boolean;
 }) => {
   return (
-    <Link href={`/blog${blog.slug}`} className="relative">
+    <Link href={`/blog/${blog.slug}`} className="relative">
       <motion.button
         layoutId={layout ? `blog-${blog.title}` : undefined}
         className="relative shadow-xl shadow-black/20 z-10 flex h-56 md:h-80 w-80 md:w-[480px] flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100  dark:bg-neutral-900"
