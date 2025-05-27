@@ -48,8 +48,8 @@ export default function Blog7() {
           amplifier votre présence sur les moteurs de recherche. Découvrez
           comment ces experts transforment votre stratégie digitale en{" "}
           <strong>résultats concrets</strong>, depuis la création de campagnes
-          ciblées jusqu'à l'optimisation de votre budget, avec des méthodes
-          éprouvées pour maximiser votre retour sur investissement.
+          ciblées jusqu&apos;à l&apos;optimisation de votre budget, avec des
+          méthodes éprouvées pour maximiser votre retour sur investissement.
         </p>
         <Link href="/contact">
           <Button>Discuter avec un expert SEA</Button>
@@ -91,24 +91,25 @@ export default function Blog7() {
             </li>
             <li className="underline">
               <Link href="#sea-pour-differents-secteurs">
-                Comment le SEA s'adapte à différents secteurs d'activité
+                Comment le SEA s&apos;adapte à différents secteurs d'activité
               </Link>
             </li>
           </ol>
         </li>
         <li className="space-y-12" id="definition-role-agence-sea">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
-            Comprendre le rôle d'une agence SEA dans votre stratégie digitale
+            Comprendre le rôle d&apos;une agence SEA dans votre stratégie
+            digitale
           </h2>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Qu'est-ce que le SEA et pourquoi est-il essentiel aujourd'hui?
+            Qu&apos;est-ce que le SEA et pourquoi est-il essentiel aujourd'hui?
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Le SEA, ou Search Engine Advertising, désigne la publicité payante
             sur les moteurs de recherche. Cette stratégie digitale permet aux
-            entreprises d'acheter des espaces publicitaires pour apparaître en
-            tête des résultats de recherche. Contrairement au référencement
+            entreprises d&apos;acheter des espaces publicitaires pour apparaître
+            en tête des résultats de recherche. Contrairement au référencement
             naturel, le SEA offre une
             <strong> visibilité immédiate</strong>, idéale pour les lancements
             de produits ou les campagnes à court terme.{" "}
@@ -128,12 +129,12 @@ export default function Blog7() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Le SEO vise à améliorer naturellement son classement dans les
-            résultats de recherche, tandis que le SEA permet d'acheter de la
-            visibilité immédiatement. Ces deux approches sont complémentaires :
-            le SEA génère du trafic rapidement,
+            résultats de recherche, tandis que le SEA permet d&apos;acheter de
+            la visibilité immédiatement. Ces deux approches sont complémentaires
+            : le SEA génère du trafic rapidement,
             <strong> le SEO construit une présence pérenne</strong>. Ensemble,
-            ils maximisent la visibilité d'une entreprise sur les moteurs de
-            recherche. Le SEA teste des mots-clés pour nourrir le SEO, qui
+            ils maximisent la visibilité d&apos;une entreprise sur les moteurs
+            de recherche. Le SEA teste des mots-clés pour nourrir le SEO, qui
             capitalise ensuite sur les enseignements obtenus.
           </p>
 
@@ -141,8 +142,9 @@ export default function Blog7() {
             Les services proposés par une agence SEA professionnelle
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            Une agence SEA gère l'intégralité de vos campagnes publicitaires sur
-            Google Ads, Microsoft Advertising et autres plateformes. Elle{" "}
+            Une agence SEA gère l&apos;intégralité de vos campagnes
+            publicitaires sur Google Ads, Microsoft Advertising et autres
+            plateformes. Elle{" "}
             <strong>
               optimise vos annonces, améliore votre score de qualité
             </strong>{" "}
@@ -175,7 +177,7 @@ export default function Blog7() {
             </li>
             <li>
               <strong>Concevoir des campagnes vidéo</strong> sur YouTube pour
-              captiver l'audience avec un contenu engageant
+              captiver l&apos;audience avec un contenu engageant
             </li>
           </ul>
           <CallToAction
@@ -185,16 +187,16 @@ export default function Blog7() {
           />
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            L'approche stratégique d'une agence SEA pour développer des
-            campagnes performantes
+            L&apos;approche stratégique d&apos;une agence SEA pour développer
+            des campagnes performantes
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Une agence SEA conçoit des campagnes personnalisées en étroite
             collaboration avec les clients. Elle identifie les cibles,
             sélectionne les mots-clés pertinents et construit des groupes
-            d'annonces thématiques. Les experts optimisent les enchères,
+            d&apos;annonces thématiques. Les experts optimisent les enchères,
             ajustent le ciblage géographique et démographique, et perfectionnent
-            les annonces pour maximiser les taux de clics. L'accompagnement
+            les annonces pour maximiser les taux de clics. L&apos;accompagnement
             inclut un suivi en temps réel et des ajustements
             <strong> continus pour garantir des performances optimales</strong>.
           </p>
@@ -213,8 +215,8 @@ export default function Blog7() {
           </p>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Démonstration du retour sur investissement (ROI) qu'une agence SEA
-            peut générer
+            Démonstration du retour sur investissement (ROI) qu&apos;une agence
+            SEA peut générer
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Une agence SEA professionnelle transforme votre budget en levier de
@@ -222,9 +224,9 @@ export default function Blog7() {
             qualifié et en optimisation des taux de conversion, elle{" "}
             <strong>maximise votre retour sur investissement</strong>. Les
             indicateurs clés comme le ROI, le taux de conversion et le coût par
-            acquisition deviennent des leviers d'amélioration continue. Vous
-            bénéficiez d'une visibilité renforcée et d'une performance
-            commerciale optimisée.
+            acquisition deviennent des leviers d&apos;amélioration continue.
+            Vous bénéficiez d&apos;une visibilité renforcée et d&apos;une
+            performance commerciale optimisée.
           </p>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
@@ -233,18 +235,19 @@ export default function Blog7() {
           <p className="lg:text-lg 2xl:text-xl">
             Les agences SEA utilisent des{" "}
             <strong>
-              techniques d'optimisation avancées pour améliorer les performances
+              techniques d&apos;optimisation avancées pour améliorer les
+              performances
             </strong>
             des campagnes Google Ads. Elles mettent en place un suivi précis des
             conversions, affinent les enchères en fonction des objectifs, et
-            optimisent les extensions d'annonces.
+            optimisent les extensions d&apos;annonces.
           </p>
 
           <div className="overflow-auto max-w-full rounded-3xl border bg-white dark:bg-black border-neutral-300 dark:border-neutral-700">
             <table className="w-full text-sm text-left bg-white dark:bg-black">
               <caption className="text-base font-semibold p-4">
                 Comparaison des principales métriques de performance SEA avant
-                et après l'intervention d'une agence spécialisée
+                et après l&apos;intervention d&apos;une agence spécialisée
               </caption>
               <thead className="bg-neutral-100 dark:bg-neutral-800">
                 <tr>
@@ -292,30 +295,30 @@ export default function Blog7() {
                   <td className="px-4 py-2">Amélioration moyenne à 8/10</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="px-4 py-2">Chiffre d'affaires généré</td>
+                  <td className="px-4 py-2">Chiffre d&apos;affaires généré</td>
                   <td className="px-4 py-2">Base 100</td>
-                  <td className="px-4 py-2">+70% d'augmentation</td>
+                  <td className="px-4 py-2">+70% d&apos;augmentation</td>
                 </tr>
                 <tr className="border-t">
                   <td className="px-4 py-2">Trafic qualifié</td>
                   <td className="px-4 py-2">Base 100</td>
-                  <td className="px-4 py-2">+55% d'augmentation</td>
+                  <td className="px-4 py-2">+55% d&apos;augmentation</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Le processus d'analyse data et de reporting transparent
+            Le processus d&apos;analyse data et de reporting transparent
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les agences SEA établissent un suivi transparent de vos campagnes
             avec des rapports personnalisés. Elles analysent les données en
-            profondeur pour identifier les leviers d'amélioration et partagent
-            régulièrement les résultats obtenus. Ces retours détaillés
+            profondeur pour identifier les leviers d&apos;amélioration et
+            partagent régulièrement les résultats obtenus. Ces retours détaillés
             expliquent les décisions stratégiques prises et justifient les
             optimisations. Cette approche collaborative permet aux clients de
-            comprendre l'impact de chaque action et d'
+            comprendre l&apos;impact de chaque action et d&apos;
             <strong>aligner les objectifs marketing</strong> avec la réalité des
             performances.
           </p>
@@ -348,7 +351,7 @@ export default function Blog7() {
             >
               Contactez notre agence certifiée
             </a>{" "}
-            pour bénéficier d'une expertise reconnue.
+            pour bénéficier d&apos;une expertise reconnue.
           </p>
 
           <ul className="list-disc list-inside lg:text-lg 2xl:text-xl space-y-2">
@@ -365,12 +368,12 @@ export default function Blog7() {
               <strong>optimiser le retour</strong> sur investissement?
             </li>
             <li>
-              <strong>Quels outils d'analyse</strong> utilisez-vous pour mesurer
-              et améliorer les performances?
+              <strong>Quels outils d&apos;analyse</strong> utilisez-vous pour
+              mesurer et améliorer les performances?
             </li>
             <li>
               <strong>Audits réguliers</strong> pour ajuster les stratégies
-              selon l'évolution des objectifs?
+              selon l&apos;évolution des objectifs?
             </li>
           </ul>
 
@@ -382,27 +385,28 @@ export default function Blog7() {
             totale. Le modèle choisi
             <strong> dépendra de votre secteur</strong>, de vos ambitions et de
             votre marge de manœuvre budgétaire. Une PME privilégiera souvent un
-            forfait prévisible, tandis qu'une grande entreprise optera pour une
-            rémunération liée aux résultats.
+            forfait prévisible, tandis qu&apos;une grande entreprise optera pour
+            une rémunération liée aux résultats.
           </p>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            L'importance de l'expertise sectorielle et des études de cas
+            L&apos;importance de l&apos;expertise sectorielle et des études de
+            cas
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Une agence SEA possédant une expertise sectorielle spécifique
             <strong> comprend les enjeux de votre marché</strong> et adapte les
             stratégies aux comportements de vos clients. Cette connaissance du
             secteur affine le choix des mots-clés, le ciblage publicitaire et
-            l'élaboration d'annonces pertinentes.
+            l&apos;élaboration d&apos;annonces pertinentes.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             <strong>Les études de cas</strong> constituent des preuves sociales
-            tangibles de la capacité d'une agence à générer des résultats
-            concrets. Lors de l'analyse, concentrez-vous sur les indicateurs
-            clés : augmentation du trafic qualifié, réduction du coût par
-            acquisition et amélioration du taux de conversion. Vérifiez la
-            pertinence des études en comparant la structure, les objectifs et
+            tangibles de la capacité d&apos;une agence à générer des résultats
+            concrets. Lors de l&apos;analyse, concentrez-vous sur les
+            indicateurs clés : augmentation du trafic qualifié, réduction du
+            coût par acquisition et amélioration du taux de conversion. Vérifiez
+            la pertinence des études en comparant la structure, les objectifs et
             les défis similaires à votre situation. Les témoignages clients et
             les données chiffrées renforcent la crédibilité des résultats
             présentés.
@@ -421,32 +425,33 @@ export default function Blog7() {
           </h2>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            L'importance de la recherche de mots-clés et du ciblage d'audience
+            L&apos;importance de la recherche de mots-clés et du ciblage
+            d&apos;audience
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            Les agences SEA utilisent Google Keyword Planner et d'autres outils
-            pour identifier les mots-clés pertinents. Elles analysent le volume
-            de recherche, la concurrence et le coût par clic pour
+            Les agences SEA utilisent Google Keyword Planner et d&apos;autres
+            outils pour identifier les mots-clés pertinents. Elles analysent le
+            volume de recherche, la concurrence et le coût par clic pour
             <strong> maximiser la performance des campagnes</strong>{" "}
             publicitaires.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Les experts en SEA segmentent les audiences par localisation, âge,
-            sexe et comportement d'achat.
+            sexe et comportement d&apos;achat.
             <strong> Ils utilisent le remarketing</strong> pour cibler les
-            visiteurs et optimisent les segments d'audience à partir des données
-            de recherche.
+            visiteurs et optimisent les segments d&apos;audience à partir des
+            données de recherche.
           </p>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            La création d'annonces performantes et l'optimisation des landing
-            pages
+            La création d&apos;annonces performantes et l&apos;optimisation des
+            landing pages
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les agences SEA conçoivent des <strong>annonces percutantes</strong>{" "}
-            avec des titres accrocheurs et des appels à l'action clairs. Elles
-            testent régulièrement les formats pour identifier les combinaisons
-            les plus efficaces.
+            avec des titres accrocheurs et des appels à l&apos;action clairs.
+            Elles testent régulièrement les formats pour identifier les
+            combinaisons les plus efficaces.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Les experts en SEA optimisent les landing pages pour aligner le
@@ -465,17 +470,18 @@ export default function Blog7() {
         />
         <li className="space-y-12" id="sea-pour-differents-secteurs">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
-            Comment le SEA s'adapte à différents secteurs d'activité
+            Comment le SEA s&apos;adapte à différents secteurs d&apos;activité
           </h2>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             Les spécificités du SEA pour le e-commerce et la vente en ligne
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            Le SEA s'adapte parfaitement aux besoins du commerce électronique
-            grâce à des outils comme Google Shopping et les annonces dynamiques.
-            Ces formats visuels et automatisés permettent de mettre en avant les
-            produits avec leurs images, prix et caractéristiques,{" "}
+            Le SEA s&apos;adapte parfaitement aux besoins du commerce
+            électronique grâce à des outils comme Google Shopping et les
+            annonces dynamiques. Ces formats visuels et automatisés permettent
+            de mettre en avant les produits avec leurs images, prix et
+            caractéristiques,{" "}
             <strong>augmentant ainsi les taux de conversion</strong>.{" "}
             <a
               href="https://www.ikovaline.com/nos-services"
@@ -488,7 +494,7 @@ export default function Blog7() {
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Les agences SEA optimisent les campagnes e-commerce en suivant le
-            parcours d'achat et en personnalisant les annonces via le
+            parcours d&apos;achat et en personnalisant les annonces via le
             remarketing dynamique. Elles intègrent les flux produits pour une
             mise à jour en temps réel et ajustent les enchères selon la marge et
             les périodes commerciales. Ces stratégies ciblent les produits les
@@ -496,7 +502,7 @@ export default function Blog7() {
             un <strong>ROI maximal</strong>.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            L'expertise d'une agence SEA spécialisée{" "}
+            L&apos;expertise d&apos;une agence SEA spécialisée{" "}
             <strong>
               transforme vos campagnes Google Ads en leviers de croissance
             </strong>
