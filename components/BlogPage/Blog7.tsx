@@ -74,7 +74,7 @@ export default function Blog7() {
           <ol className="list-decimal list-inside lg:text-lg 2xl:text-xl space-y-2">
             <li className="underline">
               <Link href="#definition-role-agence-sea">
-                Comprendre le rôle d'une agence SEA dans votre stratégie
+                Comprendre le rôle d&apos;une agence SEA dans votre stratégie
                 digitale
               </Link>
             </li>
@@ -91,7 +91,8 @@ export default function Blog7() {
             </li>
             <li className="underline">
               <Link href="#sea-pour-differents-secteurs">
-                Comment le SEA s&apos;adapte à différents secteurs d'activité
+                Comment le SEA s&apos;adapte à différents secteurs
+                d&apos;activité
               </Link>
             </li>
           </ol>
@@ -103,7 +104,8 @@ export default function Blog7() {
           </h2>
 
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Qu&apos;est-ce que le SEA et pourquoi est-il essentiel aujourd'hui?
+            Qu&apos;est-ce que le SEA et pourquoi est-il essentiel
+            aujourd&apos;hui?
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Le SEA, ou Search Engine Advertising, désigne la publicité payante
