@@ -89,7 +89,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
           <div
             className={cn(
-              "flex flex-row justify-start gap-8 pl-8",
+              "flex flex-row justify-start gap-8 pl-0",
               "mx-auto max-w-7xl" // remove max-w-4xl if you want the carousel to span the full width of its container
             )}
           >
@@ -165,7 +165,7 @@ export const Blog = ({
             {blog.title}
           </motion.h3>
         </div>
-        <div className="absolute bottom-0 z-20 h-1/2 left-0 bg-transparent backdrop-blur-[1px] w-full" />
+        <div className="absolute bottom-0 z-20 h-1/2 max-sm:hidden left-0 bg-transparent backdrop-blur-[1px] w-full" />
         <BlurImage
           src={blog.img}
           alt={blog.title}
