@@ -74,7 +74,7 @@ export function FranceMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
                 d={createCurvedPath(startPoint, endPoint)}
                 fill="none"
                 stroke="url(#path-gradient)"
-                strokeWidth="1"
+                strokeWidth="2"
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
                 transition={{
@@ -102,18 +102,18 @@ export function FranceMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
               const { x, y } = projectPoint(point.lat, point.lng);
               return (
                 <g key={`point-${i}-${j}`}>
-                  <circle cx={x} cy={y} r="2" fill={lineColor} />
-                  <circle cx={x} cy={y} r="2" fill={lineColor} opacity="0.5">
+                  <circle cx={x} cy={y} r="3" fill={lineColor} />
+                  <circle cx={x} cy={y} r="3" fill={lineColor} opacity="0.5">
                     <animate
                       attributeName="r"
-                      from="2"
-                      to="8"
+                      from="4"
+                      to="10"
                       dur="1.5s"
                       repeatCount="indefinite"
                     />
                     <animate
                       attributeName="opacity"
-                      from="0.5"
+                      from="0.6"
                       to="0"
                       dur="1.5s"
                       repeatCount="indefinite"

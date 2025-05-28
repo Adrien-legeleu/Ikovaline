@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Map() {
   return (
-    <div className="py-40 w-full space-y-10">
+    <div className="py-40 w-full space-y-10 overflow-hidden relative ">
       <div className="max-w-xl mx-auto px-5 text-center">
         <h2 className="font-bold text-4xl dark:text-white text-black">
           Ikovaline accompagne ses clients partout en France.
@@ -17,7 +17,7 @@ export default function Map() {
         </p>
       </div>
 
-      <div className="relative">
+      <div className="relative ">
         <FranceMap
           dots={[
             { start: { lat: 48.4, lng: 2.3 }, end: { lat: 45.3, lng: 3.8 } },
@@ -27,7 +27,7 @@ export default function Map() {
           ]}
         />
 
-        <div className="max-md:grid max-sm:grid-cols-1 px-5  max-md:grid-cols-2 max-md:place-items-center gap-4">
+        <div className="max-md:grid max-sm:grid-cols-1 px-5 max-sm:pt-10  max-md:grid-cols-2 max-md:place-items-center gap-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
