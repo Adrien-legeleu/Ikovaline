@@ -35,7 +35,7 @@ export default function Map() {
             className="md:absolute relative xl:top-5 md:top-10 md:left-5 lg:left-10 xl:left-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
-              <h3 className="text-sm lg:text-md xl:text-x font-semibold">
+              <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
                 ❓Votre site vous apporte-t-il vraiment des clients ?
               </h3>
               <p className=" text-xs xl:text-sm">
@@ -68,7 +68,7 @@ export default function Map() {
             className="md:absolute relative md:bottom-20 xl:bottom-40 md:right-16 lg:right-24 xl:right-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
-              <h3 className="text-sm lg:text-md xl:text-x font-semibold">
+              <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
                 ❓Vous passez trop de temps sur des tâches répétitives ?
               </h3>
               <p className=" text-xs xl:text-sm">
@@ -84,7 +84,7 @@ export default function Map() {
             className="md:absolute relative  md:bottom-[35%] lg:bottom-[40%] md:left-12 lg:left-20 z-20  max-w-[295px] lg:max-w-sm xl:max-w-md"
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px]  bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
-              <h3 className="text-sm lg:text-md xl:text-x font-semibold">
+              <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
                 ❓Pas de stratégie digitale claire ?
               </h3>
               <p className=" text-xs xl:text-sm">
