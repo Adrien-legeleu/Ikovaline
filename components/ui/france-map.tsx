@@ -40,7 +40,7 @@ export function FranceMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
   };
 
   return (
-    <div className="w-full aspect-[1.6/1] rounded-lg relative font-sans">
+    <div className="w-full aspect-[1.6/1] max-sm:scale-150 rounded-lg relative font-sans">
       {theme === "dark" ? (
         <Image
           src="/france-dots-map-dark.svg"

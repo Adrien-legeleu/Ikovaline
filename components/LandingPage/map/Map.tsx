@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export default function Map() {
   return (
     <div className="py-40 w-full space-y-10">
-      <div className="max-w-xl mx-auto text-center">
+      <div className="max-w-xl mx-auto px-5 text-center">
         <h2 className="font-bold text-4xl dark:text-white text-black">
           Ikovaline accompagne ses clients partout en France.
         </h2>
