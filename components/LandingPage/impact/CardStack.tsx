@@ -68,7 +68,7 @@ const CardSticky = React.forwardRef<HTMLDivElement, CardStickyProps>(
           backfaceVisibility: "hidden",
           ...style,
         }}
-        className={cn("sticky", className)}
+        className={cn("sticky top-32", className)}
         {...props}
       >
         {children}

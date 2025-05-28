@@ -131,7 +131,9 @@ export default function Home() {
         <section id="services">
           <Services />
         </section>
+
         <Map />
+
         <Methodologie />
         <Review />
 

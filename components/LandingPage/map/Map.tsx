@@ -3,10 +3,11 @@
 import { FranceMap } from "@/components/ui/france-map";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { CardSticky, ContainerScroll } from "../impact/CardStack";
 
 export default function Map() {
   return (
-    <div className="py-40 w-full space-y-10 overflow-hidden relative ">
+    <div className="py-40 w-full space-y-10 place-content-center relative ">
       <div className="max-w-xl mx-auto px-5 text-center">
         <h2 className="font-bold text-4xl dark:text-white text-black">
           Ikovaline accompagne ses clients partout en France.
@@ -17,17 +18,19 @@ export default function Map() {
         </p>
       </div>
 
-      <div className="relative ">
-        <FranceMap
-          dots={[
-            { start: { lat: 48.4, lng: 2.3 }, end: { lat: 45.3, lng: 3.8 } },
-            { start: { lat: 48.4, lng: 2.3 }, end: { lat: 43, lng: 1.5 } },
-            { start: { lat: 48.4, lng: 2.3 }, end: { lat: 44.2, lng: 0.1 } },
-            { start: { lat: 48.4, lng: 2.3 }, end: { lat: 47.1, lng: -1.2 } },
-          ]}
-        />
-
-        <div className="max-md:grid max-sm:grid-cols-1 px-5 max-sm:pt-10  max-md:grid-cols-2 max-md:place-items-center gap-4">
+      <div className="relative">
+        <div className="max-md:overflow-hidden relative w-full py-20">
+          <FranceMap
+            dots={[
+              { start: { lat: 48.4, lng: 2.3 }, end: { lat: 45.3, lng: 3.8 } },
+              { start: { lat: 48.4, lng: 2.3 }, end: { lat: 43, lng: 1.5 } },
+              { start: { lat: 48.4, lng: 2.3 }, end: { lat: 44.2, lng: 0.1 } },
+              { start: { lat: 48.4, lng: 2.3 }, end: { lat: 47.1, lng: -1.2 } },
+            ]}
+          />
+        </div>
+        <BlocContanerScrollMobile />
+        <div className="max-md:hidden">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -107,3 +110,38 @@ export default function Map() {
     </div>
   );
 }
+const BlocContanerScrollMobile = () => {
+  return (
+    <ContainerScroll className="min-h-[50vh] md:hidden  max-w-md mx-auto px-5 pb-24  space-y-8">
+      {[
+        {
+          title: "❓Votre site vous apporte-t-il vraiment des clients ?",
+          text: "Nous concevons des sites clairs, modernes et pensés pour convertir.",
+        },
+        {
+          title: "❓Personne ne vous trouve sur Google ?",
+          text: "On booste votre visibilité avec des stratégies SEO & SEA efficaces.",
+        },
+        {
+          title: "❓Vous passez trop de temps sur des tâches répétitives ?",
+          text: "Automatisations sur mesure pour gagner du temps et scaler sans stress.",
+        },
+        {
+          title: "❓Pas de stratégie digitale claire ?",
+          text: "On vous guide étape par étape, avec des actions concrètes et mesurables.",
+        },
+      ].map((item, i) => (
+        <CardSticky
+          key={i}
+          index={i + 2}
+          className="rounded-3xl border p-8 mx-auto  shadow-md backdrop-blur-2xl bg-white/20 dark:bg-black/10"
+        >
+          <h3 className=" text-xl md:text-sm lg:text-md xl:text-xl font-semibold">
+            {item.title}
+          </h3>
+          <p className="text-sm md:text-xs xl:text-sm">{item.text}</p>
+        </CardSticky>
+      ))}
+    </ContainerScroll>
+  );
+};
