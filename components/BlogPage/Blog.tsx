@@ -75,6 +75,15 @@ export const dataBlog: BlogType[] = [
     by: "Ikovaline",
     slug: "agence-seo-seine-marne",
   },
+  {
+    date: "2025-06-02",
+    title:
+      "Étude de marché : étapes clés pour valider votre projet d'entreprise",
+    desc: "Étude de marché : guide création entreprise. Analyse concurrence, segmentation clientèle, outils 2025. Réduisez les risques et affinez votre stratégie.",
+    img: "/blog/blog8/études-de_marché_couverture.webp",
+    by: "Ikovaline",
+    slug: "etude-marche-methodologie",
+  },
 ];
 
 function Blog() {

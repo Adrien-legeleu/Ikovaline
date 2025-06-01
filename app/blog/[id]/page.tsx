@@ -22,6 +22,7 @@ const componentsMap: Record<
   "definition-site-institutionnel": () => import("@/components/BlogPage/Blog5"),
   "agence-seo-seine-marne": () => import("@/components/BlogPage/Blog6"),
   "agence-sea-expertise": () => import("@/components/BlogPage/Blog7"),
+  "etude-marche-methodologie": () => import("@/components/BlogPage/Blog8"),
 };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {

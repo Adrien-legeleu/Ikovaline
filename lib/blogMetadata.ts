@@ -61,4 +61,12 @@ export const blogMetadata: Record<
       "Ikovaline, agence SEA certifiée : créez des campagnes Google Ads efficaces, améliorez votre rentabilité et attirez un trafic réellement qualifié.",
     ogImage: "/blog/blog7/agence-sea-google-ads.png",
   },
+  "etude-marche-methodologie": {
+    date: "2025-06-02",
+    title:
+      "Étude de marché : étapes clés pour valider votre projet d'entreprise",
+    description:
+      "Étude de marché : guide création entreprise. Analyse concurrence, segmentation clientèle, outils 2025. Réduisez les risques et affinez votre stratégie.",
+    ogImage: "/blog/blog8/études-de_marché_couverture.webp",
+  },
 };
