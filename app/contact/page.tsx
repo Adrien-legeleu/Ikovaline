@@ -44,6 +44,9 @@ export default function Page() {
             }),
           }}
         />
+
+        <link rel="canonical" href="https://www.ikovaline.com/contact" />
+        <meta name="robots" content="index, follow" />
       </Head>
       <ContactMainPage />
     </>

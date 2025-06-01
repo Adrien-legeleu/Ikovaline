@@ -11,6 +11,8 @@ export default function page() {
           name="description"
           content="Découvrez nos articles sur le SEO, la visibilité locale, la création de site web et les meilleures pratiques marketing pour les PME."
         />
+        <link rel="canonical" href="https://www.ikovaline.com/blog" />
+        <meta name="robots" content="index, follow" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

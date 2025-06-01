@@ -36,6 +36,8 @@ export default function Page() {
   return (
     <>
       <Head>
+        <link rel="canonical" href="https://www.ikovaline.com/about" />
+        <meta name="robots" content="index, follow" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

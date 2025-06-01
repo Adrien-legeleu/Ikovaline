@@ -101,6 +101,8 @@ export default async function Blog({ params }: ProductPageProps) {
             }),
           }}
         />
+        <link rel="canonical" href={`https://www.ikovaline.com/blog/${id}`} />
+        <meta name="robots" content="index, follow" />
       </Head>
       <div className="lg:py-24 relative py-12  ">
         <Buttons />

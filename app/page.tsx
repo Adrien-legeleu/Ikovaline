@@ -81,7 +81,9 @@ export default function Home() {
   return (
     <>
       <Head>
-        {/* Organization */}
+        <link rel="canonical" href="https://www.ikovaline.com/" />
+        <meta name="robots" content="index, follow" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
