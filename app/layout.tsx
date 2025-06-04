@@ -81,6 +81,23 @@ export default function RootLayout({
 
         <link rel="icon" href={Favicon.src} type="image/png" />
         <link rel="canonical" href="https://www.ikovaline.com/" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8Z98HRP3V7"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="ga4-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8Z98HRP3V7');
+    `,
+          }}
+        />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
