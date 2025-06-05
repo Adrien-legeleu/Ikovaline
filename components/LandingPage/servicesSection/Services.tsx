@@ -81,7 +81,7 @@ const SkeletonOne = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className=" w-full  relative h-auto  pt-5 gap-4  text-xs grid grid-cols-2 dark:bg-dot-white/[0.15] bg-dot-black/[0.1] flex-col "
+      className=" w-full  relative h-auto  pt-5 gap-4  text-xs grid grid-cols-2 flex-col "
     >
       <motion.div variants={variantsSecond} className="space-y-4">
         <div className="w-full text-sm bg-white dark:bg-neutral-700 text-neutral-400 rounded-full shadow-lg py-1 px-2 border">
@@ -158,7 +158,7 @@ const SkeletonTwo = () => {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 w-full h-full dark:bg-dot-white/[0.15] bg-dot-black/[0.1] flex-col space-y-2"
+      className="flex flex-1 w-full h-full flex-col space-y-2"
     >
       <SkeletonTwoComponent />
     </motion.div>
@@ -195,7 +195,7 @@ const SkeletonFour = () => {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex py-2  md:px-9 lg:px-0 px-0  h-auto bg-dot-black/[0.1] flex-row space-x-2"
+      className="flex py-2  md:px-9 lg:px-0 px-0  h-auto  flex-row space-x-2"
     >
       <SkeletonFourComponent />
     </motion.div>
@@ -206,7 +206,7 @@ const SkeletonFive = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full items-center justify-center pt-4  bg-dot-black/[0.1]  flex-col space-y-2"
+      className="flex flex-1 w-full h-full items-center justify-center pt-4    flex-col space-y-2"
     >
       <SkeletonFiveComponent />
     </motion.div>
