@@ -118,9 +118,9 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           </div>
         </div>
         <div className="mx-10 flex justify-between gap-2">
-          <Link href="/blog">
-            <Button>Voir tous les articles</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/blog">Voir tous les articles</Link>
+          </Button>
           <div className="flex gap-2">
             <button
               className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
@@ -152,15 +152,15 @@ export const Blog = ({
 }) => {
   return (
     <Link href={`/blog/${blog.slug}`} className="relative">
-      <motion.button
+      <motion.div
         layoutId={layout ? `blog-${blog.title}` : undefined}
-        className="relative shadow-xl shadow-black/20 z-10 flex h-56 md:h-80 w-80 md:w-[480px] flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100  dark:bg-neutral-900"
+        className="relative shadow-xl shadow-black/20 z-10 flex h-56 md:h-80 w-80 md:w-[480px] flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
       >
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-full bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         <div className="relative z-40 p-4  md:p-8 flex h-full justify-end items-end">
           <motion.h3
             layoutId={layout ? `title-${blog.title}` : undefined}
-            className="mt-2  text-left font-sans capitalize  text-2xl font-semibold [text-wrap:balance] text-white md:text-3xl"
+            className="mt-2  text-left font-sans capitalize text-2xl font-semibold [text-wrap:balance] text-white md:text-3xl"
           >
             {blog.title}
           </motion.h3>
@@ -171,7 +171,7 @@ export const Blog = ({
           alt={blog.title}
           className="absolute inset-0 z-10 object-cover"
         />
-      </motion.button>
+      </motion.div>
     </Link>
   );
 };

@@ -51,9 +51,9 @@ export default function Blog7() {
           ciblées jusqu&apos;à l&apos;optimisation de votre budget, avec des
           méthodes éprouvées pour maximiser votre retour sur investissement.
         </p>
-        <Link href="/contact">
-          <Button>Discuter avec un expert SEA</Button>
-        </Link>
+        <Button asChild>
+          <Link href="/contact">Discuter avec un expert SEA</Link>
+        </Button>
         <Image
           src="/blog/blog7/agence-sea-google-ads.png"
           alt="Illustration campagne SEA Google Ads"

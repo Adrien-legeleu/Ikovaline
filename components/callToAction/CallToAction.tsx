@@ -20,14 +20,13 @@ export default function CallToAction({ title, desc, textBtn }: ICallToAction) {
         <p className="text-center max-w-2xl text-neutral-800 dark:text-neutral-300 text-sm xss:text-base md:text-lg xl:text-xl 2xl:text-2xl">
           {desc}
         </p>
-        <Link href="/contact" className="inline-block z-20">
-          <Button
-            variant={"default"}
-            className="text-base md:text-lg xl:text-xl 2xl:text-2xl py-6 rounded-3xl px-6 z-30"
-          >
-            {textBtn}
-          </Button>
-        </Link>
+        <Button
+          asChild
+          variant="default"
+          className="text-base md:text-lg xl:text-xl 2xl:text-2xl py-6 rounded-3xl px-6 z-30"
+        >
+          <Link href="/contact">{textBtn}</Link>
+        </Button>
 
         {/* Animation au scroll */}
         <motion.div

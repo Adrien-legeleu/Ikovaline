@@ -33,9 +33,10 @@ export default function Blog6() {
           </Link>{" "}
           et capter les clients de demain.
         </p>
-        <Link href="/contact">
-          <Button>Contacter une agence locale</Button>
-        </Link>
+
+        <Button asChild>
+          <Link href="/contact">Contacter une agence locale</Link>
+        </Button>
         <Image
           src="/blog/blog6/En-tête Digital SEO Élégant.png"
           alt="Agence SEO Seine-et-Marne"

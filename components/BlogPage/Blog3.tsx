@@ -47,9 +47,10 @@ export default function Blog3() {
           codes du SEO pour transformer votre site en véritable moteur de
           visibilité.
         </p>
-        <Link href={"/contact"}>
-          <Button>Besoin de booster votre SEO ?</Button>
-        </Link>
+        <Button asChild>
+          <Link href="/contact">Besoin de booster votre SEO ?</Link>
+        </Button>
+
         <Image
           src="/blog/blog3/comment-etre-reference-sur-google-gratuitement-illustration.jpg"
           alt="Illustration du référencement Google"

@@ -44,9 +44,9 @@ export default function Services() {
           />
         ))}
       </BentoGrid>
-      <Link href="/nos-services" className="mt-10   mx-auto">
-        <Button>Voir tous nos services</Button>
-      </Link>
+      <Button asChild className="mt-10   mx-auto">
+        <Link href="/nos-services">Voir tous nos services</Link>
+      </Button>
     </div>
   );
 }

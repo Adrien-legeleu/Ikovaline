@@ -27,9 +27,10 @@ export default function Blog5() {
           pour créer un site institutionnel performant et adapté à votre
           identité corporate.
         </p>
-        <Link href="/contact">
-          <Button>Créer mon site institutionnel</Button>
-        </Link>
+
+        <Button asChild>
+          <Link href="/contact">Créer mon site institutionnel</Link>
+        </Button>
         <Image
           src="/blog/blog5/Page Couverture Agence Web.png"
           alt="Page Couverture Agence Web - site institutionnel"

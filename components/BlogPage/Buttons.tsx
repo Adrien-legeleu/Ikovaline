@@ -16,13 +16,27 @@ export default function Buttons() {
         variant={"secondary"}
         onClick={scrollUp}
       >
-        <IconArrowUp className="min-w-7 min-h-7" stroke={2} />
+        <IconArrowUp
+          className="min-w-7 min-h-7"
+          stroke={2}
+          aria-hidden="true"
+          focusable="false"
+        />
       </Button>
-      <Link href={"/blog"} className="inline-block">
-        <Button className="h-12 w-12 flex items-center justify-center ">
-          <IconHome className="min-w-7 min-h-7" />
-        </Button>
-      </Link>
+
+      <Button
+        asChild
+        className="h-12 w-12 flex items-center justify-center "
+        aria-label="Aller au blog"
+      >
+        <Link href="/blog">
+          <IconHome
+            className="min-w-7 min-h-7"
+            aria-hidden="true"
+            focusable="false"
+          />
+        </Link>
+      </Button>
     </div>
   );
 }

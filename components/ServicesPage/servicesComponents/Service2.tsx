@@ -26,46 +26,55 @@ export function Service2() {
         SEA, réseaux sociaux et contenus : nous activons les bons leviers pour
         améliorer votre visibilité sur Google et renforcer votre image en ligne.
       </motion.p>
+
       <div
         className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
         id="developpement-digital"
       >
-        {grid.map((feature, index) => (
-          <Link href={`nos-services/${feature.slug}`} key={index}>
+        {grid.map((feature) => (
+          <Link
+            href={`/nos-services/${feature.slug}`}
+            key={feature.title}
+            className="group h-full"
+          >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
               viewport={{ amount: 0.5 }}
-              key={feature.title}
               className="relative h-full flex flex-col justify-between bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
             >
-              <Grid size={20} />
+              <Grid size={20} aria-hidden="true" />
+
               <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
                 {feature.title}
               </p>
-              <p className="text-neutral-600 dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+
+              <div className="text-sm text-neutral-600 dark:text-neutral-400 z-20">
                 {feature.description}
-              </p>
+              </div>
+
               <Button
-                variant={"outline"}
-                className="rounded-full  w-12 h-10 mt-4 p-1"
+                variant="outline"
+                className="rounded-full w-12 h-10 mt-4 p-1"
+                aria-label={`Voir ${feature.title}`}
               >
-                <IconArrowRight />
+                <IconArrowRight aria-hidden="true" focusable="false" />
               </Button>
             </motion.div>
           </Link>
         ))}
       </div>
       <div className="w-full flex items-center justify-center">
-        <Link href="/contact">
-          <Button
-            variant={"secondary"}
-            className=" xs:text-base text-sm sm:text-lg"
-          >
+        <Button
+          asChild
+          variant={"secondary"}
+          className=" xs:text-base text-sm sm:text-lg"
+        >
+          <Link href="/contact">
             Boostez votre visibilité digitale maintenant
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
     </HeroHighlight>
   );

@@ -120,9 +120,9 @@ export default function About() {
           <AnimatedTooltip items={people2} />
         </div>
       </div>
-      <Link href={"/about"}>
-        <Button variant={"secondary"}>En savoir plus</Button>
-      </Link>
+      <Button asChild variant={"secondary"}>
+        <Link href={"/about"}>En savoir plus</Link>
+      </Button>
     </div>
   );
 }

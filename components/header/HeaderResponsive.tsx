@@ -120,7 +120,12 @@ export function HeaderResponsive() {
     <Drawer>
       <div className="fixed bottom-0 max-xs:w-full lg:hidden xs:left-1/2 xs:-translate-x-1/2  flex xs:gap-6 gap-2 bg-white [320px]:justify-between justify-around dark:bg-black dark:border-white/20 border shadow-lg items-center  p-4 xs:rounded-[2rem] rounded-t-3xl z-[10000] ">
         <DrawerTrigger asChild>
-          <IconMenu3 stroke={2} className="[360px]:min-w-9 min-w-7 min-h-9 " />
+          <IconMenu3
+            stroke={2}
+            className="[360px]:min-w-9 min-w-7 min-h-9 "
+            role="img"
+            aria-label="Ouvrir le menu de navigation"
+          />
         </DrawerTrigger>
         <div className="flex items-center max-[320px]:hidden  justify-center ">
           <DrawerClose asChild>
@@ -135,14 +140,13 @@ export function HeaderResponsive() {
             </Link>
           </DrawerClose>
         </div>
-        <Link href={"/contact"}>
-          <Button
-            variant={"secondary"}
-            className="rounded-3xl max-[360px]:p-3 max-[320px]:px-5 max-[320px]:text-sm text-xs"
-          >
-            Contactez-nous
-          </Button>
-        </Link>
+        <Button
+          asChild
+          variant={"secondary"}
+          className="rounded-3xl max-[360px]:p-3 max-[320px]:px-5 max-[320px]:text-sm text-xs"
+        >
+          <Link href={"/contact"}>Contactez-nous</Link>
+        </Button>
         <ModeToggle />
       </div>
       <DrawerContent>
@@ -173,11 +177,13 @@ export function HeaderResponsive() {
                   className="text-neutral-600 space-x-3 dark:text-neutral-300 font-bold"
                 >
                   <DrawerClose asChild>
-                    <Link href={section.href}>
-                      <Button variant="ghost" className="w-full px-0 text-xl">
-                        {section.title}
-                      </Button>
-                    </Link>
+                    <Button
+                      variant="ghost"
+                      asChild
+                      className="w-full px-0 text-xl"
+                    >
+                      <Link href={section.href}>{section.title}</Link>
+                    </Button>
                   </DrawerClose>
                 </AccordionTrigger>
                 <AccordionContent className="space-y-2">
@@ -188,7 +194,7 @@ export function HeaderResponsive() {
                           href={link.href}
                           className="text-neutral-500 flex items-center gap-2 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-700"
                         >
-                          {link.icon}
+                          <span aria-hidden="true">{link.icon}</span>
                           {link.label}
                         </Link>
                       </DrawerClose>
@@ -200,11 +206,9 @@ export function HeaderResponsive() {
           </Accordion>{" "}
           <DrawerFooter>
             <DrawerClose asChild>
-              <Link href="/contact">
-                <Button variant="secondary" className="w-full">
-                  Contactez-nous !
-                </Button>
-              </Link>
+              <Button asChild variant="secondary" className="w-full">
+                <Link href="/contact">Contactez-nous !</Link>
+              </Button>
             </DrawerClose>
             <DrawerClose asChild>
               <Button variant="outline">annuler</Button>

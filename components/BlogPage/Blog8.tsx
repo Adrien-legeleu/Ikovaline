@@ -41,9 +41,9 @@ export default function Blog8() {
           marketing gagnante, avec des exemples concrets adaptés à la création
           d’entreprise en 2025.
         </p>
-        <Link href="/contact">
-          <Button>Parler à un expert en étude de marché</Button>
-        </Link>
+        <Button asChild>
+          <Link href="/contact">Parler à un expert en étude de marché</Link>
+        </Button>
         <Image
           src="/blog/blog8/études-de_marché_couverture.webp"
           alt="Illustration étude de marché"

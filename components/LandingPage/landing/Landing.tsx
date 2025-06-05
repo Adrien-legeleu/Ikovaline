@@ -19,19 +19,19 @@ export default function Landing() {
         />
       </div>
       <div className="flex flex-col">
-        <Link
-          href="/about/#notre-garantie"
-          className=" mx-auto flex items-center justify-center "
+        <motion.div
+          className="group relative mx-auto flex items-center justify-center rounded-full px-4 py-1.5 shadow-[...] transition-shadow duration-500 ease-out hover:shadow-[...]"
+          initial={{ y: -40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
         >
-          <motion.div
-            className="group relative mx-auto flex items-center justify-center rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] "
-            initial={{ y: -40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
+          <Link
+            href="/about/#notre-garantie"
+            className="flex items-center justify-center"
           >
             <span
               className={cn(
-                "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#8bacff]/50 via-[#42b8fd]/50 to-[#5fb8f3]/50 bg-[length:300%_100%] p-[1px]"
+                "absolute inset-0 block h-full w-full animate-gradient ..."
               )}
               style={{
                 WebkitMask:
@@ -43,15 +43,17 @@ export default function Landing() {
               }}
             />
             <IconShieldCheck
-              className="ml-1 size-4 stroke-blue-400 transition-transform
- duration-300 ease-in-out group-hover:translate-x-0.5"
+              className="ml-1 size-4 stroke-blue-400 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5"
+              aria-hidden="true"
+              focusable="false"
             />
             <hr className="mx-2 h-4 w-px shrink-0 bg-blue-400" />
             <AnimatedGradientText className="text-sm font-medium">
               Satisfait ou remboursé.
             </AnimatedGradientText>
-          </motion.div>
-        </Link>
+          </Link>
+        </motion.div>
+
         <motion.h1
           initial={false} // ✅ Pas d’animation retardée
           animate={{ opacity: 1 }}
@@ -89,14 +91,16 @@ export default function Landing() {
           transition={{ duration: 0.4, delay: 0.1 }}
           viewport={{ once: true }}
         >
-          <Link href="/contact">
-            <Button className="min-w-40 relative touch-none" variant="default">
+          <Button asChild className="min-w-40 relative ">
+            <Link href="/contact">
               <span className="flex items-center justify-center gap-2">
-                <IconMessage2 />
+                <span aria-hidden="true">
+                  <IconMessage2 />
+                </span>
                 Discuter de votre stratégie digitale
               </span>
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </motion.div>
 
         <motion.div
@@ -105,17 +109,16 @@ export default function Landing() {
           transition={{ duration: 0.4, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <Link href="/nos-services">
-            <Button
-              className="min-w-40 relative touch-none"
-              variant="secondary"
-            >
+          <Button asChild className="min-w-40 relative ">
+            <Link href="/contact">
               <span className="flex items-center justify-center gap-2">
-                <IconApps />
+                <span aria-hidden="true">
+                  <IconApps />
+                </span>
                 Voir nos services marketing et digitaux
               </span>
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </motion.div>
       </div>
     </div>

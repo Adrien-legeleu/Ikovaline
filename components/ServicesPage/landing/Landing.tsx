@@ -42,12 +42,16 @@ export default function Landing() {
         viewport={{ amount: 0.5 }}
         className=" mt-10 flex max-sm:flex-col items-center justify-center max-sm:gap-3 gap-5"
       >
-        <Link href="/nos-services/#buisness-developpement">
-          <Button>Accélérez votre croissance</Button>
-        </Link>
-        <Link href="/nos-services/#developpement-digital">
-          <Button>Modernisez votre présence digitale</Button>
-        </Link>
+        <Button asChild>
+          <Link href="/nos-services/#buisness-developpement">
+            Accélérez votre croissance
+          </Link>
+        </Button>
+        <Button asChild>
+          <Link href="/nos-services/#developpement-digital">
+            Modernisez votre présence digitale
+          </Link>
+        </Button>
       </motion.div>
     </div>
   );

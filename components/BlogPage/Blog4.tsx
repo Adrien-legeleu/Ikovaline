@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import CallToAction  from "../callToAction/CallToAction";
+import CallToAction from "../callToAction/CallToAction";
 
 // On prépare la FAQ
 const faqData = [
@@ -50,9 +50,10 @@ export default function Blog4() {
           optimiser votre présence en ligne grâce à des outils numériques
           accessibles et une expérience utilisateur pensée pour vos objectifs.
         </p>
-        <Link href="/contact">
-          <Button>Lancer mon projet digital</Button>
-        </Link>
+        <Button asChild>
+          <Link href="/contact">Lancer mon projet digital</Link>
+        </Button>
+
         <Image
           src="/blog/blog4/creation-digitale.png"
           alt="Illustration création digitale"
