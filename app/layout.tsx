@@ -63,6 +63,8 @@ export default function RootLayout({
   return (
     <html lang="fr" className={poppins.className}>
       <head>
+        <meta name="next-size-adjust" content="100" />
+
         <Script
           id="gtm-head"
           strategy="afterInteractive"
