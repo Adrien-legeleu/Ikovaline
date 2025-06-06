@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme.provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
+import LazyExtraStyle from "@/app/LazyExtraStyle";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -113,6 +114,7 @@ export default function RootLayout({
         ></script>
       </head>
       <body className={`antialiased`}>
+        <LazyExtraStyle />
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NDKCHTFH"
