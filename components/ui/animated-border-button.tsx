@@ -11,7 +11,7 @@ interface ButtonBorderProps<T extends ElementType> {
 export function AnimatedBorderButton<T extends ElementType = "div">({
   as,
   className,
-  color,
+
   children,
   ...props
 }: ButtonBorderProps<T> &

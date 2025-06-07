@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { AnimatedTooltip } from "../../ui/animated-tooltip";
-import { Button } from "../../ui/button";
 import Img1 from "@/public/images/About/team-florent-profil.jpg";
 import Img2 from "@/public/images/About/team-chiara-profil.jpg";
 import Img3 from "@/public/images/About/team-adam-profil.jpg";
