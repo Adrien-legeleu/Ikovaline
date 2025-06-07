@@ -6,11 +6,12 @@ import { useId } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { IconArrowRight } from "@tabler/icons-react";
+import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
 
 export function Service1() {
   return (
-    <HeroHighlight className="pb-16 pt-10 lg:pb-28 max-w-5xl mb-2 md:px-0 px-5 mx-auto space-y-8">
-      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+    <HeroHighlight className="pb-16 pt-10 lg:pb-28 mb-2 md:px-0 px-5 mx-auto space-y-8">
+      <h2 className="sm:text-4xl max-w-5xl mx-auto text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
         Propulsez votre Business avec une Stratégie Commerciale Efficace
       </h2>
 
@@ -28,7 +29,7 @@ export function Service1() {
         leads et améliorer durablement votre chiffre d&apos;affaires.
       </motion.p>
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
+        className="grid grid-cols-1 md:px-10 sm:grid-cols-2 pt-10 md:grid-cols-3  gap-5 xl:gap-8 md:gap-3 max-w-7xl mx-auto"
         id="buisness-developpement"
       >
         {grid.map((feature) => (
@@ -42,21 +43,21 @@ export function Service1() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
               viewport={{ amount: 0.5 }}
-              className="relative h-full flex flex-col justify-between bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
+              className="relative h-full flex flex-col justify-between bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 xl:p-8 rounded-3xl overflow-hidden"
             >
               <Grid size={20} aria-hidden="true" />
 
-              <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
+              <h3 className="text-base xl:text-lg font-bold text-neutral-800 dark:text-white relative z-20">
                 {feature.title}
-              </p>
+              </h3>
 
-              <div className="text-sm text-neutral-600 dark:text-neutral-400 z-20">
+              <div className="text-sm xl:text-md text-neutral-600 dark:text-neutral-400 z-20">
                 {feature.description}
               </div>
 
               <Button
                 variant="outline"
-                className="rounded-full w-12 h-10 mt-4 p-1"
+                className="rounded-full  w-12 h-10  mt-4 p-1"
                 aria-label={`Voir ${feature.title}`}
               >
                 <IconArrowRight aria-hidden="true" focusable="false" />
@@ -67,15 +68,11 @@ export function Service1() {
       </div>
 
       <div className="w-full flex items-center justify-center">
-        <Button
-          asChild
-          variant={"secondary"}
-          className=" xs:text-base text-sm sm:text-lg"
-        >
-          <Link href="/contact">
+        <Link href="/contact">
+          <AnimatedBorderButton>
             Lancez votre croissance dès aujourd&apos;hui
-          </Link>
-        </Button>
+          </AnimatedBorderButton>
+        </Link>
       </div>
     </HeroHighlight>
   );

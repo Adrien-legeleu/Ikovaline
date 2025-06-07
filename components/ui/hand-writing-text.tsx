@@ -9,6 +9,7 @@ interface AnimatedTextProps extends React.HTMLAttributes<HTMLDivElement> {
   underlinePath?: string;
   underlineHoverPath?: string;
   underlineDuration?: number;
+  strokeWidth?: number;
 }
 
 const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
@@ -20,6 +21,7 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
       underlinePath = "M 0,10 Q 75,0 150,10 Q 225,20 300,10",
       underlineHoverPath = "M 0,10 Q 75,20 150,10 Q 225,0 300,10",
       underlineDuration = 1.5,
+      strokeWidth = 6,
       ...props
     },
     ref
@@ -60,17 +62,16 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
 
           <motion.svg
             width="100%"
-            height="20"
+            height="30"
             viewBox="0 0 300 20"
             className={cn(
-              "absolute text-[#47ddd3] dark:text-[#5EEDE4] -bottom-4 left-0",
-              underlineClassName
+              "absolute text-[#47ddd3] dark:text-[#5EEDE4] -bottom-6 left-0"
             )}
           >
             <motion.path
               d={underlinePath}
               stroke="currentColor"
-              strokeWidth="6"
+              strokeWidth={strokeWidth}
               fill="none"
               variants={pathVariants}
               initial="hidden"

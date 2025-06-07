@@ -6,11 +6,12 @@ import { useId } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { IconArrowRight } from "@tabler/icons-react";
+import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
 
 export function Service2() {
   return (
-    <HeroHighlight className="py-16 lg:py-28 max-w-5xl mx-auto md:px-0 px-5 space-y-8 ">
-      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+    <HeroHighlight className="py-16 lg:py-28  mx-auto md:px-0 px-5 space-y-8 ">
+      <h2 className="sm:text-4xl text-3xl max-w-5xl mx-auto  items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
         Renforcez votre Visibilité Digitale avec une Présence Stratégique en
         Ligne
       </h2>
@@ -28,7 +29,7 @@ export function Service2() {
       </motion.p>
 
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 pt-10 md:grid-cols-3 gap-5 md:gap-3 max-w-7xl mx-auto"
+        className="grid grid-cols-1 md:px-10 sm:grid-cols-2 pt-10 md:grid-cols-3  gap-5 xl:gap-8 md:gap-3 max-w-7xl mx-auto"
         id="developpement-digital"
       >
         {grid.map((feature) => (
@@ -46,11 +47,11 @@ export function Service2() {
             >
               <Grid size={20} aria-hidden="true" />
 
-              <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
+              <h3 className="text-base xl:text-lg font-bold text-neutral-800 dark:text-white relative z-20">
                 {feature.title}
-              </p>
+              </h3>
 
-              <div className="text-sm text-neutral-600 dark:text-neutral-400 z-20">
+              <div className="text-sm xl:text-md text-neutral-600 dark:text-neutral-400 z-20">
                 {feature.description}
               </div>
 
@@ -66,15 +67,11 @@ export function Service2() {
         ))}
       </div>
       <div className="w-full flex items-center justify-center">
-        <Button
-          asChild
-          variant={"secondary"}
-          className=" xs:text-base text-sm sm:text-lg"
-        >
-          <Link href="/contact">
+        <Link href="/contact">
+          <AnimatedBorderButton>
             Boostez votre visibilité digitale maintenant
-          </Link>
-        </Button>
+          </AnimatedBorderButton>
+        </Link>
       </div>
     </HeroHighlight>
   );

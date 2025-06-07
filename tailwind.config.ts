@@ -101,6 +101,14 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "button-border-movement-bottom": {
+          "0%": { transform: "translate(0%, 0%)", opacity: "1" },
+          "100%": { transform: "translate(-100%, 0%)", opacity: "0" },
+        },
+        "button-border-movement-top": {
+          "0%": { transform: "translate(0%, 0%)", opacity: "1" },
+          "100%": { transform: "translate(100%, 0%)", opacity: "0" },
+        },
         "fade-in-up": {
           "0%": {
             opacity: "0",
@@ -234,6 +242,10 @@ const config: Config = {
         "fade-in-up": "fade-in-up 0.5s ease-out forwards",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "scale-in": "scale-in 0.5s ease-out forwards",
+        "button-border-movement-bottom":
+          "button-border-movement-bottom linear infinite alternate",
+        "button-border-movement-top":
+          "button-border-movement-top linear infinite alternate",
       },
     },
   },
