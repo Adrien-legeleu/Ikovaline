@@ -64,6 +64,38 @@ export default function RootLayout({
   return (
     <html lang="fr" className={poppins.className}>
       <head>
+        <Script
+          src="/tarteaucitron/tarteaucitron.min.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="/tarteaucitron/tarteaucitron.services.js"
+          strategy="beforeInteractive"
+        />
+        <Script id="tarteaucitron-init" strategy="afterInteractive">
+          {`
+    tarteaucitron.init({
+      privacyUrl: "/politique-confidentialite",
+      orientation: "bottom",
+      showAlertSmall: true,
+      cookieslist: true,
+      closePopup: false,
+      removeCredit: true,
+      moreInfoLink: true,
+      useExternalCss: false,
+      highPrivacy: true,
+      acceptAllCta: true,
+      denyAllCta: true,
+      mandatory: false,
+      handleBrowserDNTRequest: false,
+      debug: true
+    });
+
+    tarteaucitron.job = tarteaucitron.job || [];
+    tarteaucitron.job.push("youtube");
+  `}
+        </Script>
+
         <meta name="next-size-adjust" content="100" />
 
         <Script
