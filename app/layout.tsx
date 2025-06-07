@@ -74,26 +74,32 @@ export default function RootLayout({
         />
         <Script id="tarteaucitron-init" strategy="afterInteractive">
           {`
-    tarteaucitron.init({
-      privacyUrl: "/politique-confidentialite",
-      orientation: "bottom",
-      showAlertSmall: true,
-      cookieslist: true,
-      closePopup: false,
-      removeCredit: true,
-      moreInfoLink: true,
-      useExternalCss: false,
-      highPrivacy: true,
-      acceptAllCta: true,
-      denyAllCta: true,
-      mandatory: false,
-      handleBrowserDNTRequest: false,
-      debug: true
-    });
+  tarteaucitron.init({
+    privacyUrl: "/politique-confidentialite",
+    orientation: "bottom",
+    highPrivacy: true,
+    cookieslist: true,
+    showAlertSmall: true,
+    removeCredit: true,
+    acceptAllCta: true,
+    denyAllCta: true,
+    mandatory: false,
+    debug: true
+  });
 
-    tarteaucitron.job = tarteaucitron.job || [];
-    tarteaucitron.job.push("youtube");
-  `}
+  tarteaucitron.services.rgpdinfo = {
+    key: "rgpdinfo",
+    type: "other",
+    name: "Cookies strictement nécessaires",
+    needConsent: true,
+    cookies: [],
+    js: function () {},
+    fallback: function () {}
+  };
+
+  tarteaucitron.job = tarteaucitron.job || [];
+  tarteaucitron.job.push("rgpdinfo");
+`}
         </Script>
 
         <meta name="next-size-adjust" content="100" />
