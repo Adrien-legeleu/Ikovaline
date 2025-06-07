@@ -33,7 +33,7 @@ export default function Landing() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
           viewport={{ amount: 0.5 }}
-          className=" mt-10 flex max-sm:flex-col  z-20 absolute w-full  md:bottom-20 bottom-10 items-center justify-center max-sm:gap-3 gap-5"
+          className=" mt-10 flex max-sm:flex-col  z-20 absolute w-full  md:bottom-20 bottom-0 items-center justify-center max-sm:gap-3 gap-5"
         >
           <Link href="/nos-services/#buisness-developpement">
             <AnimatedBorderButton>
