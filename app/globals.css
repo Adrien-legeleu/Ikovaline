@@ -71,6 +71,9 @@ body {
     --chart-4: 176 80% 40%;
     --chart-5: 190 85% 55%;
   }
+  .theme {
+    --animate-shine: shine var(--duration) infinite linear;
+  }
 }
 
 @layer base {
@@ -82,5 +85,4 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
 

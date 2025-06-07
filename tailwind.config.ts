@@ -37,6 +37,7 @@ const config: Config = {
         glow: "0 -16px 128px 0 rgba(88,211,236, 0.5) inset, 0 -30px 32px 0 rgba(88, 211, 236, 0.55) inset",
         glowMobile:
           "0 -15px 58px 0 rgba(88,211,236, 0.7) inset, 0 -20px 20px 0 rgba(88, 211, 236, 0.5) inset",
+        "ikovaline-glow-button": "0 0 20px rgba(131, 80, 232, 0.3)",
       },
       colors: {
         brand: {
