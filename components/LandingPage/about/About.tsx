@@ -14,6 +14,7 @@ import Img9 from "@/public/images/About/team-ronan-profil.jpg";
 import Img10 from "@/public/images/About/team-victor-pifferi-profil.jpg";
 import Img11 from "@/public/images/About/team-saif-profil.jpg";
 import { MagicText } from "@/components/magicui/MagicText";
+import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
 
 export default function About() {
   const people1 = [
@@ -120,9 +121,10 @@ export default function About() {
           <AnimatedTooltip items={people2} />
         </div>
       </div>
-      <Button asChild variant={"secondary"}>
-        <Link href={"/about"}>En savoir plus</Link>
-      </Button>
+
+      <Link href={"/about"}>
+        <AnimatedBorderButton>En savoir plus</AnimatedBorderButton>
+      </Link>
     </div>
   );
 }

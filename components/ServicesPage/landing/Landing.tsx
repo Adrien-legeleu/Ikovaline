@@ -1,6 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { SparklesCore } from "@/components/ui/sparkles";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import React from "react";
@@ -9,7 +7,6 @@ import { AnimatedText } from "@/components/ui/hand-writing-text";
 import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
 
 export default function Landing() {
-  const { theme } = useTheme();
   return (
     <div className="h-screen flex-col flex items-center md:justify-center justify-start pt-20">
       <h1 className="text-3xl md:px-0 px-6   md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white">

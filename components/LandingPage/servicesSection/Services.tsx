@@ -19,7 +19,7 @@ import { SkeletonFourComponent } from "./SkeletonFour";
 import { SkeletonFiveComponent } from "./SkeletonFive";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
 
 export default function Services() {
   return (
@@ -31,7 +31,7 @@ export default function Services() {
       >
         Nos Services
       </h2>
-      <BentoGrid className="md:max-w-[1400px]  max-w-sm relative mx-auto md:auto-rows-[28rem] xl:auto-rows-[31rem] 2xl:auto-rows-[32rem]  auto-rows-[29rem]">
+      <BentoGrid className="md:max-w-[1400px] pb-10  max-w-sm relative mx-auto md:auto-rows-[28rem] xl:auto-rows-[31rem] 2xl:auto-rows-[32rem]  auto-rows-[29rem]">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
@@ -44,9 +44,10 @@ export default function Services() {
           />
         ))}
       </BentoGrid>
-      <Button asChild className="mt-10   mx-auto">
-        <Link href="/nos-services">Voir tous nos services</Link>
-      </Button>
+
+      <Link href="/nos-services">
+        <AnimatedBorderButton>Voir tous nos services</AnimatedBorderButton>
+      </Link>
     </div>
   );
 }

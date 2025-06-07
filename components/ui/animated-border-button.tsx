@@ -4,22 +4,19 @@ import { BorderBeam } from "@/components/ui/border-beam";
 
 interface ButtonBorderProps<T extends ElementType> {
   as?: T;
-  color?: string;
-  speed?: string;
   className?: string;
   children: React.ReactNode;
 }
 
-export function AnimatedBorderButton<T extends ElementType = "button">({
+export function AnimatedBorderButton<T extends ElementType = "div">({
   as,
   className,
   color,
-  speed = "6s",
   children,
   ...props
 }: ButtonBorderProps<T> &
   Omit<ComponentPropsWithoutRef<T>, keyof ButtonBorderProps<T>>) {
-  const Component = as || "button";
+  const Component = as || "div";
 
   return (
     <Component

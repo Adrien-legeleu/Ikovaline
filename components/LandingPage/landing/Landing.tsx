@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import { IconApps, IconMessage2, IconShieldCheck } from "@tabler/icons-react";
 import { Glow } from "@/components/ui/glow";
 import { AnimatedText } from "@/components/ui/hand-writing-text";
-import { Button } from "@/components/ui/button";
 import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
 
 export default function Landing() {
