@@ -65,7 +65,7 @@ export default function RootLayout({
     <html lang="fr" className={poppins.className}>
       <head>
         <Script
-          src="/tarteaucitron/tarteaucitron.min.js"
+          src="/tarteaucitron/tarteaucitron.js"
           strategy="beforeInteractive"
         />
         <Script
@@ -74,32 +74,38 @@ export default function RootLayout({
         />
         <Script id="tarteaucitron-init" strategy="afterInteractive">
           {`
-  tarteaucitron.init({
-    privacyUrl: "/politique-confidentialite",
-    orientation: "bottom",
-    highPrivacy: true,
-    cookieslist: true,
-    showAlertSmall: true,
-    removeCredit: true,
-    acceptAllCta: true,
-    denyAllCta: true,
-    mandatory: false,
-    debug: true
-  });
+    tarteaucitron.init({
+      privacyUrl: "/politique-confidentialite",
+      orientation: "bottom",
+      showAlertSmall: true,
+      cookieslist: true,
+      removeCredit: true,
+      acceptAllCta: true,
+      denyAllCta: true,
+      highPrivacy: true,
+      mandatory: false,
+      useExternalCss: false,
+      moreInfoLink: true,
+      debug: true
+    });
 
-  tarteaucitron.services.rgpdinfo = {
-    key: "rgpdinfo",
-    type: "other",
-    name: "Cookies strictement nécessaires",
-    needConsent: true,
-    cookies: [],
-    js: function () {},
-    fallback: function () {}
-  };
+    tarteaucitron.services.rgpdinfo = {
+      key: "rgpdinfo",
+      type: "other",
+      name: "Cookies strictement nécessaires",
+      needConsent: true,
+      cookies: [],
+      js: function () {
+        console.log("Consentement donné pour les cookies essentiels.");
+      },
+      fallback: function () {
+        console.log("Consentement refusé.");
+      }
+    };
 
-  tarteaucitron.job = tarteaucitron.job || [];
-  tarteaucitron.job.push("rgpdinfo");
-`}
+    tarteaucitron.job = tarteaucitron.job || [];
+    tarteaucitron.job.push("rgpdinfo");
+  `}
         </Script>
 
         <meta name="next-size-adjust" content="100" />
