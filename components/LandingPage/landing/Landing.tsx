@@ -8,20 +8,21 @@ import { IconApps, IconMessage2, IconShieldCheck } from "@tabler/icons-react";
 import { Glow } from "@/components/ui/glow";
 import { AnimatedText } from "@/components/ui/hand-writing-text";
 import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
+import StarClientsGoogle from "@/components/StarClientsGoogle";
 
 export default function Landing() {
   return (
-    <div className="relative flex justify-center items-center flex-col gap-8  py-20 overflow-hidden">
+    <div className="relative flex justify-center items-center flex-col gap-5 2xl:gap-8  py-20 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <Glow
           variant="above"
           className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
         />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col z-10 -gap-5 2xl:gap-0">
         <Link
           href="/about/#notre-garantie"
-          className=" mx-auto flex items-center justify-center "
+          className=" mx-auto flex items-center  justify-center "
         >
           <motion.div
             className="group relative mx-auto flex items-center justify-center rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] "
@@ -42,21 +43,19 @@ export default function Landing() {
                 WebkitClipPath: "padding-box",
               }}
             />
-            <IconShieldCheck
-              className="ml-1 size-4 stroke-blue-400 transition-transform
- duration-300 ease-in-out group-hover:translate-x-0.5"
-            />
+            <IconShieldCheck className="ml-1 size-4 stroke-blue-400 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
             <hr className="mx-2 h-4 w-px shrink-0 bg-blue-400" />
             <AnimatedGradientText className="text-sm font-medium">
               Satisfait ou remboursé.
             </AnimatedGradientText>
           </motion.div>
         </Link>
+
         <motion.h1
-          initial={false} // ✅ Pas d’animation retardée
+          initial={false}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }} // ✅ Très léger fondu seulement
-          className="text-4xl md:px-0 px-6 lg:!leading-[70px] md:leading-[60px] leading-[50px]  font-bold md:text-5xl lg:text-6xl max-w-4xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-300 dark:via-white dark:to-white"
+          transition={{ duration: 0.2 }}
+          className="text-4xl md:px-0 px-6 lg:!leading-[70px]  xl:!leading-[85px]  2xl:!leading-[115px] md:leading-[60px] leading-[50px] font-bold xl:!font-semibold md:text-5xl xl:text-7xl lg:text-6xl  2xl:text-8xl max-w-4xl xl:max-w-6xl 2xl:max-w-[1450px] mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-300 dark:via-white dark:to-white"
         >
           Ikovaline,
           <span className="inline-flex p-2">
@@ -71,18 +70,18 @@ export default function Landing() {
           digitale qui propulse votre business !
         </motion.h1>
       </div>
-
+      <StarClientsGoogle />
       <TextAnimate
         animation="blurInUp"
         by="word"
-        className="text-muted-foreground dark:text-neutral-400  max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
+        className="text-muted-foreground dark:text-neutral-400  max-sm:px-2 max-w-2xl text-center xs:text-xs md:text-lg"
       >
         Ikovaline, la start-up spécialisée en SEO, création de site web et
         publicité en ligne, pour booster votre visibilité et vos performances
         digitales.
       </TextAnimate>
 
-      <div className="mt-10 flex max-sm:flex-col-reverse items-center justify-center max-sm:gap-3 gap-5">
+      <div className="mt-8 2xl:mt-8 flex max-sm:flex-col-reverse items-center justify-center max-sm:gap-3 gap-5">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}

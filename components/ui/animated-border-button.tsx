@@ -26,7 +26,7 @@ export function AnimatedBorderButton<T extends ElementType = "div">({
       <BorderBeam duration={8} size={100} />
       <div
         className={cn(
-          "relative z-1 border  text-foreground  text-center sm:text-base text-sm py-4 px-6 rounded-full",
+          "relative z-1 border  text-foreground  text-center md:text-base text-sm py-4 px-6 rounded-full",
           "bg-gradient-to-b from-[#f4fafbc9] to-[#d2eaf3d8] border-border/40",
           "dark:from-[#090d11e2] dark:to-[#17212bdd] dark:border-border"
         )}

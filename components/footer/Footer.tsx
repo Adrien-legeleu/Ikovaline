@@ -44,9 +44,15 @@ export default function Footer() {
       ],
     },
     {
-      title: "Legal",
+      title: "Légal",
       href: "/mentions-legales",
-      links: [{ label: "Mentions Légales", href: "/mentions-legales" }],
+      links: [
+        { label: "Mentions légales", href: "/mentions-legales" },
+        {
+          label: "Politique de confidentialité",
+          href: "/politique-confidentialite",
+        },
+      ],
     },
   ];
 

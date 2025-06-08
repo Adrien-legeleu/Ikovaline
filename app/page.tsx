@@ -127,7 +127,7 @@ export default function Home() {
         />
       </Head>
 
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1450px] mx-auto">
         <Landing />
         <About />
         <section id="services">
