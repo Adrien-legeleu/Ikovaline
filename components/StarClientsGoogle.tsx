@@ -81,7 +81,7 @@ export default function StarClientsGoogle() {
             ease: "easeInOut",
             delay: 1.2,
           }}
-          className="font-semibold flex items-center gap-1 text-sm"
+          className="font-semibold flex relative top-1 items-center gap-1 text-sm"
         >
           <span className="text-lg  ">+49 </span>
           avis Google
