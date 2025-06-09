@@ -7,7 +7,7 @@ export default function StarClientsGoogle() {
     <div>
       <a
         target="_blank"
-        className="flex z-10 items-end justify-center gap-4 cursor-pointer"
+        className="flex z-10 items-start justify-center gap-4 cursor-pointer"
         href="https://www.google.com/search?rlz=1C1CHZN_frFR1084FR1084&q=Ikovaline%20Avis&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDA0Mzc0NbU0MjM2MzcwtDQ3s9zAyPiKkc8zO78sMSczL1XBsSyzeBErmgAA2Poq2j0AAAA&rldimm=10167155926367019769&tbm=lcl&hl=fr&sa=X&ved=0CB8Q9fQKKABqFwoTCNDimKi_4o0DFQAAAAAdAAAAABAG&biw=1280&bih=598&dpr=1.5#lkt=LocalPoiReviews
       "
       >
