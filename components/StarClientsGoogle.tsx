@@ -13,7 +13,7 @@ export default function StarClientsGoogle() {
       >
         <div className="flex items-center justify-center gap-1">
           <motion.span
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
               type: "spring",
@@ -25,7 +25,7 @@ export default function StarClientsGoogle() {
             <IconStarFilled className="text-yellow-300" />
           </motion.span>
           <motion.span
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
               type: "spring",
@@ -37,7 +37,7 @@ export default function StarClientsGoogle() {
             <IconStarFilled className="text-yellow-300" />
           </motion.span>
           <motion.span
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
               type: "spring",
@@ -49,7 +49,7 @@ export default function StarClientsGoogle() {
             <IconStarFilled className="text-yellow-300" />
           </motion.span>
           <motion.span
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
               type: "spring",
@@ -61,7 +61,7 @@ export default function StarClientsGoogle() {
             <IconStarFilled className="text-yellow-300" />
           </motion.span>
           <motion.span
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
               type: "spring",
@@ -74,14 +74,14 @@ export default function StarClientsGoogle() {
           </motion.span>
         </div>
         <motion.span
-          initial={{ opacity: 0, scale: 0.5 }}
+          initial={{ opacity: 0, scale: 0.2 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{
             duration: 0.5,
             ease: "easeInOut",
             delay: 1.2,
           }}
-          className="font-semibold"
+          className="font-semibold inline-flex"
         >
           +49 avis Google
         </motion.span>
@@ -161,7 +161,7 @@ export default function StarClientsGoogle() {
 //           <g>
 //             <g>
 //               <circle cx={x} cy={y} r="3" fill={"#0ea5e9"} />
-//               <circle cx={x} cy={y} r="3" fill={"#0ea5e9"} opacity="0.5">
+//               <circle cx={x} cy={y} r="3" fill={"#0ea5e9"} opacity="0.2">
 //                 <animate
 //                   attributeName="r"
 //                   from="4"
