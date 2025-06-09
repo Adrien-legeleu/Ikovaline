@@ -22,7 +22,7 @@ export default function StarClientsGoogle() {
               delay: 0.2,
             }}
           >
-            <IconStarFilled className="text-yellow-300 w-7 h-7" />
+            <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
           <motion.span
             initial={{ opacity: 0, scale: 0.2 }}
@@ -34,7 +34,7 @@ export default function StarClientsGoogle() {
               delay: 0.4,
             }}
           >
-            <IconStarFilled className="text-yellow-300 w-7 h-7" />
+            <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
           <motion.span
             initial={{ opacity: 0, scale: 0.2 }}
@@ -46,7 +46,7 @@ export default function StarClientsGoogle() {
               delay: 0.6,
             }}
           >
-            <IconStarFilled className="text-yellow-300 w-7 h-7" />
+            <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
           <motion.span
             initial={{ opacity: 0, scale: 0.2 }}
@@ -58,7 +58,7 @@ export default function StarClientsGoogle() {
               delay: 0.8,
             }}
           >
-            <IconStarFilled className="text-yellow-300 w-7 h-7" />
+            <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
           <motion.span
             initial={{ opacity: 0, scale: 0.2 }}
@@ -70,7 +70,7 @@ export default function StarClientsGoogle() {
               delay: 1,
             }}
           >
-            <IconStarFilled className="text-yellow-300 w-7 h-7" />
+            <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
         </div>
         <motion.span
