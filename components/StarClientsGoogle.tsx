@@ -81,7 +81,7 @@ export default function StarClientsGoogle() {
             ease: "easeInOut",
             delay: 1.2,
           }}
-          className="font-semibold inline-flex"
+          className="font-semibold block"
         >
           +49 avis Google
         </motion.span>
