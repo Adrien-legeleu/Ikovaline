@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 export default function StarClientsGoogle() {
   return (
-    <div>
+    <div className="z-10">
       <a
         target="_blank"
-        className="flex z-10 items-end justify-center gap-4 cursor-pointer"
+        className="flex   items-end justify-center gap-2 cursor-pointer"
         href="https://www.google.com/search?rlz=1C1CHZN_frFR1084FR1084&q=Ikovaline%20Avis&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDA0Mzc0NbU0MjM2MzcwtDQ3s9zAyPiKkc8zO78sMSczL1XBsSyzeBErmgAA2Poq2j0AAAA&rldimm=10167155926367019769&tbm=lcl&hl=fr&sa=X&ved=0CB8Q9fQKKABqFwoTCNDimKi_4o0DFQAAAAAdAAAAABAG&biw=1280&bih=598&dpr=1.5#lkt=LocalPoiReviews
       "
       >
@@ -22,7 +22,7 @@ export default function StarClientsGoogle() {
               delay: 0.2,
             }}
           >
-            <IconStarFilled className="text-yellow-300" />
+            <IconStarFilled className="text-yellow-300 w-7 h-7" />
           </motion.span>
           <motion.span
             initial={{ opacity: 0, scale: 0.2 }}
@@ -34,7 +34,7 @@ export default function StarClientsGoogle() {
               delay: 0.4,
             }}
           >
-            <IconStarFilled className="text-yellow-300" />
+            <IconStarFilled className="text-yellow-300 w-7 h-7" />
           </motion.span>
           <motion.span
             initial={{ opacity: 0, scale: 0.2 }}
@@ -46,7 +46,7 @@ export default function StarClientsGoogle() {
               delay: 0.6,
             }}
           >
-            <IconStarFilled className="text-yellow-300" />
+            <IconStarFilled className="text-yellow-300 w-7 h-7" />
           </motion.span>
           <motion.span
             initial={{ opacity: 0, scale: 0.2 }}
@@ -58,7 +58,7 @@ export default function StarClientsGoogle() {
               delay: 0.8,
             }}
           >
-            <IconStarFilled className="text-yellow-300" />
+            <IconStarFilled className="text-yellow-300 w-7 h-7" />
           </motion.span>
           <motion.span
             initial={{ opacity: 0, scale: 0.2 }}
@@ -70,7 +70,7 @@ export default function StarClientsGoogle() {
               delay: 1,
             }}
           >
-            <IconStarFilled className="text-yellow-300" />
+            <IconStarFilled className="text-yellow-300 w-7 h-7" />
           </motion.span>
         </div>
         <motion.span
@@ -81,9 +81,10 @@ export default function StarClientsGoogle() {
             ease: "easeInOut",
             delay: 1.2,
           }}
-          className="font-semibold block self.end"
+          className="font-semibold flex items-center gap-1 text-sm"
         >
-          +49 avis Google
+          <span className="text-lg  ">+49 </span>
+          avis Google
         </motion.span>
       </a>
     </div>

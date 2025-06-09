@@ -13,7 +13,7 @@ import StarClientsGoogle from "@/components/StarClientsGoogle";
 export default function Landing() {
   return (
     <div className="relative flex justify-center items-center flex-col gap-5 2xl:gap-8  py-20 overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0  overflow-hidden pointer-events-none">
         <Glow
           variant="above"
           className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
