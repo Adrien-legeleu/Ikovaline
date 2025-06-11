@@ -48,8 +48,8 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
         />
       </div>
-      <div className="h-screen overflow-hidden relative md:mt-24 mt-20">
-        <div className="lg:w-[260px] lg:h-[260px] sm:w-[230px] sm:h-[230px] w-[200px] h-[200px] z-20 absolute bottom-10 left-1/2 transform -translate-x-1/2">
+      <div className="h-screen overflow-hidden w-full flex flex-col items-center justify-between relative md:mt-24 mt-20">
+        <div className="lg:w-[260px] lg:h-[260px] sm:w-[230px] sm:h-[230px] w-[200px] h-[200px] z-20 absolute bottom-10 sm:left-1/2 left-0 -translate-x-1/2">
           <div className="absolute inset-0 rounded-full blur-2xl opacity-40 bg-white/20 dark:bg-white/10 pointer-events-none z-0" />
           <div
             className="w-full h-full p-5 rounded-full
@@ -72,7 +72,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           <h1 className="text-3xl md:px-0 px-5 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center">
             Agence Web à {data.ville}
           </h1>
-          <p className="md:text-lg text-base px-5 text-center text-neutral-900 dark:text-neutral-300 max-w-2xl mx-auto mt-5">
+          <p className="md:text-lg tracking-wider leading-relaxed text-base px-5 text-center text-neutral-900 dark:text-neutral-300 max-w-2xl mx-auto mt-5">
             {data.intro}
           </p>
         </div>

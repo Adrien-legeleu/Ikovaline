@@ -21,7 +21,7 @@ export default function Services({
             shineColorDark={["#01d5ff86", "#02b6fd63", "#79DFF3"]}
           />
           <div className="text-2xl font-bold text-center">{card.text}</div>
-          <p className="text-center text-gray-600 dark:text-neutral-400 text-base   mx-[10%]">
+          <p className="text-center text-gray-600 dark:text-neutral-400 text-base   sm:mx-[10%]">
             {card.subtext}
           </p>
           <span className="flex items-center justify-center gap-2 2xl:text-md text-sm hover:underline py-2  rounded-full ">
