@@ -141,7 +141,7 @@ export function HeaderResponsive() {
                   alt="logo de la start-up Ikovaline"
                   width={150}
                   height={150}
-                  className="h-10 object-contain"
+                  className="max-h-8 object-contain"
                 />
               )}
             </Link>
