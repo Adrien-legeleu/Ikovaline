@@ -154,9 +154,9 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
       </div>
 
       <CallToAction
-        title="Passez à l’action maintenant !"
-        desc={`Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à ${data.ville}.`}
-        textBtn="Lancez votre projet"
+        title={data.CTATitle}
+        desc={data.CTADesc}
+        textBtn={data.CTATextBtn}
       />
     </div>
   );

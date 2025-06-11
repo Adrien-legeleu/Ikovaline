@@ -1,3 +1,4 @@
+import { removeAccents } from "@/components/pageSatellite/CityAround";
 import Link from "next/link";
 
 export const dataAgence = [
@@ -86,7 +87,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -192,7 +193,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -292,7 +293,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -396,7 +397,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -500,7 +501,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -601,7 +602,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -707,7 +708,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -811,7 +812,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -912,7 +913,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -1013,7 +1014,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -1117,7 +1118,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -1221,7 +1222,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
@@ -1325,7 +1326,7 @@ export const dataAgence = [
           "Corbeil-Essonnes",
         ].map((v, i, arr) => (
           <span key={v}>
-            <Link href={`/agence-web-${v.toLocaleLowerCase()}`}>{v}</Link>
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
             {i < arr.length - 2 ? ", " : i === arr.length - 2 ? " et " : ""}
           </span>
         ))}{" "}
