@@ -15,7 +15,7 @@ const cities = [
   "Bailly-Romainvilliers",
   "Massy",
   "Evry",
-  "Verrière-le-Buisson",
+  "Verrières-le-Buisson",
   "Saclay",
   "Courcouronnes",
   "Villeneuve-Saint-Georges",
