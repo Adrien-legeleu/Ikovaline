@@ -9,7 +9,7 @@ export default function Services({
   serviceAgenceWeb: { text: string; subtext: string; link: string }[];
 }) {
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1 z-20 relative  2xl:grid-cols-4 gap-5 xl:gap-10 px-5 xl:px-20 max-w-5xl mx-auto">
+    <div className="grid md:grid-cols-2 grid-cols-1 z-20 relative  2xl:grid-cols-4 gap-5 xl:gap-10 px-5 xl:px-20 2xl:max-w-[1400px] max-w-5xl mx-auto">
       {serviceAgenceWeb.map((card, index) => (
         <Link
           href={card.link}
