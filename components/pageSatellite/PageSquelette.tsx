@@ -18,7 +18,6 @@ import { Glow } from "../../components/ui/glow";
 export default function PageSquelette({ idAgence }: { idAgence: string }) {
   const data = dataAgence.find((item) => item.id === idAgence);
 
-  if (!data) return notFound();
   const svgRef = useRef<SVGSVGElement>(null);
   const [hovering, setHovering] = useState(false);
   const projectPoint = (lat: number, lng: number) => {
@@ -37,6 +36,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
   const lat = 48.2;
   const lng = 2;
   const { x, y } = projectPoint(lat, lng);
+  if (!data) return notFound();
   return (
     <div className="relative overflow-hidden w-full">
       <div className="absolute inset-0  overflow-hidden pointer-events-none">
