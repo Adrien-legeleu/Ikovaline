@@ -80,6 +80,9 @@ export default function Footer() {
               <p className="text-neutral-600 dark:text-white">
                 contact@ikovaline.com
               </p>
+              <p className="text-neutral-600 dark:text-white">
+                Siège social: Bailly-Romainvilliers
+              </p>
               <p>© {new Date().getFullYear()} Ikovaline</p>
             </div>
           </div>
