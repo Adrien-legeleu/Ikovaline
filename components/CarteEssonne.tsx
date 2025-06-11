@@ -1,4 +1,3 @@
-// ✅ Nouveau composant CarteEssonne parfaitement typé et corrigé
 "use client";
 import React, { useState } from "react";
 import { useTheme } from "next-themes";
@@ -20,14 +19,14 @@ interface CarteEssonneProps {
   data: GeoFeature[];
   highlighted: string;
 }
-function getBoundingBox(data: any[]) {
+function getBoundingBox(data: GeoFeature[]) {
   let minLng = Infinity,
     maxLng = -Infinity,
     minLat = Infinity,
     maxLat = -Infinity;
   data.forEach((feature) => {
     if (feature.geometry.type !== "Polygon") return;
-    feature.geometry.coordinates[0].forEach(([lng, lat]: [number, number]) => {
+    feature.geometry.coordinates[0].forEach(([lng, lat]) => {
       if (lng < minLng) minLng = lng;
       if (lng > maxLng) maxLng = lng;
       if (lat < minLat) minLat = lat;
