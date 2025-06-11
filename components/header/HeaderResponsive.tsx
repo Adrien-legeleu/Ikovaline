@@ -39,7 +39,7 @@ import {
 } from "@tabler/icons-react";
 
 export function HeaderResponsive() {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
