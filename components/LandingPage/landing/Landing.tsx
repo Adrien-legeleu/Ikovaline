@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text";
 import { cn } from "@/lib/utils";
 import { IconApps, IconMessage2, IconShieldCheck } from "@tabler/icons-react";
-import { Glow } from "@/components/ui/glow";
+
+const Glow = dynamic(() => import("@/components/ui/glow"), { ssr: false });
 import { AnimatedText } from "@/components/ui/hand-writing-text";
 import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
 import StarClientsGoogle from "@/components/StarClientsGoogle";
+import dynamic from "next/dynamic";
 
 export default function Landing() {
   return (

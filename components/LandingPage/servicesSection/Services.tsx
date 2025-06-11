@@ -273,9 +273,9 @@ const items = [
     title: "Création & Optimisation de Sites Internet",
     description: (
       <span className="text-sm xl:text-base ">
-        Conception de sites vitrines et e-commerce performants, optimisés SEO,
-        mobile-first et rapides. Offrez à vos visiteurs une expérience fluide
-        sur tous les appareils.
+        Création de sites interent performants que ce soit vitrines et
+        e-commerce ou même sur mesure, optimisés SEO, mobile-first et rapides.
+        Offrez à vos visiteurs une expérience fluide sur tous les appareils.
       </span>
     ),
     header: <SkeletonThree />,

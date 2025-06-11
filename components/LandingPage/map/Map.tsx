@@ -144,7 +144,7 @@ export default function Map() {
           </Link>{" "}
           et{" "}
           <Link href="/nos-services">
-            d'autres solutions digitales sur mesure.
+            d&apos;autres solutions digitales sur mesure.
           </Link>
         </p>
       </div>

@@ -6,7 +6,7 @@ interface GlowProps {
   className?: string;
 }
 
-export function Glow({ variant = "center", className }: GlowProps) {
+export default function Glow({ variant = "center", className }: GlowProps) {
   return (
     <div
       className={cn(
