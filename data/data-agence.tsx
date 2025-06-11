@@ -55,8 +55,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -74,8 +74,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -161,8 +161,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -180,8 +180,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -212,7 +212,7 @@ export const dataAgence = [
   },
   {
     id: "agence-web-evry",
-    ville: "Evry",
+    ville: "Évry",
     intro: `Découvrez notre agence web basée à Évry, spécialisée dans la création de sites internet. Nous aidons les entreprises et indépendants d'Évry et de l'Essonne à développer leur activité en ligne grâce à des solutions concrètes : création de site web, référencement naturel, maintenance, etc.`,
     text1: (
       <span>
@@ -261,8 +261,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -280,8 +280,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -312,12 +312,12 @@ export const dataAgence = [
   },
   {
     id: "agence-web-verriere-le-buisson",
-    ville: "Verrière-le-Buisson",
-    intro: `Découvrez notre agence web à Verrière-le-Buisson, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Verrière-le-Buisson et de l'Essonne environnante pour développer leur visibilité en ligne grâce à des solutions concrètes : création de site web, SEO, maintenance, etc.`,
+    ville: "Verrières-le-Buisson",
+    intro: `Découvrez notre agence web à Verrières-le-Buisson, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Verrières-le-Buisson et de l'Essonne environnante pour développer leur visibilité en ligne grâce à des solutions concrètes : création de site web, SEO, maintenance, etc.`,
     text1: (
       <span>
         Vous êtes une entreprise située à{" "}
-        <Link href="/agence-web-verriere-le-buisson">Verrière-le-Buisson</Link>{" "}
+        <Link href="/agence-web-verriere-le-buisson">Verrières-le-Buisson</Link>{" "}
         ou dans les environs ? Notre agence web locale est là pour booster votre
         visibilité en ligne. De la{" "}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
@@ -328,14 +328,14 @@ export const dataAgence = [
           optimisation SEO
         </Link>
         , nous vous aidons à développer efficacement votre activité sur le web à
-        Verrière-le-Buisson.
+        Verrières-le-Buisson.
       </span>
     ),
     services: [
       {
         text: "Création de sites web",
         subtext:
-          "Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Verrière-le-Buisson, en Essonne.",
+          "Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Verrières-le-Buisson, en Essonne.",
         link: "nos-services/creation-sites-web-vitrine-e-commerce",
       },
       {
@@ -347,7 +347,7 @@ export const dataAgence = [
       {
         text: "Maintenance et support",
         subtext:
-          "Maintenance, mises à jour et support continu pour votre site web : notre équipe implantée à Verrière-le-Buisson vous accompagne.",
+          "Maintenance, mises à jour et support continu pour votre site web : notre équipe implantée à Verrières-le-Buisson vous accompagne.",
         link: "nos-services/creation-site-web-sur-mesure",
       },
       {
@@ -358,15 +358,15 @@ export const dataAgence = [
       },
     ],
     objectifs: {
-      objectifTitle: "Objectif de notre agence web à Verrière-le-Buisson",
-      text1: `Notre objectif est de vous accompagner à chaque étape de votre projet digital, en proposant une stratégie personnalisée à votre entreprise, qu’il s’agisse de la création ou de la refonte de votre site internet à Verrière-le-Buisson. Nous offrons un service complet, de la conception du site à sa maintenance, partout en Essonne.`,
-      text2: `Grâce à notre expertise en création de site web et en stratégies digitales (SEO, SEA, etc.), nous nous engageons à vous fournir des résultats concrets. Notre agence web, implantée à Verrière-le-Buisson et active dans toute l’Essonne, vous soutient avec un support disponible 24h/24. Si les résultats ne répondent pas à vos attentes, nous vous remboursons.`,
+      objectifTitle: "Objectif de notre agence web à Verrières-le-Buisson",
+      text1: `Notre objectif est de vous accompagner à chaque étape de votre projet digital, en proposant une stratégie personnalisée à votre entreprise, qu’il s’agisse de la création ou de la refonte de votre site internet à Verrières-le-Buisson. Nous offrons un service complet, de la conception du site à sa maintenance, partout en Essonne.`,
+      text2: `Grâce à notre expertise en création de site web et en stratégies digitales (SEO, SEA, etc.), nous nous engageons à vous fournir des résultats concrets. Notre agence web, implantée à Verrières-le-Buisson et active dans toute l’Essonne, vous soutient avec un support disponible 24h/24. Si les résultats ne répondent pas à vos attentes, nous vous remboursons.`,
     },
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -384,8 +384,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -407,12 +407,12 @@ export const dataAgence = [
     ),
     CTATitle: "Passez à l’action maintenant !",
     CTADesc:
-      "Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Verrière-le-Buisson.",
+      "Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Verrières-le-Buisson.",
     CTATextBtn: "Lancez votre projet",
     metaTitle:
-      "Agence web à Verrière-le-Buisson - Création de site web, SEO, marketing digital",
+      "Agence web à Verrières-le-Buisson - Création de site web, SEO, marketing digital",
     metaDescription:
-      "Boostez votre entreprise à Verrière-le-Buisson avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.",
+      "Boostez votre entreprise à Verrières-le-Buisson avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.",
   },
   {
     id: "agence-web-saclay",
@@ -469,8 +469,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -488,8 +488,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -526,7 +526,7 @@ export const dataAgence = [
       <span>
         Vous êtes une entreprise située à{" "}
         <Link href="/agence-web-courcouronnes">Courcouronnes</Link> ou dans les
-        environs (Evry, Essonne) ? Notre équipe est à votre service pour
+        environs (Évry, Essonne) ? Notre équipe est à votre service pour
         améliorer votre visibilité en ligne. De la{" "}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
           création de site vitrine
@@ -570,8 +570,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -589,8 +589,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -676,8 +676,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -695,8 +695,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -780,8 +780,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -799,8 +799,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -881,8 +881,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -900,8 +900,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -982,8 +982,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -1001,8 +1001,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -1086,8 +1086,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -1105,8 +1105,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -1190,8 +1190,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -1209,8 +1209,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
@@ -1294,8 +1294,8 @@ export const dataAgence = [
     villesVoisines: [
       "Bailly-Romainvilliers",
       "Massy",
-      "Evry",
-      "Verrière-le-Buisson",
+      "Évry",
+      "Verrières-le-Buisson",
       "Saclay",
       "Courcouronnes",
       "Villeneuve-Saint-Georges",
@@ -1313,8 +1313,8 @@ export const dataAgence = [
         {[
           "Bailly-Romainvilliers",
           "Massy",
-          "Evry",
-          "Verrière-le-Buisson",
+          "Évry",
+          "Verrières-le-Buisson",
           "Saclay",
           "Courcouronnes",
           "Villeneuve-Saint-Georges",
