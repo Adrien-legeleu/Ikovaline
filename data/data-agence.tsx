@@ -311,7 +311,7 @@ export const dataAgence = [
       "Boostez votre entreprise à Évry avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.",
   },
   {
-    id: "agence-web-verriere-le-buisson",
+    id: "agence-web-verrieres-le-buisson",
     ville: "Verrières-le-Buisson",
     intro: `Découvrez notre agence web à Verrières-le-Buisson, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Verrières-le-Buisson et de l'Essonne environnante pour développer leur visibilité en ligne grâce à des solutions concrètes : création de site web, SEO, maintenance, etc.`,
     text1: (
