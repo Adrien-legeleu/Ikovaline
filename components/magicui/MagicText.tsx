@@ -6,12 +6,10 @@ export const MagicText = ({
   words,
   className,
   filter = true,
-  duration = 0.1,
 }: {
   words: string;
   className?: string;
   filter?: boolean;
-  duration?: number;
 }) => {
   const wordsArray = words.split(" ");
 
