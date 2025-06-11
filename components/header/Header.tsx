@@ -4,6 +4,7 @@ import { HoveredLink, Menu, MenuItem } from "../ui/navbar-menu";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Image from "next/image";
+
 import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
 import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
 import Link from "next/link";
@@ -28,8 +29,10 @@ export function Header({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   const [upToZero, setUpToZero] = useState(false);
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleHeader = () => {
       const scrollY = window.scrollY;
       if (scrollY > 0) {
@@ -55,13 +58,15 @@ export function Header({ className }: { className?: string }) {
         <Menu setActive={setActive} upToZero={upToZero}>
           <div className={` flex items-center justify-center `}>
             <Link href="/">
-              <Image
-                src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
-                alt="logo de la start-up Ikovaline"
-                width={150}
-                height={150}
-                className="h-10  object-contain"
-              />
+              {mounted && (
+                <Image
+                  src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                  alt="logo de la start-up Ikovaline"
+                  width={150}
+                  height={150}
+                  className="h-10 object-contain"
+                />
+              )}
             </Link>
           </div>
           <div className="flex items-center  w-full gap-10  justify-end">

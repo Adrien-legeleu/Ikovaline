@@ -40,6 +40,11 @@ import {
 
 export function HeaderResponsive() {
   const theme = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
   const headerLinks = [
     {
       title: "Home",
@@ -130,13 +135,15 @@ export function HeaderResponsive() {
         <div className="flex items-center max-[320px]:hidden  justify-center ">
           <DrawerClose asChild>
             <Link href="/">
-              <Image
-                src={theme.theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
-                alt="logo de la start-up Ikovaline"
-                width={150}
-                height={150}
-                className="h-10 w-24 min-w-12 xs:min-w-24 object-contain"
-              />
+              {mounted && (
+                <Image
+                  src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                  alt="logo de la start-up Ikovaline"
+                  width={150}
+                  height={150}
+                  className="h-10 object-contain"
+                />
+              )}
             </Link>
           </DrawerClose>
         </div>

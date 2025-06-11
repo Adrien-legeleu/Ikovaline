@@ -48,7 +48,11 @@ export default function CarteEssonne({ data, highlighted }: CarteEssonneProps) {
     const y = ((maxLat - lat) / (maxLat - minLat)) * height;
     return { x, y };
   };
-  if (!data.some((city) => city.properties.nom === highlighted)) {
+  if (
+    !data.some(
+      (city) => city.properties.nom.toLowerCase() === highlighted.toLowerCase()
+    )
+  ) {
     return null;
   }
 
