@@ -9,7 +9,7 @@ export default function Services({
   serviceAgenceWeb: { text: string; subtext: string; link: string }[];
 }) {
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1 z-20 relative  2xl:grid-cols-4 gap-5 xl:gap-10 px-5 xl:px-20 2xl:max-w-[1400px] max-w-5xl mx-auto">
+    <div className="grid md:grid-cols-2 grid-cols-1 z-20 relative   gap-5 xl:gap-10 px-5 xl:px-20 2xl:max-w-6xl max-w-5xl mx-auto">
       {serviceAgenceWeb.map((card, index) => (
         <Link
           href={card.link}
@@ -20,11 +20,11 @@ export default function Services({
             shineColor={["#01d5ff", "#02b6fd", "#79DFF3"]}
             shineColorDark={["#01d5ff86", "#02b6fd63", "#79DFF3"]}
           />
-          <div className="text-2xl font-bold">{card.text}</div>
+          <div className="text-2xl font-bold ">{card.text}</div>
           <p className="text-center text-gray-600 dark:text-neutral-400 text-sm sm:text-base  mt-8 mx-[10%]">
             {card.subtext}
           </p>
-          <span className="flex items-center justify-center gap-2  text-sm hover:underline py-2 mt-5  rounded-full ">
+          <span className="flex items-center justify-center gap-2 2xl:text-md text-sm hover:underline py-2 mt-5  rounded-full ">
             En savoir plus
             <span aria-hidden="true">
               <IconArrowRight />
