@@ -119,11 +119,11 @@ export default function Map() {
           </motion.div>
         </div>
       </div>
-      <div className="flex items-center justify-center py-20  gap-10 flex-col max-w-xl mx-auto">
+      <div className="flex items-center justify-center py-20  gap-10 flex-col max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
           Nos agences web
         </h2>
-        <div className="flex flex-wrap gap-4 justify-center max-w-xl">
+        <div className="flex flex-wrap gap-4 justify-center max-w-2xl">
           {cities.map((c, index) => (
             <Link
               key={index}

@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { dataService } from "@/data/data-services";
 import { blogMetadata } from "@/lib/blogMetadata";
+import { dataAgence } from "@/data/data-agence";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://ikovaline.com";
@@ -34,6 +35,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly" as const,
     priority: 0.6,
   }));
+  const dynamicUrlsAgences = dataAgence.map((city) => ({
+    url: `${baseUrl}/${city.id}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: "daily" as const,
+    priority: 0.6,
+  }));
 
-  return [...staticUrls, ...dynamicUrls, ...dynamicUrlsBlog];
+  return [
+    ...staticUrls,
+    ...dynamicUrls,
+    ...dynamicUrlsBlog,
+    ...dynamicUrlsAgences,
+  ];
 }
