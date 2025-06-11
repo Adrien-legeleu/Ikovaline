@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { CardSticky, ContainerScroll } from "../impact/CardStack";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { removeAccents } from "@/components/pageSatellite/CityAround";
 
 const cities = [
   "Bailly-Romainvilliers",
@@ -127,7 +128,7 @@ export default function Map() {
           {cities.map((c, index) => (
             <Link
               key={index}
-              href={`/agence-web-${c.toLowerCase()}`}
+              href={`/agence-web-${removeAccents(c)}`}
               className="border-black/10 dark:border-white/10 shadow-md border-[1px] px-2 flex gap-2 bg-white dark:bg-neutral-900 items-center justify-center py-1 rounded-full "
             >
               <div className="h-2 w-2 bg-secondary rounded-full" />

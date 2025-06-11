@@ -49,7 +49,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
         />
       </div>
       <div className="h-screen overflow-hidden relative md:mt-24 mt-20">
-        <div className="lg:w-[280px] lg:h-[280px] sm:w-[230px] sm:h-[230px] w-[200px] h-[200px] z-20 absolute bottom-20 left-1/2 transform -translate-x-1/2">
+        <div className="lg:w-[260px] lg:h-[260px] sm:w-[230px] sm:h-[230px] w-[200px] h-[200px] z-20 absolute bottom-10 left-1/2 transform -translate-x-1/2">
           <div className="absolute inset-0 rounded-full blur-2xl opacity-40 bg-white/20 dark:bg-white/10 pointer-events-none z-0" />
           <div
             className="w-full h-full p-5 rounded-full
