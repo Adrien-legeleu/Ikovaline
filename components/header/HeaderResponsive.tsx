@@ -160,7 +160,7 @@ export function HeaderResponsive() {
         <div className="mx-auto w-full  max-w-sm">
           <DrawerHeader>
             <Image
-              src={theme.theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
+              src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
               alt="logo de la start-up Ikovaline"
               width={150}
               height={150}
