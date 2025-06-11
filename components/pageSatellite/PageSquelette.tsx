@@ -12,7 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRef } from "react";
-const CarteEssonne = dynamic(() => import("@/public/svg/massy"), {
+const CarteEssonne = dynamic(() => import("@/components/CarteEssonne"), {
   ssr: false,
 });
 const Glow = dynamic(() => import("@/components/ui/glow"), { ssr: false });
