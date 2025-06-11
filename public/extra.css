@@ -38,7 +38,7 @@
 .outer {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 1.5rem;
     padding: 1px;
     background: radial-gradient(circle 230px at 0% 0%, #f0f0f0, #e0e0e0);
     position: relative;
@@ -52,7 +52,7 @@
     width: 5px;
     aspect-ratio: 1;
     position: absolute;
-    background-color: #000;
+    background-color:#00d9ff;
     box-shadow: 0 0 10px #000000;
     border-radius: 100px;
     z-index: 2;
@@ -62,8 +62,8 @@
 }
 
 .dark .dot {
-    background-color: #fff;
-    box-shadow: 0 0 10px #ffffff;
+    background-color: #1392a8;
+        box-shadow: 0 0 10px #ffffffa1;
 }
 
 @keyframes moveDot {
@@ -97,21 +97,22 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    border-radius: 9px;
+    border-radius: 1.5rem;
     border: solid 1px #ddd;
     background-size: 20px 20px;
-    background: radial-gradient(circle 280px at 0% 0%, #ffffff, #f0f0f0);
+    background: radial-gradient(circle 280px at 0% 0%, #f4fafbc9, #f4fafbc9);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
     flex-direction: column;
     color: #000;
+    padding-bottom: 11%;
 }
 
 .dark .card {
     border: solid 1px #2d2e2e;
-    background: radial-gradient(circle 280px at 0% 0%, #444444, #0c0d0d);
+    background: radial-gradient(circle 280px at 0% 0%, #090d11e2, #090d11e2);
     color: #fff;
 }
 
@@ -120,9 +121,9 @@
     height: 45px;
     border-radius: 100px;
     position: absolute;
-    background-color: #ddd;
+    background-color: #8ccce4d8;
     opacity: 0.4;
-    box-shadow: 0 0 30px #ddd;
+    box-shadow: 0 0 30px #8ccce4d8;
     filter: blur(10px);
     transform-origin: 10%;
     top: 0%;
@@ -131,8 +132,8 @@
 }
 
 .dark .ray {
-    background-color: #c7c7c7;
-    box-shadow: 0 0 50px #fff;
+    background-color: #1d3144dd;
+    box-shadow: 0 0 50px #1d3144dd;
 }
 
 .line {

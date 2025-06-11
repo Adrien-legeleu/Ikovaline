@@ -35,7 +35,6 @@ export const metadata: Metadata = {
   },
 };
 
-// ✅ Génération des données structurées FAQ
 const faqStructuredData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -49,7 +48,6 @@ const faqStructuredData = {
   })),
 };
 
-// ✅ Donnée structurée WebPage
 const webPageStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",

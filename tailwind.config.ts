@@ -14,9 +14,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // fontFamily: {
-      //   poppins: ["Poppins"],
-      // },
       screens: {
         xs: "450px",
         xss: "400px",
@@ -226,6 +223,19 @@ const config: Config = {
             transform: "scale(1)",
           },
         },
+        shine: {
+          " 0%": {
+            backgroundPosition: "0% 0%",
+          },
+
+          "50%": {
+            backgroundPosition: "100% 100%",
+          },
+
+          "100%": {
+            backgroundPosition: " 0% 0%",
+          },
+        },
       },
       animation: {
         marquee: "marquee var(--duration) infinite linear",
@@ -247,6 +257,7 @@ const config: Config = {
           "button-border-movement-bottom linear infinite alternate",
         "button-border-movement-top":
           "button-border-movement-top linear infinite alternate",
+        shine: "shine var(--duration, 2s) infinite linear",
       },
     },
   },
