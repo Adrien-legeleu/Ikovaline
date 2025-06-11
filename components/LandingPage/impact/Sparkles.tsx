@@ -24,7 +24,7 @@ interface SparklesProps {
   options?: RecursivePartial<IOptions>;
 }
 
-export function Sparkles({
+export default function Sparkles({
   className,
   size = 1,
   minSize = null,

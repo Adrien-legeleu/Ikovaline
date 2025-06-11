@@ -1,9 +1,30 @@
 "use client";
 
-import { FranceMap } from "@/components/ui/france-map";
+const FranceMap = dynamic(() => import("@/components/ui/france-map"), {
+  ssr: false,
+  loading: () => <p>Chargement de la carte...</p>,
+});
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { CardSticky, ContainerScroll } from "../impact/CardStack";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const cities = [
+  "Bailly-Romainvilliers",
+  "Massy",
+  "Evry",
+  "Verrière-le-Buisson",
+  "Saclay",
+  "Courcouronnes",
+  "Villeneuve-Saint-Georges",
+  "Yerres",
+  "Marcoussis",
+  "Vauhallan",
+  "Wissous",
+  "Palaiseau",
+  "Corbeil-Essonnes",
+];
 
 export default function Map() {
   return (
@@ -97,6 +118,35 @@ export default function Map() {
             </div>
           </motion.div>
         </div>
+      </div>
+      <div className="flex items-center justify-center py-20  gap-10 flex-col max-w-xl mx-auto">
+        <h2 className="text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
+          Nos agences web
+        </h2>
+        <div className="flex flex-wrap gap-4 justify-center max-w-xl">
+          {cities.map((c, index) => (
+            <Link
+              key={index}
+              href={`/agence-web-${c.toLowerCase()}`}
+              className="border-black/10 dark:border-white/10 shadow-md border-[1px] px-2 flex gap-2 bg-white dark:bg-neutral-900 items-center justify-center py-1 rounded-full "
+            >
+              <div className="h-2 w-2 bg-secondary rounded-full" />
+              {c}
+            </Link>
+          ))}
+        </div>
+        <p className="text-center text-neutral-900 dark:text-neutral-300">
+          Ikovaline est une agence web qui accompagne les entreprises dans toute
+          la France, avec un ancrage fort en Essonne et en Île-de-France, à
+          travers la{" "}
+          <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
+            création de sites web
+          </Link>{" "}
+          et{" "}
+          <Link href="/nos-services">
+            d'autres solutions digitales sur mesure.
+          </Link>
+        </p>
       </div>
 
       <div className="max-w-7xl px-2 mx-auto text-center flex flex-col items-center justify-center space-y-4 md:space-y-8">

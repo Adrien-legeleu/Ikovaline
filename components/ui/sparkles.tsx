@@ -434,3 +434,5 @@ export const SparklesCore = (props: ParticlesProps) => {
     </motion.div>
   );
 };
+
+export default SparklesCore;

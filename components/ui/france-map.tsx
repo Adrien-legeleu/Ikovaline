@@ -13,7 +13,10 @@ interface MapProps {
   lineColor?: string;
 }
 
-export function FranceMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
+export default function FranceMap({
+  dots = [],
+  lineColor = "#0ea5e9",
+}: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const { theme } = useTheme();
 

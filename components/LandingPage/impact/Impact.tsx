@@ -1,8 +1,13 @@
 "use client";
 import { useTheme } from "next-themes";
 import { CardSticky, ContainerScroll } from "./CardStack";
-import { Sparkles } from "./Sparkles";
+const Sparkles = dynamic(
+  () => import("@/components/LandingPage/impact/Sparkles"),
 
+  { ssr: false }
+);
+
+import dynamic from "next/dynamic";
 const METHODOLOGIE_PHASES = [
   {
     id: "phase-1",
