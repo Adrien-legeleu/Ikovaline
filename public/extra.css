@@ -103,7 +103,7 @@
     background: radial-gradient(circle 280px at 0% 0%, #f4fafbc9, #f4fafbc9);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
     flex-direction: column;
     color: #000;
@@ -121,9 +121,9 @@
     height: 45px;
     border-radius: 100px;
     position: absolute;
-    background-color: #8ccce4d8;
+    background-color: #9bc8d8d8;
     opacity: 0.4;
-    box-shadow: 0 0 30px #8ccce4d8;
+    box-shadow: 0 0 30px #9bc8d8d8;
     filter: blur(10px);
     transform-origin: 10%;
     top: 0%;
@@ -132,8 +132,8 @@
 }
 
 .dark .ray {
-    background-color: #1d3144dd;
-    box-shadow: 0 0 50px #1d3144dd;
+    background-color: #1b3955dd;
+    box-shadow: 0 0 50px #1b3955dd;
 }
 
 .line {
