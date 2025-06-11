@@ -1,9 +1,9 @@
 // next.config.mjs
-import bundleAnalyzer from "@next/bundle-analyzer";
+// import bundleAnalyzer from "@next/bundle-analyzer";
 
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-});
+// const withBundleAnalyzer = bundleAnalyzer({
+//   enabled: process.env.ANALYZE === "true",
+// });
 
 const nextConfig = {
   experimental: {
@@ -15,15 +15,15 @@ const nextConfig = {
   images: {
     domains: ["images.unsplash.com", "avatar.vercel.sh"],
   },
-  async redirects() {
-    return [
-      {
-        source: "/contact-2",
-        destination: "/contact",
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/contact-2",
+  //       destination: "/contact",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default nextConfig;

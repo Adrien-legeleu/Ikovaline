@@ -111,7 +111,7 @@ export default function About() {
       className="py-20 gap-10  max-w-3xl flex flex-col mx-auto relative items-center justify-center"
       id="about"
     >
-      <MagicText text={words} />
+      <MagicText duration={1} filter={true} words={words} />
       <div className="space-y-2 ">
         <div className="flex sm:flex-row items-center justify-center  gap-2  w-full">
           <AnimatedTooltip items={people1} />

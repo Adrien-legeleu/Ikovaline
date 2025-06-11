@@ -69,10 +69,10 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
         </div>
         <div className="absolute h-[250px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-black to-transparent from-30%" />
         <div>
-          <h1 className="text-3xl md:px-0 px-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center">
+          <h1 className="text-3xl md:px-0 px-5 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center">
             Agence Web à {data.ville}
           </h1>
-          <p className="text-lg text-center text-neutral-900 dark:text-neutral-300 max-w-2xl mx-auto mt-5">
+          <p className="md:text-lg text-base px-5 text-center text-neutral-900 dark:text-neutral-300 max-w-2xl mx-auto mt-5">
             {data.intro}
           </p>
         </div>
@@ -122,7 +122,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
       </div>
 
       <div className="flex flex-col items-center z-10 justify-center relative gap-4 -top-[50px]">
-        <p className="text-lg text-center max-w-2xl mx-auto text-neutral-900 dark:text-neutral-300">
+        <p className="md:text-lg text-base px-5 text-center max-w-2xl mx-auto text-neutral-900 dark:text-neutral-300">
           {data.text1}
         </p>
         <Link href="/contact">

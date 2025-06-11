@@ -34,7 +34,7 @@ export default function Map() {
         <h2 className="font-bold text-4xl dark:text-white text-black">
           Ikovaline accompagne ses clients partout en France.
         </h2>
-        <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
+        <p className="text-md md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
           De Paris à Marseille, en passant par Lyon ou Bordeaux, nous aidons les
           entreprises à se rendre visibles, à automatiser, et à mieux convertir.
         </p>
@@ -120,7 +120,7 @@ export default function Map() {
           </motion.div>
         </div>
       </div>
-      <div className="flex items-center justify-center  gap-10 flex-col max-w-2xl mx-auto">
+      <div className="flex items-center justify-center px-5 gap-10 flex-col max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
           Nos agences web
         </h2>
