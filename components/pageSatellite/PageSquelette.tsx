@@ -2,7 +2,6 @@
 import { notFound } from "next/navigation";
 import { dataAgence } from "@/data/data-agence";
 import dataEssonne from "@/data/data-essonne.json";
-import CarteEssonne from "@/public/svg/massy";
 import Services from "@/components/pageSatellite/Services";
 import Objectif from "@/components/pageSatellite/Objectif";
 import CityAround from "@/components/pageSatellite/CityAround";
@@ -13,7 +12,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { Lens } from "@/components/ui/lens";
-import { Glow } from "../../components/ui/glow";
+import dynamic from "next/dynamic";
+const CarteEssonne = dynamic(() => import("@/public/svg/massy"), {
+  ssr: false,
+});
+const Glow = dynamic(() => import("@/components/ui/glow"), { ssr: false });
 
 export default function PageSquelette({ idAgence }: { idAgence: string }) {
   const data = dataAgence.find((item) => item.id === idAgence);
