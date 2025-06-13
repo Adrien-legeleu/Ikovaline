@@ -301,7 +301,7 @@ export default function Blog8() {
           <p className="lg:text-lg 2xl:text-xl">
             Les données primaires proviennent d&apos;
             <a
-              href="https://www.ikovaline.com/nos-services/sondages-marche-enquetes-terrain"
+              href="https://ikovaline.com/nos-services/sondages-marche-enquetes-terrain"
               target="_blank"
               className="text-blue-600 underline"
             >

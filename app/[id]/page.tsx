@@ -1,5 +1,6 @@
 import PageSquelette from "@/components/pageSatellite/PageSquelette";
 import { dataAgence } from "@/data/data-agence";
+import Head from "next/head";
 
 interface ParamsIdProps {
   params: {
@@ -19,5 +20,13 @@ export async function generateMetadata({ params }: ParamsIdProps) {
 export default function Page({ params }: ParamsIdProps) {
   const { id } = params;
 
-  return <PageSquelette idAgence={id} />;
+  return (
+    <>
+      <Head>
+        <link rel="canonical" href={`https://ikovaline.com/${id}`} />
+        <meta name="robots" content="index, follow" />
+      </Head>
+      <PageSquelette idAgence={id} />;
+    </>
+  );
 }

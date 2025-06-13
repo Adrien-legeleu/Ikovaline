@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       "Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs",
     description:
       "Start-up étudiante experte en marketing digital, Ikovaline accompagne votre transformation numérique et booste votre visibilité en ligne.",
-    url: "https://www.ikovaline.com",
+    url: "https://ikovaline.com",
     type: "website",
     images: [
       {
@@ -130,7 +130,7 @@ export default function RootLayout({
         />
 
         <link rel="icon" href={Favicon.src} type="image/png" />
-        <link rel="canonical" href="https://www.ikovaline.com/" />
+        <link rel="canonical" href="https://ikovaline.com/" />
 
         <script
           type="application/ld+json"
@@ -139,8 +139,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Ikovaline",
-              url: "https://www.ikovaline.com",
-              logo: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+              url: "https://ikovaline.com",
+              logo: "https://ikovaline.com/images/logo/ikovaline_logo.png",
               contactPoint: {
                 "@type": "ContactPoint",
                 telephone: "+33 7 85 90 22 38",
@@ -148,8 +148,8 @@ export default function RootLayout({
                 areaServed: "FR",
               },
               sameAs: [
-                "https://www.linkedin.com/company/ikovaline",
-                "https://www.instagram.com/ikovaline",
+                "https://linkedin.com/company/ikovaline",
+                "https://instagram.com/ikovaline",
               ],
             }),
           }}

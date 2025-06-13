@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Politique de confidentialité - Ikovaline",
     description:
       "Toutes les informations sur la façon dont Ikovaline collecte, utilise, protège et conserve vos données personnelles.",
-    url: "https://www.ikovaline.com/politique-confidentialite",
+    url: "https://ikovaline.com/politique-confidentialite",
     type: "article",
   },
   twitter: {

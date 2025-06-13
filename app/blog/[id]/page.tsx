@@ -42,10 +42,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: `https://www.ikovaline.com//blog/${id}`,
+      url: `https://ikovaline.com//blog/${id}`,
       images: [
         {
-          url: `https://www.ikovaline.com${meta.ogImage}`,
+          url: `https://ikovaline.com${meta.ogImage}`,
           width: 1200,
           height: 630,
         },
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
-      images: [`https://www.ikovaline.com${meta.ogImage}`],
+      images: [`https://ikovaline.com${meta.ogImage}`],
     },
   };
 }
@@ -93,16 +93,16 @@ export default async function Blog({ params }: ProductPageProps) {
                 name: "Ikovaline",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+                  url: "https://ikovaline.com/images/logo/ikovaline_logo.png",
                 },
               },
               datePublished: meta.date, // ex: "2025-05-20"
-              image: `https://www.ikovaline.com${meta.ogImage}`,
-              url: `https://www.ikovaline.com/blog/${id}`,
+              image: `https://ikovaline.com${meta.ogImage}`,
+              url: `https://ikovaline.com/blog/${id}`,
             }),
           }}
         />
-        <link rel="canonical" href={`https://www.ikovaline.com/blog/${id}`} />
+        <link rel="canonical" href={`https://ikovaline.com/blog/${id}`} />
         <meta name="robots" content="index, follow" />
       </Head>
       <div className="lg:py-24 relative py-12  ">

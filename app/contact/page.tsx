@@ -26,12 +26,12 @@ export default function Page() {
               "@context": "https://schema.org",
               "@type": "ContactPage",
               name: "Page de contact - Ikovaline",
-              url: "https://www.ikovaline.com/contact",
+              url: "https://ikovaline.com/contact",
               about: {
                 "@type": "Organization",
                 name: "Ikovaline",
-                url: "https://www.ikovaline.com",
-                logo: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+                url: "https://ikovaline.com",
+                logo: "https://ikovaline.com/images/logo/ikovaline_logo.png",
                 contactPoint: {
                   "@type": "ContactPoint",
                   telephone: "+33 7 85 90 22 38",
@@ -45,7 +45,7 @@ export default function Page() {
           }}
         />
 
-        <link rel="canonical" href="https://www.ikovaline.com/contact" />
+        <link rel="canonical" href="https://ikovaline.com/contact" />
         <meta name="robots" content="index, follow" />
       </Head>
       <ContactMainPage />

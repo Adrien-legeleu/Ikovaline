@@ -116,7 +116,7 @@ export default function Blog7() {
             <strong> visibilité immédiate</strong>, idéale pour les lancements
             de produits ou les campagnes à court terme.{" "}
             <a
-              href="https://www.ikovaline.com/"
+              href="https://ikovaline.com/"
               className="text-blue-600 underline"
               target="_blank"
             >
@@ -152,7 +152,7 @@ export default function Blog7() {
             </strong>{" "}
             et maximise votre retour sur investissement.{" "}
             <a
-              href="https://www.ikovaline.com/nos-services"
+              href="https://ikovaline.com/nos-services"
               className="text-blue-600 underline"
               target="_blank"
             >
@@ -347,7 +347,7 @@ export default function Blog7() {
             maîtrise des outils Google Ads et garantit un accompagnement de
             qualité.{" "}
             <a
-              href="https://www.ikovaline.com/contact"
+              href="https://ikovaline.com/contact"
               className="text-blue-600 underline"
               target="_blank"
             >
@@ -486,7 +486,7 @@ export default function Blog7() {
             caractéristiques,{" "}
             <strong>augmentant ainsi les taux de conversion</strong>.{" "}
             <a
-              href="https://www.ikovaline.com/nos-services"
+              href="https://ikovaline.com/nos-services"
               target="_blank"
               className="text-blue-600 underline"
             >

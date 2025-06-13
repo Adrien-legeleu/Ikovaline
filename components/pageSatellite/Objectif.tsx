@@ -17,7 +17,7 @@ export default function Objectif({
       <h2 className="text-2xl font-semibold px-5 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-400 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
         {objectifTitle}
       </h2>
-      <p className="md:text-lg mb-4  px-5 text-justify text-neutral-900 dark:text-neutral-300">
+      <p className="md:text-lg mb-8  px-5 text-justify text-neutral-900 dark:text-neutral-300">
         {text1}
       </p>
       <p className="md:text-lg px-5 text-justify text-neutral-900 dark:text-neutral-300">

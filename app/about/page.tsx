@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "À propos d'Ikovaline - Notre Histoire et Équipe",
     description:
       "Plongez dans les coulisses d'Ikovaline : notre parcours, notre vision et les personnes qui façonnent l'accompagnement digital de demain.",
-    url: "https://www.ikovaline.com/about",
+    url: "https://ikovaline.com/about",
     type: "website",
     images: [
       {
@@ -36,7 +36,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <link rel="canonical" href="https://www.ikovaline.com/about" />
+        <link rel="canonical" href="https://ikovaline.com/about" />
         <meta name="robots" content="index, follow" />
         <script
           type="application/ld+json"
@@ -45,7 +45,7 @@ export default function Page() {
               "@context": "https://schema.org",
               "@type": "WebPage",
               name: "À propos d'Ikovaline",
-              url: "https://www.ikovaline.com/about",
+              url: "https://ikovaline.com/about",
               description:
                 "Découvrez l’histoire, les valeurs et l’équipe qui porte Ikovaline, la start-up étudiante au service de votre visibilité digitale.",
             }),

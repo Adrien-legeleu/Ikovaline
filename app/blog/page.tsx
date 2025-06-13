@@ -11,7 +11,7 @@ export default function page() {
           name="description"
           content="Découvrez nos articles sur le SEO, la visibilité locale, la création de site web et les meilleures pratiques marketing pour les PME."
         />
-        <link rel="canonical" href="https://www.ikovaline.com/blog" />
+        <link rel="canonical" href="https://ikovaline.com/blog" />
         <meta name="robots" content="index, follow" />
         <script
           type="application/ld+json"
@@ -20,7 +20,7 @@ export default function page() {
               "@context": "https://schema.org",
               "@type": "Blog",
               name: "Le blog d’Ikovaline",
-              url: "https://www.ikovaline.com/blog",
+              url: "https://ikovaline.com/blog",
               description:
                 "Conseils en visibilité digitale, SEO local, création web et marketing pour les PME et indépendants.",
             }),

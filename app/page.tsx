@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <link rel="canonical" href="https://www.ikovaline.com/" />
+        <link rel="canonical" href="https://ikovaline.com/" />
         <meta name="robots" content="index, follow" />
 
         <script
@@ -91,8 +91,8 @@ export default function Home() {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Ikovaline",
-              url: "https://www.ikovaline.com",
-              logo: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+              url: "https://ikovaline.com",
+              logo: "https://ikovaline.com/images/logo/ikovaline_logo.png",
               contactPoint: {
                 "@type": "ContactPoint",
                 telephone: "+33 7 85 90 22 38",
@@ -100,8 +100,8 @@ export default function Home() {
                 areaServed: "FR",
               },
               sameAs: [
-                "https://www.linkedin.com/company/ikovaline",
-                "https://www.instagram.com/ikovaline",
+                "https://linkedin.com/company/ikovaline",
+                "https://instagram.com/ikovaline",
               ],
             }),
           }}
@@ -115,11 +115,10 @@ export default function Home() {
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Ikovaline",
-              url: "https://www.ikovaline.com",
+              url: "https://ikovaline.com",
               potentialAction: {
                 "@type": "SearchAction",
-                target:
-                  "https://www.ikovaline.com/search?q={search_term_string}",
+                target: "https://ikovaline.com/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Mentions légales - Ikovaline",
     description:
       "Toutes les informations légales concernant le site Ikovaline : éditeur, données personnelles, propriété intellectuelle, hébergement et plus encore.",
-    url: "https://www.ikovaline.com/mentions-legales",
+    url: "https://ikovaline.com/mentions-legales",
     type: "article",
   },
   twitter: {
@@ -78,10 +78,10 @@ export default function LegalMentions() {
           <br />
           Site web :{" "}
           <a
-            href="https://www.hostinger.com"
+            href="https://hostinger.com"
             className="text-blue-600 hover:underline"
           >
-            https://www.hostinger.com
+            https://hostinger.com
           </a>
         </p>
       </section>

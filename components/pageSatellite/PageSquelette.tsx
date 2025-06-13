@@ -39,7 +39,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
   const { x, y } = projectPoint(lat, lng);
   if (!data) return notFound();
   return (
-    <div className="relative overflow-hidden w-full">
+    <div className="relative overflow-hidden w-full space-y-5">
       <div className="absolute inset-0  overflow-hidden pointer-events-none">
         <Glow
           variant="above"
@@ -122,7 +122,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
         </Link>
       </div>
       <Services serviceAgenceWeb={data.services} />
-      <div className="relative z-0">
+      <div className="relative z-0 space-y-5">
         <div className="absolute inset-0 z-0 [background-size:20px_20px] [background-image:radial-gradient(#d4d4d4_1.2px,transparent_1px)] dark:[background-image:radial-gradient(#404040_1.2px,transparent_1px)]" />
         <div className="absolute h-[100px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-black to-transparent from-30%" />
         <div className="absolute h-[250px] z-10 top-0 -translate-y-1/2 left-0 w-full bg-gradient-to-b from-[#F4FAFB] dark:from-black to-transparent from-30%" />

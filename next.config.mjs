@@ -1,10 +1,3 @@
-// next.config.mjs
-// import bundleAnalyzer from "@next/bundle-analyzer";
-
-// const withBundleAnalyzer = bundleAnalyzer({
-//   enabled: process.env.ANALYZE === "true",
-// });
-
 const nextConfig = {
   experimental: {
     optimizeCss: true,
@@ -15,15 +8,21 @@ const nextConfig = {
   images: {
     domains: ["images.unsplash.com", "avatar.vercel.sh"],
   },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: "/contact-2",
-  //       destination: "/contact",
-  //       permanent: true,
-  //     },
-  //   ];
-  // },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.ikovaline.com",
+          },
+        ],
+        destination: "https://ikovaline.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

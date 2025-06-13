@@ -50,7 +50,7 @@ export default function Page({ params }: PageProps) {
       <Head>
         <link
           rel="canonical"
-          href={`https://www.ikovaline.com/nos-services/${service.slug}`}
+          href={`https://ikovaline.com/nos-services/${service.slug}`}
         />
         <meta name="robots" content="index, follow" />
 
@@ -65,10 +65,10 @@ export default function Page({ params }: PageProps) {
               provider: {
                 "@type": "Organization",
                 name: "Ikovaline",
-                url: "https://www.ikovaline.com",
+                url: "https://ikovaline.com",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://www.ikovaline.com/images/logo/ikovaline_logo.png",
+                  url: "https://ikovaline.com/images/logo/ikovaline_logo.png",
                 },
                 contactPoint: {
                   "@type": "ContactPoint",
@@ -77,7 +77,7 @@ export default function Page({ params }: PageProps) {
                   areaServed: "FR",
                 },
               },
-              url: `https://www.ikovaline.com/nos-services/${service.slug}`,
+              url: `https://ikovaline.com/nos-services/${service.slug}`,
             }),
           }}
         />

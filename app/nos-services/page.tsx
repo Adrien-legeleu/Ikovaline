@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: "Nos Services - Solutions Digitales sur Mesure | Ikovaline",
     description:
       "Découvrez les expertises d'Ikovaline pour accompagner votre transformation digitale : SEO, SEA, création de contenu, sites web, IA et plus encore.",
-    url: "https://www.ikovaline.com/nos-services",
+    url: "https://ikovaline.com/nos-services",
     type: "website",
     images: [
       {
@@ -52,7 +52,7 @@ const webPageStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   name: "Nos services",
-  url: "https://www.ikovaline.com/nos-services",
+  url: "https://ikovaline.com/nos-services",
   description:
     "Découvrez les services digitaux proposés par Ikovaline : SEO, création de site, publicité, IA, réseaux sociaux et stratégie de visibilité.",
 };
@@ -61,7 +61,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <link rel="canonical" href="https://www.ikovaline.com/nos-services" />
+        <link rel="canonical" href="https://ikovaline.com/nos-services" />
         <meta name="robots" content="index, follow" />
         <script
           type="application/ld+json"
