@@ -44,7 +44,7 @@ export default function Services() {
             icon={item.icon}
           />
         ))}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 xs:w-2/3 h-[80%] xs:h-1/2 blur-3xl xs:opacity-40 opacity-30 dark:opacity-15 xs:dark:opacity-20  bg-gradient-to-bl from-[#59D9F1] to-[#47EAE0] z-0"/>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 xs:w-2/3 h-[80%] xs:h-1/2 blur-3xl  opacity-30 dark:opacity-15 xs:dark:opacity-20  bg-gradient-to-bl from-[#59D9F1] to-[#47EAE0] z-0"/>
        
       </BentoGrid>
     </div>
