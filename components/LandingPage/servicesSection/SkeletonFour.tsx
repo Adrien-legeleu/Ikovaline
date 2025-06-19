@@ -32,7 +32,7 @@ const chartConfig = {
 
 export function SkeletonFourComponent() {
   return (
-    <Card className="border-none bg-white dark:bg-neutral-800 w-full shadow-none ">
+    <Card className="border-none bg-transparent w-full shadow-none ">
       <CardHeader className="p-2">
         <CardTitle className="text-neutral-500 dark:text-neutral-400 text-sm">
           Graphique - Clics et Impressions

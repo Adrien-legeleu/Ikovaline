@@ -8,7 +8,7 @@ import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
 import { useTheme } from "next-themes";
 
 export default function Footer() {
-  const { theme } = useTheme();
+  const { theme , systemTheme } = useTheme();
   const footerLinks = [
     {
       title: "Home",
@@ -68,7 +68,7 @@ export default function Footer() {
             <h2 className="text-4xl font-semibold flex items-center max-sm:justify-center">
               {" "}
               <Image
-                src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                src={(theme === "system" ? systemTheme : theme)  === "dark" ? IkovalineLogoDark : IkovalineLogo}
                 alt="logo de la start-up Ikovaline"
                 width={150}
                 height={150}

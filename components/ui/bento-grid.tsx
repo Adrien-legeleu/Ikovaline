@@ -5,9 +5,11 @@ import Link from "next/link";
 export const BentoGrid = ({
   className,
   children,
+  
 }: {
   className?: string;
   children?: React.ReactNode;
+  
 }) => {
   return (
     <div
@@ -40,10 +42,11 @@ export const BentoGridItem = ({
     <Link
       href={link}
       className={cn(
-        "relative rounded-3xl   group/bento hover:shadow-xl transition duration-200  border shadow-input dark:shadow-none px-4  bg-white dark:bg-neutral-800",
+        "relative rounded-3xl z-10   group/bento hover:shadow-xl transition duration-200 border-[#00000006] dark:border-[#ffffff12] border-[1px]   shadow-input dark:shadow-none px-4  bg-[#ffffff3d] dark:bg-[#00000048] ",
         className
       )}
     >
+      
       <div className="row-span-1 rounded-3xl  grid-rows-2  grid relative  h-full  group/bento   justify-center  space-y-12">
         {header}
 

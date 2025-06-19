@@ -31,7 +31,8 @@ export default function Services() {
       >
         Nos Services
       </h2>
-      <BentoGrid className="md:max-w-[1400px] pb-10  max-w-sm relative mx-auto md:auto-rows-[28rem] xl:auto-rows-[31rem] 2xl:auto-rows-[32rem]  auto-rows-[29rem]">
+    <div className="overflow-hidden relative py-5 px-2">
+        <BentoGrid className="md:max-w-[1400px] pb-10  max-w-sm relative mx-auto md:auto-rows-[28rem] xl:auto-rows-[31rem] 2xl:auto-rows-[32rem]  auto-rows-[29rem]">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
@@ -43,7 +44,10 @@ export default function Services() {
             icon={item.icon}
           />
         ))}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-1/2 blur-3xl opacity-40 dark:opacity-20  bg-gradient-to-bl from-[#59D9F1] to-[#47EAE0] z-0"/>
+       
       </BentoGrid>
+    </div>
 
       <Link href="/nos-services">
         <AnimatedBorderButton>Voir tous nos services</AnimatedBorderButton>
@@ -226,7 +230,7 @@ const items = [
     header: <SkeletonOne />,
     link: "/nos-services/e-reputation-gestion-avis-google",
     className: "md:col-span-1",
-    icon: <IconMapPin stroke={2} className="text-neutral-500" />,
+    icon: <IconMapPin stroke={2} className="text-neutral-500 dark:text-neutral-300" />,
   },
   {
     title: "Stratégie de Contenu & Réseaux Sociaux",
@@ -240,7 +244,7 @@ const items = [
     header: <SkeletonTwo />,
     link: "/nos-services/gestion-developpement-reseaux-sociaux",
     className: "md:col-span-1",
-    icon: <IconBrandInstagram className=" text-neutral-500" />,
+    icon: <IconBrandInstagram className=" text-neutral-500 dark:text-neutral-300" />,
   },
   {
     title: "Lancement de Campagnes Publicitaires",
@@ -254,7 +258,7 @@ const items = [
     header: <SkeletonFour />,
     link: "/nos-services/gestion-campagnes-sea",
     className: "md:col-span-1",
-    icon: <IconChartBar className=" text-neutral-500" />,
+    icon: <IconChartBar className=" text-neutral-500 dark:text-neutral-300" />,
   },
   {
     title: "Consulting en Développement Commercial",
@@ -267,7 +271,7 @@ const items = [
     header: <SkeletonFive />,
     link: "/nos-services#buisness-developpement",
     className: "md:col-span-1  ",
-    icon: <IconBriefcase className=" text-neutral-500" />,
+    icon: <IconBriefcase className=" text-neutral-500 dark:text-neutral-300" />,
   },
   {
     title: "Création & Optimisation de Sites Internet",
@@ -281,6 +285,6 @@ const items = [
     header: <SkeletonThree />,
     link: "/nos-services/creation-sites-web-vitrine-e-commerce",
     className: "md:!col-span-2 ",
-    icon: <IconDeviceLaptop className=" text-neutral-500" />,
+    icon: <IconDeviceLaptop className=" text-neutral-500 dark:text-neutral-300" />,
   },
 ];

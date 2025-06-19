@@ -7,7 +7,7 @@ import XLogo from "@/public/images/logo/logo-x.avif";
 export function SkeletonTwoComponent() {
   return (
     <div className="relative flex h-[220px] w-full flex-col items-center justify-center overflow-hidden ">
-      <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b z-30 from-black to-gray-300 bg-clip-text text-center text-4xl font-semibold leading-none text-transparent dark:from-white dark:to-black">
+      <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b z-30 from-black to-neutral-700 bg-clip-text text-center text-4xl font-semibold leading-none text-transparent dark:from-white dark:to-neutral-300">
         Réseaux
       </span>
 
