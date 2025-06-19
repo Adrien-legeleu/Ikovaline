@@ -137,7 +137,7 @@ export function HeaderResponsive() {
             <Link href="/">
               {mounted && (
                 <Image
-                  src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                  src={(theme === "system" ? systemTheme : theme) === "dark" ? IkovalineLogoDark : IkovalineLogo}
                   alt="logo de la start-up Ikovaline"
                   width={150}
                   height={150}
