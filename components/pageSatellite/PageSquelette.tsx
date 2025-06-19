@@ -46,7 +46,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
         />
       </div>
-      <div className="h-screen overflow-hidden w-full flex flex-col items-center justify-between relative md:mt-24 mt-20">
+      <div className="h-screen overflow-hidden w-full flex flex-col items-center justify-between relative md:pt-24 pt-20">
         <CarteEssonne
           data={dataEssonne.features}
           highlighted={data.ville.toLowerCase()}
@@ -64,7 +64,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
         <div className="w-full aspect-[1.6/1] max-sm:scale-150 rounded-lg relative font-sans">
           <Image
             src={"/france-dots-map-dark.svg"}
-            className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none dark:block hidden"
+            className="h-full w-full relative left-10 [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none dark:block hidden"
             alt="Carte pointillée France"
             height={495}
             width={1056}
@@ -72,7 +72,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           />
           <Image
             src={"/france-dots-map.svg"}
-            className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none block dark:hidden"
+            className="h-full relative left-10 w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none block dark:hidden"
             alt="Carte pointillée France"
             height={495}
             width={1056}
