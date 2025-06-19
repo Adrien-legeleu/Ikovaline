@@ -26,7 +26,9 @@ interface LinkItem {
 }
 interface AccordionTriggerProps
   extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> {
-  links?: LinkItem[]; // ou le type exact si tu l’as (ex: LinkType[])
+  links?: LinkItem[]; 
+  className:string;
+  children:React.ReactNode;
 }
 
 const AccordionTrigger = React.forwardRef<

@@ -26,15 +26,15 @@ import {
 } from "@tabler/icons-react";
 
 export function Header({ className }: { className?: string }) {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
   const [active, setActive] = useState<string | null>(null);
-  const [themeMode , setThemeMode] =useState(theme)
+  
   const [upToZero, setUpToZero] = useState(false);
   const [mounted, setMounted] = useState(false);
 
 
   useEffect(() => {
-    setThemeMode(theme)
+  
     setMounted(true);
     const handleHeader = () => {
       const scrollY = window.scrollY;
@@ -63,7 +63,7 @@ export function Header({ className }: { className?: string }) {
             <Link href="/">
               {mounted && (
                 <Image
-                  src={themeMode === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                  src={(theme === "system" ? systemTheme : theme ) === "dark" ? IkovalineLogoDark : IkovalineLogo}
                   alt="logo de la start-up Ikovaline"
                   width={150}
                   height={150}

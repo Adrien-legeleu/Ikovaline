@@ -61,7 +61,7 @@ export default function Map() {
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
               <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                ❓Votre site vous apporte-t-il vraiment des clients ?
+                Votre site vous apporte-t-il vraiment des clients ?
               </h3>
               <p className=" text-xs xl:text-sm">
                 Nous concevons des sites clairs, modernes et pensés pour
@@ -78,7 +78,7 @@ export default function Map() {
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
               <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                ❓Personne ne vous trouve sur Google ?
+                Personne ne vous trouve sur Google ?
               </h3>
               <p className=" text-xs xl:text-sm">
                 On booste votre visibilité avec des stratégies SEO & SEA
@@ -94,7 +94,7 @@ export default function Map() {
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
               <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                ❓Vous passez trop de temps sur des tâches répétitives ?
+                Vous passez trop de temps sur des tâches répétitives ?
               </h3>
               <p className=" text-xs xl:text-sm">
                 Automatisations sur mesure pour gagner du temps et scaler sans
@@ -110,7 +110,7 @@ export default function Map() {
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px]  bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
               <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                ❓Pas de stratégie digitale claire ?
+                Pas de stratégie digitale claire ?
               </h3>
               <p className=" text-xs xl:text-sm">
                 On vous guide étape par étape, avec des actions concrètes et
@@ -166,19 +166,19 @@ const BlocContanerScrollMobile = () => {
     <ContainerScroll className="min-h-[50vh] md:hidden  max-w-md mx-auto px-5 pb-24  space-y-8">
       {[
         {
-          title: "❓Votre site vous apporte-t-il vraiment des clients ?",
+          title: "Votre site vous apporte-t-il vraiment des clients ?",
           text: "Nous concevons des sites clairs, modernes et pensés pour convertir.",
         },
         {
-          title: "❓Personne ne vous trouve sur Google ?",
+          title: "Personne ne vous trouve sur Google ?",
           text: "On booste votre visibilité avec des stratégies SEO & SEA efficaces.",
         },
         {
-          title: "❓Vous passez trop de temps sur des tâches répétitives ?",
+          title: "Vous passez trop de temps sur des tâches répétitives ?",
           text: "Automatisations sur mesure pour gagner du temps et scaler sans stress.",
         },
         {
-          title: "❓Pas de stratégie digitale claire ?",
+          title: "Pas de stratégie digitale claire ?",
           text: "On vous guide étape par étape, avec des actions concrètes et mesurables.",
         },
       ].map((item, i) => (

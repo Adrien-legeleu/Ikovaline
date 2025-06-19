@@ -39,7 +39,7 @@ import {
 } from "@tabler/icons-react";
 
 export function HeaderResponsive() {
-  const { theme } = useTheme();
+  const { theme , systemTheme} = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -160,7 +160,7 @@ export function HeaderResponsive() {
         <div className="mx-auto w-full  max-w-sm">
           <DrawerHeader>
             <Image
-              src={theme === "dark" ? IkovalineLogoDark : IkovalineLogo}
+              src={(theme ==="system" ? systemTheme : theme) === "dark" ? IkovalineLogoDark : IkovalineLogo}
               alt="logo de la start-up Ikovaline"
               width={150}
               height={150}
