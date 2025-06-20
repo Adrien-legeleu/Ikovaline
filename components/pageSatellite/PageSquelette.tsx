@@ -132,7 +132,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           text2={data.objectifs.text2}
         />
         <CityAround
-          city={data.ville}
+          city={`${/^[aeiouyàâäéèêëîïôöùûüÿAEIOUYÀÂÄÉÈÊËÎÏÔÖÙÛÜŸ]/.test(data.ville)? "d'" : "de "}${data.ville}`}
           cities={data.villesVoisines}
           text={data.cityAroundText}
         />
