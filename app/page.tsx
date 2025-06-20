@@ -38,25 +38,27 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "Ikovaline – L’agence digitale qui propulse votre business",
-  description:
-    "Boostez votre visibilité avec Ikovaline : SEO, publicité, création de sites web, stratégie digitale. Une agence qui propulse votre croissance en ligne.",
+title: "Ikovaline – Agence digitale Essonne & partout en France",
+
+    description: "Agence digitale à Bailly‑Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.",
   keywords: [
-    "marketing digital",
-    "SEO",
-    "publicité en ligne",
-    "transformation numérique",
-    "stratégies digitales",
-    "Ikovaline",
-    "site vitrine",
-    "site web",
-    "agence web",
-    "référencement naturel",
-  ],
+  "agence digitale Essonne",
+  "agence web Bailly‑Romainvilliers",
+  "SEO local Essonne",
+  "référencement naturel Essonne",
+  "création site web Essonne",
+  "publicité en ligne Essonne",
+  "marketing digital Essonne",
+  "consultant SEO Bailly‑Romainvilliers",
+  "Google Ads Essonne",
+  "agence web Paris"
+]
+,
   openGraph: {
-    title: "Ikovaline - L'agence web qui propulse votre business !",
-    description:
-      "Stratégies digitales personnalisées pour les entreprises ambitieuses. SEO, publicité, contenu, IA : faites passer votre croissance au niveau supérieur.",
+title: "Ikovaline – Agence digitale Essonne & partout en France",
+
+    description: "Agence digitale à Bailly‑Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.",
+
     url: "https://ikovaline.com",
     type: "website",
     images: [
