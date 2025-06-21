@@ -26,7 +26,7 @@ export default function Page({ params }: ParamsIdProps) {
         <link rel="canonical" href={`https://ikovaline.com/${id}`} />
         <meta name="robots" content="index, follow" />
       </Head>
-      <PageSquelette idAgence={id} />;
+      <PageSquelette idAgence={id} />
     </>
   );
 }

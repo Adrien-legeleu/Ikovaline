@@ -52,7 +52,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           highlighted={data.ville.toLowerCase()}
         />
 
-        <div className="absolute h-[250px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-black to-transparent from-30%" />
+        <div className="absolute h-[250px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-background to-transparent from-30%" />
         <div className="z-10 ">
           <h1 className="text-3xl md:px-0 px-5 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-400 dark:via-white dark:to-white  py-2 md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center">
             Agence Web à {data.ville}
@@ -124,8 +124,8 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
       <Services serviceAgenceWeb={data.services} />
       <div className="relative z-0 space-y-5">
         <div className="absolute inset-0 z-0 [background-size:20px_20px] [background-image:radial-gradient(#d4d4d4_1.2px,transparent_1px)] dark:[background-image:radial-gradient(#404040_1.2px,transparent_1px)]" />
-        <div className="absolute h-[100px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-black to-transparent from-30%" />
-        <div className="absolute h-[250px] z-10 top-0 -translate-y-1/2 left-0 w-full bg-gradient-to-b from-[#F4FAFB] dark:from-black to-transparent from-30%" />
+        <div className="absolute h-[100px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-background to-transparent from-30%" />
+        <div className="absolute h-[250px] z-10 top-0 -translate-y-1/2 left-0 w-full bg-gradient-to-b from-[#F4FAFB] dark:from-background to-transparent from-30%" />
         <Objectif
           objectifTitle={data.objectifs.objectifTitle}
           text1={data.objectifs.text1}
