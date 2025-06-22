@@ -14,6 +14,10 @@ export async function generateMetadata({ params }: ParamsIdProps) {
   return {
     title: data.metaTitle,
     description: data.metaDescription,
+    alternates: {
+      canonical: `https://ikovaline.com/${id}`,
+    },
+    robots: "index , follow"
   };
 }
 
@@ -22,10 +26,7 @@ export default function Page({ params }: ParamsIdProps) {
 
   return (
     <>
-      <Head>
-        <link rel="canonical" href={`https://ikovaline.com/${id}`} />
-        <meta name="robots" content="index, follow" />
-      </Head>
+     
       <PageSquelette idAgence={id} />
     </>
   );
