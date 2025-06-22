@@ -39,6 +39,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   return {
     title: meta.title,
     description: meta.description,
+    alternates: {
+      canonical: `htps://ikovaline.com/blog/${id}`,
+    },
+    robots:"index , follow",
     openGraph: {
       title: meta.title,
       description: meta.description,
@@ -102,8 +106,7 @@ export default async function Blog({ params }: ProductPageProps) {
             }),
           }}
         />
-        <link rel="canonical" href={`https://ikovaline.com/blog/${id}`} />
-        <meta name="robots" content="index, follow" />
+      
       </Head>
       <div className="lg:py-24 relative py-12  ">
         <Buttons />

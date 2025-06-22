@@ -34,6 +34,10 @@ export function generateMetadata({ params }: PageProps): Metadata {
       url: `https://ton-site.com/nos-services/${service.slug}`,
       type: "website",
     },
+    alternates :{
+      canonical: `https://ikovaline.com/nos-services/${service.slug}`,
+    },
+    robots :"index , follow"
   };
 }
 
@@ -48,13 +52,7 @@ export default function Page({ params }: PageProps) {
   return (
     <>
       <Head>
-        <link
-          rel="canonical"
-          href={`https://ikovaline.com/nos-services/${service.slug}`}
-        />
-        <meta name="robots" content="index, follow" />
-
-        <script
+               <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
