@@ -1,6 +1,5 @@
 import PageSquelette from "@/components/pageSatellite/PageSquelette";
 import { dataAgence } from "@/data/data-agence";
-import Head from "next/head";
 
 interface ParamsIdProps {
   params: {
