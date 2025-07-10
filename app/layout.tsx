@@ -9,6 +9,7 @@ import { Poppins } from 'next/font/google';
 import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import LazyExtraStyle from '@/app/LazyExtraStyle';
+import { Analytics } from '@vercel/analytics/next';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -19,18 +20,18 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs',
   description:
-    'Agence digitale à taille humaine, Ikovaline accompagne les PME et indépendants pour améliorer leur présence en ligne : référencement local, création de site web performant, gestion Google Business Profile et stratégie sur-mesure.',
+    'Agence digitale à Bailly‑Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.',
   keywords: [
-    'agence digitale PME',
-    'visibilité en ligne',
-    'création site internet',
-    'SEO local',
-    'accompagnement digital',
-    'Google Business Profile',
-    'stratégie web',
-    'Ikovaline',
-    'croissance digitale',
-    'agence marketing numérique',
+    'agence digitale Essonne',
+    'agence web Bailly‑Romainvilliers',
+    'SEO local Essonne',
+    'référencement naturel Essonne',
+    'création site web Essonne',
+    'publicité en ligne Essonne',
+    'marketing digital Essonne',
+    'consultant SEO Bailly‑Romainvilliers',
+    'Google Ads Essonne',
+    'agence web Paris',
   ],
   openGraph: {
     title:
@@ -163,6 +164,7 @@ export default function RootLayout({
       </head>
       <body className={`antialiased`}>
         <SpeedInsights />
+        <Analytics />
         <LazyExtraStyle />
         <noscript>
           <iframe

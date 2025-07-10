@@ -1,20 +1,18 @@
-import { cn } from "@/lib/utils";
-import { GlowingEffect } from "./glowing-effect";
-import Link from "next/link";
+import { cn } from '@/lib/utils';
+import { GlowingEffect } from './glowing-effect';
+import Link from 'next/link';
 
 export const BentoGrid = ({
   className,
   children,
-  
 }: {
   className?: string;
   children?: React.ReactNode;
-  
 }) => {
   return (
     <div
       className={cn(
-        "grid md:auto-rows-[18rem]  px-2  grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4 2xl:gap-8 max-w-[1400px] mx-auto ",
+        'grid md:auto-rows-[18rem]  px-2  grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4 2xl:gap-8 max-w-[1400px] mx-auto ',
         className
       )}
     >
@@ -42,11 +40,10 @@ export const BentoGridItem = ({
     <Link
       href={link}
       className={cn(
-        "relative rounded-3xl z-10   group/bento hover:shadow-xl transition duration-200 border-[#00000008] dark:border-[#ffffff12] border-[1px]   shadow-input dark:shadow-none px-4  bg-[#ffffff3d] dark:bg-[#00000048] ",
+        'relative rounded-3xl z-10   group/bento hover:shadow-xl transition duration-200 border-[#00000008] dark:border-[#ffffff12] border-[1px]   shadow-input dark:shadow-none px-4  bg-[#ffffff3d] dark:bg-[#0000005c] ',
         className
       )}
     >
-      
       <div className="row-span-1 rounded-3xl  grid-rows-2  grid relative  h-full  group/bento   justify-center  space-y-12">
         {header}
 

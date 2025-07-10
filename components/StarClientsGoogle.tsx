@@ -21,6 +21,7 @@ export default function StarClientsGoogle() {
               damping: 5,
               delay: 0.2,
             }}
+            viewport={{ once: true }}
           >
             <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
@@ -33,6 +34,7 @@ export default function StarClientsGoogle() {
               damping: 5,
               delay: 0.4,
             }}
+            viewport={{ once: true }}
           >
             <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
@@ -45,6 +47,7 @@ export default function StarClientsGoogle() {
               damping: 5,
               delay: 0.6,
             }}
+            viewport={{ once: true }}
           >
             <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
@@ -57,6 +60,7 @@ export default function StarClientsGoogle() {
               damping: 5,
               delay: 0.8,
             }}
+            viewport={{ once: true }}
           >
             <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
@@ -69,6 +73,7 @@ export default function StarClientsGoogle() {
               damping: 5,
               delay: 1,
             }}
+            viewport={{ once: true }}
           >
             <IconStarFilled className="text-yellow-300 w-6 h-6 sm:w-6 sm:h-6" />
           </motion.span>
@@ -81,6 +86,7 @@ export default function StarClientsGoogle() {
             ease: 'easeInOut',
             delay: 1.2,
           }}
+          viewport={{ once: true }}
           className="font-semibold flex relative top-1 items-center gap-1 text-sm"
         >
           <span className="text-lg  ">+49 </span>
