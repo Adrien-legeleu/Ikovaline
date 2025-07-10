@@ -1,30 +1,35 @@
-"use client";
+'use client';
 
-const FranceMap = dynamic(() => import("@/components/ui/france-map"), {
+const FranceMap = dynamic(() => import('@/components/ui/france-map'), {
   ssr: false,
   loading: () => <p>Chargement de la carte...</p>,
 });
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { CardSticky, ContainerScroll } from "../impact/CardStack";
-import Link from "next/link";
-import dynamic from "next/dynamic";
-import { removeAccents } from "@/components/pageSatellite/CityAround";
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { CardSticky, ContainerScroll } from '../impact/CardStack';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import { removeAccents } from '@/components/pageSatellite/CityAround';
 
 const cities = [
-  "Bailly-Romainvilliers",
-  "Massy",
-  "Evry",
-  "Verrières-le-Buisson",
-  "Saclay",
-  "Courcouronnes",
-  "Villeneuve-Saint-Georges",
-  "Yerres",
-  "Marcoussis",
-  "Vauhallan",
-  "Wissous",
-  "Palaiseau",
-  "Corbeil-Essonnes",
+  'Bailly-Romainvilliers',
+  'Massy',
+  'Evry',
+  'Verrières-le-Buisson',
+  'Saclay',
+  'Courcouronnes',
+  'Villeneuve-Saint-Georges',
+  'Yerres',
+  'Marcoussis',
+  'Vauhallan',
+  'Wissous',
+  'Palaiseau',
+  'Corbeil-Essonnes',
+  'Savigny-sur-Orge',
+  'Sainte-Geneviève-des-Bois',
+  'Viry-Châtillon',
+  'Athis-Mons',
+  'Draveil',
 ];
 
 export default function Map() {
@@ -56,7 +61,7 @@ export default function Map() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
             className="md:absolute relative xl:top-5 md:top-10 md:left-5 lg:left-10 xl:left-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
@@ -73,7 +78,7 @@ export default function Map() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
             className="md:absolute relative  md:top-28 xl:top-32 xl:right-20 md:right-10 lg:right-16 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
@@ -89,7 +94,7 @@ export default function Map() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
             className="md:absolute relative md:bottom-20 xl:bottom-40 md:right-16 lg:right-24 xl:right-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px] bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
@@ -105,7 +110,7 @@ export default function Map() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
             className="md:absolute relative  md:bottom-[35%] lg:bottom-[40%] md:left-12 lg:left-20 z-20  max-w-[295px] lg:max-w-sm xl:max-w-md"
           >
             <div className="p-5 bg-transparent backdrop-blur-[4px]  bg-white dark:bg-black shadow-md shadow-black/10 rounded-3xl z-10 space-y-2">
@@ -139,11 +144,11 @@ export default function Map() {
         <p className="text-center text-neutral-900 dark:text-neutral-300">
           Ikovaline est une agence web qui accompagne les entreprises dans toute
           la France, avec un ancrage fort en Essonne et en Île-de-France, à
-          travers la{" "}
+          travers la{' '}
           <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
             création de sites web
-          </Link>{" "}
-          et{" "}
+          </Link>{' '}
+          et{' '}
           <Link href="/nos-services">
             d&apos;autres solutions digitales sur mesure.
           </Link>
@@ -166,20 +171,20 @@ const BlocContanerScrollMobile = () => {
     <ContainerScroll className="min-h-[50vh] md:hidden  max-w-md mx-auto px-5 pb-24  space-y-8">
       {[
         {
-          title: "Votre site vous apporte-t-il vraiment des clients ?",
-          text: "Nous concevons des sites clairs, modernes et pensés pour convertir.",
+          title: 'Votre site vous apporte-t-il vraiment des clients ?',
+          text: 'Nous concevons des sites clairs, modernes et pensés pour convertir.',
         },
         {
-          title: "Personne ne vous trouve sur Google ?",
-          text: "On booste votre visibilité avec des stratégies SEO & SEA efficaces.",
+          title: 'Personne ne vous trouve sur Google ?',
+          text: 'On booste votre visibilité avec des stratégies SEO & SEA efficaces.',
         },
         {
-          title: "Vous passez trop de temps sur des tâches répétitives ?",
-          text: "Automatisations sur mesure pour gagner du temps et scaler sans stress.",
+          title: 'Vous passez trop de temps sur des tâches répétitives ?',
+          text: 'Automatisations sur mesure pour gagner du temps et scaler sans stress.',
         },
         {
-          title: "Pas de stratégie digitale claire ?",
-          text: "On vous guide étape par étape, avec des actions concrètes et mesurables.",
+          title: 'Pas de stratégie digitale claire ?',
+          text: 'On vous guide étape par étape, avec des actions concrètes et mesurables.',
         },
       ].map((item, i) => (
         <CardSticky
