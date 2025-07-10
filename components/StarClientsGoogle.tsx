@@ -1,6 +1,6 @@
-"use client";
-import { IconStarFilled } from "@tabler/icons-react";
-import { motion } from "framer-motion";
+'use client';
+import { IconStarFilled } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
 
 export default function StarClientsGoogle() {
   return (
@@ -16,7 +16,7 @@ export default function StarClientsGoogle() {
             initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
-              type: "spring",
+              type: 'spring',
               stiffness: 150,
               damping: 5,
               delay: 0.2,
@@ -28,7 +28,7 @@ export default function StarClientsGoogle() {
             initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
-              type: "spring",
+              type: 'spring',
               stiffness: 150,
               damping: 5,
               delay: 0.4,
@@ -40,7 +40,7 @@ export default function StarClientsGoogle() {
             initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
-              type: "spring",
+              type: 'spring',
               stiffness: 150,
               damping: 5,
               delay: 0.6,
@@ -52,7 +52,7 @@ export default function StarClientsGoogle() {
             initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
-              type: "spring",
+              type: 'spring',
               stiffness: 150,
               damping: 5,
               delay: 0.8,
@@ -64,7 +64,7 @@ export default function StarClientsGoogle() {
             initial={{ opacity: 0, scale: 0.2 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{
-              type: "spring",
+              type: 'spring',
               stiffness: 150,
               damping: 5,
               delay: 1,
@@ -78,7 +78,7 @@ export default function StarClientsGoogle() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{
             duration: 0.5,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: 1.2,
           }}
           className="font-semibold flex relative top-1 items-center gap-1 text-sm"

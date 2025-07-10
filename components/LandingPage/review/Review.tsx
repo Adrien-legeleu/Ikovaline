@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import Review1 from "@/public/images/logo/frewinglas-logo.png";
-import Review2 from "@/public/images/logo/jean-cristophe-Lelandais.jpeg";
-import Review3 from "@/public/images/logo/logo-lelandais.png";
-import Review4 from "@/public/images/logo/hl-horner-logo.jpg";
-import Review5 from "@/public/images/logo/logo-lora.png";
+import Review1 from '@/public/images/logo/frewinglas-logo.png';
+import Review2 from '@/public/images/logo/jean-cristophe-Lelandais.jpeg';
+import Review3 from '@/public/images/logo/logo-lelandais.png';
+import Review4 from '@/public/images/logo/hl-horner-logo.jpg';
+import Review5 from '@/public/images/logo/logo-lora.png';
 
-import { motion } from "framer-motion";
-import Marquee from "@/components/ui/marquee";
-import Image, { StaticImageData } from "next/image";
+import { motion } from 'framer-motion';
+import Marquee from '@/components/ui/marquee';
+import Image, { StaticImageData } from 'next/image';
 
 interface ReviewType {
   name: string;
@@ -19,64 +19,64 @@ interface ReviewType {
 
 const reviews: ReviewType[] = [
   {
-    name: "L’Ora Fashion Paris",
-    role: "Optimisation Instagram - Google Shopping",
-    text: "Grâce à Ikovaline, nous avons considérablement augmenté notre visibilité en ligne. Leur expertise sur Instagram et Google Shopping a dynamisé nos ventes.",
+    name: 'L’Ora Fashion Paris',
+    role: 'Optimisation Instagram - Google Shopping',
+    text: 'Grâce à Ikovaline, nous avons considérablement augmenté notre visibilité en ligne. Leur expertise sur Instagram et Google Shopping a dynamisé nos ventes.',
     image: Review5,
   },
   {
-    name: "L’Émotion",
-    role: "Gestion Google My Business - Consulting",
-    text: "Ils ont transformé notre image en ligne et apporté des conseils stratégiques pour développer notre activité. Une équipe très réactive !",
-    image: "https://avatar.vercel.sh/rauchg",
+    name: 'L’Émotion',
+    role: 'Gestion Google My Business - Consulting',
+    text: 'Ils ont transformé notre image en ligne et apporté des conseils stratégiques pour développer notre activité. Une équipe très réactive !',
+    image: 'https://avatar.vercel.sh/rauchg',
   },
   {
-    name: "Lelandais Fermetures",
-    role: "Gestion Google My Business - Leads locaux",
-    text: "Depuis qu’Ikovaline gère notre Google My Business, nous recevons beaucoup plus de demandes locales pertinentes. Excellent service !",
+    name: 'Lelandais Fermetures',
+    role: 'Gestion Google My Business - Leads locaux',
+    text: 'Depuis qu’Ikovaline gère notre Google My Business, nous recevons beaucoup plus de demandes locales pertinentes. Excellent service !',
     image: Review3,
   },
   {
-    name: "Frewinglas",
-    role: "Création site web - SEO - LinkedIn",
-    text: "Le site qu’ils ont créé est moderne et bien référencé. Nos profils LinkedIn sont désormais des outils de prospection efficaces.",
+    name: 'Frewinglas',
+    role: 'Création site web - SEO - LinkedIn',
+    text: 'Le site qu’ils ont créé est moderne et bien référencé. Nos profils LinkedIn sont désormais des outils de prospection efficaces.',
     image: Review1,
   },
   {
-    name: "Need Money For Shop",
-    role: "Création site web - Publicité - Développement commercial",
-    text: "Ikovaline a su adapter ses services à nos besoins précis. Leur approche marketing a boosté nos campagnes publicitaires.",
-    image: "https://avatar.vercel.sh/rauchg",
+    name: 'Need Money For Shop',
+    role: 'Création site web - Publicité - Développement commercial',
+    text: 'Ikovaline a su adapter ses services à nos besoins précis. Leur approche marketing a boosté nos campagnes publicitaires.',
+    image: 'https://avatar.vercel.sh/rauchg',
   },
   {
-    name: "L’Art du Bonsaï",
-    role: "Création site web - Contenu visuel - Publicité",
-    text: "Leur travail créatif et stratégique a fait passer notre entreprise à un autre niveau. Nos clients adorent notre nouveau site et visuel !",
-    image: "https://avatar.vercel.sh/rauchg",
+    name: 'L’Art du Bonsaï',
+    role: 'Création site web - Contenu visuel - Publicité',
+    text: 'Leur travail créatif et stratégique a fait passer notre entreprise à un autre niveau. Nos clients adorent notre nouveau site et visuel !',
+    image: 'https://avatar.vercel.sh/rauchg',
   },
   {
-    name: "HL CORNER",
-    role: "Création site web - Visibilité locale",
-    text: "Un grand merci à Ikovaline pour notre site fonctionnel et attrayant. Nous sommes désormais plus visibles localement.",
+    name: 'HL CORNER',
+    role: 'Création site web - Visibilité locale',
+    text: 'Un grand merci à Ikovaline pour notre site fonctionnel et attrayant. Nous sommes désormais plus visibles localement.',
     image: Review4,
   },
   {
-    name: "Jardin Auto",
-    role: "Création site web - Publicité saisonnière",
-    text: "Leur travail nous a permis de générer plus de ventes en période de forte demande. Ils gèrent tout avec professionnalisme.",
-    image: "https://avatar.vercel.sh/rauchg",
+    name: 'Jardin Auto',
+    role: 'Création site web - Publicité saisonnière',
+    text: 'Leur travail nous a permis de générer plus de ventes en période de forte demande. Ils gèrent tout avec professionnalisme.',
+    image: 'https://avatar.vercel.sh/rauchg',
   },
   {
-    name: "Jean-Christophe Lelandais",
-    role: "Accompagnement marketing - Recrutement",
-    text: "Ikovaline a été un partenaire clé pour structurer nos besoins en marketing et en recrutement. Une équipe compétente et proactive.",
+    name: 'Jean-Christophe Lelandais',
+    role: 'Accompagnement marketing - Recrutement',
+    text: 'Ikovaline a été un partenaire clé pour structurer nos besoins en marketing et en recrutement. Une équipe compétente et proactive.',
     image: Review2,
   },
   {
-    name: "Simon Corbin",
-    role: "Stratégies marketing et commerciales sur mesure",
-    text: "Leur approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.",
-    image: "https://avatar.vercel.sh/rauchg",
+    name: 'Simon Corbin',
+    role: 'Stratégies marketing et commerciales sur mesure',
+    text: 'Leur approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.',
+    image: 'https://avatar.vercel.sh/rauchg',
   },
 ];
 
@@ -100,7 +100,7 @@ const ReviewCard = ({
   <div className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-md w-full bg-white dark:bg-neutral-900">
     <div className="mb-4 text-base">{text}</div>
     <div className="flex items-center gap-2 mt-5">
-      {typeof image === "string" ? (
+      {typeof image === 'string' ? (
         <Image
           width={40}
           height={40}

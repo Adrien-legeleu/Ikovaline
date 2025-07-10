@@ -1,58 +1,59 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Header } from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
-import Favicon from "@/app/ikovaline_logo-favicon.png";
-import { ThemeProvider } from "@/components/theme.provider";
-import { Toaster } from "@/components/ui/toaster";
-import { Poppins } from "next/font/google";
-import Script from "next/script";
-import LazyExtraStyle from "@/app/LazyExtraStyle";
+import type { Metadata } from 'next';
+import './globals.css';
+import { Header } from '@/components/header/Header';
+import Footer from '@/components/footer/Footer';
+import Favicon from '@/app/ikovaline_logo-favicon.png';
+import { ThemeProvider } from '@/components/theme.provider';
+import { Toaster } from '@/components/ui/toaster';
+import { Poppins } from 'next/font/google';
+import Script from 'next/script';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import LazyExtraStyle from '@/app/LazyExtraStyle';
 
 const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700", "800"],
-  display: "swap", // ✅ important pour éviter les blocages
+  subsets: ['latin'],
+  weight: ['300', '400', '600', '700', '800'],
+  display: 'swap', // ✅ important pour éviter les blocages
 });
 
 export const metadata: Metadata = {
-  title: "Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs",
+  title: 'Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs',
   description:
-    "Agence digitale à taille humaine, Ikovaline accompagne les PME et indépendants pour améliorer leur présence en ligne : référencement local, création de site web performant, gestion Google Business Profile et stratégie sur-mesure.",
+    'Agence digitale à taille humaine, Ikovaline accompagne les PME et indépendants pour améliorer leur présence en ligne : référencement local, création de site web performant, gestion Google Business Profile et stratégie sur-mesure.',
   keywords: [
-    "agence digitale PME",
-    "visibilité en ligne",
-    "création site internet",
-    "SEO local",
-    "accompagnement digital",
-    "Google Business Profile",
-    "stratégie web",
-    "Ikovaline",
-    "croissance digitale",
-    "agence marketing numérique",
+    'agence digitale PME',
+    'visibilité en ligne',
+    'création site internet',
+    'SEO local',
+    'accompagnement digital',
+    'Google Business Profile',
+    'stratégie web',
+    'Ikovaline',
+    'croissance digitale',
+    'agence marketing numérique',
   ],
   openGraph: {
     title:
-      "Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs",
+      'Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs',
     description:
-      "Start-up étudiante experte en marketing digital, Ikovaline accompagne votre transformation numérique et booste votre visibilité en ligne.",
-    url: "https://ikovaline.com",
-    type: "website",
+      'Start-up étudiante experte en marketing digital, Ikovaline accompagne votre transformation numérique et booste votre visibilité en ligne.',
+    url: 'https://ikovaline.com',
+    type: 'website',
     images: [
       {
-        url: "/images/logo/ikovaline_logo.png",
+        url: '/images/logo/ikovaline_logo.png',
         width: 1200,
         height: 630,
-        alt: "Ikovaline Logo",
+        alt: 'Ikovaline Logo',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Ikovaline - Expert Marketing Digital et Transformation",
+    card: 'summary_large_image',
+    title: 'Ikovaline - Expert Marketing Digital et Transformation',
     description:
-      "Boostez votre visibilité avec Ikovaline, start-up étudiante experte en marketing digital et stratégies de transformation numérique.",
-    images: ["/images/logo/ikovaline_logo.png"],
+      'Boostez votre visibilité avec Ikovaline, start-up étudiante experte en marketing digital et stratégies de transformation numérique.',
+    images: ['/images/logo/ikovaline_logo.png'],
   },
 };
 
@@ -136,20 +137,20 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Ikovaline",
-              url: "https://ikovaline.com",
-              logo: "https://ikovaline.com/images/logo/ikovaline_logo.png",
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Ikovaline',
+              url: 'https://ikovaline.com',
+              logo: 'https://ikovaline.com/images/logo/ikovaline_logo.png',
               contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+33 7 85 90 22 38",
-                contactType: "customer service",
-                areaServed: "FR",
+                '@type': 'ContactPoint',
+                telephone: '+33 7 85 90 22 38',
+                contactType: 'customer service',
+                areaServed: 'FR',
               },
               sameAs: [
-                "https://linkedin.com/company/ikovaline",
-                "https://instagram.com/ikovaline",
+                'https://linkedin.com/company/ikovaline',
+                'https://instagram.com/ikovaline',
               ],
             }),
           }}
@@ -161,13 +162,14 @@ export default function RootLayout({
         ></script>
       </head>
       <body className={`antialiased`}>
+        <SpeedInsights />
         <LazyExtraStyle />
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NDKCHTFH"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
+            style={{ display: 'none', visibility: 'hidden' }}
           ></iframe>
         </noscript>
         <ThemeProvider
