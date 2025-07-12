@@ -153,7 +153,7 @@ export default function Blog9() {
             .
           </p>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Les impacts d'une refonte sur votre présence en ligne
+            Les impacts d&apos;une refonte sur votre présence en ligne
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Une refonte mal préparée peut temporairement affecter votre
@@ -177,8 +177,8 @@ export default function Blog9() {
             </Link>{' '}
             est primordiale : un site ergonomique et moderne renforce la
             confiance, facilite l&apos;engagement et encourage la fidélisation.
-            C'est un levier pour vous démarquer de vos concurrents et offrir le
-            meilleur à vos visiteurs.
+            C&apos;est un levier pour vous démarquer de vos concurrents et
+            offrir le meilleur à vos visiteurs.
           </p>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             Aligner la refonte avec vos objectifs stratégiques
