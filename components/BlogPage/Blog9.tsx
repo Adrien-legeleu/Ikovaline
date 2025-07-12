@@ -93,7 +93,7 @@ export default function Blog9() {
             </li>
             <li className="underline">
               <Link href="#aspects-techniques-strategiques">
-                Aspects techniques et stratégiques d'une refonte réussie
+                Aspects techniques et stratégiques d&apos;une refonte réussie
               </Link>
             </li>
             <li className="underline">
@@ -108,41 +108,45 @@ export default function Blog9() {
             Comprendre la refonte de site web : définition et enjeux
           </h2>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Qu'est-ce qu'une refonte de site web exactement ?
+            Qu&apos;est-ce qu&apos;une refonte de site web exactement ?
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Une refonte de site web consiste à repenser en profondeur votre
-            présence digitale, bien au-delà d'une simple mise à jour
-            occasionnelle. Alors qu'une mise à jour peut concerner l'ajout d'une
-            page ou la correction d'un élément, une refonte implique souvent de{' '}
+            présence digitale, bien au-delà d&apos;une simple mise à jour
+            occasionnelle. Alors qu&apos;une mise à jour peut concerner
+            l&apos;ajout d&apos;une page ou la correction d&apos;un élément, une
+            refonte implique souvent de{' '}
             <strong>repartir sur de nouvelles bases</strong>, touchant à
-            l'arborescence, au design, aux fonctionnalités ou même à la
+            l&apos;arborescence, au design, aux fonctionnalités ou même à la
             plateforme technique.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Plusieurs approches peuvent être envisagées : une refonte visuelle
-            pour moderniser l'identité graphique, une refonte structurelle pour
-            améliorer la navigation, une refonte technique pour optimiser la
-            performance ou une refonte fonctionnelle pour repenser l'expérience
-            utilisateur. <strong>Chaque type de refonte</strong> répond à des
-            besoins spécifiques et s'inscrit dans une stratégie globale.
+            pour moderniser l&apos;identité graphique, une refonte structurelle
+            pour améliorer la navigation, une refonte technique pour optimiser
+            la performance ou une refonte fonctionnelle pour repenser
+            l&apos;expérience utilisateur.{' '}
+            <strong>Chaque type de refonte</strong> répond à des besoins
+            spécifiques et s&apos;inscrit dans une stratégie globale.
           </p>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             Pourquoi entreprendre une refonte de votre site internet ?
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            Plusieurs signaux montrent qu'il est temps de repenser votre site
-            web : un design désuet, un affichage inadapté aux écrans mobiles,
-            des temps de chargement trop lents, ou encore un classement
+            Plusieurs signaux montrent qu&apos;il est temps de repenser votre
+            site web : un design désuet, un affichage inadapté aux écrans
+            mobiles, des temps de chargement trop lents, ou encore un classement
             déclinant sur les moteurs de recherche. Ces indicateurs révèlent que{' '}
-            <strong>votre site a besoin d'une mise à niveau stratégique</strong>
+            <strong>
+              votre site a besoin d&apos;une mise à niveau stratégique
+            </strong>
             .
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Une refonte réussie améliore votre visibilité sur Google grâce à un
-            référencement naturel optimisé, renforce l'expérience de vos
+            référencement naturel optimisé, renforce l&apos;expérience de vos
             visiteurs avec une navigation plus fluide, et booste vos conversions
-            grâce à un design plus engageant. C'est une opportunité pour{' '}
+            grâce à un design plus engageant. C&apos;est une opportunité pour{' '}
             <strong>
               aligner votre vitrine numérique sur vos ambitions actuelles
             </strong>
@@ -153,11 +157,11 @@ export default function Blog9() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Une refonte mal préparée peut temporairement affecter votre
-            positionnement sur Google, surtout en cas de changements d'URL sans
-            redirections adaptées. Cependant, elle représente aussi{' '}
+            positionnement sur Google, surtout en cas de changements d&apos;URL
+            sans redirections adaptées. Cependant, elle représente aussi{' '}
             <strong>
-              l'opportunité d'optimiser votre structure pour le SEO et de
-              renforcer votre autorité
+              l&apos;opportunité d&apos;optimiser votre structure pour le SEO et
+              de renforcer votre autorité
             </strong>{' '}
             aux yeux des moteurs de recherche.
           </p>
@@ -169,11 +173,11 @@ export default function Blog9() {
               target="_blank"
               className="text-blue-600 underline"
             >
-              <strong>une refonte centrée sur l'image de marque</strong>
+              <strong>une refonte centrée sur l&apos;image de marque</strong>
             </Link>{' '}
             est primordiale : un site ergonomique et moderne renforce la
-            confiance, facilite l'engagement et encourage la fidélisation. C'est
-            un levier pour vous démarquer de vos concurrents et offrir le
+            confiance, facilite l&apos;engagement et encourage la fidélisation.
+            C'est un levier pour vous démarquer de vos concurrents et offrir le
             meilleur à vos visiteurs.
           </p>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
@@ -181,7 +185,7 @@ export default function Blog9() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Fixer des objectifs clairs et mesurables est essentiel pour orienter
-            votre refonte et s'assurer qu'il s'agit d'
+            votre refonte et s&apos;assurer qu&apos;il s&apos;agit d&apos;
             <Link
               href="/nos-services/creation-sites-web-vitrine-e-commerce"
               target="_blank"
@@ -207,15 +211,15 @@ export default function Blog9() {
             </li>
             <li>
               <strong>Optimiser la vitesse de chargement</strong> : réduire le
-              temps d'affichage des pages à moins de 2 secondes pour{' '}
+              temps d&apos;affichage des pages à moins de 2 secondes pour{' '}
               <strong>
-                améliorer l'expérience et le référencement naturel
+                améliorer l&apos;expérience et le référencement naturel
               </strong>
             </li>
             <li>
-              <strong>Renforcer l'engagement utilisateur</strong> : augmenter de
-              Z% le temps passé sur le site grâce à un contenu pertinent et une
-              navigation fluide
+              <strong>Renforcer l&apos;engagement utilisateur</strong> :
+              augmenter de Z% le temps passé sur le site grâce à un contenu
+              pertinent et une navigation fluide
             </li>
             <li>
               <strong>Accroître la fidélisation client</strong> : viser une
@@ -225,7 +229,7 @@ export default function Blog9() {
           </ul>
           <p className="lg:text-lg 2xl:text-xl">
             Impliquer toutes les équipes concernées dès le début du projet
-            facilite l'adhésion à votre vision. Marketing, technique et
+            facilite l&apos;adhésion à votre vision. Marketing, technique et
             direction doivent collaborer pour{' '}
             <strong>aligner les attentes et concevoir une solution</strong> qui
             réponde aux besoins business comme aux attentes des utilisateurs.
@@ -271,7 +275,7 @@ export default function Blog9() {
             secteur.
           </p>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-            Conception centrée sur l'utilisateur
+            Conception centrée sur l&apos;utilisateur
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Parce que chaque visiteur a des attentes uniques, la création de
@@ -284,7 +288,7 @@ export default function Blog9() {
             <table className="w-full text-sm text-left bg-white dark:bg-black">
               <caption className="text-base font-semibold p-4">
                 Exemples de buyer personas pour guider une refonte web centrée
-                sur l'utilisateur
+                sur l&apos;utilisateur
               </caption>
               <thead className="bg-neutral-100 dark:bg-neutral-800">
                 <tr>
@@ -367,7 +371,7 @@ export default function Blog9() {
               target="_blank"
               className="text-blue-600 underline"
             >
-              <strong>rédaction d'un cahier des charges</strong>
+              <strong>rédaction d&apos;un cahier des charges</strong>
             </a>
             , qui propose un cadre clair pour formaliser vos besoins et
             attentes.
@@ -384,14 +388,14 @@ export default function Blog9() {
               simplifiés
             </li>
             <li>
-              Optimiser la vitesse de chargement : réduire le temps d'affichage
-              des pages à moins de 2 secondes pour améliorer l'expérience et le
-              référencement naturel
+              Optimiser la vitesse de chargement : réduire le temps
+              d&apos;affichage des pages à moins de 2 secondes pour améliorer
+              l&apos;expérience et le référencement naturel
             </li>
             <li>
-              <strong>Renforcer l'engagement utilisateur</strong> : augmenter de
-              Z% le temps passé sur le site grâce à un contenu pertinent et une
-              navigation fluide
+              <strong>Renforcer l&apos;engagement utilisateur</strong> :
+              augmenter de Z% le temps passé sur le site grâce à un contenu
+              pertinent et une navigation fluide
             </li>
             <li>
               Accroître la fidélisation client : viser une montée de W% dans le
@@ -455,7 +459,7 @@ export default function Blog9() {
         />
         <li className="space-y-12" id="aspects-techniques-strategiques">
           <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold">
-            Aspects techniques et stratégiques d'une refonte réussie
+            Aspects techniques et stratégiques d&apos;une refonte réussie
           </h2>
           <h3 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
             Optimisation SEO pendant la refonte
