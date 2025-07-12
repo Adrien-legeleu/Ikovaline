@@ -4,6 +4,8 @@ import Link from 'next/link';
 export const dataAgence = [
   {
     id: 'agence-web-massy',
+    departement: 'Essonne',
+
     ville: 'Massy',
     intro: `Vous cherchez une agence web à Massy pour booster votre présence en ligne ? Ikovaline est spécialisée dans la création de site internet à Massy, le référencement SEO local, la refonte de site vitrine ou e-commerce, ainsi que dans la mise en place de stratégies digitales efficaces. Que vous soyez une TPE, PME ou indépendant basé à Massy ou dans le département de l’Essonne, nous mettons tout en œuvre pour assurer la réussite de votre projet web.`,
     text1: (
@@ -116,6 +118,8 @@ export const dataAgence = [
   {
     id: 'agence-web-bailly-romainvilliers',
     ville: 'Bailly-Romainvilliers',
+    departement: 'Essonne',
+
     intro: `Découvrez notre agence web située à Bailly-Romainvilliers, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de la région pour développer leur présence en ligne grâce à des solutions concrètes : création de site web, référencement SEO, maintenance, etc.`,
     text1: (
       <span>
@@ -221,6 +225,8 @@ export const dataAgence = [
   },
   {
     id: 'agence-web-evry',
+    departement: 'Essonne',
+
     ville: 'Évry',
     intro: `Découvrez notre agence web basée à Évry, spécialisée dans la création de sites internet. Nous aidons les entreprises et indépendants d'Évry et de l'Essonne à développer leur activité en ligne grâce à des solutions concrètes : création de site web, référencement naturel, maintenance, etc.`,
     text1: (
@@ -322,6 +328,8 @@ export const dataAgence = [
   {
     id: 'agence-web-verrieres-le-buisson',
     ville: 'Verrières-le-Buisson',
+    departement: 'Essonne',
+
     intro: `Découvrez notre agence web à Verrières-le-Buisson, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Verrières-le-Buisson et de l'Essonne environnante pour développer leur visibilité en ligne grâce à des solutions concrètes : création de site web, SEO, maintenance, etc.`,
     text1: (
       <span>
@@ -425,6 +433,8 @@ export const dataAgence = [
   },
   {
     id: 'agence-web-saclay',
+    departement: 'Essonne',
+
     ville: 'Saclay',
     intro: `Découvrez notre agence web sur le plateau de Saclay, spécialisée dans la création de sites web. Nous aidons les entreprises et indépendants de Saclay et du nord de l'Essonne à développer leur présence en ligne grâce à des solutions performantes : création de site web, référencement naturel, maintenance, etc.`,
     text1: (
@@ -530,6 +540,8 @@ export const dataAgence = [
   {
     id: 'agence-web-courcouronnes',
     ville: 'Courcouronnes',
+    departement: 'Essonne',
+
     intro: `Découvrez notre agence web à Courcouronnes, spécialisée dans la création de sites internet sur mesure. Nous accompagnons les entreprises et indépendants de Courcouronnes et de l'Essonne pour booster leur activité en ligne grâce à des services digitaux : création de site web, référencement, maintenance, etc.`,
     text1: (
       <span>
@@ -631,6 +643,8 @@ export const dataAgence = [
   {
     id: 'agence-web-villeneuve-saint-georges',
     ville: 'Villeneuve-Saint-Georges',
+    departement: 'Essonne',
+
     intro: `Découvrez notre agence web à Villeneuve-Saint-Georges, spécialisée dans la création de sites internet professionnels. Nous accompagnons les entreprises et indépendants de Villeneuve-Saint-Georges et des communes voisines pour développer leur présence en ligne via des solutions sur mesure : création de site web, référencement, maintenance, etc.`,
     text1: (
       <span>
@@ -737,6 +751,8 @@ export const dataAgence = [
   {
     id: 'agence-web-yerres',
     ville: 'Yerres',
+    departement: 'Essonne',
+
     intro: `Découvrez notre agence web à Yerres, spécialisée dans la création de sites internet sur mesure. Nous aidons les entreprises et indépendants de Yerres (Essonne) et de ses environs à développer leur activité en ligne grâce à nos solutions concrètes : création de site web, SEO, maintenance, etc.`,
     text1: (
       <span>
@@ -840,6 +856,8 @@ export const dataAgence = [
   },
   {
     id: 'agence-web-marcoussis',
+    departement: 'Essonne',
+
     ville: 'Marcoussis',
     intro: `Découvrez notre agence web à Marcoussis, spécialisée dans la création de sites internet sur mesure. Nous aidons les entreprises et artisans de Marcoussis (sud de l’Essonne) et de ses alentours à développer leur présence en ligne via des solutions personnalisées : création de site web, référencement, maintenance, etc.`,
     text1: (
@@ -942,6 +960,8 @@ export const dataAgence = [
   {
     id: 'agence-web-vauhallan',
     ville: 'Vauhallan',
+    departement: 'Essonne',
+
     intro: `Découvrez notre agence web à Vauhallan, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Vauhallan (plateau de Saclay) et de ses environs pour développer leur activité en ligne grâce à nos solutions : création de site web, référencement, maintenance, etc.`,
     text1: (
       <span>
@@ -1043,6 +1063,8 @@ export const dataAgence = [
   {
     id: 'agence-web-wissous',
     ville: 'Wissous',
+    departement: 'Essonne',
+
     intro: `Découvrez notre agence web à Wissous, spécialisée dans la création de sites internet professionnels. Nous aidons les entreprises et indépendants de Wissous (Essonne) et de ses environs à développer leur présence en ligne grâce à nos services : création de site web, référencement naturel, maintenance, etc.`,
     text1: (
       <span>
@@ -1147,6 +1169,8 @@ export const dataAgence = [
   {
     id: 'agence-web-palaiseau',
     ville: 'Palaiseau',
+    departement: 'Essonne',
+
     intro: `Vous êtes à la recherche d’une agence web à Palaiseau pour créer ou refondre votre site internet ? Ikovaline vous accompagne dans tous vos projets digitaux. Nous sommes spécialisés dans la création de site internet à Palaiseau, le référencement SEO local, le web marketing et la maintenance technique. Faites confiance à une agence digitale de proximité pour développer votre visibilité en ligne dans toute l’Essonne.`,
     text1: (
       <span>
@@ -1259,6 +1283,8 @@ export const dataAgence = [
   {
     id: 'agence-web-corbeil-essonnes',
     ville: 'Corbeil-Essonnes',
+    departement: 'Essonne',
+
     intro: `Découvrez notre agence web à Corbeil-Essonnes, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Corbeil-Essonnes et du sud de l'Essonne dans le développement de leur présence en ligne grâce à nos services personnalisés : création de site web, référencement, maintenance, etc.`,
     text1: (
       <span>
@@ -1363,6 +1389,8 @@ export const dataAgence = [
   {
     id: 'agence-web-savigny-sur-orge',
     ville: 'Savigny-sur-Orge',
+    departement: 'Essonne',
+
     intro: `Vous cherchez une agence web à Savigny-sur-Orge pour créer votre site internet ou améliorer votre visibilité en ligne ? Ikovaline est spécialisée dans la création de sites web à Savigny-sur-Orge, la refonte de site vitrine ou e-commerce, et le référencement SEO local. Nous accompagnons les professionnels et indépendants en Essonne dans leur transition digitale.`,
     text1: (
       <span>
@@ -1460,6 +1488,8 @@ export const dataAgence = [
   {
     id: 'agence-web-sainte-genevieve-des-bois',
     ville: 'Sainte-Geneviève-des-Bois',
+    departement: 'Essonne',
+
     intro: `Vous recherchez une agence web à Sainte-Geneviève-des-Bois pour créer un site internet professionnel ou refondre votre site existant ? Ikovaline accompagne les entreprises et indépendants de l’Essonne dans leur développement digital : création de site web, refonte, SEO local, web marketing, maintenance.`,
     text1: (
       <span>
@@ -1560,6 +1590,8 @@ export const dataAgence = [
   {
     id: 'agence-web-viry-chatillon',
     ville: 'Viry-Châtillon',
+    departement: 'Essonne',
+
     intro: `Vous êtes à la recherche d’une agence web à Viry-Châtillon pour créer un site internet professionnel, moderniser votre site actuel ou améliorer votre référencement local ? Ikovaline accompagne les entreprises et indépendants de l’Essonne dans leur stratégie digitale : création de site web, refonte, SEO, web marketing, maintenance.`,
     text1: (
       <span>
@@ -1659,6 +1691,8 @@ export const dataAgence = [
   {
     id: 'agence-web-athis-mons',
     ville: 'Athis-Mons',
+    departement: 'Essonne',
+
     intro: `Vous avez besoin d’une agence web à Athis-Mons pour créer un site internet, refondre votre site existant ou améliorer votre visibilité sur Google ? Ikovaline accompagne les entreprises, commerçants et indépendants d’Athis-Mons et de l’Essonne dans leur stratégie digitale : création de site web, refonte, SEO local, web marketing.`,
     text1: (
       <span>
@@ -1757,6 +1791,8 @@ export const dataAgence = [
   },
   {
     id: 'agence-web-draveil',
+    departement: 'Essonne',
+
     ville: 'Draveil',
     intro: `À la recherche d’une agence web à Draveil pour créer ou refondre votre site internet ? Ikovaline vous accompagne dans tous vos projets digitaux : création de site vitrine ou e-commerce, refonte, SEO local, stratégie de visibilité, maintenance web. Basée en Essonne, notre agence digitale est proche de vos besoins.`,
     text1: (

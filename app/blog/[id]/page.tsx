@@ -1,11 +1,11 @@
-import Buttons from "@/components/BlogPage/Buttons";
+import Buttons from '@/components/BlogPage/Buttons';
 
-import { ScrollProgress } from "@/components/magicui/scroll-progress";
-import { blogMetadata } from "@/lib/blogMetadata";
-import { cn } from "@/lib/utils";
-import Head from "next/head";
-import { notFound } from "next/navigation";
-import { ComponentType } from "react";
+import { ScrollProgress } from '@/components/magicui/scroll-progress';
+import { blogMetadata } from '@/lib/blogMetadata';
+import { cn } from '@/lib/utils';
+import Head from 'next/head';
+import { notFound } from 'next/navigation';
+import { ComponentType } from 'react';
 interface ProductPageProps {
   params: Promise<{ id: string }>;
 }
@@ -14,15 +14,16 @@ const componentsMap: Record<
   string,
   () => Promise<{ default: ComponentType<unknown> }>
 > = {
-  "comment-heberger-un-site-web": () => import("@/components/BlogPage/Blog1"),
-  "arborescence-site-web": () => import("@/components/BlogPage/Blog2"),
-  "comment-etre-reference-sur-google-gratuitement": () =>
-    import("@/components/BlogPage/Blog3"),
-  "creation-digital-guide": () => import("@/components/BlogPage/Blog4"),
-  "definition-site-institutionnel": () => import("@/components/BlogPage/Blog5"),
-  "agence-seo-seine-marne": () => import("@/components/BlogPage/Blog6"),
-  "agence-sea-expertise": () => import("@/components/BlogPage/Blog7"),
-  "etude-marche-methodologie": () => import("@/components/BlogPage/Blog8"),
+  'comment-heberger-un-site-web': () => import('@/components/BlogPage/Blog1'),
+  'arborescence-site-web': () => import('@/components/BlogPage/Blog2'),
+  'comment-etre-reference-sur-google-gratuitement': () =>
+    import('@/components/BlogPage/Blog3'),
+  'creation-digital-guide': () => import('@/components/BlogPage/Blog4'),
+  'definition-site-institutionnel': () => import('@/components/BlogPage/Blog5'),
+  'agence-seo-seine-marne': () => import('@/components/BlogPage/Blog6'),
+  'agence-sea-expertise': () => import('@/components/BlogPage/Blog7'),
+  'etude-marche-methodologie': () => import('@/components/BlogPage/Blog8'),
+  'refonte-site-web-guide': () => import('@/components/BlogPage/Blog9'),
 };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
@@ -30,9 +31,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const meta = blogMetadata[id];
   if (!meta) {
     return {
-      title: "Article de blog | Ikovaline",
+      title: 'Article de blog | Ikovaline',
       description:
-        "Découvrez nos conseils digitaux pour améliorer votre présence en ligne.",
+        'Découvrez nos conseils digitaux pour améliorer votre présence en ligne.',
     };
   }
 
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     alternates: {
       canonical: `htps://ikovaline.com/blog/${id}`,
     },
-    robots:"index , follow",
+    robots: 'index , follow',
     openGraph: {
       title: meta.title,
       description: meta.description,
@@ -54,10 +55,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
           height: 630,
         },
       ],
-      type: "article",
+      type: 'article',
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
       images: [`https://ikovaline.com${meta.ogImage}`],
@@ -84,20 +85,20 @@ export default async function Blog({ params }: ProductPageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BlogPosting",
+              '@context': 'https://schema.org',
+              '@type': 'BlogPosting',
               headline: meta.title,
               description: meta.description,
               author: {
-                "@type": "Organization",
-                name: "Ikovaline",
+                '@type': 'Organization',
+                name: 'Ikovaline',
               },
               publisher: {
-                "@type": "Organization",
-                name: "Ikovaline",
+                '@type': 'Organization',
+                name: 'Ikovaline',
                 logo: {
-                  "@type": "ImageObject",
-                  url: "https://ikovaline.com/images/logo/ikovaline_logo.png",
+                  '@type': 'ImageObject',
+                  url: 'https://ikovaline.com/images/logo/ikovaline_logo.png',
                 },
               },
               datePublished: meta.date, // ex: "2025-05-20"
@@ -106,16 +107,15 @@ export default async function Blog({ params }: ProductPageProps) {
             }),
           }}
         />
-      
       </Head>
       <div className="lg:py-24 relative py-12  ">
         <Buttons />
         <div
           className={cn(
-            "absolute inset-0",
-            "[background-size:20px_20px]",
-            "[background-image:radial-gradient(#d4d4d4a0_1.2px,transparent_1px)]",
-            "dark:[background-image:radial-gradient(#404040da_1.2px,transparent_1px)]"
+            'absolute inset-0',
+            '[background-size:20px_20px]',
+            '[background-image:radial-gradient(#d4d4d4a0_1.2px,transparent_1px)]',
+            'dark:[background-image:radial-gradient(#404040da_1.2px,transparent_1px)]'
           )}
         />
         <ScrollProgress />

@@ -1,24 +1,25 @@
-"use client";
-import { notFound } from "next/navigation";
-import { dataAgence } from "@/data/data-agence";
-import dataEssonne from "@/data/data-essonne.json";
-import Services from "@/components/pageSatellite/Services";
-import Objectif from "@/components/pageSatellite/Objectif";
-import CityAround from "@/components/pageSatellite/CityAround";
-import CallToAction from "@/components/callToAction/CallToAction";
-import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
-import { IconMessage2 } from "@tabler/icons-react";
-import Link from "next/link";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-import { useRef } from "react";
-const CarteEssonne = dynamic(() => import("@/components/CarteEssonne"), {
+'use client';
+import { notFound } from 'next/navigation';
+import { dataAgenceGlobal } from '@/data/data-agence-global';
+import dataEssonne from '@/data/data-essonne.json';
+import dataHautsDeSeine from '@/data/data-hauts-de-seine.json';
+import Services from '@/components/pageSatellite/Services';
+import Objectif from '@/components/pageSatellite/Objectif';
+import CityAround from '@/components/pageSatellite/CityAround';
+import CallToAction from '@/components/callToAction/CallToAction';
+import { AnimatedBorderButton } from '@/components/ui/animated-border-button';
+import { IconMessage2 } from '@tabler/icons-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import { useRef } from 'react';
+const CarteEssonne = dynamic(() => import('@/components/CarteEssonne'), {
   ssr: false,
 });
-const Glow = dynamic(() => import("@/components/ui/glow"), { ssr: false });
+const Glow = dynamic(() => import('@/components/ui/glow'), { ssr: false });
 
 export default function PageSquelette({ idAgence }: { idAgence: string }) {
-  const data = dataAgence.find((item) => item.id === idAgence);
+  const data = dataAgenceGlobal.find((item) => item.id === idAgence);
   const svgRef = useRef<SVGSVGElement>(null);
 
   const projectPoint = (lat: number, lng: number) => {
@@ -47,10 +48,21 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
         />
       </div>
       <div className="h-screen overflow-hidden w-full flex flex-col items-center justify-between relative md:pt-24 pt-20">
-        <CarteEssonne
-          data={dataEssonne.features}
-          highlighted={data.ville.toLowerCase()}
-        />
+        {data.departement === 'Essonne' ? (
+          <CarteEssonne
+            width={800}
+            height={800}
+            data={dataEssonne.features}
+            highlighted={data.ville.toLowerCase()}
+          />
+        ) : (
+          <CarteEssonne
+            width={500}
+            height={680}
+            data={dataHautsDeSeine.features}
+            highlighted={data.ville.toLowerCase()}
+          />
+        )}
 
         <div className="absolute h-[250px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-background to-transparent from-30%" />
         <div className="z-10 ">
@@ -63,7 +75,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
         </div>
         <div className="w-full aspect-[1.6/1] max-sm:scale-150 rounded-lg relative font-sans">
           <Image
-            src={"/france-dots-map-dark.svg"}
+            src={'/france-dots-map-dark.svg'}
             className="h-full w-full relative left-10 [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none dark:block hidden"
             alt="Carte pointillée France"
             height={495}
@@ -71,7 +83,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
             draggable={false}
           />
           <Image
-            src={"/france-dots-map.svg"}
+            src={'/france-dots-map.svg'}
             className="h-full relative left-10 w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none block dark:hidden"
             alt="Carte pointillée France"
             height={495}
@@ -132,7 +144,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           text2={data.objectifs.text2}
         />
         <CityAround
-          city={`${/^[aeiouyàâäéèêëîïôöùûüÿAEIOUYÀÂÄÉÈÊËÎÏÔÖÙÛÜŸ]/.test(data.ville)? "d'" : "de "}${data.ville}`}
+          city={`${/^[aeiouyàâäéèêëîïôöùûüÿAEIOUYÀÂÄÉÈÊËÎÏÔÖÙÛÜŸ]/.test(data.ville) ? "d'" : 'de '}${data.ville}`}
           cities={data.villesVoisines}
           text={data.cityAroundText}
         />

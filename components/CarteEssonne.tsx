@@ -1,7 +1,7 @@
-"use client";
-import React, { useState } from "react";
-import { useTheme } from "next-themes";
-import { Lens } from "@/components/ui/lens";
+'use client';
+import React, { useState } from 'react';
+import { useTheme } from 'next-themes';
+import { Lens } from '@/components/ui/lens';
 
 interface GeoFeature {
   type: string;
@@ -18,6 +18,8 @@ interface GeoFeature {
 interface CarteEssonneProps {
   data: GeoFeature[];
   highlighted: string;
+  width: number;
+  height: number;
 }
 function getBoundingBox(data: GeoFeature[]) {
   let minLng = Infinity,
@@ -25,7 +27,7 @@ function getBoundingBox(data: GeoFeature[]) {
     minLat = Infinity,
     maxLat = -Infinity;
   data.forEach((feature) => {
-    if (feature.geometry.type !== "Polygon") return;
+    if (feature.geometry.type !== 'Polygon') return;
     feature.geometry.coordinates[0].forEach(([lng, lat]) => {
       if (lng < minLng) minLng = lng;
       if (lng > maxLng) maxLng = lng;
@@ -36,14 +38,16 @@ function getBoundingBox(data: GeoFeature[]) {
   return { minLng, maxLng, minLat, maxLat };
 }
 
-export default function CarteEssonne({ data, highlighted }: CarteEssonneProps) {
+export default function CarteEssonne({
+  data,
+  highlighted,
+  width,
+  height,
+}: CarteEssonneProps) {
   const { minLng, maxLng, minLat, maxLat } = getBoundingBox(data);
   const { theme } = useTheme();
 
   const [hovering, setHovering] = useState(false);
-
-  const width = 800;
-  const height = 800;
 
   const project = (lng: number, lat: number) => {
     const x = ((lng - minLng) / (maxLng - minLng)) * width;
@@ -75,8 +79,8 @@ export default function CarteEssonne({ data, highlighted }: CarteEssonneProps) {
             className="w-full h-full z-50 pointer-events-none select-none"
           >
             {data.map((feature) => {
-              if (feature.type !== "Feature") return null;
-              if (feature.geometry.type !== "Polygon") return null;
+              if (feature.type !== 'Feature') return null;
+              if (feature.geometry.type !== 'Polygon') return null;
 
               const coords = feature.geometry.coordinates[0];
               const name = feature.properties.nom;
@@ -89,15 +93,15 @@ export default function CarteEssonne({ data, highlighted }: CarteEssonneProps) {
                       const { x, y } = project(lng, lat);
                       return `${x},${y}`;
                     })
-                    .join(" L ")} Z`}
+                    .join(' L ')} Z`}
                   fill={
                     name.toLowerCase() === highlighted.toLowerCase()
-                      ? "#0ea5e9"
-                      : theme == "dark"
-                        ? "#000"
-                        : "#ffffff"
+                      ? '#0ea5e9'
+                      : theme == 'dark'
+                        ? '#000'
+                        : '#ffffff'
                   }
-                  stroke={theme == "dark" ? "#d3d3d3" : "#000000"}
+                  stroke={theme == 'dark' ? '#d3d3d3' : '#000000'}
                   strokeWidth={0.5}
                 />
               );

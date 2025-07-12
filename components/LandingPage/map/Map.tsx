@@ -10,8 +10,9 @@ import { CardSticky, ContainerScroll } from '../impact/CardStack';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { removeAccents } from '@/components/pageSatellite/CityAround';
+import { useLayoutEffect, useRef, useState } from 'react';
 
-const cities = [
+const citiesEssonne = [
   'Bailly-Romainvilliers',
   'Massy',
   'Evry',
@@ -31,8 +32,81 @@ const cities = [
   'Athis-Mons',
   'Draveil',
 ];
+const citiesHautsSeine = [
+  'Boulogne-Billancourt',
+  'Neuilly-sur-Seine',
+  'Courbevoie',
+  'Levallois-Perret',
+  'Nanterre',
+  'Suresnes',
+  'Clamart',
+  'Colombes',
+  'Montrouge',
+];
 
 export default function Map() {
+  const [depart, setDepart] = useState('essonne');
+
+  const departs = [
+    {
+      slug: 'essonne',
+      name: 'Essonne',
+    },
+    {
+      slug: 'hauts-de-seine',
+      name: 'Hauts-de-Seine',
+    },
+  ];
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]); // tableau de refs
+  const [sliderProps, setSliderProps] = useState({ width: 0, left: 0 });
+
+  useLayoutEffect(() => {
+    const index = departs.findIndex((d) => d.slug === depart);
+    const el = buttonRefs.current[index];
+    if (el) {
+      setSliderProps({
+        width: el.offsetWidth,
+        left: el.offsetLeft,
+      });
+    }
+  }, [depart]);
+  const renderCities = () => {
+    switch (depart) {
+      case 'essonne':
+        return (
+          <div className="flex flex-wrap gap-4 justify-center max-w-2xl">
+            {citiesEssonne.map((c, index) => (
+              <Link
+                key={index}
+                href={`/agence-web-${removeAccents(c)}`}
+                className="border-black/10 dark:border-white/10 shadow-md border-[1px] px-2 flex gap-2 bg-white dark:bg-neutral-900 items-center justify-center py-1 rounded-full "
+              >
+                <div className="h-2 w-2 bg-secondary rounded-full" />
+                {c}
+              </Link>
+            ))}
+          </div>
+        );
+      case 'hauts-de-seine':
+        return (
+          <div className="flex flex-wrap gap-4 justify-center max-w-2xl">
+            {citiesHautsSeine.map((c, index) => (
+              <Link
+                key={index}
+                href={`/agence-web-${removeAccents(c)}`}
+                className="border-black/10 dark:border-white/10 shadow-md border-[1px] px-2 flex gap-2 bg-white dark:bg-neutral-900 items-center justify-center py-1 rounded-full "
+              >
+                <div className="h-2 w-2 bg-secondary rounded-full" />
+                {c}
+              </Link>
+            ))}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="py-40 w-full space-y-10 place-content-center relative ">
       <div className="max-w-xl mx-auto px-5 text-center">
@@ -129,17 +203,38 @@ export default function Map() {
         <h2 className="text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
           Nos agences web
         </h2>
-        <div className="flex flex-wrap gap-4 justify-center max-w-2xl">
-          {cities.map((c, index) => (
-            <Link
-              key={index}
-              href={`/agence-web-${removeAccents(c)}`}
-              className="border-black/10 dark:border-white/10 shadow-md border-[1px] px-2 flex gap-2 bg-white dark:bg-neutral-900 items-center justify-center py-1 rounded-full "
-            >
-              <div className="h-2 w-2 bg-secondary rounded-full" />
-              {c}
-            </Link>
-          ))}
+        <div className="flex items-center justify-center flex-col gap-5">
+          <div
+            className="relative flex items-center justify-center bg-white/30 shadow-xl border border-[#00000009] p-2 rounded-full"
+            style={{ minWidth: 240 }}
+          >
+            {/* Slider animé */}
+            <motion.div
+              className="absolute top-1/2 -translate-y-1/2   bg-white rounded-full shadow-lg z-0"
+              animate={{
+                width: sliderProps.width,
+                left: sliderProps.left,
+              }}
+              style={{ height: 'calc(100% - 8px)' }}
+              transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+            />
+            {departs.map((d, index) => (
+              <button
+                key={d.slug}
+                ref={(el) => {
+                  buttonRefs.current[index] = el;
+                }}
+                className={`relative z-10 py-2 px-6 text-xl font-semibold rounded-full transition-all duration-300 ${
+                  depart === d.slug ? 'text-marcblue' : 'text-gray-600'
+                }`}
+                onClick={() => setDepart(d.slug)}
+                style={{ background: 'transparent' }}
+              >
+                {d.name}
+              </button>
+            ))}
+          </div>
+          {renderCities()}
         </div>
         <p className="text-center text-neutral-900 dark:text-neutral-300">
           Ikovaline est une agence web qui accompagne les entreprises dans toute
