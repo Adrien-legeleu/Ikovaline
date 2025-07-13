@@ -205,12 +205,12 @@ export default function Map() {
         </h2>
         <div className="flex items-center justify-center flex-col gap-5">
           <div
-            className="relative flex items-center justify-center bg-white/30 shadow-xl border border-[#00000009] p-2 rounded-full"
+            className="relative flex items-center justify-center bg-white/30 dark:bg-neutral-800/60 shadow-xl dark:shadow-2xl dark:shadow-[#FFFFFF15] border border-[#00000009] dark:border-[#ffffff10] p-2 rounded-full"
             style={{ minWidth: 240 }}
           >
             {/* Slider animé */}
             <motion.div
-              className="absolute top-1/2 -translate-y-1/2   bg-white rounded-full shadow-lg z-0"
+              className="absolute top-1/2 -translate-y-1/2   bg-white dark:bg-[#0A0D11] rounded-full shadow-lg z-0"
               animate={{
                 width: sliderProps.width,
                 left: sliderProps.left,
@@ -224,8 +224,10 @@ export default function Map() {
                 ref={(el) => {
                   buttonRefs.current[index] = el;
                 }}
-                className={`relative z-10 py-2 px-6 text-xl font-semibold rounded-full transition-all duration-300 ${
-                  depart === d.slug ? 'text-marcblue' : 'text-gray-600'
+                className={`relative z-10 py-2 px-6 sm:text-xl text-lg font-semibold rounded-full transition-all duration-300 ${
+                  depart === d.slug
+                    ? 'text-marcblue'
+                    : 'text-neutral-600 dark:text-neutral-200'
                 }`}
                 onClick={() => setDepart(d.slug)}
                 style={{ background: 'transparent' }}
