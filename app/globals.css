@@ -43,7 +43,7 @@ body {
     --chart-4: 176 80% 50%;
     --chart-5: 190 85% 75%;
     --radius: 0.5rem;
-    --gradient: linear-gradient(90deg, #1BE0E0, #06F3B7);
+    --gradient: linear-gradient(90deg, #1be0e0, #06f3b7);
   }
   .dark {
     --background: 210 30% 5%;
@@ -90,19 +90,35 @@ body {
 
 @theme inline {
   @keyframes marquee {
-  from {
-    transform: translateX(0);
+    from {
+      transform: translateX(0);
     }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
   @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+}
+@keyframes marquee-vertical {
   from {
     transform: translateY(0);
-    }
+  }
   to {
     transform: translateY(calc(-100% - var(--gap)));
-    }
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
   }
 }
