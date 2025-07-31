@@ -195,52 +195,68 @@ const ikovalineContent = [
           }}
           className="leading-9"
         >
-          Chez Ikovaline, nous nous engageons à fournir des résultats concrets à
-          travers des solutions digitales personnalisées. Toutefois, la garantie
-          de remboursement est{' '}
+          Chez Ikovaline, nous nous engageons à fournir des{' '}
+          <Highlight className="p-2 m-1">résultats</Highlight> concrets à
+          travers des <Highlight className="p-2 m-1">solutions</Highlight>{' '}
+          digitales personnalisées. Toutefois, la garantie de remboursement est{' '}
           <Highlight className="p-2 m-1">strictement</Highlight> encadrée par
           les conditions suivantes :
           <span className="block mt-4">
-            1. 📦 Transmission des éléments nécessaires sous 7 jours
+            1. 📦 Transmission des éléments nécessaires sous{' '}
+            <Highlight className="p-2 m-1">7</Highlight> jours
           </span>
           <span>
             Le client s’engage à transmettre dans un délai de 7 jours
-            calendaires à compter du paiement de l’acompte : • L’ensemble des
-            contenus nécessaires (textes, images, logos, etc.) • Les accès aux
-            plateformes, sites, hébergeurs, domaines, CMS, analytics, etc. •
-            Toute information utile à la bonne exécution du projet. En cas de
-            manquement ou de délai dépassé, la garantie de remboursement est
-            automatiquement annulée.
+            calendaires à compter du paiement de l’
+            <Highlight className="p-2 m-1">acompte</Highlight> : • L’ensemble
+            des contenus nécessaires (textes, images, logos, etc.) • Les{' '}
+            <Highlight className="p-2 m-1">accès</Highlight> aux plateformes,
+            sites, hébergeurs, domaines, CMS, analytics, etc. • Toute
+            information utile à la bonne exécution du projet. En cas de
+            <Highlight className="p-2 m-1">manquement</Highlight> ou de délai
+            dépassé, la garantie de remboursement est automatiquement{' '}
+            <Highlight className="p-2 m-1">annulée</Highlight>.
           </span>
           <span className="block mt-4">
-            2. 🧾 Délai légal de demande de remboursement – 30 jours
+            2. 🧾 Délai légal de demande de remboursement –{' '}
+            <Highlight className="p-2 m-1">30</Highlight> jours
           </span>
           <span>
             Le client dispose d’un délai de 30 jours à compter de la date
-            d’émission de la première facture (acompte ou paiement complet) pour
-            soumettre par écrit (email recommandé ou recommandé AR) une demande
-            formelle de remboursement. Passé ce délai, la demande est
-            automatiquement irrecevable.
+            d’émission de la première{' '}
+            <Highlight className="p-2 m-1">facture</Highlight> (acompte ou
+            paiement complet) pour soumettre par écrit (email recommandé ou
+            recommandé AR) une demande formelle de remboursement. Passé ce
+            délai, la demande est automatiquement{' '}
+            <Highlight className="p-2 m-1">irrecevable</Highlight>.
           </span>
           <span className="block mt-4">
             3. 📤 Livraison et réception des livrables
           </span>
           <span>
-            Le client s’engage à : • Assister aux réunions de restitution ou aux
-            démonstrations prévues. • Réceptionner les livrables finaux dans les
-            délais impartis. • Attendre la fin complète de la prestation
-            (transmission finale des fichiers, accès, maquettes, etc.) avant
-            toute réclamation. Toute tentative de rupture unilatérale ou de
-            refus de réception sans motif sérieux annule la garantie.
+            Le client s’engage à : • Assister aux{' '}
+            <Highlight className="p-2 m-1">réunions</Highlight> de restitution
+            ou aux démonstrations prévues. • Réceptionner les livrables finaux
+            dans les délais impartis. • Attendre la{' '}
+            <Highlight className="p-2 m-1">fin</Highlight> complète de la
+            prestation (transmission finale des fichiers, accès, maquettes,
+            etc.) avant toute réclamation. Toute tentative de rupture{' '}
+            <Highlight className="p-2 m-1">unilatérale</Highlight> ou de refus
+            de réception sans motif sérieux{' '}
+            <Highlight className="p-2 m-1">annule</Highlight> la garantie.
           </span>
           <span className="block mt-4">4. 🚫 Exclusions de la garantie</span>
           <span>
-            La garantie ne s’applique pas dans les cas suivants : • Objectifs
-            non définis ou non validés conjointement avant le lancement du
-            projet. • Retard ou absence de collaboration active du client. •
-            Modification de la commande en cours de prestation. • Annulation du
-            projet pour convenance personnelle. • Livraison bloquée par absence
-            de réponse du client.
+            La garantie ne s’applique pas dans les cas suivants : •
+            <Highlight className="p-2 m-1">Objectifs</Highlight> non définis ou
+            non validés conjointement avant le lancement du projet. •{' '}
+            <Highlight className="p-2 m-1">Retard</Highlight> ou absence de
+            collaboration active du client. •{' '}
+            <Highlight className="p-2 m-1">Modification</Highlight> de la
+            commande en cours de prestation. •
+            <Highlight className="p-2 m-1">Annulation</Highlight> du projet pour
+            convenance personnelle. • Livraison bloquée par absence de{' '}
+            <Highlight className="p-2 m-1">réponse</Highlight> du client.
           </span>
         </motion.p>
       </>
