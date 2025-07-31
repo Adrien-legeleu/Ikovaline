@@ -1,13 +1,13 @@
-"use client";
-import Image from "next/image";
-import { TracingBeam } from "@/components/ui/tracing-beam";
-import { Team } from "@/components/AboutPage/Team";
-import ImageHistory1 from "@/public/images/About/team-ikovaline (3).jpg";
-import ImageHistory2 from "@/public/images/About/team-ikovaline (4).jpg";
-import { Highlight } from "@/components/ui/hero-highlight";
-import { motion } from "framer-motion";
-import { Cover } from "@/components/ui/cover";
-import { IconQuote } from "@tabler/icons-react";
+'use client';
+import Image from 'next/image';
+import { TracingBeam } from '@/components/ui/tracing-beam';
+import { Team } from '@/components/AboutPage/Team';
+import ImageHistory1 from '@/public/images/About/team-ikovaline (3).jpg';
+import ImageHistory2 from '@/public/images/About/team-ikovaline (4).jpg';
+import { Highlight } from '@/components/ui/hero-highlight';
+import { motion } from 'framer-motion';
+import { Cover } from '@/components/ui/cover';
+import { IconQuote } from '@tabler/icons-react';
 
 export default function AboutContent() {
   return (
@@ -32,8 +32,8 @@ export default function AboutContent() {
 }
 const ikovalineContent = [
   {
-    title: "Les Origines d’Ikovaline",
-    id: "notre-histoire",
+    title: 'Les Origines d’Ikovaline',
+    id: 'notre-histoire',
     description: (
       <>
         <motion.p
@@ -83,11 +83,11 @@ const ikovalineContent = [
         </motion.p>
       </>
     ),
-    badge: "Histoire",
+    badge: 'Histoire',
   },
   {
-    title: "Une Équipe Passionnée",
-    id: "notre-equipe",
+    title: 'Une Équipe Passionnée',
+    id: 'notre-equipe',
     description: (
       <>
         <motion.p
@@ -98,7 +98,7 @@ const ikovalineContent = [
           className="leading-9"
         >
           Chez Ikovaline, la réussite de nos clients repose sur une équipe
-          marketing <Highlight className="p-2 m-1">passionnée</Highlight> et{" "}
+          marketing <Highlight className="p-2 m-1">passionnée</Highlight> et{' '}
           <Highlight className="p-2 m-1">engagée</Highlight>. Experts en
           stratégie digitale, développement commercial et gestion de projet,
           nous créons des solutions personnalisées qui boostent la visibilité en
@@ -116,18 +116,18 @@ const ikovalineContent = [
         >
           Ensemble, nous partageons une mission : accompagner les professionnels
           dans leur transformation numérique. Notre objectif ? Fournir des
-          résultats <Highlight className="p-2 m-1">durables</Highlight> et{" "}
+          résultats <Highlight className="p-2 m-1">durables</Highlight> et{' '}
           <Highlight className="p-2 m-1">mesurables</Highlight>, en plaçant
           l&apos;humain au cœur de chaque stratégie.
         </motion.p>
       </>
     ),
-    badge: "Équipe",
+    badge: 'Équipe',
   },
 
   {
-    title: "Une Vision Ambitieuse",
-    id: "notre-vision",
+    title: 'Une Vision Ambitieuse',
+    id: 'notre-vision',
     description: (
       <>
         <motion.p
@@ -141,7 +141,7 @@ const ikovalineContent = [
           d&apos;`affaires de <Cover>300 000 €</Cover> d&apos;ici 2026. Cette
           ambition s&apos;appuie sur notre capacité à proposer des services
           digitaux <Highlight className="p-2 m-1">performants</Highlight> et à
-          offrir un accompagnement{" "}
+          offrir un accompagnement{' '}
           <Highlight className="p-2 m-1">personnalisé</Highlight> pour chaque
           entreprise.
         </motion.p>
@@ -170,16 +170,16 @@ const ikovalineContent = [
         </motion.p>
       </>
     ),
-    badge: "Vision",
+    badge: 'Vision',
   },
   {
-    title: "Garantie de Résultats ou Remboursement",
-    id: "notre-garantie",
+    title: 'Garantie de Résultats ou Remboursement',
+    id: 'notre-garantie',
     description: (
       <>
         <motion.p
           initial={{
-            opacity: 0,
+            opacity: 1,
             y: 20,
           }}
           whileInView={{
@@ -195,15 +195,56 @@ const ikovalineContent = [
           }}
           className="leading-9"
         >
-          Chez Ikovaline, nous misons sur la performance digitale et des
-          résultats <Highlight className="p-2 m-1">concrets</Highlight>. Si nos
-          solutions personnalisées ne permettent pas d&apos;atteindre les
-          objectifs fixés ensemble, nous vous remboursons{" "}
-          <Highlight className="p-2 m-1">intégralement</Highlight>. Votre
-          satisfaction est au cœur de notre engagement.
+          Chez Ikovaline, nous nous engageons à fournir des résultats concrets à
+          travers des solutions digitales personnalisées. Toutefois, la garantie
+          de remboursement est{' '}
+          <Highlight className="p-2 m-1">strictement</Highlight> encadrée par
+          les conditions suivantes :
+          <span className="block mt-4">
+            1. 📦 Transmission des éléments nécessaires sous 7 jours
+          </span>
+          <span>
+            Le client s’engage à transmettre dans un délai de 7 jours
+            calendaires à compter du paiement de l’acompte : • L’ensemble des
+            contenus nécessaires (textes, images, logos, etc.) • Les accès aux
+            plateformes, sites, hébergeurs, domaines, CMS, analytics, etc. •
+            Toute information utile à la bonne exécution du projet. En cas de
+            manquement ou de délai dépassé, la garantie de remboursement est
+            automatiquement annulée.
+          </span>
+          <span className="block mt-4">
+            2. 🧾 Délai légal de demande de remboursement – 30 jours
+          </span>
+          <span>
+            Le client dispose d’un délai de 30 jours à compter de la date
+            d’émission de la première facture (acompte ou paiement complet) pour
+            soumettre par écrit (email recommandé ou recommandé AR) une demande
+            formelle de remboursement. Passé ce délai, la demande est
+            automatiquement irrecevable.
+          </span>
+          <span className="block mt-4">
+            3. 📤 Livraison et réception des livrables
+          </span>
+          <span>
+            Le client s’engage à : • Assister aux réunions de restitution ou aux
+            démonstrations prévues. • Réceptionner les livrables finaux dans les
+            délais impartis. • Attendre la fin complète de la prestation
+            (transmission finale des fichiers, accès, maquettes, etc.) avant
+            toute réclamation. Toute tentative de rupture unilatérale ou de
+            refus de réception sans motif sérieux annule la garantie.
+          </span>
+          <span className="block mt-4">4. 🚫 Exclusions de la garantie</span>
+          <span>
+            La garantie ne s’applique pas dans les cas suivants : • Objectifs
+            non définis ou non validés conjointement avant le lancement du
+            projet. • Retard ou absence de collaboration active du client. •
+            Modification de la commande en cours de prestation. • Annulation du
+            projet pour convenance personnelle. • Livraison bloquée par absence
+            de réponse du client.
+          </span>
         </motion.p>
       </>
     ),
-    badge: "Remboursement garanti",
+    badge: 'Remboursement garanti',
   },
 ];
