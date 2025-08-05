@@ -1,3 +1,4 @@
+import { removeAccents } from '@/components/pageSatellite/CityAround';
 import Link from 'next/link';
 
 export const dataAgenceHautsSeine = [
@@ -79,11 +80,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Boulogne-Billancourt mais aussi dans les communes
-        suivantes des Hauts-de-Seine : [
-        {
-          "'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        suivantes des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -173,11 +200,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Neuilly-sur-Seine mais aussi dans les communes
-        suivantes des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        suivantes des Hauts-de-Seine :
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -267,11 +320,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Courbevoie mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -361,11 +440,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Levallois-Perret mais aussi dans les communes
-        suivantes des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        suivantes des Hauts-de-Seine :
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -455,11 +560,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Nanterre mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -549,11 +680,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Suresnes mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -643,11 +800,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Clamart mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -737,11 +920,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Colombes mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -831,11 +1040,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Montrouge mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -925,11 +1160,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Asnières-sur-Seine mais aussi dans les communes
-        suivantes des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        suivantes des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -1019,11 +1280,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Malakoff mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -1113,11 +1400,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Gennevilliers mais aussi dans les communes
-        suivantes des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        suivantes des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -1207,11 +1520,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Clichy mais aussi dans les communes suivantes des
-        Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Meudon', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -1301,11 +1640,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Meudon mais aussi dans les communes suivantes des
-        Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Puteaux', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -1395,11 +1760,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Puteaux mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Bagneux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -1489,11 +1880,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Bagneux mais aussi dans les communes suivantes
-        des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Issy-les-Moulineaux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
@@ -1584,11 +2001,37 @@ export const dataAgenceHautsSeine = [
     cityAroundText: (
       <span className="text-center">
         Ikovaline intervient à Issy-les-Moulineaux mais aussi dans les communes
-        suivantes des Hauts-de-Seine : [
-        {
-          "'Boulogne-Billancourt', 'Neuilly-sur-Seine', 'Courbevoie', 'Levallois-Perret', 'Nanterre', 'Suresnes', 'Clamart', 'Colombes', 'Montrouge', 'Asnières-sur-Seine', 'Malakoff', 'Gennevilliers', 'Clichy', 'Meudon', 'Puteaux', 'Bagneux'"
-        }
-        ]. Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
+        suivantes des Hauts-de-Seine :{' '}
+        {[
+          'Boulogne-Billancourt',
+          'Neuilly-sur-Seine',
+          'Courbevoie',
+          'Levallois-Perret',
+          'Nanterre',
+          'Suresnes',
+          'Clamart',
+          'Colombes',
+          'Montrouge',
+          'Asnières-sur-Seine',
+          'Malakoff',
+          'Gennevilliers',
+          'Clichy',
+          'Meudon',
+          'Puteaux',
+          'Bagneux',
+          'Issy-les-Moulineaux',
+        ].map((v, i, arr) => (
+          <span key={v}>
+            {' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
+            {i < arr.length - 2
+              ? ', '
+              : i === arr.length - 2
+                ? ' et '
+                : ''}{' '}
+          </span>
+        ))}{' '}
+        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
         locale.
       </span>
     ),
