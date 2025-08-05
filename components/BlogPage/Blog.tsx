@@ -16,6 +16,15 @@ const currentYear = new Date().getFullYear();
 
 export const dataBlog: BlogType[] = [
   {
+    date: '2025-08-05',
+    title: 'Création site web Paris : agence web Paris digitale',
+    desc: 'Créez un site web professionnel à Paris avec une agence digitale spécialisée. Site vitrine, e‑commerce, UX, SEO local, budget : tout pour réussir en 2025.',
+    img: '/blog/blog10/creation_site_web_paris_couverture.png',
+    by: 'Ikovaline',
+    slug: 'creation-site-web-paris',
+  },
+
+  {
     date: '2025-05-27',
     title:
       "Agence SEA : +70 % de chiffre d'affaires avec des campagnes Google Ads optimisées",

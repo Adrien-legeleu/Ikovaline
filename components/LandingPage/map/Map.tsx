@@ -33,7 +33,6 @@ const citiesEssonne = [
   'Draveil',
 ];
 const citiesHautsSeine = [
-  'Boulogne-Billancourt',
   'Neuilly-sur-Seine',
   'Courbevoie',
   'Levallois-Perret',
@@ -42,6 +41,14 @@ const citiesHautsSeine = [
   'Clamart',
   'Colombes',
   'Montrouge',
+  'Asnières-sur-Seine',
+  'Malakoff',
+  'Gennevilliers',
+  'Clichy',
+  'Meudon',
+  'Puteaux',
+  'Bagneux',
+  'Issy-les-Moulineaux',
 ];
 
 export default function Map() {

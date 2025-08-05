@@ -7,6 +7,14 @@ export const blogMetadata: Record<
     ogImage: string;
   }
 > = {
+  'creation-site-web-paris': {
+    title: 'Création site web Paris : agence web Paris digitale',
+    date: '2025-08-05',
+    description:
+      "Créez un site web sur mesure à Paris : vitrine, e‑commerce, UX, SEO, budget et processus d'agence. Visez visibilité locale et performance digitale.",
+    ogImage: '/blog/blog10/creation_site_web_paris_couverture.png',
+  },
+
   'comment-heberger-un-site-web': {
     title: 'Comment héberger un site web en 2025 | Blog Ikovaline',
     date: '2025-04-05',
