@@ -24,6 +24,7 @@ const componentsMap: Record<
   'agence-sea-expertise': () => import('@/components/BlogPage/Blog7'),
   'etude-marche-methodologie': () => import('@/components/BlogPage/Blog8'),
   'refonte-site-web-guide': () => import('@/components/BlogPage/Blog9'),
+  'creation-site-web-paris': () => import('@/components/BlogPage/Blog10'),
 };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
