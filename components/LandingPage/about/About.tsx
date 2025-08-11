@@ -91,13 +91,6 @@ export default function About() {
       image: Img3,
       alt: "Adam Sauneron, Manager Principal d'Ikovaline, expert en développement commercial international",
     },
-    {
-      id: 6,
-      name: 'Saif Ul Islam',
-      designation: 'Google Ads Manager',
-      image: Img11,
-      alt: "Saif Ul Islam, Google Ads Manager d'Ikovaline, expert en campagnes Google Ads et pub",
-    },
   ];
 
   const words = `
