@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { TracingBeam } from '@/components/ui/tracing-beam';
-import { Team } from '@/components/AboutPage/Team';
+// import { Team } from '@/components/AboutPage/Team';
 import ImageHistory1 from '@/public/images/About/team-ikovaline (3).jpg';
 import ImageHistory2 from '@/public/images/About/team-ikovaline (4).jpg';
 import { Highlight } from '@/components/ui/hero-highlight';
@@ -85,45 +85,45 @@ const ikovalineContent = [
     ),
     badge: 'Histoire',
   },
-  {
-    title: 'Une Équipe Passionnée',
-    id: 'notre-equipe',
-    description: (
-      <>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: [20, -5, 0] }}
-          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-          viewport={{ amount: 1 }}
-          className="leading-9"
-        >
-          Chez Ikovaline, la réussite de nos clients repose sur une équipe
-          marketing <Highlight className="p-2 m-1">passionnée</Highlight> et{' '}
-          <Highlight className="p-2 m-1">engagée</Highlight>. Experts en
-          stratégie digitale, développement commercial et gestion de projet,
-          nous créons des solutions personnalisées qui boostent la visibilité en
-          ligne et la croissance durable des entreprises.
-        </motion.p>
+  // {
+  //   title: 'Une Équipe Passionnée',
+  //   id: 'notre-equipe',
+  //   description: (
+  //     <>
+  //       <motion.p
+  //         initial={{ opacity: 0, y: 20 }}
+  //         whileInView={{ opacity: 1, y: [20, -5, 0] }}
+  //         transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+  //         viewport={{ amount: 1 }}
+  //         className="leading-9"
+  //       >
+  //         Chez Ikovaline, la réussite de nos clients repose sur une équipe
+  //         marketing <Highlight className="p-2 m-1">passionnée</Highlight> et{' '}
+  //         <Highlight className="p-2 m-1">engagée</Highlight>. Experts en
+  //         stratégie digitale, développement commercial et gestion de projet,
+  //         nous créons des solutions personnalisées qui boostent la visibilité en
+  //         ligne et la croissance durable des entreprises.
+  //       </motion.p>
 
-        <Team />
+  //       <Team />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: [20, -5, 0] }}
-          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-          viewport={{ amount: 1 }}
-          className="leading-9"
-        >
-          Ensemble, nous partageons une mission : accompagner les professionnels
-          dans leur transformation numérique. Notre objectif ? Fournir des
-          résultats <Highlight className="p-2 m-1">durables</Highlight> et{' '}
-          <Highlight className="p-2 m-1">mesurables</Highlight>, en plaçant
-          l&apos;humain au cœur de chaque stratégie.
-        </motion.p>
-      </>
-    ),
-    badge: 'Équipe',
-  },
+  //       <motion.p
+  //         initial={{ opacity: 0, y: 20 }}
+  //         whileInView={{ opacity: 1, y: [20, -5, 0] }}
+  //         transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+  //         viewport={{ amount: 1 }}
+  //         className="leading-9"
+  //       >
+  //         Ensemble, nous partageons une mission : accompagner les professionnels
+  //         dans leur transformation numérique. Notre objectif ? Fournir des
+  //         résultats <Highlight className="p-2 m-1">durables</Highlight> et{' '}
+  //         <Highlight className="p-2 m-1">mesurables</Highlight>, en plaçant
+  //         l&apos;humain au cœur de chaque stratégie.
+  //       </motion.p>
+  //     </>
+  //   ),
+  //   badge: 'Équipe',
+  // },
 
   {
     title: 'Une Vision Ambitieuse',

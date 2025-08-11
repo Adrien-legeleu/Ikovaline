@@ -1,16 +1,16 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { HoveredLink, Menu, MenuItem } from "../ui/navbar-menu";
-import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
-import Image from "next/image";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { HoveredLink, Menu, MenuItem } from '../ui/navbar-menu';
+import { cn } from '@/lib/utils';
+import { Button } from '../ui/button';
+import Image from 'next/image';
 
-import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
-import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
-import Link from "next/link";
-import { HeaderResponsive } from "./HeaderResponsive";
-import { ModeToggle } from "../toggle-darkmode";
-import { useTheme } from "next-themes";
+import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
+import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
+import Link from 'next/link';
+import { HeaderResponsive } from './HeaderResponsive';
+import { ModeToggle } from '../toggle-darkmode';
+import { useTheme } from 'next-themes';
 import {
   IconApps,
   IconChartLine,
@@ -22,19 +22,16 @@ import {
   IconShieldCheck,
   IconThumbUp,
   IconUser,
-  IconUsersGroup,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 
 export function Header({ className }: { className?: string }) {
   const { theme, systemTheme } = useTheme();
   const [active, setActive] = useState<string | null>(null);
-  
+
   const [upToZero, setUpToZero] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-
   useEffect(() => {
-  
     setMounted(true);
     const handleHeader = () => {
       const scrollY = window.scrollY;
@@ -44,7 +41,7 @@ export function Header({ className }: { className?: string }) {
         setUpToZero(false);
       }
     };
-    window.addEventListener("scroll", handleHeader);
+    window.addEventListener('scroll', handleHeader);
   }, []);
 
   return (
@@ -53,8 +50,8 @@ export function Header({ className }: { className?: string }) {
 
       <div
         className={cn(
-          "fixed max-lg:hidden bg-transparent  inset-x-0 duration-500 ease-in-out flex items-center justify-center mx-auto z-[10000]  ",
-          upToZero ? "top-4" : "top-0",
+          'fixed max-lg:hidden bg-transparent  inset-x-0 duration-500 ease-in-out flex items-center justify-center mx-auto z-[10000]  ',
+          upToZero ? 'top-4' : 'top-0',
           className
         )}
       >
@@ -63,7 +60,11 @@ export function Header({ className }: { className?: string }) {
             <Link href="/">
               {mounted && (
                 <Image
-                  src={(theme === "system" ? systemTheme : theme ) === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                  src={
+                    (theme === 'system' ? systemTheme : theme) === 'dark'
+                      ? IkovalineLogoDark
+                      : IkovalineLogo
+                  }
                   alt="logo de la start-up Ikovaline"
                   width={150}
                   height={150}
@@ -84,12 +85,12 @@ export function Header({ className }: { className?: string }) {
                   <IconUser stroke={2} />A Propos
                 </HoveredLink>
                 <HoveredLink href="/#services">
-                  {" "}
+                  {' '}
                   <IconApps stroke={2} />
                   Nos Services
                 </HoveredLink>
                 <HoveredLink href="/#review">
-                  {" "}
+                  {' '}
                   <IconMessage stroke={2} />
                   Témoignages
                 </HoveredLink>
@@ -129,10 +130,10 @@ export function Header({ className }: { className?: string }) {
                   <IconHistory stroke={2} />
                   Notre Histoire
                 </HoveredLink>
-                <HoveredLink href="/about/#notre-equipe">
+                {/* <HoveredLink href="/about/#notre-equipe">
                   <IconUsersGroup stroke={2} />
                   Notre Equipe
-                </HoveredLink>
+                </HoveredLink> */}
                 <HoveredLink href="/about/#notre-vision">
                   <IconEye stroke={2} /> Notre Vision
                 </HoveredLink>
@@ -151,10 +152,10 @@ export function Header({ className }: { className?: string }) {
               <ModeToggle />
               <Button
                 asChild
-                variant={"secondary"}
+                variant={'secondary'}
                 className="rounded-3xl py-5"
               >
-                <Link href={"/contact"}>Contactez-nous</Link>
+                <Link href={'/contact'}>Contactez-nous</Link>
               </Button>
             </div>
           </div>

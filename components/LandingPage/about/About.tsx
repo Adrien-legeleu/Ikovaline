@@ -3,15 +3,13 @@ import Link from 'next/link';
 import { AnimatedTooltip } from '../../ui/animated-tooltip';
 import Img1 from '@/public/images/About/team-florent-profil.jpg';
 import Img2 from '@/public/images/About/team-chiara-profil.jpg';
-import Img3 from '@/public/images/About/team-adam-profil.jpg';
 import Img4 from '@/public/images/About/team-lea-profil.jpg';
 import Img5 from '@/public/images/About/team-lucille-profil.jpg';
 import Img6 from '@/public/images/About/team-adrien-profil.png';
-import Img7 from '@/public/images/About/team-samuel-profil.jpg';
+import Img7 from '@/public/images/About/team-morgan-profil.jpg';
 import Img8 from '@/public/images/About/team-victor-profil.jpg';
-import Img9 from '@/public/images/About/team-ronan-profil.jpg';
-import Img10 from '@/public/images/About/team-victor-pifferi-profil.jpg';
-import Img11 from '@/public/images/About/team-saif-profil.jpg';
+import Img9 from '@/public/images/About/team-rafeal-profil.jpg';
+
 import { AnimatedBorderButton } from '@/components/ui/animated-border-button';
 import { MagicText } from '@/components/magicui/MagicText';
 
@@ -26,70 +24,56 @@ export default function About() {
     },
     {
       id: 2,
-      name: 'Chiara Pinto Perez',
-      designation: 'Directrice marketing',
-      image: Img2,
-      alt: "Chiara Pinto Perez, Directrice Marketing d'Ikovaline, experte en stratégie marketing digital",
-    },
-    {
-      id: 3,
-      name: 'Léa Moura Pinto',
-      designation: 'Directrice Communication',
-      image: Img4,
-      alt: "Léa Moura Pinto, Directrice Communication d'Ikovaline, experte en communication digitale",
-    },
-    {
-      id: 4,
-      name: 'Lucille Legoaec',
-      designation: 'Directrice R&D Technologique',
-      image: Img5,
-      alt: "Lucille Legoaec, Directrice R&D d'Ikovaline, experte en innovation numérique et tech",
-    },
-    {
-      id: 5,
       name: 'Adrien Legeleux',
       designation: 'Directeur Web Développement',
       image: Img6,
       alt: "Adrien Legeleux, Directeur Web Développement d'Ikovaline, expert en solutions web modernes",
+    },
+    {
+      id: 3,
+      name: 'Victor Biaujaud',
+      designation: 'Manager Principal',
+      image: Img8,
+      alt: "Victor Biaujaud, Manager Principal d'Ikovaline, expert en gestion d'équipe et en stratégie de développement commercial",
+    },
+    {
+      id: 4,
+      name: 'Morgan Jardin',
+      designation: 'Commercial',
+      image: Img7,
+      alt: 'Morgan Jardin, Commercial chez Ikovaline, spécialiste en conseil client et développement des ventes',
     },
   ];
 
   // People2
   const people2 = [
     {
-      id: 1,
-      name: 'Samuel Garrel',
-      designation: 'Directeur Web Marketing',
-      image: Img7,
-      alt: "Samuel Garrel, Directeur Web Marketing d'Ikovaline, expert en stratégie digitale et SEO",
-    },
-    {
-      id: 2,
-      name: 'Victor Biaujaud',
-      designation: 'Manager Principal',
-      image: Img8,
-      alt: "Victor Biaujaud, Manager Principal d'Ikovaline, expert en gestion d'équipe et développement commercial",
-    },
-    {
-      id: 3,
-      name: 'Ronan Alexandre',
-      designation: 'Commercial Junior',
-      image: Img9,
-      alt: "Ronan Alexandre, Commercial Junior d'Ikovaline, expert en développement commercial et marketing digital",
-    },
-    {
-      id: 4,
-      name: 'Victor Pifferi',
-      designation: 'Commercial Senior',
-      image: Img10,
-      alt: "Victor Pifferi, Commercial Senior d'Ikovaline, expert en stratégie commerciale et relation client",
-    },
-    {
       id: 5,
-      name: 'Adam Sauneron',
-      designation: 'Manager Principal',
-      image: Img3,
-      alt: "Adam Sauneron, Manager Principal d'Ikovaline, expert en développement commercial international",
+      name: 'Rafeal Bory',
+      designation: 'Commercial',
+      image: Img9,
+      alt: 'Rafeal Bory, Commercial chez Ikovaline, spécialiste en conseil client et développement des ventes',
+    },
+    {
+      id: 6,
+      name: 'Chiara Pinto Perez',
+      designation: 'Directrice marketing',
+      image: Img2,
+      alt: "Chiara Pinto Perez, Directrice Marketing d'Ikovaline, experte en stratégie marketing digital",
+    },
+    {
+      id: 7,
+      name: 'Léa Moura Pinto',
+      designation: 'Directrice Communication',
+      image: Img4,
+      alt: "Léa Moura Pinto, Directrice Communication d'Ikovaline, experte en communication digitale",
+    },
+    {
+      id: 8,
+      name: 'Lucille Legoaec',
+      designation: 'Directrice R&D Technologique',
+      image: Img5,
+      alt: "Lucille Legoaec, Directrice R&D d'Ikovaline, experte en innovation numérique et tech",
     },
   ];
 

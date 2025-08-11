@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerClose,
@@ -10,21 +10,21 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import Link from "next/link";
-import Image from "next/image";
-import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
-import { IconMenu3, IconShieldCheck } from "@tabler/icons-react";
-import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
+} from '@/components/ui/drawer';
+import Link from 'next/link';
+import Image from 'next/image';
+import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
+import { IconMenu3, IconShieldCheck } from '@tabler/icons-react';
+import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
 
-import { ModeToggle } from "../toggle-darkmode";
-import { useTheme } from "next-themes";
+import { ModeToggle } from '../toggle-darkmode';
+import { useTheme } from 'next-themes';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../ui/accordion";
+} from '../ui/accordion';
 import {
   IconApps,
   IconChartLine,
@@ -35,11 +35,10 @@ import {
   IconMessage,
   IconThumbUp,
   IconUser,
-  IconUsersGroup,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 
 export function HeaderResponsive() {
-  const { theme , systemTheme} = useTheme();
+  const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -47,77 +46,77 @@ export function HeaderResponsive() {
   }, []);
   const headerLinks = [
     {
-      title: "Home",
-      href: "/",
+      title: 'Home',
+      href: '/',
       links: [
-        { label: "À Propos", href: "/#about", icon: <IconUser stroke={2} /> },
+        { label: 'À Propos', href: '/#about', icon: <IconUser stroke={2} /> },
         {
-          label: "Nos Services",
-          href: "/#services",
+          label: 'Nos Services',
+          href: '/#services',
           icon: <IconApps stroke={2} />,
         },
         {
-          label: "Témoignages",
-          href: "/#review",
+          label: 'Témoignages',
+          href: '/#review',
           icon: <IconMessage stroke={2} />,
         },
       ],
     },
     {
-      title: "Nos Services",
-      href: "/nos-services",
+      title: 'Nos Services',
+      href: '/nos-services',
       links: [
         {
-          label: "Accélérez votre croissance",
-          href: "/nos-services/#buisness-developpement",
+          label: 'Accélérez votre croissance',
+          href: '/nos-services/#buisness-developpement',
           icon: <IconChartLine stroke={2} />,
         },
         {
-          label: "Modernisez votre présence en lignel",
-          href: "/nos-services/#developpement-digital",
+          label: 'Modernisez votre présence en lignel',
+          href: '/nos-services/#developpement-digital',
           icon: <IconDeviceLaptop stroke={2} />,
         },
         {
-          label: "Ce qui fait notre différence",
-          href: "/nos-services/#pourquoi-nous",
+          label: 'Ce qui fait notre différence',
+          href: '/nos-services/#pourquoi-nous',
           icon: <IconThumbUp stroke={2} />,
         },
         {
-          label: "Foire aux questions",
-          href: "/nos-services/#faq",
+          label: 'Foire aux questions',
+          href: '/nos-services/#faq',
           icon: <IconHelpHexagon stroke={2} />,
         },
       ],
     },
     {
-      title: "À Propos",
-      href: "/about",
+      title: 'À Propos',
+      href: '/about',
       links: [
         {
-          label: "Notre Histoire",
-          href: "/about/#notre-histoire",
+          label: 'Notre Histoire',
+          href: '/about/#notre-histoire',
           icon: <IconHistory stroke={2} />,
         },
+        // {
+        //   label: "Notre Équipe",
+        //   href: "/about/#notre-equipe",
+        //   icon: <IconUsersGroup stroke={2} />,
+        // },
         {
-          label: "Notre Équipe",
-          href: "/about/#notre-equipe",
-          icon: <IconUsersGroup stroke={2} />,
-        },
-        {
-          label: "Notre Vision",
-          href: "/about/#notre-vision",
+          label: 'Notre Vision',
+          href: '/about/#notre-vision',
           icon: <IconEye stroke={2} />,
         },
         {
-          label: "Notre Garantie",
-          href: "/about/#notre-garantie",
+          label: 'Notre Garantie',
+          href: '/about/#notre-garantie',
           icon: <IconShieldCheck stroke={2} />,
         },
       ],
     },
     {
-      title: "Conseils Digitaux",
-      href: "/blog",
+      title: 'Conseils Digitaux',
+      href: '/blog',
       links: [],
     },
   ];
@@ -137,7 +136,11 @@ export function HeaderResponsive() {
             <Link href="/">
               {mounted && (
                 <Image
-                  src={(theme === "system" ? systemTheme : theme) === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                  src={
+                    (theme === 'system' ? systemTheme : theme) === 'dark'
+                      ? IkovalineLogoDark
+                      : IkovalineLogo
+                  }
                   alt="logo de la start-up Ikovaline"
                   width={150}
                   height={150}
@@ -149,10 +152,10 @@ export function HeaderResponsive() {
         </div>
         <Button
           asChild
-          variant={"secondary"}
+          variant={'secondary'}
           className="rounded-3xl max-[360px]:p-3 max-[320px]:px-5 max-[320px]:text-sm text-xs"
         >
-          <Link href={"/contact"}>Contactez-nous</Link>
+          <Link href={'/contact'}>Contactez-nous</Link>
         </Button>
         <ModeToggle />
       </div>
@@ -160,7 +163,11 @@ export function HeaderResponsive() {
         <div className="mx-auto w-full  max-w-sm">
           <DrawerHeader>
             <Image
-              src={(theme ==="system" ? systemTheme : theme) === "dark" ? IkovalineLogoDark : IkovalineLogo}
+              src={
+                (theme === 'system' ? systemTheme : theme) === 'dark'
+                  ? IkovalineLogoDark
+                  : IkovalineLogo
+              }
               alt="logo de la start-up Ikovaline"
               width={150}
               height={150}
@@ -172,7 +179,7 @@ export function HeaderResponsive() {
             className="gap-4 py-8  flex  flex-col max-w-[250px] mx-auto justify-center"
             collapsible
           >
-            {" "}
+            {' '}
             {headerLinks.map((section, index) => (
               <AccordionItem
                 value={`item-${index + 1}`}
@@ -210,7 +217,7 @@ export function HeaderResponsive() {
                 </AccordionContent>
               </AccordionItem>
             ))}
-          </Accordion>{" "}
+          </Accordion>{' '}
           <DrawerFooter>
             <DrawerClose asChild>
               <Button asChild variant="secondary" className="w-full">
