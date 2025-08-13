@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { dataAgenceGlobal } from '@/data/data-agence-global';
 import dataEssonne from '@/data/data-essonne.json';
 import dataHautsDeSeine from '@/data/data-hauts-de-seine.json';
+import dataSeineEtMarne from '@/data/data-seine-et-marne.json'; // 👈 ton JSON carte 77
+
 import Services from '@/components/pageSatellite/Services';
 import Objectif from '@/components/pageSatellite/Objectif';
 import CityAround from '@/components/pageSatellite/CityAround';
@@ -13,9 +15,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
+
 const CarteEssonne = dynamic(() => import('@/components/CarteEssonne'), {
   ssr: false,
 });
+
 const Glow = dynamic(() => import('@/components/ui/glow'), { ssr: false });
 
 export default function PageSquelette({ idAgence }: { idAgence: string }) {
@@ -35,10 +39,13 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
     return { x, y };
   };
 
+  // Point générique France (tu peux ignorer / modifier au besoin)
   const lat = 48.2;
-  const lng = 2;
+  const lng = 2.0;
   const { x, y } = projectPoint(lat, lng);
+
   if (!data) return notFound();
+
   return (
     <div className="relative overflow-hidden w-full space-y-5">
       <div className="absolute inset-0  overflow-hidden pointer-events-none">
@@ -47,24 +54,36 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
         />
       </div>
+
       <div className="h-screen overflow-hidden w-full flex flex-col items-center justify-between relative md:pt-24 pt-20">
-        {data.departement === 'Essonne' ? (
-          <CarteEssonne
-            width={800}
-            height={800}
-            data={dataEssonne.features}
-            highlighted={data.ville.toLowerCase()}
-          />
-        ) : (
-          <CarteEssonne
-            width={500}
-            height={680}
-            data={dataHautsDeSeine.features}
-            highlighted={data.ville.toLowerCase()}
-          />
-        )}
+        {
+          // 🗺️ Choix de la carte selon le département
+          data.departement === 'Essonne' ? (
+            <CarteEssonne
+              width={800}
+              height={800}
+              data={dataEssonne.features}
+              highlighted={data.ville.toLowerCase()}
+            />
+          ) : data.departement === 'Hauts-de-Seine' ? (
+            <CarteEssonne
+              width={500}
+              height={680}
+              data={dataHautsDeSeine.features}
+              highlighted={data.ville.toLowerCase()}
+            />
+          ) : data.departement === 'Seine-et-Marne' ? (
+            <CarteEssonne
+              width={800}
+              height={800}
+              data={dataSeineEtMarne.features} // 👈 ton GeoJSON 77
+              highlighted={data.ville.toLowerCase()}
+            />
+          ) : null
+        }
 
         <div className="absolute h-[250px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-background to-transparent from-30%" />
+
         <div className="z-10 ">
           <h1 className="text-3xl md:px-0 px-5 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-400 dark:via-white dark:to-white  py-2 md:text-4xl lg:text-5xl font-semibold max-w-4xl mx-auto text-center">
             Agence Web à {data.ville}
@@ -73,6 +92,7 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
             {data.intro}
           </p>
         </div>
+
         <div className="w-full aspect-[1.6/1] max-sm:scale-150 rounded-lg relative font-sans">
           <Image
             src={'/france-dots-map-dark.svg'}
@@ -133,18 +153,26 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           </AnimatedBorderButton>
         </Link>
       </div>
+
       <Services serviceAgenceWeb={data.services} />
+
       <div className="relative z-0 space-y-5">
         <div className="absolute inset-0 z-0 [background-size:20px_20px] [background-image:radial-gradient(#d4d4d4_1.2px,transparent_1px)] dark:[background-image:radial-gradient(#404040_1.2px,transparent_1px)]" />
         <div className="absolute h-[100px] z-10 bottom-0 left-0 w-full bg-gradient-to-t from-[#F4FAFB] dark:from-background to-transparent from-30%" />
         <div className="absolute h-[250px] z-10 top-0 -translate-y-1/2 left-0 w-full bg-gradient-to-b from-[#F4FAFB] dark:from-background to-transparent from-30%" />
+
         <Objectif
           objectifTitle={data.objectifs.objectifTitle}
           text1={data.objectifs.text1}
           text2={data.objectifs.text2}
         />
+
         <CityAround
-          city={`${/^[aeiouyàâäéèêëîïôöùûüÿAEIOUYÀÂÄÉÈÊËÎÏÔÖÙÛÜŸ]/.test(data.ville) ? "d'" : 'de '}${data.ville}`}
+          city={`${
+            /^[aeiouyàâäéèêëîïôöùûüÿAEIOUYÀÂÄÉÈÊËÎÏÔÖÙÛÜŸ]/.test(data.ville)
+              ? "d'"
+              : 'de '
+          }${data.ville}`}
           cities={data.villesVoisines}
           text={data.cityAroundText}
         />

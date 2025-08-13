@@ -50,7 +50,18 @@ const citiesHautsSeine = [
   'Bagneux',
   'Issy-les-Moulineaux',
 ];
-
+const citiesSeineEtMarne = [
+  'Serris',
+  'Chessy',
+  'Bussy-Saint-Georges',
+  'Montévrain',
+  'Bailly-Romainvilliers',
+  'Lagny-sur-Marne',
+  'Torcy',
+  'Lognes',
+  'Champs-sur-Marne',
+  'Meaux',
+];
 export default function Map() {
   const [depart, setDepart] = useState('essonne');
 
@@ -62,6 +73,10 @@ export default function Map() {
     {
       slug: 'hauts-de-seine',
       name: 'Hauts-de-Seine',
+    },
+    {
+      slug: 'seine-et-marne',
+      name: 'Seine et Marne',
     },
   ];
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]); // tableau de refs
@@ -98,6 +113,21 @@ export default function Map() {
         return (
           <div className="flex flex-wrap gap-4 justify-center max-w-2xl">
             {citiesHautsSeine.map((c, index) => (
+              <Link
+                key={index}
+                href={`/agence-web-${removeAccents(c)}`}
+                className="border-black/10 dark:border-white/10 shadow-md border-[1px] px-2 flex gap-2 bg-white dark:bg-neutral-900 items-center justify-center py-1 rounded-full "
+              >
+                <div className="h-2 w-2 bg-secondary rounded-full" />
+                {c}
+              </Link>
+            ))}
+          </div>
+        );
+      case 'seine-et-marne':
+        return (
+          <div className="flex flex-wrap gap-4 justify-center max-w-2xl">
+            {citiesSeineEtMarne.map((c, index) => (
               <Link
                 key={index}
                 href={`/agence-web-${removeAccents(c)}`}

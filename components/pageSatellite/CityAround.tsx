@@ -1,12 +1,12 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link';
+import React from 'react';
 
 export const removeAccents = (str: string) =>
   str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
-    .replace(/\s+/g, "-");
+    .replace(/\s+/g, '-');
 
 export default function CityAround({
   city,
@@ -14,12 +14,12 @@ export default function CityAround({
   text,
 }: {
   city: string;
-  cities: string[];
+  cities: ReadonlyArray<string>;
   text: JSX.Element | string;
 }) {
   return (
     <div className="z-20 relative">
-      {" "}
+      {' '}
       <div className="flex items-center justify-center py-20 px-5 gap-10 flex-col max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-400 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
           Voir plus d&apos;agences à côté {city}
