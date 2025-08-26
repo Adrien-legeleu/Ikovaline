@@ -1,12 +1,17 @@
-"use client";
-import React, { useEffect, useState, createContext } from "react";
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
-import Image, { ImageProps } from "next/image";
-import { BlogType } from "../BlogPage/Blog";
-import Link from "next/link";
-import { Button } from "./button";
+'use client';
+import React, { useEffect, useState, createContext } from 'react';
+import {
+  IconArrowNarrowLeft,
+  IconArrowNarrowRight,
+  IconNews,
+} from '@tabler/icons-react';
+import { cn } from '@/lib/utils';
+import { motion } from 'motion/react';
+import Image, { ImageProps } from 'next/image';
+import { BlogType } from '../BlogPage/Blog';
+import Link from 'next/link';
+import { Button } from './button';
+import { LiquidLink } from './liquid-link';
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -44,13 +49,13 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
   const scrollLeft = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
+      carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
+      carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     }
   };
 
@@ -61,7 +66,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
       const scrollPosition = (cardWidth + gap) * (index + 1);
       carouselRef.current.scrollTo({
         left: scrollPosition,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
       setCurrentIndex(index);
     }
@@ -83,14 +88,14 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         >
           <div
             className={cn(
-              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l"
+              'absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l'
             )}
           ></div>
 
           <div
             className={cn(
-              "flex flex-row justify-start gap-8 pl-4",
-              "mx-auto max-w-7xl" // remove max-w-4xl if you want the carousel to span the full width of its container
+              'flex flex-row justify-start gap-8 pl-4',
+              'mx-auto max-w-7xl' // remove max-w-4xl if you want the carousel to span the full width of its container
             )}
           >
             {items.map((item, index) => (
@@ -105,11 +110,11 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                   transition: {
                     duration: 0.5,
                     delay: 0.2 * index,
-                    ease: "easeOut",
+                    ease: 'easeOut',
                     once: true,
                   },
                 }}
-                key={"card" + index}
+                key={'card' + index}
                 className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
               >
                 {item}
@@ -117,10 +122,15 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             ))}
           </div>
         </div>
-        <div className="mx-10 flex justify-between gap-2">
-          <Button asChild>
-            <Link href="/blog">Voir tous les articles</Link>
-          </Button>
+        <div className="mx-10 flex items-center justify-between gap-2">
+          <LiquidLink href="/blog" className="z-10 px-4">
+            <span className="flex items-center justify-center gap-2">
+              <span aria-hidden="true">
+                <IconNews />
+              </span>
+              Tous nos articles
+            </span>
+          </LiquidLink>
           <div className="flex gap-2">
             <button
               className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
@@ -183,16 +193,16 @@ export const BlurImage = ({ src, className, alt, ...rest }: ImageProps) => {
       height={500}
       width={500}
       className={cn(
-        "h-full w-full brightness-75 transition duration-300",
-        isLoading ? "blur-sm" : "blur-0",
+        'h-full w-full brightness-75 transition duration-300',
+        isLoading ? 'blur-sm' : 'blur-0',
         className
       )}
       onLoad={() => setLoading(false)}
       src={src as string}
       loading="lazy"
       decoding="async"
-      blurDataURL={typeof src === "string" ? src : undefined}
-      alt={alt ? alt : "Background of a beautiful view"}
+      blurDataURL={typeof src === 'string' ? src : undefined}
+      alt={alt ? alt : 'Background of a beautiful view'}
       {...rest}
     />
   );

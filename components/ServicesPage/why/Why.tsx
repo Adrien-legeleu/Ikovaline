@@ -1,6 +1,7 @@
-"use client";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+'use client';
+
+import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 import {
   IconDiscountCheck,
   IconCash,
@@ -8,108 +9,172 @@ import {
   IconMessage2,
   IconUsersGroup,
   IconShieldCheck,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
+import React from 'react';
 
 export default function Why() {
   const features = [
     {
-      title: "Un excellent rapport qualité/prix",
+      title: 'Un excellent rapport qualité/prix',
       description:
-        "Des services digitaux performants à des tarifs étudiés, accessibles même pour les petites entreprises.",
-      icon: <IconDiscountCheck className="text-secondary" />,
+        'Des services digitaux performants à des tarifs étudiés, accessibles même pour les petites structures.',
+      icon: IconDiscountCheck,
     },
     {
-      title: "Garantie satisfait ou remboursé",
+      title: 'Garantie de résultat',
       description:
-        "	Si nos solutions ne répondent pas à vos objectifs, nous vous remboursons intégralement.",
-      icon: <IconCash className="text-secondary" />,
+        'Si nos solutions ne répondent pas à vos objectifs, nous vous remboursons intégralement.',
+      icon: IconCash,
     },
     {
-      title: "Des résultats rapides et mesurables",
+      title: 'Des résultats rapides et mesurables',
       description:
-        "Livraison rapide des projets, avec indicateurs clairs et impact mesurable.",
-      icon: <IconClock className="text-secondary" />,
+        'Livraison rapide, indicateurs clairs et impact mesurable à chaque étape.',
+      icon: IconClock,
     },
     {
-      title: "Suivi personnalisé & communication fluide",
+      title: 'Suivi personnalisé & communication fluide',
       description:
-        "Un accompagnement digital transparent, avec points réguliers et réponses rapides.",
-      icon: <IconMessage2 className="text-secondary" />,
+        'Un accompagnement transparent avec points réguliers et réponses réactives.',
+      icon: IconMessage2,
     },
     {
-      title: "Une équipe engagée et expérimentée",
+      title: 'Une équipe engagée et expérimentée',
       description:
-        "	Des spécialistes passionnés en marketing digital et développement commercial.",
-      icon: <IconUsersGroup className="text-secondary" />,
+        'Des spécialistes passionnés en marketing digital et développement commercial.',
+      icon: IconUsersGroup,
     },
     {
-      title: "Confiance et cadre sur-mesure",
+      title: 'Confiance et cadre sur-mesure',
       description:
-        "Chaque mission est encadrée avec un plan d’action clair et une vraie relation de confiance.",
-      icon: <IconShieldCheck className="text-secondary" />,
+        'Chaque mission est encadrée par un plan d’action clair et une relation de confiance.',
+      icon: IconShieldCheck,
     },
-  ];
+  ] as const;
 
   return (
-    <div
-      className=" max-w-5xl z-10 py-20 overflow-hidden  mx-auto"
-      id="pourquoi-nous"
-    >
-      <h2 className="sm:text-4xl text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
-        6 raisons de faire équipe avec Ikovaline
-      </h2>
-
-      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xs:py-20 py-16 relative ">
-        <div className="absolute h-60 w-60 dark:blur-[150px] blur-[100px] bg-secondary top-1/4 left-2/3  opacity-65" />
-        {features.map((feature, index) => (
-          <Feature key={feature.title} {...feature} index={index} />
-        ))}
+    <section id="pourquoi-nous" className="relative py-20">
+      {/* Halos bleus d’ambiance */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <span className="absolute -top-24 left-1/3 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full blur-[180px] bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)] opacity-25 dark:opacity-35" />
+        <span className="absolute -bottom-20 right-1/4 h-[26rem] w-[26rem] translate-x-1/4 rounded-full blur-[160px] bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-20 dark:opacity-30" />
       </div>
-    </div>
+
+      <div className="mx-auto max-w-6xl px-6">
+        <h2
+          className="text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight
+                       bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
+                       dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
+        >
+          6 raisons de faire équipe avec Ikovaline
+        </h2>
+
+        {/* Grille de cartes liquid glass */}
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((f, i) => (
+            <FeatureCard
+              key={f.title}
+              title={f.title}
+              description={f.description}
+              Icon={f.icon}
+              delay={i * 0.06}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
-const Feature = ({
+/* ------------------------- Card “Liquid Glass” ------------------------- */
+function FeatureCard({
   title,
   description,
-  icon,
-  index,
+  Icon,
+  delay = 0,
 }: {
   title: string;
   description: string;
-  icon: React.ReactNode;
-  index: number;
-}) => {
+  Icon: React.ElementType;
+  delay?: number;
+}) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
+    <motion.article
+      initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-      viewport={{ amount: 0.5 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.55, ease: 'easeOut', delay }}
       className={cn(
-        "flex flex-col lg:border-r py-4 xs:py-10 relative group/feature dark:border-neutral-800",
-        (index === 0 || index === 4) && "lg:border-l dark:border-neutral-800",
-        index < 4 && "lg:border-b dark:border-neutral-800"
+        'relative overflow-hidden flex flex-col justify-between rounded-3xl p-6 xl:p-7 backdrop-blur-2xl',
+        // Fond verre : clair en light, noir fumé en dark
+        'bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]',
+        'dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]',
+        // Bordure + ombres
+        'border border-white/50 dark:border-[rgba(56,130,246,0.20)]',
+        'shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)]',
+        'dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]',
+        // Hover subtil pro
+        'transition-transform duration-500 hover:-translate-y-1.5',
+        'hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]'
       )}
     >
-      {index < 4 && (
-        <div className="opacity-0 group-hover/feature:opacity-25 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
-      )}
-      {index >= 4 && (
-        <div className="opacity-0 group-hover/feature:opacity-25 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
-      )}
-      <div className="xs:mb-4 mb-2 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
-        {icon}
-      </div>
-      <div className="text-lg font-bold mb-2 relative z-10 px-10">
-        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-[#77DEF3] transition-all duration-200 origin-center" />
-        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-800 dark:text-neutral-100">
+      {/* Glow bas “royal/electric” */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-12 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-full blur-3xl"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, rgba(0,168,232,.48), rgba(37,99,235,.35), transparent 70%)',
+        }}
+      />
+
+      {/* Rim conique (effet verre) */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[26px]"
+        style={{
+          border: '1px solid transparent',
+          backgroundImage:
+            'linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46)),' +
+            'conic-gradient(from 210deg, rgba(255,255,255,.85), rgba(0,168,232,.28), rgba(255,255,255,.55), rgba(37,99,235,.22), rgba(255,255,255,.85))',
+          backgroundClip: 'padding-box, border-box',
+          opacity: 0.55,
+        }}
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 hidden rounded-[26px] dark:block"
+        style={{
+          border: '1px solid transparent',
+          backgroundImage:
+            'linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65)),' +
+            'conic-gradient(from 210deg, rgba(0,168,232,.26), rgba(37,99,235,.20), rgba(0,168,232,.26))',
+          backgroundClip: 'padding-box, border-box',
+          opacity: 0.9,
+        }}
+      />
+
+      {/* Header (icône + titre) */}
+      <div className="relative z-10 flex items-start gap-3">
+        <div
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl
+                     bg-white/70 dark:bg-neutral-900/60 border border-white/40 dark:border-white/10
+                     shadow-inner"
+        >
+          <Icon className="h-6 w-6 text-sky-600 dark:text-sky-400" />
+        </div>
+        <h3 className="text-lg xl:text-xl font-bold text-neutral-900 dark:text-white">
           {title}
-        </span>
+        </h3>
       </div>
-      <p className="text-sm text-neutral-600 dark:text-neutral-300 max-w-xs relative z-10 px-10">
+
+      {/* Description */}
+      <p className="relative z-10 mt-3 text-neutral-700 dark:text-neutral-300 text-sm xl:text-[15px] leading-relaxed">
         {description}
       </p>
-    </motion.div>
+
+      {/* Streak haut (jamais blanc en dark) */}
+      <span className="pointer-events-none absolute left-6 right-6 top-3 h-6 rounded-full blur-[10px] bg-black/5 dark:bg-sky-400/12" />
+    </motion.article>
   );
-};
+}

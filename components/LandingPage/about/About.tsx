@@ -12,6 +12,8 @@ import Img9 from '@/public/images/About/team-rafeal-profil.jpg';
 
 import { AnimatedBorderButton } from '@/components/ui/animated-border-button';
 import { MagicText } from '@/components/magicui/MagicText';
+import { LiquidLink } from '@/components/ui/liquid-link';
+import { IconInfoCircle } from '@tabler/icons-react';
 
 export default function About() {
   const people1 = [
@@ -95,10 +97,14 @@ export default function About() {
           <AnimatedTooltip items={people2} />
         </div>
       </div>
-
-      <Link href={'/about'}>
-        <AnimatedBorderButton>En savoir plus</AnimatedBorderButton>
-      </Link>
+      <LiquidLink href="/about" className="z-10 ">
+        <span className="flex items-center justify-center gap-2">
+          <span aria-hidden="true">
+            <IconInfoCircle />
+          </span>
+          En savoir plus
+        </span>
+      </LiquidLink>
     </div>
   );
 }

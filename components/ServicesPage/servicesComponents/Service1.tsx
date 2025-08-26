@@ -1,280 +1,193 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { HeroHighlight } from "@/components/ui/hero-highlight";
-import React from "react";
-import { useId } from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { IconArrowRight } from "@tabler/icons-react";
-import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { LiquidLink } from '@/components/ui/liquid-link';
+import { IconArrowRight } from '@tabler/icons-react';
+import { GridOverlay } from './GridOverlay';
 
 export function Service1() {
   return (
-    <HeroHighlight className="pb-16 pt-10 lg:pb-28 mb-2 md:px-0 px-5 mx-auto space-y-8">
-      <h2 className="sm:text-4xl max-w-5xl mx-auto text-3xl items-center justify-center text-center mb-12 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
-        Propulsez votre Business avec une Stratégie Commerciale Efficace
-      </h2>
+    <section className="relative pb-20 pt-14 md:pt-20">
+      {/* Backdrop halo cohérent Hero */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <span className="absolute -top-40 left-1/3 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full blur-[200px] bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)] opacity-25 dark:opacity-35" />
+        <span className="absolute -bottom-20 right-1/4 h-[30rem] w-[30rem] translate-x-1/4 rounded-full blur-[160px] bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-20 dark:opacity-30" />
+      </div>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: [20, -5, 0] }}
-        transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-        viewport={{ amount: 0.5 }}
-        className="text-center max-w-3xl leading-relaxed tracking-wider mx-auto"
-      >
-        Grâce à notre expertise en <strong>développement commercial</strong> et
-        en <strong>stratégie business</strong>, nous vous aidons à structurer
-        votre croissance. Études de marché, prospection multicanale,
-        accompagnement stratégique : découvrez nos leviers pour générer plus de
-        leads et améliorer durablement votre chiffre d&apos;affaires.
-      </motion.p>
-      <div
-        className="grid grid-cols-1 md:px-10 sm:grid-cols-2 pt-10 md:grid-cols-3  gap-5 xl:gap-8 md:gap-3 max-w-7xl mx-auto"
-        id="buisness-developpement"
-      >
-        {grid.map((feature) => (
-          <Link
-            href={`/nos-services/${feature.slug}`}
-            key={feature.title}
-            className="group h-full"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-              viewport={{ amount: 0.5 }}
-              className="relative h-full flex flex-col justify-between bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 xl:p-8 rounded-3xl overflow-hidden"
+      <div className="relative mx-auto max-w-6xl px-6">
+        {/* Titre + sous-titre */}
+        <motion.h2
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight
+                     bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
+                     dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
+        >
+          Applications Web, Mobiles &{' '}
+          <span className="text-sky-500 dark:text-sky-400">SaaS</span>{' '}
+          sur-mesure
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.1 }}
+          className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg"
+        >
+          Nous concevons des produits <b>robustes</b>, <b>scalables</b> et
+          orientés
+          <b> conversion</b> : de l’idée à la mise en production, avec un soin
+          particulier porté à l’UX, à la performance et à la maintenabilité.
+        </motion.p>
+
+        {/* Grille features (liquid glass cards) */}
+        <div
+          id="saas-apps"
+          className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {grid.map((feature, idx) => (
+            <Link
+              href={`/nos-services/${feature.slug}`}
+              key={feature.title}
+              className="group"
             >
-              <Grid size={20} aria-hidden="true" />
-
-              <h3 className="text-base xl:text-lg font-bold text-neutral-800 dark:text-white relative z-20">
-                {feature.title}
-              </h3>
-
-              <div className="text-sm xl:text-md text-neutral-600 dark:text-neutral-400 z-20">
-                {feature.description}
-              </div>
-
-              <Button
-                variant="outline"
-                className="rounded-full  w-12 h-10  mt-4 p-1"
-                aria-label={`Voir ${feature.title}`}
+              <motion.article
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{
+                  duration: 0.55,
+                  ease: 'easeOut',
+                  delay: idx * 0.08,
+                }}
+                className="relative overflow-hidden h-full flex flex-col justify-between rounded-3xl p-6 xl:p-7 backdrop-blur-2xl
+                           bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]
+                           dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]
+                           border border-white/50 dark:border-[rgba(56,130,246,0.20)]
+                           shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)]
+                           dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]
+                           transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]"
               >
-                <IconArrowRight aria-hidden="true" focusable="false" />
-              </Button>
-            </motion.div>
-          </Link>
-        ))}
-      </div>
+                {/* Glow bas */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -bottom-12 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-full blur-3xl
+                             bg-[radial-gradient(ellipse_at_center,rgba(0,168,232,.52),rgba(37,99,235,.38),transparent_70%)]"
+                />
 
-      <div className="w-full flex items-center justify-center">
-        <Link href="/contact">
-          <AnimatedBorderButton>
-            Lancez votre croissance dès aujourd&apos;hui
-          </AnimatedBorderButton>
-        </Link>
+                {/* Contenu */}
+                <h3 className="relative z-10 text-lg xl:text-xl font-bold text-neutral-900 dark:text-white">
+                  {feature.title}
+                </h3>
+
+                <div className="relative z-10 mt-4 text-neutral-700 dark:text-neutral-300 text-sm xl:text-[15px] leading-relaxed">
+                  {feature.description}
+                </div>
+
+                <div className="relative z-10 mt-5 flex justify-end">
+                  <span
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full
+                                   bg-white/70 dark:bg-neutral-900/60 border border-white/40 dark:border-white/10
+                                   shadow-inner group-hover:scale-105 transition"
+                  >
+                    <IconArrowRight className="h-5 w-5 text-sky-600 dark:text-sky-400" />
+                  </span>
+                </div>
+
+                {/* Rim conique discret (effet verre) */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[26px]"
+                  style={{
+                    border: '1px solid transparent',
+                    backgroundImage:
+                      'linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46)),' +
+                      'conic-gradient(from 210deg, rgba(255,255,255,.85), rgba(0,168,232,.28), rgba(255,255,255,.55), rgba(37,99,235,.22), rgba(255,255,255,.85))',
+                    backgroundClip: 'padding-box, border-box',
+                    opacity: 0.55,
+                  }}
+                />
+                {/* Version dark du rim (sans blanc) */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 hidden rounded-[26px] dark:block"
+                  style={{
+                    border: '1px solid transparent',
+                    backgroundImage:
+                      'linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65)),' +
+                      'conic-gradient(from 210deg, rgba(0,168,232,.26), rgba(37,99,235,.20), rgba(0,168,232,.26))',
+                    backgroundClip: 'padding-box, border-box',
+                    opacity: 0.9,
+                  }}
+                />
+              </motion.article>
+            </Link>
+          ))}
+        </div>
+
+        {/* CTA principal (LiquidLink imposé) */}
+        <div className="mt-10 flex justify-center">
+          <LiquidLink href="/contact" className="text-md">
+            Discutons de votre projet
+          </LiquidLink>
+        </div>
       </div>
-    </HeroHighlight>
+    </section>
   );
 }
 
 const grid = [
   {
-    title: "Études de Marché Sur Mesure",
-    slug: "etudes-marche-sur-mesure",
+    title: 'Création SaaS sur mesure',
+    slug: 'creation-saas-sur-mesure',
     description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+      <ul className="list-disc pl-4 space-y-3">
         <li>
-          Analyse poussée du marché, identification de vos cibles, veille
-          concurrentielle et tendances sectorielles pour orienter votre
-          stratégie commerciale.
+          Plateformes modulaires <b>scalables</b> et sécurisées, prêtes à
+          grandir avec votre activité.
         </li>
       </ul>
     ),
   },
   {
-    title: "Sondages de Marché & Enquêtes Terrain",
-    slug: "sondages-marche-enquetes-terrain",
+    title: 'Web Apps & Mobiles',
+    slug: 'web-apps-applications-mobiles',
     description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+      <ul className="list-disc pl-4 space-y-3">
         <li>
-          Collecte et analyse de données précises (qualitatives et
-          quantitatives) pour obtenir des insights clients B2B/B2C fiables et
-          actionnables.
+          Expériences <b>fluides</b> et performantes, web ou natives, centrées
+          sur l’utilisateur.
         </li>
       </ul>
     ),
   },
   {
-    title: "Stratégie Commerciale & Développement Business",
-    slug: "strategie-commerciale-developpement-business",
+    title: 'Sites Vitrine & E-commerce',
+    slug: 'creation-sites-web-vitrine-e-commerce',
     description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+      <ul className="list-disc pl-4 space-y-3">
         <li>
-          Mise en place d&apos;une stratégie commerciale performante et alignée
-          sur vos objectifs pour augmenter vos ventes et votre chiffre
-          d&apos;affaires.
+          Conversion, <b>SEO</b> et vitesse : des sites qui livrent des
+          résultats mesurables.
         </li>
       </ul>
     ),
   },
   {
-    title: "Pilotage & Gestion de Projet Stratégique",
-    slug: "pilotage-gestion-projet-strategique",
+    title: 'Site Sur-mesure',
+    slug: 'creation-site-web-sur-mesure',
     description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+      <ul className="list-disc pl-4 space-y-3">
         <li>
-          Accompagnement dans la coordination et le suivi de vos projets
-          marketing ou business, avec une approche orientée résultats.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Plan Go-to-Market & Accompagnement Opérationnel",
-    slug: "plan-go-to-market-accompagnement-operational",
-    description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
-        <li>
-          Structuration de vos lancements produits ou services avec une
-          stratégie de pénétration efficace sur vos marchés cibles.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Prospection & Lead Generation (B2B, B2C, B2B2C)",
-    slug: "prospection-lead-generation-multicanal",
-    description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
-        <li>
-          Stratégies de prospection multicanale et outils de lead generation
-          pour booster la conversion et remplir votre pipeline commercial.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Création de Sites Web Vitrine & E-commerce",
-    slug: "creation-sites-web-vitrine-e-commerce",
-    description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
-        <li>
-          Conception de sites performants, pensés pour la conversion, le
-          référencement naturel (SEO) et l&apos;expérience utilisateur
-          mobile-first.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Prospection & Téléphone IA",
-    slug: "prospection-telephone-ia",
-    description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
-        <li>
-          IA de prospection intelligente : appels automatisés, suivi
-          personnalisé et relance optimisée pour générer des leads efficacement.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Développement International",
-    slug: "developpement-international",
-    description: (
-      <ul className="text-neutral-600 space-y-4 list-disc dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
-        <li>
-          Accompagnement stratégique pour réussir votre implantation sur de
-          nouveaux marchés internationaux, avec analyse locale et adaptation
-          commerciale.
+          Design aligné à votre marque, <b>responsive</b> et optimisé pour
+          l’acquisition.
         </li>
       </ul>
     ),
   },
 ];
-
-export const Grid = ({
-  pattern,
-  size,
-}: {
-  pattern?: [number, number][];
-  size?: number;
-}) => {
-  const p = pattern ?? [
-    [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-    [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-    [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-    [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-    [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-  ];
-  return (
-    <div className="pointer-events-none absolute left-1/2 top-0 -ml-20 -mt-2 h-full w-full [mask-image:linear-gradient(white,transparent)]">
-      <div className="absolute inset-0 bg-gradient-to-r [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:from-zinc-900/30 from-blue-100/30 to-blue-300/30 dark:to-zinc-900/30 opacity-100">
-        <GridPattern
-          width={size ?? 20}
-          height={size ?? 20}
-          x="-12"
-          y="4"
-          squares={p}
-          className="absolute inset-0 h-full w-full mix-blend-overlay dark:fill-white/10 dark:stroke-white/10 stroke-black/10 fill-black/10"
-        />
-      </div>
-    </div>
-  );
-};
-
-export function GridPattern({
-  width,
-  height,
-  x,
-  y,
-  squares,
-  ...props
-}: {
-  width: number;
-  height: number;
-  x?: string;
-  y?: string;
-  squares?: [number, number][];
-  [key: string]: unknown;
-}) {
-  const patternId = useId();
-
-  return (
-    <svg aria-hidden="true" {...props}>
-      <defs>
-        <pattern
-          id={patternId}
-          width={width}
-          height={height}
-          patternUnits="userSpaceOnUse"
-          x={x}
-          y={y}
-        >
-          <path d={`M.5 ${height}V.5H${width}`} fill="none" />
-        </pattern>
-      </defs>
-      <rect
-        width="100%"
-        height="100%"
-        strokeWidth={0}
-        fill={`url(#${patternId})`}
-      />
-      {squares && (
-        <svg x={x} y={y} className="overflow-visible">
-          {squares.map(([x, y]) => (
-            <rect
-              strokeWidth="0"
-              key={`${x}-${y}`}
-              width={width + 1}
-              height={height + 1}
-              x={x * width}
-              y={y * height}
-            />
-          ))}
-        </svg>
-      )}
-    </svg>
-  );
-}

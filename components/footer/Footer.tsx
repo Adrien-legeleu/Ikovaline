@@ -1,56 +1,56 @@
-"use client";
-import React from "react";
-import { TextHoverEffect } from "../ui/text-hover-effect";
-import Link from "next/link";
-import Image from "next/image";
-import IkovalineLogo from "@/public/images/logo/ikovaline_logo.png";
-import IkovalineLogoDark from "@/public/images/logo/ikovaline_logo_dark.png";
-import { useTheme } from "next-themes";
+'use client';
+import React from 'react';
+import { TextHoverEffect } from '../ui/text-hover-effect';
+import Link from 'next/link';
+import Image from 'next/image';
+import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
+import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
+import { useTheme } from 'next-themes';
 
 export default function Footer() {
-  const { theme , systemTheme } = useTheme();
+  const { theme, systemTheme } = useTheme();
   const footerLinks = [
     {
-      title: "Home",
-      href: "/",
+      title: 'Accueil',
+      href: '/',
       links: [
-        { label: "À Propos", href: "/#about" },
-        { label: "Nos Services", href: "/#services" },
-        { label: "Témoignages", href: "/#review" },
+        { label: 'À Propos', href: '/#about' },
+        { label: 'Nos Services', href: '/#services' },
+        { label: 'Témoignages', href: '/#review' },
       ],
     },
     {
-      title: "Nos Services",
-      href: "/nos-services",
+      title: 'Nos Services',
+      href: '/nos-services',
       links: [
         {
-          label: "Business Développement",
-          href: "/nos-services/#buisness-developpement",
+          label: 'Business Développement',
+          href: '/nos-services/#buisness-developpement',
         },
         {
-          label: "Développement Digital",
-          href: "/nos-services/#developpement-digital",
+          label: 'Développement Digital',
+          href: '/nos-services/#developpement-digital',
         },
-        { label: "Pourquoi-Nous ?", href: "/nos-services/#pourquoi-nous" },
+        { label: 'Pourquoi-Nous ?', href: '/nos-services/#pourquoi-nous' },
       ],
     },
     {
-      title: "À Propos",
-      href: "/about",
+      title: 'À Propos',
+      href: '/about',
       links: [
-        { label: "Notre Histoire", href: "/about/#notre-histoire" },
-        { label: "Notre Équipe", href: "/about/#notre-equipe" },
-        { label: "Notre Vision", href: "/about/#notre-vision" },
+        { label: 'Notre Histoire', href: '/about/#notre-histoire' },
+        { label: 'Notre Équipe', href: '/about/#notre-equipe' },
+        { label: 'Notre Vision', href: '/about/#notre-vision' },
       ],
     },
     {
-      title: "Légal",
-      href: "/mentions-legales",
+      title: 'Légal',
+      href: '/mentions-legales',
       links: [
-        { label: "Mentions légales", href: "/mentions-legales" },
+        { label: 'Mentions légales', href: '/mentions-legales' },
         {
-          label: "Politique de confidentialité",
-          href: "/politique-confidentialite",
+          label: 'Politique de confidentialité',
+          href: '/politique-confidentialite',
         },
       ],
     },
@@ -66,9 +66,13 @@ export default function Footer() {
         <div className="flex justify-left w-full ">
           <div className="space-y-5">
             <h2 className="text-4xl font-semibold flex items-center max-sm:justify-center">
-              {" "}
+              {' '}
               <Image
-                src={(theme === "system" ? systemTheme : theme)  === "dark" ? IkovalineLogoDark : IkovalineLogo}
+                src={
+                  (theme === 'system' ? systemTheme : theme) === 'dark'
+                    ? IkovalineLogoDark
+                    : IkovalineLogo
+                }
                 alt="logo de la start-up Ikovaline"
                 width={150}
                 height={150}

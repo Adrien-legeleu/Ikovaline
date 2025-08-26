@@ -1,11 +1,12 @@
-"use client";
-import React, { ReactNode } from "react";
-import { motion } from "framer-motion";
-import Link, { LinkProps } from "next/link";
-import Image from "next/image";
+'use client';
+import React, { ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import Link, { LinkProps } from 'next/link';
+import Image from 'next/image';
+import type { Transition } from 'framer-motion';
 
-const transition = {
-  type: "spring",
+const springTransition: Transition = {
+  type: 'spring',
   mass: 0.5,
   damping: 11.5,
   stiffness: 100,
@@ -40,12 +41,12 @@ export const MenuItem = ({
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={transition}
+          transition={springTransition}
         >
           {active === item && (
             <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
               <motion.div
-                transition={transition}
+                transition={springTransition}
                 layoutId="active" // layoutId ensures smooth animation
                 className="bg-white dark:bg-black backdrop-blur-sm rounded-3xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
               >
@@ -78,8 +79,8 @@ export const Menu = ({
       onMouseLeave={() => setActive(null)} // resets the state
       className={`relative rounded-full  gap-10 max-w-[1400px]   justify-between   flex space-x-4 px-6 py-4 duration-500 ease-in-out ${
         upToZero
-          ? "lg:w-[80%] bg-[#F4FAFB]  dark:bg-black   border dark:border-white/20 "
-          : "w-full  bg-transparent border border-black/0"
+          ? 'lg:w-[80%] bg-[#f4fafbb7] backdrop-blur-lg  dark:bg-black/80   border dark:border-white/20 '
+          : 'w-full  bg-transparent border border-black/0'
       } `}
     >
       {children}

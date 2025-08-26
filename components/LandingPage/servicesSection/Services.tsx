@@ -1,290 +1,214 @@
-"use client";
-import { cn } from "@/lib/utils";
-import React from "react";
-import { BentoGrid, BentoGridItem } from "../../ui/bento-grid";
-import {
-  IconBrandInstagram,
-  IconBriefcase,
-  IconChartBar,
-  IconDeviceLaptop,
-  IconMapPin,
-} from "@tabler/icons-react";
-import { motion } from "framer-motion";
-import ImgLogoUnique from "@/public/images/logo/ikovaline_logo_unique.png";
+'use client';
 
-import { IconBuildingStore } from "@tabler/icons-react";
-import { SkeletonThreeComponent } from "./SkeletonThree";
-import { SkeletonTwoComponent } from "./SkeletonTwo";
-import { SkeletonFourComponent } from "./SkeletonFour";
-import { SkeletonFiveComponent } from "./SkeletonFive";
-import Image from "next/image";
-import Link from "next/link";
-import { AnimatedBorderButton } from "@/components/ui/animated-border-button";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { LiquidLink } from '@/components/ui/liquid-link';
+import {
+  IconCpu,
+  IconDeviceMobileCode,
+  IconRobot,
+  IconSparkles,
+  IconTools,
+} from '@tabler/icons-react';
+
+import {
+  SaaSConstellation,
+  DevicesOrbit,
+  AutomationGrid,
+  ConversionPulse,
+} from './ServicesSkeletons';
+import LightBackdrop from '@/components/ui/lightBackdrop';
+import UnicornBackdrop from '@/components/ui/unicornBackdrop';
+
+type Card = {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  header: React.ReactNode;
+  href: string;
+  className?: string;
+};
+
+const cards: Card[] = [
+  {
+    title: 'SaaS sur-mesure • scalable • sécurisé',
+    description:
+      'De l’architecture au billing, multi-tenant, RBAC et observabilité. On bâtit une base produit saine pour itérer vite, sans dette.',
+    icon: <IconCpu className="size-6 text-cyan-600 dark:text-cyan-300" />,
+    header: <SaaSConstellation />,
+    href: '/nos-services/creation-saas-sur-mesure',
+  },
+  {
+    title: 'Web Apps & Mobiles • UX produit',
+    description:
+      'Next.js / Expo, perfs élevées, accessibilité, offline-first. Du PWA au store, du design système au shipping.',
+    icon: (
+      <IconDeviceMobileCode className="size-6 text-indigo-600 dark:text-indigo-300" />
+    ),
+    header: <DevicesOrbit />,
+    href: '/nos-services/web-apps-applications-mobiles',
+  },
+  {
+    title: 'Automatisation & IA • gains réels',
+    description:
+      'Workflows no/low-code, intégrations API, agents IA et RAG. On connecte vos outils et supprime les tâches répétitives.',
+    icon: <IconRobot className="size-6 text-teal-600 dark:text-teal-300" />,
+    header: <AutomationGrid />,
+    href: '/nos-services/automatisation-intelligence-artificielle',
+  },
+  {
+    title: 'Sites premium • conversion & SEO',
+    description:
+      'Design haut de gamme, contenus orientés ROI, vitesse extrême, tracking clean et SEO irréprochable.',
+    icon: (
+      <IconSparkles className="size-6 text-amber-600 dark:text-amber-300" />
+    ),
+    header: <ConversionPulse />,
+    href: '/nos-services/sites-web-premium-conversion',
+  },
+];
 
 export default function Services() {
   return (
-    <div className="pt-32 pb-10 lg:px-10 flex items-center flex-col">
-      <h2
-        className={
-          "max-md:flex hidden sm:text-4xl text-3xl items-center justify-center mb-12  font-semibold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-400 dark:to-neutral-100  bg-clip-text text-transparent "
-        }
-      >
-        Nos Services
-      </h2>
-    <div className="overflow-hidden relative py-5 px-2">
-        <BentoGrid className="md:max-w-[1400px] pb-10  max-w-sm relative mx-auto md:auto-rows-[28rem] xl:auto-rows-[31rem] 2xl:auto-rows-[32rem]  auto-rows-[29rem]">
-        {items.map((item, i) => (
-          <BentoGridItem
-            key={i}
-            title={item.title}
-            description={item.description}
-            header={item.header}
-            link={item.link}
-            className={cn("[&>p:text-lg]", item.className)}
-            icon={item.icon}
-          />
-        ))}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 xs:w-2/3 h-[80%] xs:h-1/2 blur-3xl opacity-20  dark:opacity-15 xs:dark:opacity-20  bg-gradient-to-bl from-[#59D9F1] to-[#47EAE0] z-0"/>
-       
-      </BentoGrid>
-    </div>
+    <section className="relative isolate py-28 md:py-36">
+      {/* Backdrops */}
+      <LightBackdrop className="block dark:hidden" />
+      <UnicornBackdrop className="hidden dark:block" />
 
-      <Link href="/nos-services">
-        <AnimatedBorderButton>Voir tous nos services</AnimatedBorderButton>
-      </Link>
+      <div className="mx-auto max-w-6xl px-4">
+        <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-neutral-100 dark:to-neutral-200">
+          Nos Services
+        </h2>
+        <p className="mt-3 text-center text-neutral-800 dark:text-neutral-200">
+          Du produit au go-to-market, on conçoit des expériences qui
+          transforment vraiment.
+        </p>
+
+        {/* Grid en staggered layout */}
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-7 auto-rows-[minmax(20rem,auto)]">
+          {cards.map((card, i) => (
+            <motion.a
+              key={i}
+              href={card.href}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              viewport={{ once: true }}
+              className={cn(
+                'group relative overflow-hidden rounded-3xl p-1',
+                'hover:scale-[1.01] transition-transform duration-300',
+                // Staggered layout: décalage vertical
+                i % 2 === 1 ? 'sm:translate-y-8' : ''
+              )}
+            >
+              <GlassCard className="h-full flex flex-col">
+                <div className="relative h-40 w-full">{card.header}</div>
+                <div className="mt-4 flex items-start gap-3">
+                  {card.icon}
+                  <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                    {card.title}
+                  </h3>
+                </div>
+                <p className="mt-2 text-sm sm:text-base text-neutral-600 dark:text-neutral-300">
+                  {card.description}
+                </p>
+                <div className="mt-auto pt-5">
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-cyan-700 dark:text-cyan-200">
+                    Découvrir →
+                  </span>
+                </div>
+              </GlassCard>
+            </motion.a>
+          ))}
+        </div>
+
+        <div className="mt-14 flex justify-center">
+          <LiquidLink href="/nos-services" className="z-10">
+            <span className="flex items-center justify-center gap-2">
+              <IconTools />
+              Voir tous nos services
+            </span>
+          </LiquidLink>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function GlassCard({
+  className,
+  children,
+}: React.PropsWithChildren<{ className?: string }>) {
+  return (
+    <div
+      className={cn(
+        'relative overflow-hidden rounded-3xl',
+        'bg-white/10 dark:bg-neutral-900/10',
+        'border border-white/30 dark:border-white/10',
+        'backdrop-blur-md',
+        'transition-transform duration-300 hover:scale-[1.01]',
+        className
+      )}
+    >
+      {/* couche “relief” comme LiquidButton */}
+      <div
+        aria-hidden
+        className="absolute inset-0 z-0 rounded-3xl shadow-[0_0_6px_rgba(0,0,0,0.03),0_4px_12px_rgba(0,0,0,0.08),inset_3px_3px_0.5px_-3px_rgba(0,0,0,0.9),inset_-3px_-3px_0.5px_-3px_rgba(0,0,0,0.85),inset_1px_1px_1px_-0.5px_rgba(0,0,0,0.6),inset_-1px_-1px_1px_-0.5px_rgba(0,0,0,0.6),inset_0_0_8px_8px_rgba(0,0,0,0.1),inset_0_0_3px_3px_rgba(0,0,0,0.05),0_0_18px_rgba(255,255,255,0.15)]"
+      />
+
+      {/* filtre verre */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 overflow-hidden rounded-3xl"
+        style={{ backdropFilter: 'url("#card-glass")' }}
+      />
+
+      {/* contenu */}
+      <div className="relative z-10 p-6">{children}</div>
+
+      {/* filtre svg */}
+      <GlassFilter />
     </div>
   );
 }
 
-const SkeletonOne = () => {
-  const variants = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: 8,
-      rotate: 3,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
-  const variantsSecond = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: -8,
-      rotate: -3,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
-
+function GlassFilter() {
   return (
-    <motion.div
-      initial="initial"
-      whileHover="animate"
-      className=" w-full  relative h-auto  pt-5 gap-4  text-xs grid grid-cols-2 flex-col "
-    >
-      <motion.div variants={variantsSecond} className="space-y-4">
-        <div className="w-full text-sm bg-white dark:bg-neutral-700 text-neutral-400 rounded-full shadow-lg py-1 px-2 border">
-          recherche
-        </div>
-        <div className="space-y-2">
-          <div className="space-y-1 flex flex-col  border border-red-300 rounded-xl p-1">
-            <span className="text-sm text-neutral-500 flex gap-1 items-center ">
-              {" "}
-              <Image
-                width={30}
-                height={30}
-                src={ImgLogoUnique}
-                alt="ikovaline logo"
-                className="w-3 h-3"
-              />
-              Ikovaline
-            </span>
-            <span className="text-xs text-neutral-400">
-              La start-up qui booste...
-            </span>
-          </div>
-          <div className="space-y-1 flex flex-col">
-            <div className="w-1/2 bg-neutral-100 h-4 rounded-full dark:bg-neutral-900" />
-            <div className="w-full bg-neutral-100 h-4 rounded-full dark:bg-neutral-900" />
-          </div>
-          <div className="space-y-1 flex flex-col">
-            <div className="w-1/2 bg-neutral-100 h-4 rounded-full dark:bg-neutral-900" />
-            <div className="w-full bg-neutral-100 h-4 rounded-full dark:bg-neutral-900" />
-          </div>
-        </div>
-      </motion.div>
-      <div className="h-full border border-neutral-100 dark:border-neutral-700 absolute top-0 left-1/2 -translate-x-1/2" />
-      <motion.div variants={variants}>
-        <div>
-          <IconBuildingStore
-            stroke={2}
-            width={55}
-            height={55}
-            className="mx-auto text-neutral-300 dark:text-neutral-700"
+    <svg className="hidden">
+      <defs>
+        <filter
+          id="card-glass"
+          x="0%"
+          y="0%"
+          width="100%"
+          height="100%"
+          colorInterpolationFilters="sRGB"
+        >
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.05 0.05"
+            numOctaves="1"
+            seed="2"
+            result="turbulence"
           />
-        </div>
-        <div>
-          <span className="text-base flex  text-neutral-500 gap-2 items-center">
-            {" "}
-            <Image
-              width={50}
-              height={50}
-              src={ImgLogoUnique}
-              alt="ikovaline logo"
-              className="h-5 w-5"
-            />
-            Ikovaline
-          </span>
-        </div>
-        <div className="flex text-sm text-neutral-400 ">
-          <span>⭐</span>
-          <span>⭐</span>
-          <span>⭐</span>
-          <span>⭐</span>
-          <span>⭐</span>
-          <span>(87)</span>
-        </div>
-        <div className="text-xs text-neutral-400">buisness développement</div>
-        <div className="w-full border my-2" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
-      </motion.div>
-    </motion.div>
+          <feGaussianBlur
+            in="turbulence"
+            stdDeviation="2"
+            result="blurredNoise"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="blurredNoise"
+            scale="60"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="displaced"
+          />
+          <feGaussianBlur in="displaced" stdDeviation="3" result="finalBlur" />
+          <feComposite in="finalBlur" in2="finalBlur" operator="over" />
+        </filter>
+      </defs>
+    </svg>
   );
-};
-const SkeletonTwo = () => {
-  return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      whileHover="hover"
-      className="flex flex-1 w-full h-full flex-col space-y-2"
-    >
-      <SkeletonTwoComponent />
-    </motion.div>
-  );
-};
-const SkeletonThree = () => {
-  const variants = {
-    initial: {
-      backgroundPosition: "0 50%",
-    },
-    animate: {
-      backgroundPosition: ["0, 50%", "100% 50%", "0 50%"],
-    },
-  };
-  return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={variants}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        repeatType: "reverse",
-      }}
-      className="flex flex-1 w-full h-full mt-4  rounded-lg  flex-col space-y-2"
-    >
-      <SkeletonThreeComponent className=" " />
-    </motion.div>
-  );
-};
-const SkeletonFour = () => {
-  return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      whileHover="hover"
-      className="flex py-2  md:px-9 lg:px-0 px-0  h-auto  flex-row space-x-2"
-    >
-      <SkeletonFourComponent />
-    </motion.div>
-  );
-};
-const SkeletonFive = () => {
-  return (
-    <motion.div
-      initial="initial"
-      whileHover="animate"
-      className="flex flex-1 w-full h-full items-center justify-center pt-4    flex-col space-y-2"
-    >
-      <SkeletonFiveComponent />
-    </motion.div>
-  );
-};
-const items = [
-  {
-    title: "Google My Business & Avis Clients",
-    description: (
-      <span className="text-sm xl:text-base ">
-        Améliorez votre positionnement local grâce à une gestion stratégique de
-        votre fiche Google My Business et des avis clients. Gagnez en
-        visibilité, en crédibilité, et attirez plus de prospects.
-      </span>
-    ),
-    header: <SkeletonOne />,
-    link: "/nos-services/e-reputation-gestion-avis-google",
-    className: "md:col-span-1",
-    icon: <IconMapPin stroke={2} className="text-neutral-500 dark:text-neutral-300" />,
-  },
-  {
-    title: "Stratégie de Contenu & Réseaux Sociaux",
-    description: (
-      <span className="text-sm xl:text-base ">
-        Déployez des campagnes engageantes sur Instagram, Facebook, TikTok et
-        LinkedIn avec une stratégie de contenu SEO-friendly. Renforcez votre
-        notoriété et générez du trafic qualifié.
-      </span>
-    ),
-    header: <SkeletonTwo />,
-    link: "/nos-services/gestion-developpement-reseaux-sociaux",
-    className: "md:col-span-1",
-    icon: <IconBrandInstagram className=" text-neutral-500 dark:text-neutral-300" />,
-  },
-  {
-    title: "Lancement de Campagnes Publicitaires",
-    description: (
-      <span className="text-sm xl:text-base ">
-        Lancez des campagnes Google Ads et Social Ads ciblées pour booster vos
-        conversions. Augmentez votre retour sur investissement (ROI) grâce à une
-        stratégie publicitaire maîtrisée.
-      </span>
-    ),
-    header: <SkeletonFour />,
-    link: "/nos-services/gestion-campagnes-sea",
-    className: "md:col-span-1",
-    icon: <IconChartBar className=" text-neutral-500 dark:text-neutral-300" />,
-  },
-  {
-    title: "Consulting en Développement Commercial",
-    description: (
-      <span className="text-sm xl:text-base ">
-        Bénéficiez de conseils stratégiques pour structurer votre prospection,
-        améliorer vos ventes et automatiser votre croissance grâce au digital.
-      </span>
-    ),
-    header: <SkeletonFive />,
-    link: "/nos-services#buisness-developpement",
-    className: "md:col-span-1  ",
-    icon: <IconBriefcase className=" text-neutral-500 dark:text-neutral-300" />,
-  },
-  {
-    title: "Création & Optimisation de Sites Internet",
-    description: (
-      <span className="text-sm xl:text-base ">
-        Création de sites interent performants que ce soit vitrines et
-        e-commerce ou même sur mesure, optimisés SEO, mobile-first et rapides.
-        Offrez à vos visiteurs une expérience fluide sur tous les appareils.
-      </span>
-    ),
-    header: <SkeletonThree />,
-    link: "/nos-services/creation-sites-web-vitrine-e-commerce",
-    className: "md:!col-span-2 ",
-    icon: <IconDeviceLaptop className=" text-neutral-500 dark:text-neutral-300" />,
-  },
-];
+}

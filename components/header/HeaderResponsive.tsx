@@ -14,7 +14,7 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
-import { IconMenu3, IconShieldCheck } from '@tabler/icons-react';
+import { IconMenu3, IconMessage2, IconShieldCheck } from '@tabler/icons-react';
 import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
 
 import { ModeToggle } from '../toggle-darkmode';
@@ -36,6 +36,7 @@ import {
   IconThumbUp,
   IconUser,
 } from '@tabler/icons-react';
+import { LiquidLink } from '../ui/liquid-link';
 
 export function HeaderResponsive() {
   const { theme, systemTheme } = useTheme();
@@ -46,7 +47,7 @@ export function HeaderResponsive() {
   }, []);
   const headerLinks = [
     {
-      title: 'Home',
+      title: 'Accueil',
       href: '/',
       links: [
         { label: 'À Propos', href: '/#about', icon: <IconUser stroke={2} /> },
@@ -150,13 +151,15 @@ export function HeaderResponsive() {
             </Link>
           </DrawerClose>
         </div>
-        <Button
-          asChild
-          variant={'secondary'}
-          className="rounded-3xl max-[360px]:p-3 max-[320px]:px-5 max-[320px]:text-sm text-xs"
-        >
-          <Link href={'/contact'}>Contactez-nous</Link>
-        </Button>
+
+        <LiquidLink href="/contact" className="z-10 px-3 h-11 ">
+          <span className="flex items-center justify-center text-xs gap-2">
+            <span aria-hidden="true">
+              <IconMessage2 />
+            </span>
+            Contactez-nous
+          </span>
+        </LiquidLink>
         <ModeToggle />
       </div>
       <DrawerContent>

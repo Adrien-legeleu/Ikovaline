@@ -1,37 +1,37 @@
-"use client";
-import { useTheme } from "next-themes";
-import { CardSticky, ContainerScroll } from "./CardStack";
+'use client';
+import { useTheme } from 'next-themes';
+import { CardSticky, ContainerScroll, GlassSticky } from './CardStack';
 const Sparkles = dynamic(
-  () => import("@/components/LandingPage/impact/Sparkles"),
+  () => import('@/components/LandingPage/impact/Sparkles'),
 
   { ssr: false }
 );
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 const METHODOLOGIE_PHASES = [
   {
-    id: "phase-1",
-    title: "Audit & Objectifs",
+    id: 'phase-1',
+    title: 'Audit & Objectifs',
     description:
       "Avant toute action, nous réalisons un audit complet de votre présence en ligne. Nous identifions vos points forts, vos freins et les opportunités d'amélioration. Cette phase stratégique permet de fixer des objectifs clairs pour votre digitalisation.",
   },
   {
-    id: "phase-2",
-    title: "Stratégie Digitale Personnalisée",
+    id: 'phase-2',
+    title: 'Stratégie Digitale Personnalisée',
     description:
-      "SEO local, création de contenu, gestion de Google Business Profile, publicité Google Ads... nous concevons un plan sur-mesure pour renforcer votre visibilité et attirer des clients qualifiés.",
+      'SEO local, création de contenu, gestion de Google Business Profile, publicité Google Ads... nous concevons un plan sur-mesure pour renforcer votre visibilité et attirer des clients qualifiés.',
   },
   {
-    id: "phase-3",
-    title: "Conception & Optimisation",
+    id: 'phase-3',
+    title: 'Conception & Optimisation',
     description:
       "Nous concevons ou refondons votre site web avec une approche centrée sur l'utilisateur. Responsive, rapide, optimisé pour le référencement naturel et pensé pour convertir vos visiteurs en prospects.",
   },
   {
-    id: "phase-4",
-    title: "Suivi & Résultats",
+    id: 'phase-4',
+    title: 'Suivi & Résultats',
     description:
-      "Une fois votre stratégie lancée, nous assurons un suivi régulier. Nos actions sont mesurées, ajustées et transparentes, pour garantir des résultats durables en visibilité, trafic et conversions.",
+      'Une fois votre stratégie lancée, nous assurons un suivi régulier. Nos actions sont mesurées, ajustées et transparentes, pour garantir des résultats durables en visibilité, trafic et conversions.',
   },
 ];
 
@@ -42,7 +42,7 @@ export default function Methodologie() {
       <div className="grid md:grid-cols-2 md:gap-12 xl:gap-16">
         <div className="left-0 top-36 md:sticky md:h-svh">
           <h2 className="mb-6 mt-4 text-4xl max-md:text-center text-neutral-900 dark:text-neutral-100 font-bold tracking-tight">
-            Une méthode claire pour{" "}
+            Une méthode claire pour{' '}
             <span className="">booster votre visibilité en ligne</span>
           </h2>
           <p className="max-w-prose md:text-sm  max-md:text-center lg:text-base text-neutral-700 dark:text-neutral-300">
@@ -52,34 +52,45 @@ export default function Methodologie() {
             référencement naturel, la visibilité locale et la performance.
           </p>
           <div className="relative -mt-32 h-96 w-full overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]">
-            <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#5AD8F2,transparent_99%)] before:opacity-40" />
-            <div className="absolute -left-1/2 top-1/2 aspect-[1/0.7] z-10 w-[200%] rounded-[100%] border-t border-zinc-900/20 dark:border-white/20 bg-white dark:bg-zinc-900" />
+            {/* Halo bleu brillant */}
+            <div
+              className="absolute inset-0 before:absolute before:inset-0 
+                  before:bg-[radial-gradient(circle_at_bottom_center,#2563EB,#3B82F6_40%,transparent_95%)] 
+                  before:opacity-60"
+            />
+
+            {/* Base arrondie */}
+            <div
+              className="absolute -left-1/2 top-1/2 aspect-[1/0.7] z-10 w-[200%] 
+                  rounded-[100%] border-t border-zinc-900/20 dark:border-white/20 
+                  bg-white dark:bg-zinc-900"
+            />
+
+            {/* Sparkles */}
             <Sparkles
               density={1200}
-              className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
-              color={theme === "dark" ? "#ffffff" : "#000000"}
+              className="absolute inset-x-0 bottom-0 h-full w-full 
+               [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
+              color={theme === 'dark' ? '#ffffff' : '#000000'}
             />
           </div>
         </div>
         <ContainerScroll className="min-h-[220vh] space-y-8 py-12">
           {METHODOLOGIE_PHASES.map((phase, index) => (
-            <CardSticky
-              key={phase.id}
-              index={index + 2}
-              className="rounded-3xl border p-8 shadow-md backdrop-blur-2xl bg-white/20 dark:bg-black/10"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <h2 className="my-6 text-2xl font-bold text-secondary tracking-tighter">
-                  {phase.title}
-                </h2>
-                <h3 className="text-2xl font-bold text-secondary">
-                  {String(index + 1).padStart(2, "0")}
-                </h3>
-              </div>
-
-              <p className="text-neutral-700 md:text-sm lg:text-base dark:text-neutral-300 ">
-                {phase.description}
-              </p>
+            <CardSticky key={phase.id} index={index + 2}>
+              <GlassSticky>
+                <div className="flex items-center justify-between gap-4">
+                  <h2 className="my-2 text-2xl font-bold text-primary tracking-tight">
+                    {phase.title}
+                  </h2>
+                  <h3 className="text-2xl font-bold text-primary">
+                    {String(index + 1).padStart(2, '0')}
+                  </h3>
+                </div>
+                <p className="text-neutral-700 md:text-sm lg:text-base dark:text-neutral-300">
+                  {phase.description}
+                </p>
+              </GlassSticky>
             </CardSticky>
           ))}
         </ContainerScroll>

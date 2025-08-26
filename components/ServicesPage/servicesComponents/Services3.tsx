@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import { IconArrowRight } from '@tabler/icons-react';
 
-export function Service2() {
+export function Service3() {
   return (
     <section className="relative pb-20 pt-14 md:pt-20">
       {/* Halo bleu */}
@@ -27,9 +27,9 @@ export function Service2() {
                      bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
                      dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
         >
-          Automatisation &{' '}
-          <span className="text-sky-500 dark:text-sky-400">IA</span> au service
-          de votre efficacité
+          Stratégies Digitales &{' '}
+          <span className="text-sky-500 dark:text-sky-400">Croissance</span>{' '}
+          sur-mesure
         </motion.h2>
 
         {/* Intro */}
@@ -40,15 +40,15 @@ export function Service2() {
           transition={{ duration: 0.55, ease: 'easeOut', delay: 0.1 }}
           className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg"
         >
-          Libérez du temps et <b>optimisez vos conversions</b> grâce à nos{' '}
-          <b>solutions d’automatisation</b> et d’
-          <b>intelligence artificielle</b>. Du CRM intelligent aux assistants
-          vocaux, nous intégrons des outils qui travaillent pour vous.
+          Nous activons tous les <b>leviers</b> pertinents — marketing digital,
+          prospection, SEO, campagnes, réseaux sociaux — pour{' '}
+          <b>accélérer votre croissance</b>, générer des leads qualifiés et
+          conquérir de nouveaux marchés.
         </motion.p>
 
         {/* Cartes */}
         <div
-          id="automatisation-ia"
+          id="scaling"
           className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {grid.map((feature, idx) => (
@@ -74,7 +74,7 @@ export function Service2() {
                            dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]
                            transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]"
               >
-                {/* Glow bas */}
+                {/* Glow */}
                 <span
                   aria-hidden
                   className="pointer-events-none absolute -bottom-12 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-full blur-3xl
@@ -133,7 +133,7 @@ export function Service2() {
         {/* CTA */}
         <div className="mt-10 flex justify-center">
           <LiquidLink href="/contact" className="text-md">
-            Découvrez nos solutions IA
+            Boostez votre business
           </LiquidLink>
         </div>
       </div>
@@ -143,36 +143,69 @@ export function Service2() {
 
 const grid = [
   {
-    title: 'IA & Marketing',
-    slug: 'automatisation-solutions-ia-marketing',
+    title: 'Études de Marché',
+    slug: 'etudes-marche-sur-mesure',
     description: (
       <ul className="list-disc pl-4 space-y-3">
         <li>
-          CRM intelligent, segmentation automatisée et{' '}
-          <b>scénarios de conversion</b>.
+          Analyse du marché, identification des cibles et tendances pour
+          orienter vos <b>stratégies</b>.
         </li>
       </ul>
     ),
   },
   {
-    title: 'Prospection Téléphonique',
-    slug: 'prospection-telephone-ia',
+    title: 'Sondages & Enquêtes',
+    slug: 'sondages-marche-enquetes-terrain',
     description: (
       <ul className="list-disc pl-4 space-y-3">
         <li>
-          Assistant vocal : <b>appels automatisés</b>, suivi et relances
-          optimisées.
+          Collecte et analyse de données fiables pour des{' '}
+          <b>décisions éclairées</b>.
         </li>
       </ul>
     ),
   },
   {
-    title: 'Emailing Automatisé',
-    slug: 'automatisation-ia-emailing',
+    title: 'Stratégie Commerciale',
+    slug: 'strategie-commerciale-developpement-business',
     description: (
       <ul className="list-disc pl-4 space-y-3">
         <li>
-          Augmentez vos conversions grâce à l’<b>emailing piloté par IA</b>.
+          Mise en place de plans performants pour <b>augmenter vos ventes</b>.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: 'SEO & Référencement',
+    slug: 'seo-referencement-naturel',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>
+          Boostez votre visibilité organique avec un <b>SEO optimisé</b>.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Campagnes SEA',
+    slug: 'gestion-campagnes-sea',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>
+          Publicités ciblées et pilotage axé <b>ROI</b>.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Développement International',
+    slug: 'developpement-international',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>
+          Accompagnement pour <b>conquérir de nouveaux marchés</b>.
         </li>
       </ul>
     ),

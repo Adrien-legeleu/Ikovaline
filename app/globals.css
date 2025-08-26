@@ -18,59 +18,94 @@ body {
 }
 @layer base {
   :root {
-    --background: 193 50% 97%;
-    --foreground: 210 30% 20%;
-    --card: 193 45% 95%;
-    --card-foreground: 210 30% 15%;
-    --popover: 193 45% 95%;
-    --popover-foreground: 210 30% 15%;
-    --primary: 176 80% 65%;
-    --primary-foreground: 0% 0% 100%;
-    --secondary: 190 85% 65%;
-    --secondary-foreground: 0% 0% 100%;
-    --muted: 193 30% 90%;
-    --muted-foreground: 210 15% 40%;
-    --accent: 190 85% 60%;
-    --accent-foreground: 0% 0% 100%;
+    /* Base - LIGHT */
+    --background: 0 0% 100%; /* Blanc pur */
+    --foreground: 210 30% 12%; /* Gris très foncé lisible sur clair */
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 30% 12%;
+
+    /* Brand */
+    --primary: 192 100% 45%; /* #00A8E8 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 192 100% 38%; /* version + sombre */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Neutrals */
+    --muted: 210 12% 95%;
+    --muted-foreground: 210 10% 40%;
+
+    --accent: 197 100% 45%; /* Accent identique au primaire */
+    --accent-foreground: 0 0% 100%;
+
+    /* States */
     --destructive: 0 84% 58%;
-    --destructive-foreground: 220 20% 95%;
-    --border: 193 30% 85%;
-    --input: 193 30% 85%;
-    --ring: 190 85% 65%;
-    --chart-1: 190 85% 65%;
-    --chart-2: 176 80% 65%;
-    --chart-3: 176 80% 70%;
-    --chart-4: 176 80% 50%;
-    --chart-5: 190 85% 75%;
-    --radius: 0.5rem;
-    --gradient: linear-gradient(90deg, #1be0e0, #06f3b7);
+    --destructive-foreground: 0 0% 100%;
+
+    /* Lines / Inputs */
+    --border: 210 12% 85%;
+    --input: 210 12% 85%;
+    --ring: 197 100% 45%;
+
+    /* Charts */
+    --chart-1: 197 100% 45%;
+    --chart-2: 197 100% 35%;
+    --chart-3: 197 100% 55%;
+    --chart-4: 197 100% 65%;
+    --chart-5: 197 100% 75%;
+
+    --radius: 0.75rem;
+
+    /* Gradient (bleu dégradé clair/foncé) */
+    --gradient: linear-gradient(90deg, hsl(197 100% 45%), hsl(197 100% 60%));
   }
+
   .dark {
-    --background: 210 30% 5%;
-    --foreground: 193 50% 90%;
-    --card: 210 30% 15%;
-    --card-foreground: 193 50% 95%;
-    --popover: 210 30% 15%;
-    --popover-foreground: 193 50% 95%;
-    --primary: 176 80% 65%;
-    --primary-foreground: 210 30% 10%;
-    --secondary: 190 85% 55%;
-    --secondary-foreground: 210 30% 10%;
-    --muted: 210 30% 20%;
-    --muted-foreground: 193 50% 70%;
-    --accent: 190 85% 60%;
-    --accent-foreground: 193 50% 90%;
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 210 30% 95%;
-    --border: 210 30% 20%;
-    --input: 210 30% 20%;
-    --ring: 190 85% 65%;
-    --chart-1: 190 85% 65%;
-    --chart-2: 176 80% 60%;
-    --chart-3: 176 80% 50%;
-    --chart-4: 176 80% 40%;
-    --chart-5: 190 85% 55%;
+    /* Base - DARK */
+    --background: 210 21% 5%; /* Noir profond #0B0E11 */
+    --foreground: 0 0% 100%;
+
+    --card: 214 12% 12%; /* Gris anthracite */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 214 12% 12%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Brand */
+    --primary: 197 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 197 100% 35%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Neutrals */
+    --muted: 214 12% 18%;
+    --muted-foreground: 193 20% 80%;
+
+    --accent: 197 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    /* States */
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Lines / Inputs */
+    --border: 214 12% 22%;
+    --input: 214 12% 22%;
+    --ring: 197 100% 50%;
+
+    /* Charts */
+    --chart-1: 197 100% 50%;
+    --chart-2: 197 100% 40%;
+    --chart-3: 197 100% 60%;
+    --chart-4: 197 100% 70%;
+    --chart-5: 197 100% 80%;
   }
+
   .theme {
     --animate-shine: shine var(--duration) infinite linear;
     --animate-marquee: marquee var(--duration) infinite linear;
@@ -121,4 +156,9 @@ body {
   to {
     transform: translateX(calc(-100% - var(--gap)));
   }
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }

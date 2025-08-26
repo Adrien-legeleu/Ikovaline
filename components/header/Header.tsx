@@ -10,7 +10,6 @@ import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
 import Link from 'next/link';
 import { HeaderResponsive } from './HeaderResponsive';
 import { ModeToggle } from '../toggle-darkmode';
-import { useTheme } from 'next-themes';
 import {
   IconApps,
   IconChartLine,
@@ -23,16 +22,15 @@ import {
   IconThumbUp,
   IconUser,
 } from '@tabler/icons-react';
+import { LiquidButton, liquidbuttonVariants } from '../ui/liquid-glass-button';
+import { LiquidLink } from '../ui/liquid-link';
 
 export function Header({ className }: { className?: string }) {
-  const { theme, systemTheme } = useTheme();
   const [active, setActive] = useState<string | null>(null);
 
   const [upToZero, setUpToZero] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const handleHeader = () => {
       const scrollY = window.scrollY;
       if (scrollY > 0) {
@@ -58,19 +56,24 @@ export function Header({ className }: { className?: string }) {
         <Menu setActive={setActive} upToZero={upToZero}>
           <div className={` flex items-center justify-center `}>
             <Link href="/">
-              {mounted && (
-                <Image
-                  src={
-                    (theme === 'system' ? systemTheme : theme) === 'dark'
-                      ? IkovalineLogoDark
-                      : IkovalineLogo
-                  }
-                  alt="logo de la start-up Ikovaline"
-                  width={150}
-                  height={150}
-                  className="h-10 object-contain"
-                />
-              )}
+              {/* Logo clair */}
+              <Image
+                src={IkovalineLogo}
+                alt="Ikovaline"
+                width={150}
+                height={150}
+                className="h-10 object-contain dark:hidden"
+                priority
+              />
+              {/* Logo sombre */}
+              <Image
+                src={IkovalineLogoDark}
+                alt="Ikovaline (dark)"
+                width={150}
+                height={150}
+                className="h-10 object-contain hidden dark:block"
+                priority
+              />
             </Link>
           </div>
           <div className="flex items-center  w-full gap-10  justify-end">
@@ -150,13 +153,9 @@ export function Header({ className }: { className?: string }) {
             ></MenuItem>
             <div className="flex items-center gap-4">
               <ModeToggle />
-              <Button
-                asChild
-                variant={'secondary'}
-                className="rounded-3xl py-5"
-              >
-                <Link href={'/contact'}>Contactez-nous</Link>
-              </Button>
+              <LiquidLink href="/contact" className="z-10 !py-0 !h-10 !px-4">
+                Contactez-nous
+              </LiquidLink>
             </div>
           </div>
         </Menu>

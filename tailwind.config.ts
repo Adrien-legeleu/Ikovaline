@@ -39,25 +39,37 @@ const config: Config = {
         servicemobileDark: '0 0 200px 50px #000000',
         serviceIconlight: '20px -20px 60px #bebebe, 20px 20px 60px #ffffff',
         serviceIconDark: ' -28px -28px 55px #292929,   28px 28px 55px #373737',
-        glow: '0 -16px 128px 0 rgba(88,211,236, 0.5) inset, 0 -30px 32px 0 rgba(88, 211, 236, 0.55) inset',
-        glowMobile:
-          '0 -15px 58px 0 rgba(88,211,236, 0.7) inset, 0 -20px 20px 0 rgba(88, 211, 236, 0.5) inset',
-        'ikovaline-glow-button': '0 0 20px rgba(131, 80, 232, 0.3)',
+        glow: `
+  0 -18px 140px 0 rgba(0, 168, 232, 0.55) inset,   /* halo large */
+  0 -32px 42px 0 rgba(0, 168, 232, 0.7) inset,    /* cœur intense */
+  0 0 36px rgba(0, 168, 232, 0.45),               /* glow externe lumineux */
+  0 0 80px rgba(0, 168, 232, 0.3)                 /* diffusion turquoise */
+`,
+        glowMobile: `
+  0 -15px 70px 0 rgba(0, 168, 232, 0.7) inset,
+  0 -22px 28px 0 rgba(0, 168, 232, 0.55) inset,
+  0 0 28px rgba(0, 168, 232, 0.4)
+`,
+        'ikovaline-glow-button': `
+  0 0 32px rgba(0, 168, 232, 0.55),
+  0 0 60px rgba(0, 168, 232, 0.45),
+  0 0 90px rgba(0, 168, 232, 0.3)
+`,
       },
       colors: {
         brand: {
-          DEFAULT: '#5AD8F2',
-          50: '#EBFBFE',
-          100: '#D5F5FC',
-          200: '#B0EFFA',
-          300: '#8BEAF7',
-          400: '#6FE4F4',
-          500: '#5AD8F2',
-          600: '#52D0E6',
-          700: '#4BC8DA',
-          800: '#43BFCF',
-          900: '#3AB4C3',
-          950: '#2B99A8',
+          DEFAULT: '#00A8E8', // ELECTRIC BLUE principal
+          50: '#E6FBFF',
+          100: '#CCF6FF',
+          200: '#99EFFF',
+          300: '#66E5FA',
+          400: '#33D4F5',
+          500: '#00A8E8', // teinte phare
+          600: '#0095D1',
+          700: '#007DAC',
+          800: '#006588',
+          900: '#004B66',
+          950: '#00384D',
         },
 
         background: 'hsl(var(--background))',

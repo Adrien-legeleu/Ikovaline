@@ -9,6 +9,7 @@ import Review5 from '@/public/images/logo/logo-lora.png';
 import { motion } from 'framer-motion';
 import Marquee from '@/components/ui/marquee';
 import Image, { StaticImageData } from 'next/image';
+import { GlassSticky } from '../impact/CardStack';
 
 interface ReviewType {
   name: string;
@@ -97,7 +98,7 @@ const ReviewCard = ({
   role: string;
   text: string;
 }) => (
-  <div className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-md w-full bg-white dark:bg-neutral-900">
+  <GlassSticky className="shadow-none">
     <div className="mb-4 text-base">{text}</div>
     <div className="flex items-center gap-2 mt-5">
       {typeof image === 'string' ? (
@@ -124,7 +125,7 @@ const ReviewCard = ({
         </div>
       </div>
     </div>
-  </div>
+  </GlassSticky>
 );
 
 const MarqueeDemoVertical = () => (
