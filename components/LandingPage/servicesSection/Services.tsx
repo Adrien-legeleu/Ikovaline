@@ -24,7 +24,7 @@ const UnicornBackdrop = dynamic(
 import { usePathname } from 'next/navigation';
 
 // Framer allégé
-import { LazyMotion, m, domAnimation, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import {
   AutomationGrid,
   ConversionPulse,

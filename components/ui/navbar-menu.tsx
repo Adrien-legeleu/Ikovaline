@@ -176,7 +176,7 @@ export const Menu = ({
         upToZero
           ? [
               // Base liquid glass
-              'lg:w-[80%]',
+              'lg:w-[98%] xl:w-[85%]',
               'backdrop-blur-2xl backdrop-saturate-150',
               'bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.42))]',
               'dark:bg-[linear-gradient(135deg,rgba(8,12,18,.92),rgba(8,12,18,.62))]',

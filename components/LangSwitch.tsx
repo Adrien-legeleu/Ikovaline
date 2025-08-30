@@ -12,7 +12,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { LiquidButton } from './ui/liquid-glass-button';
 
 // ------- helpers URL / cookies -------
 function setLocaleCookie(locale: 'fr' | 'en') {
