@@ -23,13 +23,6 @@ export default function WorldMap({
 
   const { theme } = useTheme();
 
-  const svgMap = map.getSVG({
-    radius: 0.22,
-    color: theme === 'dark' ? '#FFFFFF90' : '#00000040',
-    shape: 'circle',
-    backgroundColor: 'transparent',
-  });
-
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
     const y = (90 - lat) * (400 / 180);

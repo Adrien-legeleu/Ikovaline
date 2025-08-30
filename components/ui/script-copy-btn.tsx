@@ -1,10 +1,7 @@
 'use client';
-
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Check, Copy } from 'lucide-react';
 import { useState } from 'react';
-import { LiquidLink } from './liquid-link';
 import { LiquidButton } from './liquid-glass-button';
 
 interface ScriptCopyBtnProps {
