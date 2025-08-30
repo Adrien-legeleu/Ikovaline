@@ -1,61 +1,57 @@
-import CTAHome from '@/components/LandingPage/CTAHome';
-import ComponentDemo from '@/components/LandingPage/impact/TextImpact';
-import Landing from '@/components/LandingPage/landing/Landing';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
+import type { Metadata } from 'next';
 
+import InViewLazy from '@/components/ux/InViewLazy';
+import Landing from '@/components/LandingPage/landing/Landing';
+import ComponentDemo from '@/components/LandingPage/impact/TextImpact';
+
+// ↓↓↓ HORS ÉCRAN → pas de SSR pour éviter de gonfler l'HTML initial
 const Review = dynamic(() => import('@/components/LandingPage/review/Review'), {
-  ssr: true,
+  ssr: false,
 });
 const Services = dynamic(
   () => import('@/components/LandingPage/servicesSection/Services'),
-  {
-    ssr: true,
-  }
+  { ssr: false }
 );
 const Map = dynamic(() => import('@/components/LandingPage/map/Map'), {
-  ssr: true,
+  ssr: false,
 });
 const Blog = dynamic(
   () => import('@/components/LandingPage/Blog/BlogLanding'),
-  {
-    ssr: true,
-  }
+  { ssr: false }
 );
 const About = dynamic(() => import('@/components/LandingPage/about/About'), {
   ssr: true,
 });
 const Methodologie = dynamic(
-  () =>
-    import('@/components/LandingPage/impact/Impact').then((mod) => mod.default),
+  () => import('@/components/LandingPage/impact/Impact').then((m) => m.default),
   { ssr: true }
 );
-
-import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
-import Head from 'next/head';
+const CTAHome = dynamic(() => import('@/components/LandingPage/CTAHome'), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: 'Ikovaline – Agence digitale Essonne & partout en France',
-
   description:
-    'Agence digitale à Bailly‑Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.',
+    'Agence digitale à Bailly-Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.',
   keywords: [
     'agence digitale Essonne',
-    'agence web Bailly‑Romainvilliers',
+    'agence web Bailly-Romainvilliers',
     'SEO local Essonne',
     'référencement naturel Essonne',
     'création site web Essonne',
     'publicité en ligne Essonne',
     'marketing digital Essonne',
-    'consultant SEO Bailly‑Romainvilliers',
+    'consultant SEO Bailly-Romainvilliers',
     'Google Ads Essonne',
     'agence web Paris',
   ],
   openGraph: {
     title: 'Ikovaline – Agence digitale Essonne & partout en France',
-
     description:
-      'Agence digitale à Bailly‑Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.',
-
+      'Agence digitale à Bailly-Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.',
     url: 'https://ikovaline.com',
     type: 'website',
     images: [
@@ -82,7 +78,6 @@ export default function Home() {
       <Head>
         <link rel="canonical" href="https://ikovaline.com/" />
         <meta name="robots" content="index, follow" />
-
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -105,8 +100,6 @@ export default function Home() {
             }),
           }}
         />
-
-        {/* WebSite */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -125,23 +118,43 @@ export default function Home() {
         />
       </Head>
 
-      <div className="max-w-[1450px]  mx-auto">
-        <div className="h-full w-full relative overflow-hidden">
+      <div className="max-w-[1450px] mx-auto">
+        {/* Above-the-fold: SSR OK */}
+        <div className="relative overflow-hidden">
           <Landing />
           <ComponentDemo />
-          <About />
-          <section id="services" className="h-full w-full relative ">
-            <Services />
-          </section>
         </div>
-        <Map />
-        <Methodologie />
-        <div className="overflow-hidden relative w-full">
-          <Review />
 
-          <CTAHome />
+        {/* lazy quand visible */}
+        <InViewLazy>
+          <About />
+        </InViewLazy>
+
+        <section id="services" className="relative">
+          <InViewLazy>
+            <Services />
+          </InViewLazy>
+        </section>
+
+        <InViewLazy>
+          <Map />
+        </InViewLazy>
+        <InViewLazy>
+          <Methodologie />
+        </InViewLazy>
+
+        <div className="relative w-full overflow-hidden">
+          <InViewLazy>
+            <Review />
+          </InViewLazy>
+          <InViewLazy rootMargin="400px">
+            <CTAHome />
+          </InViewLazy>
         </div>
-        <Blog />
+
+        <InViewLazy>
+          <Blog />
+        </InViewLazy>
       </div>
     </>
   );
