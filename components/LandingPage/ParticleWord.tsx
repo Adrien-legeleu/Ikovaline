@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 interface Vector2D {
@@ -203,8 +204,8 @@ interface ParticleTextEffectProps {
   words?: string[];
 }
 
-// Seulement 2 mots : scale + synonyme
-const DEFAULT_WORDS = ['PROPULSE', 'DÉCUPLE'];
+const FR_WORDS = ['PROPULSE', 'DÉCUPLE'];
+const EN_WORDS = ['BOOST', 'SCALE']; // <-- choisis ce que tu veux
 
 // Couleurs
 const themeRGB = () => {
@@ -213,8 +214,16 @@ const themeRGB = () => {
 };
 
 export function ParticleTextEffect({
-  words = DEFAULT_WORDS,
-}: ParticleTextEffectProps) {
+  words, // facultatif: si tu le passes depuis le parent, on le respecte
+}: {
+  words?: string[];
+}) {
+  const pathname = usePathname();
+  const locale = /^\/en(\/|$)/.test(pathname) ? 'en' : 'fr';
+
+  // ⬇️ on résout les mots en fonction de la locale si "words" n'est pas fourni
+  const resolvedWords = words ?? (locale === 'en' ? EN_WORDS : FR_WORDS);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const particlesRef = useRef<Particle[]>([]);
@@ -228,7 +237,6 @@ export function ParticleTextEffect({
   });
 
   const pixelSteps = 6;
-  const drawAsPoints = true;
 
   const generateRandomPos = (x: number, y: number, mag: number): Vector2D => {
     const randomX = Math.random() * 1000;
@@ -395,7 +403,11 @@ export function ParticleTextEffect({
     frameCountRef.current++;
     if (frameCountRef.current % 240 === 0) {
       wordIndexRef.current = (wordIndexRef.current + 1) % 2;
-      nextWord(words[wordIndexRef.current], canvas, wordIndexRef.current);
+      nextWord(
+        resolvedWords[wordIndexRef.current],
+        canvas,
+        wordIndexRef.current
+      );
     }
 
     animationRef.current = requestAnimationFrame(animate);
@@ -410,7 +422,7 @@ export function ParticleTextEffect({
 
     // 1er mot = bleu électrique
     wordIndexRef.current = 0;
-    nextWord(words[0], canvas, 0);
+    nextWord(resolvedWords[0], canvas, 0);
 
     animate();
 
@@ -474,7 +486,7 @@ export function ParticleTextEffect({
       canvas.removeEventListener('contextmenu', handleContextMenu);
       obs.disconnect();
     };
-  }, [words]);
+  }, [resolvedWords, locale]);
 
   return (
     <div className="flex flex-col items-center justify-center  bg-transparent">

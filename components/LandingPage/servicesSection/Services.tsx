@@ -20,17 +20,32 @@ import {
 } from './ServicesSkeletons';
 import LightBackdrop from '@/components/ui/lightBackdrop';
 import UnicornBackdrop from '@/components/ui/unicornBackdrop';
+import { usePathname } from 'next/navigation';
 
-type Card = {
+/* ================= locale helpers ================= */
+function useLocale() {
+  const pathname = usePathname() || '/';
+  const isEN = /^\/en(\/|$)/.test(pathname);
+  return { isEN };
+}
+function localizeHref(href: string, isEN: boolean) {
+  if (!isEN) return href;
+  if (/^(https?:)?\/\//.test(href)) return href;
+  if (/^\/en(\/|$)/.test(href)) return href;
+  if (href === '/') return '/en';
+  if (href.startsWith('/#')) return `/en${href}`;
+  return href.startsWith('/') ? `/en${href}` : `/en/${href}`;
+}
+
+/* ================= content ================= */
+type CardBase = {
   title: string;
   description: string;
   icon: React.ReactNode;
   header: React.ReactNode;
   href: string;
-  className?: string;
 };
-
-const cards: Card[] = [
+const CARDS_FR: CardBase[] = [
   {
     title: 'SaaS sur-mesure • scalable • sécurisé',
     description:
@@ -68,8 +83,61 @@ const cards: Card[] = [
     href: '/nos-services/sites-web-premium-conversion',
   },
 ];
+const CARDS_EN: CardBase[] = [
+  {
+    title: 'Custom SaaS • scalable • secure',
+    description:
+      'From architecture to billing, multi-tenant, RBAC, and observability. A healthy product foundation to iterate fast—without debt.',
+    icon: <IconCpu className="size-6 text-cyan-600 dark:text-cyan-300" />,
+    header: <SaaSConstellation />,
+    href: '/nos-services/creation-saas-sur-mesure',
+  },
+  {
+    title: 'Web & Mobile Apps • product UX',
+    description:
+      'Next.js / Expo, high performance, accessibility, offline-first. From PWA to app stores, from design system to shipping.',
+    icon: (
+      <IconDeviceMobileCode className="size-6 text-indigo-600 dark:text-indigo-300" />
+    ),
+    header: <DevicesOrbit />,
+    href: '/nos-services/web-apps-applications-mobiles',
+  },
+  {
+    title: 'Automation & AI • real gains',
+    description:
+      'No/low-code workflows, API integrations, AI agents & RAG. We connect your tools and remove repetitive work.',
+    icon: <IconRobot className="size-6 text-teal-600 dark:text-teal-300" />,
+    header: <AutomationGrid />,
+    href: '/nos-services/automatisation-intelligence-artificielle',
+  },
+  {
+    title: 'Premium websites • conversion & SEO',
+    description:
+      'High-end design, ROI-focused content, extreme speed, clean tracking, and rock-solid SEO.',
+    icon: (
+      <IconSparkles className="size-6 text-amber-600 dark:text-amber-300" />
+    ),
+    header: <ConversionPulse />,
+    href: '/nos-services/sites-web-premium-conversion',
+  },
+];
 
 export default function Services() {
+  const { isEN } = useLocale();
+
+  const heading = isEN ? 'Our Services' : 'Nos Services';
+  const sub = isEN
+    ? 'From product to go-to-market, we design experiences that truly convert.'
+    : 'Du produit au go-to-market, on conçoit des expériences qui transforment vraiment.';
+  const ctaAll = isEN ? 'See all services' : 'Voir tous nos services';
+  const ctaCard = isEN ? 'Explore →' : 'Découvrir →';
+
+  // localize hrefs with /en when needed
+  const cards = (isEN ? CARDS_EN : CARDS_FR).map((c) => ({
+    ...c,
+    href: localizeHref(c.href, isEN),
+  }));
+
   return (
     <section className="relative isolate py-28 md:py-36">
       {/* Backdrops */}
@@ -78,15 +146,14 @@ export default function Services() {
 
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-neutral-100 dark:to-neutral-200">
-          Nos Services
+          {heading}
         </h2>
         <p className="mt-3 text-center text-neutral-800 dark:text-neutral-200">
-          Du produit au go-to-market, on conçoit des expériences qui
-          transforment vraiment.
+          {sub}
         </p>
 
         {/* Grid en staggered layout */}
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-7 auto-rows-[minmax(20rem,auto)]">
+        <div className="mt-14 grid grid-cols-1 gap-7 sm:grid-cols-2 auto-rows-[minmax(20rem,auto)]">
           {cards.map((card, i) => (
             <motion.a
               key={i}
@@ -97,12 +164,11 @@ export default function Services() {
               viewport={{ once: true }}
               className={cn(
                 'group relative overflow-hidden rounded-3xl p-1',
-                'hover:scale-[1.01] transition-transform duration-300',
-                // Staggered layout: décalage vertical
+                'transition-transform duration-300 hover:scale-[1.01]',
                 i % 2 === 1 ? 'sm:translate-y-8' : ''
               )}
             >
-              <GlassCard className="h-full flex flex-col">
+              <GlassCard className="flex h-full flex-col">
                 <div className="relative h-40 w-full">{card.header}</div>
                 <div className="mt-4 flex items-start gap-3">
                   {card.icon}
@@ -115,7 +181,7 @@ export default function Services() {
                 </p>
                 <div className="mt-auto pt-5">
                   <span className="inline-flex items-center gap-2 text-sm font-medium text-cyan-700 dark:text-cyan-200">
-                    Découvrir →
+                    {ctaCard}
                   </span>
                 </div>
               </GlassCard>
@@ -124,10 +190,13 @@ export default function Services() {
         </div>
 
         <div className="mt-14 flex justify-center">
-          <LiquidLink href="/nos-services" className="z-10">
+          <LiquidLink
+            href={localizeHref('/nos-services', isEN)}
+            className="z-10"
+          >
             <span className="flex items-center justify-center gap-2">
               <IconTools />
-              Voir tous nos services
+              {ctaAll}
             </span>
           </LiquidLink>
         </div>
@@ -136,6 +205,7 @@ export default function Services() {
   );
 }
 
+/* ================= UI card ================= */
 export function GlassCard({
   className,
   children,

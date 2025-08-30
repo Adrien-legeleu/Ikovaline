@@ -1,22 +1,26 @@
-import CallToAction from '@/components/callToAction/CallToAction';
-import { AnimatedShinyText } from '@/components/magicui/animated-shiny-text';
+import { Metadata } from 'next';
+import { cn } from '@/lib/utils';
+
 import { GridPattern } from '@/components/magicui/grid-pattern';
 import { NeonGradientCard } from '@/components/magicui/neon-gradient-card';
 import ServiceInteractive from '@/components/ServicesPage/servicesComponents/ServiceInteractive';
-import { Button } from '@/components/ui/button';
+import CallToAction from '@/components/callToAction/CallToAction';
+import { LiquidLink } from '@/components/ui/liquid-link';
 import { TextAnimate } from '@/components/ui/text-animate';
-import { dataService } from '@/data/data-services';
-import { cn } from '@/lib/utils';
-import { IconRocket, IconTrendingUp } from '@tabler/icons-react';
-import { Metadata } from 'next';
-import Head from 'next/head';
 
-type PageProps = {
-  params: { id: string };
-};
+import { dataService } from '@/data/data-services';
+import { IconRocket, IconTrendingUp } from '@tabler/icons-react';
+import { GlassCard } from '@/components/LandingPage/servicesSection/Services';
+import {
+  CardSticky,
+  GlassSticky,
+} from '@/components/LandingPage/impact/CardStack';
+import { LiquidButton } from '@/components/ui/liquid-glass-button';
+
+type PageProps = { params: { id: string } };
 
 export function generateMetadata({ params }: PageProps): Metadata {
-  const service = dataService.find((data) => data.slug === params.id);
+  const service = dataService.find((d) => d.slug === params.id);
   if (!service) {
     return {
       title: 'Service non trouvé - Ikovaline',
@@ -40,46 +44,54 @@ export function generateMetadata({ params }: PageProps): Metadata {
 }
 
 export default function Page({ params }: PageProps) {
-  const service = dataService.find((service) => service.slug === params.id);
-  if (!service) {
-    return <p>Le service demandé n'existe pas.</p>;
-  }
+  const service = dataService.find((s) => s.slug === params.id);
+  if (!service) return <p>Le service demandé n'existe pas.</p>;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.section1Title,
+    description: service.seoDescription || service.section1Desc,
+    provider: {
+      '@type': 'Organization',
+      name: 'Ikovaline',
+      url: 'https://ikovaline.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://ikovaline.com/images/logo/ikovaline_logo.png',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+33 7 85 90 22 38',
+        contactType: 'customer service',
+        areaServed: 'FR',
+      },
+    },
+    url: `https://ikovaline.com/nos-services/${service.slug}`,
+  };
 
   return (
     <>
-      <Head>
-        {/* Données structurées JSON-LD Service */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Service',
-              name: service.section1Title,
-              description: service.seoDescription || service.section1Desc,
-              provider: {
-                '@type': 'Organization',
-                name: 'Ikovaline',
-                url: 'https://ikovaline.com',
-                logo: {
-                  '@type': 'ImageObject',
-                  url: 'https://ikovaline.com/images/logo/ikovaline_logo.png',
-                },
-                contactPoint: {
-                  '@type': 'ContactPoint',
-                  telephone: '+33 7 85 90 22 38',
-                  contactType: 'customer service',
-                  areaServed: 'FR',
-                },
-              },
-              url: `https://ikovaline.com/nos-services/${service.slug}`,
-            }),
-          }}
-        />
-      </Head>
+      {/* JSON-LD SSR */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div>
-        {/* Section Hero du service */}
-        <div className="min-h-screen h-full relative rounded-b-3xl flex flex-col items-center justify-center bg-gradient-to-t from-primary/60 dark:from-primary/35 to-transparent md:pt-24 max-md:pb-10 md:px-10 px-5">
+        {/* HERO — halos bleus + liquid CTA */}
+        <section className="relative flex min-h-[92svh] flex-col items-center justify-center rounded-b-3xl px-5 md:px-10 pt-24 overflow-hidden bg-gradient-to-b from-sky-100/60 via-sky-50/20 to-transparent dark:from-[#0a1420] dark:via-[#0d1628] dark:to-transparent">
+          {/* Halos bleus intenses */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10"
+          >
+            <span className="absolute -top-40 left-1/2 h-[70rem] w-[70rem] -translate-x-1/2 rounded-full blur-[300px] opacity-50 dark:opacity-60 bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)]" />
+            <span className="absolute bottom-0 right-[10%] h-[60rem] w-[60rem] translate-x-1/4 rounded-full blur-[280px] opacity-40 dark:opacity-50 bg-[radial-gradient(closest-side,#2563EB,transparent_70%)]" />
+            <span className="absolute top-1/3 left-[15%] h-[40rem] w-[40rem] rounded-full blur-[200px] opacity-30 dark:opacity-40 bg-[radial-gradient(closest-side,#3b82f6,transparent_70%)]" />
+          </div>
+
+          {/* Grid pattern subtil */}
           <GridPattern
             width={25}
             height={25}
@@ -87,87 +99,118 @@ export default function Page({ params }: PageProps) {
             y={-1}
             strokeDasharray="4 0"
             className={cn(
-              '[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]',
-              'md:[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]',
-              'lg:[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]'
+              'opacity-70 dark:opacity-30',
+              '[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]'
             )}
           />
+
+          {/* Intro */}
           <TextAnimate
             animation="blurInUp"
             by="word"
-            className="text-muted-foreground z-10 mx-auto dark:text-neutral-300 max-sm:px-2 max-w-lg text-center xs:text-xs md:text-lg"
+            className="z-10 mx-auto max-w-2xl text-center text-base md:text-lg text-neutral-700 dark:text-neutral-300"
           >
             {service.section1Desc}
           </TextAnimate>
-          <h1 className="sm:text-5xl md:text-6xl text-4xl max-w-3xl mx-auto text-center z-10 py-2 font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-300 dark:from-neutral-100 bg-clip-text text-transparent">
+
+          {/* Titre flashy bleu */}
+          <h1
+            className="z-10 mx-auto max-w-4xl py-4 text-center text-4xl sm:text-5xl md:text-6xl font-extrabold
+                 bg-gradient-to-r from-sky-600 via-sky-500 to-sky-400
+                 dark:from-sky-300 dark:via-sky-400 dark:to-sky-500
+                 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(0,168,232,0.45)]"
+          >
             {service.section1Title}
           </h1>
-          <Button className="sm:shadow-servicepc dark:shadow-servicemobileDark sm:dark:shadow-servicepcDark shadow-servicemobile text-lg px-5 py-6 rounded-3xl z-10">
-            Contactez-nous
-          </Button>
-          <div className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-[#cacaca] to-[#f0f0f0] dark:from-[#202020] dark:to-[#282828] shadow-serviceIconlight dark:shadow-serviceIconDark rounded-3xl absolute md:top-1/4 sm:top-[10%] top-[6%] left-[15%]">
-            <IconRocket className="w-20 h-20 text-secondary" stroke={2} />
-          </div>
-          <div className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-[#cacaca] to-[#f0f0f0] dark:from-[#202020] dark:to-[#282828] shadow-serviceIconlight dark:shadow-serviceIconDark rounded-3xl absolute md:top-2/3 top-[75%] right-[15%]">
-            <IconTrendingUp className="w-20 h-20 text-secondary" stroke={2} />
-          </div>
-        </div>
 
-        {/* Section 2 : Statistiques ou argument clé */}
-        <div className="py-24 md:px-10 px-5 flex flex-col items-center space-y-12 text-center">
-          <h2 className="sm:text-4xl text-3xl max-w-xl mx-auto font-bold bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+          {/* Liquid CTA bleu */}
+          <div className="z-10 mt-10">
+            <LiquidLink href="/contact" className="text-lg px-8 py-4">
+              Contactez-nous
+            </LiquidLink>
+          </div>
+
+          {/* Tuiles vitrées décoratives */}
+          <div
+            className="absolute left-[10%] top-[14%] hidden sm:flex h-32 w-32 items-center justify-center rounded-3xl 
+                  bg-gradient-to-br from-white/70 to-neutral-100/40 dark:from-[#0d1117] dark:to-[#121826] 
+                  shadow-[0_0_40px_rgba(0,168,232,0.4)]"
+          >
+            <IconRocket
+              className="h-16 w-16 text-sky-400 drop-shadow-[0_0_20px_rgba(0,168,232,0.7)]"
+              stroke={2}
+            />
+          </div>
+          <div
+            className="absolute right-[10%] bottom-[16%] hidden sm:flex h-32 w-32 items-center justify-center rounded-3xl 
+                  bg-gradient-to-br from-white/70 to-neutral-100/40 dark:from-[#0d1117] dark:to-[#121826] 
+                  shadow-[0_0_40px_rgba(37,99,235,0.45)]"
+          >
+            <IconTrendingUp
+              className="h-16 w-16 text-sky-400 drop-shadow-[0_0_20px_rgba(37,99,235,0.7)]"
+              stroke={2}
+            />
+          </div>
+        </section>
+
+        {/* SECTION 2 — Stat / argument clé (Neon liquid bleu) */}
+        <section className="flex flex-col items-center space-y-10 py-24 px-5 md:px-10 text-center">
+          <h2 className="mx-auto max-w-xl bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-300 dark:to-neutral-500 bg-clip-text text-transparent text-3xl sm:text-4xl font-bold">
             {service.section2Title}
           </h2>
-          <p className="text-muted-foreground dark:text-neutral-400 xs:text-xs md:text-lg max-w-lg mx-auto">
+          <p className="mx-auto max-w-lg text-neutral-600 dark:text-neutral-400 xs:text-sm md:text-lg">
             {service.section2Desc}
           </p>
-          <NeonGradientCard className="max-w-sm flex flex-col items-center justify-center text-center">
-            <AnimatedShinyText className="inline-block md:text-8xl text-7xl font-extrabold px-4 py-1">
-              <span>{service.section2NumberImportant}</span>
-            </AnimatedShinyText>
-            <span className="block text-muted-foreground dark:text-neutral-400">
+
+          <GlassSticky className="max-w-sm mx-auto flex flex-col items-center justify-center text-center">
+            <div className="inline-flex items-baseline gap-2">
+              <span className="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-sky-500 via-sky-400 to-sky-300 dark:from-sky-300 dark:via-sky-200 dark:to-sky-100 bg-clip-text text-transparent">
+                {service.section2NumberImportant}
+              </span>
+            </div>
+            <span className="mt-1 block text-neutral-600 dark:text-neutral-400">
               {service.section2TextImportant}
             </span>
-          </NeonGradientCard>
-        </div>
+          </GlassSticky>
+        </section>
 
-        {/* Section 3 : Points forts / Étapes en cartes */}
-        <div className="md:px-10 py-24 space-y-12 px-5 max-w-7xl mx-auto">
-          <h2 className="sm:text-4xl text-3xl max-w-xl mx-auto font-bold text-center bg-gradient-to-t from-neutral-500 to-neutral-800 dark:to-neutral-500 dark:from-neutral-200 bg-clip-text text-transparent">
+        {/* SECTION 3 — Cards liquid glass bleues (rims + glow) */}
+        <section className="mx-auto max-w-7xl px-5 md:px-10 py-24 space-y-12">
+          <h2 className="text-center text-3xl sm:text-4xl font-bold mx-auto max-w-xl bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-300 dark:to-neutral-500 bg-clip-text text-transparent">
             {service.section3Title}
           </h2>
-          <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 w-full mx-auto">
-            {service.section3Cards.map((card, index) => (
-              <div key={index} className="outer aspect-square">
-                <div className="dot"></div>
-                <div className="card">
-                  <div className="ray"></div>
-                  <div
-                    className="text-3xl pt-[15%] mx-[15%] font-bold text-center 
-                                  bg-[linear-gradient(45deg,_#cacaca_4%,_#000,_#fff)] 
-                                  dark:bg-[linear-gradient(45deg,_#2b2b2b_4%,_#fff,_#000)] 
-                                  bg-clip-text text-transparent"
-                  >
-                    {card.text}
-                  </div>
-                  <p className="text-center text-gray-600 dark:text-neutral-400 text-sm px-4 mt-8 mx-[10%]">
-                    {card.subtext}
-                  </p>
-                  {/* decorative lines */}
-                  <div className="line topl"></div>
-                  <div className="line leftl"></div>
-                  <div className="line bottoml"></div>
-                  <div className="line rightl"></div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            {service.section3Cards.map((card, i) => (
+              <GlassSticky key={i}>
+                {/* Titre de la carte */}
+                <div
+                  className="mx-[10%] pt-[8%] text-center text-3xl font-bold
+                             bg-[linear-gradient(45deg,_#9bc9ff_4%,_#2a3b8f,_#cfe6ff)]
+                             dark:bg-[linear-gradient(45deg,_#9bc9ff_4%,_#e6f2ff,_#2a3b8f)]
+                             bg-clip-text text-transparent"
+                >
+                  {card.text}
                 </div>
-              </div>
+
+                <p className="mt-6 text-center text-sm text-neutral-700 dark:text-neutral-300">
+                  {card.subtext}
+                </p>
+
+                {/* glow bas bleu */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -bottom-6 left-1/2 h-12 w-3/4 -translate-x-1/2 rounded-full blur-3xl bg-[radial-gradient(ellipse_at_center,rgba(0,168,232,.45),rgba(37,99,235,.30),transparent_70%)]"
+                />
+              </GlassSticky>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Section interactive spécifique (galeries, FAQ, etc.) */}
+        {/* SECTION 4 — Interactif (tabs liquides bleus) */}
         <ServiceInteractive service={service} />
 
-        {/* Section 4 : Avantages / Notre expertise (sous forme de cards) */}
+        {/* CTA final (conserve ton composant) */}
         <CallToAction
           title={
             service.section4Title

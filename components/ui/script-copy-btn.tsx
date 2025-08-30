@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Check, Copy } from "lucide-react";
-import { useState } from "react";
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { Check, Copy } from 'lucide-react';
+import { useState } from 'react';
+import { LiquidLink } from './liquid-link';
+import { LiquidButton } from './liquid-glass-button';
 
 interface ScriptCopyBtnProps {
   commandMap: Record<string, string>;
@@ -27,21 +29,20 @@ export default function ScriptCopyBtn({
   return (
     <div
       className={cn(
-        "mx-auto w-full flex-row  py-2 flex items-center gap-2 justify-center text-center",
+        'mx-auto w-full flex-row  py-2 flex items-center gap-2 justify-center text-center',
         className
       )}
     >
-      <pre className="text-base bg-gray-100 dark:bg-gray-800 rounded-3xl px-4 py-3 text-neutral-800 dark:text-neutral-200">
+      <pre className="text-base dark:bg-[linear-gradient(135deg,rgba(10,14,20,0.92),rgba(10,14,20,0.58))] bg-[linear-gradient(135deg,rgba(255,255,255,0.86),rgba(240,245,252,0.42))] border border-black/10 dark:border-white/5 rounded-3xl px-4 py-3 text-neutral-800 dark:text-neutral-200">
         {value}
       </pre>
-      <Button
+      <LiquidButton
+        className="!px-5 !py-4 !h-full"
         onClick={copyToClipboard}
-        className="py-4 h-full px-3  rounded-2xl"
-        variant="outline"
-        aria-label={copied ? "Copié" : "Copier"}
+        aria-label={copied ? 'Copié' : 'Copier'}
       >
         {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-      </Button>
+      </LiquidButton>
     </div>
   );
 }

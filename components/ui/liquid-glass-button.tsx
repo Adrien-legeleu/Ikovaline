@@ -120,7 +120,7 @@ export const LiquidButton = React.forwardRef<
       {/* filtre “verre” */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 overflow-hidden rounded-md"
+        className="absolute inset-0  -z-10 overflow-hidden rounded-md"
         style={{ backdropFilter: 'url("#container-glass")' }}
       />
       {/* contenu */}

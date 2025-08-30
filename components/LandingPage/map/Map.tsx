@@ -6,12 +6,74 @@ import { motion } from 'framer-motion';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { IconMessage } from '@tabler/icons-react';
 
-import { ContainerScroll, CardSticky } from '../impact/CardStack';
+import { ContainerScroll, CardSticky, GlassSticky } from '../impact/CardStack';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import { removeAccents } from '@/components/pageSatellite/CityAround';
+import WorldMap from '@/components/ui/world-map';
+import { usePathname } from 'next/navigation';
+
+/* ======================= i18n minimal (FR / EN) ======================= */
+const TEXTS = {
+  fr: {
+    loadingMap: 'Chargement de la carte...',
+    headerTitle:
+      'Ikovaline accompagne ses clients en France et à l’international.',
+    headerDesc:
+      'De Paris à Londres, Dubaï, Kinshasa, Brazzaville et Berne, nous aidons les entreprises à gagner en visibilité, automatiser leurs process et mieux convertir — avec des sites, applications et produits SaaS conçus pour scaler.',
+    bubble1Title: 'Votre site vous apporte-t-il vraiment des clients ?',
+    bubble1Text:
+      'Nous concevons des sites clairs, modernes et pensés pour convertir.',
+    bubble2Title: 'Personne ne vous trouve sur Google ?',
+    bubble2Text:
+      'On booste votre visibilité avec des stratégies SEO & SEA efficaces.',
+    bubble3Title: 'Vous passez trop de temps sur des tâches répétitives ?',
+    bubble3Text:
+      'Automatisations sur mesure pour gagner du temps et scaler sans stress.',
+    bubble4Title: 'Pas de stratégie digitale claire ?',
+    bubble4Text:
+      'On vous guide étape par étape, avec des actions concrètes et mesurables.',
+    agenciesTitle: 'Nos agences web',
+    paragraph1a:
+      'Ikovaline est une agence web qui accompagne les entreprises dans toute la France, avec un ancrage fort en Essonne et en Île-de-France, à travers la ',
+    paragraph1Link1: 'création de sites web',
+    paragraph1b: ' et ',
+    paragraph1Link2: "d'autres solutions digitales sur mesure.",
+    ctaTitle: 'Besoin d’un audit rapide ?',
+    ctaBtn: 'Contactez-nous',
+  },
+  en: {
+    loadingMap: 'Loading map...',
+    headerTitle: 'Ikovaline supports clients across France and worldwide.',
+    headerDesc:
+      'From Paris to London, Dubai, Kinshasa, Brazzaville, and Bern, we help companies gain visibility, automate processes, and convert better—with websites, apps, and SaaS products built to scale.',
+    bubble1Title: 'Does your website actually bring you customers?',
+    bubble1Text: 'We design clear, modern websites built to convert.',
+    bubble2Title: 'No one finds you on Google?',
+    bubble2Text:
+      'We boost your visibility with effective SEO & SEA strategies.',
+    bubble3Title: 'Spending too much time on repetitive tasks?',
+    bubble3Text: 'Custom automations to save time and scale without stress.',
+    bubble4Title: 'No clear digital strategy?',
+    bubble4Text: 'We guide you step by step with concrete, measurable actions.',
+    agenciesTitle: 'Our web agencies',
+    paragraph1a:
+      'Ikovaline is a web agency supporting businesses across France—with a strong presence in Essonne and Île-de-France—through ',
+    paragraph1Link1: 'website creation',
+    paragraph1b: ' and ',
+    paragraph1Link2: 'other custom digital solutions.',
+    ctaTitle: 'Need a quick audit?',
+    ctaBtn: 'Contact us',
+  },
+} as const;
+
+function useIsEN() {
+  const pathname = usePathname() || '/';
+  return /^\/en(\/|$)/.test(pathname);
+}
 
 const FranceMap = dynamic(() => import('@/components/ui/france-map'), {
   ssr: false,
+  // i18n pour le fallback de chargement
   loading: () => <p>Chargement de la carte...</p>,
 });
 
@@ -75,21 +137,14 @@ const GlassCard: React.FC<{
     className={[
       'relative z-10 overflow-hidden rounded-[28px] p-5',
       'backdrop-blur-2xl',
-
-      /* ——— Light (inchangé/clean) ——— */
       'bg-[radial-gradient(120%_120%_at_50%_0%,rgba(255,255,255,0.92),rgba(245,248,252,0.55))]',
-
-      /* ——— Dark = noir fumé (aucun blanc) ——— */
       'dark:bg-[linear-gradient(180deg,rgba(8,12,18,0.80),rgba(8,12,18,0.58))]',
       'border border-black/5 dark:border-[rgba(56,130,246,0.14)]',
-
-      /* profondeur (pas de glow blanc en dark) */
       'shadow-[0_28px_90px_rgba(6,24,44,0.14),0_6px_16px_rgba(6,24,44,0.08)]',
       'dark:shadow-[0_18px_60px_rgba(2,6,12,0.65),inset_0_1px_0_rgba(59,130,246,0.10)]',
       className,
     ].join(' ')}
   >
-    {/* RIM & reflets — LIGHT */}
     <span
       className="pointer-events-none absolute inset-0 rounded-[28px] block dark:hidden"
       style={{
@@ -100,32 +155,20 @@ const GlassCard: React.FC<{
         backgroundClip: 'padding-box,border-box',
       }}
     />
-
-    {/* RIM & reflets — DARK (teinte bleue, AUCUN blanc) */}
     <span
       className="pointer-events-none absolute inset-0 hidden rounded-[28px] opacity-90 dark:block"
       style={{
         border: '1px solid transparent',
         backgroundImage:
-          'linear-gradient(135deg,rgba(8,12,18,0.92),rgba(8,12,18,0.55)),' + // base noire
-          // léger liseré bleu
+          'linear-gradient(135deg,rgba(8,12,18,0.92),rgba(8,12,18,0.55)),' +
           'conic-gradient(from 210deg,rgba(37,99,235,.22),rgba(56,189,248,.18),rgba(37,99,235,.22))',
         backgroundClip: 'padding-box,border-box',
-        // surtout PAS screen/plus-lighter qui blanchissent sur noir
         mixBlendMode: 'normal',
       }}
     />
-
-    {/* STREAK haut — remplace le blanc par un bleu très faible en dark */}
     <span className="pointer-events-none absolute left-6 right-6 top-2 h-6 rounded-full blur-[10px] bg-white/70 dark:bg-sky-400/15" />
-
-    {/* Glow bas bleu (sans blanc) */}
     <span className="pointer-events-none absolute -bottom-10 left-1/2 h-16 w-[82%] -translate-x-1/2 rounded-full blur-3xl bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,.55),rgba(37,99,235,.38),transparent_70%)] dark:opacity-80" />
-
-    {/* Vignette d’épaisseur (noir en dark) */}
     <span className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-black/0 shadow-[inset_0_1px_0_rgba(255,255,255,.75),inset_0_-1px_0_rgba(0,0,0,.08)] dark:shadow-[inset_0_1px_0_rgba(37,99,235,.14),inset_0_-1px_0_rgba(0,0,0,.6)]" />
-
-    {/* grain subtil (bleuté en dark, pas blanc) */}
     <span
       className="pointer-events-none absolute inset-0 opacity-[.07] dark:opacity-[.05] mix-blend-normal"
       style={{
@@ -134,13 +177,15 @@ const GlassCard: React.FC<{
           'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27120%27 height=%27120%27 viewBox=%270 0 120 120%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27120%27 height=%27120%27 filter=%27url(%23n)%27 fill=%27%230a1220%27 fill-opacity=%270.12%27/%3E%3C/svg%3E")',
       }}
     />
-
     <div className="relative">{children}</div>
   </div>
 );
 
 /* ------------------------------- Composant -------------------------------- */
 export default function Map() {
+  const isEN = useIsEN();
+  const t = isEN ? TEXTS.en : TEXTS.fr;
+
   type Depart = 'essonne' | 'hauts-de-seine' | 'seine-et-marne';
   const [depart, setDepart] = useState<Depart>('essonne');
 
@@ -151,7 +196,6 @@ export default function Map() {
   ];
 
   // refs pour positions des boutons (slider liquide sous l’actif)
-  // en haut du composant :
   const groupRef = useRef<HTMLDivElement | null>(null);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -162,13 +206,12 @@ export default function Map() {
     const el = buttonRefs.current[index];
     const group = groupRef.current;
     if (el && group) {
-      const left = el.offsetLeft; // relatif au conteneur
+      const left = el.offsetLeft;
       setSlider({ width: el.offsetWidth, left });
     }
   };
 
   useLayoutEffect(() => {
-    // init après paint
     const id = requestAnimationFrame(computeSlider);
     return () => cancelAnimationFrame(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -217,45 +260,66 @@ export default function Map() {
 
   return (
     <div className="py-40 w-full space-y-10 place-content-center relative">
-      {/* Halo bleu perçant centré (pas en haut) */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background: [
-            'radial-gradient(800px 380px at 50% 58%, rgba(62,119,255,.22), rgba(30,144,255,.18), rgba(34,211,238,.12), rgba(12,18,28,0) 70%)',
-            'radial-gradient(1200px 600px at 50% 50%, rgba(56,189,248,.10), rgba(59,130,246,.06), rgba(12,18,28,0))',
+            // Halo principal, royal blue éclatant
+            'radial-gradient(800px 380px at 50% 58%, rgba(65,105,225,0.35), rgba(65,105,225,0.20), transparent 75%)',
+            // Halo secondaire plus diffus
+            'radial-gradient(1200px 600px at 50% 50%, rgba(70,130,255,0.18), rgba(65,105,225,0.12), transparent 80%)',
           ].join(','),
         }}
       />
 
       <header className="max-w-xl mx-auto px-5 text-center">
-        <h2 className="font-bold text-4xl dark:text-white text-black">
-          Ikovaline accompagne ses clients partout en France.
+        <h2 className="font-bold text-4xl text-black dark:text-white">
+          {t.headerTitle}
         </h2>
         <p className="text-md md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
-          De Paris à Marseille, en passant par Lyon ou Bordeaux, nous aidons les
-          entreprises à se rendre visibles, à automatiser, et à mieux convertir.
+          {t.headerDesc}
         </p>
       </header>
 
-      {/* Carte + 4 bulles glass */}
+      {/* Carte + bulles */}
       <div className="relative">
-        <div className="max-md:overflow-hidden relative w-full py-20">
-          <FranceMap
+        <div className="max-md:overflow-hidden relative w-full pb-10 md:py-20">
+          <WorldMap
             dots={[
-              { start: { lat: 48.4, lng: 2.3 }, end: { lat: 45.3, lng: 3.8 } },
-              { start: { lat: 48.4, lng: 2.3 }, end: { lat: 43, lng: 1.5 } },
-              { start: { lat: 48.4, lng: 2.3 }, end: { lat: 44.2, lng: 0.1 } },
-              { start: { lat: 48.4, lng: 2.3 }, end: { lat: 47.1, lng: -1.2 } },
+              // (on ne touche pas à la structure/design ici)
+              {
+                start: { lat: 38.8566, lng: 2.3522 },
+                end: { lat: 45.5074, lng: -0.1278 },
+              },
+              {
+                start: { lat: 38.8566, lng: 2.3522 },
+                end: { lat: 36.948, lng: 7.4474 },
+              },
+              {
+                start: { lat: 38.8566, lng: 2.3522 },
+                end: { lat: 9.2048, lng: 55.2708 },
+              },
+              {
+                start: { lat: 38.8566, lng: 2.3522 },
+                end: { lat: -20.4419, lng: 15.2663 },
+              },
+              {
+                start: { lat: 38.8566, lng: 2.3522 },
+                end: { lat: -20.2634, lng: 15.2429 },
+              },
+              {
+                start: { lat: 45.5074, lng: -0.1278 },
+                end: { lat: 9.2048, lng: 55.2708 },
+              },
             ]}
           />
         </div>
 
-        {/* Mobile cards (déjà glassy) */}
-        <BlocContanerScrollMobile />
+        {/* Mobile cards */}
+        <BlocContanerScrollMobile t={t} />
 
-        {/* Desktop cards : effet liquid glass plus marqué en light */}
+        {/* Desktop cards */}
         <div className="max-md:hidden">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -265,12 +329,9 @@ export default function Map() {
           >
             <GlassCard>
               <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                Votre site vous apporte-t-il vraiment des clients ?
+                {t.bubble1Title}
               </h3>
-              <p className="text-xs xl:text-sm">
-                Nous concevons des sites clairs, modernes et pensés pour
-                convertir.
-              </p>
+              <p className="text-xs xl:text-sm">{t.bubble1Text}</p>
             </GlassCard>
           </motion.div>
 
@@ -282,12 +343,9 @@ export default function Map() {
           >
             <GlassCard>
               <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                Personne ne vous trouve sur Google ?
+                {t.bubble2Title}
               </h3>
-              <p className="text-xs xl:text-sm">
-                On booste votre visibilité avec des stratégies SEO &amp; SEA
-                efficaces.
-              </p>
+              <p className="text-xs xl:text-sm">{t.bubble2Text}</p>
             </GlassCard>
           </motion.div>
 
@@ -299,12 +357,9 @@ export default function Map() {
           >
             <GlassCard>
               <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                Vous passez trop de temps sur des tâches répétitives ?
+                {t.bubble3Title}
               </h3>
-              <p className="text-xs xl:text-sm">
-                Automatisations sur mesure pour gagner du temps et scaler sans
-                stress.
-              </p>
+              <p className="text-xs xl:text-sm">{t.bubble3Text}</p>
             </GlassCard>
           </motion.div>
 
@@ -316,21 +371,18 @@ export default function Map() {
           >
             <GlassCard>
               <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                Pas de stratégie digitale claire ?
+                {t.bubble4Title}
               </h3>
-              <p className="text-xs xl:text-sm">
-                On vous guide étape par étape, avec des actions concrètes et
-                mesurables.
-              </p>
+              <p className="text-xs xl:text-sm">{t.bubble4Text}</p>
             </GlassCard>
           </motion.div>
         </div>
       </div>
 
-      {/* Segmented control : SEUL l’actif a le “liquid glass” qui glisse */}
+      {/* Segmented control + villes */}
       <section className="flex items-center justify-center px-5 gap-10 flex-col max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
-          Nos agences web
+          {t.agenciesTitle}
         </h2>
 
         <div className="flex items-center justify-center flex-col gap-5">
@@ -344,15 +396,12 @@ export default function Map() {
              shadow-[0_18px_60px_rgba(6,24,44,.10)]"
             style={{ minWidth: 260 }}
           >
-            {/* Capsule active — liquid glass */}
             <motion.div
               className={[
                 'absolute top-1/2 -translate-y-1/2 rounded-full z-0 overflow-hidden',
                 'border border-white/60 dark:border-white/8',
                 'shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_14px_46px_rgba(37,99,235,.35)]',
-                // light
                 'bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(255,255,255,.30))]',
-                // dark, plus sombre
                 'dark:bg-[linear-gradient(135deg,rgba(8,10,14,.92),rgba(8,10,14,.58))]',
                 'backdrop-blur-[14px]',
               ].join(' ')}
@@ -360,7 +409,6 @@ export default function Map() {
               style={{ height: 'calc(100% - 8px)' }}
               transition={{ type: 'spring', stiffness: 520, damping: 40 }}
             >
-              {/* cœur bleu — light (bleu plus perçant) */}
               <span
                 className="pointer-events-none absolute inset-0 block opacity-95 mix-blend-screen dark:hidden"
                 style={{
@@ -368,7 +416,6 @@ export default function Map() {
                     'radial-gradient(160px 56px at 50% 50%, rgba(64,156,255,.95), rgba(37,99,235,.85) 40%, rgba(34,211,238,.42) 70%, transparent 78%)',
                 }}
               />
-              {/* cœur bleu — dark (encore plus saturé, froid) */}
               <span
                 className="pointer-events-none absolute inset-0 hidden dark:block opacity-92 mix-blend-screen"
                 style={{
@@ -385,8 +432,7 @@ export default function Map() {
                   key={d.slug}
                   type="button"
                   ref={(el) => {
-                    // <-- retourne bien void
-                    buttonRefs.current[i] = el; // affecte sans return
+                    buttonRefs.current[i] = el;
                   }}
                   onClick={() => setDepart(d.slug)}
                   className={[
@@ -415,71 +461,56 @@ export default function Map() {
         </div>
 
         <p className="text-center text-neutral-900 dark:text-neutral-300">
-          Ikovaline est une agence web qui accompagne les entreprises dans toute
-          la France, avec un ancrage fort en Essonne et en Île-de-France, à
-          travers la{' '}
+          {t.paragraph1a}
           <Link href="/nos-services/creation-sites-web-vitrine-e-commerce">
-            création de sites web
+            {t.paragraph1Link1}
           </Link>{' '}
-          et{' '}
-          <Link href="/nos-services">
-            d&apos;autres solutions digitales sur mesure.
-          </Link>
+          {t.paragraph1b}
+          <Link href="/nos-services">{t.paragraph1Link2}</Link>
         </p>
       </section>
 
       {/* CTA */}
       <div className="max-w-7xl px-2 mx-auto text-center flex flex-col items-center justify-center space-y-4 md:space-y-8">
-        <h3 className="text-2xl md:text-4xl font-semibold">
-          Besoin d’un audit rapide ?
-        </h3>
+        <h3 className="text-2xl md:text-4xl font-semibold">{t.ctaTitle}</h3>
 
         <LiquidLink href="/contact" className="z-10 ">
           <span className="flex items-center justify-center gap-2">
             <span aria-hidden="true">
               <IconMessage />
             </span>
-            Contactez-nous
+            {t.ctaBtn}
           </span>
         </LiquidLink>
       </div>
 
-      {/* filtres SVG (liquid) */}
       <GlassDefs />
     </div>
   );
 }
 
 /* ------------------------ Mobile sticky (glass) --------------------------- */
-const BlocContanerScrollMobile = () => {
+const BlocContanerScrollMobile = ({
+  t,
+}: {
+  t: (typeof TEXTS)['fr'] | (typeof TEXTS)['en'];
+}) => {
   return (
     <ContainerScroll className="min-h-[50vh] md:hidden  max-w-md mx-auto px-5 pb-24  space-y-8">
       {[
-        {
-          title: 'Votre site vous apporte-t-il vraiment des clients ?',
-          text: 'Nous concevons des sites clairs, modernes et pensés pour convertir.',
-        },
-        {
-          title: 'Personne ne vous trouve sur Google ?',
-          text: 'On booste votre visibilité avec des stratégies SEO & SEA efficaces.',
-        },
-        {
-          title: 'Vous passez trop de temps sur des tâches répétitives ?',
-          text: 'Automatisations sur mesure pour gagner du temps et scaler sans stress.',
-        },
-        {
-          title: 'Pas de stratégie digitale claire ?',
-          text: 'On vous guide étape par étape, avec des actions concrètes et mesurables.',
-        },
+        { title: t.bubble1Title, text: t.bubble1Text },
+        { title: t.bubble2Title, text: t.bubble2Text },
+        { title: t.bubble3Title, text: t.bubble3Text },
+        { title: t.bubble4Title, text: t.bubble4Text },
       ].map((item, i) => (
-        <GlassCard key={i}>
-          <CardSticky index={i + 2}>
+        <CardSticky index={i + 5} key={i}>
+          <GlassSticky>
             <h3 className=" text-xl md:text-sm lg:text-md xl:text-xl font-semibold">
               {item.title}
             </h3>
             <p className="text-sm md:text-xs xl:text-sm">{item.text}</p>
-          </CardSticky>
-        </GlassCard>
+          </GlassSticky>
+        </CardSticky>
       ))}
     </ContainerScroll>
   );
@@ -490,7 +521,6 @@ function GlassDefs() {
   return (
     <svg className="hidden">
       <defs>
-        {/* filtre pour la capsule du segmented control (liquid glass) */}
         <filter id="segment-glass" x="0" y="0" width="100%" height="100%">
           <feTurbulence
             type="fractalNoise"

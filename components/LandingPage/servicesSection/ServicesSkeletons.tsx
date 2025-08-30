@@ -210,8 +210,7 @@ export function ConversionPulse() {
       {/* points dynamiques */}
       {[
         { x: 180, y: 60 },
-        { x: 280, y: 110 },
-        { x: 340, y: 90 },
+        { x: 280, y: 85 },
       ].map((p, i) => (
         <motion.span
           key={i}

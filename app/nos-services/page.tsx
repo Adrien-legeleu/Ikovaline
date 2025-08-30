@@ -1,5 +1,5 @@
 import CallToAction from '@/components/callToAction/CallToAction';
-import FAQ, { faqData } from '@/components/ServicesPage/FAQ/FAQ';
+import FAQ from '@/components/ServicesPage/FAQ/FAQ';
 import Landing from '@/components/ServicesPage/landing/Landing';
 import { GridOverlay } from '@/components/ServicesPage/servicesComponents/GridOverlay';
 import { Service1 } from '@/components/ServicesPage/servicesComponents/Service1';
@@ -7,7 +7,11 @@ import { Service2 } from '@/components/ServicesPage/servicesComponents/Service2'
 import { Service3 } from '@/components/ServicesPage/servicesComponents/Services3';
 import Why from '@/components/ServicesPage/why/Why';
 import type { Metadata } from 'next';
-import Head from 'next/head';
+import * as React from 'react';
+
+// ⬇️ server-safe FAQ strings for JSON-LD
+import { FAQ_SEO_FR } from '@/components/ServicesPage/FAQ/faq-seo.fr';
+import CTAServices from '@/components/ServicesPage/CTAServices';
 
 export const metadata: Metadata = {
   title: 'Nos Services - Solutions Digitales sur Mesure | Ikovaline',
@@ -35,18 +39,18 @@ export const metadata: Metadata = {
       'Une stratégie digitale sur-mesure avec Ikovaline : développement web, IA, automatisation marketing, visibilité en ligne et croissance commerciale.',
     images: ['/images/logo/ikovaline_logo.png'],
   },
+  robots: { index: true, follow: true },
+  alternates: { canonical: 'https://ikovaline.com/nos-services' },
 };
 
+// —— JSON-LD (utilise la version FR simplifiée, côté serveur) ——
 const faqStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqData.map((faq) => ({
+  mainEntity: FAQ_SEO_FR.map((faq) => ({
     '@type': 'Question',
     name: faq.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.answer.replace(/\n/g, '<br>'),
-    },
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
   })),
 };
 
@@ -62,26 +66,19 @@ const webPageStructuredData = {
 export default function Page() {
   return (
     <>
-      <Head>
-        <link rel="canonical" href="https://ikovaline.com/nos-services" />
-        <meta name="robots" content="index, follow" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(webPageStructuredData),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqStructuredData),
-          }}
-        />
-      </Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageStructuredData),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
 
-      <div>
+      <div className="relative overflow-hidden">
         <Landing />
-
         <div className="relative">
           <GridOverlay size={22} />
           <Service1 />
@@ -89,11 +86,7 @@ export default function Page() {
           <Service3 />
         </div>
         <Why />
-        <CallToAction
-          title="Passez à l’action maintenant !"
-          desc="Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible."
-          textBtn="Lancez votre projet"
-        />
+        <CTAServices />
         <FAQ />
       </div>
     </>

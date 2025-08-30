@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState, createContext } from 'react';
 import {
   IconArrowNarrowLeft,
@@ -8,10 +9,11 @@ import {
 import { cn } from '@/lib/utils';
 import { motion } from 'motion/react';
 import Image, { ImageProps } from 'next/image';
-import { BlogType } from '../BlogPage/Blog';
 import Link from 'next/link';
-import { Button } from './button';
 import { LiquidLink } from './liquid-link';
+import { usePathname } from 'next/navigation';
+import type { BlogType } from '@/components/BlogPage/Blog';
+import { LiquidButton } from './liquid-glass-button';
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -27,6 +29,8 @@ export const CarouselContext = createContext<{
 });
 
 export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
+  const isEN = /^\/en(\/|$)/.test(usePathname() || '/');
+
   const carouselRef = React.useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
   const [canScrollRight, setCanScrollRight] = React.useState(true);
@@ -73,8 +77,11 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   };
 
   const isMobile = () => {
-    return window && window.innerWidth < 768;
+    return typeof window !== 'undefined' && window.innerWidth < 768;
   };
+
+  const seeAll = isEN ? 'All posts' : 'Tous nos articles';
+  const ariaChange = isEN ? 'Change slide' : 'Changer de diapo';
 
   return (
     <CarouselContext.Provider
@@ -95,15 +102,12 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           <div
             className={cn(
               'flex flex-row justify-start gap-8 pl-4',
-              'mx-auto max-w-7xl' // remove max-w-4xl if you want the carousel to span the full width of its container
+              'mx-auto max-w-7xl'
             )}
           >
             {items.map((item, index) => (
               <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{
                   opacity: 1,
                   y: 0,
@@ -122,30 +126,34 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             ))}
           </div>
         </div>
+
         <div className="mx-10 flex items-center justify-between gap-2">
-          <LiquidLink href="/blog" className="z-10 px-4">
+          <LiquidLink href={`/${isEN ? 'en/' : ''}blog`} className="z-10 px-4">
             <span className="flex items-center justify-center gap-2">
               <span aria-hidden="true">
                 <IconNews />
               </span>
-              Tous nos articles
+              {seeAll}
             </span>
           </LiquidLink>
+
           <div className="flex gap-2">
-            <button
-              className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
+            <LiquidButton
+              className="relative z-40 flex h-10 w-10 !p-0 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
               onClick={scrollLeft}
+              aria-label={ariaChange}
               disabled={!canScrollLeft}
             >
               <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
-            </button>
-            <button
-              className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
+            </LiquidButton>
+            <LiquidButton
+              className="relative z-40 flex h-10 !p-0 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
               onClick={scrollRight}
+              aria-label={ariaChange}
               disabled={!canScrollRight}
             >
               <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
-            </button>
+            </LiquidButton>
           </div>
         </div>
       </div>
@@ -160,17 +168,19 @@ export const Blog = ({
   blog: BlogType;
   layout?: boolean;
 }) => {
+  const isEN = /^\/en(\/|$)/.test(usePathname() || '/');
+
   return (
-    <Link href={`/blog/${blog.slug}`} className="relative">
+    <Link href={`/${isEN ? 'en/' : ''}blog/${blog.slug}`} className="relative">
       <motion.div
         layoutId={layout ? `blog-${blog.title}` : undefined}
         className="relative shadow-xl shadow-black/20 z-10 flex h-56 md:h-80 w-80 md:w-[480px] flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
       >
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-full bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-        <div className="relative z-40 p-4  md:p-8 flex h-full justify-end items-end">
+        <div className="relative z-40 p-4 md:p-8 flex h-full justify-end items-end">
           <motion.h3
             layoutId={layout ? `title-${blog.title}` : undefined}
-            className="mt-2  text-left font-sans capitalize text-2xl font-semibold [text-wrap:balance] text-white md:text-3xl"
+            className="mt-2 text-left font-sans capitalize text-2xl font-semibold [text-wrap:balance] text-white md:text-3xl"
           >
             {blog.title}
           </motion.h3>

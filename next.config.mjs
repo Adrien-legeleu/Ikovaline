@@ -1,12 +1,19 @@
 const nextConfig = {
   experimental: {
     optimizeCss: true,
+    serverActions: { allowedOrigins: ['*'] },
   },
   compiler: {
     removeConsole: true,
   },
   images: {
-    domains: ["images.unsplash.com", "avatar.vercel.sh"],
+    domains: ['images.unsplash.com', 'avatar.vercel.sh'],
+  },
+  async rewrites() {
+    return [
+      { source: '/en', destination: '/' },
+      { source: '/en/:path*', destination: '/:path*' },
+    ];
   },
 };
 

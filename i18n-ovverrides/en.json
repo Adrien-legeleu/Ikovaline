@@ -1,0 +1,42 @@
+{
+  "footer": {
+    "titleHome": "Home",
+    "titleServices": "Services",
+    "titleAbout": "About",
+    "titleLegal": "Legal",
+    "linksHome": ["About", "Services", "Testimonials"],
+    "linksServices": ["Business Development", "Digital Development", "Why Us?"],
+    "linksAbout": ["Our History", "Our Team", "Our Vision"],
+    "linksLegal": ["Legal Notice", "Privacy Policy"],
+    "headOffice": "Head office: Bailly-Romainvilliers",
+    "rights": "© 2025 Ikovaline"
+  },
+  "cta": {
+    "home": {
+      "title": "Improve your online visibility today!",
+      "desc": "With Ikovaline, boost your digital strategy: SEO, websites, advertising campaigns and more. Contact us to turn your goals into tangible results.",
+      "button": "Get started now!"
+    },
+    "services": {
+      "title": "Take action now!",
+      "desc": "Attract more customers, increase your sales, grow your notoriety. With Ikovaline, it’s possible.",
+      "button": "Launch your project"
+    },
+    "about": {
+      "title": "Take your business to the next level with Ikovaline",
+      "desc": "Benefit from our expertise in digital marketing, SEO, advertising, and tailor-made strategy to boost your visibility and achieve your business goals.",
+      "button": "Contact us now!"
+    }
+  },
+  "landing": {
+    "guarantee": "Guaranteed results",
+    "headline": "Ikovaline, from idea to the SaaS that",
+    "subtitle": "We design, build, and ship digital products ready for 10,000 users.",
+    "ctaAudit": "Start my free audit",
+    "ctaServices": "Explore our services"
+  },
+  "about": {
+    "paragraph": "Ikovaline is a 100% student-driven agency turning your ideas into high-impact digital products. We craft bespoke web apps and SaaS—fast, scalable, and built to engage your users and fit your business. Every project benefits from transparent guidance, efficient delivery, and SEO foundations that boost your visibility and growth.",
+    "ctaMore": "Learn more"
+  }
+}

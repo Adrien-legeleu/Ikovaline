@@ -1,8 +1,9 @@
-import React from "react";
-import type { Metadata } from "next";
-import Head from "next/head";
-import CallToAction from "@/components/callToAction/CallToAction";
-import AboutContent from "@/components/AboutPage/AboutContent";
+import React from 'react';
+import type { Metadata } from 'next';
+import Head from 'next/head';
+import CallToAction from '@/components/callToAction/CallToAction';
+import AboutContent from '@/components/AboutPage/AboutContent';
+import CTAABout from '@/components/AboutPage/CTAAbout';
 
 export const metadata: Metadata = {
   title: "À propos d'Ikovaline - Notre Histoire et Équipe",
@@ -12,23 +13,23 @@ export const metadata: Metadata = {
     title: "À propos d'Ikovaline - Notre Histoire et Équipe",
     description:
       "Plongez dans les coulisses d'Ikovaline : notre parcours, notre vision et les personnes qui façonnent l'accompagnement digital de demain.",
-    url: "https://ikovaline.com/about",
-    type: "website",
+    url: 'https://ikovaline.com/about',
+    type: 'website',
     images: [
       {
-        url: "/images/logo/ikovaline_logo.png",
+        url: '/images/logo/ikovaline_logo.png',
         width: 1200,
         height: 630,
-        alt: "Ikovaline Logo",
+        alt: 'Ikovaline Logo',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: "À propos d'Ikovaline - Notre Histoire et Équipe",
     description:
-      "Découvrez qui se cache derrière Ikovaline et comment notre équipe vous accompagne dans votre transformation digitale.",
-    images: ["/images/logo/ikovaline_logo.png"],
+      'Découvrez qui se cache derrière Ikovaline et comment notre équipe vous accompagne dans votre transformation digitale.',
+    images: ['/images/logo/ikovaline_logo.png'],
   },
 };
 
@@ -42,24 +43,20 @@ export default function Page() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebPage",
+              '@context': 'https://schema.org',
+              '@type': 'WebPage',
               name: "À propos d'Ikovaline",
-              url: "https://ikovaline.com/about",
+              url: 'https://ikovaline.com/about',
               description:
-                "Découvrez l’histoire, les valeurs et l’équipe qui porte Ikovaline, la start-up étudiante au service de votre visibilité digitale.",
+                'Découvrez l’histoire, les valeurs et l’équipe qui porte Ikovaline, la start-up étudiante au service de votre visibilité digitale.',
             }),
           }}
         />
       </Head>
 
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1400px] relative overflow-hidden mx-auto">
         <AboutContent />
-        <CallToAction
-          title="Faites passer votre activité au niveau supérieur avec Ikovaline"
-          desc="Bénéficiez de notre expertise en marketing digital, SEO, publicité et stratégie sur-mesure pour booster votre visibilité et atteindre vos objectifs business."
-          textBtn="Contactez-nous dès maintenant !"
-        />
+        <CTAABout />
       </div>
     </>
   );

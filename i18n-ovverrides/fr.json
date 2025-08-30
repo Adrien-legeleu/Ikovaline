@@ -1,0 +1,46 @@
+{
+  "footer": {
+    "titleHome": "Home",
+    "titleServices": "Nos Services",
+    "titleAbout": "À Propos",
+    "titleLegal": "Légal",
+    "linksHome": ["À Propos", "Nos Services", "Témoignages"],
+    "linksServices": [
+      "Business Développement",
+      "Développement Digital",
+      "Pourquoi-Nous ?"
+    ],
+    "linksAbout": ["Notre Histoire", "Notre Équipe", "Notre Vision"],
+    "linksLegal": ["Mentions légales", "Politique de confidentialité"],
+    "headOffice": "Siège social : Bailly-Romainvilliers",
+    "rights": "© 2025 Ikovaline"
+  },
+  "cta": {
+    "home": {
+      "title": "Améliorez votre visibilité en ligne dès aujourd'hui !",
+      "desc": "Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets.",
+      "button": "Commencez maintenant !"
+    },
+    "services": {
+      "title": "Passez à l’action maintenant !",
+      "desc": "Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible.",
+      "button": "Lancez votre projet"
+    },
+    "about": {
+      "title": "Faites passer votre activité au niveau supérieur avec Ikovaline",
+      "desc": "Bénéficiez de notre expertise en marketing digital, SEO, publicité et stratégie sur-mesure pour booster votre visibilité et atteindre vos objectifs business.",
+      "button": "Contactez-nous dès maintenant !"
+    }
+  },
+  "landing": {
+    "guarantee": "Garantie de résultat",
+    "headline": "Ikovaline, De l’idée au SaaS qui",
+    "subtitle": "On conçoit, développe et déploie vos produits digitaux pour qu’ils soient prêts à encaisser 10 000 utilisateurs.",
+    "ctaAudit": "Lancer mon audit gratuit",
+    "ctaServices": "Explorer nos services"
+  },
+  "about": {
+    "paragraph": "Ikovaline, c’est l’agence 100 % étudiante qui transforme vos idées en solutions digitales à impact. Nous concevons des applications web et des SaaS sur mesure, performants et évolutifs, pensés pour s’adapter à votre activité et séduire vos utilisateurs. Avec Ikovaline, chaque projet bénéficie d’un accompagnement transparent, d’un développement rapide et efficace, et d’un référencement optimisé pour maximiser votre visibilité et votre croissance.",
+    "ctaMore": "En savoir plus"
+  }
+}

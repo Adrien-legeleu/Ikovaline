@@ -1,11 +1,13 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Carousel, Blog } from "@/components/ui/apple-cards-carousel";
-import { dataBlog } from "@/components/BlogPage/Blog";
+import React from 'react';
+import { Carousel, Blog } from '@/components/ui/apple-cards-carousel';
+import { getBlogData } from '@/components/BlogPage/Blog';
+import { usePathname } from 'next/navigation';
 
 export default function BlogLanding() {
-  const blogs = dataBlog.map((blog) => (
+  const isEN = /^\/en(\/|$)/.test(usePathname() || '/');
+  const blogs = getBlogData(isEN).map((blog) => (
     <Blog key={blog.date + blog.slug} blog={blog} />
   ));
 

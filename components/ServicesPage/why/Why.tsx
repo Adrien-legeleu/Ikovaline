@@ -1,5 +1,8 @@
+// components/ServicesPage/why/Why.tsx
 'use client';
 
+import * as React from 'react';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import {
@@ -10,51 +13,106 @@ import {
   IconUsersGroup,
   IconShieldCheck,
 } from '@tabler/icons-react';
-import React from 'react';
+
+type Feature = {
+  title: string;
+  description: string;
+  icon: React.ElementType;
+};
+
+function useLocale() {
+  const pathname = usePathname() || '/';
+  return { isEN: /^\/en(\/|$)/.test(pathname) };
+}
 
 export default function Why() {
-  const features = [
-    {
-      title: 'Un excellent rapport qualité/prix',
-      description:
-        'Des services digitaux performants à des tarifs étudiés, accessibles même pour les petites structures.',
-      icon: IconDiscountCheck,
-    },
-    {
-      title: 'Garantie de résultat',
-      description:
-        'Si nos solutions ne répondent pas à vos objectifs, nous vous remboursons intégralement.',
-      icon: IconCash,
-    },
-    {
-      title: 'Des résultats rapides et mesurables',
-      description:
-        'Livraison rapide, indicateurs clairs et impact mesurable à chaque étape.',
-      icon: IconClock,
-    },
-    {
-      title: 'Suivi personnalisé & communication fluide',
-      description:
-        'Un accompagnement transparent avec points réguliers et réponses réactives.',
-      icon: IconMessage2,
-    },
-    {
-      title: 'Une équipe engagée et expérimentée',
-      description:
-        'Des spécialistes passionnés en marketing digital et développement commercial.',
-      icon: IconUsersGroup,
-    },
-    {
-      title: 'Confiance et cadre sur-mesure',
-      description:
-        'Chaque mission est encadrée par un plan d’action clair et une relation de confiance.',
-      icon: IconShieldCheck,
-    },
-  ] as const;
+  const { isEN } = useLocale();
+
+  const TITLE = isEN
+    ? '6 reasons to team up with Ikovaline'
+    : '6 raisons de faire équipe avec Ikovaline';
+
+  const FEATURES: Feature[] = isEN
+    ? [
+        {
+          title: 'Great value for money',
+          description:
+            'High-performance services at fair, accessible prices — even for small teams.',
+          icon: IconDiscountCheck,
+        },
+        {
+          title: 'Result guarantee',
+          description:
+            'If our solutions don’t meet your objectives, we refund you in full.',
+          icon: IconCash,
+        },
+        {
+          title: 'Fast, measurable outcomes',
+          description:
+            'Quick delivery, clear metrics, and measurable impact at every step.',
+          icon: IconClock,
+        },
+        {
+          title: 'Personal follow-up & smooth comms',
+          description:
+            'Transparent support, regular check-ins, and responsive answers.',
+          icon: IconMessage2,
+        },
+        {
+          title: 'Committed, experienced team',
+          description:
+            'Passionate specialists in digital marketing and business development.',
+          icon: IconUsersGroup,
+        },
+        {
+          title: 'Trust & tailored framework',
+          description:
+            'Each mission is guided by a clear action plan and a trust-based relationship.',
+          icon: IconShieldCheck,
+        },
+      ]
+    : [
+        {
+          title: 'Un excellent rapport qualité/prix',
+          description:
+            'Des services digitaux performants à des tarifs étudiés, accessibles même pour les petites structures.',
+          icon: IconDiscountCheck,
+        },
+        {
+          title: 'Garantie de résultat',
+          description:
+            'Si nos solutions ne répondent pas à vos objectifs, nous vous remboursons intégralement.',
+          icon: IconCash,
+        },
+        {
+          title: 'Des résultats rapides et mesurables',
+          description:
+            'Livraison rapide, indicateurs clairs et impact mesurable à chaque étape.',
+          icon: IconClock,
+        },
+        {
+          title: 'Suivi personnalisé & communication fluide',
+          description:
+            'Un accompagnement transparent avec points réguliers et réponses réactives.',
+          icon: IconMessage2,
+        },
+        {
+          title: 'Une équipe engagée et expérimentée',
+          description:
+            'Des spécialistes passionnés en marketing digital et développement commercial.',
+          icon: IconUsersGroup,
+        },
+        {
+          title: 'Confiance et cadre sur-mesure',
+          description:
+            'Chaque mission est encadrée par un plan d’action clair et une relation de confiance.',
+          icon: IconShieldCheck,
+        },
+      ];
 
   return (
     <section id="pourquoi-nous" className="relative py-20">
-      {/* Halos bleus d’ambiance */}
+      {/* Halos */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <span className="absolute -top-24 left-1/3 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full blur-[180px] bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)] opacity-25 dark:opacity-35" />
         <span className="absolute -bottom-20 right-1/4 h-[26rem] w-[26rem] translate-x-1/4 rounded-full blur-[160px] bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-20 dark:opacity-30" />
@@ -63,15 +121,14 @@ export default function Why() {
       <div className="mx-auto max-w-6xl px-6">
         <h2
           className="text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight
-                       bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
-                       dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
+                     bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
+                     dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
         >
-          6 raisons de faire équipe avec Ikovaline
+          {TITLE}
         </h2>
 
-        {/* Grille de cartes liquid glass */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((f, i) => (
+          {FEATURES.map((f, i) => (
             <FeatureCard
               key={f.title}
               title={f.title}
@@ -86,7 +143,6 @@ export default function Why() {
   );
 }
 
-/* ------------------------- Card “Liquid Glass” ------------------------- */
 function FeatureCard({
   title,
   description,
@@ -105,20 +161,16 @@ function FeatureCard({
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.55, ease: 'easeOut', delay }}
       className={cn(
-        'relative overflow-hidden flex flex-col justify-between rounded-3xl p-6 xl:p-7 backdrop-blur-2xl',
-        // Fond verre : clair en light, noir fumé en dark
+        'relative overflow-hidden h-full flex flex-col justify-between rounded-3xl p-6 xl:p-7 backdrop-blur-2xl',
         'bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]',
         'dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]',
-        // Bordure + ombres
         'border border-white/50 dark:border-[rgba(56,130,246,0.20)]',
         'shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)]',
         'dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]',
-        // Hover subtil pro
         'transition-transform duration-500 hover:-translate-y-1.5',
         'hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]'
       )}
     >
-      {/* Glow bas “royal/electric” */}
       <span
         aria-hidden
         className="pointer-events-none absolute -bottom-12 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-full blur-3xl"
@@ -128,33 +180,6 @@ function FeatureCard({
         }}
       />
 
-      {/* Rim conique (effet verre) */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[26px]"
-        style={{
-          border: '1px solid transparent',
-          backgroundImage:
-            'linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46)),' +
-            'conic-gradient(from 210deg, rgba(255,255,255,.85), rgba(0,168,232,.28), rgba(255,255,255,.55), rgba(37,99,235,.22), rgba(255,255,255,.85))',
-          backgroundClip: 'padding-box, border-box',
-          opacity: 0.55,
-        }}
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 hidden rounded-[26px] dark:block"
-        style={{
-          border: '1px solid transparent',
-          backgroundImage:
-            'linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65)),' +
-            'conic-gradient(from 210deg, rgba(0,168,232,.26), rgba(37,99,235,.20), rgba(0,168,232,.26))',
-          backgroundClip: 'padding-box, border-box',
-          opacity: 0.9,
-        }}
-      />
-
-      {/* Header (icône + titre) */}
       <div className="relative z-10 flex items-start gap-3">
         <div
           className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl
@@ -168,12 +193,10 @@ function FeatureCard({
         </h3>
       </div>
 
-      {/* Description */}
       <p className="relative z-10 mt-3 text-neutral-700 dark:text-neutral-300 text-sm xl:text-[15px] leading-relaxed">
         {description}
       </p>
 
-      {/* Streak haut (jamais blanc en dark) */}
       <span className="pointer-events-none absolute left-6 right-6 top-3 h-6 rounded-full blur-[10px] bg-black/5 dark:bg-sky-400/12" />
     </motion.article>
   );

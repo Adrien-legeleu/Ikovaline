@@ -1,11 +1,19 @@
-"use client";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
+'use client';
+
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { LiquidButton } from '@/components/ui/liquid-glass-button';
+import { Textarea } from '@/components/ui/textarea';
+import { ToastAction } from '@/components/ui/toast';
+import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+
+function useLocale() {
+  const pathname = usePathname() || '/';
+  return { isEN: /^\/en(\/|$)/.test(pathname) };
+}
 
 export default function ContactFormBusiness({
   handleForm,
@@ -13,220 +21,225 @@ export default function ContactFormBusiness({
   handleForm: () => void;
 }) {
   const { toast } = useToast();
+  const { isEN } = useLocale();
+
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    buisnessname: "",
-    etude: "",
-    email: "",
-    tel: "",
-    message: "",
-    category: "Entreprise",
-    secteur: "",
+    firstname: '',
+    lastname: '',
+    buisnessname: '',
+    email: '',
+    tel: '',
+    secteur: '',
+    message: '',
+    category: isEN ? 'Business' : 'Entreprise',
   });
 
-  const handleChangeValue = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
+  const onChange =
+    (id: keyof typeof formData) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setFormData((s) => ({ ...s, [id]: e.target.value }));
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
-    console.log(formData.email);
-
     try {
-      const response = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      if (response.ok) {
-        console.log("message envoyé");
+      if (res.ok) {
         toast({
-          title: "Votre message a été envoyé avec succès !",
-          description:
-            "Nous traiterons votre message dans les plus brefs délais.",
+          title: isEN
+            ? 'Your message has been sent successfully!'
+            : 'Votre message a été envoyé avec succès !',
+          description: isEN
+            ? 'We will get back to you shortly.'
+            : 'Nous traiterons votre message dans les plus brefs délais.',
         });
         setFormData({
-          firstname: "",
-          lastname: "",
-          buisnessname: "",
-          etude: "",
-          email: "",
-          tel: "",
-          message: "",
-          category: "Entreprise",
-          secteur: "",
+          firstname: '',
+          lastname: '',
+          buisnessname: '',
+          email: '',
+          tel: '',
+          secteur: '',
+          message: '',
+          category: isEN ? 'Business' : 'Entreprise',
         });
       } else {
-        console.log(response);
-        toast({
-          variant: "destructive",
-          title: "une erreur est survenue",
-          description:
-            "Une erreur est survenue durant l'envoie de votre message",
-          action: <ToastAction altText="Try again">Réessayer</ToastAction>,
-        });
+        throw new Error();
       }
-    } catch (error) {
-      console.error("error lors de l'envoie", error);
+    } catch {
       toast({
-        variant: "destructive",
-        title: "une erreur est survenue",
-        description: "Une erreur est survenue durant l'envoie de votre message",
-        action: <ToastAction altText="Try again">Réessayer</ToastAction>,
+        variant: 'destructive',
+        title: isEN ? 'An error occurred' : 'Une erreur est survenue',
+        description: isEN
+          ? 'Something went wrong while sending your message.'
+          : "Une erreur est survenue durant l'envoi de votre message",
+        action: (
+          <ToastAction altText="try-again">
+            {isEN ? 'Try again' : 'Réessayer'}
+          </ToastAction>
+        ),
       });
     }
   };
+
+  const fieldCls =
+    'rounded-3xl border border-white/50 dark:border-white/10 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl ' +
+    'shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_6px_16px_rgba(0,0,0,.06)] ' +
+    'dark:shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_22px_rgba(0,0,0,.5)] ' +
+    'focus-visible:ring-1 focus-visible:ring-sky-400/60';
+
   return (
-    <div className="max-w-lg w-full mx-auto   rounded-3xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-      <h2 className="font-extrabold lg:hidden text-2xl text-neutral-800 sm:text-left text-center dark:text-neutral-100">
-        Une question ? Un projet ?
+    <div
+      className="relative group rounded-[28px] p-8 backdrop-blur-2xl overflow-hidden
+        bg-[linear-gradient(135deg,rgba(255,255,255,.85),rgba(240,245,252,.45))]
+        dark:bg-[linear-gradient(135deg,rgba(10,14,20,.9),rgba(10,14,20,.65))]
+        border border-white/40 dark:border-[rgba(56,130,246,0.2)]
+        shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)]
+        dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.15)]"
+    >
+      <h2 className="text-center font-extrabold text-2xl text-neutral-900 dark:text-neutral-100">
+        {isEN ? 'A question? A project?' : 'Une question ? Un projet ?'}
       </h2>
-      <h1 className="font-extrabold max-lg:hidden text-2xl text-neutral-800 sm:text-left text-center dark:text-neutral-100">
-        Une question ? Un projet ?
-      </h1>
-      <p className="text-neutral-600 text-base max-w-md mt-3 leading-relaxed dark:text-neutral-300">
-        Remplissez le formulaire ci-dessous pour être recontacté par notre
-        équipe. Ensemble, nous allons{" "}
-        <strong className="font-semibold">
-          booster votre visibilité en ligne
-        </strong>
-        ,<strong className="font-semibold">générer plus de leads</strong> et
-        accélérer la{" "}
-        <strong className="font-semibold">
-          croissance de votre entreprise
-        </strong>{" "}
-        grâce à une stratégie digitale sur mesure.
+
+      <p className="mt-3 max-w-md mx-auto text-center text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
+        {isEN ? (
+          <>
+            Tell us what you need: we <b>boost visibility</b>,{' '}
+            <b>generate leads</b> and accelerate your <b>growth</b>.
+          </>
+        ) : (
+          <>
+            Dites-nous ce dont vous avez besoin : nous{' '}
+            <b>boostons votre visibilité</b>, <b>générons des leads</b> et
+            accélérons votre <b>croissance</b>.
+          </>
+        )}
       </p>
 
-      <form className="my-8" onSubmit={handleSubmit}>
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+      <form className="my-8" onSubmit={onSubmit}>
+        <div className="mb-4 flex flex-col md:flex-row gap-2">
           <LabelInputContainer>
-            <Label htmlFor="firstname">Nom</Label>
+            <Label htmlFor="firstname">{isEN ? 'Last name' : 'Nom'}</Label>
             <Input
-              required
               id="firstname"
-              placeholder="Adrien"
+              required
+              placeholder={isEN ? 'Smith' : 'Dupont'}
               value={formData.firstname}
-              type="text"
-              onChange={handleChangeValue}
+              onChange={onChange('firstname')}
+              className={fieldCls}
             />
           </LabelInputContainer>
           <LabelInputContainer>
-            <Label htmlFor="lastname">Prénom</Label>
+            <Label htmlFor="lastname">{isEN ? 'First name' : 'Prénom'}</Label>
             <Input
-              required
               id="lastname"
-              placeholder="Legeleux"
+              required
+              placeholder={isEN ? 'Emma' : 'Emma'}
               value={formData.lastname}
-              type="text"
-              onChange={handleChangeValue}
+              onChange={onChange('lastname')}
+              className={fieldCls}
             />
           </LabelInputContainer>
         </div>
+
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Adresse mail</Label>
+          <Label htmlFor="email">
+            {isEN ? 'Email address' : 'Adresse mail'}
+          </Label>
           <Input
-            required
-            value={formData.email}
             id="email"
-            placeholder="adrienlegeleu@gmail.com"
+            required
             type="email"
-            onChange={handleChangeValue}
+            placeholder={isEN ? 'emma@example.com' : 'emma@exemple.com'}
+            value={formData.email}
+            onChange={onChange('email')}
+            className={fieldCls}
           />
         </LabelInputContainer>
+
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="buisnessname">Nom Entreprise</Label>
+          <Label htmlFor="buisnessname">
+            {isEN ? 'Company name' : 'Nom Entreprise'}
+          </Label>
           <Input
-            required
-            value={formData.buisnessname}
             id="buisnessname"
-            placeholder="IKovaline"
-            type="text"
-            onChange={handleChangeValue}
+            required
+            placeholder="Ikovaline"
+            value={formData.buisnessname}
+            onChange={onChange('buisnessname')}
+            className={fieldCls}
           />
         </LabelInputContainer>
+
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="tel">Téléphone</Label>
+          <Label htmlFor="tel">{isEN ? 'Phone' : 'Téléphone'}</Label>
           <Input
-            required
             id="tel"
-            value={formData.tel}
-            placeholder="07 67 62 89 82"
-            type="tel"
-            onChange={handleChangeValue}
-          />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="secteur">Secteur</Label>
-          <Input
             required
-            id="secteur"
-            value={formData.secteur}
-            placeholder="architecture"
-            type="text"
-            onChange={handleChangeValue}
+            placeholder={isEN ? '+33 6 00 00 00 00' : '07 00 00 00 00'}
+            value={formData.tel}
+            onChange={onChange('tel')}
+            className={fieldCls}
           />
         </LabelInputContainer>
+
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="message">Message</Label>
-          <Textarea
-            placeholder="Entrez votre message"
-            name="message"
-            id="message"
-            onChange={handleChangeValue}
-            value={formData.message}
+          <Label htmlFor="secteur">{isEN ? 'Sector' : 'Secteur'}</Label>
+          <Input
+            id="secteur"
+            required
+            placeholder={isEN ? 'Architecture' : 'Architecture'}
+            value={formData.secteur}
+            onChange={onChange('secteur')}
+            className={fieldCls}
           />
         </LabelInputContainer>
 
-        <button
-          className="bg-gradient-to-br mt-10 relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-3xl h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          type="submit"
-        >
-          Envoyer
-          <BottomGradient />
-        </button>
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="message">{isEN ? 'Message' : 'Message'}</Label>
+          <Textarea
+            id="message"
+            placeholder={isEN ? 'Enter your message…' : 'Entrez votre message…'}
+            value={formData.message}
+            onChange={onChange('message')}
+            className={cn(fieldCls, 'min-h-28')}
+          />
+        </LabelInputContainer>
 
-        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-
-        <div className="flex flex-col space-y-4">
+        <div className="w-full flex flex-col items-center">
           <button
-            className=" relative group/btn flex space-x-2  items-center justify-center px-4 w-full text-black rounded-3xl h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            onClick={handleForm}
+            type="submit"
+            className="relative group/btn mt-10 block h-14 w-full rounded-full text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]"
           >
-            <span className="text-neutral-700 dark:text-neutral-300 text-center text-sm">
-              Étudiant ?
-            </span>
-            <BottomGradient />
+            {isEN ? 'Send' : 'Envoyer'}
           </button>
+          <div className="my-5 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent" />
+          <LiquidButton
+            type="button"
+            onClick={handleForm}
+            className="rounded-3xl mx-auto w-full"
+          >
+            {isEN ? 'Student?' : 'Étudiant ?'}
+          </LiquidButton>
         </div>
       </form>
     </div>
   );
 }
 
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-    </>
-  );
-};
-
-const LabelInputContainer = ({
+function LabelInputContainer({
   children,
   className,
 }: {
   children: React.ReactNode;
   className?: string;
-}) => {
+}) {
   return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>
+    <div className={cn('flex w-full flex-col space-y-2', className)}>
       {children}
     </div>
   );
-};
+}

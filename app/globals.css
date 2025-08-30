@@ -66,7 +66,7 @@ body {
 
   .dark {
     /* Base - DARK */
-    --background: 210 21% 5%; /* Noir profond #0B0E11 */
+    --background: 210 21% 0%; /* Noir profond #0B0E11 */
     --foreground: 0 0% 100%;
 
     --card: 214 12% 12%; /* Gris anthracite */

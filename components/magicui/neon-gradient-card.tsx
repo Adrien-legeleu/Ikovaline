@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   CSSProperties,
@@ -7,63 +7,20 @@ import {
   useEffect,
   useRef,
   useState,
-} from "react";
-
-import { cn } from "@/lib/utils";
+} from 'react';
+import { cn } from '@/lib/utils';
 
 interface NeonColorsProps {
   firstColor: string;
   secondColor: string;
 }
-
 interface NeonGradientCardProps {
-  /**
-   * @default <div />
-   * @type ReactElement
-   * @description
-   * The component to be rendered as the card
-   * */
   as?: ReactElement;
-  /**
-   * @default ""
-   * @type string
-   * @description
-   * The className of the card
-   */
   className?: string;
-
-  /**
-   * @default ""
-   * @type ReactNode
-   * @description
-   * The children of the card
-   * */
   children?: ReactNode;
-
-  /**
-   * @default 5
-   * @type number
-   * @description
-   * The size of the border in pixels
-   * */
   borderSize?: number;
-
-  /**
-   * @default 20
-   * @type number
-   * @description
-   * The size of the radius in pixels
-   * */
   borderRadius?: number;
-
-  /**
-   * @default "{ firstColor: '#ff00aa', secondColor: '#00FFF1' }"
-   * @type string
-   * @description
-   * The colors of the neon gradient
-   * */
   neonColors?: NeonColorsProps;
-
   [key: string]:
     | string
     | boolean
@@ -77,78 +34,102 @@ interface NeonGradientCardProps {
 export const NeonGradientCard: React.FC<NeonGradientCardProps> = ({
   className,
   children,
-  borderSize = 0,
-  borderRadius = 40,
+  borderSize = 3,
+  borderRadius = 32,
   neonColors = {
-    firstColor: "#79DFF3",
-    secondColor: "#09F4B5",
+    firstColor: '#00A8E8', // electric blue
+    secondColor: '#2563EB', // royal blue
   },
   ...props
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const ref = useRef<HTMLDivElement>(null);
+  const [dim, setDim] = useState({ w: 0, h: 0 });
 
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        const { offsetWidth, offsetHeight } = containerRef.current;
-        setDimensions({ width: offsetWidth, height: offsetHeight });
-      }
-    };
-
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-
-    return () => {
-      window.removeEventListener("resize", updateDimensions);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      const { offsetWidth, offsetHeight } = containerRef.current;
-      setDimensions({ width: offsetWidth, height: offsetHeight });
+  const update = () => {
+    if (ref.current) {
+      setDim({ w: ref.current.offsetWidth, h: ref.current.offsetHeight });
     }
-  }, [children]);
+  };
+
+  useEffect(() => {
+    update();
+    window.addEventListener('resize', update, { passive: true });
+    return () => window.removeEventListener('resize', update);
+  }, []);
+  useEffect(() => update(), [children]);
 
   return (
     <div
-      ref={containerRef}
+      ref={ref}
       style={
         {
-          "--border-size": `${borderSize}px`,
-          "--border-radius": `${borderRadius}px`,
-          "--neon-first-color": neonColors.firstColor,
-          "--neon-second-color": neonColors.secondColor,
-          "--card-width": `${dimensions.width}px`,
-          "--card-height": `${dimensions.height}px`,
-          "--card-content-radius": `${borderRadius - borderSize}px`,
-          "--pseudo-element-background-image": `linear-gradient(0deg, ${neonColors.firstColor}, ${neonColors.secondColor})`,
-          "--pseudo-element-width": `${dimensions.width + borderSize * 2}px`,
-          "--pseudo-element-height": `${dimensions.height + borderSize * 2}px`,
-          "--after-blur": `${dimensions.width / 3}px`,
+          '--b': `${borderSize}px`,
+          '--r': `${borderRadius}px`,
+          '--c1': neonColors.firstColor,
+          '--c2': neonColors.secondColor,
+          '--pw': `${dim.w + borderSize * 2}px`,
+          '--ph': `${dim.h + borderSize * 2}px`,
+          '--blur': `${Math.max(dim.w, 240) / 2.8}px`,
         } as CSSProperties
       }
-      className={cn(
-        "relative z-10 size-full rounded-[var(--border-radius)]",
-        className
-      )}
+      className={cn('relative z-10 size-full rounded-[var(--r)]', className)}
       {...props}
     >
+      {/* contour néon animé */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -left-[var(--b)] -top-[var(--b)] -z-10 block h-[var(--ph)] w-[var(--pw)] rounded-[var(--r)]
+                   bg-[linear-gradient(0deg,var(--c1),var(--c2))] bg-[length:100%_200%] animate-background-position-spin opacity-80"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -left-[var(--b)] -top-[var(--b)] -z-10 block h-[var(--ph)] w-[var(--pw)] rounded-[var(--r)]
+                   blur-[var(--blur)] bg-[linear-gradient(0deg,var(--c1),var(--c2))] bg-[length:100%_200%] animate-background-position-spin opacity-60"
+      />
+
+      {/* contenu — liquid glass */}
       <div
         className={cn(
-          "relative size-full min-h-[inherit] rounded-[var(--card-content-radius)]  p-6",
-          "before:absolute before:-left-[var(--border-size)] before:-top-[var(--border-size)] before:-z-10 before:block",
-          "before:h-[var(--pseudo-element-height)] before:w-[var(--pseudo-element-width)] before:rounded-[var(--border-radius)] before:content-['']",
-          "before:bg-[linear-gradient(0deg,var(--neon-first-color),var(--neon-second-color))] before:bg-[length:100%_200%]",
-          "before:animate-background-position-spin",
-          "after:absolute after:-left-[var(--border-size)] after:-top-[var(--border-size)] after:-z-10 after:block",
-          "after:h-[var(--pseudo-element-height)] after:w-[var(--pseudo-element-width)] after:rounded-[var(--border-radius)] after:blur-[var(--after-blur)] after:content-['']",
-          "after:bg-[linear-gradient(0deg,var(--neon-first-color),var(--neon-second-color))] after:bg-[length:100%_200%] after:opacity-80",
-          "after:animate-background-position-spin",
-          "bg-background"
+          'relative size-full min-h-[inherit] rounded-[calc(var(--r)-var(--b))] p-6',
+          // LIGHT
+          'bg-[linear-gradient(135deg,rgba(255,255,255,.92),rgba(240,245,252,.50))]',
+          // DARK (black glass, no white)
+          'dark:bg-[linear-gradient(135deg,rgba(8,12,18,.95),rgba(8,12,18,.65))]',
+          'backdrop-blur-2xl backdrop-saturate-150',
+          'border border-white/60 dark:border-[rgba(56,130,246,.22)]',
+          'shadow-[0_24px_80px_rgba(0,168,232,.22),inset_0_1px_0_rgba(255,255,255,.55)]',
+          'dark:shadow-[0_24px_80px_rgba(0,0,0,.65),inset_0_1px_0_rgba(59,130,246,.12)]'
         )}
       >
+        {/* rim interne clair */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-[calc(var(--r)-var(--b))] block dark:hidden"
+          style={{
+            border: '1px solid transparent',
+            backgroundImage:
+              'linear-gradient(135deg,rgba(255,255,255,.95),rgba(245,248,252,.52)),' +
+              'conic-gradient(from 210deg,rgba(255,255,255,.90),rgba(0,168,232,.30),rgba(255,255,255,.55),rgba(37,99,235,.22),rgba(255,255,255,.90))',
+            backgroundClip: 'padding-box,border-box',
+            opacity: 0.95,
+          }}
+        />
+        {/* rim interne dark (no white) */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 hidden rounded-[calc(var(--r)-var(--b))] dark:block"
+          style={{
+            border: '1px solid transparent',
+            backgroundImage:
+              'linear-gradient(135deg,rgba(8,12,18,.96),rgba(8,12,18,.62)),' +
+              'conic-gradient(from 210deg,rgba(0,168,232,.24),rgba(37,99,235,.18),rgba(0,168,232,.24))',
+            backgroundClip: 'padding-box,border-box',
+            opacity: 0.92,
+          }}
+        />
+
+        {/* streak doux */}
+        <span className="pointer-events-none absolute left-6 right-6 top-2 h-6 rounded-full blur-[12px] bg-white/70 dark:bg-sky-400/10" />
         {children}
       </div>
     </div>

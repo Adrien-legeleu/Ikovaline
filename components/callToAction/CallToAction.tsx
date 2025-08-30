@@ -69,7 +69,7 @@ export default function CallToAction({ title, desc, textBtn }: ICallToAction) {
           style={{
             border: '1px solid transparent',
             backgroundImage:
-              'linear-gradient(180deg, rgba(8,12,18,0.92), rgba(8,12,18,0.62)),' +
+              'linear-gradient(180deg, rgba(8,12,18,0.92), rgba(8,12,18,0.92)),' +
               `conic-gradient(from 210deg, ${ELECTRIC},.28), ${ROYAL},.22), ${ELECTRIC},.26))`,
             backgroundClip: 'padding-box, border-box',
             mixBlendMode: 'normal',

@@ -1,3 +1,4 @@
+import CTAHome from '@/components/LandingPage/CTAHome';
 import ComponentDemo from '@/components/LandingPage/impact/TextImpact';
 import Landing from '@/components/LandingPage/landing/Landing';
 
@@ -25,12 +26,6 @@ const About = dynamic(() => import('@/components/LandingPage/about/About'), {
 const Methodologie = dynamic(
   () =>
     import('@/components/LandingPage/impact/Impact').then((mod) => mod.default),
-  { ssr: true }
-);
-
-const CallToAction = dynamic(
-  () =>
-    import('@/components/callToAction/CallToAction').then((mod) => mod.default),
   { ssr: true }
 );
 
@@ -130,23 +125,21 @@ export default function Home() {
         />
       </Head>
 
-      <div className="max-w-[1450px] overflow-hidden mx-auto">
-        <Landing />
-        <ComponentDemo />
-        <About />
-        <section id="services">
-          <Services />
-        </section>
+      <div className="max-w-[1450px]  mx-auto">
+        <div className="h-full w-full relative overflow-hidden">
+          <Landing />
+          <ComponentDemo />
+          <About />
+          <section id="services" className="h-full w-full relative ">
+            <Services />
+          </section>
+        </div>
         <Map />
         <Methodologie />
         <div className="overflow-hidden relative w-full">
           <Review />
 
-          <CallToAction
-            title="Améliorez votre visibilité en ligne dès aujourd'hui !"
-            desc="Avec Ikovaline, boostez votre stratégie digitale : SEO, site web, campagnes publicitaires et plus. Contactez-nous pour transformer vos objectifs en résultats concrets."
-            textBtn="Commencez maintenant !"
-          />
+          <CTAHome />
         </div>
         <Blog />
       </div>
