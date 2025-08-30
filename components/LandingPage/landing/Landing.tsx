@@ -1,3 +1,4 @@
+'use client';
 import { TextAnimate } from '@/components/ui/text-animate';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
