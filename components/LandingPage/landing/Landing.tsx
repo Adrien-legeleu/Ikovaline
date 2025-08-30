@@ -1,5 +1,3 @@
-'use client';
-
 import { TextAnimate } from '@/components/ui/text-animate';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -9,16 +7,34 @@ import dynamic from 'next/dynamic';
 import { ParticleTextEffect } from '../ParticleWord';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import { usePathname } from 'next/navigation';
-import fr from '/i18n-ovverrides/fr.json';
-import en from '/i18n-ovverrides/en.json';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
 
 const Glow = dynamic(() => import('@/components/ui/glow'), { ssr: false });
 
+/* -------------------- Dictionnaire inline (FR/EN) -------------------- */
+const DICT = {
+  fr: {
+    guarantee: 'Garantie de résultats',
+    headline: 'Boostez votre visibilité digitale',
+    subtitle:
+      'De la stratégie au développement, Ikovaline conçoit des solutions digitales sur mesure pour accélérer votre croissance.',
+    ctaAudit: 'Demander un audit gratuit',
+    ctaServices: 'Voir nos services',
+  },
+  en: {
+    guarantee: 'Results guarantee',
+    headline: 'Boost your digital visibility',
+    subtitle:
+      'From strategy to development, Ikovaline designs tailored digital solutions to accelerate your growth.',
+    ctaAudit: 'Request a free audit',
+    ctaServices: 'See our services',
+  },
+} as const;
+
 export default function Landing() {
   const pathname = usePathname();
   const isEN = /^\/en(\/|$)/.test(pathname);
-  const t = isEN ? en.landing : fr.landing;
+  const t = isEN ? DICT.en : DICT.fr;
 
   return (
     <div className="relative flex flex-col items-center justify-center gap-5 2xl:gap-0 py-20 overflow-hidden">

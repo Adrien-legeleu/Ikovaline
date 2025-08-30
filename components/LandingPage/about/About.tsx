@@ -1,4 +1,5 @@
 'use client';
+
 import { usePathname } from 'next/navigation';
 import { AnimatedTooltip } from '../../ui/animated-tooltip';
 import Img1 from '@/public/images/About/team-florent-profil.jpg';
@@ -13,16 +14,13 @@ import Img9 from '@/public/images/About/team-rafeal-profil.jpg';
 import { MagicText } from '@/components/magicui/MagicText';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import { IconInfoCircle } from '@tabler/icons-react';
-
-import fr from '/i18n-ovverrides/fr.json';
-import en from '/i18n-ovverrides/en.json';
 import { StaticImageData } from 'next/image';
 
 type Person = {
   id: number;
   name: string;
   designation: string;
-  image: StaticImageData | string;
+  image: StaticImageData;
   alt: string;
 };
 
@@ -41,9 +39,23 @@ function localizeHref(href: string, isEN: boolean) {
   return href.startsWith('/') ? `/en${href}` : `/en/${href}`;
 }
 
+/* -------------------- Dictionnaire inline (FR/EN) -------------------- */
+const DICT = {
+  fr: {
+    paragraph:
+      'Ikovaline, c’est une équipe d’étudiants passionnés par le digital, la stratégie et l’innovation. Nous accompagnons les entreprises dans leur transformation numérique avec des méthodes concrètes, des solutions sur-mesure et une exigence de résultats.',
+    ctaMore: 'En savoir plus sur notre équipe',
+  },
+  en: {
+    paragraph:
+      'Ikovaline is a team of students driven by digital, strategy, and innovation. We help companies with their digital transformation using practical methods, tailored solutions, and a strong focus on results.',
+    ctaMore: 'Learn more about our team',
+  },
+} as const;
+
 export default function About() {
   const { isEN } = useLocale();
-  const dict = isEN ? en.about : fr.about;
+  const dict = isEN ? DICT.en : DICT.fr;
 
   // ——— Team (désignations + alt localisés) ———
   const people1: Person[] = [
