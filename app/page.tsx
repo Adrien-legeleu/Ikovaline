@@ -1,4 +1,3 @@
-'use client';
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -10,7 +9,7 @@ import ComponentDemo from '@/components/LandingPage/impact/TextImpact';
 import About from '@/components/LandingPage/about/About';
 import Services from '@/components/LandingPage/servicesSection/Services';
 
-// ↓↓↓ Hors écran → pas de SSR (évite HTML lourd)
+// ↓↓↓ Sections lourdes → chargées côté client uniquement
 const Map = dynamic(() => import('@/components/LandingPage/map/Map'), {
   ssr: false,
 });
@@ -19,9 +18,7 @@ const Review = dynamic(() => import('@/components/LandingPage/review/Review'), {
 });
 const Blog = dynamic(
   () => import('@/components/LandingPage/Blog/BlogLanding'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 );
 const CTAHome = dynamic(() => import('@/components/LandingPage/CTAHome'), {
   ssr: false,
@@ -60,12 +57,16 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  // Préchargement des sections lourdes en idle time
+  // Préchargement en idle des sections lourdes
   useEffect(() => {
-    import('@/components/LandingPage/map/Map');
-    import('@/components/LandingPage/review/Review');
-    import('@/components/LandingPage/Blog/BlogLanding');
-    import('@/components/LandingPage/CTAHome');
+    if (typeof window !== 'undefined') {
+      requestIdleCallback(() => {
+        import('@/components/LandingPage/map/Map');
+        import('@/components/LandingPage/review/Review');
+        import('@/components/LandingPage/Blog/BlogLanding');
+        import('@/components/LandingPage/CTAHome');
+      });
+    }
   }, []);
 
   return (
@@ -76,11 +77,12 @@ export default function Home() {
       </Head>
 
       <div className="max-w-[1450px] mx-auto">
-        {/* ---- Above-the-fold (SEO + LCP) ---- */}
+        {/* ---- Above the fold (SEO + LCP) ---- */}
         <div className="relative overflow-hidden">
           <Landing />
           <ComponentDemo />
         </div>
+
         <About />
         <section id="services" className="relative">
           <Services />
