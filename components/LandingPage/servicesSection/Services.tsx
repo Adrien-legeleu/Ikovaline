@@ -19,8 +19,13 @@ import {
   ConversionPulse,
 } from './ServicesSkeletons';
 import LightBackdrop from '@/components/ui/lightBackdrop';
-import UnicornBackdrop from '@/components/ui/unicornBackdrop';
+const UnicornBackdrop = dynamic(
+  () => import('@/components/ui/unicornBackdrop'),
+  { ssr: false }
+);
+
 import { usePathname } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 /* ================= locale helpers ================= */
 function useLocale() {
