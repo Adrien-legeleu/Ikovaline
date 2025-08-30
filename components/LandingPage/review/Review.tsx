@@ -161,6 +161,18 @@ const reviewsEN: ReviewType[] = [
 ];
 
 /* ======================= UI ======================= */
+// Avatar bleu royal → azur encodé (OK pour Next/Image)
+const BLUE_AVATAR = `data:image/svg+xml;utf8,${encodeURIComponent(
+  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <defs>
+      <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+        <stop offset='0%' stop-color='#2563EB'/>
+        <stop offset='100%' stop-color='#00A8E8'/>
+      </linearGradient>
+    </defs>
+    <circle cx='50' cy='50' r='50' fill='url(#g)'/>
+  </svg>`
+)}`;
 
 const ReviewCard = ({
   image,
@@ -168,44 +180,41 @@ const ReviewCard = ({
   role,
   text,
 }: {
-  image?: string | StaticImageData; // devient optionnel
+  image?: string | StaticImageData;
   name: string;
   role: string;
   text: string;
-}) => (
-  <GlassSticky className="shadow-none">
-    <div className="mb-4 text-base">{text}</div>
-    <div className="mt-5 flex items-center gap-2">
-      <Image
-        width={40}
-        height={40}
-        src={
-          typeof image === 'string'
-            ? image
-            : image?.src ||
-              `data:image/svg+xml;utf8,
-              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-                <defs>
-                  <linearGradient id='grad' x1='0' y1='0' x2='1' y2='1'>
-                    <stop offset='0%' stop-color='%232563EB'/>
-                    <stop offset='100%' stop-color='%2300A8E8'/>
-                  </linearGradient>
-                </defs>
-                <circle cx='50' cy='50' r='50' fill='url(%23grad)'/>
-              </svg>`
-        }
-        alt={name}
-        className="h-10 w-10 rounded-full object-cover"
-      />
-      <div className="ml-2 flex flex-col">
-        <div className="font-medium leading-5 tracking-tight">{name}</div>
-        <div className="text-xs leading-5 tracking-tight opacity-60">
-          {role}
+}) => {
+  // Sélection de la source finale (logos réels prioritaire, sinon dégradé bleu)
+  const src =
+    typeof image === 'string'
+      ? image.startsWith('https://avatar.vercel.sh')
+        ? BLUE_AVATAR
+        : image
+      : image?.src || BLUE_AVATAR;
+
+  return (
+    <GlassSticky className="shadow-none">
+      <div className="mb-4 text-base">{text}</div>
+      <div className="mt-5 flex items-center gap-2">
+        <Image
+          width={40}
+          height={40}
+          src={src}
+          alt={name}
+          className="h-10 w-10 rounded-full object-cover"
+          unoptimized
+        />
+        <div className="ml-2 flex flex-col">
+          <div className="font-medium leading-5 tracking-tight">{name}</div>
+          <div className="text-xs leading-5 tracking-tight opacity-60">
+            {role}
+          </div>
         </div>
       </div>
-    </div>
-  </GlassSticky>
-);
+    </GlassSticky>
+  );
+};
 
 function useIsEN() {
   const pathname = usePathname() || '/';
