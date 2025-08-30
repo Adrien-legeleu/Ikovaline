@@ -1,15 +1,16 @@
-import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import type { Metadata } from 'next';
 
 import InViewLazy from '@/components/ux/InViewLazy';
+import PrewarmChunks from '@/components/ux/PrewarmChunks';
+
 import Landing from '@/components/LandingPage/landing/Landing';
 import ComponentDemo from '@/components/LandingPage/impact/TextImpact';
 import About from '@/components/LandingPage/about/About';
 import Services from '@/components/LandingPage/servicesSection/Services';
 
-// ↓↓↓ Sections lourdes → chargées côté client uniquement
+// Below-the-fold → client-only to avoid heavy SSR HTML
 const Map = dynamic(() => import('@/components/LandingPage/map/Map'), {
   ssr: false,
 });
@@ -57,18 +58,6 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  // Préchargement en idle des sections lourdes
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      requestIdleCallback(() => {
-        import('@/components/LandingPage/map/Map');
-        import('@/components/LandingPage/review/Review');
-        import('@/components/LandingPage/Blog/BlogLanding');
-        import('@/components/LandingPage/CTAHome');
-      });
-    }
-  }, []);
-
   return (
     <>
       <Head>
@@ -77,22 +66,20 @@ export default function Home() {
       </Head>
 
       <div className="max-w-[1450px] mx-auto">
-        {/* ---- Above the fold (SEO + LCP) ---- */}
+        {/* Above-the-fold (SSR for SEO + fast LCP) */}
         <div className="relative overflow-hidden">
           <Landing />
           <ComponentDemo />
         </div>
-
         <About />
         <section id="services" className="relative">
           <Services />
         </section>
 
-        {/* ---- Sections lourdes → lazy + preload ---- */}
+        {/* Below-the-fold (lazy render when near viewport) */}
         <InViewLazy rootMargin="1000px">
           <Map />
         </InViewLazy>
-
         <InViewLazy rootMargin="1000px">
           <Methodologie />
         </InViewLazy>
@@ -110,6 +97,9 @@ export default function Home() {
           <Blog />
         </InViewLazy>
       </div>
+
+      {/* Kick off prefetch quietly on the client (no UI) */}
+      <PrewarmChunks />
     </>
   );
 }
