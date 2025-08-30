@@ -1,7 +1,6 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import {
@@ -12,20 +11,26 @@ import {
   IconTools,
 } from '@tabler/icons-react';
 
-import {
-  SaaSConstellation,
-  DevicesOrbit,
-  AutomationGrid,
-  ConversionPulse,
-} from './ServicesSkeletons';
 import LightBackdrop from '@/components/ui/lightBackdrop';
+import dynamic from 'next/dynamic';
 const UnicornBackdrop = dynamic(
   () => import('@/components/ui/unicornBackdrop'),
-  { ssr: false }
+  {
+    ssr: false,
+    loading: () => null,
+  }
 );
 
 import { usePathname } from 'next/navigation';
-import dynamic from 'next/dynamic';
+
+// Framer allégé
+import { LazyMotion, m, domAnimation, useReducedMotion } from 'framer-motion';
+import {
+  AutomationGrid,
+  ConversionPulse,
+  DevicesOrbit,
+  SaaSConstellation,
+} from '@/components/LandingPage/servicesSection/ServicesSkeletons';
 
 /* ================= locale helpers ================= */
 function useLocale() {
@@ -50,6 +55,7 @@ type CardBase = {
   header: React.ReactNode;
   href: string;
 };
+
 const CARDS_FR: CardBase[] = [
   {
     title: 'SaaS sur-mesure • scalable • sécurisé',
@@ -88,6 +94,7 @@ const CARDS_FR: CardBase[] = [
     href: '/nos-services/sites-web-premium-conversion',
   },
 ];
+
 const CARDS_EN: CardBase[] = [
   {
     title: 'Custom SaaS • scalable • secure',
@@ -129,6 +136,7 @@ const CARDS_EN: CardBase[] = [
 
 export default function Services() {
   const { isEN } = useLocale();
+  const reduceMotion = useReducedMotion();
 
   const heading = isEN ? 'Our Services' : 'Nos Services';
   const sub = isEN
@@ -137,16 +145,21 @@ export default function Services() {
   const ctaAll = isEN ? 'See all services' : 'Voir tous nos services';
   const ctaCard = isEN ? 'Explore →' : 'Découvrir →';
 
-  // localize hrefs with /en when needed
-  const cards = (isEN ? CARDS_EN : CARDS_FR).map((c) => ({
-    ...c,
-    href: localizeHref(c.href, isEN),
-  }));
+  // localize + memo
+  const cards = useMemo(
+    () =>
+      (isEN ? CARDS_EN : CARDS_FR).map((c) => ({
+        ...c,
+        href: localizeHref(c.href, isEN),
+      })),
+    [isEN]
+  );
 
   return (
     <section className="relative isolate py-28 md:py-36">
-      {/* Backdrops */}
+      {/* Backdrops (légers) */}
       <LightBackdrop className="block dark:hidden" />
+      {/* Ne montera que côté client et seulement si la section est visible (si tu enveloppes la section avec InViewLazy) */}
       <UnicornBackdrop className="hidden dark:block" />
 
       <div className="mx-auto max-w-6xl px-4">
@@ -157,19 +170,22 @@ export default function Services() {
           {sub}
         </p>
 
-        {/* Grid en staggered layout */}
         <div className="mt-14 grid grid-cols-1 gap-7 sm:grid-cols-2 auto-rows-[minmax(20rem,auto)]">
           {cards.map((card, i) => (
-            <motion.a
-              key={i}
+            <m.a
+              key={card.href}
               href={card.href}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              viewport={{ once: true }}
+              initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={
+                reduceMotion ? undefined : { duration: 0.5, delay: i * 0.12 }
+              }
+              viewport={{ once: true, amount: 0.3 }}
               className={cn(
                 'group relative overflow-hidden rounded-3xl p-1',
-                'transition-transform duration-300 hover:scale-[1.01]',
+                reduceMotion
+                  ? ''
+                  : 'transition-transform duration-300 hover:scale-[1.01]',
                 i % 2 === 1 ? 'sm:translate-y-8' : ''
               )}
             >
@@ -190,7 +206,7 @@ export default function Services() {
                   </span>
                 </div>
               </GlassCard>
-            </motion.a>
+            </m.a>
           ))}
         </div>
 
@@ -215,6 +231,8 @@ export function GlassCard({
   className,
   children,
 }: React.PropsWithChildren<{ className?: string }>) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div
       className={cn(
@@ -222,28 +240,31 @@ export function GlassCard({
         'bg-white/10 dark:bg-neutral-900/10',
         'border border-white/30 dark:border-white/10',
         'backdrop-blur-md',
-        'transition-transform duration-300 hover:scale-[1.01]',
+        // pas de hover-scale si reduced motion
+        reduceMotion
+          ? ''
+          : 'transition-transform duration-300 hover:scale-[1.01]',
         className
       )}
     >
-      {/* couche “relief” comme LiquidButton */}
+      {/* couche “relief” */}
       <div
         aria-hidden
         className="absolute inset-0 z-0 rounded-3xl shadow-[0_0_6px_rgba(0,0,0,0.03),0_4px_12px_rgba(0,0,0,0.08),inset_3px_3px_0.5px_-3px_rgba(0,0,0,0.9),inset_-3px_-3px_0.5px_-3px_rgba(0,0,0,0.85),inset_1px_1px_1px_-0.5px_rgba(0,0,0,0.6),inset_-1px_-1px_1px_-0.5px_rgba(0,0,0,0.6),inset_0_0_8px_8px_rgba(0,0,0,0.1),inset_0_0_3px_3px_rgba(0,0,0,0.05),0_0_18px_rgba(255,255,255,0.15)]"
       />
 
-      {/* filtre verre */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 overflow-hidden rounded-3xl"
-        style={{ backdropFilter: 'url("#card-glass")' }}
-      />
+      {/* filtre verre — on le coupe si reduced motion pour soulager le GPU */}
+      {!reduceMotion && (
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 overflow-hidden rounded-3xl"
+          style={{ backdropFilter: 'url("#card-glass")' }}
+        />
+      )}
 
-      {/* contenu */}
       <div className="relative z-10 p-6">{children}</div>
 
-      {/* filtre svg */}
-      <GlassFilter />
+      {!reduceMotion && <GlassFilter />}
     </div>
   );
 }

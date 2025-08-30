@@ -12,6 +12,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { LiquidButton } from './ui/liquid-glass-button';
 
 // ------- helpers URL / cookies -------
 function setLocaleCookie(locale: 'fr' | 'en') {
@@ -61,7 +62,7 @@ export default function LangSwitch() {
   // pastille “glass” réutilisable
   const glass =
     'rounded-2xl border px-3 py-1 backdrop-blur-xl ' +
-    'bg-white/50 dark:bg-white/10 ' +
+    'bg-white/10 dark:bg-black/10 ' +
     'border-white/60 dark:border-white/15 ' +
     'shadow-[0_10px_30px_rgba(6,24,44,.08)] dark:shadow-[0_10px_30px_rgba(0,0,0,.5)]';
 
