@@ -71,12 +71,6 @@ function useIsEN() {
   return /^\/en(\/|$)/.test(pathname);
 }
 
-const FranceMap = dynamic(() => import('@/components/ui/france-map'), {
-  ssr: false,
-  // i18n pour le fallback de chargement
-  loading: () => <p>Chargement de la carte...</p>,
-});
-
 /* ----------------------------- Données villes ----------------------------- */
 const citiesEssonne = [
   'Bailly-Romainvilliers',

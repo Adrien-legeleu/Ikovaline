@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { cn } from '@/lib/utils';
 
 import { GridPattern } from '@/components/magicui/grid-pattern';
-import { NeonGradientCard } from '@/components/magicui/neon-gradient-card';
 import ServiceInteractive from '@/components/ServicesPage/servicesComponents/ServiceInteractive';
 import CallToAction from '@/components/callToAction/CallToAction';
 import { LiquidLink } from '@/components/ui/liquid-link';
@@ -10,12 +9,7 @@ import { TextAnimate } from '@/components/ui/text-animate';
 
 import { dataService } from '@/data/data-services';
 import { IconRocket, IconTrendingUp } from '@tabler/icons-react';
-import { GlassCard } from '@/components/LandingPage/servicesSection/Services';
-import {
-  CardSticky,
-  GlassSticky,
-} from '@/components/LandingPage/impact/CardStack';
-import { LiquidButton } from '@/components/ui/liquid-glass-button';
+import { GlassSticky } from '@/components/LandingPage/impact/CardStack';
 
 type PageProps = { params: { id: string } };
 
@@ -45,7 +39,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
 
 export default function Page({ params }: PageProps) {
   const service = dataService.find((s) => s.slug === params.id);
-  if (!service) return <p>Le service demandé n'existe pas.</p>;
+  if (!service) return <p>Le service demandé n&apos;existe pas.</p>;
 
   const jsonLd = {
     '@context': 'https://schema.org',

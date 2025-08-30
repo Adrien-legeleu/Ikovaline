@@ -1,6 +1,4 @@
 'use client';
-
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatedTooltip } from '../../ui/animated-tooltip';
 import Img1 from '@/public/images/About/team-florent-profil.jpg';
@@ -18,12 +16,13 @@ import { IconInfoCircle } from '@tabler/icons-react';
 
 import fr from '/i18n-ovverrides/fr.json';
 import en from '/i18n-ovverrides/en.json';
+import { StaticImageData } from 'next/image';
 
 type Person = {
   id: number;
   name: string;
   designation: string;
-  image: any;
+  image: StaticImageData | string;
   alt: string;
 };
 

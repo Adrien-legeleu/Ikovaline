@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import React from 'react';
+import React, { isValidElement, ReactNode } from 'react';
 
 /* ---------- helpers locale ---------- */
 function useLocale() {
@@ -132,35 +132,37 @@ const FAQ_EN: FaqItem[] = [
 /* ---------- composant ---------- */
 export default function FAQ() {
   const { isEN } = useLocale();
-  const data = (isEN ? FAQ_EN : FAQ_FR).map((item) => {
-    // localiser tous les liens internes éventuellement présents dans les answers
-    // (on remappe Link props via cloneElement si besoin)
-    if (
-      typeof item.answer === 'object' &&
-      item.answer &&
-      'props' in item.answer
-    ) {
-      const remap = (node: any): any => {
-        if (!node) return node;
-        if (Array.isArray(node)) return node.map(remap);
-        if (node.type === Link && node.props?.href) {
-          return (
-            <Link {...node.props} href={localizeHref(node.props.href, isEN)}>
-              {remap(node.props.children)}
-            </Link>
-          );
-        }
-        if (node.props?.children) {
-          return React.cloneElement(node, {
-            children: remap(node.props.children),
-          });
-        }
-        return node;
-      };
-      return { ...item, answer: remap(item.answer) };
+
+  const remap = (node: ReactNode): ReactNode => {
+    if (!node) return node;
+
+    if (Array.isArray(node)) {
+      return node.map(remap);
     }
-    return item;
-  });
+
+    if (isValidElement(node)) {
+      if (node.type === Link && node.props?.href) {
+        return (
+          <Link {...node.props} href={localizeHref(node.props.href, isEN)}>
+            {remap(node.props.children)}
+          </Link>
+        );
+      }
+
+      if (node.props?.children) {
+        return React.cloneElement(node, {
+          children: remap(node.props.children),
+        });
+      }
+    }
+
+    return node;
+  };
+
+  const data = (isEN ? FAQ_EN : FAQ_FR).map((item) => ({
+    ...item,
+    answer: remap(item.answer),
+  }));
 
   const heading = isEN ? (
     <>

@@ -93,7 +93,7 @@ class Particle {
         (towardsTarget.y / magnitude) * this.maxSpeed * proximityMult;
     }
 
-    let steer = {
+    const steer = {
       x: towardsTarget.x - this.vel.x,
       y: towardsTarget.y - this.vel.y,
     };
@@ -200,18 +200,8 @@ class Particle {
   }
 }
 
-interface ParticleTextEffectProps {
-  words?: string[];
-}
-
 const FR_WORDS = ['PROPULSE', 'DÉCUPLE'];
 const EN_WORDS = ['BOOST', 'SCALE']; // <-- choisis ce que tu veux
-
-// Couleurs
-const themeRGB = () => {
-  const isDark = document.documentElement.classList.contains('dark');
-  return isDark ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 };
-};
 
 export function ParticleTextEffect({
   words, // facultatif: si tu le passes depuis le parent, on le respecte

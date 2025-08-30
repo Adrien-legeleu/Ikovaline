@@ -6,10 +6,8 @@ import Image from 'next/image';
 import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
 import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
 import { usePathname } from 'next/navigation';
-import { useTheme } from 'next-themes';
 
 export default function Footer() {
-  const { theme, systemTheme } = useTheme();
   const pathname = usePathname() || '/';
   const isEN = /^\/en(\/|$)/.test(pathname);
 
