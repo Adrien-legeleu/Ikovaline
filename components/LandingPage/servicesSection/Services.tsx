@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import {
@@ -138,6 +138,12 @@ export default function Services() {
   const { isEN } = useLocale();
   const reduceMotion = useReducedMotion();
 
+  // ➜ clé : SSR = cartes visibles direct; à l’hydratation on déclenche l’anim d’entrée
+  const [canAnimate, setCanAnimate] = useState(false);
+  useEffect(() => {
+    if (!reduceMotion) setCanAnimate(true);
+  }, [reduceMotion]);
+
   const heading = isEN ? 'Our Services' : 'Nos Services';
   const sub = isEN
     ? 'From product to go-to-market, we design experiences that truly convert.'
@@ -159,7 +165,6 @@ export default function Services() {
     <section className="relative isolate py-28 md:py-36">
       {/* Backdrops (légers) */}
       <LightBackdrop className="block dark:hidden" />
-      {/* Ne montera que côté client et seulement si la section est visible (si tu enveloppes la section avec InViewLazy) */}
       <UnicornBackdrop className="hidden dark:block" />
 
       <div className="mx-auto max-w-6xl px-4">
@@ -175,14 +180,20 @@ export default function Services() {
             <m.a
               key={card.href}
               href={card.href}
-              initial={reduceMotion ? false : { opacity: 0, y: 30 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              // SSR: pas d'anim (visible tout de suite) ; Client: anim d'entrée immédiate
+              initial={canAnimate ? { opacity: 0, y: 30 } : false}
+              animate={canAnimate ? { opacity: 1, y: 0 } : undefined}
               transition={
-                reduceMotion ? undefined : { duration: 0.5, delay: i * 0.12 }
+                canAnimate
+                  ? {
+                      duration: 0.45,
+                      delay: i * 0.08,
+                      ease: [0.22, 1, 0.36, 1],
+                    }
+                  : undefined
               }
-              viewport={{ once: true, amount: 0.3 }}
               className={cn(
-                'group relative overflow-hidden rounded-3xl p-1',
+                'group relative overflow-hidden rounded-3xl p-1 will-change-transform',
                 reduceMotion
                   ? ''
                   : 'transition-transform duration-300 hover:scale-[1.01]',
@@ -240,7 +251,6 @@ export function GlassCard({
         'bg-white/10 dark:bg-neutral-900/10',
         'border border-white/30 dark:border-white/10',
         'backdrop-blur-md',
-        // pas de hover-scale si reduced motion
         reduceMotion
           ? ''
           : 'transition-transform duration-300 hover:scale-[1.01]',
@@ -253,7 +263,7 @@ export function GlassCard({
         className="absolute inset-0 z-0 rounded-3xl shadow-[0_0_6px_rgba(0,0,0,0.03),0_4px_12px_rgba(0,0,0,0.08),inset_3px_3px_0.5px_-3px_rgba(0,0,0,0.9),inset_-3px_-3px_0.5px_-3px_rgba(0,0,0,0.85),inset_1px_1px_1px_-0.5px_rgba(0,0,0,0.6),inset_-1px_-1px_1px_-0.5px_rgba(0,0,0,0.6),inset_0_0_8px_8px_rgba(0,0,0,0.1),inset_0_0_3px_3px_rgba(0,0,0,0.05),0_0_18px_rgba(255,255,255,0.15)]"
       />
 
-      {/* filtre verre — on le coupe si reduced motion pour soulager le GPU */}
+      {/* filtre verre — coupé si reduced motion pour soulager le GPU */}
       {!reduceMotion && (
         <div
           aria-hidden
