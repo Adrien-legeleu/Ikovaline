@@ -5,13 +5,14 @@ import Review2 from '@/public/images/logo/jean-cristophe-Lelandais.jpeg';
 import Review3 from '@/public/images/logo/logo-lelandais.png';
 import Review4 from '@/public/images/logo/hl-horner-logo.jpg';
 import Review5 from '@/public/images/logo/logo-lora.png';
-
+import { useReducedMotion } from 'framer-motion';
 import { motion } from 'framer-motion';
 import Marquee from '@/components/ui/marquee';
 import Image, { StaticImageData } from 'next/image';
 import { GlassSticky } from '../impact/CardStack';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import React from 'react';
 
 interface ReviewType {
   name: string;
@@ -174,7 +175,7 @@ const BLUE_AVATAR = `data:image/svg+xml;utf8,${encodeURIComponent(
   </svg>`
 )}`;
 
-const ReviewCard = ({
+const ReviewCardBase = ({
   image,
   name,
   role,
@@ -194,7 +195,7 @@ const ReviewCard = ({
       : image?.src || BLUE_AVATAR;
 
   return (
-    <GlassSticky className="shadow-none">
+    <GlassSticky className="shadow-none will-change-transform">
       <div className="mb-4 text-base">{text}</div>
       <div className="mt-5 flex items-center gap-2">
         <Image
@@ -204,6 +205,8 @@ const ReviewCard = ({
           alt={name}
           className="h-10 w-10 rounded-full object-cover"
           unoptimized
+          loading="lazy"
+          decoding="async"
         />
         <div className="ml-2 flex flex-col">
           <div className="font-medium leading-5 tracking-tight">{name}</div>
@@ -215,6 +218,7 @@ const ReviewCard = ({
     </GlassSticky>
   );
 };
+const ReviewCard = React.memo(ReviewCardBase);
 
 function useIsEN() {
   const pathname = usePathname() || '/';
@@ -229,7 +233,10 @@ const MarqueeDemoVertical = ({ data }: { data: ReviewType[] }) => {
   const thirdColumn = data.slice(6, 10);
 
   return (
-    <div className="relative flex h-[700px] w-full flex-row items-center justify-center overflow-hidden sm:h[500px] 2xl:h-[600px]">
+    <div
+      className="relative flex h-[700px] w-full flex-row items-center justify-center overflow-hidden 2xl:h-[600px]"
+      style={{ transform: 'translateZ(0)' }}
+    >
       <Marquee pauseOnHover vertical className="[--duration:20s] max-lg:hidden">
         {firstColumn.map((review) => (
           <ReviewCard key={review.name} {...review} />
@@ -279,17 +286,89 @@ const MarqueeDemoVertical = ({ data }: { data: ReviewType[] }) => {
         ))}
       </Marquee>
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 from-background bg-gradient-to-b"></div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 from-background bg-gradient-to-t"></div>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background/80 to-transparent sm:from-background"></div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background/80 to-transparent sm:from-background"></div>
     </div>
   );
 };
 
 const Review = () => {
   const isEN = useIsEN();
+  const reduce = useReducedMotion();
   const t = isEN ? TEXTS.en : TEXTS.fr;
   const data = isEN ? reviewsEN : reviewsFR;
 
+  if (reduce) {
+    return (
+      <section className="relative my-20 bg-background pt-32">
+        <div className="container relative z-10 mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
+            className="z-10 mx-auto flex max-w-[540px] flex-col items-center justify-center px-5"
+          >
+            <motion.div
+              className="group relative mx-auto flex items-center justify-center rounded-full px-5 py-2
+             shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]
+             transition-shadow duration-500 ease-out
+             hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]
+             bg-white/70 backdrop-blur-xl dark:bg-transparent"
+              initial={{ y: -40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              {/* glow animé (bordure dégradée) */}
+              <span
+                className={cn(
+                  'absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] p-[1px]',
+                  'bg-gradient-to-r from-[#5faaff]/60 via-[#42b8fd]/60 to-[#00e0ff]/60 bg-[length:300%_100%]'
+                )}
+                style={{
+                  WebkitMask:
+                    'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  WebkitMaskComposite: 'destination-out',
+                  mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  maskComposite: 'subtract',
+                  WebkitClipPath: 'padding-box',
+                }}
+              />
+
+              <span
+                aria-hidden
+                className="absolute -inset-6 rounded-full blur-3xl 
+               bg-[radial-gradient(circle_at_center,rgba(0,168,255,.55),rgba(37,99,235,.35),transparent_75%)]
+               opacity-50 dark:opacity-40"
+              />
+
+              <span className="relative z-10 text-sm font-semibold tracking-wide text-sky-700 dark:text-transparent dark:bg-gradient-to-r dark:from-sky-200 dark:via-sky-100 dark:to-blue-200 dark:bg-clip-text">
+                {t.badge}
+              </span>
+            </motion.div>
+
+            <h2 className="z-10 mt-5 text-center text-4xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-200 xl:text-5xl">
+              {t.title}
+            </h2>
+            <p className="mt-5 text-center opacity-75">{t.desc}</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+            {data.slice(0, 6).map((r) => (
+              <ReviewCard key={r.name} {...r} />
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="absolute left-1/2 top-32 h-36 w-36 -translate-x-1/2 bg-secondary blur-[110px] md:h-48 md:w-48 md:blur-[150px] z-0"
+        />
+      </section>
+    );
+  }
   return (
     <section className="relative my-20 bg-background pt-32">
       <div className="container relative z-10 mx-auto">

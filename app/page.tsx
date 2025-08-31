@@ -79,15 +79,27 @@ export default function Home() {
         </div>
 
         {/* Below-the-fold (lazy render when near viewport) */}
-        <InViewLazy rootMargin="1000px">
+        <InViewLazy
+          rootMargin="1500px"
+          minHeight={520}
+          placeholder={<SectionShimmer />}
+        >
           <Map />
         </InViewLazy>
-        <InViewLazy rootMargin="1000px">
+        <InViewLazy
+          rootMargin="1400px"
+          minHeight={560}
+          placeholder={<SectionShimmer />}
+        >
           <Methodologie />
         </InViewLazy>
 
         <div className="relative w-full overflow-hidden">
-          <InViewLazy rootMargin="1000px">
+          <InViewLazy
+            rootMargin="1400px"
+            minHeight={740}
+            placeholder={<SectionShimmer />}
+          >
             <Review />
           </InViewLazy>
           <InViewLazy rootMargin="1200px">
@@ -95,7 +107,11 @@ export default function Home() {
           </InViewLazy>
         </div>
 
-        <InViewLazy rootMargin="1000px">
+        <InViewLazy
+          rootMargin="1400px"
+          minHeight={600}
+          placeholder={<SectionShimmer />}
+        >
           <Blog />
         </InViewLazy>
       </div>
@@ -103,5 +119,17 @@ export default function Home() {
       {/* Kick off prefetch quietly on the client (no UI) */}
       <PrewarmChunks />
     </>
+  );
+}
+function SectionShimmer() {
+  return (
+    <div
+      className="relative overflow-hidden rounded-3xl"
+      style={{ height: '100%' }}
+      aria-hidden
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(1000px_400px_at_50%_-10%,rgba(59,130,246,.12),rgba(56,189,248,.10),transparent_70%)]" />
+      <div className="h-[100%] w-full animate-pulse bg-white/40 dark:bg-white/5 backdrop-blur-md" />
+    </div>
   );
 }

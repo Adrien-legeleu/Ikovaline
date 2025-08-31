@@ -29,13 +29,18 @@ function onIdle(cb: () => void): void {
 
 export default function PrewarmChunks() {
   useEffect(() => {
-    onIdle(() => {
-      // Prefetch des bundles lourds (non bloquant)
-      import('@/components/LandingPage/map/Map');
-      import('@/components/LandingPage/review/Review');
-      import('@/components/LandingPage/Blog/BlogLanding');
-      import('@/components/LandingPage/CTAHome');
-    });
+    const start = () =>
+      onIdle(() => {
+        setTimeout(() => {
+          import('@/components/LandingPage/map/Map');
+          import('@/components/LandingPage/review/Review');
+          import('@/components/LandingPage/Blog/BlogLanding');
+          import('@/components/LandingPage/CTAHome');
+        }, 1500); // laisse le temps au premier scroll/tap
+      });
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+    return () => window.removeEventListener('load', start);
   }, []);
 
   return null;

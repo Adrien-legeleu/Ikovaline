@@ -1,8 +1,8 @@
 'use client';
-
+import React from 'react';
 import { TextAnimate } from '@/components/ui/text-animate';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, m } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { IconApps, IconMessage2, IconShieldCheck } from '@tabler/icons-react';
 import dynamic from 'next/dynamic';
@@ -10,8 +10,47 @@ import { LiquidLink } from '@/components/ui/liquid-link';
 import { usePathname } from 'next/navigation';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
 
+function HeroGlow({ children }: React.PropsWithChildren) {
+  const reduce = useReducedMotion();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    if (reduce) return;
+    // laisser hydrater → animer juste après
+    requestAnimationFrame(() => setMounted(true));
+  }, [reduce]);
+
+  // mobile/reduced-motion → pas de blur coûteux
+  if (reduce) {
+    return (
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden
+        style={{
+          background:
+            'radial-gradient(1200px 500px at 50% -10%, rgba(56,189,248,.18), rgba(37,99,235,.12), transparent 70%)',
+        }}
+      />
+    );
+  }
+
+  return (
+    <m.div
+      className="absolute inset-0 pointer-events-none overflow-hidden will-change-transform"
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={mounted ? { opacity: 0.9, scale: 1 } : undefined}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </m.div>
+  );
+}
+
 /* Effets lourds -> lazy/no-SSR + fallback léger */
-const Glow = dynamic(() => import('@/components/ui/glow'), { ssr: false });
+const GlowLazy = dynamic(() => import('@/components/ui/glow'), {
+  ssr: false,
+  loading: () => null,
+});
 const ParticleTextEffect = dynamic(
   () => import('../ParticleWord').then((m) => m.ParticleTextEffect),
   {
@@ -53,10 +92,9 @@ export default function Landing() {
     <div className="relative flex flex-col items-center justify-center gap-5 2xl:gap-0 py-20 overflow-hidden">
       {/* Glow décoratif : on l’affiche seulement ≥ sm pour éviter du blur coûteux en mobile */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden ">
-        <Glow
-          variant="above"
-          className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
-        />
+        <HeroGlow>
+          <GlowLazy variant="above" />+{' '}
+        </HeroGlow>
       </div>
 
       {/* Badge + Headline */}
