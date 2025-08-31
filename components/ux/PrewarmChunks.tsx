@@ -31,12 +31,12 @@ export default function PrewarmChunks() {
   useEffect(() => {
     const start = () =>
       onIdle(() => {
-        setTimeout(() => {
-          import('@/components/LandingPage/map/Map');
-          import('@/components/LandingPage/review/Review');
-          import('@/components/LandingPage/Blog/BlogLanding');
-          import('@/components/LandingPage/CTAHome');
-        }, 1500); // laisse le temps au premier scroll/tap
+        const mem = (navigator as any).deviceMemory ?? 8;
+        const net = (navigator as any).connection?.effectiveType ?? '4g';
+        if (mem < 4 || /2g|3g/.test(net)) return; // skip préchauffe sur devices modestes        import('@/components/LandingPage/map/Map');
+        import('@/components/LandingPage/review/Review');
+        import('@/components/LandingPage/Blog/BlogLanding');
+        import('@/components/LandingPage/CTAHome');
       });
     if (document.readyState === 'complete') start();
     else window.addEventListener('load', start, { once: true });

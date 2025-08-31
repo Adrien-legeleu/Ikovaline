@@ -57,7 +57,18 @@ export default function InViewLazy({
   }, [shown, rootMargin, once, timeoutMs]);
 
   return (
-    <div ref={ref} style={{ minHeight }}>
+    <div
+      ref={ref}
+      style={{
+        minHeight,
+        // skip layout/paint tant que hors-écran
+        contentVisibility: shown ? 'visible' : ('auto' as any),
+        containIntrinsicSize:
+          typeof minHeight === 'number'
+            ? `${minHeight}px`
+            : (minHeight as string),
+      }}
+    >
       {shown
         ? children
         : (placeholder ?? <DefaultSkeleton height={minHeight} />)}

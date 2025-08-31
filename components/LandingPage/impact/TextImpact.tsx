@@ -1,8 +1,20 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Component } from '@/components/ui/testimonial-slider';
-
+import dynamic from 'next/dynamic';
+const TestimonialSlider = dynamic(
+  () => import('@/components/ui/testimonial-slider').then((m) => m.Component),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="mx-auto mt-10 h-[160px] w-[92%] max-w-4xl animate-pulse rounded-2xl"
+        style={{ contentVisibility: 'auto' }}
+        aria-hidden
+      />
+    ),
+  }
+);
 const testimonialsFR = [
   {
     emoji: '🚀',
@@ -38,10 +50,17 @@ export default function ComponentDemo() {
   const testimonials = isEN ? testimonialsEN : testimonialsFR;
 
   return (
-    <div className="relative h-[520px] w-full overflow-hidden rounded-2xl bg-white/70 p-4 backdrop-blur-2xl dark:bg-neutral-950/50">
+    <div
+      className="relative h-[520px] w-full overflow-hidden rounded-2xl bg-white/70 p-4 dark:bg-neutral-950/50"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '520px' }}
+    >
+      {' '}
       <div className="mt-10 flex justify-center px-3 sm:px-8">
         {/* key pour forcer le reset du slider quand la langue change */}
-        <Component key={isEN ? 'en' : 'fr'} testimonials={testimonials} />
+        <TestimonialSlider
+          key={isEN ? 'en' : 'fr'}
+          testimonials={testimonials}
+        />{' '}
       </div>
     </div>
   );

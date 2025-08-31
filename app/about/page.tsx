@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Head from 'next/head';
 import AboutContent from '@/components/AboutPage/AboutContent';
 import CTAABout from '@/components/AboutPage/CTAAbout';
+import Glow from '@/components/ui/glow';
 
 export const metadata: Metadata = {
   title: "À propos d'Ikovaline - Notre Histoire et Équipe",
@@ -54,6 +55,12 @@ export default function Page() {
       </Head>
 
       <div className="max-w-[1400px] relative overflow-hidden mx-auto">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden ">
+          <Glow
+            variant="above"
+            className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
+          />
+        </div>
         <AboutContent />
         <CTAABout />
       </div>

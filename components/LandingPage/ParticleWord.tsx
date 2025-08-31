@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+import { ParticleTextEffectProps } from './landing/Landing';
 
 interface Vector2D {
   x: number;
@@ -203,11 +204,8 @@ class Particle {
 const FR_WORDS = ['PROPULSE', 'DÉCUPLE'];
 const EN_WORDS = ['BOOST', 'SCALE']; // <-- choisis ce que tu veux
 
-export function ParticleTextEffect({
-  words, // facultatif: si tu le passes depuis le parent, on le respecte
-}: {
-  words?: string[];
-}) {
+export function ParticleTextEffect(props: ParticleTextEffectProps) {
+  const { words } = props;
   const pathname = usePathname();
   const locale = /^\/en(\/|$)/.test(pathname) ? 'en' : 'fr';
 
@@ -488,3 +486,4 @@ export function ParticleTextEffect({
     </div>
   );
 }
+export default ParticleTextEffect;

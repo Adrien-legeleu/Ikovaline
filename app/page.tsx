@@ -1,16 +1,27 @@
-import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import type { Metadata } from 'next';
 
 import InViewLazy from '@/components/ux/InViewLazy';
 import PrewarmChunks from '@/components/ux/PrewarmChunks';
 
 import Landing from '@/components/LandingPage/landing/Landing';
-import ComponentDemo from '@/components/LandingPage/impact/TextImpact';
 import About from '@/components/LandingPage/about/About';
 import Services from '@/components/LandingPage/servicesSection/Services';
-import ProjectsTeaser from '@/components/Projects/ProjectTeaser';
+import dynamic from 'next/dynamic';
 
+const ComponentDemo = dynamic(
+  () => import('@/components/LandingPage/impact/TextImpact'),
+  {
+    ssr: false,
+    loading: () => <div style={{ height: 220 }} aria-hidden />,
+  }
+);
+const ProjectsTeaser = dynamic(
+  () => import('@/components/Projects/ProjectTeaser'),
+  {
+    ssr: false,
+    loading: () => <div style={{ height: 240 }} aria-hidden />,
+  }
+);
 // Below-the-fold → client-only to avoid heavy SSR HTML
 const Map = dynamic(() => import('@/components/LandingPage/map/Map'), {
   ssr: false,
@@ -34,6 +45,7 @@ export const metadata: Metadata = {
   title: 'Ikovaline – Agence digitale Essonne & partout en France',
   description:
     'Agence digitale à Bailly-Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.',
+  alternates: { canonical: 'https://ikovaline.com/' },
   openGraph: {
     title: 'Ikovaline – Agence digitale Essonne & partout en France',
     description:
@@ -61,17 +73,17 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <Head>
-        <link rel="canonical" href="https://ikovaline.com/" />
-        <meta name="robots" content="index, follow" />
-      </Head>
-
       <div className="max-w-[1450px] mx-auto">
         {/* Above-the-fold (SSR for SEO + fast LCP) */}
         <div className="relative overflow-hidden w-full">
           <Landing />
-          <ComponentDemo />
-          <ProjectsTeaser />
+          <InViewLazy rootMargin="600px" minHeight={220}>
+            <ComponentDemo />
+          </InViewLazy>
+
+          <InViewLazy rootMargin="700px" minHeight={240}>
+            <ProjectsTeaser />
+          </InViewLazy>
           <About />
           <section id="services" className="relative">
             <Services />
@@ -80,27 +92,42 @@ export default function Home() {
 
         {/* Below-the-fold (lazy render when near viewport) */}
         <InViewLazy
-          rootMargin="1500px"
+          rootMargin="900px"
           minHeight={520}
           placeholder={<SectionShimmer />}
         >
-          <Map />
+          <section
+            style={{ contentVisibility: 'auto', containIntrinsicSize: '520px' }}
+          >
+            <Map />
+          </section>
         </InViewLazy>
         <InViewLazy
-          rootMargin="1400px"
+          rootMargin="900px"
           minHeight={560}
           placeholder={<SectionShimmer />}
         >
-          <Methodologie />
+          <section
+            style={{ contentVisibility: 'auto', containIntrinsicSize: '560px' }}
+          >
+            <Methodologie />
+          </section>
         </InViewLazy>
 
         <div className="relative w-full overflow-hidden">
           <InViewLazy
-            rootMargin="1400px"
+            rootMargin="900px"
             minHeight={740}
             placeholder={<SectionShimmer />}
           >
-            <Review />
+            <section
+              style={{
+                contentVisibility: 'auto',
+                containIntrinsicSize: '740px',
+              }}
+            >
+              <Review />
+            </section>
           </InViewLazy>
           <InViewLazy rootMargin="1200px">
             <CTAHome />
@@ -108,11 +135,15 @@ export default function Home() {
         </div>
 
         <InViewLazy
-          rootMargin="1400px"
+          rootMargin="900px"
           minHeight={600}
           placeholder={<SectionShimmer />}
         >
-          <Blog />
+          <section
+            style={{ contentVisibility: 'auto', containIntrinsicSize: '600px' }}
+          >
+            <Blog />
+          </section>
         </InViewLazy>
       </div>
 
