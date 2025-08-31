@@ -1,18 +1,9 @@
 'use client';
 import { IconStarFilled } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
 
 export default function StarClientsGoogle() {
   return (
-    <motion.div
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        ease: 'easeInOut',
-      }}
-      viewport={{ once: true }}
-      className="z-10"
-    >
+    <div className="z-10">
       <a
         target="_blank"
         className="flex   items-end justify-center gap-2 cursor-pointer"
@@ -41,6 +32,6 @@ export default function StarClientsGoogle() {
           avis Google
         </span>
       </a>
-    </motion.div>
+    </div>
   );
 }

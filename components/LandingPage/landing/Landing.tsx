@@ -10,7 +10,6 @@ import { IconApps, IconMessage2, IconShieldCheck } from '@tabler/icons-react';
 import { cn } from '@/lib/utils';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
-import { TextAnimate } from '@/components/ui/text-animate';
 
 /* -------------------- Types -------------------- */
 export type ParticleTextEffectProps = {
