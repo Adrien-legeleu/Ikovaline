@@ -25,8 +25,7 @@ export const metadata: Metadata = {
 export default function PageProjets() {
   return (
     <main className="relative isolate py-20">
-      <LightBackdrop className="block dark:hidden" />
-      <UnicornBackdrop className="hidden dark:block" />
+      <LightBackdrop />
 
       {/* locale + contenu via usePathname dans le wrapper client */}
       <ProjectsPageClient />
