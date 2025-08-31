@@ -236,9 +236,9 @@ export default function Map() {
             key={i}
             href={`/agence-web-${removeAccents(c)}`}
             className={[
-              'px-3 py-1 rounded-full flex items-center gap-2 border shadow-md backdrop-blur-xl transition-shadow',
+              'px-3 py-1 rounded-full flex items-center gap-2 border max-sm:text-sm shadow-md backdrop-blur-sm transition-shadow',
               'border-white/35 dark:border-white/10',
-              'bg-white/75 dark:bg-neutral-900/60',
+              'bg-white/60 dark:bg-neutral-900/60',
               'hover:shadow-[0_10px_40px_rgba(59,130,246,.25)]',
             ].join(' ')}
           >
@@ -257,11 +257,13 @@ export default function Map() {
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background: [
-            // Halo principal, royal blue éclatant
-            'radial-gradient(800px 380px at 50% 58%, rgba(65,105,225,0.35), rgba(65,105,225,0.20), transparent 75%)',
-            // Halo secondaire plus diffus
-            'radial-gradient(1200px 600px at 50% 50%, rgba(70,130,255,0.18), rgba(65,105,225,0.12), transparent 80%)',
+            // Halo principal : bleu pur, lumineux (DodgerBlue-like)
+            'radial-gradient(900px 420px at 50% 58%, hsl(210 100% 60% / 0.45), hsl(210 100% 56% / 0.26), transparent 75%)',
+            // Halo secondaire plus large, encore plus clair
+            'radial-gradient(1400px 700px at 50% 50%, hsl(205 100% 62% / 0.25), hsl(205 100% 62% / 0.14), transparent 80%)',
           ].join(','),
+          // Optionnel : rend le bleu plus “punchy” sans virer au violet
+          filter: 'saturate(1.15) brightness(1.05)',
         }}
       />
 
@@ -436,7 +438,7 @@ export default function Map() {
                 >
                   <span
                     className={[
-                      'relative',
+                      'relative max-sm:text-sm',
                       isActive
                         ? 'drop-shadow-[0_0_16px_rgba(37,99,235,.50)]'
                         : '',

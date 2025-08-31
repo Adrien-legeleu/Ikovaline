@@ -92,7 +92,7 @@ function ProjectCard({
       rel={lien ? 'noopener noreferrer' : undefined}
       className="snap-center snap-always  block"
     >
-      <GlassShell className="transition-transform min-w-[300px] duration-300 hover:scale-[1.015] shadow-[0_0_28px_rgba(59,130,246,.50),0_0_70px_rgba(56,189,248,.38)] hover:shadow-[0_0_40px_rgba(59,130,246,.70),0_0_110px_rgba(56,189,248,.60)]">
+      <GlassShell className="transition-transform min-w-[300px] duration-300 hover:scale-[1.015] shadow-[0_0_28px_rgba(59,130,246,.50),0_0_70px_rgba(56,189,248,.38)] lg:hover:shadow-[0_0_40px_rgba(59,130,246,.70),0_0_110px_rgba(56,189,248,.60)]">
         {/* Media */}
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-[28px]">
           <Image
@@ -314,30 +314,33 @@ export default function ProjectsCarousel() {
   }
 
   return (
-    <section className="relative pt-10 mx-auto max-w-6xl" aria-label={t.title}>
+    <section
+      className="relative pt-10 mx-auto  w-full max-w-7xl "
+      aria-label={t.title}
+    >
       {/* halo global bleu discret */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10" />
 
-      <div className="sm:mb-8 mb-12 flex max-sm:flex-col max-sm:gap-5 sm:items-end items-center sm:justify-between gap-4">
-        <h2 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-neutral-100 dark:to-neutral-200">
+      <div className="sm:mb-8 sm:px-2  w-full lg:px-12 xl:px-0 mb-12 flex max-sm:flex-col max-sm:gap-5 sm:items-end items-center sm:justify-between gap-4">
+        <h2 className="text-3xl pb-1 sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-neutral-100 dark:to-neutral-200">
           {t.title}
         </h2>
         <Link
           href={t.baseHref}
-          className="text-sm font-medium text-sky-700 hover:underline dark:text-sky-300"
+          className="text-sm relative bottom-1 font-medium text-sky-700 hover:underline dark:text-sky-300"
         >
           {t.all}
         </Link>
       </div>
 
-      <div className="relative">
+      <div className="w-full lg:px-12 relative">
         {/* flèches */}
         <button
           type="button"
           aria-label="Previous"
           onClick={prev}
           className={cn(
-            'absolute left-0 top-1/2 z-20 -translate-y-1/2 rounded-full backdrop-blur-md',
+            'absolute left-0 top-1/2 lg:hidden z-20 -translate-y-1/2 rounded-full backdrop-blur-md',
             'bg-white/70 dark:bg-neutral-900/60 border border-sky-400/30',
             'shadow-[0_8px_30px_rgba(59,130,246,.25)] p-2 hidden sm:inline-flex',
             active === 0 && 'opacity-50 cursor-not-allowed'
@@ -359,7 +362,7 @@ export default function ProjectsCarousel() {
           aria-label="Next"
           onClick={next}
           className={cn(
-            'absolute right-0 top-1/2 z-20 -translate-y-1/2 rounded-full backdrop-blur-md',
+            'absolute right-0 top-1/2 z-20 lg:hidden -translate-y-1/2 rounded-full backdrop-blur-md',
             'bg-white/70 dark:bg-neutral-900/60 border border-sky-400/30',
             'shadow-[0_8px_30px_rgba(59,130,246,.25)] p-2 hidden sm:inline-flex',
             active === data.length - 1 && 'opacity-50 cursor-not-allowed'
@@ -385,23 +388,18 @@ export default function ProjectsCarousel() {
           tabIndex={0}
           onKeyDown={onKeyDown}
           className={cn(
-            'flex items-stretch lg:gap-6 gap-4 overflow-x-auto px-6 py-16 relative bottom-10 sm:px-10 lg:px-20',
+            'flex items-center lg:justify-center max-w-[1400px]    mx-auto w-full  gap-6 max-lg:overflow-x-auto px-6 py-20 relative bottom-10 sm:px-10 lg:px-0 ',
             'snap-x snap-mandatory scroll-smooth overscroll-x-contain',
             '[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden'
           )}
-          style={{
-            // on centre parfaitement : padding = 10% si carte = 80% du viewport
-            scrollPaddingLeft: '10%',
-            scrollPaddingRight: '10%',
-          }}
         >
           {data.map((p, i) => (
             <div
               key={p.id}
               data-snap-item
               className={cn(
-                'shrink-0 basis-[80%] sm:basis-[68%] lg:basis-[58%]',
-                i === 1 ? 'lg:scale-[1.06]' : 'lg:scale-[.98]'
+                'shrink-0 basis-[80%] sm:basis-[58%] md:basis-[50%] lg:basis-[32%] xl:basis-[35%]',
+                i === 1 ? 'scale-[1.06]' : 'scale-[.98]'
               )}
             >
               <ProjectCard
@@ -421,7 +419,7 @@ export default function ProjectsCarousel() {
         </div>
 
         {/* Dots */}
-        <div className="mt-6 flex relative bottom-20 justify-center gap-2">
+        <div className="mt-6 lg:hidden flex relative bottom-20 justify-center gap-2">
           {data.map((_, i) => (
             <button
               key={i}

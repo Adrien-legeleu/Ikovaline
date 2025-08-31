@@ -2,15 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
-import dynamic from 'next/dynamic';
 import { CardSticky, ContainerScroll, GlassSticky } from './CardStack';
-
-const Sparkles = dynamic(
-  () => import('@/components/LandingPage/impact/Sparkles'),
-  { ssr: false }
-);
-
-/* ------------------------- Textes FR / EN ------------------------- */
 
 const TEXTS = {
   fr: {
@@ -101,17 +93,11 @@ export default function Methodologie() {
           </p>
 
           {/* Décor */}
-          <div className="relative mt-6 h-96 w-full overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]">
+          <div className="relative mt-6 h-32 md:h-96 w-full overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]">
             {/* Halo */}
             <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#2563EB,#3B82F6_40%,transparent_95%)] before:opacity-60" />
             {/* Base arrondie */}
             <div className="absolute -left-1/2 top-1/2 z-10 aspect-[1/0.7] w-[200%] rounded-[100%] border-t border-zinc-900/20 bg-white dark:border-white/20 dark:bg-zinc-900" />
-            {/* Sparkles */}
-            <Sparkles
-              density={1200}
-              className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
-              color={theme === 'dark' ? '#ffffff' : '#000000'}
-            />
           </div>
         </div>
 

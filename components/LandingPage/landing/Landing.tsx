@@ -52,7 +52,7 @@ export default function Landing() {
   return (
     <div className="relative flex flex-col items-center justify-center gap-5 2xl:gap-0 py-20 overflow-hidden">
       {/* Glow décoratif : on l’affiche seulement ≥ sm pour éviter du blur coûteux en mobile */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden max-sm:hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden ">
         <Glow
           variant="above"
           className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
@@ -69,7 +69,7 @@ export default function Landing() {
             className={cn(
               'group relative mx-auto flex items-center justify-center rounded-full px-5 py-2',
               // blur/ombres lourdes uniquement ≥ sm
-              'bg-white/70 backdrop-blur-0 sm:backdrop-blur-xl dark:bg-transparent',
+              'bg-white/70 backdrop-blur-xl dark:bg-transparent',
               'shadow-none sm:shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]',
               'transition-shadow duration-500 ease-out',
               'sm:hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]'
@@ -84,7 +84,7 @@ export default function Landing() {
             {/* glow animé (bordure dégradée) */}
             <span
               className={cn(
-                'absolute inset-0 hidden sm:block h-full w-full animate-gradient rounded-[inherit] p-[1px]',
+                'absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] p-[1px]',
                 'bg-gradient-to-r from-[#5faaff]/60 via-[#42b8fd]/60 to-[#00e0ff]/60 bg-[length:300%_100%]'
               )}
               style={{
@@ -99,7 +99,7 @@ export default function Landing() {
             {/* halo externe bleu (désactivé en mobile) */}
             <span
               aria-hidden
-              className="absolute -inset-6 hidden sm:block rounded-full blur-3xl 
+              className="absolute -inset-6 block rounded-full blur-3xl 
                bg-[radial-gradient(circle_at_center,rgba(0,168,255,.55),rgba(37,99,235,.35),transparent_75%)]
                opacity-50 dark:opacity-40"
             />
@@ -120,7 +120,7 @@ export default function Landing() {
         >
           {t.headline} {/* Particules lourdes : pas en mobile, respect RMW */}
           {prefersReduced ? null : (
-            <span className="hidden sm:inline-flex p-2 align-middle will-change-transform">
+            <span className="inline-flex p-2 align-middle will-change-transform">
               <ParticleTextEffect />
             </span>
           )}

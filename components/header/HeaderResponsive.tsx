@@ -245,12 +245,12 @@ export function HeaderResponsive() {
       <div
         className={[
           'fixed bottom-0 z-[10000] lg:hidden',
-          'flex max-xs:w-full xs:left-1/2 xs:-translate-x-1/2 items-center justify-around [320px]:justify-between xs:gap-6 gap-2',
+          'flex max-xs:w-full xs:left-1/2 max-xs:pb-5 xs:-translate-x-1/2 items-center justify-around [320px]:justify-between xs:gap-6 gap-2',
           'rounded-t-[2rem] xs:rounded-[2rem] border dark:border-white/15',
           'backdrop-blur-2xl',
           'bg-[linear-gradient(135deg,rgba(255,255,255,.78),rgba(240,245,252,.42))] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]',
           'shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)] dark:shadow-[0_18px_60px_rgba(2,6,12,.6),inset_0_1px_0_rgba(59,130,246,.12)]',
-          'p-4',
+          'xs:p-4 px-1 pt-3',
         ].join(' ')}
       >
         <DrawerTrigger aria-label={t.ariaOpen} asChild>
@@ -259,6 +259,8 @@ export function HeaderResponsive() {
           </button>
         </DrawerTrigger>
 
+        <ModeToggle />
+        <LangSwitch />
         <div className="max-[320px]:hidden">
           <DrawerClose asChild>
             <Link href={localizeHref('/', isEN)} aria-label={t.ariaHome}>
@@ -283,14 +285,11 @@ export function HeaderResponsive() {
         </div>
 
         <LiquidLink href={localizeHref('/contact', isEN)} className="h-11 px-3">
-          <span className="flex items-center gap-2 text-xs">
-            <IconMessage2 aria-hidden />
+          <span className="flex items-center gap-2 xs:text-xs text-[0.7rem]">
+            <IconMessage2 aria-hidden className="max-xs:hidden" />
             {t.contact}
           </span>
         </LiquidLink>
-
-        <ModeToggle />
-        <LangSwitch />
       </div>
 
       {/* CONTENU DU DRAWER */}
@@ -359,7 +358,7 @@ export function HeaderResponsive() {
           </DrawerHeader>
 
           {/* NAV (accordion single-open) */}
-          <nav className="mx-auto max-w-[280px] space-y-3 py-4">
+          <nav className="mx-auto max-w-[280px] space-y-3 pt-4">
             {headerLinks.map((section, i) => {
               const hasChildren = !!section.links?.length;
               const expanded = activeIndex === i;
@@ -449,7 +448,7 @@ export function HeaderResponsive() {
           </nav>
 
           {/* FOOTER CTA */}
-          <DrawerFooter className="relative z-10 mt-2">
+          <DrawerFooter className="relative z-10 ">
             <DrawerClose asChild>
               <button
                 className={[

@@ -159,8 +159,8 @@ export default function Services() {
   return (
     <section className="relative isolate py-28 md:py-36">
       {/* Backdrops (légers) */}
-      <LightBackdrop className="block dark:hidden" />
-      <UnicornBackdrop className="hidden dark:block" />
+      <LightBackdrop className="block lg:dark:hidden" />
+      <UnicornBackdrop className="hidden lg:dark:block" />
 
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-neutral-100 dark:to-neutral-200">

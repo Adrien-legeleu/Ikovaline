@@ -6,6 +6,7 @@ import ContactFormBusiness from './contactForm/ContactFormBusiness';
 import ScriptCopyBtn from '../ui/script-copy-btn';
 import { LiquidButton } from '../ui/liquid-glass-button';
 import { usePathname } from 'next/navigation';
+import Glow from '../ui/glow';
 
 function useLocale() {
   const pathname = usePathname() || '/';
@@ -22,12 +23,18 @@ export default function ContactMainPage() {
 
   return (
     <section className="relative mx-auto overflow-hidden py-32 grid max-w-[1400px] grid-cols-1 lg:grid-cols-60/40 gap-10 items-start max-sm:px-4 px-20">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden ">
+        <Glow
+          variant="above"
+          className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
+        />
+      </div>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <span className="absolute -top-28 left-1/3 h-[44rem] w-[44rem] -translate-x-1/2 rounded-full blur-[220px] opacity-30 dark:opacity-40 bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)]" />
         <span className="absolute bottom-32 right-1/4 h-[38rem] w-[38rem] translate-x-1/4 rounded-full blur-[200px] opacity-25 dark:opacity-35 bg-[radial-gradient(closest-side,#2563EB,transparent_70%)]" />
       </div>
 
-      <h1 className="lg:hidden px-6 text-center text-3xl font-extrabold bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-600 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent">
+      <h1 className="lg:hidden z-20 px-6 text-center text-3xl font-extrabold bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-600 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent">
         {isEN
           ? 'Contact our agency to boost your digital presence'
           : 'Contactez notre agence pour booster votre présence digitale'}
