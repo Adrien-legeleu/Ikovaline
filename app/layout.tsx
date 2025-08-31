@@ -77,20 +77,21 @@ export default function RootLayout({
         <Script id="tarteaucitron-init" strategy="afterInteractive">
           {`
     tarteaucitron.init({
-      privacyUrl: "/politique-confidentialite", // ✅ bon lien
-      orientation: "bottom", // ou "middle" si tu veux centré
-      showAlertSmall: false, // ✅ désactivé car tu gères une grosse bannière manuellement
-      cookieslist: true,
+      privacyUrl: "/politique-confidentialite",
+      orientation: "bottom",
       removeCredit: true,
-      acceptAllCta: true,
-      denyAllCta: true,
+      useExternalCss: false, // on surcharge via ton globals.css
+      showAlertSmall: false,
+      cookieslist: false,
+      cookieslistEmbed: false,
       highPrivacy: true,
-      mandatory: false,
-      useExternalCss: false, // tu gères ton style à la main
-      moreInfoLink: true,
+      DenyAllCta: true,
+      AcceptAllCta: true,
       showIcon: false,
-      readmoreLink: "/politique-confidentialite", // ✅ optionnel mais cohérent
-      debug: false // ❌ mettre à false en production
+      alwaysNeedConsent: false,
+      readmoreLink: false,
+      mandatory: false,
+      debug: false
     });
 
     tarteaucitron.services.rgpdinfo = {
@@ -100,7 +101,6 @@ export default function RootLayout({
       needConsent: true,
       cookies: [],
       js: function () {
-        // Appelé uniquement si l'utilisateur accepte
         console.log("Consentement donné pour les cookies essentiels.");
       },
       fallback: function () {

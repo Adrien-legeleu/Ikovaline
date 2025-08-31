@@ -78,18 +78,23 @@ const ParticleTextEffect = dynamic<ParticleTextEffectProps>(
   { ssr: false, loading: () => null }
 );
 
-/* -------------------- Lazy Loader Hook -------------------- */
 function useDeferredRender() {
   const [ready, setReady] = React.useState(false);
+
   React.useEffect(() => {
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(() => setReady(true), {
+    if (typeof window !== 'undefined' && window.requestIdleCallback) {
+      const id = window.requestIdleCallback(() => setReady(true), {
         timeout: 800,
       });
+      return () => {
+        if (window.cancelIdleCallback) window.cancelIdleCallback(id);
+      };
     } else {
-      setTimeout(() => setReady(true), 800);
+      const t = setTimeout(() => setReady(true), 800);
+      return () => clearTimeout(t);
     }
   }, []);
+
   return ready;
 }
 
