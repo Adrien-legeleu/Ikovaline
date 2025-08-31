@@ -31,8 +31,11 @@ export default function InViewLazy({
 
     const el = ref.current;
 
-    // Déclencheur de secours (const + type inféré number côté navigateur)
-    const timeoutId = window.setTimeout(() => setShown(true), timeoutMs);
+    // ✅ timeout strictement typé
+    const timeoutId: number = window.setTimeout(
+      () => setShown(true),
+      timeoutMs
+    );
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -61,12 +64,10 @@ export default function InViewLazy({
       ref={ref}
       style={{
         minHeight,
-        // skip layout/paint tant que hors-écran
-        contentVisibility: shown ? 'visible' : ('auto' as any),
+        // ✅ typage propre : "auto" est bien une valeur valide
+        contentVisibility: shown ? 'visible' : 'auto',
         containIntrinsicSize:
-          typeof minHeight === 'number'
-            ? `${minHeight}px`
-            : (minHeight as string),
+          typeof minHeight === 'number' ? `${minHeight}px` : minHeight,
       }}
     >
       {shown
