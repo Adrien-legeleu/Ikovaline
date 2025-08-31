@@ -97,9 +97,6 @@ export default function Home() {
 
         <Blog />
       </div>
-
-      {/* Kick off prefetch quietly on the client (no UI) */}
-      <PrewarmChunks />
     </>
   );
 }

@@ -2,20 +2,25 @@
 
 import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import type { Testimonial } from '@/components/ui/testimonial-slider';
+
 const TestimonialSlider = dynamic(
-  () => import('@/components/ui/testimonial-slider').then((m) => m.Component),
+  () =>
+    import('@/components/ui/testimonial-slider').then(
+      (m) => m.TestimonialSlider
+    ),
   {
     ssr: false,
     loading: () => (
       <div
         className="mx-auto mt-10 h-[160px] w-[92%] max-w-4xl animate-pulse rounded-2xl"
-        style={{ contentVisibility: 'auto' }}
         aria-hidden
       />
     ),
   }
 );
-const testimonialsFR = [
+
+const testimonialsFR: Testimonial[] = [
   {
     emoji: '🚀',
     quote: 'Nos clients augmentent en moyenne de 30% leur conversion web',
@@ -31,7 +36,7 @@ const testimonialsFR = [
   { emoji: '✅', quote: 'Certifié Google Search et Google Analytics' },
 ];
 
-const testimonialsEN = [
+const testimonialsEN: Testimonial[] = [
   {
     emoji: '🚀',
     quote: 'Our clients increase web conversion by 30% on average',
@@ -50,17 +55,12 @@ export default function ComponentDemo() {
   const testimonials = isEN ? testimonialsEN : testimonialsFR;
 
   return (
-    <div
-      className="relative h-[520px] w-full overflow-hidden rounded-2xl bg-white/70 p-4 dark:bg-neutral-950/50"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '520px' }}
-    >
-      {' '}
-      <div className="mt-10 flex justify-center px-3 sm:px-8">
-        {/* key pour forcer le reset du slider quand la langue change */}
+    <div className="relative h-[520px] w-full rounded-2xl bg-white/70 p-4 dark:bg-neutral-950/50">
+      <div className="mt-10 flex justify-center ">
         <TestimonialSlider
           key={isEN ? 'en' : 'fr'}
           testimonials={testimonials}
-        />{' '}
+        />
       </div>
     </div>
   );

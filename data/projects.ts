@@ -51,7 +51,7 @@ export const PROJECTS_FR: Project[] = [
     objectif:
       'Créer une plateforme SaaS permettant aux entreprises de se connecter instantanément aux meilleurs freelances IA & automatisation.',
     resultat: 'MVP en cours, onboarding B2B fluide et scalable',
-    coverImage: '/images/skillize.png',
+    coverImage: '/images/skilize.png',
     lien: 'https://skillize.fr/',
   },
   {
@@ -108,7 +108,7 @@ export const PROJECTS_EN: Project[] = [
     objectif:
       'Develop a SaaS platform connecting companies instantly with the best AI & automation freelancers.',
     resultat: 'MVP in progress, smooth and scalable B2B onboarding',
-    coverImage: '/images/skillize.png',
+    coverImage: '/images/skilize.png',
     lien: 'https://skillize.fr/',
   },
   {

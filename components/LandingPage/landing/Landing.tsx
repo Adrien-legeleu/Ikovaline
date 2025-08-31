@@ -43,10 +43,21 @@ const DICT = {
   },
 } as const;
 
-/* -------------------- Helpers perf -------------------- */
+/* -------------------- Perf helpers -------------------- */
 function usePathLocale() {
   const pathname = usePathname() || '/';
   return /^\/en(\/|$)/.test(pathname) ? 'en' : 'fr';
+}
+function useLgUp() {
+  const [ok, setOk] = React.useState(false);
+  React.useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const on = () => setOk(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  return ok;
 }
 function usePerfBudget() {
   const prefersReduced = useReducedMotion();
@@ -66,8 +77,23 @@ function usePerfBudget() {
   }, [prefersReduced]);
   return { lowEnd, prefersReduced };
 }
+function useIdleReady(timeout = 600) {
+  const [ready, setReady] = React.useState(false);
+  React.useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(() => setReady(true), {
+        timeout,
+      });
+      return () => window.cancelIdleCallback?.(id);
+    } else {
+      const t = setTimeout(() => setReady(true), timeout);
+      return () => clearTimeout(t);
+    }
+  }, [timeout]);
+  return ready;
+}
 
-/* -------------------- Dynamic lazy -------------------- */
+/* -------------------- Lazy heavy components -------------------- */
 const GlowLazy = dynamic(() => import('@/components/ui/glow'), { ssr: false });
 const UnicornBackdrop = dynamic(
   () => import('@/components/ui/unicornBackdrop'),
@@ -75,49 +101,80 @@ const UnicornBackdrop = dynamic(
 );
 const ParticleTextEffect = dynamic<ParticleTextEffectProps>(
   () => import('../ParticleWord').then((m) => m.default),
-  { ssr: false, loading: () => null }
+  { ssr: false }
 );
 
-function useDeferredRender() {
-  const [ready, setReady] = React.useState(false);
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined' && window.requestIdleCallback) {
-      const id = window.requestIdleCallback(() => setReady(true), {
-        timeout: 800,
-      });
-      return () => {
-        if (window.cancelIdleCallback) window.cancelIdleCallback(id);
-      };
-    } else {
-      const t = setTimeout(() => setReady(true), 800);
-      return () => clearTimeout(t);
-    }
-  }, []);
-
-  return ready;
+/* -------------------- Mobile fallback -------------------- */
+function MobileBlueFlipWords({ words }: { words: ReadonlyArray<string> }) {
+  return (
+    <span
+      className="relative inline-block h-[1.05em] bottom-1 ml-1 overflow-hidden align-baseline"
+      aria-hidden
+    >
+      <span className="flex flex-col leading-none motion-safe:animate-[slideWords_4s_ease-in-out_infinite]">
+        {words.map((w, i) => (
+          <span
+            key={i}
+            className="font-extrabold py-1 bg-clip-text text-transparent"
+            style={{
+              backgroundImage:
+                'linear-gradient(90deg,#00A8E8,#3B82F6,#22D3EE,#00A8E8)',
+              backgroundSize: '200% 100%',
+              animation: 'shimmer 3.5s linear infinite',
+            }}
+          >
+            {w}
+          </span>
+        ))}
+      </span>
+      <style jsx>{`
+        @keyframes slideWords {
+          0%,
+          40% {
+            transform: translateY(0%);
+          }
+          50%,
+          90% {
+            transform: translateY(-50%);
+          }
+          100% {
+            transform: translateY(0%);
+          }
+        }
+        @keyframes shimmer {
+          from {
+            background-position: 0% 50%;
+          }
+          to {
+            background-position: 200% 50%;
+          }
+        }
+      `}</style>
+    </span>
+  );
 }
 
 /* -------------------- Page -------------------- */
 export default function Landing() {
   const locale = usePathLocale();
   const t = DICT[locale];
+  const lgUp = useLgUp();
   const { lowEnd, prefersReduced } = usePerfBudget();
-  const heavyReady = useDeferredRender(); // ⬅️ décalage du rendu lourd
+  const heavyReady = useIdleReady(500); // décalage du gros décor
 
   return (
     <div className="relative flex flex-col items-center justify-center gap-5 py-20 overflow-hidden">
-      {/* Glow décoratif → différé */}
+      {/* Fond Glow + Unicorn → seulement après idle */}
       {heavyReady && (
-        <div className="absolute dark:hidden inset-0 pointer-events-none overflow-hidden">
-          <GlowLazy variant="above" />
-        </div>
+        <>
+          <div className="absolute dark:hidden inset-0 pointer-events-none overflow-hidden">
+            <GlowLazy variant="above" />
+          </div>
+          <UnicornBackdrop className="dark:block hidden" />
+        </>
       )}
 
-      {/* Fond Unicorn → différé */}
-      {heavyReady && <UnicornBackdrop className="dark:block hidden" />}
-
-      {/* Badge “garantie” */}
+      {/* Badge garantie */}
       <div className="z-10 flex flex-col">
         <Link
           href="/about/#notre-garantie"
@@ -125,16 +182,12 @@ export default function Landing() {
         >
           <motion.div
             className={cn(
-              'group relative mx-auto flex items-center justify-center rounded-full px-5 py-2',
-              'bg-white/70 backdrop-blur-xl dark:bg-transparent',
-              'shadow-none sm:shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]'
+              'group relative border border-blue-500/40 mx-auto flex items-center justify-center rounded-full px-5 py-2',
+              'bg-white/30 backdrop-blur-sm dark:bg-transparent'
             )}
-            initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: -24 }}
-            animate={prefersReduced ? {} : { opacity: 1, y: 0 }}
-            transition={{
-              duration: prefersReduced ? 0.2 : 0.5,
-              ease: 'easeOut',
-            }}
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           >
             <IconShieldCheck className="ml-1 size-4 stroke-sky-600 dark:stroke-sky-300" />
             <span className="ml-2 text-sm font-semibold tracking-wide text-sky-700 dark:text-sky-200">
@@ -144,46 +197,42 @@ export default function Landing() {
         </Link>
 
         {/* Headline */}
-        <h1 className="mx-auto pt-6 text-center font-bold md:text-5xl lg:text-6xl xl:text-7xl text-2xl leading-snug max-w-5xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-300 dark:to-white relative z-20">
+        <h1 className="mx-auto pt-6 text-center font-bold md:text-5xl lg:text-6xl text-2xl leading-snug max-w-5xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-300 dark:to-white relative z-20">
           {t.headline}
-          {/* Toujours rendu, mais effets lourds différés */}
-          {heavyReady && !prefersReduced ? (
-            <span className="inline-flex align-middle">
-              <ParticleTextEffect
-                words={t.words}
-                quality={lowEnd ? 'mid' : 'high'}
-                width={500}
-                height={110}
-                dprCap={lowEnd ? 1.25 : 1.8}
-              />
-            </span>
+          {lgUp && !prefersReduced && !lowEnd ? (
+            heavyReady ? (
+              <span className="inline-flex align-middle ml-2">
+                <ParticleTextEffect
+                  words={t.words}
+                  quality="high"
+                  width={500}
+                  height={110}
+                  dprCap={1.8}
+                />
+              </span>
+            ) : (
+              <span className="inline-flex ml-2 text-5xl">{t.words[0]}</span>
+            )
           ) : (
-            <span className="inline-flex text-5xl align-middle ml-1">
-              {t.words[0]}
+            <span className="inline-flex text-5xl ml-2">
+              <MobileBlueFlipWords words={t.words} />
             </span>
           )}
         </h1>
       </div>
 
-      {/* Avis clients */}
       <StarClientsGoogle />
 
-      {/* Sous-titre */}
-      <TextAnimate
-        animation={prefersReduced ? undefined : 'blurInUp'}
-        by="word"
-        className="max-w-2xl text-center text-muted-foreground dark:text-neutral-200 max-sm:px-2 md:text-lg"
-      >
+      <motion.div className="max-w-2xl text-center text-muted-foreground dark:text-neutral-200 max-sm:px-2 md:text-lg">
         {t.subtitle}
-      </TextAnimate>
+      </motion.div>
 
-      {/* CTAs */}
       <div className="mt-8 flex items-center justify-center gap-5 max-sm:flex-col">
-        <LiquidLink href="/contact">
-          <IconMessage2 aria-hidden className="inline-flex mr-2" /> {t.ctaAudit}
+        <LiquidLink href="/contact" className="backdrop-blur-sm">
+          <IconMessage2 aria-hidden className="mr-2 inline-flex" /> {t.ctaAudit}
         </LiquidLink>
-        <LiquidLink href="/nos-services">
-          <IconApps aria-hidden className="inline-flex mr-2" /> {t.ctaServices}
+        <LiquidLink href="/nos-services" className="backdrop-blur-sm">
+          <IconApps aria-hidden className="mr-2 inline-flex" /> {t.ctaServices}
         </LiquidLink>
       </div>
     </div>
