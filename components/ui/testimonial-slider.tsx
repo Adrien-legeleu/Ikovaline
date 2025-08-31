@@ -76,6 +76,7 @@ export function TestimonialSlider({
           </div>
         </div>
       </div>
+      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent dark:from-black"></div>
 
       {/* ======= Contenu animé ======= */}
       <div className="relative mb-10 h-28">
@@ -94,6 +95,7 @@ export function TestimonialSlider({
                 {testimonials[active].emoji}
               </div>
             </div>
+
             {/* texte bleu */}
             <p className="text-lg lg:text-2xl font-semibold leading-snug text-neutral-900 dark:text-white">
               <span className="mr-2 text-sky-400">“</span>
@@ -107,7 +109,7 @@ export function TestimonialSlider({
       </div>
 
       {/* ======= Navigation ======= */}
-      <div className="mt-4 flex items-center justify-center gap-5">
+      <div className="pb-4 flex items-center justify-center gap-5">
         <LiquidButton
           onClick={prev}
           aria-label="Précédent"

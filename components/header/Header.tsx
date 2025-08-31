@@ -50,6 +50,7 @@ const TEXTS = {
     about: 'À Propos',
     blog: 'Conseils Digitaux',
     contact: 'Contactez-nous',
+    projects: 'Nos projets',
 
     sub_home_about: 'À Propos',
     sub_home_services: 'Nos Services',
@@ -70,6 +71,7 @@ const TEXTS = {
     about: 'About us',
     blog: 'Digital Consulting',
     contact: 'Contact us',
+    projects: 'Our Projects',
 
     sub_home_about: 'About',
     sub_home_services: 'Our services',
@@ -234,6 +236,12 @@ export function Header({ className }: { className?: string }) {
               active={active}
               item={t.blog}
               link={localizeHref('/blog', isEN)}
+            />
+            <MenuItem
+              setActive={setActive}
+              active={active}
+              item={t.projects}
+              link={localizeHref('/projects', isEN)}
             />
 
             {/* Right side actions */}
