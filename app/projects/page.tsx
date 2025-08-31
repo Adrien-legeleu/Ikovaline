@@ -4,11 +4,6 @@ import dynamic from 'next/dynamic';
 import LightBackdrop from '@/components/ui/lightBackdrop';
 import ProjectsPageClient from '@/components/Projects/ProjectsPageClient';
 
-const UnicornBackdrop = dynamic(
-  () => import('@/components/ui/unicornBackdrop'),
-  { ssr: false }
-);
-
 export const metadata: Metadata = {
   title: 'Projets — Ikovaline',
   description:
