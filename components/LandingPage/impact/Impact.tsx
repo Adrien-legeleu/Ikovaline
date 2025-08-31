@@ -1,6 +1,5 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
 import { CardSticky, ContainerScroll, GlassSticky } from './CardStack';
 
@@ -74,7 +73,6 @@ const TEXTS = {
 /* ------------------------------ UI -------------------------------- */
 
 export default function Methodologie() {
-  const { theme } = useTheme();
   const pathname = usePathname() || '/';
   const isEN = /^\/en(\/|$)/.test(pathname);
   const t = isEN ? TEXTS.en : TEXTS.fr;
