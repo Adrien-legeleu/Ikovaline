@@ -163,7 +163,7 @@ export function Service2() {
           id="automatisation-ia"
           className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {GRID.map((feature, idx) => (
+          {GRID.map((feature) => (
             <Link
               href={localizeHref(`/nos-services/${feature.slug}`, isEN)}
               key={feature.title}

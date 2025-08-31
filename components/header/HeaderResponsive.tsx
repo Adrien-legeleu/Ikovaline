@@ -29,15 +29,12 @@ import {
   IconCpu,
 } from '@tabler/icons-react';
 import {
-  IconApps,
   IconChartLine,
   IconDeviceLaptop,
   IconEye,
   IconHelpHexagon,
   IconHistory,
-  IconMessage,
   IconThumbUp,
-  IconUser,
 } from '@tabler/icons-react';
 import { LiquidButton } from '../ui/liquid-glass-button';
 import LangSwitch from '../LangSwitch';
