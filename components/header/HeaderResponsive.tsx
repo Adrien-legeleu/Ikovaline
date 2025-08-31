@@ -22,7 +22,12 @@ import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
 import { ModeToggle } from '../toggle-darkmode';
 import { LiquidLink } from '../ui/liquid-link';
 
-import { IconMenu3, IconMessage2, IconChevronDown } from '@tabler/icons-react';
+import {
+  IconMenu3,
+  IconMessage2,
+  IconChevronDown,
+  IconCpu,
+} from '@tabler/icons-react';
 import {
   IconApps,
   IconChartLine,
@@ -70,33 +75,26 @@ const TEXTS = {
       {
         title: 'Accueil',
         href: '/',
-        links: [
-          { label: 'À Propos', href: '/#about', icon: <IconUser stroke={2} /> },
-          {
-            label: 'Nos Services',
-            href: '/#services',
-            icon: <IconApps stroke={2} />,
-          },
-          {
-            label: 'Témoignages',
-            href: '/#review',
-            icon: <IconMessage stroke={2} />,
-          },
-        ],
+        links: [],
       },
       {
         title: 'Nos Services',
         href: '/nos-services',
         links: [
           {
-            label: 'Accélérez votre croissance',
-            href: '/nos-services/#buisness-developpement',
-            icon: <IconChartLine stroke={2} />,
+            label: 'Applications Web, Mobiles & SaaS',
+            href: '/nos-services/#saas-apps',
+            icon: <IconDeviceLaptop stroke={2} />,
           },
           {
-            label: 'Modernisez votre présence en ligne',
-            href: '/nos-services/#developpement-digital',
-            icon: <IconDeviceLaptop stroke={2} />,
+            label: 'Automatisation & IA',
+            href: '/nos-services/#automatisation-ia',
+            icon: <IconCpu stroke={2} />,
+          },
+          {
+            label: 'Stratégies Digitales & Croissance',
+            href: '/nos-services/#scaling',
+            icon: <IconChartLine stroke={2} />,
           },
           {
             label: 'Ce qui fait notre différence',
@@ -132,8 +130,10 @@ const TEXTS = {
         ],
       },
       { title: 'Conseils Digitaux', href: '/blog', links: [] },
+      { title: 'Nos Projets', href: '/projects', links: [] },
     ] as Section[],
   },
+
   en: {
     ariaOpen: 'Open menu',
     ariaHome: 'Home',
@@ -144,33 +144,26 @@ const TEXTS = {
       {
         title: 'Home',
         href: '/',
-        links: [
-          { label: 'About', href: '/#about', icon: <IconUser stroke={2} /> },
-          {
-            label: 'Our Services',
-            href: '/#services',
-            icon: <IconApps stroke={2} />,
-          },
-          {
-            label: 'Testimonials',
-            href: '/#review',
-            icon: <IconMessage stroke={2} />,
-          },
-        ],
+        links: [],
       },
       {
         title: 'Our Services',
         href: '/nos-services',
         links: [
           {
-            label: 'Accelerate your growth',
-            href: '/nos-services/#buisness-developpement',
-            icon: <IconChartLine stroke={2} />,
+            label: 'Web, Mobile & SaaS Apps',
+            href: '/nos-services/#saas-apps',
+            icon: <IconDeviceLaptop stroke={2} />,
           },
           {
-            label: 'Modernize your online presence',
-            href: '/nos-services/#developpement-digital',
-            icon: <IconDeviceLaptop stroke={2} />,
+            label: 'Automation & AI',
+            href: '/nos-services/#automatisation-ia',
+            icon: <IconCpu stroke={2} />,
+          },
+          {
+            label: 'Digital Strategies & Growth',
+            href: '/nos-services/#scaling',
+            icon: <IconChartLine stroke={2} />,
           },
           {
             label: 'What makes us different',
@@ -206,6 +199,7 @@ const TEXTS = {
         ],
       },
       { title: 'Digital Advice', href: '/blog', links: [] },
+      { title: 'Our Projects', href: '/projects', links: [] },
     ] as Section[],
   },
 } as const;
@@ -338,7 +332,7 @@ export function HeaderResponsive() {
 
           {/* handle */}
           <span className="pointer-events-none absolute left-6 right-6 top-2 h-6 rounded-full bg-white/65 blur-[10px] dark:bg-sky-400/10" />
-          <div className="relative z-10 mx-auto mt-4 h-2 w-[100px] rounded-full bg-neutral-300/80 dark:bg-white/10" />
+          <div className="relative z-10 mx-auto mt-2 h-2 w-[100px] rounded-full bg-neutral-300/80 dark:bg-white/10" />
 
           <DrawerHeader className="relative z-10">
             <Image
@@ -358,7 +352,10 @@ export function HeaderResponsive() {
           </DrawerHeader>
 
           {/* NAV (accordion single-open) */}
-          <nav className="mx-auto max-w-[280px] space-y-3 pt-4">
+          <nav
+            style={{ scrollbarWidth: 'none' }}
+            className="mx-auto max-w-[300px] max-h-[50vh] px-2 overflow-y-auto space-y-2 pt-0"
+          >
             {headerLinks.map((section, i) => {
               const hasChildren = !!section.links?.length;
               const expanded = activeIndex === i;
@@ -366,68 +363,30 @@ export function HeaderResponsive() {
               return (
                 <div
                   key={`${section.title}-${i}`}
-                  className={[
-                    'group relative overflow-hidden rounded-3xl',
-                    'bg-white/70 dark:bg-zinc-900/60 backdrop-blur-2xl backdrop-saturate-150',
-                    'border border-white/55 dark:border-white/10',
-                    'shadow-[0_18px_48px_rgba(6,24,44,.10),inset_0_1px_0_rgba(255,255,255,.55)]',
-                    'dark:shadow-[0_18px_48px_rgba(0,0,0,.55),inset_0_1px_0_rgba(37,99,235,.10)]',
-                    'transition-transform duration-300 hover:-translate-y-[2px]',
-                    'hover:shadow-[0_24px_60px_rgba(37,99,235,.20),inset_0_1px_0_rgba(255,255,255,.6)]',
-                  ].join(' ')}
+                  className="bg-white/60 relative  rounded-[2rem] shadow-[0_1px_4px_rgba(0,0,0,.12)] dark:bg-black/40 dark:shadow-[0_1px_4px_rgba(0,0,0,.55)]"
                 >
-                  {/* rims (card) */}
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-95 dark:hidden"
-                    style={{
-                      border: '1px solid transparent',
-                      backgroundImage:
-                        'linear-gradient(135deg,rgba(255,255,255,.85),rgba(245,248,252,.40)),' +
-                        'conic-gradient(from 210deg, rgba(255,255,255,.85), rgba(0,168,232,.26), rgba(255,255,255,.55), rgba(37,99,235,.22), rgba(255,255,255,.85))',
-                      backgroundClip: 'padding-box, border-box',
-                    }}
-                  />
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 hidden rounded-2xl opacity-90 mix-blend-normal dark:block"
-                    style={{
-                      border: '1px solid transparent',
-                      backgroundImage:
-                        'linear-gradient(135deg,rgba(8,12,18,.90),rgba(8,12,18,.60)),' +
-                        'conic-gradient(from 210deg, rgba(0,168,232,.20), rgba(37,99,235,.16), rgba(0,168,232,.20))',
-                      backgroundClip: 'padding-box, border-box',
-                    }}
-                  />
-
                   {/* ligne principale */}
-                  <div className="relative z-10 flex items-center">
+                  <div className="relative z-10  pr-4 h-full  flex items-center">
                     <DrawerClose asChild>
                       <Link
                         href={section.href}
-                        className="flex-1 px-4 py-4 text-[15px] font-semibold text-neutral-800 transition-colors hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white"
+                        className="flex-1 px-4 py-4 text-sm font-semibold text-neutral-800 transition-colors hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white"
                       >
                         {section.title}
                       </Link>
                     </DrawerClose>
 
                     {hasChildren && (
-                      <button
+                      <LiquidButton
+                        className="!p-2 h-full !py-2 relative"
                         aria-expanded={expanded}
                         aria-controls={`sub-${i}`}
                         onClick={() => toggle(i)}
-                        className={[
-                          'mr-2 grid size-10 place-items-center rounded-2xl transition',
-                          'border border-white/45 dark:border-white/10',
-                          'bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md backdrop-saturate-150',
-                          'shadow-[inset_0_1px_0_rgba(255,255,255,.5)] dark:shadow-[inset_0_1px_0_rgba(37,99,235,.10)]',
-                          'hover:scale-[1.04]',
-                        ].join(' ')}
                       >
                         <IconChevronDown
                           className={`size-5 text-sky-700/70 transition-transform duration-300 dark:text-sky-300/80 ${expanded ? 'rotate-180' : ''}`}
                         />
-                      </button>
+                      </LiquidButton>
                     )}
                   </div>
 
@@ -483,7 +442,6 @@ function MeasuredList({
   id,
   links,
   duration,
-  isAnimating,
 }: {
   id: string;
   links: { label: string; href: string; icon?: React.ReactNode }[];
@@ -509,16 +467,12 @@ function MeasuredList({
       animate={{ height: h, opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: duration / 1000, ease: [0.2, 0.0, 0.2, 1] }}
+      className="overflow-hidden"
       style={{
-        overflow: 'hidden',
         willChange: 'height, opacity',
         contain: 'layout paint',
         transform: 'translateZ(0)',
       }}
-      className={[
-        'relative z-10 px-2 pb-2',
-        isAnimating ? 'backdrop-blur-sm' : 'backdrop-blur-md',
-      ].join(' ')}
     >
       <span
         aria-hidden
@@ -530,13 +484,7 @@ function MeasuredList({
           <DrawerClose asChild>
             <Link
               href={link.href}
-              className={[
-                'my-1.5 flex items-center gap-2 rounded-xl px-3 py-2 text-[14px] transition',
-                'text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white',
-                isAnimating
-                  ? 'hover:bg-white/45 dark:hover:bg-zinc-900/45'
-                  : 'hover:bg-white/55 dark:hover:bg-zinc-900/55 hover:shadow-[inset_0_1px_0_rgba(255,255,255,.6)] dark:hover:shadow-[inset_0_1px_0_rgba(37,99,235,.12)]',
-              ].join(' ')}
+              className="flex items-center gap-3 rounded-lg p-3 text-[15px] font-medium text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-white/10"
             >
               <span aria-hidden className="opacity-75">
                 {link.icon}

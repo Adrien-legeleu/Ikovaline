@@ -271,14 +271,14 @@ export default function Map() {
         <h2 className="font-bold text-4xl text-black dark:text-white">
           {t.headerTitle}
         </h2>
-        <p className="text-md md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
+        <p className="text-md md:text-lg dark:text-neutral-200 text-neutral-800 max-w-2xl mx-auto py-4">
           {t.headerDesc}
         </p>
       </header>
 
       {/* Carte + bulles */}
       <div className="relative">
-        <div className="max-md:overflow-hidden relative w-full pb-10 md:py-20">
+        <div className="max-md:overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white_8%,transparent_100%,transparent)] dark:[mask-image:linear-gradient(to_bottom,transparent,black_8%,transparent_100%,transparent)] relative w-full pb-10 md:py-20">
           <WorldMap
             dots={[
               // (on ne touche pas à la structure/design ici)

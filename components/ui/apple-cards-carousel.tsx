@@ -139,7 +139,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
           <div className="flex gap-2">
             <LiquidButton
-              className="relative z-40 flex h-10 w-10 !p-0 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
+              className="relative z-40 flex h-10 w-10 !p-0 items-center justify-center rounded-full  disabled:opacity-50"
               onClick={scrollLeft}
               aria-label={ariaChange}
               disabled={!canScrollLeft}
@@ -147,7 +147,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
               <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
             </LiquidButton>
             <LiquidButton
-              className="relative z-40 flex h-10 !p-0 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
+              className="relative z-40 flex h-10 !p-0 w-10 items-center justify-center rounded-full  disabled:opacity-50"
               onClick={scrollRight}
               aria-label={ariaChange}
               disabled={!canScrollRight}

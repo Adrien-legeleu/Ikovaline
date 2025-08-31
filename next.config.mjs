@@ -1,5 +1,4 @@
 const nextConfig = {
-  darkMode: 'class',
   experimental: {
     optimizeCss: true,
     serverActions: { allowedOrigins: ['*'] },

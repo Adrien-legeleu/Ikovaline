@@ -194,13 +194,12 @@ export function Service1() {
               className="group"
             >
               <motion.article
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
+                viewport={{ once: true }}
                 transition={{
                   duration: 0.55,
                   ease: 'easeOut',
-                  delay: idx * 0.08,
                 }}
                 className="relative group h-full flex flex-col  justify-between rounded-[28px] p-8 backdrop-blur-2xl overflow-hidden
                        bg-[linear-gradient(135deg,rgba(255,255,255,.85),rgba(240,245,252,.45))]

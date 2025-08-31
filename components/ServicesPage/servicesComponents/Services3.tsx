@@ -236,13 +236,12 @@ export function Service3() {
               className="group"
             >
               <motion.article
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
+                viewport={{ once: true }}
                 transition={{
                   duration: 0.55,
                   ease: 'easeOut',
-                  delay: idx * 0.08,
                 }}
                 className="relative overflow-hidden h-full flex flex-col justify-between rounded-3xl p-6 xl:p-7 backdrop-blur-2xl
                            bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]

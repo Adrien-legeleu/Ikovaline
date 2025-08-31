@@ -131,8 +131,8 @@ export default function ServicesHero() {
         {TEXTS.pillars.map((p, i) => (
           <motion.div
             key={p.id}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 40 }}
+            whileInView={{ y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: i * 0.2 }}
             viewport={{ once: true }}
             className="relative group overflow-hidden rounded-[28px] p-8 backdrop-blur-2xl
