@@ -1,6 +1,5 @@
 // app/(marketing)/projets/page.tsx
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import LightBackdrop from '@/components/ui/lightBackdrop';
 import ProjectsPageClient from '@/components/Projects/ProjectsPageClient';
 

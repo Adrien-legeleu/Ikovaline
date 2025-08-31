@@ -102,9 +102,9 @@ export default function ServiceInteractive({
                 return (
                   <motion.div
                     key={key}
-                    initial={{ y: 40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
+                    initial={{ y: 40 }}
+                    animate={{ y: 0 }}
+                    exit={{ y: -20 }}
                     transition={{ type: 'spring', stiffness: 150, damping: 18 }}
                     className="relative w-full max-w-md overflow-hidden rounded-[28px] p-8
                                backdrop-blur-2xl backdrop-saturate-150
