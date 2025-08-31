@@ -25,12 +25,14 @@ export default function UnicornBackdrop({ className }: { className?: string }) {
       className={cn('absolute inset-0 -z-10 bg-neutral-950', className)}
     >
       {size.w > 0 && size.h > 0 && (
-        <UnicornScene
-          production
-          projectId="ed7SJMvTJEVxfqzypOOQ"
-          width={size.w}
-          height={size.h}
-        />
+        <div style={{ filter: 'brightness(0.9)  ' }}>
+          <UnicornScene
+            production
+            projectId="ed7SJMvTJEVxfqzypOOQ"
+            width={size.w}
+            height={size.h}
+          />
+        </div>
       )}
     </div>
   );

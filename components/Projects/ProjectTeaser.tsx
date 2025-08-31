@@ -32,8 +32,8 @@ function GlassShell({
         'relative z-0 overflow-hidden rounded-[28px] backdrop-blur-2xl',
         'bg-[radial-gradient(120%_120%_at_50%_0%,rgba(255,255,255,0.92),rgba(245,248,252,0.55))]',
         'dark:bg-[linear-gradient(180deg,rgba(8,12,18,0.80),rgba(8,12,18,0.58))]',
-        'border border-black/5 dark:border-[rgba(2,98,254,0.30)]',
-        'shadow-[0_28px_90px_rgba(6,24,44,0.14),0_6px_16px_rgba(6,24,44,0.08)]',
+        'border border-blue-500/20 dark:border-blue-600/30',
+        'shadow-xl',
         className
       )}
     >
@@ -92,7 +92,7 @@ function ProjectCard({
       rel={lien ? 'noopener noreferrer' : undefined}
       className="snap-center snap-always  block"
     >
-      <GlassShell className="transition-transform min-w-[300px] duration-300 hover:scale-[1.015] shadow-[0_0_28px_rgba(59,130,246,.50),0_0_70px_rgba(56,189,248,.38)] lg:hover:shadow-[0_0_40px_rgba(59,130,246,.70),0_0_110px_rgba(56,189,248,.60)]">
+      <GlassShell className="transition-transform min-w-[300px] duration-300 hover:scale-[1.015] ">
         {/* Media */}
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-[28px]">
           <Image

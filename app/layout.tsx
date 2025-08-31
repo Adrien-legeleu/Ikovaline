@@ -64,7 +64,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={poppins.className}>
+    <html lang="fr" className={`${poppins.className} dark`}>
       <head>
         <Script
           src="/tarteaucitron/tarteaucitron.js"
@@ -176,7 +176,7 @@ export default function RootLayout({
         </noscript>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

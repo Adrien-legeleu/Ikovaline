@@ -97,6 +97,13 @@ const ParticleTextEffect = dynamic<ParticleTextEffectProps>(
     ),
   }
 );
+const UnicornBackdrop = dynamic(
+  () => import('@/components/ui/unicornBackdrop'),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
 
 /* -------------------- Fallback mobile ultra-léger (CSS only) -------------------- */
 function MobileBlueFlipWords({ words }: { words: ReadonlyArray<string> }) {
@@ -176,9 +183,11 @@ export default function Landing() {
   return (
     <div className="relative flex flex-col items-center justify-center gap-5 py-20 overflow-hidden">
       {/* Glow décoratif performant */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute dark:hidden inset-0 pointer-events-none overflow-hidden">
         <GlowLazy variant="above" />
       </div>
+
+      <UnicornBackdrop className="dark:block hidden" />
 
       {/* Badge “garantie” */}
       <div className="z-10 flex flex-col">
@@ -230,11 +239,11 @@ export default function Landing() {
         </Link>
 
         {/* Headline : Particle ≥ lg / Fallback mobile CSS */}
-        <h1 className="mx-auto pt-6 text-center font-bold md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-4xl xl:!font-semibold leading-[50px] md:leading-[60px] lg:!leading-[70px] xl:!leading-[85px] 2xl:!leading-[115px] max-w-4xl xl:max-w-6xl 2xl:max-w-[1450px] bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-300 dark:via-white dark:to-white relative z-20">
+        <h1 className="mx-auto pt-6 text-center font-bold md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-2xl xl:!font-semibold leading-[50px] md:leading-[60px] lg:!leading-[70px] xl:!leading-[85px] 2xl:!leading-[115px] max-w-4xl xl:max-w-6xl 2xl:max-w-[1450px] bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-700 to-neutral-800 dark:from-neutral-300 dark:via-white dark:to-white relative z-20">
           {t.headline}
           {/* Desktop (≥ lg) : particles */}
           {lgUp && !prefersReduced ? (
-            <span className="hidden lg:inline-flex align-middle">
+            <span className="hidden  lg:inline-flex align-middle">
               <ParticleTextEffect
                 words={t.words}
                 quality={lowEnd ? 'mid' : 'high'}
@@ -245,7 +254,7 @@ export default function Landing() {
             </span>
           ) : (
             // Mobile (& réduite) : flip + shimmer CSS (super perf)
-            <span className="inline-flex lg:hidden align-middle">
+            <span className="inline-flex text-5xl lg:hidden align-middle">
               <MobileBlueFlipWords words={t.words as unknown as string[]} />
             </span>
           )}
@@ -259,20 +268,20 @@ export default function Landing() {
       <TextAnimate
         animation={prefersReduced ? undefined : 'blurInUp'}
         by="word"
-        className="max-w-2xl text-center text-muted-foreground dark:text-neutral-400 max-sm:px-2 xs:text-xs md:text-lg"
+        className="max-w-2xl text-center text-muted-foreground dark:text-neutral-200 max-sm:px-2 xs:text-xs md:text-lg"
       >
         {t.subtitle}
       </TextAnimate>
 
       {/* CTAs */}
       <div className="mt-8 flex items-center justify-center gap-5 max-sm:flex-col-reverse max-sm:gap-3 2xl:mt-8">
-        <LiquidLink href="/contact" className="z-10">
+        <LiquidLink href="/contact" className="z-10 !backdrop-blur-sm">
           <span className="flex items-center justify-center gap-2">
             <IconMessage2 aria-hidden />
             {t.ctaAudit}
           </span>
         </LiquidLink>
-        <LiquidLink href="/nos-services" className="z-10">
+        <LiquidLink href="/nos-services" className="z-10 backdrop-blur-sm">
           <span className="flex items-center justify-center gap-2">
             <IconApps aria-hidden />
             {t.ctaServices}

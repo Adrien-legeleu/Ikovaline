@@ -13,13 +13,6 @@ import {
 
 import LightBackdrop from '@/components/ui/lightBackdrop';
 import dynamic from 'next/dynamic';
-const UnicornBackdrop = dynamic(
-  () => import('@/components/ui/unicornBackdrop'),
-  {
-    ssr: false,
-    loading: () => null,
-  }
-);
 
 import { usePathname } from 'next/navigation';
 
@@ -159,8 +152,7 @@ export default function Services() {
   return (
     <section className="relative isolate py-28 md:py-36">
       {/* Backdrops (légers) */}
-      <LightBackdrop className="block lg:dark:hidden" />
-      <UnicornBackdrop className="hidden lg:dark:block" />
+      <LightBackdrop />
 
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-neutral-100 dark:to-neutral-200">
@@ -175,9 +167,6 @@ export default function Services() {
             <m.a
               key={card.href}
               href={card.href}
-              initial={mounted ? { opacity: 0.5, y: 30 } : false} // SSR: visible, Client: part de 0.5
-              animate={mounted ? { opacity: 1, y: 0 } : undefined}
-              transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
               className={cn(
                 'group relative overflow-hidden rounded-3xl p-1 will-change-transform'
               )}

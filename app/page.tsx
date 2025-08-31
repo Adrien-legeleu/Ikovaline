@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-
-import InViewLazy from '@/components/ux/InViewLazy';
 import PrewarmChunks from '@/components/ux/PrewarmChunks';
 
 import Landing from '@/components/LandingPage/landing/Landing';
@@ -77,90 +75,31 @@ export default function Home() {
         {/* Above-the-fold (SSR for SEO + fast LCP) */}
         <div className="relative overflow-hidden w-full">
           <Landing />
-          <InViewLazy rootMargin="600px" minHeight={220}>
-            <ComponentDemo />
-          </InViewLazy>
+          <ComponentDemo />
 
-          <InViewLazy rootMargin="700px" minHeight={240}>
-            <ProjectsTeaser />
-          </InViewLazy>
+          <ProjectsTeaser />
+
           <About />
           <section id="services" className="relative">
             <Services />
           </section>
         </div>
 
-        {/* Below-the-fold (lazy render when near viewport) */}
-        <InViewLazy
-          rootMargin="900px"
-          minHeight={520}
-          placeholder={<SectionShimmer />}
-        >
-          <section
-            style={{ contentVisibility: 'auto', containIntrinsicSize: '520px' }}
-          >
-            <Map />
-          </section>
-        </InViewLazy>
-        <InViewLazy
-          rootMargin="900px"
-          minHeight={560}
-          placeholder={<SectionShimmer />}
-        >
-          <section
-            style={{ contentVisibility: 'auto', containIntrinsicSize: '560px' }}
-          >
-            <Methodologie />
-          </section>
-        </InViewLazy>
+        <Map />
+
+        <Methodologie />
 
         <div className="relative w-full overflow-hidden">
-          <InViewLazy
-            rootMargin="900px"
-            minHeight={740}
-            placeholder={<SectionShimmer />}
-          >
-            <section
-              style={{
-                contentVisibility: 'auto',
-                containIntrinsicSize: '740px',
-              }}
-            >
-              <Review />
-            </section>
-          </InViewLazy>
-          <InViewLazy rootMargin="1200px">
-            <CTAHome />
-          </InViewLazy>
+          <Review />
+
+          <CTAHome />
         </div>
 
-        <InViewLazy
-          rootMargin="900px"
-          minHeight={600}
-          placeholder={<SectionShimmer />}
-        >
-          <section
-            style={{ contentVisibility: 'auto', containIntrinsicSize: '600px' }}
-          >
-            <Blog />
-          </section>
-        </InViewLazy>
+        <Blog />
       </div>
 
       {/* Kick off prefetch quietly on the client (no UI) */}
       <PrewarmChunks />
     </>
-  );
-}
-function SectionShimmer() {
-  return (
-    <div
-      className="relative overflow-hidden rounded-3xl"
-      style={{ height: '100%' }}
-      aria-hidden
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(1000px_400px_at_50%_-10%,rgba(59,130,246,.12),rgba(56,189,248,.10),transparent_70%)]" />
-      <div className="h-[100%] w-full animate-pulse bg-white/40 dark:bg-white/5 backdrop-blur-md" />
-    </div>
   );
 }
