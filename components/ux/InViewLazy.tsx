@@ -29,8 +29,10 @@ export default function InViewLazy({
   useEffect(() => {
     if (shown || !ref.current) return;
 
-    let timeout: any;
     const el = ref.current;
+
+    // Déclencheur de secours (const + type inféré number côté navigateur)
+    const timeoutId = window.setTimeout(() => setShown(true), timeoutMs);
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -38,7 +40,7 @@ export default function InViewLazy({
           if (e.isIntersecting) {
             setShown(true);
             if (once) io.disconnect();
-            clearTimeout(timeout);
+            window.clearTimeout(timeoutId);
             break;
           }
         }
@@ -48,12 +50,9 @@ export default function InViewLazy({
 
     io.observe(el);
 
-    // Secours: si l’IO ne “tire” pas, on affiche quand même après X ms
-    timeout = setTimeout(() => setShown(true), timeoutMs);
-
     return () => {
       io.disconnect();
-      clearTimeout(timeout);
+      window.clearTimeout(timeoutId);
     };
   }, [shown, rootMargin, once, timeoutMs]);
 
