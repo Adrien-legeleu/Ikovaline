@@ -66,7 +66,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${poppins.className} dark`}>
       <head>
-        <Script
+        {/* <Script
           src="/tarteaucitron/tarteaucitron.js"
           strategy="beforeInteractive"
         />
@@ -111,7 +111,7 @@ export default function RootLayout({
     tarteaucitron.job = tarteaucitron.job || [];
     tarteaucitron.job.push("rgpdinfo");
   `}
-        </Script>
+        </Script> */}
 
         <meta name="next-size-adjust" content="100" />
 
