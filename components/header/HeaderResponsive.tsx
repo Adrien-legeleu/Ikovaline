@@ -368,6 +368,12 @@ export function HeaderResponsive() {
                   <div className="relative z-10  pr-4 h-full  flex items-center">
                     <DrawerClose asChild>
                       <Link
+                        onClick={() => {
+                          // Force scroll en haut à chaque navigation
+                          if (typeof window !== 'undefined') {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }
+                        }}
                         href={section.href}
                         className="flex-1 px-4 py-4 text-sm font-semibold text-neutral-800 transition-colors hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white"
                       >
@@ -419,7 +425,15 @@ export function HeaderResponsive() {
                 <span className="pointer-events-none absolute inset-0 rounded-3xl [mask-image:linear-gradient(160deg,transparent_35%,black_50%,transparent_65%)]">
                   <span className="absolute -inset-10 rotate-[18deg] bg-white/20 blur-xl" />
                 </span>
-                <Link href={localizeHref('/contact', isEN)}>
+                <Link
+                  onClick={() => {
+                    // Force scroll en haut à chaque navigation
+                    if (typeof window !== 'undefined') {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}
+                  href={localizeHref('/contact', isEN)}
+                >
                   {t.contactCta}
                 </Link>
                 <span className="pointer-events-none absolute inset-x-10 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-sky-300 to-transparent" />
@@ -482,6 +496,12 @@ function MeasuredList({
         <li key={link.href}>
           <DrawerClose asChild>
             <Link
+              onClick={() => {
+                // Force scroll en haut à chaque navigation
+                if (typeof window !== 'undefined') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
               href={link.href}
               className="flex items-center gap-3 rounded-lg p-3 text-[15px] font-medium text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-white/10"
             >
