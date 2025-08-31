@@ -12,7 +12,6 @@ import {
 } from '@tabler/icons-react';
 
 import LightBackdrop from '@/components/ui/lightBackdrop';
-import dynamic from 'next/dynamic';
 
 import { usePathname } from 'next/navigation';
 
@@ -146,8 +145,6 @@ export default function Services() {
       })),
     [isEN]
   );
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
 
   return (
     <section className="relative isolate py-28 md:py-36">
@@ -163,7 +160,7 @@ export default function Services() {
         </p>
 
         <div className="mt-14 grid grid-cols-1 gap-7 sm:grid-cols-2 auto-rows-[minmax(20rem,auto)]">
-          {cards.map((card, i) => (
+          {cards.map((card) => (
             <m.a
               key={card.href}
               href={card.href}
