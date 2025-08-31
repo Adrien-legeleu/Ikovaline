@@ -3,7 +3,6 @@
 
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 import { IconArrowRight } from '@tabler/icons-react';
 
 type CardProps = {
@@ -27,7 +26,6 @@ const BLUR =
   );
 
 export default function ProjectCard({
-  id,
   titre,
   client,
   secteur,
@@ -36,7 +34,6 @@ export default function ProjectCard({
   resultat,
   coverImage,
   lien,
-  hrefDetails = '#',
   className,
 }: CardProps) {
   return (

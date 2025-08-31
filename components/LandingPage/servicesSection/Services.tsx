@@ -136,13 +136,6 @@ const CARDS_EN: CardBase[] = [
 
 export default function Services() {
   const { isEN } = useLocale();
-  const reduceMotion = useReducedMotion();
-
-  // ➜ clé : SSR = cartes visibles direct; à l’hydratation on déclenche l’anim d’entrée
-  const [canAnimate, setCanAnimate] = useState(false);
-  useEffect(() => {
-    if (!reduceMotion) setCanAnimate(true);
-  }, [reduceMotion]);
 
   const heading = isEN ? 'Our Services' : 'Nos Services';
   const sub = isEN
