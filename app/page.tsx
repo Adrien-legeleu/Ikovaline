@@ -9,6 +9,7 @@ import Landing from '@/components/LandingPage/landing/Landing';
 import ComponentDemo from '@/components/LandingPage/impact/TextImpact';
 import About from '@/components/LandingPage/about/About';
 import Services from '@/components/LandingPage/servicesSection/Services';
+import ProjectsTeaser from '@/components/Projects/ProjectTeaser';
 
 // Below-the-fold → client-only to avoid heavy SSR HTML
 const Map = dynamic(() => import('@/components/LandingPage/map/Map'), {
@@ -67,14 +68,15 @@ export default function Home() {
 
       <div className="max-w-[1450px] mx-auto">
         {/* Above-the-fold (SSR for SEO + fast LCP) */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden w-full">
           <Landing />
           <ComponentDemo />
+          <ProjectsTeaser />
+          <About />
+          <section id="services" className="relative">
+            <Services />
+          </section>
         </div>
-        <About />
-        <section id="services" className="relative">
-          <Services />
-        </section>
 
         {/* Below-the-fold (lazy render when near viewport) */}
         <InViewLazy rootMargin="1000px">

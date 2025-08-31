@@ -160,6 +160,8 @@ export default function Services() {
       })),
     [isEN]
   );
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <section className="relative isolate py-28 md:py-36">
@@ -180,24 +182,11 @@ export default function Services() {
             <m.a
               key={card.href}
               href={card.href}
-              // SSR: pas d'anim (visible tout de suite) ; Client: anim d'entrée immédiate
-              initial={canAnimate ? { opacity: 0, y: 30 } : false}
-              animate={canAnimate ? { opacity: 1, y: 0 } : undefined}
-              transition={
-                canAnimate
-                  ? {
-                      duration: 0.45,
-                      delay: i * 0.08,
-                      ease: [0.22, 1, 0.36, 1],
-                    }
-                  : undefined
-              }
+              initial={mounted ? { opacity: 0.5, y: 30 } : false} // SSR: visible, Client: part de 0.5
+              animate={mounted ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
               className={cn(
-                'group relative overflow-hidden rounded-3xl p-1 will-change-transform',
-                reduceMotion
-                  ? ''
-                  : 'transition-transform duration-300 hover:scale-[1.01]',
-                i % 2 === 1 ? 'sm:translate-y-8' : ''
+                'group relative overflow-hidden rounded-3xl p-1 will-change-transform'
               )}
             >
               <GlassCard className="flex h-full flex-col">
