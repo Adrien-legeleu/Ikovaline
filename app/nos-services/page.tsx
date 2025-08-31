@@ -11,6 +11,7 @@ import * as React from 'react';
 // ⬇️ server-safe FAQ strings for JSON-LD
 import { FAQ_SEO_FR } from '@/components/ServicesPage/FAQ/faq-seo.fr';
 import CTAServices from '@/components/ServicesPage/CTAServices';
+import Glow from '@/components/ui/glow';
 
 export const metadata: Metadata = {
   title: 'Nos Services - Solutions Digitales sur Mesure | Ikovaline',
@@ -75,8 +76,13 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
-
       <div className="relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden ">
+          <Glow
+            variant="above"
+            className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
+          />
+        </div>
         <Landing />
         <div className="relative">
           <GridOverlay size={22} />
