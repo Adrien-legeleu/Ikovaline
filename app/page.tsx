@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import PrewarmChunks from '@/components/ux/PrewarmChunks';
 
 import Landing from '@/components/LandingPage/landing/Landing';
 import About from '@/components/LandingPage/about/About';
