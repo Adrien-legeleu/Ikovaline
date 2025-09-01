@@ -134,9 +134,9 @@ export default function ServicesHero() {
         {TEXTS.pillars.map((p, i) => (
           <motion.div
             key={p.id}
-            initial={{ y: 40 }}
+            initial={{ y: 20 }}
             whileInView={{ y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: i * 0.2 }}
+            transition={{ duration: 0.4, ease: 'easeInOut', delay: i * 0.2 }}
             viewport={{ once: true }}
             className="relative group overflow-hidden rounded-[28px] p-8 backdrop-blur-2xl
              bg-[linear-gradient(135deg,rgba(255,255,255,.85),rgba(240,245,252,.45))]

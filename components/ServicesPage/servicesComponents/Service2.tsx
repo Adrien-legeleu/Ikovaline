@@ -171,12 +171,12 @@ export function Service2() {
               className="group"
             >
               <motion.article
-                initial={{ y: 30 }}
+                initial={{ y: 20 }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.55,
-                  ease: 'easeOut',
+                  duration: 0.35,
+                  ease: 'easeInOut',
                 }}
                 className="relative  flex flex-col  justify-between group rounded-[28px] h-full p-8 backdrop-blur-2xl overflow-hidden
                        bg-[linear-gradient(135deg,rgba(255,255,255,.85),rgba(240,245,252,.45))]
