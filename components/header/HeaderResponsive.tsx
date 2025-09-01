@@ -228,7 +228,13 @@ export function HeaderResponsive() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Drawer>
+      <Drawer
+        onAnimationEnd={(open) => {
+          if (!open) {
+            window.scrollTo({ top: 0, behavior: 'auto' });
+          }
+        }}
+      >
         {/* BARRE FLOTTANTE MOBILE */}
         <div
           className={[
