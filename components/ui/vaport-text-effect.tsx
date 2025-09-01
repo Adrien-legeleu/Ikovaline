@@ -52,12 +52,12 @@ function useResponsiveFontSize() {
       const w = window.innerWidth;
 
       if (w < 640)
-        setSize('2.25rem'); // < sm → text-4xl
+        setSize('4.25rem'); // < sm → text-4xl
       else if (w < 768)
-        setSize('3.75rem'); // sm → text-6xl
+        setSize('8.75rem'); // sm → text-6xl
       else if (w < 1024)
-        setSize('4.5rem'); // md → text-7xl
-      else setSize('6rem'); // lg & xl → text-9xl
+        setSize('10.5rem'); // md → text-7xl
+      else setSize('12rem'); // lg & xl → text-9xl
     }
 
     handleResize(); // init

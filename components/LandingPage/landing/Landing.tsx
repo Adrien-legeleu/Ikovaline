@@ -1,16 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { IconApps, IconMessage2 } from '@tabler/icons-react';
 
 import { cn } from '@/lib/utils';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
-import { Component } from '@/components/ui/vaport-text-effect';
 
 /* -------------------- i18n -------------------- */
 const DICT = {
@@ -54,48 +52,6 @@ const UnicornBackdrop = dynamic(
   () => import('@/components/ui/unicornBackdrop'),
   { ssr: false }
 );
-
-export function BlueWordsCycle({
-  words,
-  interval = 2500,
-}: {
-  words: ReadonlyArray<string>;
-  interval?: number;
-}) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % words.length);
-    }, interval);
-    return () => clearInterval(id);
-  }, [words, interval]);
-
-  return (
-    <span className="relative ml-2 mt-4 inline-block align-baseline">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={words[index]}
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -30 }}
-          transition={{ duration: 0.6, ease: 'easeInOut' }}
-          className={cn(
-            'font-extrabold bg-clip-text text-transparent',
-            'text-4xl md:text-6xl lg:text-8xl xl:text-9xl'
-          )}
-          style={{
-            backgroundImage:
-              'linear-gradient(90deg,#00A8E8,#3B82F6,#22D3EE,#00A8E8)',
-            backgroundSize: '200% 100%',
-          }}
-        >
-          {words[index]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
 
 /* -------------------- Page -------------------- */
 export default function Landing() {
@@ -152,23 +108,33 @@ export default function Landing() {
 
         {/* Headline + mots flip */}
         <h1 className="mx-auto py-10 text-center font-bold text-2xl md:text-5xl lg:text-6xl xl:text-7xl leading-snug max-w-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-300 dark:to-white relative z-20">
-          <span className="lg:block"> {t.headline}</span>
+          <span className="lg:block">{t.headline}</span>
 
-          <Component words={t.words} />
+          {/* Mot statique = fallback LCP immédiat */}
+          <span
+            className="font-extrabold bg-clip-text text-transparent
+                   text-4xl md:text-6xl lg:text-8xl xl:text-9xl
+                   bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400"
+          >
+            {t.words[0]}
+          </span>
         </h1>
       </div>
 
       <StarClientsGoogle />
 
-      <motion.p className="max-w-2xl text-center text-muted-foreground dark:text-neutral-200 max-sm:px-2 md:text-lg">
+      <p className="max-w-2xl text-center text-muted-foreground dark:text-neutral-200 max-sm:px-2 md:text-lg">
         {t.subtitle}
-      </motion.p>
+      </p>
 
       <div className="mt-8 flex items-center justify-center gap-5 max-sm:flex-col">
-        <LiquidLink href="/contact" className="backdrop-blur-sm">
+        <LiquidLink href="/contact" className=" dark:bg-black/50 rounded-full">
           <IconMessage2 aria-hidden className="mr-2 inline-flex" /> {t.ctaAudit}
         </LiquidLink>
-        <LiquidLink href="/nos-services" className="backdrop-blur-sm">
+        <LiquidLink
+          href="/nos-services"
+          className=" dark:bg-black/50 rounded-full"
+        >
           <IconApps aria-hidden className="mr-2 inline-flex" /> {t.ctaServices}
         </LiquidLink>
       </div>
