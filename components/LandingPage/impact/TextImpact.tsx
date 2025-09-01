@@ -5,19 +5,8 @@ import dynamic from 'next/dynamic';
 import type { Testimonial } from '@/components/ui/testimonial-slider';
 
 // ✅ on garde le dynamic import mais sans `ssr: false`
-const TestimonialSlider = dynamic(
-  () =>
-    import('@/components/ui/testimonial-slider').then(
-      (m) => m.TestimonialSlider
-    ),
-  {
-    loading: () => (
-      <div
-        className="mx-auto mt-10 h-[200px] w-[92%] max-w-4xl animate-pulse rounded-2xl bg-neutral-200 dark:bg-neutral-800"
-        aria-hidden
-      />
-    ),
-  }
+const TestimonialSlider = dynamic(() =>
+  import('@/components/ui/testimonial-slider').then((m) => m.TestimonialSlider)
 );
 
 const testimonialsFR: Testimonial[] = [
