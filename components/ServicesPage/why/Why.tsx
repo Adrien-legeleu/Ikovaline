@@ -156,8 +156,8 @@ function FeatureCard({
 }) {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 22 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.55, ease: 'easeOut', delay }}
       className={cn(
