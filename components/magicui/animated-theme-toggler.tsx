@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Moon, SunDim } from "lucide-react";
-import { useState, useRef } from "react";
-import { flushSync } from "react-dom";
-import { cn } from "@/lib/utils";
+import { Moon, SunDim } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { flushSync } from 'react-dom';
+import { cn } from '@/lib/utils';
 
 type props = {
   className?: string;
@@ -17,7 +17,7 @@ export const AnimatedThemeToggler = ({ className }: props) => {
 
     await document.startViewTransition(() => {
       flushSync(() => {
-        const dark = document.documentElement.classList.toggle("dark");
+        const dark = document.documentElement.classList.toggle('dark');
         setIsDarkMode(dark);
       });
     }).ready;
@@ -40,14 +40,18 @@ export const AnimatedThemeToggler = ({ className }: props) => {
       },
       {
         duration: 700,
-        easing: "ease-in-out",
-        pseudoElement: "::view-transition-new(root)",
-      },
+        easing: 'ease-in-out',
+        pseudoElement: '::view-transition-new(root)',
+      }
     );
   };
   return (
     <button ref={buttonRef} onClick={changeTheme} className={cn(className)}>
-      {isDarkMode ? <SunDim /> : <Moon />}
+      {isDarkMode ? (
+        <SunDim className="w-5 h-5 xl:w-7 xl:h-7" />
+      ) : (
+        <Moon className="w-5 h-5 xl:w-7 xl:h-7" />
+      )}
     </button>
   );
 };

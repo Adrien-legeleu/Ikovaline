@@ -112,7 +112,7 @@ export default function Landing() {
 
           {/* Mot statique = fallback LCP immédiat */}
           <span
-            className="font-extrabold bg-clip-text text-transparent
+            className="font-extrabold bg-clip-text pt-2 text-transparent
                    text-5xl md:text-6xl lg:text-8xl xl:text-9xl
                    bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400"
           >

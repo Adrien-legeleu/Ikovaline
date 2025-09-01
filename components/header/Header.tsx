@@ -140,7 +140,7 @@ export function Header({ className }: { className?: string }) {
           </div>
 
           {/* Nav items */}
-          <div className="flex w-full items-center justify-end gap-10">
+          <div className="flex w-full items-center justify-end gap-7 xl:gap-10">
             {/* Home (mega sous-menu) */}
             <MenuItem
               setActive={setActive}
@@ -250,7 +250,7 @@ export function Header({ className }: { className?: string }) {
               <LangSwitch />
               <LiquidLink
                 href={localizeHref('/contact', isEN)}
-                className="z-10 !h-10 !px-4 !py-0"
+                className="z-10 !h-10 text-xs xl:text-sm !px-4 !py-0"
               >
                 {t.contact}
               </LiquidLink>

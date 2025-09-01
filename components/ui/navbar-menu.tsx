@@ -32,7 +32,7 @@ export const MenuItem = ({
       <Link href={link}>
         <motion.span
           transition={{ duration: 0.25 }}
-          className="cursor-pointer text-black/90 hover:text-black dark:text-white/90 hover:opacity-90"
+          className="cursor-pointer text-sm xl:text-md text-black/90 hover:text-black dark:text-white/90 hover:opacity-90"
         >
           {item}
         </motion.span>
@@ -141,7 +141,9 @@ export const MenuItem = ({
                bg-[radial-gradient(ellipse_at_center,rgba(0,168,232,.40),rgba(37,99,235,.28),transparent_70%)]"
                   />
 
-                  <div className="relative z-10">{children}</div>
+                  <div className="relative z-10 text-sm xl:text-md">
+                    {children}
+                  </div>
                 </motion.div>
 
                 {/* glow bas bleu */}

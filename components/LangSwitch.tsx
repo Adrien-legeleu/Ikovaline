@@ -74,7 +74,7 @@ export default function LangSwitch() {
       >
         <button
           onClick={() => switchTo('fr')}
-          className={`transition ${
+          className={`transition text-xs xl:text-sm ${
             current === 'fr' ? 'font-semibold' : 'opacity-60 hover:opacity-90'
           }`}
           aria-current={current === 'fr' ? 'true' : 'false'}
@@ -87,7 +87,7 @@ export default function LangSwitch() {
         </span>
         <button
           onClick={() => switchTo('en')}
-          className={`transition ${
+          className={`transition text-xs xl:text-sm ${
             current === 'en' ? 'font-semibold' : 'opacity-60 hover:opacity-90'
           }`}
           aria-current={current === 'en' ? 'true' : 'false'}
