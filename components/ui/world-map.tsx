@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 let DottedMapClass: typeof import('dotted-map').default;
 
