@@ -37,6 +37,7 @@ import {
 
 import { LiquidButton } from '../ui/liquid-glass-button';
 import LangSwitch from '../LangSwitch';
+import { useScrollTopOnPathChange } from '@/hooks/useScrollTopOnPathChange';
 
 /* ================= helpers locale ================= */
 
@@ -201,7 +202,7 @@ const TEXTS = {
 export function HeaderResponsive() {
   const { isEN } = useLocale();
   const DURATION = 260;
-
+  useScrollTopOnPathChange();
   // sections localisées
   const headerLinks: Section[] = (
     isEN ? TEXTS.en.sections : TEXTS.fr.sections
