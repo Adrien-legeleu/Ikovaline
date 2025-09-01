@@ -4,7 +4,6 @@ import Landing from '@/components/LandingPage/landing/Landing';
 import About from '@/components/LandingPage/about/About';
 import Services from '@/components/LandingPage/servicesSection/Services';
 import dynamic from 'next/dynamic';
-import { ClientWrapper } from '@/components/ClientWrapper';
 
 const ComponentDemo = dynamic(
   () => import('@/components/LandingPage/impact/TextImpact'),
@@ -75,10 +74,9 @@ export default function Home() {
         {/* Above-the-fold (SSR for SEO + fast LCP) */}
         <div className="relative overflow-hidden w-full">
           <Landing />
-          <ClientWrapper>
-            <ComponentDemo />
-            <ProjectsTeaser />
-          </ClientWrapper>
+
+          <ComponentDemo />
+          <ProjectsTeaser />
 
           <About />
           <section id="services" className="relative">

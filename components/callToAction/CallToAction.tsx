@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { LiquidLink } from '../ui/liquid-link';
 
 interface ICallToAction {
@@ -115,11 +114,7 @@ export default function CallToAction({ title, desc, textBtn }: ICallToAction) {
           </LiquidLink>
         </div>
 
-        {/* Glow d’ambiance animé (sans blanchir le dark) */}
-        <motion.div
-          initial={{ opacity: 0.35 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
+        <div
           className="pointer-events-none absolute inset-0 rounded-[28px]"
           style={{
             boxShadow: `

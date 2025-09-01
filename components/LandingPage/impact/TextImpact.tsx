@@ -4,16 +4,16 @@ import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import type { Testimonial } from '@/components/ui/testimonial-slider';
 
+// ✅ on garde le dynamic import mais sans `ssr: false`
 const TestimonialSlider = dynamic(
   () =>
     import('@/components/ui/testimonial-slider').then(
       (m) => m.TestimonialSlider
     ),
   {
-    ssr: false,
     loading: () => (
       <div
-        className="mx-auto mt-10 h-[160px] w-[92%] max-w-4xl animate-pulse rounded-2xl"
+        className="mx-auto mt-10 h-[200px] w-[92%] max-w-4xl animate-pulse rounded-2xl bg-neutral-200 dark:bg-neutral-800"
         aria-hidden
       />
     ),
@@ -55,9 +55,12 @@ export default function ComponentDemo() {
   const testimonials = isEN ? testimonialsEN : testimonialsFR;
 
   return (
-    <div className="relative h-[520px] w-full rounded-2xl bg-white/70 p-4 dark:bg-neutral-950/50">
-      <div className="h-32 w-full absolute top-0 -translate-y-2/3 left-0 bg-gradient-to-t hidden dark:block from-black from-50% to-transparent" />
-      <div className="mt-10 flex justify-center ">
+    <div className="relative h-[420px] w-full rounded-2xl bg-white/70 p-4 dark:bg-neutral-950/50">
+      {/* halo sombre haut */}
+      <div className="absolute top-0 left-0 h-32 w-full -translate-y-2/3 bg-gradient-to-t from-black/60 to-transparent dark:block hidden" />
+
+      {/* slider */}
+      <div className="mt-10 flex justify-center">
         <TestimonialSlider
           key={isEN ? 'en' : 'fr'}
           testimonials={testimonials}

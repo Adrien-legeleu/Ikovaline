@@ -1,8 +1,16 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import DottedMap from 'dotted-map';
+let DottedMap: any;
+
+async function getDottedMap() {
+  if (!DottedMap) {
+    const mod = await import('dotted-map');
+    DottedMap = mod.default;
+  }
+  return DottedMap;
+}
 import Image from 'next/image';
 
 interface MapProps {
@@ -18,7 +26,14 @@ export default function WorldMap({
   lineColor = '#0ea5e9',
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const map = new DottedMap({ height: 100, grid: 'diagonal' });
+  const mapRef = useRef<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const DM = await getDottedMap();
+      mapRef.current = new DM({ height: 100, grid: 'diagonal' });
+    })();
+  }, []);
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
@@ -38,14 +53,18 @@ export default function WorldMap({
   return (
     <div className="w-full max-sm:scale-[150%] aspect-[2/1] bg-transparent rounded-lg  relative font-sans">
       <Image
-        src={`data:image/svg+xml;utf8,${encodeURIComponent(
-          map.getSVG({
-            radius: 0.22,
-            color: '#00000040', // gris clair en light
-            shape: 'circle',
-            backgroundColor: 'transparent',
-          })
-        )}`}
+        src={
+          mapRef.current
+            ? `data:image/svg+xml;utf8,${encodeURIComponent(
+                mapRef.current.getSVG({
+                  radius: 0.22,
+                  color: '#00000040',
+                  shape: 'circle',
+                  backgroundColor: 'transparent',
+                })
+              )}`
+            : '/placeholder.svg' // ou rien le temps que ça charge
+        }
         width={500}
         height={500}
         className="h-full w-full  block dark:hidden [mask-image:linear-gradient(to_bottom,transparent,white_10%,transparent_90%,transparent)] pointer-events-none select-none"
@@ -55,14 +74,18 @@ export default function WorldMap({
 
       {/* version sombre */}
       <Image
-        src={`data:image/svg+xml;utf8,${encodeURIComponent(
-          map.getSVG({
-            radius: 0.22,
-            color: '#FFFFFF60', // blanc transparent en dark
-            shape: 'circle',
-            backgroundColor: 'transparent',
-          })
-        )}`}
+        src={
+          mapRef.current
+            ? `data:image/svg+xml;utf8,${encodeURIComponent(
+                mapRef.current.getSVG({
+                  radius: 0.22,
+                  color: '#FFFFFF40',
+                  shape: 'circle',
+                  backgroundColor: 'transparent',
+                })
+              )}`
+            : '/placeholder.svg' // ou rien le temps que ça charge
+        }
         width={500}
         height={500}
         className="h-full  w-full hidden dark:block [mask-image:linear-gradient(to_bottom,transparent,black_10%,transparent_90%,transparent)] pointer-events-none select-none"

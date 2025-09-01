@@ -1,14 +1,19 @@
 'use client';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { IconMessage } from '@tabler/icons-react';
 
 import { ContainerScroll, CardSticky, GlassSticky } from '../impact/CardStack';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import { removeAccents } from '@/components/pageSatellite/CityAround';
-import WorldMap from '@/components/ui/world-map';
+
+const WorldMap = dynamic(() => import('@/components/ui/world-map'), {
+  ssr: false, // sinon crash car window n’existe pas côté serveur
+  loading: () => <div className="h-64 w-full bg-neutral-200 animate-pulse" />,
+});
 import { usePathname } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 /* ======================= i18n minimal (FR / EN) ======================= */
 const TEXTS = {
@@ -251,234 +256,236 @@ export default function Map() {
   };
 
   return (
-    <div className="py-40 w-full space-y-10 place-content-center relative">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background: [
-            // Halo principal : bleu pur, lumineux (DodgerBlue-like)
-            'radial-gradient(900px 420px at 50% 58%, hsl(210 100% 60% / 0.45), hsl(210 100% 56% / 0.26), transparent 75%)',
-            // Halo secondaire plus large, encore plus clair
-            'radial-gradient(1400px 700px at 50% 50%, hsl(205 100% 62% / 0.25), hsl(205 100% 62% / 0.14), transparent 80%)',
-          ].join(','),
-          // Optionnel : rend le bleu plus “punchy” sans virer au violet
-          filter: 'saturate(1.15) brightness(1.05)',
-        }}
-      />
+    <LazyMotion features={domAnimation}>
+      <div className="py-40 w-full space-y-10 place-content-center relative">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background: [
+              // Halo principal : bleu pur, lumineux (DodgerBlue-like)
+              'radial-gradient(900px 420px at 50% 58%, hsl(210 100% 60% / 0.45), hsl(210 100% 56% / 0.26), transparent 75%)',
+              // Halo secondaire plus large, encore plus clair
+              'radial-gradient(1400px 700px at 50% 50%, hsl(205 100% 62% / 0.25), hsl(205 100% 62% / 0.14), transparent 80%)',
+            ].join(','),
+            // Optionnel : rend le bleu plus “punchy” sans virer au violet
+            filter: 'saturate(1.15) brightness(1.05)',
+          }}
+        />
 
-      <header className="max-w-xl mx-auto px-5 text-center">
-        <h2 className="font-bold text-4xl text-black dark:text-white">
-          {t.headerTitle}
-        </h2>
-        <p className="text-md md:text-lg dark:text-neutral-200 text-neutral-800 max-w-2xl mx-auto py-4">
-          {t.headerDesc}
-        </p>
-      </header>
+        <header className="max-w-xl mx-auto px-5 text-center">
+          <h2 className="font-bold text-4xl text-black dark:text-white">
+            {t.headerTitle}
+          </h2>
+          <p className="text-md md:text-lg dark:text-neutral-200 text-neutral-800 max-w-2xl mx-auto py-4">
+            {t.headerDesc}
+          </p>
+        </header>
 
-      {/* Carte + bulles */}
-      <div className="relative">
-        <div className="max-md:overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white_8%,transparent_100%,transparent)] dark:[mask-image:linear-gradient(to_bottom,transparent,black_8%,transparent_100%,transparent)] relative w-full pb-10 md:py-20">
-          <WorldMap
-            dots={[
-              // (on ne touche pas à la structure/design ici)
-              {
-                start: { lat: 38.8566, lng: 2.3522 },
-                end: { lat: 45.5074, lng: -0.1278 },
-              },
-              {
-                start: { lat: 38.8566, lng: 2.3522 },
-                end: { lat: 36.948, lng: 7.4474 },
-              },
-              {
-                start: { lat: 38.8566, lng: 2.3522 },
-                end: { lat: 9.2048, lng: 55.2708 },
-              },
-              {
-                start: { lat: 38.8566, lng: 2.3522 },
-                end: { lat: -20.4419, lng: 15.2663 },
-              },
-              {
-                start: { lat: 38.8566, lng: 2.3522 },
-                end: { lat: -20.2634, lng: 15.2429 },
-              },
-              {
-                start: { lat: 45.5074, lng: -0.1278 },
-                end: { lat: 9.2048, lng: 55.2708 },
-              },
-            ]}
-          />
+        {/* Carte + bulles */}
+        <div className="relative">
+          <div className="max-md:overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white_8%,transparent_100%,transparent)] dark:[mask-image:linear-gradient(to_bottom,transparent,black_8%,transparent_100%,transparent)] relative w-full pb-10 md:py-20">
+            <WorldMap
+              dots={[
+                // (on ne touche pas à la structure/design ici)
+                {
+                  start: { lat: 38.8566, lng: 2.3522 },
+                  end: { lat: 45.5074, lng: -0.1278 },
+                },
+                {
+                  start: { lat: 38.8566, lng: 2.3522 },
+                  end: { lat: 36.948, lng: 7.4474 },
+                },
+                {
+                  start: { lat: 38.8566, lng: 2.3522 },
+                  end: { lat: 9.2048, lng: 55.2708 },
+                },
+                {
+                  start: { lat: 38.8566, lng: 2.3522 },
+                  end: { lat: -20.4419, lng: 15.2663 },
+                },
+                {
+                  start: { lat: 38.8566, lng: 2.3522 },
+                  end: { lat: -20.2634, lng: 15.2429 },
+                },
+                {
+                  start: { lat: 45.5074, lng: -0.1278 },
+                  end: { lat: 9.2048, lng: 55.2708 },
+                },
+              ]}
+            />
+          </div>
+
+          {/* Mobile cards */}
+          <BlocContanerScrollMobile t={t} />
+
+          {/* Desktop cards */}
+          <div className="max-md:hidden">
+            <m.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="md:absolute relative xl:top-5 md:top-10 md:left-5 lg:left-10 xl:left-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
+            >
+              <GlassCard>
+                <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
+                  {t.bubble1Title}
+                </h3>
+                <p className="text-xs xl:text-sm">{t.bubble1Text}</p>
+              </GlassCard>
+            </m.div>
+
+            <m.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+              className="md:absolute relative md:top-28 xl:top-32 xl:right-20 md:right-10 lg:right-16 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
+            >
+              <GlassCard>
+                <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
+                  {t.bubble2Title}
+                </h3>
+                <p className="text-xs xl:text-sm">{t.bubble2Text}</p>
+              </GlassCard>
+            </m.div>
+
+            <m.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+              className="md:absolute relative md:bottom-20 xl:bottom-40 md:right-16 lg:right-24 xl:right-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
+            >
+              <GlassCard>
+                <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
+                  {t.bubble3Title}
+                </h3>
+                <p className="text-xs xl:text-sm">{t.bubble3Text}</p>
+              </GlassCard>
+            </m.div>
+
+            <m.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
+              className="md:absolute relative md:bottom-[35%] lg:bottom-[40%] md:left-12 lg:left-20 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
+            >
+              <GlassCard>
+                <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
+                  {t.bubble4Title}
+                </h3>
+                <p className="text-xs xl:text-sm">{t.bubble4Text}</p>
+              </GlassCard>
+            </m.div>
+          </div>
         </div>
 
-        {/* Mobile cards */}
-        <BlocContanerScrollMobile t={t} />
+        {/* Segmented control + villes */}
+        <section className="flex items-center justify-center px-5 gap-10 flex-col max-w-2xl mx-auto">
+          <h2 className="text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
+            {t.agenciesTitle}
+          </h2>
 
-        {/* Desktop cards */}
-        <div className="max-md:hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="md:absolute relative xl:top-5 md:top-10 md:left-5 lg:left-10 xl:left-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
-          >
-            <GlassCard>
-              <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                {t.bubble1Title}
-              </h3>
-              <p className="text-xs xl:text-sm">{t.bubble1Text}</p>
-            </GlassCard>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-            className="md:absolute relative md:top-28 xl:top-32 xl:right-20 md:right-10 lg:right-16 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
-          >
-            <GlassCard>
-              <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                {t.bubble2Title}
-              </h3>
-              <p className="text-xs xl:text-sm">{t.bubble2Text}</p>
-            </GlassCard>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-            className="md:absolute relative md:bottom-20 xl:bottom-40 md:right-16 lg:right-24 xl:right-32 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
-          >
-            <GlassCard>
-              <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                {t.bubble3Title}
-              </h3>
-              <p className="text-xs xl:text-sm">{t.bubble3Text}</p>
-            </GlassCard>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
-            className="md:absolute relative md:bottom-[35%] lg:bottom-[40%] md:left-12 lg:left-20 z-20 max-w-[295px] lg:max-w-sm xl:max-w-md"
-          >
-            <GlassCard>
-              <h3 className="text-sm lg:text-md xl:text-xl font-semibold">
-                {t.bubble4Title}
-              </h3>
-              <p className="text-xs xl:text-sm">{t.bubble4Text}</p>
-            </GlassCard>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Segmented control + villes */}
-      <section className="flex items-center justify-center px-5 gap-10 flex-col max-w-2xl mx-auto">
-        <h2 className="text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-800 dark:from-neutral-800 dark:via-white dark:to-white  py-2 md:text-3xl lg:text-4xl max-w-4xl mx-auto">
-          {t.agenciesTitle}
-        </h2>
-
-        <div className="flex items-center justify-center flex-col gap-5">
-          <div
-            ref={groupRef}
-            className="relative inline-flex items-center rounded-full p-2 overflow-hidden
+          <div className="flex items-center justify-center flex-col gap-5">
+            <div
+              ref={groupRef}
+              className="relative inline-flex items-center rounded-full p-2 overflow-hidden
              border border-white/50 dark:border-white/10
          
              bg-[linear-gradient(135deg,rgba(255,255,255,.48),rgba(255,255,255,.16))]
              dark:bg-[linear-gradient(135deg,rgba(10,12,16,.70),rgba(10,12,16,.38))]
              shadow-[0_18px_60px_rgba(6,24,44,.10)]"
-            style={{ minWidth: 260 }}
-          >
-            <motion.div
-              className={[
-                'absolute top-1/2 -translate-y-1/2 rounded-full z-0 overflow-hidden',
-                'border border-white/60 dark:border-white/8',
-                'shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_14px_46px_rgba(37,99,235,.35)]',
-                'bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(255,255,255,.30))]',
-                'dark:bg-[linear-gradient(135deg,rgba(8,10,14,.92),rgba(8,10,14,.58))]',
-              ].join(' ')}
-              animate={{ width: slider.width, left: slider.left }}
-              style={{ height: 'calc(100% - 8px)' }}
-              transition={{ type: 'spring', stiffness: 520, damping: 40 }}
+              style={{ minWidth: 260 }}
             >
-              <span
-                className="pointer-events-none absolute inset-0 block opacity-95 mix-blend-screen dark:hidden"
-                style={{
-                  background:
-                    'radial-gradient(160px 56px at 50% 50%, rgba(64,156,255,.95), rgba(37,99,235,.85) 40%, rgba(34,211,238,.42) 70%, transparent 78%)',
-                }}
-              />
-              <span
-                className="pointer-events-none absolute inset-0 hidden dark:block opacity-92 mix-blend-screen"
-                style={{
-                  background:
-                    'radial-gradient(160px 56px at 50% 50%, rgba(64,156,255,.95), rgba(37,99,235,.85) 40%, rgba(34,211,238,.42) 70%, transparent 78%)',
-                }}
-              />
-            </motion.div>
-
-            {departs.map((d, i) => {
-              const isActive = depart === d.slug;
-              return (
-                <button
-                  key={d.slug}
-                  type="button"
-                  ref={(el) => {
-                    buttonRefs.current[i] = el;
+              <m.div
+                className={[
+                  'absolute top-1/2 -translate-y-1/2 rounded-full z-0 overflow-hidden',
+                  'border border-white/60 dark:border-white/8',
+                  'shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_14px_46px_rgba(37,99,235,.35)]',
+                  'bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(255,255,255,.30))]',
+                  'dark:bg-[linear-gradient(135deg,rgba(8,10,14,.92),rgba(8,10,14,.58))]',
+                ].join(' ')}
+                animate={{ width: slider.width, left: slider.left }}
+                style={{ height: 'calc(100% - 8px)' }}
+                transition={{ type: 'spring', stiffness: 520, damping: 40 }}
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 block opacity-95 mix-blend-screen dark:hidden"
+                  style={{
+                    background:
+                      'radial-gradient(160px 56px at 50% 50%, rgba(64,156,255,.95), rgba(37,99,235,.85) 40%, rgba(34,211,238,.42) 70%, transparent 78%)',
                   }}
-                  onClick={() => setDepart(d.slug)}
-                  className={[
-                    'relative z-10 rounded-full px-5 py-2 transition-[color,transform] duration-200',
-                    isActive
-                      ? 'text-sky-700 dark:text-sky-300 font-semibold'
-                      : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100',
-                  ].join(' ')}
-                >
-                  <span
+                />
+                <span
+                  className="pointer-events-none absolute inset-0 hidden dark:block opacity-92 mix-blend-screen"
+                  style={{
+                    background:
+                      'radial-gradient(160px 56px at 50% 50%, rgba(64,156,255,.95), rgba(37,99,235,.85) 40%, rgba(34,211,238,.42) 70%, transparent 78%)',
+                  }}
+                />
+              </m.div>
+
+              {departs.map((d, i) => {
+                const isActive = depart === d.slug;
+                return (
+                  <button
+                    key={d.slug}
+                    type="button"
+                    ref={(el) => {
+                      buttonRefs.current[i] = el;
+                    }}
+                    onClick={() => setDepart(d.slug)}
                     className={[
-                      'relative max-sm:text-sm',
+                      'relative z-10 rounded-full px-5 py-2 transition-[color,transform] duration-200',
                       isActive
-                        ? 'drop-shadow-[0_0_16px_rgba(37,99,235,.50)]'
-                        : '',
+                        ? 'text-sky-700 dark:text-sky-300 font-semibold'
+                        : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100',
                     ].join(' ')}
                   >
-                    {d.name}
-                  </span>
-                </button>
-              );
-            })}
+                    <span
+                      className={[
+                        'relative max-sm:text-sm',
+                        isActive
+                          ? 'drop-shadow-[0_0_16px_rgba(37,99,235,.50)]'
+                          : '',
+                      ].join(' ')}
+                    >
+                      {d.name}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {renderCities()}
           </div>
 
-          {renderCities()}
+          <p className="text-center text-neutral-900 dark:text-neutral-300">
+            {t.paragraph1a}
+            <Link href="/nos-services/creation-sites-web-vitrine-e-commerce">
+              {t.paragraph1Link1}
+            </Link>{' '}
+            {t.paragraph1b}
+            <Link href="/nos-services">{t.paragraph1Link2}</Link>
+          </p>
+        </section>
+
+        {/* CTA */}
+        <div className="max-w-7xl px-2 mx-auto text-center flex flex-col items-center justify-center space-y-4 md:space-y-8">
+          <h3 className="text-2xl md:text-4xl font-semibold">{t.ctaTitle}</h3>
+
+          <LiquidLink href="/contact" className="z-10 ">
+            <span className="flex items-center justify-center gap-2">
+              <span aria-hidden="true">
+                <IconMessage />
+              </span>
+              {t.ctaBtn}
+            </span>
+          </LiquidLink>
         </div>
 
-        <p className="text-center text-neutral-900 dark:text-neutral-300">
-          {t.paragraph1a}
-          <Link href="/nos-services/creation-sites-web-vitrine-e-commerce">
-            {t.paragraph1Link1}
-          </Link>{' '}
-          {t.paragraph1b}
-          <Link href="/nos-services">{t.paragraph1Link2}</Link>
-        </p>
-      </section>
-
-      {/* CTA */}
-      <div className="max-w-7xl px-2 mx-auto text-center flex flex-col items-center justify-center space-y-4 md:space-y-8">
-        <h3 className="text-2xl md:text-4xl font-semibold">{t.ctaTitle}</h3>
-
-        <LiquidLink href="/contact" className="z-10 ">
-          <span className="flex items-center justify-center gap-2">
-            <span aria-hidden="true">
-              <IconMessage />
-            </span>
-            {t.ctaBtn}
-          </span>
-        </LiquidLink>
+        <GlassDefs />
       </div>
-
-      <GlassDefs />
-    </div>
+    </LazyMotion>
   );
 }
 

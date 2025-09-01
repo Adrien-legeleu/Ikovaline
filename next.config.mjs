@@ -1,3 +1,10 @@
+import bundleAnalyzer from '@next/bundle-analyzer';
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     optimizeCss: true,
@@ -15,6 +22,7 @@ const nextConfig = {
       { source: '/en/:path*', destination: '/:path*' },
     ];
   },
+  reactStrictMode: true,
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

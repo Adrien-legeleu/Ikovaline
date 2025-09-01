@@ -5,8 +5,7 @@ import Review2 from '@/public/images/logo/jean-cristophe-Lelandais.jpeg';
 import Review3 from '@/public/images/logo/logo-lelandais.png';
 import Review4 from '@/public/images/logo/hl-horner-logo.jpg';
 import Review5 from '@/public/images/logo/logo-lora.png';
-import { useReducedMotion } from 'framer-motion';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
 import Marquee from '@/components/ui/marquee';
 import Image, { StaticImageData } from 'next/image';
 import { GlassSticky } from '../impact/CardStack';
@@ -193,6 +192,7 @@ const ReviewCardBase = ({
         ? BLUE_AVATAR
         : image
       : image?.src || BLUE_AVATAR;
+  const isExternal = typeof image === 'string';
 
   return (
     <GlassSticky className="shadow-none will-change-transform">
@@ -202,9 +202,9 @@ const ReviewCardBase = ({
           width={40}
           height={40}
           src={src}
-          alt={name}
+          alt={`Photo de ${name} - ${role}`}
           className="h-10 w-10 rounded-full object-cover"
-          unoptimized
+          unoptimized={isExternal}
           loading="lazy"
           decoding="async"
         />
@@ -300,121 +300,84 @@ const Review = () => {
 
   if (reduce) {
     return (
+      <LazyMotion features={domAnimation}>
+        <section className="relative my-20 bg-background pt-32">
+          <div className="container relative z-10 mx-auto">
+            <ReviewBadge label={t.badge} />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+              {data.slice(0, 6).map((r) => (
+                <ReviewCard key={r.name} {...r} />
+              ))}
+            </div>
+          </div>
+
+          <m.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="absolute left-1/2 top-32 h-36 w-36 -translate-x-1/2 bg-secondary blur-[110px] md:h-48 md:w-48 md:blur-[150px] z-0"
+          />
+        </section>
+      </LazyMotion>
+    );
+  }
+  return (
+    <LazyMotion features={domAnimation}>
       <section className="relative my-20 bg-background pt-32">
         <div className="container relative z-10 mx-auto">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
             className="z-10 mx-auto flex max-w-[540px] flex-col items-center justify-center px-5"
           >
-            <motion.div
-              className="group relative mx-auto flex items-center justify-center rounded-full px-5 py-2
-             shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]
-             transition-shadow duration-500 ease-out
-             hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]
-             bg-white/70  dark:bg-transparent"
-              initial={{ y: -40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-              {/* glow animé (bordure dégradée) */}
-              <span
-                className={cn(
-                  'absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] p-[1px]',
-                  'bg-gradient-to-r from-[#5faaff]/60 via-[#42b8fd]/60 to-[#00e0ff]/60 bg-[length:300%_100%]'
-                )}
-                style={{
-                  WebkitMask:
-                    'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'destination-out',
-                  mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  maskComposite: 'subtract',
-                  WebkitClipPath: 'padding-box',
-                }}
-              />
-
-              <span className="relative z-10 text-sm font-semibold tracking-wide text-sky-700 dark:text-transparent dark:bg-gradient-to-r dark:from-sky-200 dark:via-sky-100 dark:to-blue-200 dark:bg-clip-text">
-                {t.badge}
-              </span>
-            </motion.div>
+            <ReviewBadge label={t.badge} />
 
             <h2 className="z-10 mt-5 text-center text-4xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-200 xl:text-5xl">
               {t.title}
             </h2>
             <p className="mt-5 text-center opacity-75">{t.desc}</p>
-          </motion.div>
+          </m.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-            {data.slice(0, 6).map((r) => (
-              <ReviewCard key={r.name} {...r} />
-            ))}
+          <div className="z-10 mt-10 flex max-h-[740px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
+            <MarqueeDemoVertical data={data} />
           </div>
         </div>
-
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="absolute left-1/2 top-32 h-36 w-36 -translate-x-1/2 bg-secondary blur-[110px] md:h-48 md:w-48 md:blur-[150px] z-0"
-        />
       </section>
-    );
-  }
-  return (
-    <section className="relative my-20 bg-background pt-32">
-      <div className="container relative z-10 mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="z-10 mx-auto flex max-w-[540px] flex-col items-center justify-center px-5"
-        >
-          <motion.div
-            className="group relative mx-auto flex items-center justify-center rounded-full px-5 py-2
-             shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]
-             transition-shadow duration-500 ease-out
-             hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]
-             bg-white/70  dark:bg-transparent"
-            initial={{ y: -40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            {/* glow animé (bordure dégradée) */}
-            <span
-              className={cn(
-                'absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] p-[1px]',
-                'bg-gradient-to-r from-[#5faaff]/60 via-[#42b8fd]/60 to-[#00e0ff]/60 bg-[length:300%_100%]'
-              )}
-              style={{
-                WebkitMask:
-                  'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'destination-out',
-                mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                maskComposite: 'subtract',
-                WebkitClipPath: 'padding-box',
-              }}
-            />
-
-            <span className="relative z-10 text-sm font-semibold tracking-wide text-sky-700 dark:text-transparent dark:bg-gradient-to-r dark:from-sky-200 dark:via-sky-100 dark:to-blue-200 dark:bg-clip-text">
-              {t.badge}
-            </span>
-          </motion.div>
-
-          <h2 className="z-10 mt-5 text-center text-4xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-200 xl:text-5xl">
-            {t.title}
-          </h2>
-          <p className="mt-5 text-center opacity-75">{t.desc}</p>
-        </motion.div>
-
-        <div className="z-10 mt-10 flex max-h-[740px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
-          <MarqueeDemoVertical data={data} />
-        </div>
-      </div>
-    </section>
+    </LazyMotion>
   );
 };
 
 export default Review;
+const ReviewBadge = ({ label }: { label: string }) => (
+  <m.div
+    className="group relative mx-auto flex items-center justify-center rounded-full px-5 py-2
+      shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]
+      transition-shadow duration-500 ease-out
+      hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]
+      bg-white/70  dark:bg-transparent"
+    initial={{ y: -40, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.6, ease: 'easeOut' }}
+  >
+    <span
+      className={cn(
+        'absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] p-[1px]',
+        'bg-gradient-to-r from-[#5faaff]/60 via-[#42b8fd]/60 to-[#00e0ff]/60 bg-[length:300%_100%]'
+      )}
+      style={{
+        WebkitMask:
+          'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+        WebkitMaskComposite: 'destination-out',
+        mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+        maskComposite: 'subtract',
+        WebkitClipPath: 'padding-box',
+      }}
+    />
+    <span className="relative z-10 text-sm font-semibold tracking-wide text-sky-700 dark:text-transparent dark:bg-gradient-to-r dark:from-sky-200 dark:via-sky-100 dark:to-blue-200 dark:bg-clip-text">
+      {label}
+    </span>
+  </m.div>
+);
