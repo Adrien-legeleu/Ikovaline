@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import type DottedMap from 'dotted-map';
 
 let DottedMapClass: typeof import('dotted-map').default;
 
@@ -26,34 +27,24 @@ export default function WorldMap({
   lineColor = '#0ea5e9',
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const mapRef = useRef<InstanceType<typeof DottedMapClass> | null>(null);
+  const [map, setMap] = useState<InstanceType<typeof DottedMapClass> | null>(
+    null
+  );
 
-  const [visible, setVisible] = useState(false);
-
+  // Charger la lib et instancier la map AVANT rendu
   useEffect(() => {
-    const el = svgRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '200px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    (async () => {
+      const DM = await getDottedMap();
+      setMap(new DM({ height: 100, grid: 'diagonal' }));
+    })();
   }, []);
 
-  useEffect(() => {
-    if (visible) {
-      (async () => {
-        const DM = await getDottedMap();
-        mapRef.current = new DM({ height: 100, grid: 'diagonal' });
-      })();
-    }
-  }, [visible]);
+  if (!map) {
+    // tant que la map n’est pas prête → squelette léger
+    return (
+      <div className="w-full aspect-[2/1] rounded-lg bg-neutral-100 dark:bg-neutral-900 animate-pulse" />
+    );
+  }
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
@@ -72,19 +63,16 @@ export default function WorldMap({
 
   return (
     <div className="w-full max-sm:scale-[150%] aspect-[2/1] bg-transparent rounded-lg relative font-sans">
+      {/* light */}
       <img
-        src={
-          mapRef.current
-            ? `data:image/svg+xml;utf8,${encodeURIComponent(
-                mapRef.current.getSVG({
-                  radius: 0.22,
-                  color: '#00000040',
-                  shape: 'circle',
-                  backgroundColor: 'transparent',
-                })
-              )}`
-            : '/placeholder.svg'
-        }
+        src={`data:image/svg+xml;utf8,${encodeURIComponent(
+          map.getSVG({
+            radius: 0.22,
+            color: '#00000040',
+            shape: 'circle',
+            backgroundColor: 'transparent',
+          })
+        )}`}
         width={500}
         height={500}
         className="h-full w-full block dark:hidden [mask-image:linear-gradient(to_bottom,transparent,white_10%,transparent_90%,transparent)] pointer-events-none select-none"
@@ -93,20 +81,16 @@ export default function WorldMap({
         aria-hidden="true"
       />
 
-      {/* version sombre */}
+      {/* dark */}
       <img
-        src={
-          mapRef.current
-            ? `data:image/svg+xml;utf8,${encodeURIComponent(
-                mapRef.current.getSVG({
-                  radius: 0.22,
-                  color: '#FFFFFF40',
-                  shape: 'circle',
-                  backgroundColor: 'transparent',
-                })
-              )}`
-            : '/placeholder.svg'
-        }
+        src={`data:image/svg+xml;utf8,${encodeURIComponent(
+          map.getSVG({
+            radius: 0.22,
+            color: '#FFFFFF40',
+            shape: 'circle',
+            backgroundColor: 'transparent',
+          })
+        )}`}
         width={500}
         height={500}
         className="h-full w-full hidden dark:block [mask-image:linear-gradient(to_bottom,transparent,black_10%,transparent_90%,transparent)] pointer-events-none select-none"
