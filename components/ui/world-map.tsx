@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
-import type DottedMap from 'dotted-map'; // on importe le type
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 let DottedMapClass: typeof import('dotted-map').default;
@@ -30,12 +29,32 @@ export default function WorldMap({
   const svgRef = useRef<SVGSVGElement>(null);
   const mapRef = useRef<InstanceType<typeof DottedMapClass> | null>(null);
 
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
-    (async () => {
-      const DM = await getDottedMap();
-      mapRef.current = new DM({ height: 100, grid: 'diagonal' });
-    })();
+    const el = svgRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (visible) {
+      (async () => {
+        const DM = await getDottedMap();
+        mapRef.current = new DM({ height: 100, grid: 'diagonal' });
+      })();
+    }
+  }, [visible]);
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
@@ -54,7 +73,7 @@ export default function WorldMap({
 
   return (
     <div className="w-full max-sm:scale-[150%] aspect-[2/1] bg-transparent rounded-lg relative font-sans">
-      <Image
+      <img
         src={
           mapRef.current
             ? `data:image/svg+xml;utf8,${encodeURIComponent(
@@ -72,10 +91,11 @@ export default function WorldMap({
         className="h-full w-full block dark:hidden [mask-image:linear-gradient(to_bottom,transparent,white_10%,transparent_90%,transparent)] pointer-events-none select-none"
         alt="world map light"
         draggable={false}
+        aria-hidden="true"
       />
 
       {/* version sombre */}
-      <Image
+      <img
         src={
           mapRef.current
             ? `data:image/svg+xml;utf8,${encodeURIComponent(
@@ -93,10 +113,12 @@ export default function WorldMap({
         className="h-full w-full hidden dark:block [mask-image:linear-gradient(to_bottom,transparent,black_10%,transparent_90%,transparent)] pointer-events-none select-none"
         alt="world map dark"
         draggable={false}
+        aria-hidden="true"
       />
 
       <svg
         ref={svgRef}
+        aria-hidden="true"
         viewBox="0 0 800 400"
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
