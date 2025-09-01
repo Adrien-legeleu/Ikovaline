@@ -372,7 +372,6 @@ export default function VaporizeTextCycle({
       particlesRef,
       globalDpr,
       currentTextIndex,
-      transformedDensity,
       framerProps: {
         texts,
         font,
@@ -477,7 +476,7 @@ const handleFontChange = ({
   particlesRef,
   globalDpr,
   currentTextIndex,
-  transformedDensity,
+
   framerProps,
 }: {
   currentFont: string;
@@ -487,7 +486,6 @@ const handleFontChange = ({
   particlesRef: React.MutableRefObject<Particle[]>;
   globalDpr: number;
   currentTextIndex: number;
-  transformedDensity: number;
   framerProps: VaporizeTextCycleProps;
 }) => {
   if (currentFont !== lastFontRef.current) {
