@@ -34,34 +34,13 @@ const AccordionTrigger = React.forwardRef<
         'group relative flex w-full items-center gap-4 rounded-2xl px-6 py-5 text-left',
         'text-[15px] md:text-[17px] font-semibold tracking-tight',
         'transition-all duration-300 will-change-transform',
-        // Base tint (light/dark) — aucun blanc en dark
-        'backdrop-blur-2xl',
-        'bg-[radial-gradient(120%_120%_at_50%_0%,rgba(255,255,255,.9),rgba(244,250,251,.48))]',
-        'dark:bg-[linear-gradient(180deg,rgba(8,12,18,.86),rgba(8,12,18,.62))]',
-        // Rim conique (verre)
-        'border border-transparent',
-        'shadow-[0_14px_40px_rgba(6,24,44,.10),0_2px_8px_rgba(6,24,44,.06)]',
-        'dark:shadow-[0_16px_50px_rgba(2,6,12,.55)]',
-        'hover:-translate-y-[2px] hover:shadow-[0_26px_80px_rgba(0,168,232,.20)]',
-        'data-[state=open]:shadow-[0_30px_90px_rgba(37,99,235,.25)]',
+
         className
       )}
       {...props}
     >
       {/* barre d’accent à gauche */}
       <span className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-[3px] rounded-r-full bg-[rgba(0,168,232,.55)] dark:bg-[rgba(37,99,235,.55)]" />
-
-      {/* streak haut (jamais blanc en dark) */}
-      <span className="pointer-events-none absolute left-6 right-16 top-2 h-6 rounded-full blur-[10px] bg-black/5 dark:bg-sky-400/12" />
-
-      {/* micro grain pour éviter le banding */}
-      <span
-        className="pointer-events-none absolute inset-0 opacity-[.06] dark:opacity-[.05]"
-        style={{
-          background:
-            'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27120%27 height=%27120%27 viewBox=%270 0 120 120%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27120%27 height=%27120%27 filter=%27url(%23n)%27/%3E%3C/svg%3E")',
-        }}
-      />
 
       {/* Texte */}
       <span className="relative z-10 flex-1 text-neutral-900 dark:text-neutral-100">
@@ -87,12 +66,6 @@ const AccordionTrigger = React.forwardRef<
         }}
       />
 
-      {/* Filtre « verre liquide » */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 overflow-hidden rounded-2xl"
-        style={{ backdropFilter: 'url("#accordion-glass")' }}
-      />
       <GlassFilter />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>

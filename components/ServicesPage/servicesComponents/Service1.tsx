@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { LiquidLink } from '@/components/ui/liquid-link';
 import { IconArrowRight } from '@tabler/icons-react';
+import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
 function useLocale() {
   const pathname = usePathname() || '/';
@@ -194,7 +195,7 @@ export function Service1() {
               className="group"
             >
               <motion.article
-                initial={{ y: 50 }}
+                initial={{ y: 30 }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{
@@ -222,13 +223,10 @@ export function Service1() {
                   {feature.description}
                 </div>
                 <div className="relative z-10 mt-5 flex justify-end">
-                  <span
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full
-                                   bg-white/70 dark:bg-neutral-900/60 border border-white/40 dark:border-white/10
-                                   shadow-inner group-hover:scale-105 transition"
-                  >
+                  <LiquidButton className="!p-5">
+                    {' '}
                     <IconArrowRight className="h-5 w-5 text-sky-600 dark:text-sky-400" />
-                  </span>
+                  </LiquidButton>
                 </div>
               </motion.article>
             </Link>

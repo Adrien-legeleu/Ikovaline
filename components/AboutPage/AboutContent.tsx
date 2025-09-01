@@ -156,10 +156,10 @@ function getContent(isEN: boolean) {
               transition={{ duration: 0.45, ease: [0.2, 0, 0.2, 1] }}
               className="leading-8"
             >
-              At Ikovaline, we commit to delivering{' '}
-              <Highlight>tangible results</Highlight> with{' '}
-              <Highlight>tailored digital solutions</Highlight>. However, the
-              refund guarantee is strictly governed by the following conditions:
+              At Ikovaline, we commit to delivering tangible{' '}
+              <Highlight> results</Highlight> with tailored digital{' '}
+              <Highlight>solutions</Highlight>. However, the refund guarantee is
+              strictly governed by the following conditions:
             </motion.p>
 
             {/* 1 */}
@@ -191,7 +191,7 @@ function getContent(isEN: boolean) {
                 <li>Any information useful for proper project execution.</li>
               </ul>
               <p className="text-neutral-700 dark:text-neutral-300">
-                If missing or late, the <Highlight>refund guarantee</Highlight>{' '}
+                If missing or late, the refund<Highlight> guarantee</Highlight>{' '}
                 is automatically void.
               </p>
             </motion.div>
@@ -236,18 +236,18 @@ function getContent(isEN: boolean) {
               <ul className="list-disc list-inside space-y-1">
                 <li>Attend restitution meetings or planned demos.</li>
                 <li>
-                  Receive the <Highlight>final deliverables</Highlight> within
+                  Receive the <Highlight>final </Highlight>deliverables within
                   the allotted time.
                 </li>
                 <li>
-                  Wait for the <Highlight>full completion</Highlight> of the
+                  Wait for the full<Highlight> completion</Highlight> of the
                   service (final transfer of files, accesses, mockups, etc.)
                   before any claim.
                 </li>
               </ul>
               <p className="text-neutral-700 dark:text-neutral-300">
-                Any attempt at <Highlight>unilateral termination</Highlight> or{' '}
-                <Highlight>refusal to receive</Highlight> without serious reason
+                Any attempt at unilateral<Highlight> termination</Highlight> or{' '}
+                <Highlight>refusal </Highlight>to receive without serious reason
                 cancels the guarantee.
               </p>
             </motion.div>
@@ -267,11 +267,11 @@ function getContent(isEN: boolean) {
                   validated before project kick-off.
                 </li>
                 <li>
-                  Delays or lack of <Highlight>active collaboration</Highlight>{' '}
+                  Delays or lack of active<Highlight> collaboration</Highlight>{' '}
                   from the client.
                 </li>
                 <li>
-                  <Highlight>Scope changes</Highlight> during the engagement.
+                  Scope<Highlight> changes</Highlight> during the engagement.
                 </li>
                 <li>
                   <Highlight>Cancellation</Highlight> for convenience.
@@ -386,10 +386,10 @@ function getContent(isEN: boolean) {
             className="leading-8"
           >
             Chez Ikovaline, nous nous engageons à fournir des{' '}
-            <Highlight>résultats concrets</Highlight> via des{' '}
-            <Highlight>solutions digitales personnalisées</Highlight>.
-            Toutefois, la garantie de remboursement est encadrée par les
-            conditions suivantes :
+            <Highlight>résultats </Highlight> concrets via des solutions
+            digitales
+            <Highlight> personnalisées</Highlight>. Toutefois, la garantie de
+            remboursement est encadrée par les conditions suivantes :
           </motion.p>
 
           {/* 1 */}
@@ -410,7 +410,7 @@ function getContent(isEN: boolean) {
             </p>
             <p className="text-neutral-700 dark:text-neutral-300">
               En cas de manquement ou retard, la{' '}
-              <Highlight>garantie de remboursement</Highlight> est annulée.
+              <Highlight>garantie </Highlight> de remboursement est annulée.
             </p>
           </motion.div>
 
@@ -444,17 +444,17 @@ function getContent(isEN: boolean) {
             <ul className="list-disc list-inside space-y-1">
               <li>Présence aux restitutions / démonstrations prévues.</li>
               <li>
-                Réception des <Highlight>livrables finaux</Highlight> dans les
+                Réception des livrables<Highlight> finaux</Highlight> dans les
                 délais.
               </li>
               <li>
-                Attendre la <Highlight>fin complète</Highlight> de la prestation
+                Attendre la fin<Highlight> complète</Highlight> de la prestation
                 avant toute réclamation.
               </li>
             </ul>
             <p className="text-neutral-700 dark:text-neutral-300">
-              Toute <Highlight>rupture unilatérale</Highlight> ou{' '}
-              <Highlight>refus de réception</Highlight> injustifié annule la
+              Toute <Highlight>rupture </Highlight>unilatérale ou{' '}
+              <Highlight>refus </Highlight>de réception injustifié annule la
               garantie.
             </p>
           </motion.div>
@@ -474,7 +474,7 @@ function getContent(isEN: boolean) {
                 lancement.
               </li>
               <li>
-                Manque de <Highlight>collaboration active</Highlight> du client.
+                Manque de <Highlight>collaboration </Highlight>active du client.
               </li>
               <li>
                 <Highlight>Modification</Highlight> de commande en cours.
@@ -483,7 +483,8 @@ function getContent(isEN: boolean) {
                 <Highlight>Annulation</Highlight> pour convenance personnelle.
               </li>
               <li>
-                Livraison bloquée par <Highlight>absence de réponse</Highlight>.
+                Livraison bloquée par <Highlight>absence </Highlight> de
+                réponse.
               </li>
             </ul>
           </motion.div>
