@@ -107,13 +107,13 @@ export default function Landing() {
         </Link>
 
         {/* Headline + mots flip */}
-        <h1 className="mx-auto py-10 text-center font-bold text-2xl md:text-5xl lg:text-6xl xl:text-7xl leading-snug max-w-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-300 dark:to-white relative z-20">
+        <h1 className="mx-auto py-10 text-center font-bold text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-snug max-w-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-300 dark:to-white relative z-20">
           <span className="lg:block">{t.headline}</span>
 
           {/* Mot statique = fallback LCP immédiat */}
           <span
             className="font-extrabold bg-clip-text text-transparent
-                   text-4xl md:text-6xl lg:text-8xl xl:text-9xl
+                   text-5xl md:text-6xl lg:text-8xl xl:text-9xl
                    bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400"
           >
             {t.words[0]}
@@ -123,7 +123,7 @@ export default function Landing() {
 
       <StarClientsGoogle />
 
-      <p className="max-w-2xl text-center text-muted-foreground dark:text-neutral-200 max-sm:px-2 md:text-lg">
+      <p className="max-w-2xl text-center max-sm:text-sm text-muted-foreground dark:text-neutral-200 max-sm:px-2 md:text-lg">
         {t.subtitle}
       </p>
 
