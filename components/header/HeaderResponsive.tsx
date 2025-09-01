@@ -3,13 +3,11 @@
 import * as React from 'react';
 import { useState, useCallback } from 'react';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
@@ -215,13 +213,6 @@ export function HeaderResponsive() {
   }));
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [animatingIndex, setAnimatingIndex] = useState<number | null>(null);
-
-  const toggle = (i: number) => {
-    setAnimatingIndex(i);
-    setActiveIndex((prev) => (prev === i ? null : i));
-    window.setTimeout(() => setAnimatingIndex(null), DURATION + 40);
-  };
 
   // NAVIGATION DEPUIS LE DRAWER (FIABLE MOBILE)
   const goFromDrawer = useCallback(
@@ -358,12 +349,7 @@ export function HeaderResponsive() {
                           aria-expanded={expanded}
                           aria-controls={`sub-${i}`}
                           onClick={() => {
-                            setAnimatingIndex(i);
                             setActiveIndex((prev) => (prev === i ? null : i));
-                            window.setTimeout(
-                              () => setAnimatingIndex(null),
-                              DURATION + 40
-                            );
                           }}
                         >
                           <IconChevronDown
