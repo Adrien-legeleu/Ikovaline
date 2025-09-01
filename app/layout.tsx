@@ -10,6 +10,7 @@ import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import LazyExtraStyle from '@/app/LazyExtraStyle';
 import { Analytics } from '@vercel/analytics/next';
+import { ScrollManager } from '@/components/ScrollManager';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -188,6 +189,7 @@ export default function RootLayout({
           <footer>
             <Footer />
           </footer>
+          <ScrollManager />
         </ThemeProvider>
       </body>
     </html>
