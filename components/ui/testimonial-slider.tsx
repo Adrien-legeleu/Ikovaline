@@ -54,7 +54,7 @@ export const TestimonialSlider = React.memo(function TestimonialSlider({
       </div>
 
       {/* ===== Contenu animé ===== */}
-      <div className="relative mb-10 h-40">
+      <div className="relative mb-4 h-48">
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
