@@ -40,7 +40,7 @@ export const TestimonialSlider = React.memo(function TestimonialSlider({
       style={{ contentVisibility: 'auto' }}
     >
       {/* ===== Halo bleu (optimisé) ===== */}
-      <div className="absolute inset-0 flex items-start justify-center">
+      <div className="absolute inset-0 pt-2 flex items-start justify-center">
         <div
           className="relative -z-10 rounded-full"
           style={{

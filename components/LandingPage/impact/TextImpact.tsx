@@ -60,7 +60,7 @@ export default function ComponentDemo() {
       <div className="absolute top-0 left-0 h-32 w-full -translate-y-[70%] bg-gradient-to-t from-black to-transparent dark:block hidden" />
 
       {/* slider */}
-      <div className="mt-10 flex justify-center">
+      <div className="mt-10  flex justify-center ">
         <TestimonialSlider
           key={isEN ? 'en' : 'fr'}
           testimonials={testimonials}
