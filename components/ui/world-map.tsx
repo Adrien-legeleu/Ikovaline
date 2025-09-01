@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import type DottedMap from 'dotted-map';
 
 let DottedMapClass: typeof import('dotted-map').default;
 
