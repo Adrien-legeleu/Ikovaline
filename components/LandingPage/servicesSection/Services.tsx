@@ -112,7 +112,7 @@ const CARDS_EN: CardBase[] = [
       'No/low-code workflows, API integrations, AI agents & RAG. We connect your tools and remove repetitive work.',
     icon: <IconRobot className="size-6 text-teal-600 dark:text-teal-300" />,
     header: <AutomationGrid />,
-    href: '/nos-services/automatisation-intelligence-artificielle',
+    href: '/nos-services#automatisation-ia',
   },
   {
     title: 'Premium websites • conversion & SEO',
@@ -122,7 +122,7 @@ const CARDS_EN: CardBase[] = [
       <IconSparkles className="size-6 text-amber-600 dark:text-amber-300" />
     ),
     header: <ConversionPulse />,
-    href: '/nos-services/sites-web-premium-conversion',
+    href: '/nos-services#saas-apps',
   },
 ];
 

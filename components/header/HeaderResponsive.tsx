@@ -502,12 +502,6 @@ function MeasuredList({
           </DrawerClose>
         </li>
       ))}
-
-      <span
-        aria-hidden
-        className="pointer-events-none mx-auto -mb-1 block h-8 w-[84%] rounded-full
-                   bg-[radial-gradient(ellipse_at_center,rgba(0,168,232,.40),rgba(37,99,235,.28),transparent_70%)] blur-2xl"
-      />
     </motion.ul>
   );
 }
