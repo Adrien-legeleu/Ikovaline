@@ -169,7 +169,7 @@ export default function RootLayout({
           <ScrollManager />
         </Suspense>
         <SpeedInsights />
-        <Analytics />s
+        <Analytics />
         <LazyExtraStyle />
         <noscript>
           <iframe
