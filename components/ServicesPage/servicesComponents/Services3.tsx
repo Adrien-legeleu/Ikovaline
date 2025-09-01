@@ -203,7 +203,7 @@ export function Service3() {
         <span className="absolute -bottom-28 right-1/4 h-[32rem] w-[32rem] translate-x-1/4 rounded-full blur-[180px] bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-20 dark:opacity-30" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6">
+      <div className="relative mx-auto max-w-6xl px-6" id="scaling">
         <motion.h2
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -226,10 +226,7 @@ export function Service3() {
           {INTRO}
         </motion.p>
 
-        <div
-          id="scaling"
-          className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <div className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRID.map((feature) => (
             <Link
               href={localizeHref(`/nos-services/${feature.slug}`, isEN)}

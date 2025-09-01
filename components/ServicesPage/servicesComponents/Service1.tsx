@@ -161,7 +161,7 @@ export function Service1() {
         <span className="absolute -bottom-20 right-1/4 h-[30rem] w-[30rem] translate-x-1/4 rounded-full blur-[160px] bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-20 dark:opacity-30" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6">
+      <div id="saas-apps" className="relative mx-auto max-w-6xl px-6">
         <motion.h2
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -184,10 +184,7 @@ export function Service1() {
           {INTRO}
         </motion.p>
 
-        <div
-          id="saas-apps"
-          className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <div className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRID.map((feature) => (
             <Link
               href={localizeHref(`/nos-services/${feature.slug}`, isEN)}
@@ -195,12 +192,12 @@ export function Service1() {
               className="group"
             >
               <motion.article
-                initial={{ y: 30 }}
+                initial={{ y: 20 }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.55,
-                  ease: 'easeOut',
+                  duration: 0.35,
+                  ease: 'easeInOut',
                 }}
                 className="relative group h-full flex flex-col  justify-between rounded-[28px] p-8 backdrop-blur-2xl overflow-hidden
                        bg-[linear-gradient(135deg,rgba(255,255,255,.85),rgba(240,245,252,.45))]
