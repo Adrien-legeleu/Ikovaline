@@ -15,16 +15,17 @@ export const Component = ({
 }: {
   words: readonly ['PROPULSE', 'DÉCUPLE'] | readonly ['BOOST', 'SCALE'];
 }) => {
+  const fontSize = useResponsiveFontSize();
+
   return (
     <div className="h-32">
       <VaporizeTextCycle
         texts={words}
         font={{
           fontFamily: 'Inter, sans-serif',
-          fontSize: '70px',
-          fontWeight: 600,
+          fontSize: fontSize, // ← auto responsive
+          fontWeight: 700,
         }}
-        // on ne force plus en blanc !
         color="currentColor"
         spread={5}
         density={5}
@@ -36,12 +37,36 @@ export const Component = ({
         direction="left-to-right"
         alignment="center"
         tag={Tag.H1}
-        // Ici tu définis les classes Tailwind
         className="text-black dark:text-white"
       />
     </div>
   );
 };
+
+// Hook responsive basé sur les breakpoints Tailwind
+function useResponsiveFontSize() {
+  const [size, setSize] = useState('2rem'); // défaut mobile
+
+  useEffect(() => {
+    function handleResize() {
+      const w = window.innerWidth;
+
+      if (w < 640)
+        setSize('2.25rem'); // < sm → text-4xl
+      else if (w < 768)
+        setSize('3.75rem'); // sm → text-6xl
+      else if (w < 1024)
+        setSize('4.5rem'); // md → text-7xl
+      else setSize('6rem'); // lg & xl → text-9xl
+    }
+
+    handleResize(); // init
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return size;
+}
 
 export enum Tag {
   H1 = 'h1',
