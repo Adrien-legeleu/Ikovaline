@@ -85,7 +85,7 @@ export default function WorldMap({
         src={`data:image/svg+xml;utf8,${encodeURIComponent(
           map.getSVG({
             radius: 0.22,
-            color: '#FFFFFF40',
+            color: '#FFFFFF80',
             shape: 'circle',
             backgroundColor: 'transparent',
           })
