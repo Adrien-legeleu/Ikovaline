@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
+import { IconRobot } from '@tabler/icons-react';
 
 /* 1. SaaSConstellation – constellation + flux animés vers le noyau */
 export function SaaSConstellation() {
@@ -23,23 +24,6 @@ export function SaaSConstellation() {
           style={{
             top: `${15 + (i % 6) * 15}%`,
             left: `${8 + ((i * 19) % 85)}%`,
-          }}
-        />
-      ))}
-
-      {/* flux entrants */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute h-1 w-10 rounded-full bg-gradient-to-r from-cyan-400/70 to-transparent"
-          style={{ top: `${20 + i * 12}%`, left: '5%' }}
-          initial={{ x: 0, opacity: 0 }}
-          animate={{ x: '80%', opacity: [0, 1, 0] }}
-          transition={{
-            duration: 2.4,
-            repeat: Infinity,
-            delay: i * 0.35,
-            ease: 'easeInOut',
           }}
         />
       ))}
@@ -86,73 +70,79 @@ export function DevicesOrbit() {
 }
 
 export function AutomationGrid() {
-  const lanesH = [35, 65]; // 2 flux horizontaux
-  const lanesV = [30, 70]; // 2 flux verticaux
-
   return (
-    <div className="absolute inset-0">
-      {/* grille subtile (beaucoup moins lourde) */}
-      <div className="absolute inset-0 grid grid-cols-4 grid-rows-3 gap-4 p-6 opacity-40">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="rounded-md bg-white/20 dark:bg-neutral-800/30 border border-cyan-200/20 dark:border-cyan-400/10 "
-          />
-        ))}
+    <div className="relative w-full h-48 flex items-center justify-center">
+      {/* Noyau central : AI */}
+      <div className="absolute z-20 w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 shadow-[0_0_18px_rgba(34,211,238,0.8)] flex items-center justify-center animate-pulse-slow">
+        <IconRobot className="size-6 text-white" />
       </div>
 
-      {/* flux horizontaux (fluides et lumineux) */}
-      {lanesH.map((y, i) => (
-        <motion.div
-          key={`h-${i}`}
-          className="absolute h-2 w-1/3 rounded-full bg-gradient-to-r from-cyan-400/80 via-blue-400/70 to-transparent blur-sm"
-          style={{ top: `${y}%` }}
-          initial={{ left: '-30%' }}
-          animate={{ left: '110%' }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            delay: i * 2,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-
-      {/* flux verticaux (croisés avec douceur) */}
-      {lanesV.map((x, i) => (
-        <motion.div
-          key={`v-${i}`}
-          className="absolute w-2 h-1/3 rounded-full bg-gradient-to-b from-blue-400/80 via-cyan-400/70 to-transparent blur-sm"
-          style={{ left: `${x}%` }}
-          initial={{ top: '-30%' }}
-          animate={{ top: '110%' }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            delay: i * 2.5,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-
-      {/* quelques nœuds pulsants */}
+      {/* Nœuds périphériques en losange */}
       {[
-        { top: '40%', left: '30%' },
-        { top: '60%', left: '70%' },
+        { top: '15%', left: '50%' }, // haut
+        { top: '50%', left: '85%' }, // droite
+        { top: '85%', left: '50%' }, // bas
+        { top: '50%', left: '15%' }, // gauche
       ].map((pos, i) => (
-        <motion.span
-          key={`node-${i}`}
-          className="absolute size-3 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(59,130,246,0.9)]"
-          style={pos}
-          animate={{ scale: [0.8, 1.5, 0.8], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 3 + i, repeat: Infinity }}
+        <div
+          key={i}
+          className="absolute w-4 !-translate-x-1/2 !-translate-y-1/2 h-4 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.7)] animate-pulse-slower"
+          style={{ ...pos }}
         />
       ))}
+
+      {/* Lignes lumineuses */}
+      <svg
+        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <line x1="50" y1="15" x2="50" y2="50" className="automation-line" />
+        <line x1="85" y1="50" x2="50" y2="50" className="automation-line" />
+        <line x1="50" y1="85" x2="50" y2="50" className="automation-line" />
+        <line x1="15" y1="50" x2="50" y2="50" className="automation-line" />
+      </svg>
+
+      <style jsx>{`
+        .automation-line {
+          stroke: rgba(34, 211, 238, 0.5);
+          stroke-width: 1.5;
+          stroke-linecap: round;
+          animation: flow 4s ease-in-out infinite;
+        }
+
+        @keyframes flow {
+          0% {
+            stroke-opacity: 0.2;
+          }
+          50% {
+            stroke-opacity: 0.8;
+          }
+          100% {
+            stroke-opacity: 0.2;
+          }
+        }
+
+        .animate-pulse-slow {
+          animation: pulse 3s infinite;
+        }
+        .animate-pulse-slower {
+          animation: pulse 5s infinite;
+        }
+        @keyframes pulse {
+          0%,
+          100% {
+            transform: scale(0.9);
+          }
+          50% {
+            transform: scale(1.2);
+          }
+        }
+      `}</style>
     </div>
   );
 }
 
-/* 4. ConversionPulse – premium chart avec glow + points dynamiques */
 export function ConversionPulse() {
   const controls = useAnimationControls();
 

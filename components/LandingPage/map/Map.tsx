@@ -128,7 +128,7 @@ const GlassCard: React.FC<{
   <div
     className={[
       'relative z-10 overflow-hidden rounded-[28px] p-5',
-      'backdrop-blur-2xl',
+
       'bg-[radial-gradient(120%_120%_at_50%_0%,rgba(255,255,255,0.92),rgba(245,248,252,0.55))]',
       'dark:bg-[linear-gradient(180deg,rgba(8,12,18,0.80),rgba(8,12,18,0.58))]',
       'border border-black/5 dark:border-[rgba(56,130,246,0.14)]',
@@ -384,7 +384,7 @@ export default function Map() {
             ref={groupRef}
             className="relative inline-flex items-center rounded-full p-2 overflow-hidden
              border border-white/50 dark:border-white/10
-             backdrop-blur-xl
+         
              bg-[linear-gradient(135deg,rgba(255,255,255,.48),rgba(255,255,255,.16))]
              dark:bg-[linear-gradient(135deg,rgba(10,12,16,.70),rgba(10,12,16,.38))]
              shadow-[0_18px_60px_rgba(6,24,44,.10)]"
@@ -397,7 +397,6 @@ export default function Map() {
                 'shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_14px_46px_rgba(37,99,235,.35)]',
                 'bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(255,255,255,.30))]',
                 'dark:bg-[linear-gradient(135deg,rgba(8,10,14,.92),rgba(8,10,14,.58))]',
-                'backdrop-blur-[14px]',
               ].join(' ')}
               animate={{ width: slider.width, left: slider.left }}
               style={{ height: 'calc(100% - 8px)' }}

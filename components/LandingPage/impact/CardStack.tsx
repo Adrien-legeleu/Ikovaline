@@ -87,9 +87,8 @@ export function GlassSticky({
     <div
       className={[
         'relative z-10 overflow-hidden rounded-[28px] p-5',
-        'backdrop-blur-2xl',
         'bg-[radial-gradient(120%_120%_at_50%_0%,rgba(255,255,255,0.92),rgba(245,248,252,0.55))]',
-        'dark:bg-[linear-gradient(180deg,rgba(8,12,18,0.80),rgba(8,12,18,0.58))]',
+        'dark:bg-[linear-gradient(180deg,rgb(8,12,18),rgb(8,12,18))]',
         'border border-black/5 dark:border-[rgba(56,130,246,0.14)]',
         'shadow-[0_28px_90px_rgba(6,24,44,0.14),0_6px_16px_rgba(6,24,44,0.08)]',
         'dark:shadow-[0_18px_60px_rgba(2,6,12,0.65),inset_0_1px_0_rgba(59,130,246,0.10)]',

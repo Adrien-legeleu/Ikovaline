@@ -1050,7 +1050,6 @@ span#tarteaucitronDisclaimerAlert {
 
 #tarteaucitronRoot #tarteaucitronAlertBig {
   background: #e0f6ffec;
-  backdrop-filter: blur(8px);
   color: #000000;
   display: none;
   font-size: 15px !important;

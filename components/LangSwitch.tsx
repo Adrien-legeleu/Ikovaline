@@ -60,7 +60,7 @@ export default function LangSwitch() {
 
   // pastille “glass” réutilisable
   const glass =
-    'rounded-2xl border px-3 py-1 backdrop-blur-xl ' +
+    'rounded-2xl border px-3 py-1 ' +
     'bg-white/10 dark:bg-black/10 ' +
     'border-white/60 dark:border-white/15 ' +
     'shadow-[0_10px_30px_rgba(6,24,44,.08)] dark:shadow-[0_10px_30px_rgba(0,0,0,.5)]';
@@ -112,7 +112,7 @@ export default function LangSwitch() {
         <DropdownMenuContent
           align="end"
           sideOffset={8}
-          className="min-w-[180px] rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-zinc-900/70 border-white/60 dark:border-white/15"
+          className="min-w-[180px] rounded-3xl  bg-white dark:bg-zinc-900 border-white/60 dark:border-white/15"
           data-i18n="no"
         >
           <DropdownMenuLabel>Language</DropdownMenuLabel>

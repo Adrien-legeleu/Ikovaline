@@ -240,7 +240,8 @@ export function HeaderResponsive() {
           'fixed bottom-0 z-[10000] lg:hidden',
           'flex max-xs:w-full xs:left-1/2 max-xs:pb-5 xs:-translate-x-1/2 items-center justify-around [320px]:justify-between xs:gap-6 gap-2',
           'rounded-t-[2rem] xs:rounded-[2rem] border dark:border-white/15',
-          'backdrop-blur-2xl',
+          'bg-white dark:bg-black',
+
           'bg-[linear-gradient(135deg,rgba(255,255,255,.78),rgba(240,245,252,.42))] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]',
           'shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)] dark:shadow-[0_18px_60px_rgba(2,6,12,.6),inset_0_1px_0_rgba(59,130,246,.12)]',
           'xs:p-4 px-1 pt-3',
@@ -287,16 +288,9 @@ export function HeaderResponsive() {
 
       {/* CONTENU DU DRAWER */}
       <DrawerContent>
-        {/* halos */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          <span className="absolute -top-32 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full opacity-35 blur-[220px] dark:opacity-45 bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)]" />
-          <span className="absolute -bottom-40 right-1/3 h-[30rem] w-[30rem] translate-x-1/4 rounded-full opacity-25 blur-[200px] dark:opacity-35 bg-[radial-gradient(closest-side,#2563EB,transparent_70%)]" />
-        </div>
-
         <div
           className={[
             'relative mx-auto w-full overflow-hidden rounded-t-[2rem] pb-6',
-            'backdrop-blur-[18px] backdrop-saturate-150',
             'bg-white/6 dark:bg-black/30',
             'border border-white/40 dark:border-[rgba(37,99,235,0.20)]',
             'shadow-[0_22px_70px_rgba(6,24,44,0.12),inset_0_1px_0_rgba(255,255,255,0.45)]',
@@ -330,7 +324,6 @@ export function HeaderResponsive() {
           />
 
           {/* handle */}
-          <span className="pointer-events-none absolute left-6 right-6 top-2 h-6 rounded-full bg-white/65 blur-[10px] dark:bg-sky-400/10" />
           <div className="relative z-10 mx-auto mt-2 h-2 w-[100px] rounded-full bg-neutral-300/80 dark:bg-white/10" />
 
           <DrawerHeader className="relative z-10">
@@ -419,12 +412,8 @@ export function HeaderResponsive() {
                   'relative group/btn mt-10 block h-14 w-full rounded-full text-[15px] font-semibold tracking-wide text-white',
                   'bg-[linear-gradient(135deg,#2563EB,#00A8E8)]',
                   'shadow-[0_14px_36px_rgba(37,99,235,.55),0_0_50px_rgba(0,168,232,.30)]',
-                  'transition-shadow hover:shadow-[0_18px_48px_rgba(37,99,235,.65),0_0_70px_rgba(0,168,232,.40)]',
                 ].join(' ')}
               >
-                <span className="pointer-events-none absolute inset-0 rounded-3xl [mask-image:linear-gradient(160deg,transparent_35%,black_50%,transparent_65%)]">
-                  <span className="absolute -inset-10 rotate-[18deg] bg-white/20 blur-xl" />
-                </span>
                 <Link
                   onClick={() => {
                     // Force scroll en haut à chaque navigation
@@ -440,7 +429,7 @@ export function HeaderResponsive() {
               </button>
             </DrawerClose>
             <DrawerClose asChild>
-              <LiquidButton className="rounded-2xl">{t.cancel}</LiquidButton>
+              <LiquidButton className="rounded-2xl ">{t.cancel}</LiquidButton>
             </DrawerClose>
           </DrawerFooter>
         </div>

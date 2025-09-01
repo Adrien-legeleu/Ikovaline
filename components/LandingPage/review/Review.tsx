@@ -314,7 +314,7 @@ const Review = () => {
              shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]
              transition-shadow duration-500 ease-out
              hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]
-             bg-white/70 backdrop-blur-xl dark:bg-transparent"
+             bg-white/70  dark:bg-transparent"
               initial={{ y: -40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -333,13 +333,6 @@ const Review = () => {
                   maskComposite: 'subtract',
                   WebkitClipPath: 'padding-box',
                 }}
-              />
-
-              <span
-                aria-hidden
-                className="absolute -inset-6 rounded-full blur-3xl 
-               bg-[radial-gradient(circle_at_center,rgba(0,168,255,.55),rgba(37,99,235,.35),transparent_75%)]
-               opacity-50 dark:opacity-40"
               />
 
               <span className="relative z-10 text-sm font-semibold tracking-wide text-sky-700 dark:text-transparent dark:bg-gradient-to-r dark:from-sky-200 dark:via-sky-100 dark:to-blue-200 dark:bg-clip-text">
@@ -384,7 +377,7 @@ const Review = () => {
              shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]
              transition-shadow duration-500 ease-out
              hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]
-             bg-white/70 backdrop-blur-xl dark:bg-transparent"
+             bg-white/70  dark:bg-transparent"
             initial={{ y: -40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -405,13 +398,6 @@ const Review = () => {
               }}
             />
 
-            <span
-              aria-hidden
-              className="absolute -inset-6 rounded-full blur-3xl 
-               bg-[radial-gradient(circle_at_center,rgba(0,168,255,.55),rgba(37,99,235,.35),transparent_75%)]
-               opacity-50 dark:opacity-40"
-            />
-
             <span className="relative z-10 text-sm font-semibold tracking-wide text-sky-700 dark:text-transparent dark:bg-gradient-to-r dark:from-sky-200 dark:via-sky-100 dark:to-blue-200 dark:bg-clip-text">
               {t.badge}
             </span>
@@ -427,13 +413,6 @@ const Review = () => {
           <MarqueeDemoVertical data={data} />
         </div>
       </div>
-
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="absolute left-1/2 top-32 h-36 w-36 -translate-x-1/2 bg-secondary blur-[110px] md:h-48 md:w-48 md:blur-[150px] z-0"
-      />
     </section>
   );
 };

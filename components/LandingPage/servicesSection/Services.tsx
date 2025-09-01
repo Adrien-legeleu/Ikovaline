@@ -218,7 +218,7 @@ export function GlassCard({
         'relative overflow-hidden rounded-3xl',
         'bg-white/10 dark:bg-neutral-900/10',
         'border border-white/30 dark:border-white/10',
-        'backdrop-blur-md',
+
         reduceMotion
           ? ''
           : 'transition-transform duration-300 hover:scale-[1.01]',

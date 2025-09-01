@@ -28,7 +28,7 @@ export default function AboutContent() {
             <p
               className={[
                 'relative w-fit px-4 py-1 mb-6 rounded-full text-sm font-semibold tracking-wide',
-                'backdrop-blur-xl overflow-hidden',
+                ' overflow-hidden',
                 'bg-[linear-gradient(135deg,rgba(255,255,255,.85),rgba(245,248,252,.35))]',
                 'dark:bg-[linear-gradient(135deg,rgba(10,14,20,.9),rgba(10,14,20,.55))]',
                 'border border-white/40 dark:border-[rgba(56,130,246,0.25)]',

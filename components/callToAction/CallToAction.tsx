@@ -40,7 +40,7 @@ export default function CallToAction({ title, desc, textBtn }: ICallToAction) {
         className={[
           'relative mx-auto max-w-5xl z-10 overflow-hidden rounded-[28px]',
           'px-4 xss:px-8 pt-24 md:pt-36 pb-12 md:pb-24 text-center',
-          'backdrop-blur-2xl',
+
           // teinte base — zéro blanc en dark
           'bg-[radial-gradient(120%_120%_at_50%_0%,rgba(255,255,255,0.92),rgba(244,250,251,0.55))]',
           'dark:bg-[linear-gradient(180deg,rgba(8,12,18,0.90),rgba(8,12,18,0.62))]',
