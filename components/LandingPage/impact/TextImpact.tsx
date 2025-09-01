@@ -57,7 +57,7 @@ export default function ComponentDemo() {
   return (
     <div className="relative h-[420px] w-full rounded-2xl bg-white/70 p-4 dark:bg-neutral-950/50">
       {/* halo sombre haut */}
-      <div className="absolute top-0 left-0 h-32 w-full -translate-y-2/3 bg-gradient-to-t from-black/60 to-transparent dark:block hidden" />
+      <div className="absolute top-0 left-0 h-32 w-full -translate-y-2/3 bg-gradient-to-t from-black to-transparent dark:block hidden" />
 
       {/* slider */}
       <div className="mt-10 flex justify-center">

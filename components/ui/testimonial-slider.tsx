@@ -82,7 +82,7 @@ export const TestimonialSlider = React.memo(function TestimonialSlider({
       </div>
 
       {/* ===== Navigation ===== */}
-      <div className="pb-4 flex items-center justify-center gap-5">
+      <div className="pb-4 z-10 relative flex items-center justify-center gap-5">
         <LiquidButton
           onClick={prev}
           aria-label="Précédent"
@@ -113,6 +113,7 @@ export const TestimonialSlider = React.memo(function TestimonialSlider({
           ›
         </LiquidButton>
       </div>
+      <div className="absolute bottom-0  left-0 h-24 w-full  bg-gradient-to-t from-white dark:from-black to-transparent" />
 
       <style jsx>{`
         .nav-btn {
