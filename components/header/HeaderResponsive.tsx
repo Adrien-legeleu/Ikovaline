@@ -368,12 +368,7 @@ export function HeaderResponsive() {
                     <div className="relative z-10  pr-4 h-full  flex items-center">
                       <DrawerClose asChild>
                         <Link
-                          onClick={() => {
-                            // Force scroll en haut à chaque navigation
-                            if (typeof window !== 'undefined') {
-                              window.scrollTo({ top: 0, behavior: 'smooth' });
-                            }
-                          }}
+                          scroll
                           href={section.href}
                           className="flex-1 px-4 py-4 text-sm font-semibold text-neutral-800 transition-colors hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white"
                         >
@@ -420,15 +415,7 @@ export function HeaderResponsive() {
                     'shadow-[0_14px_36px_rgba(37,99,235,.55),0_0_50px_rgba(0,168,232,.30)]',
                   ].join(' ')}
                 >
-                  <Link
-                    onClick={() => {
-                      // Force scroll en haut à chaque navigation
-                      if (typeof window !== 'undefined') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }
-                    }}
-                    href={localizeHref('/contact', isEN)}
-                  >
+                  <Link scroll href={localizeHref('/contact', isEN)}>
                     {t.contactCta}
                   </Link>
                   <span className="pointer-events-none absolute inset-x-10 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-sky-300 to-transparent" />
@@ -499,7 +486,7 @@ function MeasuredList({
                 }
               }}
               href={link.href}
-              className="flex items-center gap-3 rounded-lg p-3 text-[15px] font-medium text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-white/10"
+              className="flex items-center gap-3 rounded-lg p-3 text-xs font-medium text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-white/10"
             >
               <span aria-hidden className="opacity-75">
                 {link.icon}
