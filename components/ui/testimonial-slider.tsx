@@ -25,12 +25,19 @@ export function TestimonialSlider({
     return () => clearInterval(id);
   }, [autorotate, testimonials.length]);
 
-  const prev = () => {
+  const pauseAndResume = () => {
     setAutorotate(false);
+    // relance l'auto après 5s
+    setTimeout(() => setAutorotate(true), 2000);
+  };
+
+  const prev = () => {
+    pauseAndResume();
     setActive((p) => (p === 0 ? testimonials.length - 1 : p - 1));
   };
+
   const next = () => {
-    setAutorotate(false);
+    pauseAndResume();
     setActive((p) => (p + 1 === testimonials.length ? 0 : p + 1));
   };
 
@@ -123,7 +130,7 @@ export function TestimonialSlider({
               key={i}
               aria-label={`Aller à ${i + 1}`}
               onClick={() => {
-                setAutorotate(false);
+                pauseAndResume();
                 setActive(i);
               }}
               className={cn(

@@ -361,7 +361,6 @@ export default function VaporizeTextCycle({
       particlesRef,
       globalDpr,
       currentTextIndex,
-      transformedDensity,
     });
 
     const currentFont = font.fontFamily || 'sans-serif';
@@ -392,7 +391,6 @@ export default function VaporizeTextCycle({
     transformedDensity,
   ]);
 
-  // Handle resize
   useEffect(() => {
     const container = wrapperRef.current;
     if (!container) return;
@@ -404,13 +402,8 @@ export default function VaporizeTextCycle({
       }
 
       renderCanvas({
-        framerProps: {
-          texts,
-          font,
-          color,
-          alignment,
-        },
-        canvasRef: canvasRef as React.RefObject<HTMLCanvasElement>,
+        framerProps: { texts, font, color, alignment },
+        canvasRef,
         wrapperSize: {
           width: container.clientWidth,
           height: container.clientHeight,
@@ -418,15 +411,21 @@ export default function VaporizeTextCycle({
         particlesRef,
         globalDpr,
         currentTextIndex,
-        transformedDensity,
       });
     });
 
     resizeObserver.observe(container);
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [wrapperRef.current]);
+    return () => resizeObserver.disconnect();
+  }, [
+    texts,
+    font,
+    color,
+    alignment,
+    canvasRef,
+    globalDpr,
+    currentTextIndex,
+    transformedDensity,
+  ]);
 
   // Initial size detection
   useEffect(() => {
@@ -447,39 +446,29 @@ export default function VaporizeTextCycle({
   );
 }
 
-// ------------------------------------------------------------ //
-// SEO ELEMENT
-// ------------------------------------------------------------ //
-const SeoElement = memo(
-  ({
-    tag = Tag.P,
-    texts,
-  }: {
-    tag: Tag;
-    texts: readonly ['PROPULSE', 'DÉCUPLE'] | readonly ['BOOST', 'SCALE'];
-  }) => {
-    const style = useMemo(
-      () => ({
-        position: 'absolute' as const,
-        width: '0',
-        height: '0',
-        overflow: 'hidden',
-        userSelect: 'none' as const,
-        pointerEvents: 'none' as const,
-      }),
-      []
-    );
+const SeoElement = memo(function SeoElement({
+  tag = Tag.P,
+  texts,
+}: {
+  tag: Tag;
+  texts: readonly ['PROPULSE', 'DÉCUPLE'] | readonly ['BOOST', 'SCALE'];
+}) {
+  const style = useMemo(
+    () => ({
+      position: 'absolute' as const,
+      width: '0',
+      height: '0',
+      overflow: 'hidden',
+      userSelect: 'none' as const,
+      pointerEvents: 'none' as const,
+    }),
+    []
+  );
 
-    // Ensure tag is a valid HTML element string
-    const safeTag = Object.values(Tag).includes(tag) ? tag : 'p';
+  const safeTag = Object.values(Tag).includes(tag) ? tag : 'p';
+  return createElement(safeTag, { style }, texts?.join(' ') ?? '');
+});
 
-    return createElement(safeTag, { style }, texts?.join(' ') ?? '');
-  }
-);
-
-// ------------------------------------------------------------ //
-// FONT HANDLING
-// ------------------------------------------------------------ //
 const handleFontChange = ({
   currentFont,
   lastFontRef,
@@ -514,7 +503,6 @@ const handleFontChange = ({
         particlesRef,
         globalDpr,
         currentTextIndex,
-        transformedDensity,
       });
     }, 1000);
 
@@ -558,7 +546,6 @@ const renderCanvas = ({
   particlesRef,
   globalDpr,
   currentTextIndex,
-  transformedDensity,
 }: {
   framerProps: VaporizeTextCycleProps;
   canvasRef: React.RefObject<HTMLCanvasElement>;
@@ -566,7 +553,6 @@ const renderCanvas = ({
   particlesRef: React.MutableRefObject<Particle[]>;
   globalDpr: number;
   currentTextIndex: number;
-  transformedDensity: number;
 }) => {
   const canvas = canvasRef.current;
   if (!canvas || !wrapperSize.width || !wrapperSize.height) return;
@@ -654,11 +640,13 @@ const createParticles = (
   ctx.imageSmoothingEnabled = true;
 
   if ('fontKerning' in ctx) {
-    (ctx as any).fontKerning = 'normal';
+    (ctx as CanvasRenderingContext2D & { fontKerning?: string }).fontKerning =
+      'normal';
   }
-
   if ('textRendering' in ctx) {
-    (ctx as any).textRendering = 'geometricPrecision';
+    (
+      ctx as CanvasRenderingContext2D & { textRendering?: string }
+    ).textRendering = 'geometricPrecision';
   }
 
   // Calculate text boundaries
@@ -908,11 +896,11 @@ const parseColor = (color: string) => {
 
   if (rgbaMatch) {
     // If RGBA format
-    const [_, r, g, b, a] = rgbaMatch;
+    const [, r, g, b, a] = rgbaMatch;
     return `rgba(${r}, ${g}, ${b}, ${a})`;
   } else if (rgbMatch) {
     // If RGB format
-    const [_, r, g, b] = rgbMatch;
+    const [, r, g, b] = rgbMatch;
     return `rgba(${r}, ${g}, ${b}, 1)`;
   }
 

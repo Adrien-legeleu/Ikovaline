@@ -56,6 +56,7 @@ export default function ComponentDemo() {
 
   return (
     <div className="relative h-[520px] w-full rounded-2xl bg-white/70 p-4 dark:bg-neutral-950/50">
+      <div className="h-32 w-full absolute top-0 -translate-y-2/3 left-0 bg-gradient-to-t hidden dark:block from-black from-50% to-transparent" />
       <div className="mt-10 flex justify-center ">
         <TestimonialSlider
           key={isEN ? 'en' : 'fr'}

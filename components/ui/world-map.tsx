@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion } from 'motion/react';
 import DottedMap from 'dotted-map';
+import Image from 'next/image';
 
 interface MapProps {
   dots?: Array<{
@@ -36,7 +37,7 @@ export default function WorldMap({
 
   return (
     <div className="w-full max-sm:scale-[150%] aspect-[2/1] bg-transparent rounded-lg  relative font-sans">
-      <img
+      <Image
         src={`data:image/svg+xml;utf8,${encodeURIComponent(
           map.getSVG({
             radius: 0.22,
@@ -45,13 +46,15 @@ export default function WorldMap({
             backgroundColor: 'transparent',
           })
         )}`}
+        width={500}
+        height={500}
         className="h-full w-full  block dark:hidden [mask-image:linear-gradient(to_bottom,transparent,white_10%,transparent_90%,transparent)] pointer-events-none select-none"
         alt="world map light"
         draggable={false}
       />
 
       {/* version sombre */}
-      <img
+      <Image
         src={`data:image/svg+xml;utf8,${encodeURIComponent(
           map.getSVG({
             radius: 0.22,
@@ -60,6 +63,8 @@ export default function WorldMap({
             backgroundColor: 'transparent',
           })
         )}`}
+        width={500}
+        height={500}
         className="h-full  w-full hidden dark:block [mask-image:linear-gradient(to_bottom,transparent,black_10%,transparent_90%,transparent)] pointer-events-none select-none"
         alt="world map dark"
         draggable={false}
