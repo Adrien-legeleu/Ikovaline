@@ -1,57 +1,80 @@
 'use client';
 
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useRef } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 /**
- * Force le scroll en haut sur chaque navigation.
- * - si hash (#id) → scroll vers l'élément (avec retries si rendu async)
- * - sinon → top:0
- * - désactive la restauration du navigateur (sinon ça recale la position précédente)
+ * Force la position de scroll après chaque navigation.
+ * - "forceScrollTop" via sessionStorage (déclenché par le Drawer)
+ * - si hash (#id) => scroll vers l'ancre (avec retry DOM)
+ * - sinon => top
+ * - attend un petit délai pour laisser le Drawer relâcher le body-lock sur mobile
  */
 export function ScrollManager() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const lastKey = useRef<string>('');
 
+  // désactiver la restauration native du navigateur
   useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+      const onBeforeUnload = () => {
+        history.scrollRestoration = 'auto';
+      };
+      window.addEventListener('beforeunload', onBeforeUnload);
+      return () => window.removeEventListener('beforeunload', onBeforeUnload);
     }
   }, []);
 
-  const scrollToHash = (maxRetries = 20) => {
-    const hash = window.location.hash?.slice(1);
-    if (!hash) return false;
-    const el = document.getElementById(hash);
-    if (el) {
-      el.scrollIntoView({ block: 'start', behavior: 'smooth' });
-      return true;
-    }
-    if (maxRetries > 0) {
-      setTimeout(() => scrollToHash(maxRetries - 1), 50);
-    }
-    return false;
-  };
-
-  // à chaque changement de route → remonte
   useEffect(() => {
-    const id = requestAnimationFrame(() => {
-      if (window.location.hash) {
-        scrollToHash();
-      } else {
+    const keyNow = `${pathname}?${searchParams?.toString() || ''}`;
+    if (keyNow === lastKey.current) return;
+    lastKey.current = keyNow;
+
+    const run = () => {
+      const forceTop = sessionStorage.getItem('forceScrollTop') === '1';
+      const hash = window.location.hash;
+
+      const scrollTopNow = () => {
+        // double raf + setTimeout = passe bien sur iOS après overlay/lock
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      }
-    });
-    return () => cancelAnimationFrame(id);
-  }, [pathname]);
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        });
+        setTimeout(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        }, 60);
+      };
 
-  // si le hash change sans changer de page
-  useEffect(() => {
-    const onHash = () => {
-      if (!scrollToHash()) scrollToHash(10);
+      if (forceTop) {
+        sessionStorage.removeItem('forceScrollTop');
+        scrollTopNow();
+        return;
+      }
+
+      if (hash && hash.length > 1) {
+        const id = decodeURIComponent(hash.slice(1));
+        let tries = 0;
+        const tryScroll = () => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else if (tries++ < 12) {
+            requestAnimationFrame(tryScroll);
+          }
+        };
+        requestAnimationFrame(tryScroll);
+        return;
+      }
+
+      scrollTopNow();
     };
-    window.addEventListener('hashchange', onHash);
-    return () => window.removeEventListener('hashchange', onHash);
-  }, []);
+
+    // important: laisser 80ms pour que le Drawer ait fini de rendre/relâcher
+    const t = setTimeout(() => requestAnimationFrame(run), 80);
+    return () => clearTimeout(t);
+  }, [pathname, searchParams]);
 
   return null;
 }

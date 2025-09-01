@@ -1,11 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import {
   Drawer,
@@ -21,7 +21,6 @@ import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
 
 import { ModeToggle } from '../toggle-darkmode';
 import { LiquidLink } from '../ui/liquid-link';
-
 import {
   IconMenu3,
   IconMessage2,
@@ -34,10 +33,8 @@ import {
   IconHistory,
   IconThumbUp,
 } from '@tabler/icons-react';
-
 import { LiquidButton } from '../ui/liquid-glass-button';
 import LangSwitch from '../LangSwitch';
-import { useScrollTopOnPathChange } from '@/hooks/useScrollTopOnPathChange';
 
 /* ================= helpers locale ================= */
 
@@ -49,18 +46,20 @@ function useLocale() {
   const isEN = /^\/en(\/|$)/.test(pathname);
   return { isEN };
 }
-
 function localizeHref(href: string, isEN: boolean) {
   if (!isEN) return href;
-  if (/^(https?:)?\/\//.test(href)) return href; // externe
-  if (/^\/en(\/|$)/.test(href)) return href; // déjà en /en
+  if (/^(https?:)?\/\//.test(href)) return href;
+  if (/^\/en(\/|$)/.test(href)) return href;
   if (href === '/') return '/en';
-  if (href.startsWith('/#')) return `/en${href}`; // ancre page d’accueil
+  if (href.startsWith('/#')) return `/en${href}`;
   return href.startsWith('/') ? `/en${href}` : `/en/${href}`;
 }
 
 /* ================= dictionnaires ================= */
-
+/** IMPORTANT:
+ *  - Les liens de NIVEAU 1 pointent vers la PAGE (sans #) => on doit arriver TOUT EN HAUT
+ *  - Les SOUS-LIENS (links) peuvent garder les ancres (#...)
+ */
 const TEXTS = {
   fr: {
     ariaOpen: 'Ouvrir le menu',
@@ -69,14 +68,10 @@ const TEXTS = {
     contactCta: 'Contactez-nous !',
     cancel: 'Annuler',
     sections: [
-      {
-        title: 'Accueil',
-        href: '/#home',
-        links: [],
-      },
+      { title: 'Accueil', href: '/', links: [] },
       {
         title: 'Nos Services',
-        href: '/nos-services#nos-services',
+        href: '/nos-services', // <-- pas d’ancre ici
         links: [
           {
             label: 'Applications Web, Mobiles & SaaS',
@@ -107,7 +102,7 @@ const TEXTS = {
       },
       {
         title: 'À Propos',
-        href: '/about#notre-histoire',
+        href: '/about', // <-- pas d’ancre ici
         links: [
           {
             label: 'Notre Histoire',
@@ -127,10 +122,9 @@ const TEXTS = {
         ],
       },
       { title: 'Conseils Digitaux', href: '/blog', links: [] },
-      { title: 'Nos Projets', href: '/projects#projects', links: [] },
+      { title: 'Nos Projets', href: '/projects', links: [] }, // <-- pas d’ancre ici
     ] as Section[],
   },
-
   en: {
     ariaOpen: 'Open menu',
     ariaHome: 'Home',
@@ -138,10 +132,10 @@ const TEXTS = {
     contactCta: 'Contact us!',
     cancel: 'Cancel',
     sections: [
-      { title: 'Home', href: '/#home', links: [] },
+      { title: 'Home', href: '/', links: [] },
       {
         title: 'Our Services',
-        href: '/nos-services#nos-services',
+        href: '/nos-services',
         links: [
           {
             label: 'Web, Mobile & SaaS Apps',
@@ -192,7 +186,7 @@ const TEXTS = {
         ],
       },
       { title: 'Digital Advice', href: '/blog', links: [] },
-      { title: 'Our Projects', href: '/projects#projects', links: [] },
+      { title: 'Our Projects', href: '/projects', links: [] },
     ] as Section[],
   },
 } as const;
@@ -201,8 +195,13 @@ const TEXTS = {
 
 export function HeaderResponsive() {
   const { isEN } = useLocale();
+  const router = useRouter();
   const DURATION = 260;
-  useScrollTopOnPathChange();
+  const DRAWER_ANIM_MS = 260;
+
+  // état d'ouverture du Drawer (on contrôle pour séquencer)
+  const [open, setOpen] = useState(false);
+
   // sections localisées
   const headerLinks: Section[] = (
     isEN ? TEXTS.en.sections : TEXTS.fr.sections
@@ -224,17 +223,29 @@ export function HeaderResponsive() {
     window.setTimeout(() => setAnimatingIndex(null), DURATION + 40);
   };
 
+  // NAVIGATION DEPUIS LE DRAWER (FIABLE MOBILE)
+  const goFromDrawer = useCallback(
+    (href: string, forceTop: boolean) => {
+      // Marqueur pour ScrollManager sur la prochaine navigation
+      if (forceTop) sessionStorage.setItem('forceScrollTop', '1');
+
+      // 1) fermer le drawer
+      setOpen(false);
+
+      // 2) attendre la fin de l’anim, puis router.push
+      window.setTimeout(() => {
+        router.push(href); // scroll:true par défaut
+        // pas besoin d’appeler scrollTo ici : ScrollManager s’en charge
+      }, DRAWER_ANIM_MS);
+    },
+    [router]
+  );
+
   const t = isEN ? TEXTS.en : TEXTS.fr;
 
   return (
     <LazyMotion features={domAnimation}>
-      <Drawer
-        onAnimationEnd={(open) => {
-          if (!open) {
-            window.scrollTo({ top: 0, behavior: 'auto' });
-          }
-        }}
-      >
+      <Drawer open={open} onOpenChange={setOpen}>
         {/* BARRE FLOTTANTE MOBILE */}
         <div
           className={[
@@ -259,26 +270,28 @@ export function HeaderResponsive() {
           <ModeToggle />
           <LangSwitch />
           <div className="max-[320px]:hidden">
-            <DrawerClose asChild>
-              <Link href={localizeHref('/', isEN)} aria-label={t.ariaHome}>
-                <Image
-                  src={IkovalineLogoDark}
-                  alt="Ikovaline"
-                  width={150}
-                  height={150}
-                  className="hidden h-10 w-24 object-contain dark:block"
-                  priority
-                />
-                <Image
-                  src={IkovalineLogo}
-                  alt="Ikovaline"
-                  width={150}
-                  height={150}
-                  className="block h-10 w-24 object-contain dark:hidden"
-                  priority
-                />
-              </Link>
-            </DrawerClose>
+            {/* logo vers HOME — on force top */}
+            <button
+              aria-label={t.ariaHome}
+              onClick={() => goFromDrawer(localizeHref('/', isEN), true)}
+            >
+              <Image
+                src={IkovalineLogoDark}
+                alt="Ikovaline"
+                width={150}
+                height={150}
+                className="hidden h-10 w-24 object-contain dark:block"
+                priority
+              />
+              <Image
+                src={IkovalineLogo}
+                alt="Ikovaline"
+                width={150}
+                height={150}
+                className="block h-10 w-24 object-contain dark:hidden"
+                priority
+              />
+            </button>
           </div>
 
           <LiquidLink
@@ -299,20 +312,24 @@ export function HeaderResponsive() {
             <div className="relative z-10 mx-auto mt-2 h-2 w-[100px] rounded-full bg-neutral-300/80 dark:bg-white/10" />
 
             <DrawerHeader className="relative z-10">
-              <Image
-                src={IkovalineLogoDark}
-                alt="Ikovaline"
-                width={150}
-                height={150}
-                className="mx-auto hidden min-h-10 min-w-28 object-contain dark:block"
-              />
-              <Image
-                src={IkovalineLogo}
-                alt="Ikovaline"
-                width={150}
-                height={150}
-                className="mx-auto block min-h-10 min-w-28 object-contain dark:hidden"
-              />
+              <button
+                onClick={() => goFromDrawer(localizeHref('/', isEN), true)}
+              >
+                <Image
+                  src={IkovalineLogoDark}
+                  alt="Ikovaline"
+                  width={150}
+                  height={150}
+                  className="mx-auto hidden min-h-10 min-w-28 object-contain dark:block"
+                />
+                <Image
+                  src={IkovalineLogo}
+                  alt="Ikovaline"
+                  width={150}
+                  height={150}
+                  className="mx-auto block min-h-10 min-w-28 object-contain dark:hidden"
+                />
+              </button>
             </DrawerHeader>
 
             {/* NAV */}
@@ -327,22 +344,27 @@ export function HeaderResponsive() {
                     className="bg-white/60 relative rounded-[2rem] shadow dark:bg-black/40"
                   >
                     <div className="relative z-10 pr-4 flex items-center">
-                      <DrawerClose asChild>
-                        <Link
-                          scroll
-                          href={section.href}
-                          className="flex-1 px-4 py-4 text-sm font-semibold"
-                        >
-                          {section.title}
-                        </Link>
-                      </DrawerClose>
+                      {/* IMPORTANT: bouton -> goFromDrawer(page, forceTop=true) */}
+                      <button
+                        onClick={() => goFromDrawer(section.href, true)}
+                        className="flex-1 text-left px-4 py-4 text-sm font-semibold"
+                      >
+                        {section.title}
+                      </button>
 
                       {hasChildren && (
                         <LiquidButton
                           className="!p-2 h-full relative"
                           aria-expanded={expanded}
                           aria-controls={`sub-${i}`}
-                          onClick={() => toggle(i)}
+                          onClick={() => {
+                            setAnimatingIndex(i);
+                            setActiveIndex((prev) => (prev === i ? null : i));
+                            window.setTimeout(
+                              () => setAnimatingIndex(null),
+                              DURATION + 40
+                            );
+                          }}
                         >
                           <IconChevronDown
                             className={`size-5 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
@@ -351,13 +373,17 @@ export function HeaderResponsive() {
                       )}
                     </div>
 
+                    {/* sous-liens (peuvent garder des #ancres) */}
                     <AnimatePresence initial={false} mode="wait">
                       {hasChildren && expanded && (
                         <MeasuredList
                           id={`sub-${i}`}
                           links={section.links!}
                           duration={DURATION}
-                          isAnimating={animatingIndex === i}
+                          onClickLink={(href) => {
+                            // Sous-lien: on NE force PAS top, on laisse le ScrollManager scroller vers l’ancre
+                            goFromDrawer(href, false);
+                          }}
                         />
                       )}
                     </AnimatePresence>
@@ -368,16 +394,17 @@ export function HeaderResponsive() {
 
             {/* FOOTER CTA */}
             <DrawerFooter>
-              <DrawerClose asChild>
-                <button className="relative group/btn mt-10 block h-14 w-full rounded-full text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]">
-                  <Link scroll href={'/contact'}>
-                    {t.contactCta}
-                  </Link>
-                </button>
-              </DrawerClose>
-              <DrawerClose asChild>
-                <LiquidButton className="rounded-2xl">{t.cancel}</LiquidButton>
-              </DrawerClose>
+              <button
+                className="relative group/btn mt-10 block h-14 w-full rounded-full text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]"
+                onClick={() =>
+                  goFromDrawer(localizeHref('/contact', isEN), true)
+                }
+              >
+                {t.contactCta}
+              </button>
+              <button className="rounded-2xl" onClick={() => setOpen(false)}>
+                {t.cancel}
+              </button>
             </DrawerFooter>
           </div>
         </DrawerContent>
@@ -391,11 +418,12 @@ function MeasuredList({
   id,
   links,
   duration,
+  onClickLink,
 }: {
   id: string;
   links: { label: string; href: string; icon?: React.ReactNode }[];
   duration: number;
-  isAnimating: boolean;
+  onClickLink: (href: string) => void;
 }) {
   const innerRef = React.useRef<HTMLUListElement>(null);
   const [h, setH] = React.useState<number | 'auto'>(0);
@@ -418,16 +446,13 @@ function MeasuredList({
     >
       {links.map((link) => (
         <li key={link.href}>
-          <DrawerClose asChild>
-            <Link
-              scroll
-              href={link.href}
-              className="flex items-center gap-3 p-3 text-sm font-medium"
-            >
-              {link.icon && <span>{link.icon}</span>}
-              {link.label}
-            </Link>
-          </DrawerClose>
+          <button
+            onClick={() => onClickLink(link.href)}
+            className="flex w-full items-center gap-3 p-3 text-sm font-medium text-left"
+          >
+            {link.icon && <span>{link.icon}</span>}
+            {link.label}
+          </button>
         </li>
       ))}
     </m.ul>

@@ -167,9 +167,9 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <Suspense fallback={null}>
           <ScrollManager />
-        </Suspense>{' '}
+        </Suspense>
         <SpeedInsights />
-        <Analytics />
+        <Analytics />s
         <LazyExtraStyle />
         <noscript>
           <iframe
