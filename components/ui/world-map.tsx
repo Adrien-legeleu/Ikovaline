@@ -2,16 +2,18 @@
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-let DottedMap: any;
+import type DottedMap from 'dotted-map'; // on importe le type
+import Image from 'next/image';
+
+let DottedMapClass: typeof import('dotted-map').default;
 
 async function getDottedMap() {
-  if (!DottedMap) {
+  if (!DottedMapClass) {
     const mod = await import('dotted-map');
-    DottedMap = mod.default;
+    DottedMapClass = mod.default;
   }
-  return DottedMap;
+  return DottedMapClass;
 }
-import Image from 'next/image';
 
 interface MapProps {
   dots?: Array<{
@@ -26,7 +28,7 @@ export default function WorldMap({
   lineColor = '#0ea5e9',
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const mapRef = useRef<any>(null);
+  const mapRef = useRef<InstanceType<typeof DottedMapClass> | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -51,7 +53,7 @@ export default function WorldMap({
   };
 
   return (
-    <div className="w-full max-sm:scale-[150%] aspect-[2/1] bg-transparent rounded-lg  relative font-sans">
+    <div className="w-full max-sm:scale-[150%] aspect-[2/1] bg-transparent rounded-lg relative font-sans">
       <Image
         src={
           mapRef.current
@@ -63,11 +65,11 @@ export default function WorldMap({
                   backgroundColor: 'transparent',
                 })
               )}`
-            : '/placeholder.svg' // ou rien le temps que ça charge
+            : '/placeholder.svg'
         }
         width={500}
         height={500}
-        className="h-full w-full  block dark:hidden [mask-image:linear-gradient(to_bottom,transparent,white_10%,transparent_90%,transparent)] pointer-events-none select-none"
+        className="h-full w-full block dark:hidden [mask-image:linear-gradient(to_bottom,transparent,white_10%,transparent_90%,transparent)] pointer-events-none select-none"
         alt="world map light"
         draggable={false}
       />
@@ -84,14 +86,15 @@ export default function WorldMap({
                   backgroundColor: 'transparent',
                 })
               )}`
-            : '/placeholder.svg' // ou rien le temps que ça charge
+            : '/placeholder.svg'
         }
         width={500}
         height={500}
-        className="h-full  w-full hidden dark:block [mask-image:linear-gradient(to_bottom,transparent,black_10%,transparent_90%,transparent)] pointer-events-none select-none"
+        className="h-full w-full hidden dark:block [mask-image:linear-gradient(to_bottom,transparent,black_10%,transparent_90%,transparent)] pointer-events-none select-none"
         alt="world map dark"
         draggable={false}
       />
+
       <svg
         ref={svgRef}
         viewBox="0 0 800 400"
@@ -107,19 +110,10 @@ export default function WorldMap({
                 fill="none"
                 stroke="url(#path-gradient)"
                 strokeWidth="1"
-                initial={{
-                  pathLength: 0,
-                }}
-                animate={{
-                  pathLength: 1,
-                }}
-                transition={{
-                  duration: 1,
-                  delay: 0.5 * i,
-                  ease: 'easeOut',
-                }}
-                key={`start-upper-${i}`}
-              ></motion.path>
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1, delay: 0.5 * i, ease: 'easeOut' }}
+              />
             </g>
           );
         })}
@@ -135,70 +129,32 @@ export default function WorldMap({
 
         {dots.map((dot, i) => (
           <g key={`points-group-${i}`}>
-            <g key={`start-${i}`}>
-              <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
-              />
-              <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="8"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </g>
-            <g key={`end-${i}`}>
-              <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
-              />
-              <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="8"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </g>
+            {(['start', 'end'] as const).map((pos, j) => {
+              const { x, y } = projectPoint(dot[pos].lat, dot[pos].lng);
+              return (
+                <g key={`${pos}-${i}-${j}`}>
+                  <circle cx={x} cy={y} r="2" fill={lineColor} />
+                  <circle cx={x} cy={y} r="2" fill={lineColor} opacity="0.5">
+                    <animate
+                      attributeName="r"
+                      from="2"
+                      to="8"
+                      dur="1.5s"
+                      begin="0s"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      from="0.5"
+                      to="0"
+                      dur="1.5s"
+                      begin="0s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </g>
+              );
+            })}
           </g>
         ))}
       </svg>
