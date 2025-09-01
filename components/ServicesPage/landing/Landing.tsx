@@ -103,7 +103,10 @@ export default function ServicesHero() {
       };
 
   return (
-    <section className="relative overflow-hidden flex flex-col items-center justify-center text-center pt-28 pb-32 px-6">
+    <section
+      id="nos-services"
+      className="relative overflow-hidden flex flex-col items-center justify-center text-center pt-28 pb-32 px-6"
+    >
       <div aria-hidden className="absolute inset-0 -z-10">
         <span className="absolute -top-40 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full blur-[200px] bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)] opacity-30 dark:opacity-40" />
         <span className="absolute bottom-0 right-1/2 h-[32rem] w-[32rem] translate-x-1/2 rounded-full blur-[160px] bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-25 dark:opacity-35" />

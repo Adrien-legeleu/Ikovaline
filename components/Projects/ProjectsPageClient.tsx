@@ -24,7 +24,7 @@ export default function ProjectsPageClient() {
       };
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pt-10">
+    <section id="projects" className="mx-auto max-w-7xl px-4 pt-10">
       <header className="mb-10 text-center">
         <h1 className="text-4xl sm:text-5xl pb-2 font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-neutral-100 dark:to-neutral-200">
           {t.title}

@@ -37,7 +37,6 @@ import {
 
 import { LiquidButton } from '../ui/liquid-glass-button';
 import LangSwitch from '../LangSwitch';
-import { useScrollTopOnPathChange } from '@/hooks/useScrollToponPathChange';
 
 /* ================= helpers locale ================= */
 
@@ -71,63 +70,63 @@ const TEXTS = {
     sections: [
       {
         title: 'Accueil',
-        href: '/',
+        href: '/#home',
         links: [],
       },
       {
         title: 'Nos Services',
-        href: '/nos-services',
+        href: '/nos-services#nos-services',
         links: [
           {
             label: 'Applications Web, Mobiles & SaaS',
-            href: '/nos-services/#saas-apps',
+            href: '/nos-services#saas-apps',
             icon: <IconDeviceLaptop stroke={2} />,
           },
           {
             label: 'Automatisation & IA',
-            href: '/nos-services/#automatisation-ia',
+            href: '/nos-services#automatisation-ia',
             icon: <IconCpu stroke={2} />,
           },
           {
             label: 'Stratégies Digitales & Croissance',
-            href: '/nos-services/#scaling',
+            href: '/nos-services#scaling',
             icon: <IconChartLine stroke={2} />,
           },
           {
             label: 'Ce qui fait notre différence',
-            href: '/nos-services/#pourquoi-nous',
+            href: '/nos-services#pourquoi-nous',
             icon: <IconThumbUp stroke={2} />,
           },
           {
             label: 'Foire aux questions',
-            href: '/nos-services/#faq',
+            href: '/nos-services#faq',
             icon: <IconHelpHexagon stroke={2} />,
           },
         ],
       },
       {
         title: 'À Propos',
-        href: '/about',
+        href: '/about#notre-histoire',
         links: [
           {
             label: 'Notre Histoire',
-            href: '/about/#notre-histoire',
+            href: '/about#notre-histoire',
             icon: <IconHistory stroke={2} />,
           },
           {
             label: 'Notre Vision',
-            href: '/about/#notre-vision',
+            href: '/about#notre-vision',
             icon: <IconEye stroke={2} />,
           },
           {
             label: 'Notre Garantie',
-            href: '/about/#notre-garantie',
+            href: '/about#notre-garantie',
             icon: <IconHelpHexagon stroke={2} />,
           },
         ],
       },
       { title: 'Conseils Digitaux', href: '/blog', links: [] },
-      { title: 'Nos Projets', href: '/projects', links: [] },
+      { title: 'Nos Projets', href: '/projects#projects', links: [] },
     ] as Section[],
   },
 
@@ -138,34 +137,34 @@ const TEXTS = {
     contactCta: 'Contact us!',
     cancel: 'Cancel',
     sections: [
-      { title: 'Home', href: '/', links: [] },
+      { title: 'Home', href: '/#home', links: [] },
       {
         title: 'Our Services',
-        href: '/nos-services',
+        href: '/nos-services#nos-services',
         links: [
           {
             label: 'Web, Mobile & SaaS Apps',
-            href: '/nos-services/#saas-apps',
+            href: '/nos-services#saas-apps',
             icon: <IconDeviceLaptop stroke={2} />,
           },
           {
             label: 'Automation & AI',
-            href: '/nos-services/#automatisation-ia',
+            href: '/nos-services#automatisation-ia',
             icon: <IconCpu stroke={2} />,
           },
           {
             label: 'Digital Strategies & Growth',
-            href: '/nos-services/#scaling',
+            href: '/nos-services#scaling',
             icon: <IconChartLine stroke={2} />,
           },
           {
             label: 'What makes us different',
-            href: '/nos-services/#pourquoi-nous',
+            href: '/nos-services#pourquoi-nous',
             icon: <IconThumbUp stroke={2} />,
           },
           {
             label: 'FAQ',
-            href: '/nos-services/#faq',
+            href: '/nos-services#faq',
             icon: <IconHelpHexagon stroke={2} />,
           },
         ],
@@ -176,23 +175,23 @@ const TEXTS = {
         links: [
           {
             label: 'Our Story',
-            href: '/about/#notre-histoire',
+            href: '/about#notre-histoire',
             icon: <IconHistory stroke={2} />,
           },
           {
             label: 'Our Vision',
-            href: '/about/#notre-vision',
+            href: '/about#notre-vision',
             icon: <IconEye stroke={2} />,
           },
           {
             label: 'Our Guarantee',
-            href: '/about/#notre-garantie',
+            href: '/about#notre-garantie',
             icon: <IconHelpHexagon stroke={2} />,
           },
         ],
       },
       { title: 'Digital Advice', href: '/blog', links: [] },
-      { title: 'Our Projects', href: '/projects', links: [] },
+      { title: 'Our Projects', href: '/projects#projects', links: [] },
     ] as Section[],
   },
 } as const;
@@ -202,9 +201,6 @@ const TEXTS = {
 export function HeaderResponsive() {
   const { isEN } = useLocale();
   const DURATION = 260;
-
-  // hook global → scrollTop automatique après chaque navigation
-  useScrollTopOnPathChange();
 
   // sections localisées
   const headerLinks: Section[] = (
@@ -367,7 +363,7 @@ export function HeaderResponsive() {
             <DrawerFooter>
               <DrawerClose asChild>
                 <button className="relative group/btn mt-10 block h-14 w-full rounded-full text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]">
-                  <Link scroll href={localizeHref('/contact', isEN)}>
+                  <Link scroll href={'/contact'}>
                     {t.contactCta}
                   </Link>
                 </button>
