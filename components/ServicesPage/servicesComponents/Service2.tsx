@@ -2,134 +2,51 @@
 'use client';
 
 import * as React from 'react';
-import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { LiquidLink } from '@/components/ui/liquid-link';
+import { motion } from 'motion/react';
 import { IconArrowRight } from '@tabler/icons-react';
-import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
-function useLocale() {
-  const pathname = usePathname() || '/';
-  return { isEN: /^\/en(\/|$)/.test(pathname) };
-}
-function localizeHref(href: string, isEN: boolean) {
-  if (!isEN) return href;
-  if (/^(https?:)?\/\//.test(href)) return href;
-  if (/^\/en(\/|$)/.test(href)) return href;
-  if (href === '/') return '/en';
-  if (href.startsWith('/#')) return `/en${href}`;
-  return href.startsWith('/') ? `/en${href}` : `/en/${href}`;
-}
+type Feature = {
+  title: string;
+  slug: string;
+  description: React.ReactNode;
+};
+
+const GRID: Feature[] = [
+  {
+    title: 'IA & Marketing',
+    slug: 'automatisation-solutions-ia-marketing',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>CRM intelligent, segmentation automatisée et <b>scénarios de conversion</b>.</li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Prospection Téléphonique',
+    slug: 'prospection-telephone-ia',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>
+          Assistant vocal : <b>appels automatisés</b>, suivi et relances optimisées.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Emailing Automatisé',
+    slug: 'automatisation-ia-emailing',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>
+          Augmentez vos conversions grâce à l’<b>emailing piloté par IA</b>.
+        </li>
+      </ul>
+    ),
+  },
+];
 
 export function Service2() {
-  const { isEN } = useLocale();
-
-  const TITLE = isEN ? (
-    <>
-      Automation & <span className="text-sky-500 dark:text-sky-400">AI</span> to
-      power your efficiency
-    </>
-  ) : (
-    <>
-      Automatisation &{' '}
-      <span className="text-sky-500 dark:text-sky-400">IA</span> au service de
-      votre efficacité
-    </>
-  );
-
-  const INTRO = isEN ? (
-    <>
-      Free up time and <b>improve conversions</b> with our <b>automation</b> and{' '}
-      <b>artificial intelligence</b> solutions. From smart CRMs to voice
-      assistants, we integrate tools that work for you.
-    </>
-  ) : (
-    <>
-      Libérez du temps et <b>optimisez vos conversions</b> grâce à nos{' '}
-      <b>solutions d’automatisation</b> et d’<b>intelligence artificielle</b>.
-      Du CRM intelligent aux assistants vocaux, nous intégrons des outils qui
-      travaillent pour vous.
-    </>
-  );
-
-  const gridFR = [
-    {
-      title: 'IA & Marketing',
-      slug: 'automatisation-solutions-ia-marketing',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            CRM intelligent, segmentation automatisée et{' '}
-            <b>scénarios de conversion</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Prospection Téléphonique',
-      slug: 'prospection-telephone-ia',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Assistant vocal : <b>appels automatisés</b>, suivi et relances
-            optimisées.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Emailing Automatisé',
-      slug: 'automatisation-ia-emailing',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Augmentez vos conversions grâce à l’<b>emailing piloté par IA</b>.
-          </li>
-        </ul>
-      ),
-    },
-  ];
-
-  const gridEN = [
-    {
-      title: 'AI & Marketing',
-      slug: 'automatisation-solutions-ia-marketing',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Smart CRM, automated segmentation, and <b>conversion scenarios</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Phone Prospecting',
-      slug: 'prospection-telephone-ia',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Voice assistant: <b>automated calls</b>, tracking, and optimized
-            follow-ups.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Automated Emailing',
-      slug: 'automatisation-ia-emailing',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Increase conversions with <b>AI-driven emailing</b>.
-          </li>
-        </ul>
-      ),
-    },
-  ];
-
-  const GRID = isEN ? gridEN : gridFR;
-
   return (
     <section className="relative pb-20 pt-14 md:pt-20">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -147,7 +64,7 @@ export function Service2() {
                      bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
                      dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
         >
-          {TITLE}
+          Automatisation & <span className="text-sky-500 dark:text-sky-400">IA</span> au service de votre efficacité
         </motion.h2>
 
         <motion.p
@@ -157,32 +74,27 @@ export function Service2() {
           transition={{ duration: 0.55, ease: 'easeOut', delay: 0.1 }}
           className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg"
         >
-          {INTRO}
+          Libérez du temps et <b>optimisez vos conversions</b> grâce à nos{' '}
+          <b>solutions d’automatisation</b> et d’<b>intelligence artificielle</b>. Du CRM intelligent aux
+          assistants vocaux, nous intégrons des outils qui travaillent pour vous.
         </motion.p>
 
         <div className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRID.map((feature) => (
-            <Link
-              href={localizeHref(`/nos-services/${feature.slug}`, isEN)}
-              key={feature.title}
-              className="group"
-            >
+            <Link href={`/nos-services/${feature.slug}`} key={feature.title} className="group">
               <motion.article
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.35,
-                  ease: 'easeInOut',
-                }}
-                className="relative  flex flex-col  justify-between group rounded-[28px] h-full p-8 backdrop-blur-2xl overflow-hidden
-                       bg-[linear-gradient(135deg,rgba(255,255,255,.85),rgba(240,245,252,.45))]
-                       dark:bg-[linear-gradient(135deg,rgba(10,14,20,.9),rgba(10,14,20,.65))]
-                       border border-white/40 dark:border-[rgba(56,130,246,0.2)]
-                       shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)]
-                       dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.15)]
-                       transform transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]
-                       "
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                className="relative flex h-full flex-col justify-between rounded-2xl p-8 overflow-hidden
+                           backdrop-blur-2xl
+                           bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]
+                           dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]
+                           border border-white/50 dark:border-[rgba(56,130,246,0.20)]
+                           shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)]
+                           dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]
+                           transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]"
               >
                 <span
                   aria-hidden
@@ -195,11 +107,11 @@ export function Service2() {
                 <div className="relative z-10 mt-4 text-neutral-700 dark:text-neutral-300 text-sm xl:text-[15px] leading-relaxed">
                   {feature.description}
                 </div>
-                <div className="relative z-10 mt-5 flex justify-end">
-                  <LiquidButton className="!p-5">
-                    {' '}
+
+                <div className="relative z-10 mt-6 flex justify-end">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/80 ring-1 ring-black/10 shadow-md dark:bg-neutral-900/80 dark:ring-white/10">
                     <IconArrowRight className="h-5 w-5 text-sky-600 dark:text-sky-400" />
-                  </LiquidButton>
+                  </span>
                 </div>
               </motion.article>
             </Link>
@@ -207,12 +119,14 @@ export function Service2() {
         </div>
 
         <div className="mt-10 flex justify-center">
-          <LiquidLink
-            href={localizeHref('/contact', isEN)}
-            className="text-md dark:backdrop-blur-sm"
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-[15px] font-semibold
+                       bg-sky-500 text-white shadow-[0_12px_30px_-10px_rgba(2,132,199,.65)]
+                       hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70"
           >
-            {isEN ? 'Explore our AI solutions' : 'Découvrez nos solutions IA'}
-          </LiquidLink>
+            Demander une démo
+          </Link>
         </div>
       </div>
     </section>

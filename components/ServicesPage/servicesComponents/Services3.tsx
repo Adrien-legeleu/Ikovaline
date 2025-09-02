@@ -2,200 +2,78 @@
 'use client';
 
 import * as React from 'react';
-import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { LiquidLink } from '@/components/ui/liquid-link';
+import { motion } from 'motion/react';
 import { IconArrowRight } from '@tabler/icons-react';
-import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
-function useLocale() {
-  const pathname = usePathname() || '/';
-  return { isEN: /^\/en(\/|$)/.test(pathname) };
-}
-function localizeHref(href: string, isEN: boolean) {
-  if (!isEN) return href;
-  if (/^(https?:)?\/\//.test(href)) return href;
-  if (/^\/en(\/|$)/.test(href)) return href;
-  if (href === '/') return '/en';
-  if (href.startsWith('/#')) return `/en${href}`;
-  return href.startsWith('/') ? `/en${href}` : `/en/${href}`;
-}
+type Feature = {
+  title: string;
+  slug: string;
+  description: React.ReactNode;
+};
+
+const GRID: Feature[] = [
+  {
+    title: 'Études de Marché',
+    slug: 'etudes-marche-sur-mesure',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>
+          Analyse du marché, identification des cibles et tendances pour orienter vos <b>stratégies</b>.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Sondages & Enquêtes',
+    slug: 'sondages-marche-enquetes-terrain',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>
+          Collecte et analyse de données fiables pour des <b>décisions éclairées</b>.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Stratégie Commerciale',
+    slug: 'strategie-commerciale-developpement-business',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>Mise en place de plans performants pour <b>augmenter vos ventes</b>.</li>
+      </ul>
+    ),
+  },
+  {
+    title: 'SEO & Référencement',
+    slug: 'seo-referencement-naturel',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>Boostez votre visibilité organique avec un <b>SEO optimisé</b>.</li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Campagnes SEA',
+    slug: 'gestion-campagnes-sea',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>Publicités ciblées et pilotage axé <b>ROI</b>.</li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Développement International',
+    slug: 'developpement-international',
+    description: (
+      <ul className="list-disc pl-4 space-y-3">
+        <li>Accompagnement pour <b>conquérir de nouveaux marchés</b>.</li>
+      </ul>
+    ),
+  },
+];
 
 export function Service3() {
-  const { isEN } = useLocale();
-
-  const TITLE = isEN ? (
-    <>
-      Digital Strategies &{' '}
-      <span className="text-sky-500 dark:text-sky-400">Growth</span> tailored to
-      you
-    </>
-  ) : (
-    <>
-      Stratégies Digitales &{' '}
-      <span className="text-sky-500 dark:text-sky-400">Croissance</span>{' '}
-      sur-mesure
-    </>
-  );
-
-  const INTRO = isEN ? (
-    <>
-      We activate the right <b>levers</b> — digital marketing, prospecting, SEO,
-      campaigns, social — to <b>accelerate growth</b>, generate qualified leads,
-      and win new markets.
-    </>
-  ) : (
-    <>
-      Nous activons tous les <b>leviers</b> pertinents — marketing digital,
-      prospection, SEO, campagnes, réseaux sociaux — pour{' '}
-      <b>accélérer votre croissance</b>, générer des leads qualifiés et
-      conquérir de nouveaux marchés.
-    </>
-  );
-
-  const gridFR = [
-    {
-      title: 'Études de Marché',
-      slug: 'etudes-marche-sur-mesure',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Analyse du marché, identification des cibles et tendances pour
-            orienter vos <b>stratégies</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Sondages & Enquêtes',
-      slug: 'sondages-marche-enquetes-terrain',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Collecte et analyse de données fiables pour des{' '}
-            <b>décisions éclairées</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Stratégie Commerciale',
-      slug: 'strategie-commerciale-developpement-business',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Mise en place de plans performants pour <b>augmenter vos ventes</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'SEO & Référencement',
-      slug: 'seo-referencement-naturel',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Boostez votre visibilité organique avec un <b>SEO optimisé</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Campagnes SEA',
-      slug: 'gestion-campagnes-sea',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Publicités ciblées et pilotage axé <b>ROI</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Développement International',
-      slug: 'developpement-international',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Accompagnement pour <b>conquérir de nouveaux marchés</b>.
-          </li>
-        </ul>
-      ),
-    },
-  ];
-
-  const gridEN = [
-    {
-      title: 'Market Research',
-      slug: 'etudes-marche-sur-mesure',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Market analysis, audience & trends to guide your <b>strategies</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Surveys & Field Studies',
-      slug: 'sondages-marche-enquetes-terrain',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Reliable data collection and analysis for <b>informed decisions</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'Sales Strategy',
-      slug: 'strategie-commerciale-developpement-business',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            High-performing plans to <b>increase your sales</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'SEO',
-      slug: 'seo-referencement-naturel',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Boost organic visibility with <b>optimized SEO</b>.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'SEA Campaigns',
-      slug: 'gestion-campagnes-sea',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Targeted ads with <b>ROI-driven</b> management.
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: 'International Expansion',
-      slug: 'developpement-international',
-      description: (
-        <ul className="list-disc pl-4 space-y-3">
-          <li>
-            Support to <b>enter new markets</b>.
-          </li>
-        </ul>
-      ),
-    },
-  ];
-
-  const GRID = isEN ? gridEN : gridFR;
-
   return (
     <section className="relative pb-20 pt-14 md:pt-20">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -213,7 +91,7 @@ export function Service3() {
                      bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
                      dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
         >
-          {TITLE}
+          Stratégies Digitales & <span className="text-sky-500 dark:text-sky-400">Croissance</span> sur-mesure
         </motion.h2>
 
         <motion.p
@@ -223,25 +101,20 @@ export function Service3() {
           transition={{ duration: 0.55, ease: 'easeOut', delay: 0.1 }}
           className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg"
         >
-          {INTRO}
+          Nous activons les bons <b>leviers</b> — marketing digital, prospection, SEO, campagnes, social — pour{' '}
+          <b>accélérer votre croissance</b>, générer des leads qualifiés et gagner de nouveaux marchés.
         </motion.p>
 
         <div className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRID.map((feature) => (
-            <Link
-              href={localizeHref(`/nos-services/${feature.slug}`, isEN)}
-              key={feature.title}
-              className="group"
-            >
+            <Link href={`/nos-services/${feature.slug}`} key={feature.title} className="group">
               <motion.article
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.35,
-                  ease: 'easeInOut',
-                }}
-                className="relative overflow-hidden h-full flex flex-col justify-between rounded-3xl p-6 xl:p-7 backdrop-blur-2xl
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                className="relative overflow-hidden h-full flex flex-col justify-between rounded-2xl p-6 xl:p-7
+                           backdrop-blur-2xl
                            bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]
                            dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]
                            border border-white/50 dark:border-[rgba(56,130,246,0.20)]
@@ -260,11 +133,11 @@ export function Service3() {
                 <div className="relative z-10 mt-4 text-neutral-700 dark:text-neutral-300 text-sm xl:text-[15px] leading-relaxed">
                   {feature.description}
                 </div>
-                <div className="relative z-10 mt-5 flex justify-end">
-                  <LiquidButton className="!p-5">
-                    {' '}
+
+                <div className="relative z-10 mt-6 flex justify-end">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/80 ring-1 ring-black/10 shadow-md dark:bg-neutral-900/80 dark:ring-white/10">
                     <IconArrowRight className="h-5 w-5 text-sky-600 dark:text-sky-400" />
-                  </LiquidButton>
+                  </span>
                 </div>
               </motion.article>
             </Link>
@@ -272,12 +145,14 @@ export function Service3() {
         </div>
 
         <div className="mt-10 flex justify-center">
-          <LiquidLink
-            href={localizeHref('/contact', isEN)}
-            className="text-md dark:backdrop-blur-sm"
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-[15px] font-semibold
+                       bg-sky-500 text-white shadow-[0_12px_30px_-10px_rgba(2,132,199,.65)]
+                       hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70"
           >
-            {isEN ? 'Grow your business' : 'Boostez votre business'}
-          </LiquidLink>
+            Booster ma croissance
+          </Link>
         </div>
       </div>
     </section>

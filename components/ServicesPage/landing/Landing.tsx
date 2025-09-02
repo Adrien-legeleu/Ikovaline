@@ -2,177 +2,162 @@
 'use client';
 
 import * as React from 'react';
-import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { LiquidLink } from '@/components/ui/liquid-link';
-import { IconCpu, IconRobot, IconTrendingUp } from '@tabler/icons-react';
+import Link from 'next/link';
+import { motion } from 'motion/react';
+import {
+  IconCpu,
+  IconRobot,
+  IconTrendingUp,
+  IconStarFilled,
+} from '@tabler/icons-react';
 
-function useLocale() {
-  const pathname = usePathname() || '/';
-  const isEN = /^\/en(\/|$)/.test(pathname);
-  return { isEN };
-}
-function localizeHref(href: string, isEN: boolean) {
-  if (!isEN) return href;
-  if (/^(https?:)?\/\//.test(href)) return href;
-  if (/^\/en(\/|$)/.test(href)) return href;
-  if (href === '/') return '/en';
-  if (href.startsWith('/#')) return `/en${href}`;
-  return href.startsWith('/') ? `/en${href}` : `/en/${href}`;
+type Pillar = {
+  id: 'saas-apps' | 'automatisation-ia' | 'scaling';
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  href: string;
+};
+
+const PILLARS: Pillar[] = [
+  {
+    id: 'saas-apps',
+    icon: <IconCpu className="h-7 w-7 text-sky-500 dark:text-sky-400" />,
+    title: 'Applications & SaaS',
+    desc:
+      "Conception sur-mesure d'applications web, mobiles et SaaS performantes.",
+    href: '/nos-services/#saas-apps',
+  },
+  {
+    id: 'automatisation-ia',
+    icon: <IconRobot className="h-7 w-7 text-sky-500 dark:text-sky-400" />,
+    title: 'Automatisation & IA',
+    desc:
+      "Optimisez vos processus avec l'intelligence artificielle et l'automatisation.",
+    href: '/nos-services/#automatisation-ia',
+  },
+  {
+    id: 'scaling',
+    icon: <IconTrendingUp className="h-7 w-7 text-sky-500 dark:text-sky-400" />,
+    title: 'Croissance digitale',
+    desc:
+      'Boostez votre visibilité, attirez plus de clients et accélérez vos résultats.',
+    href: '/nos-services/#scaling',
+  },
+];
+
+function PrimaryButton({
+  href,
+  children,
+  className = '',
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+      <Link
+        href={href}
+        className={[
+          'inline-flex items-center justify-center rounded-xl px-5 py-3 text-[15px] font-semibold',
+          'bg-sky-500 text-white shadow-[0_12px_30px_-10px_rgba(2,132,199,.65)]',
+          'hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70',
+          className,
+        ].join(' ')}
+      >
+        {children}
+      </Link>
+    </motion.div>
+  );
 }
 
 export default function ServicesHero() {
-  const { isEN } = useLocale();
-
-  const TEXTS = isEN
-    ? {
-        title: (
-          <>
-            Modern{' '}
-            <span className="text-sky-500 dark:text-sky-400">digital</span>{' '}
-            solutions to boost your business
-          </>
-        ),
-        subtitle:
-          'From idea to production, we build robust, scalable solutions tailored to your needs.',
-        cta: 'Discover',
-        pillars: [
-          {
-            id: 'saas-apps',
-            icon: (
-              <IconCpu className="h-8 w-8 text-sky-500 dark:text-sky-400" />
-            ),
-            title: 'Applications & SaaS',
-            desc: 'Custom-built web, mobile and SaaS applications that perform.',
-          },
-          {
-            id: 'automatisation-ia',
-            icon: (
-              <IconRobot className="h-8 w-8 text-sky-500 dark:text-sky-400" />
-            ),
-            title: 'Automation & AI',
-            desc: 'Optimize your processes with automation and artificial intelligence.',
-          },
-          {
-            id: 'scaling',
-            icon: (
-              <IconTrendingUp className="h-8 w-8 text-sky-500 dark:text-sky-400" />
-            ),
-            title: 'Digital Growth',
-            desc: 'Increase visibility, attract more customers, and accelerate results.',
-          },
-        ],
-      }
-    : {
-        title: (
-          <>
-            Des solutions{' '}
-            <span className="text-sky-500 dark:text-sky-400">digitales</span>{' '}
-            modernes pour propulser votre entreprise
-          </>
-        ),
-        subtitle:
-          'De l’idée à la mise en production, nous concevons des solutions digitales robustes, évolutives et centrées sur vos besoins.',
-        cta: 'Découvrir',
-        pillars: [
-          {
-            id: 'saas-apps',
-            icon: (
-              <IconCpu className="h-8 w-8 text-sky-500 dark:text-sky-400" />
-            ),
-            title: 'Applications & SaaS',
-            desc: "Conception sur-mesure d'applications web, mobiles et SaaS performantes.",
-          },
-          {
-            id: 'automatisation-ia',
-            icon: (
-              <IconRobot className="h-8 w-8 text-sky-500 dark:text-sky-400" />
-            ),
-            title: 'Automatisation & IA',
-            desc: "Optimisez vos processus avec l'intelligence artificielle et l'automatisation.",
-          },
-          {
-            id: 'scaling',
-            icon: (
-              <IconTrendingUp className="h-8 w-8 text-sky-500 dark:text-sky-400" />
-            ),
-            title: 'Croissance digitale',
-            desc: 'Boostez votre visibilité, attirez plus de clients et accélérez vos résultats.',
-          },
-        ],
-      };
-
   return (
-    <section
-      id="nos-services"
-      className="relative overflow-hidden flex flex-col items-center justify-center text-center pt-28 pb-32 px-6"
-    >
+    <section className="relative overflow-hidden flex flex-col items-center text-center pt-24 md:pt-28 pb-20 md:pb-28 px-6">
+      {/* halos d’arrière-plan (comme la home) */}
       <div aria-hidden className="absolute inset-0 -z-10">
         <span className="absolute -top-40 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full blur-[200px] bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)] opacity-30 dark:opacity-40" />
         <span className="absolute bottom-0 right-1/2 h-[32rem] w-[32rem] translate-x-1/2 rounded-full blur-[160px] bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-25 dark:opacity-35" />
       </div>
 
+      {/* Bande “avis Google” */}
+      <div className="mb-6 flex items-center gap-2 text-sky-500">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <IconStarFilled key={i} className="h-5 w-5" />
+        ))}
+        <span className="ml-2 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
+          +67 avis Google
+        </span>
+      </div>
+
+      {/* Titre & sous-titre */}
       <motion.h1
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent max-w-4xl"
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="max-w-4xl text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-gradient-to-t from-neutral-900 via-neutral-800 to-neutral-600 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
       >
-        {TEXTS.title}
+        Des solutions digitales modernes pour propulser votre entreprise
       </motion.h1>
 
       <motion.p
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 }}
-        className="mt-6 max-w-2xl text-lg md:text-xl text-neutral-700 dark:text-neutral-300"
+        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+        className="mt-5 max-w-2xl text-[17px] md:text-lg leading-7 text-neutral-700 dark:text-neutral-300"
       >
-        {TEXTS.subtitle}
+        De l’idée à la mise en production, nous concevons des solutions
+        robustes, évolutives et centrées sur vos besoins.
       </motion.p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 max-w-6xl">
-        {TEXTS.pillars.map((p, i) => (
+      {/* CTA principal */}
+      <div className="mt-8">
+        <PrimaryButton href="/contact">Nous contacter</PrimaryButton>
+      </div>
+
+      {/* Cartes “piliers” */}
+      <div className="mt-16 grid w-full max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {PILLARS.map((p, i) => (
           <motion.div
             key={p.id}
-            initial={{ y: 20 }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut', delay: i * 0.2 }}
-            viewport={{ once: true }}
-            className="relative group overflow-hidden rounded-[28px] p-8 backdrop-blur-2xl
-             bg-[linear-gradient(135deg,rgba(255,255,255,.85),rgba(240,245,252,.45))]
-             dark:bg-[linear-gradient(135deg,rgba(10,14,20,.9),rgba(10,14,20,.65))]
-             border border-white/40 dark:border-[rgba(56,130,246,0.2)]
-             shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)]
-             dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.15)]
-             transform transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]
-             flex flex-col justify-between h-full"
+            initial={{ y: 18, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
           >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -bottom-10 left-1/2 h-20 w-[80%] -translate-x-1/2 rounded-full blur-3xl 
-               bg-[radial-gradient(ellipse_at_center,rgba(0,168,232,.5),rgba(37,99,235,.4),transparent_70%)]"
-            />
-            <div className="relative z-10 flex flex-col gap-4">
-              <div className="mx-auto p-3 rounded-2xl bg-white/70 dark:bg-neutral-900/50 shadow-inner">
+            <Link
+              href={p.href}
+              className="group block h-full rounded-[28px] border border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,.9),rgba(240,245,252,.55))] p-7 text-left shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)] backdrop-blur-2xl transition-all hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.22)] dark:border-[rgba(56,130,246,0.2)] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.9),rgba(10,14,20,.65))] dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.15)]"
+            >
+              <div className="mb-4 inline-flex items-center gap-2 rounded-2xl bg-white/70 px-3 py-2 shadow-inner ring-1 ring-black/5 dark:bg-neutral-900/60 dark:ring-white/10">
                 {p.icon}
+                <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                  {p.title}
+                </span>
               </div>
-              <h3 className="text-center text-xl font-bold text-neutral-900 dark:text-white">
+
+              <h3 className="text-xl font-bold leading-tight text-neutral-900 dark:text-white">
                 {p.title}
               </h3>
-              <p className="text-center text-neutral-700 dark:text-neutral-300 text-sm">
+              <p className="mt-2 text-[15px] leading-7 text-neutral-700 dark:text-neutral-300">
                 {p.desc}
               </p>
-            </div>
-            <div className="relative z-10 mt-6">
-              <div className="flex justify-center">
-                <LiquidLink
-                  href={localizeHref(`/nos-services/#${p.id}`, isEN)}
-                  className="mt-1"
+
+              <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-neutral-800 transition group-hover:translate-x-0.5 dark:text-neutral-200">
+                En savoir plus
+                <svg
+                  aria-hidden
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
                 >
-                  {TEXTS.cta}
-                </LiquidLink>
+                  <path d="M5 12h14" strokeWidth="2" />
+                  <path d="M13 5l7 7-7 7" strokeWidth="2" />
+                </svg>
               </div>
-            </div>
+            </Link>
           </motion.div>
         ))}
       </div>

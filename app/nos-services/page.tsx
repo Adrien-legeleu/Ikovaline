@@ -1,6 +1,5 @@
 import FAQ from '@/components/ServicesPage/FAQ/FAQ';
 import Landing from '@/components/ServicesPage/landing/Landing';
-import { GridOverlay } from '@/components/ServicesPage/servicesComponents/GridOverlay';
 import { Service1 } from '@/components/ServicesPage/servicesComponents/Service1';
 import { Service2 } from '@/components/ServicesPage/servicesComponents/Service2';
 import { Service3 } from '@/components/ServicesPage/servicesComponents/Services3';
@@ -12,6 +11,7 @@ import * as React from 'react';
 import { FAQ_SEO_FR } from '@/components/ServicesPage/FAQ/faq-seo.fr';
 import CTAServices from '@/components/ServicesPage/CTAServices';
 import Glow from '@/components/ui/glow';
+import { Background } from '@/components/ServicesPage/servicesComponents/GridOverlay';
 
 export const metadata: Metadata = {
   title: 'Nos Services - Solutions Digitales sur Mesure | Ikovaline',
@@ -85,7 +85,7 @@ export default function Page() {
         </div>
         <Landing />
         <div className="relative">
-          <GridOverlay size={22} />
+          <Background/>
           <Service1 />
           <Service2 />
           <Service3 />

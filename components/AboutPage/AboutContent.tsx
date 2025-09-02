@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { TracingBeam } from '@/components/ui/tracing-beam';
 import ImageHistory1 from '@/public/images/About/team-ikovaline (3).jpg';
 import ImageHistory2 from '@/public/images/About/team-ikovaline (4).jpg';
-import { Highlight } from '@/components/ui/hero-highlight';
 import { motion } from 'framer-motion';
 import { IconQuote } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
+import { Highlighter } from '../magicui/highlighter';
 
 function useLocale() {
   const pathname = usePathname() || '/';
@@ -74,12 +74,20 @@ function getContent(isEN: boolean) {
               transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
               className="leading-8"
             >
-              Founded by <Highlight>Florent</Highlight>, Ikovaline is a
-              student-led start-up specializing in{' '}
-              <Highlight>digital</Highlight> and transformation. Born from a
-              strong will to support businesses, it designs tailored solutions
-              to strengthen their <Highlight>visibility</Highlight> and
-              accelerate growth.
+              Founded by{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                Florent
+              </Highlighter>
+              , Ikovaline is a student-led start-up specializing in{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                digital
+              </Highlighter>{' '}
+              and transformation. Born from a strong will to support businesses,
+              it designs tailored solutions to strengthen their{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                visibility
+              </Highlighter>{' '}
+              and accelerate growth.
             </motion.p>
 
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 my-10">
@@ -101,10 +109,16 @@ function getContent(isEN: boolean) {
               transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
               className="leading-8"
             >
-              Ikovaline <Highlight>stands out</Highlight> with a clear mission:
-              helping every client reach the next{' '}
-              <Highlight>milestone</Highlight> through innovative services
-              focused on measurable and lasting results.
+              Ikovaline{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                stands out
+              </Highlighter>{' '}
+              with a clear mission: helping every client reach the next{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                milestone
+              </Highlighter>{' '}
+              through innovative services focused on measurable and lasting
+              results.
             </motion.p>
           </>
         ),
@@ -121,10 +135,19 @@ function getContent(isEN: boolean) {
               transition={{ duration: 0.6 }}
               className="leading-8"
             >
-              Ikovaline aims for a turnover of <Highlight>€300,000</Highlight>{' '}
+              Ikovaline aims for a turnover of{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                €300,000
+              </Highlighter>{' '}
               by 2026. This ambition relies on delivering{' '}
-              <Highlight>high-performance</Highlight> services and{' '}
-              <Highlight>personalized</Highlight> support for every company.
+              <Highlighter action="highlight" color="#87CEFA">
+                high-performance
+              </Highlighter>{' '}
+              services and{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                personalized
+              </Highlighter>{' '}
+              support for every company.
             </motion.p>
 
             <motion.p
@@ -157,9 +180,15 @@ function getContent(isEN: boolean) {
               className="leading-8"
             >
               At Ikovaline, we commit to delivering tangible{' '}
-              <Highlight> results</Highlight> with tailored digital{' '}
-              <Highlight>solutions</Highlight>. However, the refund guarantee is
-              strictly governed by the following conditions:
+              <Highlighter action="highlight" color="#87CEFA">
+                results
+              </Highlighter>{' '}
+              with tailored digital{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                solutions
+              </Highlighter>
+              . However, the refund guarantee is strictly governed by the
+              following conditions:
             </motion.p>
 
             {/* 1 */}
@@ -176,7 +205,9 @@ function getContent(isEN: boolean) {
             >
               <p className="font-semibold">
                 1. 📦 Provide required assets within{' '}
-                <Highlight>7 days</Highlight>
+                <Highlighter action="highlight" color="#87CEFA">
+                  7 days
+                </Highlighter>
               </p>
               <p className="text-neutral-700 dark:text-neutral-300">
                 The client must send within 7 calendar days from the
@@ -185,13 +216,19 @@ function getContent(isEN: boolean) {
               <ul className="list-disc list-inside space-y-1">
                 <li>All necessary content (copy, images, logos, etc.)</li>
                 <li>
-                  <Highlight>Access</Highlight> to platforms, sites, hosts,
-                  domains, CMS, analytics, etc.
+                  <Highlighter action="highlight" color="#87CEFA">
+                    Access
+                  </Highlighter>{' '}
+                  to platforms, sites, hosts, domains, CMS, analytics, etc.
                 </li>
                 <li>Any information useful for proper project execution.</li>
               </ul>
               <p className="text-neutral-700 dark:text-neutral-300">
-                If missing or late, the refund<Highlight> guarantee</Highlight>{' '}
+                If missing or late, the refund
+                <Highlighter action="highlight" color="#87CEFA">
+                  {' '}
+                  guarantee
+                </Highlighter>{' '}
                 is automatically void.
               </p>
             </motion.div>
@@ -206,14 +243,21 @@ function getContent(isEN: boolean) {
             >
               <p className="font-semibold">
                 2. 🧾 Legal refund request timeframe –{' '}
-                <Highlight>30 days</Highlight>
+                <Highlighter action="highlight" color="#87CEFA">
+                  30 days
+                </Highlighter>
               </p>
               <p className="text-neutral-700 dark:text-neutral-300">
                 The client has 30 days from the date of the first{' '}
-                <Highlight>invoice</Highlight> (deposit or full payment) to
-                submit a<Highlight>formal</Highlight> written request (email
-                recommended or registered letter). After this period, the
-                request is not admissible.
+                <Highlighter action="highlight" color="#87CEFA">
+                  invoice
+                </Highlighter>{' '}
+                (deposit or full payment) to submit a
+                <Highlighter action="highlight" color="#87CEFA">
+                  formal
+                </Highlighter>{' '}
+                written request (email recommended or registered letter). After
+                this period, the request is not admissible.
               </p>
             </motion.div>
 
@@ -236,19 +280,33 @@ function getContent(isEN: boolean) {
               <ul className="list-disc list-inside space-y-1">
                 <li>Attend restitution meetings or planned demos.</li>
                 <li>
-                  Receive the <Highlight>final </Highlight>deliverables within
-                  the allotted time.
+                  Receive the{' '}
+                  <Highlighter action="highlight" color="#87CEFA">
+                    final
+                  </Highlighter>{' '}
+                  deliverables within the allotted time.
                 </li>
                 <li>
-                  Wait for the full<Highlight> completion</Highlight> of the
-                  service (final transfer of files, accesses, mockups, etc.)
-                  before any claim.
+                  Wait for the full
+                  <Highlighter action="highlight" color="#87CEFA">
+                    {' '}
+                    completion
+                  </Highlighter>{' '}
+                  of the service (final transfer of files, accesses, mockups,
+                  etc.) before any claim.
                 </li>
               </ul>
               <p className="text-neutral-700 dark:text-neutral-300">
-                Any attempt at unilateral<Highlight> termination</Highlight> or{' '}
-                <Highlight>refusal </Highlight>to receive without serious reason
-                cancels the guarantee.
+                Any attempt at unilateral
+                <Highlighter action="highlight" color="#87CEFA">
+                  {' '}
+                  termination
+                </Highlighter>{' '}
+                or{' '}
+                <Highlighter action="highlight" color="#87CEFA">
+                  refusal
+                </Highlighter>{' '}
+                to receive without serious reason cancels the guarantee.
               </p>
             </motion.div>
 
@@ -263,22 +321,39 @@ function getContent(isEN: boolean) {
               <p className="font-semibold">4. 🚫 Exclusions</p>
               <ul className="list-disc list-inside space-y-1">
                 <li>
-                  <Highlight>Objectives</Highlight> not defined or jointly
-                  validated before project kick-off.
+                  <Highlighter action="highlight" color="#87CEFA">
+                    Objectives
+                  </Highlighter>{' '}
+                  not defined or jointly validated before project kick-off.
                 </li>
                 <li>
-                  Delays or lack of active<Highlight> collaboration</Highlight>{' '}
+                  Delays or lack of active
+                  <Highlighter action="highlight" color="#87CEFA">
+                    {' '}
+                    collaboration
+                  </Highlighter>{' '}
                   from the client.
                 </li>
                 <li>
-                  Scope<Highlight> changes</Highlight> during the engagement.
+                  Scope
+                  <Highlighter action="highlight" color="#87CEFA">
+                    {' '}
+                    changes
+                  </Highlighter>{' '}
+                  during the engagement.
                 </li>
                 <li>
-                  <Highlight>Cancellation</Highlight> for convenience.
+                  <Highlighter action="highlight" color="#87CEFA">
+                    Cancellation
+                  </Highlighter>{' '}
+                  for convenience.
                 </li>
                 <li>
                   Delivery blocked by the client’s{' '}
-                  <Highlight>no-response</Highlight>.
+                  <Highlighter action="highlight" color="#87CEFA">
+                    no-response
+                  </Highlighter>
+                  .
                 </li>
               </ul>
             </motion.div>
@@ -302,11 +377,21 @@ function getContent(isEN: boolean) {
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             className="leading-8"
           >
-            Fondée par <Highlight>Florent</Highlight>, Ikovaline est une
-            start-up spécialisée dans le <Highlight>digital</Highlight> et la
-            transformation numérique. Née d’une volonté forte d’accompagner les
-            entreprises, elle conçoit des solutions sur-mesure pour renforcer
-            leur <Highlight>visibilité</Highlight> et accélérer leur croissance.
+            Fondée par{' '}
+            <Highlighter action="highlight" color="#87CEFA">
+              Florent
+            </Highlighter>
+            , Ikovaline est une start-up spécialisée dans le{' '}
+            <Highlighter action="highlight" color="#87CEFA">
+              digital
+            </Highlighter>{' '}
+            et la transformation numérique. Née d’une volonté forte
+            d’accompagner les entreprises, elle conçoit des solutions
+            sur-mesure pour renforcer leur{' '}
+            <Highlighter action="highlight" color="#87CEFA">
+              visibilité
+            </Highlighter>{' '}
+            et accélérer leur croissance.
           </motion.p>
 
           <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 my-10">
@@ -328,10 +413,16 @@ function getContent(isEN: boolean) {
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             className="leading-8"
           >
-            Ikovaline <Highlight>se distingue</Highlight> par sa mission : aider
-            chaque client à franchir un <Highlight>cap</Highlight> stratégique
-            grâce à des services innovants, pensés pour des résultats mesurables
-            et durables.
+            Ikovaline{' '}
+            <Highlighter action="highlight" color="#87CEFA">
+              se distingue
+            </Highlighter>{' '}
+            par sa mission : aider chaque client à franchir un{' '}
+            <Highlighter action="highlight" color="#87CEFA">
+              cap
+            </Highlighter>{' '}
+            stratégique grâce à des services innovants, pensés pour des
+            résultats mesurables et durables.
           </motion.p>
         </>
       ),
@@ -349,10 +440,20 @@ function getContent(isEN: boolean) {
             className="leading-8"
           >
             Ikovaline porte une vision claire : atteindre un chiffre d’affaires
-            de <Highlight>300 000€</Highlight> d’ici 2026. Cette ambition repose
-            sur notre capacité à offrir des services{' '}
-            <Highlight>performants</Highlight> et un accompagnement{' '}
-            <Highlight>personnalisé</Highlight>.
+            de{' '}
+            <Highlighter action="highlight" color="#87CEFA">
+              300 000€
+            </Highlighter>{' '}
+            d’ici 2026. Cette ambition repose sur notre capacité à offrir des
+            services{' '}
+            <Highlighter action="highlight" color="#87CEFA">
+              performants
+            </Highlighter>{' '}
+            et un accompagnement{' '}
+            <Highlighter action="highlight" color="#87CEFA">
+              personnalisé
+            </Highlighter>
+            .
           </motion.p>
 
           <motion.p
@@ -386,10 +487,16 @@ function getContent(isEN: boolean) {
             className="leading-8"
           >
             Chez Ikovaline, nous nous engageons à fournir des{' '}
-            <Highlight>résultats </Highlight> concrets via des solutions
-            digitales
-            <Highlight> personnalisées</Highlight>. Toutefois, la garantie de
-            remboursement est encadrée par les conditions suivantes :
+            <Highlighter action="highlight" color="#87CEFA">
+              résultats
+            </Highlighter>{' '}
+            concrets via des solutions digitales
+            <Highlighter action="highlight" color="#87CEFA">
+              {' '}
+              personnalisées
+            </Highlighter>
+            . Toutefois, la garantie de remboursement est encadrée par les
+            conditions suivantes :
           </motion.p>
 
           {/* 1 */}
@@ -402,15 +509,24 @@ function getContent(isEN: boolean) {
           >
             <p className="font-semibold">
               1. 📦 Transmission des éléments sous{' '}
-              <Highlight>7 jours</Highlight>
+              <Highlighter action="highlight" color="#87CEFA">
+                7 jours
+              </Highlighter>
             </p>
             <p className="text-neutral-700 dark:text-neutral-300">
-              Contenus, <Highlight>accès</Highlight> (sites, hébergeurs,
-              domaines, CMS, analytics, etc.) et informations utiles.
+              Contenus,{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                accès
+              </Highlighter>{' '}
+              (sites, hébergeurs, domaines, CMS, analytics, etc.) et
+              informations utiles.
             </p>
             <p className="text-neutral-700 dark:text-neutral-300">
               En cas de manquement ou retard, la{' '}
-              <Highlight>garantie </Highlight> de remboursement est annulée.
+              <Highlighter action="highlight" color="#87CEFA">
+                garantie
+              </Highlighter>{' '}
+              de remboursement est annulée.
             </p>
           </motion.div>
 
@@ -423,12 +539,21 @@ function getContent(isEN: boolean) {
             className="mt-5 space-y-2"
           >
             <p className="font-semibold">
-              2. 🧾 Délai de demande – <Highlight>30 jours</Highlight>
+              2. 🧾 Délai de demande –{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                30 jours
+              </Highlighter>
             </p>
             <p className="text-neutral-700 dark:text-neutral-300">
-              30 jours à compter de la première <Highlight>facture</Highlight>{' '}
-              pour une demande écrite formelle. Passé ce délai, la demande est
-              irrecevable.
+              30 jours à compter de la première{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                facture
+              </Highlighter>{' '}
+              pour une demande écrite{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                formelle
+              </Highlighter>
+              . Passé ce délai, la demande est irrecevable.
             </p>
           </motion.div>
 
@@ -444,18 +569,32 @@ function getContent(isEN: boolean) {
             <ul className="list-disc list-inside space-y-1">
               <li>Présence aux restitutions / démonstrations prévues.</li>
               <li>
-                Réception des livrables<Highlight> finaux</Highlight> dans les
-                délais.
+                Réception des livrables
+                <Highlighter action="highlight" color="#87CEFA">
+                  {' '}
+                  finaux
+                </Highlighter>{' '}
+                dans les délais.
               </li>
               <li>
-                Attendre la fin<Highlight> complète</Highlight> de la prestation
-                avant toute réclamation.
+                Attendre la fin
+                <Highlighter action="highlight" color="#87CEFA">
+                  {' '}
+                  complète
+                </Highlighter>{' '}
+                de la prestation avant toute réclamation.
               </li>
             </ul>
             <p className="text-neutral-700 dark:text-neutral-300">
-              Toute <Highlight>rupture </Highlight>unilatérale ou{' '}
-              <Highlight>refus </Highlight>de réception injustifié annule la
-              garantie.
+              Toute{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                rupture
+              </Highlighter>{' '}
+              unilatérale ou{' '}
+              <Highlighter action="highlight" color="#87CEFA">
+                refus
+              </Highlighter>{' '}
+              de réception injustifié annule la garantie.
             </p>
           </motion.div>
 
@@ -470,21 +609,36 @@ function getContent(isEN: boolean) {
             <p className="font-semibold">4. 🚫 Exclusions</p>
             <ul className="list-disc list-inside space-y-1">
               <li>
-                <Highlight>Objectifs</Highlight> non définis/validés avant le
-                lancement.
+                <Highlighter action="highlight" color="#87CEFA">
+                  Objectifs
+                </Highlighter>{' '}
+                non définis/validés avant le lancement.
               </li>
               <li>
-                Manque de <Highlight>collaboration </Highlight>active du client.
+                Manque de{' '}
+                <Highlighter action="highlight" color="#87CEFA">
+                  collaboration
+                </Highlighter>{' '}
+                active du client.
               </li>
               <li>
-                <Highlight>Modification</Highlight> de commande en cours.
+                <Highlighter action="highlight" color="#87CEFA">
+                  Modification
+                </Highlighter>{' '}
+                de commande en cours.
               </li>
               <li>
-                <Highlight>Annulation</Highlight> pour convenance personnelle.
+                <Highlighter action="highlight" color="#87CEFA">
+                  Annulation
+                </Highlighter>{' '}
+                pour convenance personnelle.
               </li>
-              <li>
-                Livraison bloquée par <Highlight>absence </Highlight> de
-                réponse.
+              <li >
+                Livraison bloquée par{' '}
+                <Highlighter action="highlight" color="#87CEFA">
+                  absence
+                </Highlighter>{' '}
+                de réponse.
               </li>
             </ul>
           </motion.div>

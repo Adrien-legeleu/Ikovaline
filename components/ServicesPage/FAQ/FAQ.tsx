@@ -1,34 +1,12 @@
+// components/ServicesPage/faq/FAQ.tsx
 'use client';
 
-import { usePathname } from 'next/navigation';
+import * as React from 'react';
 import Link from 'next/link';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-import React, { isValidElement, ReactNode } from 'react';
 
-/* ---------- helpers locale ---------- */
-function useLocale() {
-  const pathname = usePathname() || '/';
-  const isEN = /^\/en(\/|$)/.test(pathname);
-  return { isEN };
-}
-function localizeHref(href: string, isEN: boolean) {
-  if (!isEN) return href;
-  if (/^(https?:)?\/\//.test(href)) return href;
-  if (/^\/en(\/|$)/.test(href)) return href;
-  if (href === '/') return '/en';
-  if (href.startsWith('/#')) return `/en${href}`;
-  return href.startsWith('/') ? `/en${href}` : `/en/${href}`;
-}
-
-/* ---------- dictionnaires ---------- */
 type FaqItem = { question: React.ReactNode; answer: React.ReactNode };
 
-export const FAQ_FR: FaqItem[] = [
+const FAQ_FR: FaqItem[] = [
   {
     question: "Qu'est-ce qu'Ikovaline ?",
     answer:
@@ -37,18 +15,17 @@ export const FAQ_FR: FaqItem[] = [
   {
     question: 'Comment Ikovaline peut-elle aider mon entreprise ?',
     answer:
-      'Grâce à une approche personnalisée, nous vous accompagnons dans votre digitalisation : refonte de site web, SEO/SEA, réseaux sociaux, publicité en ligne, contenu… Notre objectif ? Augmenter votre visibilité, votre trafic et vos résultats commerciaux.',
+      'Grâce à une approche personnalisée, nous vous accompagnons dans votre digitalisation : refonte de site web, SEO/SEA, réseaux sociaux, publicité en ligne, contenu… Objectif : augmenter votre visibilité, votre trafic et vos résultats commerciaux.',
   },
   {
-    question:
-      'Quels résultats puis-je attendre en travaillant avec Ikovaline ?',
+    question: 'Quels résultats puis-je attendre en travaillant avec Ikovaline ?',
     answer:
-      "En moyenne, nos clients constatent une hausse de leur visibilité en ligne, un trafic qualifié en progression, et une nette amélioration de leur notoriété. Résultat : une croissance du chiffre d'affaires pouvant atteindre +70% selon les cas.",
+      "En moyenne, nos clients constatent une hausse de la visibilité en ligne, un trafic qualifié en progression et une meilleure notoriété. Résultat : une croissance du chiffre d’affaires pouvant atteindre +70% selon les cas.",
   },
   {
     question: "Quels types d'entreprises pouvez-vous aider ?",
     answer:
-      'Nous travaillons avec PME, start-up et grandes entreprises de tous secteurs : commerce, services, industrie, tech, santé, etc. Chaque mission est adaptée à vos objectifs et à vos enjeux spécifiques.',
+      'Nous travaillons avec PME, start-up et grands comptes, tous secteurs confondus (commerce, services, industrie, tech, santé…). Chaque mission est adaptée à vos objectifs et à vos enjeux.',
   },
   {
     question: 'Quels services proposez-vous exactement ?',
@@ -59,9 +36,7 @@ export const FAQ_FR: FaqItem[] = [
         <li>Social media (LinkedIn, TikTok, Instagram…)</li>
         <li>Création de sites vitrine & e-commerce</li>
         <li>Campagnes Google Ads & Social Ads</li>
-        <li>
-          Consulting en développement commercial, stratégie & gestion de projet
-        </li>
+        <li>Conseil en stratégie, développement commercial & gestion de projet</li>
       </ul>
     ),
   },
@@ -73,136 +48,54 @@ export const FAQ_FR: FaqItem[] = [
         <Link href="/contact" className="underline underline-offset-2">
           Contact
         </Link>
-        . Nous échangeons sur vos objectifs pour vous proposer une stratégie
-        adaptée et un accompagnement efficace.
+        . Nous échangeons sur vos objectifs et vous proposons une stratégie
+        adaptée avec un accompagnement efficace.
       </>
     ),
   },
 ];
 
-const FAQ_EN: FaqItem[] = [
-  {
-    question: 'What is Ikovaline?',
-    answer:
-      'Ikovaline is a startup specializing in digital marketing and transformation. We help businesses boost online visibility, optimize their Google Business Profile, manage online reputation, and drive growth projects with tailored solutions for every stage.',
-  },
-  {
-    question: 'How can Ikovaline help my business?',
-    answer:
-      'With a personalized approach: website redesign, SEO/SEA, social media, online ads, content… Our goal is to increase your visibility, traffic, and commercial results.',
-  },
-  {
-    question: 'What results can I expect when working with Ikovaline?',
-    answer:
-      'On average, clients see higher online visibility, more qualified traffic, and stronger brand awareness—leading to revenue growth that can reach +70%, depending on the case.',
-  },
-  {
-    question: 'What types of companies do you work with?',
-    answer:
-      'We work with SMBs, startups, and larger companies across industries—retail, services, industry, tech, healthcare, and more. Every engagement is tailored to your objectives and constraints.',
-  },
-  {
-    question: 'Which services do you offer exactly?',
-    answer: (
-      <ul className="list-disc pl-5 space-y-2">
-        <li>Organic (SEO) & paid search (SEA)</li>
-        <li>Google Business Profile optimization & online reputation</li>
-        <li>Social media (LinkedIn, TikTok, Instagram…)</li>
-        <li>Showcase & e-commerce website creation</li>
-        <li>Google Ads & Social Ads campaigns</li>
-        <li>Consulting in sales development, strategy & project management</li>
-      </ul>
-    ),
-  },
-  {
-    question: 'How do we get started with Ikovaline?',
-    answer: (
-      <>
-        Easy—head to the{' '}
-        <Link href="/contact" className="underline underline-offset-2">
-          Contact
-        </Link>{' '}
-        page. We’ll discuss your goals and propose a tailored strategy with
-        effective support.
-      </>
-    ),
-  },
-];
-
-/* ---------- composant ---------- */
 export default function FAQ() {
-  const { isEN } = useLocale();
-
-  const remap = (node: ReactNode): ReactNode => {
-    if (!node) return node;
-
-    if (Array.isArray(node)) {
-      return node.map(remap);
-    }
-
-    if (isValidElement(node)) {
-      if (node.type === Link && node.props?.href) {
-        return (
-          <Link {...node.props} href={localizeHref(node.props.href, isEN)}>
-            {remap(node.props.children)}
-          </Link>
-        );
-      }
-
-      if (node.props?.children) {
-        return React.cloneElement(node, {
-          children: remap(node.props.children),
-        });
-      }
-    }
-
-    return node;
-  };
-
-  const data = (isEN ? FAQ_EN : FAQ_FR).map((item) => ({
-    ...item,
-    answer: remap(item.answer),
-  }));
-
-  const heading = isEN ? (
-    <>
-      Any questions about our digital services?
-      <br /> All the answers here
-    </>
-  ) : (
-    <>
-      Une question sur nos services digitaux ?
-      <br /> Toutes les réponses ici
-    </>
-  );
-
   return (
-    <section
-      id="faq"
-      className="relative mx-auto max-w-5xl px-5 py-20 space-y-12"
-    >
-      {/* Halo bleu subtil */}
+    <section id="faq" className="relative mx-auto max-w-6xl px-6 py-20">
+      {/* halo discret */}
       <span
         aria-hidden
-        className="absolute top-20 left-1/2 -translate-x-1/2 h-64 w-64 rounded-full blur-[160px] bg-sky-400/20 dark:bg-sky-600/20"
+        className="absolute top-16 left-1/2 -translate-x-1/2 h-64 w-64 rounded-full blur-[160px] bg-sky-400/20 dark:bg-sky-600/20"
       />
 
-      <h2 className="mb-12 text-center text-3xl sm:text-4xl font-bold bg-gradient-to-t from-neutral-700 to-neutral-900 dark:from-neutral-200 dark:to-neutral-400 bg-clip-text text-transparent">
-        {heading}
-      </h2>
+      {/* Titre + intro */}
+      <div className="mb-10">
+        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
+          Foire aux questions
+        </h2>
+        <p className="mt-3 max-w-3xl text-neutral-600 dark:text-neutral-300">
+          Nous sommes là pour vous aider. Si vous ne trouvez pas la réponse à
+          votre question, contactez-nous via la page{' '}
+          <Link href="/contact" className="underline underline-offset-2">
+            Contact
+          </Link>
+          .
+        </p>
+      </div>
 
-      <Accordion type="single" collapsible className="flex flex-col gap-4">
-        {data.map((faq, index) => (
-          <AccordionItem
-            value={`item-${index + 1}`}
-            key={index}
-            className="relative"
+      {/* Cartes visibles (pas d’accordéon) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {FAQ_FR.map((item, i) => (
+          <article
+            key={i}
+            className="rounded-3xl h-auto bg-white p-6 shadow-[0_18px_50px_-28px_rgba(0,0,0,.25)] ring-1 ring-black/5
+                       dark:bg-neutral-900 dark:ring-white/10"
           >
-            <AccordionTrigger>{faq.question}</AccordionTrigger>
-            <AccordionContent>{faq.answer}</AccordionContent>
-          </AccordionItem>
+            <h3 className="text-[17px] font-semibold text-neutral-900 dark:text-white">
+              {item.question}
+            </h3>
+            <div className="mt-3 text-[15px] leading-7 text-neutral-700 dark:text-neutral-300">
+              {item.answer}
+            </div>
+          </article>
         ))}
-      </Accordion>
+      </div>
     </section>
   );
 }

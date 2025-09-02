@@ -57,7 +57,7 @@ export const MenuItem = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.18 }}
-            className="absolute left-1/2 z-30 mt-3 w-max -translate-x-1/2"
+            className="absolute left-0 z-30 mt-3 w-max -translate-x-1/2"
           >
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
               {children}
