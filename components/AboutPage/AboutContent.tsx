@@ -20,7 +20,7 @@ function SectionBadge({ Icon, label }: { Icon: React.ElementType; label: string 
   return (
     <span
       className={[
-        'relative inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold',
+        'relative inline-flex items-center gap-2 rounded-xl px-4 py-1.5 text-xs font-semibold',
         'backdrop-blur-2xl',
         'bg-[linear-gradient(135deg,rgba(255,255,255,.9),rgba(240,245,252,.55))]',
         'dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]',
@@ -212,7 +212,7 @@ export default function AboutContent() {
           className="pointer-events-none absolute bottom-0 right-1/4 -z-10 h-[30rem] w-[30rem] translate-x-1/4 rounded-full bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-20 blur-[180px] dark:opacity-30"
         />
 
-        {blocks.map((b, i) => (
+        {blocks.map((b) => (
           <section key={b.id} id={b.id} className="mb-20">
             {/* Badge */}
             <div className="mb-5 flex justify-center">
