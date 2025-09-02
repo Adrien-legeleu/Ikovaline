@@ -32,7 +32,6 @@ export default function ProjectCard({
   resultat,
   coverImage,
   lien,
-  hrefDetails,
   className,
 }: CardProps) {
   return (
