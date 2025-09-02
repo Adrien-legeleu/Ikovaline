@@ -75,14 +75,14 @@ export function HeaderResponsive() {
             <Image src={IkovalineLogoDark} alt="Ikovaline" width={120} height={36} className="hidden h-8 w-auto object-contain dark:block" priority />
           </Link>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <AnimatedThemeToggler />
             <button
               onClick={() => setOpen(true)}
               aria-label="Ouvrir le menu"
-              className="grid size-10 place-items-center rounded-xl bg-white/70 text-neutral-900 shadow-sm ring-1 ring-black/10 backdrop-blur dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/10"
+              className="grid size-10 p-1  place-items-center rounded-xl bg-white/70 text-neutral-900 shadow-sm ring-1 ring-black/10 backdrop-blur dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/10"
             >
-              <IconMenu3 />
+              <IconMenu3 className='w-full h-full'/>
             </button>
           </div>
         </div>
