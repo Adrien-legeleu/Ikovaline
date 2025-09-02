@@ -26,6 +26,8 @@ export default function PageProjets() {
             'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.1) 0 1px, transparent 1px calc(12.5%))',
         }}
       />
+      <div className='absolute top-0 left-0 bg-gradient-to-b from-white dark:from-black to-transparent w-full h-32'/>
+        <div className='absolute bottom-0 left-0 bg-gradient-to-t from-white dark:from-black to-transparent w-full h-32'/>
       <ProjectsPageClient />
     </main>
   );

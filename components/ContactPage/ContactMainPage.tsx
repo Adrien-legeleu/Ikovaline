@@ -21,6 +21,8 @@ export default function ContactMainPage() {
             'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.1) 0 1px, transparent 1px calc(12.5%))',
         }}
       />
+       <div className='absolute top-0 left-0 bg-gradient-to-b from-white dark:from-black to-transparent w-full h-32'/>
+        <div className='absolute bottom-0 left-0 bg-gradient-to-t from-white dark:from-black to-transparent w-full h-32'/>
 
       <h1 className="lg:hidden z-10 text-center text-3xl font-extrabold bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-600 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent">
         Contactez-nous pour booster votre présence digitale
