@@ -68,7 +68,7 @@ export function HeaderResponsive() {
   return (
     <>
       {/* Header mobile transparent */}
-      <header className="fixed inset-x-0 top-0 z-50 lg:hidden">
+      <header className="fixed inset-x-0 top-0 z-[10000] lg:hidden">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
           <Link href="/" aria-label="Accueil" className="flex items-center gap-2">
             <Image src={IkovalineLogo} alt="Ikovaline" width={120} height={36} className="h-8 w-auto object-contain dark:hidden" priority />

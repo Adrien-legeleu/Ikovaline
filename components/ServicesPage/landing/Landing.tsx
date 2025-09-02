@@ -121,8 +121,8 @@ export default function ServicesHero() {
         {PILLARS.map((p, i) => (
           <motion.div
             key={p.id}
-            initial={{ y: 18, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            initial={{ y: 18 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
           >

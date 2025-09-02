@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 
 export default function PageProjets() {
   return (
-    <main className="relative isolate py-20 overflow-hidden">
-      <div className="absolute inset-0 -z-10">
+    <main className="relative isolate py-20 ">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
         <BackgroundStripes />
       </div>
       <ProjectsPageClient />

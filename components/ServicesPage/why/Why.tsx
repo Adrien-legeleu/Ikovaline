@@ -96,8 +96,8 @@ function FeatureCard({
 
   return (
     <motion.article
-      initial={{ y: 22, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
+      initial={{ y: 22 }}
+      whileInView={{ y: 0}}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.55, ease: 'easeOut', delay }}
       className="relative h-full overflow-hidden rounded-2xl p-7 backdrop-blur-2xl

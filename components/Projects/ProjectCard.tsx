@@ -99,14 +99,7 @@ export default function ProjectCard({
             </a>
           )}
 
-          {hrefDetails && (
-            <a
-              href={hrefDetails}
-              className="inline-flex items-center gap-2 text-sm font-medium text-neutral-800 dark:text-neutral-200"
-            >
-              Détails <IconArrowRight className="size-4" />
-            </a>
-          )}
+          
         </div>
       </div>
     </article>

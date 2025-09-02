@@ -3,6 +3,12 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 type FaqItem = { question: React.ReactNode; answer: React.ReactNode };
 
@@ -10,7 +16,7 @@ const FAQ_FR: FaqItem[] = [
   {
     question: "Qu'est-ce qu'Ikovaline ?",
     answer:
-      'Ikovaline est une start-up spécialisée en marketing digital et transformation numérique. Nous aidons les entreprises à améliorer leur visibilité en ligne, optimiser leur Google Business Profile, gérer leur e-réputation et piloter leurs projets de croissance. Notre force : des solutions sur-mesure pour chaque étape de votre développement.',
+      "Ikovaline est une start-up spécialisée en marketing digital et transformation numérique. Nous aidons les entreprises à améliorer leur visibilité en ligne, optimiser leur Google Business Profile, gérer leur e-réputation et piloter leurs projets de croissance. Notre force : des solutions sur-mesure pour chaque étape de votre développement.",
   },
   {
     question: 'Comment Ikovaline peut-elle aider mon entreprise ?',
@@ -18,7 +24,8 @@ const FAQ_FR: FaqItem[] = [
       'Grâce à une approche personnalisée, nous vous accompagnons dans votre digitalisation : refonte de site web, SEO/SEA, réseaux sociaux, publicité en ligne, contenu… Objectif : augmenter votre visibilité, votre trafic et vos résultats commerciaux.',
   },
   {
-    question: 'Quels résultats puis-je attendre en travaillant avec Ikovaline ?',
+    question:
+      'Quels résultats puis-je attendre en travaillant avec Ikovaline ?',
     answer:
       "En moyenne, nos clients constatent une hausse de la visibilité en ligne, un trafic qualifié en progression et une meilleure notoriété. Résultat : une croissance du chiffre d’affaires pouvant atteindre +70% selon les cas.",
   },
@@ -57,7 +64,10 @@ const FAQ_FR: FaqItem[] = [
 
 export default function FAQ() {
   return (
-    <section id="faq" className="relative mx-auto max-w-6xl sm:px-6 px-2 py-16 sm:py-20">
+    <section
+      id="faq"
+      className="relative mx-auto max-w-6xl px-6 py-16 sm:py-20"
+    >
       {/* halo discret */}
       <span
         aria-hidden
@@ -79,32 +89,52 @@ export default function FAQ() {
         </p>
       </div>
 
-      {/* Masonry : 2 colonnes mobile, 3 colonnes desktop */}
+      {/* < md : Accordéon sobre */}
+      <div className="md:hidden">
+        <Accordion type="single" collapsible >
+          {FAQ_FR.map((item, i) => (
+            <AccordionItem
+              key={i}
+              value={`item-${i + 1}`}
+         
+            >
+              <AccordionTrigger >
+                {item.question}
+              </AccordionTrigger>
+              <AccordionContent >
+                {item.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+
+      {/* >= md : Masonry cartes visibles */}
       <div
-        className="columns-1 xss:columns-2 lg:columns-3
-          sm:gap-x-5 gap-x-2 lg:gap-x-6
-          [column-fill:_balance]
-        "
+        className="hidden md:block"
+        aria-hidden // pour éviter double lecture par les lecteurs d'écran
       >
-        {FAQ_FR.map((item, i) => (
-          <article
-            key={i}
-            className="
-              mb-5 lg:mb-6 break-inside-avoid rounded-2xl bg-white p-3 sm:p-6
-              shadow-[0_18px_50px_-28px_rgba(0,0,0,.25)] ring-1 ring-black/5
-              dark:bg-neutral-900 dark:ring-white/10
-              transition-transform duration-300 will-change-transform
-              hover:-translate-y-0.5
-            "
-          >
-            <h3 className="text-[15px] sm:text-[17px] font-semibold text-neutral-900 dark:text-white">
-              {item.question}
-            </h3>
-            <div className="mt-2 sm:mt-3 text-xs  sm:text-sm leading-6 sm:leading-7 text-neutral-700 dark:text-neutral-300">
-              {item.answer}
-            </div>
-          </article>
-        ))}
+        <div
+          className="
+            columns-2 lg:columns-3
+            gap-x-5 lg:gap-x-6
+            [column-fill:_balance]
+          "
+        >
+          {FAQ_FR.map((item, i) => (
+            <article
+              key={i}
+              className="mb-5 lg:mb-6 break-inside-avoid rounded-2xl bg-white p-6 shadow-[0_18px_50px_-28px_rgba(0,0,0,.25)] ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10 transition-transform duration-300 will-change-transform hover:-translate-y-0.5"
+            >
+              <h3 className="text-[17px] font-semibold text-neutral-900 dark:text-white">
+                {item.question}
+              </h3>
+              <div className="mt-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+                {item.answer}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

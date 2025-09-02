@@ -232,11 +232,11 @@ export default function Review() {
           - Mobile: 2 colonnes (compact), 5 items + bouton "Voir plus"
           - ≥ md: 3→4 colonnes, tout afficher
       */}
-     <div className=' py-10'>
+     <div className='z-50 relative py-10'>
        <StarClientsGoogle/>
       <div
         className={[
-          'mt-4 columns-2 gap-4',            // 2 colonnes même sur mobile
+          'mt-4 z-50 columns-2 gap-4',            // 2 colonnes même sur mobile
           'sm:gap-6 relative',
           'md:columns-3 lg:columns-4',         // plus de colonnes au-dessus
         ].join(' ')}

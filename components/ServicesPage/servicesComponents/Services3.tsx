@@ -109,8 +109,8 @@ export function Service3() {
           {GRID.map((feature) => (
             <Link href={`/nos-services/${feature.slug}`} key={feature.title} className="group">
               <motion.article
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
+                initial={{ y: 20}}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="relative overflow-hidden h-full flex flex-col justify-between rounded-2xl p-6 xl:p-7

@@ -41,7 +41,7 @@ export function Header({ className }: { className?: string }) {
 
       {/* Desktop navbar */}
       <div
-        className={cn('fixed inset-x-0 top-0 z-40 hidden lg:block', className)}
+        className={cn('fixed inset-x-0 top-0 z-[10000] hidden lg:block', className)}
       >
         <div className="mx-auto mt-2 max-w-6xl px-4">
           <nav
