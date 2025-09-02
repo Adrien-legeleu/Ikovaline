@@ -1,3 +1,4 @@
+// components/magicui/highlighter.tsx
 'use client';
 
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
@@ -15,9 +16,7 @@ type AnnotationAction =
 
 interface HighlighterProps {
   children: React.ReactNode;
-  /** Classes appliquées au wrapper */
   className?: string;
-
   action?: AnnotationAction;
   color?: string;
   strokeWidth?: number;
@@ -25,18 +24,12 @@ interface HighlighterProps {
   iterations?: number;
   padding?: number;
   multiline?: boolean;
-  /** Démarrer seulement quand l’élément entre en vue */
   isView?: boolean;
-
-  /** Forcer une boîte stable (line-height, display…) */
+  /** Conserve une boîte stable si besoin (garde inline-block) */
   baselineFix?: boolean;
-  /**
-   * Ajustement fin vertical en px (positif = descend le surlignage visuellement)
-   * Utilise un padding-bottom interne pour faire “descendre” la boîte.
-   */
+  /** Décalage vertical fin en px (descend visuellement le surlignage) */
   baselineOffset?: number;
-
-  /** Empêche le retour à la ligne (pratique pour un seul mot) */
+  /** Empêche le retour à la ligne pour un seul mot */
   noWrap?: boolean;
 }
 
@@ -50,18 +43,17 @@ export function Highlighter({
   iterations = 2,
   padding = 2,
   multiline = true,
-  isView = false,
-  baselineFix = true,
-  baselineOffset = 0, // ex: 1 ou 2 si ça remonte un peu chez toi
+  isView = true,
+  baselineFix = false, // ⚠️ par défaut: inline (évite les bugs de hauteur 0)
+  baselineOffset = 0,
   noWrap = false,
 }: HighlighterProps) {
   const elRef = useRef<HTMLSpanElement>(null);
   const annRef = useRef<ReturnType<typeof annotate> | null>(null);
-  const inView = useInView(elRef, { once: true, margin: '-10%' });
+  const inView = useInView(elRef, { once: true, margin: '-8%' });
 
   const shouldShow = !isView || inView;
 
-  // Crée/rafraîchit l’annotation (attend un frame pour laisser le layout se stabiliser)
   const createAnnotation = () => {
     const el = elRef.current;
     if (!el) return;
@@ -81,60 +73,51 @@ export function Highlighter({
     inst.show();
   };
 
-  // (1) Création quand visible / quand props clés changent
+  // attend 2 frames (layout + fonts) avant de dessiner
   useLayoutEffect(() => {
     if (!shouldShow) return;
-    // attend un frame + encore un (fonts/layout)
-    const id = requestAnimationFrame(() => {
+    const id1 = requestAnimationFrame(() => {
       const id2 = requestAnimationFrame(createAnnotation);
       return () => cancelAnimationFrame(id2);
     });
-    return () => cancelAnimationFrame(id);
+    return () => cancelAnimationFrame(id1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    shouldShow,
-    action,
-    color,
-    strokeWidth,
-    animationDuration,
-    iterations,
-    padding,
-    multiline,
-  ]);
+  }, [shouldShow, action, color, strokeWidth, animationDuration, iterations, padding, multiline]);
 
-  // (2) Re-crée si la taille du contenu change (changement de police, weight, responsive…)
+  // reposition si la taille change (responsive, fonts, etc.)
   useEffect(() => {
     if (!shouldShow || !elRef.current) return;
     const ro = new ResizeObserver(() => {
-      // évite de spammer reflow si caché
-      if (elRef.current && elRef.current.isConnected) {
-        createAnnotation();
-      }
+      if (elRef.current?.isConnected) createAnnotation();
     });
     ro.observe(elRef.current);
-    return () => ro.disconnect();
+    // re-crée aussi après un resize fenêtre (utile sur mobile)
+    const onResize = () => createAnnotation();
+    window.addEventListener('resize', onResize);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', onResize);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldShow]);
 
-  // Cleanup
-  useEffect(() => {
-    return () => annRef.current?.remove();
-  }, []);
+  useEffect(() => () => annRef.current?.remove(), []);
 
-  const base = [
-    'relative',
-    'bg-transparent',
-    // important pour une boîte stable
-    baselineFix ? 'inline-block leading-none align-middle' : 'inline',
+  const classes = [
+    'relative bg-transparent align-baseline',
+    baselineFix ? 'inline-block' : 'inline',
     noWrap ? 'whitespace-nowrap' : '',
-    baselineOffset ? `pb-[${baselineOffset}px]` : '',
     className || '',
   ]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <span ref={elRef} className={base}>
+    <span
+      ref={elRef}
+      className={classes}
+      style={baselineOffset ? { paddingBottom: baselineOffset } : undefined}
+    >
       {children}
     </span>
   );

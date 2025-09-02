@@ -57,19 +57,19 @@ const FAQ_FR: FaqItem[] = [
 
 export default function FAQ() {
   return (
-    <section id="faq" className="relative mx-auto max-w-6xl px-6 py-20">
+    <section id="faq" className="relative mx-auto max-w-6xl sm:px-6 px-2 py-16 sm:py-20">
       {/* halo discret */}
       <span
         aria-hidden
-        className="absolute top-16 left-1/2 -translate-x-1/2 h-64 w-64 rounded-full blur-[160px] bg-sky-400/20 dark:bg-sky-600/20"
+        className="pointer-events-none absolute top-16 left-1/2 -translate-x-1/2 h-64 w-64 rounded-full blur-[160px] bg-sky-400/20 dark:bg-sky-600/20"
       />
 
       {/* Titre + intro */}
-      <div className="mb-10">
-        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
+      <div className="mb-8 sm:mb-10">
+        <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
           Foire aux questions
         </h2>
-        <p className="mt-3 max-w-3xl text-neutral-600 dark:text-neutral-300">
+        <p className="mt-3 max-w-3xl text-[13.5px] leading-6 sm:text-base sm:leading-7 text-neutral-600 dark:text-neutral-300">
           Nous sommes là pour vous aider. Si vous ne trouvez pas la réponse à
           votre question, contactez-nous via la page{' '}
           <Link href="/contact" className="underline underline-offset-2">
@@ -79,18 +79,28 @@ export default function FAQ() {
         </p>
       </div>
 
-      {/* Cartes visibles (pas d’accordéon) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* Masonry : 2 colonnes mobile, 3 colonnes desktop */}
+      <div
+        className="columns-1 xss:columns-2 lg:columns-3
+          sm:gap-x-5 gap-x-2 lg:gap-x-6
+          [column-fill:_balance]
+        "
+      >
         {FAQ_FR.map((item, i) => (
           <article
             key={i}
-            className="rounded-3xl h-auto bg-white p-6 shadow-[0_18px_50px_-28px_rgba(0,0,0,.25)] ring-1 ring-black/5
-                       dark:bg-neutral-900 dark:ring-white/10"
+            className="
+              mb-5 lg:mb-6 break-inside-avoid rounded-2xl bg-white p-3 sm:p-6
+              shadow-[0_18px_50px_-28px_rgba(0,0,0,.25)] ring-1 ring-black/5
+              dark:bg-neutral-900 dark:ring-white/10
+              transition-transform duration-300 will-change-transform
+              hover:-translate-y-0.5
+            "
           >
-            <h3 className="text-[17px] font-semibold text-neutral-900 dark:text-white">
+            <h3 className="text-[15px] sm:text-[17px] font-semibold text-neutral-900 dark:text-white">
               {item.question}
             </h3>
-            <div className="mt-3 text-[15px] leading-7 text-neutral-700 dark:text-neutral-300">
+            <div className="mt-2 sm:mt-3 text-xs  sm:text-sm leading-6 sm:leading-7 text-neutral-700 dark:text-neutral-300">
               {item.answer}
             </div>
           </article>
