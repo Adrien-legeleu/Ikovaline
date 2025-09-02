@@ -1,7 +1,7 @@
 // app/(marketing)/projets/page.tsx
 import type { Metadata } from 'next';
-import LightBackdrop from '@/components/ui/lightBackdrop';
 import ProjectsPageClient from '@/components/Projects/ProjectsPageClient';
+import BackgroundStripes from '@/components/ServicesPage/BackgroundStripes';
 
 export const metadata: Metadata = {
   title: 'Projets — Ikovaline',
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 
 export default function PageProjets() {
   return (
-    <main className="relative isolate py-20">
-      <LightBackdrop />
-
-      {/* locale + contenu via usePathname dans le wrapper client */}
+    <main className="relative isolate py-20 overflow-hidden">
+      <div className="absolute inset-0 -z-10">
+        <BackgroundStripes />
+      </div>
       <ProjectsPageClient />
     </main>
   );

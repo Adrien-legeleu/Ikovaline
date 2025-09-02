@@ -2,8 +2,8 @@
 'use client';
 
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
 import { IconArrowRight } from '@tabler/icons-react';
+import { cn } from '@/lib/utils';
 
 type CardProps = {
   id: string;
@@ -15,15 +15,13 @@ type CardProps = {
   resultat: string;
   coverImage: string;
   lien?: string;
-  hrefDetails?: string; // vers page /projets (panel ou détails)
+  hrefDetails?: string;
   className?: string;
 };
 
 const BLUR =
   'data:image/svg+xml;utf8,' +
-  encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' width='24' height='16'></svg>`
-  );
+  encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='24' height='16'></svg>");
 
 export default function ProjectCard({
   titre,
@@ -34,58 +32,83 @@ export default function ProjectCard({
   resultat,
   coverImage,
   lien,
+  hrefDetails,
   className,
 }: CardProps) {
   return (
-    <div
+    <article
       className={cn(
-        'relative overflow-hidden p-3  rounded-3xl border border-white/30 dark:border-white/10 bg-white/10 dark:bg-neutral-900/10 backdrop-blur-md transition-transform duration-300 hover:scale-[1.01]',
+        'group relative overflow-hidden rounded-[28px] border',
+        'border-white/50 dark:border-white/10',
+        'bg-[linear-gradient(135deg,rgba(255,255,255,.9),rgba(240,245,252,.45))] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.6))]',
+        'backdrop-blur-2xl shadow-[0_18px_60px_rgba(6,24,44,.12)] dark:shadow-[0_18px_60px_rgba(0,0,0,.65)]',
+        'transition-transform duration-300 hover:-translate-y-1.5',
         className
       )}
     >
+      {/* cover */}
       <div className="relative aspect-[16/10] w-full overflow-hidden">
         <Image
           src={coverImage}
           alt={titre}
           fill
-          className="object-cover rounded-3xl"
+          className="object-cover"
           placeholder="blur"
           blurDataURL={BLUR}
           unoptimized
           sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 520px"
-          priority={false}
         />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0 opacity-70 mix-blend-multiply dark:opacity-80" />
       </div>
 
+      {/* content */}
       <div className="p-6">
-        <div className="mb-1 text-xs uppercase tracking-wide text-neutral-600 dark:text-neutral-400">
+        <div className="mb-2 text-[11px] uppercase tracking-wide text-neutral-600 dark:text-neutral-400">
           {client} • {secteur} • {periode}
         </div>
+
         <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-100">
           {titre}
         </h3>
 
-        <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
-          {services.join(' • ')}
-        </p>
+        {/* tags services */}
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {services.slice(0, 4).map((s, i) => (
+            <li
+              key={i}
+              className="rounded-full px-3 py-1 text-[11px] font-medium text-neutral-700 dark:text-neutral-200 border border-white/50 dark:border-white/10 bg-white/60 dark:bg-neutral-900/50 backdrop-blur-xl"
+            >
+              {s}
+            </li>
+          ))}
+        </ul>
 
-        <div className="mt-3 text-sm font-medium text-emerald-700 dark:text-emerald-300">
+        <div className="mt-4 text-sm font-medium text-emerald-700 dark:text-emerald-300">
           {resultat}
         </div>
 
-        <div className="mt-5 flex gap-3">
+        <div className="mt-5 flex gap-4">
           {lien && (
             <a
               href={lien}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-cyan-700 dark:text-cyan-200"
+              className="inline-flex items-center gap-2 text-sm font-medium text-sky-700 dark:text-sky-300"
             >
-              Demo <IconArrowRight className="size-4" />
+              Démo <IconArrowRight className="size-4" />
+            </a>
+          )}
+
+          {hrefDetails && (
+            <a
+              href={hrefDetails}
+              className="inline-flex items-center gap-2 text-sm font-medium text-neutral-800 dark:text-neutral-200"
+            >
+              Détails <IconArrowRight className="size-4" />
             </a>
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

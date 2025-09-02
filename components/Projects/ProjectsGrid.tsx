@@ -1,11 +1,11 @@
-// components/Projects/ProjectGrid.tsx
+// components/Projects/ProjectsGrid.tsx
 'use client';
 
 import * as React from 'react';
 import ProjectCard from './ProjectCard';
 import type { Project } from '@/data/projects';
 
-export default function ProjectGrid({
+export default function ProjectsGrid({
   projects,
   baseHref = '/projets',
 }: {
@@ -14,9 +14,6 @@ export default function ProjectGrid({
 }) {
   return (
     <div className="space-y-6">
-      {/* Filtres légers */}
-
-      {/* Grille */}
       <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-3">
         {projects.map((p) => (
           <ProjectCard

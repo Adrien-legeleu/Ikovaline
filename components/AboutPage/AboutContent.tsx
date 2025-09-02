@@ -3,7 +3,12 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { IconQuote, IconSparkles, IconTargetArrow, IconShieldCheck } from '@tabler/icons-react';
+import {
+  IconQuote,
+  IconSparkles,
+  IconTargetArrow,
+  IconShieldCheck,
+} from '@tabler/icons-react';
 import { TracingBeam } from '@/components/ui/tracing-beam';
 import { Highlighter } from '../magicui/highlighter';
 import ImageHistory1 from '@/public/images/About/team-ikovaline (3).jpg';
@@ -16,7 +21,13 @@ type Block = {
   body: JSX.Element;
 };
 
-function SectionBadge({ Icon, label }: { Icon: React.ElementType; label: string }) {
+function SectionBadge({
+  Icon,
+  label,
+}: {
+  Icon: React.ElementType;
+  label: string;
+}) {
   return (
     <span
       className={[
@@ -39,161 +50,246 @@ function SectionBadge({ Icon, label }: { Icon: React.ElementType; label: string 
 export default function AboutContent() {
   const blocks: Block[] = [
     {
-      id: 'notre-histoire',
-      badge: { label: 'Notre histoire', Icon: IconSparkles },
-      title: 'D’une idée à une équipe qui livre des résultats',
+      id: 'les-origines',
+      badge: { label: 'Origines', Icon: IconSparkles },
+      title: 'Les Origines d’Ikovaline',
       body: (
         <>
+          {/* Paragraphe 1 */}
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-10% 0px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="leading-8 text-neutral-700 dark:text-neutral-300"
+            className="relative leading-8 text-neutral-700 dark:text-neutral-300"
           >
             Fondée par{' '}
             <Highlighter action="highlight" color="#87CEFA" noWrap>
               Florent
-            </Highlighter>
-            , Ikovaline est née d’une volonté simple : offrir aux entreprises des
-            solutions{' '}
-            <Highlighter action="highlight" color="#87CEFA" noWrap>
-              digitales
             </Highlighter>{' '}
-            concrètes qui renforcent leur{' '}
-            <Highlighter action="highlight" color="#87CEFA" noWrap>
-              visibilité
-            </Highlighter>{' '}
-            et accélèrent leur croissance.
+            Ghizzoni, Ikovaline est une start-up spécialisée dans le marketing
+            digital et la transformation numérique. Née d&apos;une volonté forte
+            d&apos;accompagner les entreprises dans leur croissance, elle
+            propose des solutions digitales personnalisées pour améliorer la
+            visibilité, le développement commercial et les performances
+            globales.
           </motion.p>
 
+          {/* Images + légendes */}
           <div className="my-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Image
-              src={ImageHistory1}
-              alt="Équipe Ikovaline au travail"
-              className="aspect-square w-full rounded-3xl object-cover shadow-2xl"
-              priority
-            />
-            <Image
-              src={ImageHistory2}
-              alt="Atelier de stratégie digitale"
-              className="aspect-square w-full rounded-3xl object-cover shadow-2xl max-sm:hidden"
-            />
+            <figure className="relative">
+              <Image
+                src={ImageHistory1}
+                alt="Équipe Ikovaline en collaboration sur projets de transformation numérique et marketing digital"
+                className="aspect-square w-full rounded-3xl object-cover shadow-2xl"
+                priority
+              />
+              <figcaption className="mt-2 text-center text-xs text-neutral-600 dark:text-neutral-400">
+                Équipe Ikovaline en collaboration sur projets de transformation
+                numérique et marketing digital
+              </figcaption>
+            </figure>
+
+            <figure className="relative max-sm:hidden">
+              <Image
+                src={ImageHistory2}
+                alt="Équipe Ikovaline en réunion de stratégie digitale"
+                className="aspect-square w-full rounded-3xl object-cover shadow-2xl"
+              />
+              <figcaption className="mt-2 text-center text-xs text-neutral-600 dark:text-neutral-400">
+                Équipe Ikovaline en réunion de stratégie digitale
+              </figcaption>
+            </figure>
           </div>
 
+          {/* Paragraphe 2 */}
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-10% 0px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="leading-8 text-neutral-700 dark:text-neutral-300"
+            className="relative leading-8 text-neutral-700 dark:text-neutral-300"
           >
-            Notre mission est claire : aider chaque client à franchir un{' '}
-            <Highlighter action="highlight" color="#87CEFA" noWrap>
-              cap
-            </Highlighter>{' '}
-            grâce à des services modernes, mesurables et durables.
+            Ikovaline se distingue par sa mission : accélérer la digitalisation
+            des entreprises avec des services innovants et sur-mesure. Grâce à
+            une approche orientée résultats, l&apos;équipe aide chaque client à
+            franchir un cap stratégique dans un environnement numérique en
+            constante évolution.
           </motion.p>
         </>
       ),
     },
     {
-      id: 'notre-vision',
+      id: 'vision',
       badge: { label: 'Vision', Icon: IconTargetArrow },
-      title: 'Ambition, clarté et obsession du résultat',
+      title: 'Une Vision Ambitieuse',
       body: (
         <>
+          {/* Paragraphe vision */}
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-10% 0px' }}
             transition={{ duration: 0.55, ease: 'easeOut' }}
-            className="leading-8 text-neutral-700 dark:text-neutral-300"
+            className="relative leading-8 text-neutral-700 dark:text-neutral-300"
           >
-            Objectif : atteindre{' '}
+            Ikovaline porte une vision claire : atteindre un chiffre
+            d&apos;affaires de{' '}
             <Highlighter action="highlight" color="#87CEFA" noWrap>
-              300 000€
+              300&nbsp;000&nbsp;€
             </Highlighter>{' '}
-            de chiffre d’affaires d’ici 2026 en livrant des expériences{' '}
-            <Highlighter action="highlight" color="#87CEFA" noWrap>
-              performantes
-            </Highlighter>{' '}
-            et des accompagnements{' '}
-            <Highlighter action="highlight" color="#87CEFA" noWrap>
-              personnalisés
-            </Highlighter>
-            .
+            d&apos;ici 2026. Cette ambition s&apos;appuie sur notre capacité à
+            proposer des services digitaux performants et à offrir un
+            accompagnement personnalisé pour chaque entreprise.
           </motion.p>
 
+          {/* Citation */}
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="leading-8 italic text-neutral-600 dark:text-neutral-400"
+            className="relative leading-8 italic text-neutral-600 dark:text-neutral-400"
           >
             <IconQuote className="mr-2 inline-block h-5 w-5" stroke={2} />
-            Nous croyons qu’une stratégie numérique taillée sur-mesure change le
-            destin d’une entreprise
+            Nous croyons que la réussite passe par une stratégie numérique
+            adaptée
             <IconQuote className="ml-2 inline-block h-5 w-5" stroke={2} />
-            <span className="not-italic font-semibold"> — Florent Ghizzoni</span>
+            <span className="not-italic font-semibold">
+              {' '}
+              — Florent Ghizzoni.
+            </span>
           </motion.p>
         </>
       ),
     },
     {
-      id: 'notre-garantie',
-      badge: { label: 'Garantie', Icon: IconShieldCheck },
-      title: 'Garantie de résultats — conditions claires',
+      id: 'garantie',
+      badge: { label: 'Remboursement garanti', Icon: IconShieldCheck },
+      title: 'Garantie de Résultats ou Remboursement',
       body: (
         <>
+          {/* Intro garantie */}
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="leading-8 text-neutral-700 dark:text-neutral-300"
+            className="relative leading-8 text-neutral-700 dark:text-neutral-300"
           >
-            Nous nous engageons sur des{' '}
-            <Highlighter action="highlight" color="#87CEFA" noWrap>
-              résultats
-            </Highlighter>{' '}
-            via des solutions{' '}
-            <Highlighter action="highlight" color="#87CEFA" noWrap>
-              sur-mesure
-            </Highlighter>
-            . La garantie de remboursement s’applique dans les cas suivants :
+            Chez Ikovaline, nous nous engageons à fournir des résultats concrets
+            à travers des solutions digitales personnalisées. Toutefois, la
+            garantie de remboursement est strictement encadrée par les
+            conditions suivantes :
           </motion.p>
 
-          <ul className="mt-4 space-y-3 text-neutral-700 dark:text-neutral-300">
-            <li>
-              1) Envoi des éléments sous{' '}
+          {/* 1 */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="relative mt-5 space-y-2"
+          >
+            <p className="font-semibold">
+              1. 📦 Transmission des éléments nécessaires sous{' '}
               <Highlighter action="highlight" color="#87CEFA" noWrap>
-                7 jours
-              </Highlighter>{' '}
-              (contenus, accès, informations utiles).
-            </li>
-            <li>
-              2) Demande formelle sous{' '}
-              <Highlighter action="highlight" color="#87CEFA" noWrap>
-                30 jours
-              </Highlighter>{' '}
-              après la première facture.
-            </li>
-            <li>
-              3) Réception des livrables{' '}
-              <Highlighter action="highlight" color="#87CEFA" noWrap>
-                finaux
-              </Highlighter>{' '}
-              et participation aux restitutions/démos.
-            </li>
-          </ul>
+                7&nbsp;jours
+              </Highlighter>
+            </p>
+            <p className="text-neutral-700 dark:text-neutral-300">
+              Le client s’engage à transmettre dans un délai de 7 jours
+              calendaires à compter du paiement de l’acompte :
+            </p>
+            <ul className="relative list-disc space-y-1 pl-5 text-neutral-700 dark:text-neutral-300">
+              <li>
+                L’ensemble des contenus nécessaires (textes, images, logos,
+                etc.)
+              </li>
+              <li>
+                Les accès aux plateformes, sites, hébergeurs, domaines, CMS,
+                analytics, etc.
+              </li>
+              <li>Toute information utile à la bonne exécution du projet.</li>
+            </ul>
+            <p className="text-neutral-700 dark:text-neutral-300">
+              En cas de manquement ou de délai dépassé, la garantie de
+              remboursement est automatiquement annulée.
+            </p>
+          </motion.div>
 
-          <p className="mt-3 text-neutral-700 dark:text-neutral-300">
-            Sont exclus : objectifs non validés, manque de collaboration, changement
-            de périmètre, annulation de convenance, ou absence de réponse bloquant
-            la livraison.
-          </p>
+          {/* 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="relative mt-5 space-y-2"
+          >
+            <p className="font-semibold">
+              2. 🧾 Délai légal de demande de remboursement –{' '}
+              <Highlighter action="highlight" color="#87CEFA" noWrap>
+                30&nbsp;jours
+              </Highlighter>
+            </p>
+            <p className="text-neutral-700 dark:text-neutral-300">
+              Le client dispose d’un délai de 30 jours à compter de la date
+              d’émission de la première facture (acompte ou paiement complet)
+              pour soumettre par écrit (email recommandé ou recommandé AR) une
+              demande formelle de remboursement. Passé ce délai, la demande est
+              automatiquement irrecevable.
+            </p>
+          </motion.div>
+
+          {/* 3 */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="relative mt-5 space-y-2"
+          >
+            <p className="font-semibold">3. 📤 Livraison et réception des livrables</p>
+            <ul className="relative list-disc space-y-1 pl-5 text-neutral-700 dark:text-neutral-300">
+              <li>Assister aux réunions de restitution ou aux démonstrations prévues.</li>
+              <li>
+                Réceptionner les livrables{' '}
+                <Highlighter action="highlight" color="#87CEFA" noWrap>
+                  finaux
+                </Highlighter>{' '}
+                dans les délais impartis.
+              </li>
+              <li>
+                Attendre la fin complète de la prestation (transmission finale
+                des fichiers, accès, maquettes, etc.) avant toute réclamation.
+              </li>
+            </ul>
+            <p className="text-neutral-700 dark:text-neutral-300">
+              Toute tentative de rupture unilatérale ou de refus de réception
+              sans motif sérieux annule la garantie.
+            </p>
+          </motion.div>
+
+          {/* 4 */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="relative mt-5 space-y-2"
+          >
+            <p className="font-semibold">4. 🚫 Exclusions de la garantie</p>
+            <ul className="relative list-disc space-y-1 pl-5 text-neutral-700 dark:text-neutral-300">
+              <li>
+                Objectifs non définis ou non validés conjointement avant le
+                lancement du projet.
+              </li>
+              <li>Retard ou absence de collaboration active du client.</li>
+              <li>Modification de la commande en cours de prestation.</li>
+              <li>Annulation du projet pour convenance personnelle.</li>
+              <li>Livraison bloquée par absence de réponse du client.</li>
+            </ul>
+          </motion.div>
         </>
       ),
     },
@@ -214,18 +310,15 @@ export default function AboutContent() {
 
         {blocks.map((b) => (
           <section key={b.id} id={b.id} className="mb-20">
-            {/* Badge */}
             <div className="mb-5 flex justify-center">
               <SectionBadge Icon={b.badge.Icon} label={b.badge.label} />
             </div>
 
-            {/* Titre */}
             <h2 className="mx-auto mb-8 text-center text-3xl xs:text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-t from-neutral-900 via-neutral-800 to-neutral-600 bg-clip-text text-transparent dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400">
               {b.title}
             </h2>
 
-            {/* Texte */}
-            <div className="space-y-6 text-center text-base sm:text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
+            <div className="space-y-6 text-center text-base leading-relaxed text-neutral-700 dark:text-neutral-300 sm:text-lg">
               {b.body}
             </div>
           </section>
