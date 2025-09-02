@@ -127,7 +127,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         </div>
 
         <div className="mx-10 flex items-center justify-between gap-2">
-          <Link href={`/${isEN ? 'en/' : ''}blog`} className="z-10 bg-primary py-2 rounded-xl px-4">
+          <Link href={`/${isEN ? 'en/' : ''}blog`} className="z-10 bg-primary text-white py-2 rounded-xl px-4">
             <span className="flex items-center justify-center gap-2">
               <span aria-hidden="true">
                 <IconNews />
