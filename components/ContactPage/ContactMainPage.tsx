@@ -5,7 +5,6 @@ import { useState } from 'react';
 import ContactFormStudent from './contactForm/ContactFormStudent';
 import ContactFormBusiness from './contactForm/ContactFormBusiness';
 import ScriptCopyBtn from '../ui/script-copy-btn';
-import BackgroundStripes from '../ServicesPage/BackgroundStripes';
 
 export default function ContactMainPage() {
   const [isBusiness, setIsBusiness] = useState(true);
@@ -14,9 +13,14 @@ export default function ContactMainPage() {
 
   return (
     <section className="relative mx-auto grid max-w-[1300px]  grid-cols-1 gap-10 px-5 py-20 lg:grid-cols-[1fr_380px]">
-      <div className="absolute overflow-hidden inset-0 -z-10">
-        <BackgroundStripes />
-      </div>
+       <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-100"
+        style={{
+          background:
+            'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.1) 0 1px, transparent 1px calc(12.5%))',
+        }}
+      />
 
       <h1 className="lg:hidden z-10 text-center text-3xl font-extrabold bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-600 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent">
         Contactez-nous pour booster votre présence digitale

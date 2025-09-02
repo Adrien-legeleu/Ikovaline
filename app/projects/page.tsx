@@ -1,7 +1,6 @@
 // app/(marketing)/projets/page.tsx
 import type { Metadata } from 'next';
 import ProjectsPageClient from '@/components/Projects/ProjectsPageClient';
-import BackgroundStripes from '@/components/ServicesPage/BackgroundStripes';
 
 export const metadata: Metadata = {
   title: 'Projets — Ikovaline',
@@ -19,9 +18,14 @@ export const metadata: Metadata = {
 export default function PageProjets() {
   return (
     <main className="relative isolate py-20 ">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <BackgroundStripes />
-      </div>
+       <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-100"
+        style={{
+          background:
+            'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.1) 0 1px, transparent 1px calc(12.5%))',
+        }}
+      />
       <ProjectsPageClient />
     </main>
   );
