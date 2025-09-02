@@ -250,7 +250,7 @@ export default function Map() {
                 href="/nos-services"
                 className="text-primary underline-offset-4 hover:underline"
               >
-                d'autres solutions digitales sur mesure.
+                d&apos;autres solutions digitales sur mesure.
               </Link>
             </p>
           </div>

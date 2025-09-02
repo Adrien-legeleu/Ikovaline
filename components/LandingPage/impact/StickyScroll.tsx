@@ -190,13 +190,11 @@ export function StickyScrollMobile({
   content,
   contentClassName,
   className,
-  backgrounds = ['#ffffff', '#fafafa', '#ffffff'],
   gradients = [
     'linear-gradient(135deg, #2CB7FF1a, #00A8FF14)',
     'linear-gradient(135deg, #60A5FA1a, #2CB7FF14)',
     'linear-gradient(135deg, #38BDF81a, #60A5FA14)',
   ],
-  darkBackgrounds = ['#0a0a0a', '#0b0b0b', '#0a0a0a'],
   darkGradients = [
     'linear-gradient(135deg, #0ea5e915, #38bdf812)',
     'linear-gradient(135deg, #38bdf815, #60a5fa12)',

@@ -37,16 +37,18 @@ function GridLines8() {
   );
 }
 
-/* ========================= Card shell — luxe & neutre ========================= */
-function CardShell({
-  children,
-  as: Comp = 'article',
-  className = '',
-}: {
+type CardShellProps<As extends React.ElementType = 'article'> = {
   children: React.ReactNode;
-  as?: any;
+  as?: As;
   className?: string;
-}) {
+} & Omit<React.ComponentPropsWithoutRef<As>, 'as' | 'className' | 'children'>;
+
+function CardShell<As extends React.ElementType = 'article'>({
+  children,
+  as,
+  className = '',
+}: CardShellProps<As>) {
+  const Comp = (as ?? 'article') as React.ElementType;
   return (
     <Comp
       className={[

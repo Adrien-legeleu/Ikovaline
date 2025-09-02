@@ -22,7 +22,6 @@ export default function CallToAction({
   title,
   desc,
   textBtn,
-  reviewsCount = 67,
 }: Props) {
   return (
     <section className="relative mx-auto w-full max-w-[120rem] px-2 sm:px-6 py-28 md:py-40">
