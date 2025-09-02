@@ -75,14 +75,16 @@ export const AnimatedTooltip = ({
                   rotate: rotate,
                   whiteSpace: 'nowrap',
                 }}
-                className="absolute -top-16 -left-1/4 -translate-x-1/2 flex text-xs  flex-col items-center justify-center rounded-md bg-black z-50 shadow-xl px-4 py-2"
+                className="absolute -top-16 -left-1/4 -translate-x-1/2 flex text-xs  flex-col items-center justify-center rounded-xl bg-neutral-50 dark:bg-black z-50 shadow-xl px-4 py-2"
               >
                 <div className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent h-px " />
-                <div className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px " />
-                <div className="font-bold text-white relative z-30 sm:text-base">
+                <div className="absolute left-10 w-[55%] z-30 -bottom-px bg-gradient-to-r from-transparent via-primary to-transparent h-[2px] " />
+                <div className="font-bold text-black dark:text-white relative z-30 sm:text-base">
                   {item.name}
                 </div>
-                <div className="text-white text-xs">{item.designation}</div>
+                <div className="text-black dark:text-white text-xs">
+                  {item.designation}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -92,7 +94,7 @@ export const AnimatedTooltip = ({
             width={100}
             src={item.image}
             alt={item.alt}
-            className="object-cover !m-0 !p-0 object-right rounded-full h-20 w-20 sm:w-28 sm:h-28 border-2 group-hover:scale-105 group-hover:z-30 border-white dark:border-white/90 shadow-xl  relative transition duration-500"
+            className="object-cover !m-0 !p-0 object-right rounded-3xl h-16 w-16 sm:w-28 sm:h-28 border-2 group-hover:scale-105 group-hover:z-30 border-white dark:border-white/90 shadow-xl  relative transition duration-500"
           />
         </div>
       ))}

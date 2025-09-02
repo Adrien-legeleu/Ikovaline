@@ -1,27 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import { useState, useCallback } from 'react';
-import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
-
-import {
-  Drawer,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
-
-import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
-import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
-
-import { ModeToggle } from '../toggle-darkmode';
-import { LiquidLink } from '../ui/liquid-link';
+import { AnimatePresence, motion as m } from 'motion/react';
 import {
   IconMenu3,
-  IconMessage2,
+  IconX,
   IconChevronDown,
   IconCpu,
   IconChartLine,
@@ -31,416 +16,234 @@ import {
   IconHistory,
   IconThumbUp,
 } from '@tabler/icons-react';
-import { LiquidButton } from '../ui/liquid-glass-button';
-import LangSwitch from '../LangSwitch';
 
-/* ================= helpers locale ================= */
+import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
+import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
+import { AnimatedThemeToggler } from '../magicui/animated-theme-toggler';
 
 type SubLink = { label: string; href: string; icon?: React.ReactNode };
 type Section = { title: string; href: string; links?: SubLink[] };
 
-function useLocale() {
-  const pathname = usePathname() || '/';
-  const isEN = /^\/en(\/|$)/.test(pathname);
-  return { isEN };
-}
-function localizeHref(href: string, isEN: boolean) {
-  if (!isEN) return href;
-  if (/^(https?:)?\/\//.test(href)) return href;
-  if (/^\/en(\/|$)/.test(href)) return href;
-  if (href === '/') return '/en';
-  if (href.startsWith('/#')) return `/en${href}`;
-  return href.startsWith('/') ? `/en${href}` : `/en/${href}`;
-}
-
-/* ================= dictionnaires ================= */
-/** IMPORTANT:
- *  - Les liens de NIVEAU 1 pointent vers la PAGE (sans #) => on doit arriver TOUT EN HAUT
- *  - Les SOUS-LIENS (links) peuvent garder les ancres (#...)
- */
-const TEXTS = {
-  fr: {
-    ariaOpen: 'Ouvrir le menu',
-    ariaHome: 'Accueil',
-    contact: 'Contactez-nous',
-    contactCta: 'Contactez-nous !',
-    cancel: 'Annuler',
-    sections: [
-      { title: 'Accueil', href: '/', links: [] },
-      {
-        title: 'Nos Services',
-        href: '/nos-services', // <-- pas d’ancre ici
-        links: [
-          {
-            label: 'Applications Web, Mobiles & SaaS',
-            href: '/nos-services#saas-apps',
-            icon: <IconDeviceLaptop stroke={2} />,
-          },
-          {
-            label: 'Automatisation & IA',
-            href: '/nos-services#automatisation-ia',
-            icon: <IconCpu stroke={2} />,
-          },
-          {
-            label: 'Stratégies Digitales & Croissance',
-            href: '/nos-services#scaling',
-            icon: <IconChartLine stroke={2} />,
-          },
-          {
-            label: 'Ce qui fait notre différence',
-            href: '/nos-services#pourquoi-nous',
-            icon: <IconThumbUp stroke={2} />,
-          },
-          {
-            label: 'Foire aux questions',
-            href: '/nos-services#faq',
-            icon: <IconHelpHexagon stroke={2} />,
-          },
-        ],
-      },
-      {
-        title: 'À Propos',
-        href: '/about', // <-- pas d’ancre ici
-        links: [
-          {
-            label: 'Notre Histoire',
-            href: '/about#notre-histoire',
-            icon: <IconHistory stroke={2} />,
-          },
-          {
-            label: 'Notre Vision',
-            href: '/about#notre-vision',
-            icon: <IconEye stroke={2} />,
-          },
-          {
-            label: 'Notre Garantie',
-            href: '/about#notre-garantie',
-            icon: <IconHelpHexagon stroke={2} />,
-          },
-        ],
-      },
-      { title: 'Conseils Digitaux', href: '/blog', links: [] },
-      { title: 'Nos Projets', href: '/projects', links: [] }, // <-- pas d’ancre ici
-    ] as Section[],
+const SECTIONS: Section[] = [
+  { title: 'Accueil', href: '/' },
+  {
+    title: 'Nos Services',
+    href: '/nos-services',
+    links: [
+      { label: 'Applications Web, Mobiles & SaaS', href: '/nos-services#saas-apps', icon: <IconDeviceLaptop stroke={2} className="shrink-0" /> },
+      { label: 'Automatisation & IA', href: '/nos-services#automatisation-ia', icon: <IconCpu stroke={2} className="shrink-0" /> },
+      { label: 'Stratégies Digitales & Croissance', href: '/nos-services#scaling', icon: <IconChartLine stroke={2} className="shrink-0" /> },
+      { label: 'Ce qui fait notre différence', href: '/nos-services#pourquoi-nous', icon: <IconThumbUp stroke={2} className="shrink-0" /> },
+      { label: 'Foire aux questions', href: '/nos-services#faq', icon: <IconHelpHexagon stroke={2} className="shrink-0" /> },
+    ],
   },
-  en: {
-    ariaOpen: 'Open menu',
-    ariaHome: 'Home',
-    contact: 'Contact us',
-    contactCta: 'Contact us!',
-    cancel: 'Cancel',
-    sections: [
-      { title: 'Home', href: '/', links: [] },
-      {
-        title: 'Our Services',
-        href: '/nos-services',
-        links: [
-          {
-            label: 'Web, Mobile & SaaS Apps',
-            href: '/nos-services#saas-apps',
-            icon: <IconDeviceLaptop stroke={2} />,
-          },
-          {
-            label: 'Automation & AI',
-            href: '/nos-services#automatisation-ia',
-            icon: <IconCpu stroke={2} />,
-          },
-          {
-            label: 'Digital Strategies & Growth',
-            href: '/nos-services#scaling',
-            icon: <IconChartLine stroke={2} />,
-          },
-          {
-            label: 'What makes us different',
-            href: '/nos-services#pourquoi-nous',
-            icon: <IconThumbUp stroke={2} />,
-          },
-          {
-            label: 'FAQ',
-            href: '/nos-services#faq',
-            icon: <IconHelpHexagon stroke={2} />,
-          },
-        ],
-      },
-      {
-        title: 'About',
-        href: '/about',
-        links: [
-          {
-            label: 'Our Story',
-            href: '/about#notre-histoire',
-            icon: <IconHistory stroke={2} />,
-          },
-          {
-            label: 'Our Vision',
-            href: '/about#notre-vision',
-            icon: <IconEye stroke={2} />,
-          },
-          {
-            label: 'Our Guarantee',
-            href: '/about#notre-garantie',
-            icon: <IconHelpHexagon stroke={2} />,
-          },
-        ],
-      },
-      { title: 'Digital Advice', href: '/blog', links: [] },
-      { title: 'Our Projects', href: '/projects', links: [] },
-    ] as Section[],
+  {
+    title: 'À Propos',
+    href: '/about',
+    links: [
+      { label: 'Notre Histoire', href: '/about#notre-histoire', icon: <IconHistory stroke={2} className="shrink-0" /> },
+      { label: 'Notre Vision', href: '/about#notre-vision', icon: <IconEye stroke={2} className="shrink-0" /> },
+      { label: 'Notre Garantie', href: '/about#notre-garantie', icon: <IconHelpHexagon stroke={2} className="shrink-0" /> },
+    ],
   },
-} as const;
-
-/* ================= composant ================= */
+  { title: 'Conseils Digitaux', href: '/blog' },
+  { title: 'Nos Projets', href: '/projects' },
+];
 
 export function HeaderResponsive() {
-  const { isEN } = useLocale();
-  const router = useRouter();
-  const DURATION = 260;
-  const DRAWER_ANIM_MS = 260;
+  const [open, setOpen] = React.useState(false);
+  const [expanded, setExpanded] = React.useState<number | null>(null);
 
-  // état d'ouverture du Drawer (on contrôle pour séquencer)
-  const [open, setOpen] = useState(false);
+  React.useEffect(() => {
+    document.documentElement.classList.toggle('overflow-hidden', open);
+    return () => document.documentElement.classList.remove('overflow-hidden');
+  }, [open]);
 
-  // sections localisées
-  const headerLinks: Section[] = (
-    isEN ? TEXTS.en.sections : TEXTS.fr.sections
-  ).map((s) => ({
-    title: s.title,
-    href: localizeHref(s.href, isEN),
-    links: (s.links || []).map((l) => ({
-      ...l,
-      href: localizeHref(l.href, isEN),
-    })),
-  }));
-
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  // NAVIGATION DEPUIS LE DRAWER (FIABLE MOBILE)
-  const goFromDrawer = useCallback(
-    (href: string, forceTop: boolean) => {
-      // Marqueur pour ScrollManager sur la prochaine navigation
-      if (forceTop) sessionStorage.setItem('forceScrollTop', '1');
-
-      // 1) fermer le drawer
-      setOpen(false);
-
-      // 2) attendre la fin de l’anim, puis router.push
-      window.setTimeout(() => {
-        router.push(href); // scroll:true par défaut
-        // pas besoin d’appeler scrollTo ici : ScrollManager s’en charge
-      }, DRAWER_ANIM_MS);
-    },
-    [router]
-  );
-
-  const t = isEN ? TEXTS.en : TEXTS.fr;
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
-    <LazyMotion features={domAnimation}>
-      <Drawer open={open} onOpenChange={setOpen}>
-        {/* BARRE FLOTTANTE MOBILE */}
-        <div
-          className={[
-            'fixed bottom-0 z-[10000] lg:hidden',
-            'flex max-xs:w-full xs:left-1/2 max-xs:pb-5 xs:-translate-x-1/2 items-center justify-around [320px]:justify-between xs:gap-6 gap-2',
-            'rounded-t-[2rem] xs:rounded-[2rem] border dark:border-white/15',
-            'bg-white dark:bg-black',
-            'bg-[linear-gradient(135deg,rgba(255,255,255,.78),rgba(240,245,252,.42))] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]',
-            'shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)] dark:shadow-[0_18px_60px_rgba(2,6,12,.6),inset_0_1px_0_rgba(59,130,246,.12)]',
-            'xs:p-4 px-1 pt-3',
-          ].join(' ')}
-        >
-          <DrawerTrigger aria-label={t.ariaOpen} asChild>
-            <button className="grid place-items-center rounded-full p-0 transition hover:scale-[1.03]">
-              <IconMenu3
-                stroke={2}
-                className="[360px]:min-w-9 min-w-7 min-h-9"
-              />
-            </button>
-          </DrawerTrigger>
+    <>
+      {/* Header mobile transparent */}
+      <header className="fixed inset-x-0 top-0 z-50 lg:hidden">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
+          <Link href="/" aria-label="Accueil" className="flex items-center gap-2">
+            <Image src={IkovalineLogo} alt="Ikovaline" width={120} height={36} className="h-8 w-auto object-contain dark:hidden" priority />
+            <Image src={IkovalineLogoDark} alt="Ikovaline" width={120} height={36} className="hidden h-8 w-auto object-contain dark:block" priority />
+          </Link>
 
-          <ModeToggle />
-          <LangSwitch />
-          <div className="max-[320px]:hidden">
-            {/* logo vers HOME — on force top */}
+          <div className="flex items-center gap-2">
+            <AnimatedThemeToggler />
             <button
-              aria-label={t.ariaHome}
-              onClick={() => goFromDrawer(localizeHref('/', isEN), true)}
+              onClick={() => setOpen(true)}
+              aria-label="Ouvrir le menu"
+              className="grid size-10 place-items-center rounded-xl bg-white/70 text-neutral-900 shadow-sm ring-1 ring-black/10 backdrop-blur dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/10"
             >
-              <Image
-                src={IkovalineLogoDark}
-                alt="Ikovaline"
-                width={150}
-                height={150}
-                className="hidden h-10 w-24 object-contain dark:block"
-                priority
-              />
-              <Image
-                src={IkovalineLogo}
-                alt="Ikovaline"
-                width={150}
-                height={150}
-                className="block h-10 w-24 object-contain dark:hidden"
-                priority
-              />
+              <IconMenu3 />
             </button>
           </div>
-
-          <LiquidLink
-            href={localizeHref('/contact', isEN)}
-            className="h-11 px-3"
-          >
-            <span className="flex items-center gap-2 xs:text-xs text-[0.7rem]">
-              <IconMessage2 aria-hidden className="max-xs:hidden" />
-              {t.contact}
-            </span>
-          </LiquidLink>
         </div>
+      </header>
 
-        {/* CONTENU DU DRAWER */}
-        <DrawerContent>
-          <div className="relative mx-auto w-full overflow-hidden rounded-t-[2rem] pb-6 bg-white/6 dark:bg-black/30 border border-white/40 dark:border-[rgba(37,99,235,0.20)]">
-            {/* handle */}
-            <div className="relative z-10 mx-auto mt-2 h-2 w-[100px] rounded-full bg-neutral-300/80 dark:bg-white/10" />
-
-            <DrawerHeader className="relative z-10">
-              <button
-                onClick={() => goFromDrawer(localizeHref('/', isEN), true)}
-              >
-                <Image
-                  src={IkovalineLogoDark}
-                  alt="Ikovaline"
-                  width={150}
-                  height={150}
-                  className="mx-auto hidden min-h-10 min-w-28 object-contain dark:block"
-                />
-                <Image
-                  src={IkovalineLogo}
-                  alt="Ikovaline"
-                  width={150}
-                  height={150}
-                  className="mx-auto block min-h-10 min-w-28 object-contain dark:hidden"
-                />
-              </button>
-            </DrawerHeader>
-
-            {/* NAV */}
-            <nav className="mx-auto max-w-[300px] max-h-[50vh] px-2 overflow-y-auto space-y-2 pt-0">
-              {headerLinks.map((section, i) => {
-                const hasChildren = !!section.links?.length;
-                const expanded = activeIndex === i;
-
-                return (
-                  <div
-                    key={section.title}
-                    className="bg-white/60 relative rounded-[2rem] shadow dark:bg-black/40"
-                  >
-                    <div className="relative z-10 pr-4 flex items-center">
-                      {/* IMPORTANT: bouton -> goFromDrawer(page, forceTop=true) */}
-                      <button
-                        onClick={() => goFromDrawer(section.href, true)}
-                        className="flex-1 text-left px-4 py-4 text-sm font-semibold"
-                      >
-                        {section.title}
-                      </button>
-
-                      {hasChildren && (
-                        <LiquidButton
-                          className="!p-2 h-full relative"
-                          aria-expanded={expanded}
-                          aria-controls={`sub-${i}`}
-                          onClick={() => {
-                            setActiveIndex((prev) => (prev === i ? null : i));
-                          }}
-                        >
-                          <IconChevronDown
-                            className={`size-5 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
-                          />
-                        </LiquidButton>
-                      )}
-                    </div>
-
-                    {/* sous-liens (peuvent garder des #ancres) */}
-                    <AnimatePresence initial={false} mode="wait">
-                      {hasChildren && expanded && (
-                        <MeasuredList
-                          id={`sub-${i}`}
-                          links={section.links!}
-                          duration={DURATION}
-                          onClickLink={(href) => {
-                            // Sous-lien: on NE force PAS top, on laisse le ScrollManager scroller vers l’ancre
-                            goFromDrawer(href, false);
-                          }}
-                        />
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </nav>
-
-            {/* FOOTER CTA */}
-            <DrawerFooter>
-              <button
-                className="relative group/btn mt-10 block h-14 w-full rounded-full text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]"
-                onClick={() =>
-                  goFromDrawer(localizeHref('/contact', isEN), true)
-                }
-              >
-                {t.contactCta}
-              </button>
-              <button className="rounded-2xl" onClick={() => setOpen(false)}>
-                {t.cancel}
-              </button>
-            </DrawerFooter>
-          </div>
-        </DrawerContent>
-      </Drawer>
-    </LazyMotion>
-  );
-}
-
-/* ============== sous-liste animée ============== */
-function MeasuredList({
-  id,
-  links,
-  duration,
-  onClickLink,
-}: {
-  id: string;
-  links: { label: string; href: string; icon?: React.ReactNode }[];
-  duration: number;
-  onClickLink: (href: string) => void;
-}) {
-  const innerRef = React.useRef<HTMLUListElement>(null);
-  const [h, setH] = React.useState<number | 'auto'>(0);
-
-  React.useLayoutEffect(() => {
-    if (!innerRef.current) return;
-    innerRef.current.style.height = 'auto';
-    setH(innerRef.current.scrollHeight);
-  }, [links.length]);
-
-  return (
-    <m.ul
-      id={id}
-      ref={innerRef}
-      initial={{ height: 0, opacity: 0 }}
-      animate={{ height: h, opacity: 1 }}
-      exit={{ height: 0, opacity: 0 }}
-      transition={{ duration: duration / 1000 }}
-      className="overflow-hidden"
-    >
-      {links.map((link) => (
-        <li key={link.href}>
-          <button
-            onClick={() => onClickLink(link.href)}
-            className="flex w-full items-center gap-3 p-3 text-sm font-medium text-left"
+      {/* Menu plein écran */}
+      <AnimatePresence>
+        {open && (
+          <m.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] lg:hidden"
           >
-            {link.icon && <span>{link.icon}</span>}
-            {link.label}
-          </button>
-        </li>
-      ))}
-    </m.ul>
+            <div aria-hidden className="absolute inset-0 bg-white/70 backdrop-blur-2xl dark:bg-black/70" />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-100"
+              style={{
+                background:
+                  'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.08) 0 1px, transparent 1px calc(12.5%))',
+              }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full blur-[120px]"
+              style={{ background: 'radial-gradient(closest-side, hsl(var(--primary)/0.16), transparent 70%)' }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute right-0 bottom-0 h-96 w-96 translate-x-1/4 rounded-full blur-[160px]"
+              style={{ background: 'radial-gradient(closest-side, color-mix(in oklab, hsl(var(--primary)) 75%, #00E5FF) / 0.14, transparent 70%)' }}
+            />
+
+            <m.aside
+              key="panel"
+              initial={{ y: 24, opacity: 0, scale: 0.98 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 12, opacity: 0, scale: 0.995 }}
+              transition={{ duration: 0.28, ease: 'easeOut' }}
+              className="relative z-10 flex h-full w-full flex-col"
+            >
+              <div className="flex items-center justify-between px-5 pt-4">
+                <Link href="/" aria-label="Accueil" onClick={() => setOpen(false)}>
+                  <Image src={IkovalineLogo} alt="Ikovaline" width={120} height={36} className="h-8 w-auto object-contain dark:hidden" />
+                  <Image src={IkovalineLogoDark} alt="Ikovaline" width={120} height={36} className="hidden h-8 w-auto object-contain dark:block" />
+                </Link>
+
+                <button
+                  onClick={() => setOpen(false)}
+                  aria-label="Fermer le menu"
+                  className="grid size-10 place-items-center rounded-xl bg-white/70 text-neutral-900 shadow-sm ring-1 ring-black/10 backdrop-blur hover:opacity-95 dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/10"
+                >
+                  <IconX />
+                </button>
+              </div>
+
+              <m.nav
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                variants={{
+                  hidden: { transition: { staggerChildren: 0.04, staggerDirection: -1 } },
+                  show: { transition: { staggerChildren: 0.06 } },
+                }}
+                className="relative mx-auto mt-6 w-full max-w-3xl grow overflow-y-auto px-5 pb-28"
+              >
+                {SECTIONS.map((s, idx) => {
+                  const hasChildren = !!s.links?.length;
+                  const isOpen = expanded === idx;
+
+                  return (
+                    <m.div
+                      key={s.title}
+                      variants={{
+                        hidden: { opacity: 0, y: 12, filter: 'blur(4px)' },
+                        show: { opacity: 1, y: 0, filter: 'blur(0px)' },
+                      }}
+                      className="mb-2"
+                    >
+                      {/* LIGNE PRINCIPALE — Link + bouton séparés (❗pas de bouton dans le Link) */}
+                      <div className="group relative flex items-center justify-between rounded-2xl px-4 py-4">
+                        <Link
+                          href={s.href}
+                          onClick={() => setOpen(false)}
+                          className="text-2xl font-semibold tracking-tight text-neutral-900 hover:opacity-80 dark:text-neutral-50"
+                        >
+                          {s.title}
+                        </Link>
+
+                        {hasChildren && (
+                          <button
+                            type="button"
+                            aria-expanded={isOpen}
+                            aria-controls={`submenu-${idx}`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation(); // ← empêche la fermeture
+                              setExpanded((p) => (p === idx ? null : idx));
+                            }}
+                            onPointerDown={(e) => {
+                              // évite que le mousedown déclenche le click du parent sur mobiles
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }}
+                            className="ml-3 grid size-9 place-items-center rounded-xl text-neutral-700 transition group-hover:scale-105 hover:bg-black/10 dark:text-neutral-300 dark:hover:bg-white/10"
+                          >
+                            <IconChevronDown className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Hairline */}
+                      <div className="pointer-events-none mt-2 h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent dark:via-white/10" />
+
+                      {/* SOUS-LIENS */}
+                      <AnimatePresence initial={false}>
+                        {hasChildren && isOpen && (
+                          <m.ul
+                            id={`submenu-${idx}`}
+                            initial={{ height: 0, opacity: 0, y: -4 }}
+                            animate={{ height: 'auto', opacity: 1, y: 0 }}
+                            exit={{ height: 0, opacity: 0, y: -4 }}
+                            transition={{ duration: 0.24, ease: 'easeOut' }}
+                            className="overflow-hidden px-1"
+                          >
+                            {s.links!.map((l) => (
+                              <li key={l.href}>
+                                <Link
+                                  href={l.href}
+                                  onClick={() => setOpen(false)}
+                                  className="mt-1 flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] text-neutral-800 transition hover:bg-black/5 dark:text-neutral-200 dark:hover:bg-white/5"
+                                >
+                                  <span className="grid size-6 place-items-center">{l.icon}</span>
+                                  <span className="truncate">{l.label}</span>
+                                </Link>
+                              </li>
+                            ))}
+                          </m.ul>
+                        )}
+                      </AnimatePresence>
+                    </m.div>
+                  );
+                })}
+              </m.nav>
+
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/5 to-transparent dark:from-white/5" />
+              <div className="relative z-10 mx-auto mb-6 w-full max-w-3xl px-5">
+                <Link
+                  href="/contact"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-5 py-4 text-[15px] font-semibold text-white shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary)/0.45)]"
+                >
+                  Contactez-nous
+                </Link>
+              </div>
+            </m.aside>
+          </m.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

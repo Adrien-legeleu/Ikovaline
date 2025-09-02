@@ -14,6 +14,7 @@ import { LiquidLink } from './liquid-link';
 import { usePathname } from 'next/navigation';
 import type { BlogType } from '@/components/BlogPage/Blog';
 import { LiquidButton } from './liquid-glass-button';
+import { Button } from './button';
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -128,32 +129,32 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         </div>
 
         <div className="mx-10 flex items-center justify-between gap-2">
-          <LiquidLink href={`/${isEN ? 'en/' : ''}blog`} className="z-10 px-4">
+          <Link href={`/${isEN ? 'en/' : ''}blog`} className="z-10 bg-primary py-2 rounded-xl px-4">
             <span className="flex items-center justify-center gap-2">
               <span aria-hidden="true">
                 <IconNews />
               </span>
               {seeAll}
             </span>
-          </LiquidLink>
+          </Link>
 
           <div className="flex gap-2">
-            <LiquidButton
+            <Button
               className="relative z-40 flex h-10 w-10 !p-0 items-center justify-center rounded-full  disabled:opacity-50"
               onClick={scrollLeft}
               aria-label={ariaChange}
               disabled={!canScrollLeft}
             >
-              <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
-            </LiquidButton>
-            <LiquidButton
+              <IconArrowNarrowLeft className="h-6 w-6 text-white" />
+            </Button>
+            <Button
               className="relative z-40 flex h-10 !p-0 w-10 items-center justify-center rounded-full  disabled:opacity-50"
               onClick={scrollRight}
               aria-label={ariaChange}
               disabled={!canScrollRight}
             >
-              <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
-            </LiquidButton>
+              <IconArrowNarrowRight className="h-6 w-6 text-white" />
+            </Button>
           </div>
         </div>
       </div>

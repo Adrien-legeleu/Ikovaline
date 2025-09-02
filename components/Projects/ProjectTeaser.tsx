@@ -21,49 +21,32 @@ type CardProps = {
   hrefFallback: string;
 };
 
-/* ------- Skin “Liquid Glass” : bord/tour bleu + halos + reflets ------- */
-function GlassShell({
+/* ---------- Skin “Satin Primary” : sobre, élégant, accents bleus ---------- */
+function PrimaryCardShell({
   className,
   children,
 }: React.PropsWithChildren<{ className?: string }>) {
   return (
     <div
       className={cn(
-        'relative z-0 overflow-hidden rounded-[28px] backdrop-blur-2xl',
-        'bg-[radial-gradient(120%_120%_at_50%_0%,rgba(255,255,255,0.92),rgba(245,248,252,0.55))]',
-        'dark:bg-[linear-gradient(180deg,rgba(8,12,18,0.80),rgba(8,12,18,0.58))]',
-        'border border-blue-500/20 dark:border-blue-600/30',
-        'shadow-xl',
+        'relative overflow-hidden rounded-2xl ',
+        // surface satinée + ring primary léger
+        ' bg-white/90  shadow-[0_10px_30px_rgba(0,0,0,.06)]',
+        ' dark:bg-neutral-900/85  dark:shadow-[0_10px_30px_rgba(0,0,0,.45)]',
         className
       )}
     >
-      {/* anneau conique (contour) */}
+      {/* bande header très discrète (dégradé primary) */}
       <span
         aria-hidden
-        className="pointer-events-none absolute -inset-px rounded-[28px] opacity-95"
+        className="pointer-events-none absolute inset-x-0 top-0 h-1.5"
         style={{
           background:
-            'conic-gradient(from 210deg,rgba(37,99,235,.22),rgba(56,189,248,.22),rgba(37,99,235,.22))',
-          WebkitMask:
-            'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
-          WebkitMaskComposite: 'xor',
-          mask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
-          maskComposite: 'exclude',
-          padding: '1px',
+            'linear-gradient(90deg, hsl(var(--primary)/.0), hsl(var(--primary)/.35) 18%, hsl(var(--primary)/.5) 50%, hsl(var(--primary)/.35) 82%, hsl(var(--primary)/.0))',
         }}
       />
-      {/* reflets */}
-      <span className="pointer-events-none absolute left-6 right-6 top-2 h-6 rounded-full blur-[10px] bg-white/70 dark:bg-sky-400/15" />
-      <span className="pointer-events-none absolute -bottom-10 left-1/2 h-16 w-[82%] -translate-x-1/2 rounded-full blur-3xl bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,.55),rgba(37,99,235,.38),transparent_70%)] dark:opacity-80" />
-      {/* halo externe */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -inset-8 rounded-[30px] blur-3xl opacity-60"
-        style={{
-          background:
-            'radial-gradient(60% 50% at 50% 0%, rgba(56,189,248,.45), rgba(59,130,246,.35), transparent 70%)',
-        }}
-      />
+      {/* reflet doux en haut */}
+      <span className="pointer-events-none absolute inset-x-6 top-0 h-10 rounded-b-[32px] bg-white/35 blur-xl dark:bg-white/5" />
       <div className="relative z-10">{children}</div>
     </div>
   );
@@ -90,11 +73,11 @@ function ProjectCard({
       aria-label={`${titre} – ${client}`}
       target={lien ? '_blank' : undefined}
       rel={lien ? 'noopener noreferrer' : undefined}
-      className="snap-center snap-always  block"
+      className="group block snap-center snap-always"
     >
-      <GlassShell className="transition-transform min-w-[300px] duration-300 hover:scale-[1.015] ">
+      <PrimaryCardShell className="transition-transform duration-300 group-hover:scale-[1.01]">
         {/* Media */}
-        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-[28px]">
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-2xl">
           <Image
             src={coverImage}
             alt={titre}
@@ -103,24 +86,28 @@ function ProjectCard({
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             priority={index === 1}
           />
+          {/* fondu bas pour lisibilité + liseré primary fin */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent dark:from-black/15" />
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 opacity-80"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
             style={{
               background:
-                'linear-gradient(90deg, rgba(56,189,248,0), rgba(56,189,248,.6), rgba(59,130,246,.7), rgba(56,189,248,.6), rgba(56,189,248,0))',
+                'linear-gradient(90deg, transparent, hsl(var(--primary)/.35), hsl(var(--primary)/.55), hsl(var(--primary)/.35), transparent)',
             }}
           />
         </div>
 
         {/* Contenu */}
         <div className="p-5 lg:p-6">
-          <div className="mb-2 flex items-center gap-2 text-[11px] sm:text-xs text-sky-900 dark:text-sky-100">
-            <span className="inline-flex items-center rounded-full border border-sky-400/25 bg-sky-400/10 px-2 py-0.5">
+          <div className="mb-2 flex items-center gap-2 text-[11px] sm:text-xs text-primary">
+            <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/8 px-2 py-0.5">
               {client}
             </span>
-            <span className="opacity-60">•</span>
-            <span className="opacity-80">{secteur}</span>
+            <span className="opacity-50">•</span>
+            <span className="text-neutral-600 dark:text-neutral-300">
+              {secteur}
+            </span>
           </div>
 
           <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">
@@ -134,26 +121,26 @@ function ProjectCard({
             {services.slice(0, 3).map((s) => (
               <span
                 key={s}
-                className="rounded-full border border-sky-400/30 bg-sky-500/10 px-2 py-0.5 text-[11px] font-medium text-sky-800 dark:text-sky-200"
+                className="rounded-full border border-primary/20 bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary/90 dark:text-primary"
               >
                 {s}
               </span>
             ))}
             {services.length > 3 && (
-              <span className="rounded-full border border-sky-400/30 bg-sky-500/10 px-2 py-0.5 text-[11px] font-medium text-sky-800 dark:text-sky-200">
+              <span className="rounded-full border border-primary/20 bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary/90 dark:text-primary">
                 +{services.length - 3}
               </span>
             )}
           </div>
 
           <div className="mt-4 flex items-center justify-between">
-            <span className="text-sm font-semibold text-sky-700 dark:text-sky-300">
+            <span className="text-sm font-semibold text-primary">
               {resultat}
             </span>
-            <span className="inline-flex items-center gap-2 text-sm font-medium text-sky-700 dark:text-sky-200">
+            <span className="inline-flex items-center gap-2 text-sm font-medium text-neutral-800 dark:text-neutral-200">
               <span className="relative">
                 <span className="relative z-10">{lien ? 'Demo' : 'Voir'}</span>
-                <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-gradient-to-r from-sky-400 to-sky-600 transition-[width] duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-primary/80 transition-[width] duration-300 group-hover:w-full" />
               </span>
               <svg
                 className="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
@@ -172,7 +159,7 @@ function ProjectCard({
             </span>
           </div>
         </div>
-      </GlassShell>
+      </PrimaryCardShell>
     </Link>
   );
 }
@@ -193,19 +180,18 @@ export default function ProjectsCarousel() {
         baseHref: '/projets',
       };
 
-  // 3 projets uniquement — on enlève Sophie direct
+  // 3 projets uniquement
   const dataRaw = isEN ? PROJECTS_EN : PROJECTS_FR;
   const data = dataRaw
     .filter((p) => p.id !== 'sophie-deneriez-2025')
     .slice(0, 3);
 
   const viewportRef = React.useRef<HTMLDivElement | null>(null);
-  const [active, setActive] = React.useState(1); // centre par défaut (carte 2/3)
+  const [active, setActive] = React.useState(1); // centre par défaut
   const snapPositionsRef = React.useRef<number[]>([]);
   const snapTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const snappingRef = React.useRef(false);
 
-  // calcule les positions de centrage réelles (robuste : offsetLeft + width/2)
   const computeSnapPositions = React.useCallback(() => {
     const el = viewportRef.current;
     if (!el) return;
@@ -223,20 +209,17 @@ export default function ProjectsCarousel() {
     snapPositionsRef.current = positions;
   }, []);
 
-  // scroll vers l’index souhaité
   const scrollToIndex = React.useCallback((idx: number) => {
     const el = viewportRef.current;
     if (!el) return;
     const pos = snapPositionsRef.current[idx] ?? 0;
     snappingRef.current = true;
     el.scrollTo({ left: pos, behavior: 'smooth' });
-    // on relâche le flag après un petit délai
     window.setTimeout(() => {
       snappingRef.current = false;
     }, 320);
   }, []);
 
-  // trouve l’index le plus proche d’une position
   const nearestIndex = React.useCallback((left: number) => {
     const arr = snapPositionsRef.current;
     if (!arr.length) return 0;
@@ -252,7 +235,6 @@ export default function ProjectsCarousel() {
     return best;
   }, []);
 
-  // observe scroll : met à jour l’active et déclenche un auto-snap après inertie
   React.useEffect(() => {
     const el = viewportRef.current;
     if (!el) return;
@@ -262,11 +244,10 @@ export default function ProjectsCarousel() {
       const idx = nearestIndex(el.scrollLeft);
       setActive(idx);
 
-      if (snappingRef.current) return; // on ne se bat pas contre notre smooth scroll
+      if (snappingRef.current) return;
 
       if (snapTimerRef.current) clearTimeout(snapTimerRef.current);
       snapTimerRef.current = setTimeout(() => {
-        // fin d’inertie -> verrouille pile au centre le plus proche
         scrollToIndex(nearestIndex(el.scrollLeft));
       }, 90);
     };
@@ -278,12 +259,10 @@ export default function ProjectsCarousel() {
     };
   }, [nearestIndex, scrollToIndex]);
 
-  // recalcul sur mount + resize
   React.useEffect(() => {
     computeSnapPositions();
     const ro = new ResizeObserver(() => computeSnapPositions());
     if (viewportRef.current) ro.observe(viewportRef.current);
-    // recalc aussi après un tick (images)
     const t = window.setTimeout(computeSnapPositions, 200);
     return () => {
       ro.disconnect();
@@ -292,7 +271,6 @@ export default function ProjectsCarousel() {
   }, [computeSnapPositions, data.length]);
 
   React.useEffect(() => {
-    // centre par défaut sur la carte du milieu
     scrollToIndex(1);
   }, [scrollToIndex]);
 
@@ -302,7 +280,6 @@ export default function ProjectsCarousel() {
   function next() {
     scrollToIndex(Math.min(data.length - 1, active + 1));
   }
-
   function onKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'ArrowRight') {
       e.preventDefault();
@@ -315,34 +292,41 @@ export default function ProjectsCarousel() {
 
   return (
     <section
-      className="relative pt-10 mx-auto  w-full max-w-7xl "
+      className="relative mx-auto w-full max-w-7xl pt-12"
       aria-label={t.title}
     >
-      {/* halo global bleu discret */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10" />
+      {/* décor section — motif primaire très léger */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08] dark:opacity-[0.06]"
+        style={{
+          background:
+            'radial-gradient(70% 50% at 20% 0%, hsl(var(--primary)/.6), transparent 60%), radial-gradient(65% 45% at 85% 10%, hsl(var(--primary)/.45), transparent 62%)',
+        }}
+      />
 
-      <div className="sm:mb-8 sm:px-2  w-full lg:px-12 xl:px-0 mb-12 flex max-sm:flex-col max-sm:gap-5 sm:items-end items-center sm:justify-between gap-4">
-        <h2 className="text-3xl pb-1 sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-neutral-100 dark:to-neutral-200">
+      <div className="mb-12 flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-start px-2 lg:px-4">
+        <h2 className="pb-1 text-3xl font-bold text-neutral-900 sm:text-4xl dark:text-neutral-100">
           {t.title}
         </h2>
         <Link
           href={t.baseHref}
-          className="text-sm relative bottom-1 font-medium text-sky-700 hover:underline dark:text-sky-300"
+          className="relative bottom-0.5 text-sm font-medium text-primary hover:opacity-90"
         >
           {t.all}
         </Link>
       </div>
 
-      <div className="w-full lg:px-12 relative">
-        {/* flèches */}
+      <div className="relative lg:px-4">
+        {/* flèches mobiles */}
         <button
           type="button"
-          aria-label="Previous"
+          aria-label="Précédent"
           onClick={prev}
           className={cn(
-            'absolute left-0 top-1/2 lg:hidden z-20 -translate-y-1/2 rounded-full backdrop-blur-md',
-            'bg-white/70 dark:bg-neutral-900/60 border border-sky-400/30',
-            'shadow-[0_8px_30px_rgba(59,130,246,.25)] p-2 hidden sm:inline-flex',
+            'absolute left-0 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border p-2 backdrop-blur-md sm:inline-flex lg:hidden',
+            'border-black/5 bg-white/80 text-neutral-800 shadow-[0_8px_24px_rgba(0,0,0,.12)]',
+            'dark:border-white/10 dark:bg-neutral-900/70 dark:text-neutral-100 dark:shadow-[0_8px_24px_rgba(0,0,0,.5)]',
             active === 0 && 'opacity-50 cursor-not-allowed'
           )}
           disabled={active === 0}
@@ -359,12 +343,12 @@ export default function ProjectsCarousel() {
         </button>
         <button
           type="button"
-          aria-label="Next"
+          aria-label="Suivant"
           onClick={next}
           className={cn(
-            'absolute right-0 top-1/2 z-20 lg:hidden -translate-y-1/2 rounded-full backdrop-blur-md',
-            'bg-white/70 dark:bg-neutral-900/60 border border-sky-400/30',
-            'shadow-[0_8px_30px_rgba(59,130,246,.25)] p-2 hidden sm:inline-flex',
+            'absolute right-0 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border p-2 backdrop-blur-md sm:inline-flex lg:hidden',
+            'border-black/5 bg-white/80 text-neutral-800 shadow-[0_8px_24px_rgba(0,0,0,.12)]',
+            'dark:border-white/10 dark:bg-neutral-900/70 dark:text-neutral-100 dark:shadow-[0_8px_24px_rgba(0,0,0,.5)]',
             active === data.length - 1 && 'opacity-50 cursor-not-allowed'
           )}
           disabled={active === data.length - 1}
@@ -388,8 +372,9 @@ export default function ProjectsCarousel() {
           tabIndex={0}
           onKeyDown={onKeyDown}
           className={cn(
-            'flex items-center lg:justify-center max-w-[1400px]    mx-auto w-full  gap-6 max-lg:overflow-x-auto px-6 py-20 relative bottom-10 sm:px-10 lg:px-0 ',
+            'relative mx-auto flex w-full max-w-[1400px] items-center gap-6 px-6 py-16 sm:px-8 lg:justify-center lg:px-0',
             'snap-x snap-mandatory scroll-smooth overscroll-x-contain',
+            'max-lg:overflow-x-auto',
             '[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden'
           )}
         >
@@ -398,8 +383,9 @@ export default function ProjectsCarousel() {
               key={p.id}
               data-snap-item
               className={cn(
-                'shrink-0 basis-[80%] sm:basis-[58%] md:basis-[50%] lg:basis-[32%] xl:basis-[35%]',
-                i === 1 ? 'scale-[1.06]' : 'scale-[.98]'
+                'shrink-0 basis-[86%] sm:basis-[62%] md:basis-[54%] lg:basis-[34%] xl:basis-[36%]',
+                i === active ? 'scale-[1.04]' : 'scale-[.99]',
+                'transition-transform duration-300'
               )}
             >
               <ProjectCard
@@ -419,17 +405,17 @@ export default function ProjectsCarousel() {
         </div>
 
         {/* Dots */}
-        <div className="mt-6 lg:hidden flex relative bottom-20 justify-center gap-2">
+        <div className="relative -top-4 flex justify-center gap-2 lg:hidden">
           {data.map((_, i) => (
             <button
               key={i}
-              aria-label={`Go to slide ${i + 1}`}
+              aria-label={`Aller à la slide ${i + 1}`}
               onClick={() => scrollToIndex(i)}
               className={cn(
                 'h-2 rounded-full transition-all',
                 i === active
-                  ? 'w-6 bg-sky-500 shadow-[0_0_18px_rgba(56,189,248,.65)]'
-                  : 'w-2 bg-sky-300/60 dark:bg-sky-300/40'
+                  ? 'w-6 bg-primary shadow-[0_0_14px_hsl(var(--primary)/.55)]'
+                  : 'w-2 bg-primary/30 dark:bg-primary/25'
               )}
             />
           ))}

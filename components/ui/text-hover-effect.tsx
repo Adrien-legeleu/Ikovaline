@@ -46,10 +46,10 @@ export const TextHoverEffect = ({
           x2="100%"
           y2="0%"
         >
-          <stop offset="0%" stopColor={hovered ? '#3b82f6' : '#2563eb'} />
-          <stop offset="40%" stopColor={hovered ? '#60a5fa' : '#3b82f6'} />
-          <stop offset="80%" stopColor={hovered ? '#93c5fd' : '#60a5fa'} />
-          <stop offset="100%" stopColor={hovered ? '#bfdbfe' : '#93c5fd'} />
+          <stop offset="0%" stopColor={hovered ? '#3b82f610' : '#2563eb10'} />
+          <stop offset="40%" stopColor={hovered ? '#60a5fa10' : '#3b82f610'} />
+          <stop offset="80%" stopColor={hovered ? '#93c5fd10' : '#60a5fa10'} />
+          <stop offset="100%" stopColor={hovered ? '#bfdbfe10' : '#93c5fd10'} />
         </linearGradient>
 
         {/* Masque radial (curseur) */}
@@ -73,37 +73,8 @@ export const TextHoverEffect = ({
           />
         </mask>
 
-        {/* Glow néon bleu clair */}
-        <filter id="neon-blue" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur1" />
-          <feColorMatrix
-            in="blur1"
-            type="matrix"
-            values="0 0 0 0 0   0 0 0 0 0.6   0 0 0 0 1   0 0 0 1 0"
-            result="blueSoft"
-          />
-          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur2" />
-          <feColorMatrix
-            in="blur2"
-            type="matrix"
-            values="0 0 0 0 0   0 0 0 0 0.5   0 0 0 0 0.95   0 0 0 1 0"
-            result="blueStrong"
-          />
-          <feMerge>
-            <feMergeNode in="blueSoft" />
-            <feMergeNode in="blueStrong" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
 
-        {/* Glow interne subtil */}
-        <filter id="inner-glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="blur" />
-          <feComponentTransfer>
-            <feFuncA type="linear" slope="0.85" />
-          </feComponentTransfer>
-          <feBlend in="SourceGraphic" in2="blur" mode="screen" />
-        </filter>
+       
       </defs>
 
       {/* Contour neutre */}
@@ -126,7 +97,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.6"
-        stroke="#3b82f6" // bleu clair
+        stroke="#3b82f610" // bleu clair
         className="font-[helvetica] font-bold fill-transparent text-7xl"
         initial={{
           strokeDasharray: 1000,

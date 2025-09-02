@@ -70,31 +70,28 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <div className="max-w-[1450px] mx-auto">
-        {/* Above-the-fold (SSR for SEO + fast LCP) */}
-        <div className="relative overflow-hidden w-full">
+      <div className="max-w-[1450px] mx-auto ">
+        <div className="overflow-hidden">
           <Landing />
 
           <ComponentDemo />
           <ProjectsTeaser />
 
           <About />
-          <section id="services" className="relative">
-            <Services />
-          </section>
+
+          <Services />
+
+          <Map />
         </div>
-
-        <Map />
-
         <Methodologie />
 
-        <div className="relative w-full overflow-hidden">
+        <div className="overflow-hidden">
           <Review />
 
           <CTAHome />
-        </div>
 
-        <Blog />
+          <Blog />
+        </div>
       </div>
     </>
   );

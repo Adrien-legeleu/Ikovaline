@@ -1,143 +1,120 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
-import { IconApps, IconMessage2 } from '@tabler/icons-react';
-
-import { cn } from '@/lib/utils';
-import { LiquidLink } from '@/components/ui/liquid-link';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
+import Image from 'next/image';
+import Link from 'next/link';
 
-/* -------------------- i18n -------------------- */
-const DICT = {
-  fr: {
-    guarantee: 'Garantie de résultats',
-    headline: 'De l’idée au SaaS qui ',
-    words: ['PROPULSE', 'DÉCUPLE'],
-    subtitle:
-      'De la stratégie au développement, Ikovaline conçoit des solutions digitales sur mesure pour accélérer votre croissance.',
-    ctaAudit: 'Demander un audit gratuit',
-    ctaServices: 'Voir nos services',
-  },
-  en: {
-    guarantee: 'Results guarantee',
-    headline: 'From idea to a SaaS that ',
-    words: ['BOOST', 'SCALE'],
-    subtitle:
-      'From strategy to development, Ikovaline designs tailored digital solutions to accelerate your growth.',
-    ctaAudit: 'Request a free audit',
-    ctaServices: 'See our services',
-  },
-} as const;
+export default function HeroNoiseLight() {
+  return (
+    <section className="relative flex w-full items-center justify-center overflow-hidden bg-white px-4 py-20 md:py-40 dark:bg-black">
+      <Background />
 
-/* -------------------- Helpers -------------------- */
-function usePathLocale() {
-  const pathname = usePathname() || '/';
-  return /^\/en(\/|$)/.test(pathname) ? 'en' : 'fr';
+      <div className="relative z-10 mx-auto w-full max-w-7xl">
+        <StarClientsGoogle />
+
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mt-2 text-center text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl lg:text-7xl dark:text-white"
+        >
+          De l’idée à un <br className="hidden sm:block" />
+          projet réussi.
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
+          className="mx-auto mt-4 max-w-xl text-center text-sm text-slate-600 md:text-xl dark:text-slate-300"
+        >
+          De la stratégie au développement, Ikovaline conçoit des solutions
+          digitales sur mesure pour accélérer votre croissance.
+        </motion.p>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.25 }}
+          className="mt-8 flex w-full flex-col items-center justify-center gap-4 sm:flex-row"
+        >
+          <Link
+            href="/contact"
+            className="rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:opacity-95"
+          >
+            Nous contacter
+          </Link>
+        </motion.div>
+
+        {/* Visuel / screenshot */}
+        <div className="z-40 mt-12 flex w-full bg-white dark:bg-black justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.35, delay: 0.3 }}
+            className="relative w-full overflow-hidden rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 [mask-image:linear-gradient(to_bottom,white,white_45%,transparent)]"
+          >
+            <Image
+              src="/heroImage.png" // ← place ton image ici
+              alt="Aperçu du produit"
+              className="h-auto w-full object-cover"
+              width={1280}
+              height={720}
+              priority
+            />
+            {/* léger fondu pour la lisibilité (plus marqué en dark) */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent dark:from-black/40" />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 }
-function useIdleReady(timeout = 600) {
-  const [ready, setReady] = React.useState(false);
-  React.useEffect(() => {
-    const t = setTimeout(() => setReady(true), timeout);
-    return () => clearTimeout(t);
-  }, [timeout]);
-  return ready;
-}
 
-/* -------------------- Décors lourds (lazy) -------------------- */
-const GlowLazy = dynamic(() => import('@/components/ui/glow'), { ssr: false });
-const UnicornBackdrop = dynamic(
-  () => import('@/components/ui/unicornBackdrop'),
-  { ssr: false }
-);
+/* ---------- Fond bandes + bruit (light + dark) ---------- */
+function Background() {
+  const [strips, setStrips] = useState<number[]>([]);
 
-/* -------------------- Page -------------------- */
-export default function Landing() {
-  const locale = usePathLocale();
-  const t = DICT[locale];
-  const heavyReady = useIdleReady(500);
+  useEffect(() => {
+    const calc = () => {
+      const stripW = 80;
+      const n = Math.ceil(window.innerWidth / stripW);
+      setStrips(Array.from({ length: n }, (_, i) => i));
+    };
+    calc();
+    window.addEventListener('resize', calc);
+    return () => window.removeEventListener('resize', calc);
+  }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center gap-5 py-20 overflow-hidden">
-      {/* Décors (uniquement après idle) */}
-      {heavyReady && (
-        <>
-          <div className="absolute dark:hidden inset-0 pointer-events-none overflow-hidden">
-            <GlowLazy variant="above" />
-          </div>
-          <UnicornBackdrop className="dark:block hidden" />
-        </>
-      )}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="absolute inset-0 z-0 flex [mask-image:radial-gradient(circle_at_center,white_0%,white_32%,transparent_70%)]"
+    >
+      <Noise />
+      {strips.map((i) => (
+        <div
+          key={i}
+          className="h-full w-20 bg-gradient-to-r from-slate-100 to-white shadow-[2px_0_0_0_#e5e7eb] dark:from-neutral-900 dark:to-neutral-950 dark:shadow-[2px_0_0_0_#262626]"
+        />
+      ))}
+    </motion.div>
+  );
+}
 
-      {/* Badge garantie */}
-      <div className="z-10 flex flex-col">
-        <Link
-          href="/about/#notre-garantie"
-          className="mx-auto flex items-center justify-center"
-        >
-          <div
-            className="group relative mx-auto flex items-center justify-center rounded-full px-5 py-2
-                       shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]
-                       transition-shadow duration-500 ease-out
-                       hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]
-                       bg-white/70  dark:bg-transparent"
-          >
-            {/* glow animé (bordure dégradée) */}
-            <span
-              className={cn(
-                'absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] p-[1px]',
-                'bg-gradient-to-r from-[#5faaff]/60 via-[#42b8fd]/60 to-[#00e0ff]/60 bg-[length:300%_100%]'
-              )}
-              style={{
-                WebkitMask:
-                  'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'destination-out',
-                mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                maskComposite: 'subtract',
-                WebkitClipPath: 'padding-box',
-              }}
-            />
-
-            <span className="relative z-10 text-sm font-semibold tracking-wide text-sky-700 dark:text-transparent dark:bg-gradient-to-r dark:from-sky-200 dark:via-sky-100 dark:to-blue-200 dark:bg-clip-text">
-              {t.guarantee}
-            </span>
-          </div>
-        </Link>
-
-        {/* Headline + mots flip */}
-        <h1 className="mx-auto py-10 text-center font-bold text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-snug max-w-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-300 dark:to-white relative z-20">
-          <span className="lg:block">{t.headline}</span>
-
-          {/* Mot statique = fallback LCP immédiat */}
-          <span
-            className="font-extrabold bg-clip-text pt-2 text-transparent
-                   text-5xl md:text-6xl lg:text-8xl xl:text-9xl
-                   bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400"
-          >
-            {t.words[0]}
-          </span>
-        </h1>
-      </div>
-
-      <StarClientsGoogle />
-
-      <p className="max-w-2xl text-center max-sm:text-sm text-muted-foreground dark:text-neutral-200 max-sm:px-2 md:text-lg">
-        {t.subtitle}
-      </p>
-
-      <div className="mt-8 flex items-center justify-center gap-5 max-sm:flex-col">
-        <LiquidLink href="/contact" className=" dark:bg-black/50 rounded-full">
-          <IconMessage2 aria-hidden className="mr-2 inline-flex" /> {t.ctaAudit}
-        </LiquidLink>
-        <LiquidLink
-          href="/nos-services"
-          className=" dark:bg-black/50 rounded-full"
-        >
-          <IconApps aria-hidden className="mr-2 inline-flex" /> {t.ctaServices}
-        </LiquidLink>
-      </div>
-    </div>
+function Noise() {
+  return (
+    <div
+      className="absolute inset-0 h-full w-full scale-[1.2] opacity-[0.05] [mask-image:radial-gradient(#fff,transparent,75%)] dark:opacity-[0.07]"
+      style={{
+        backgroundImage: 'url(/noise.webp)',
+        backgroundSize: '20%',
+      }}
+    />
   );
 }

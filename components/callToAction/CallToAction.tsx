@@ -1,128 +1,148 @@
 'use client';
 
-import { LiquidLink } from '../ui/liquid-link';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import StarClientsGoogle from '../StarClientsGoogle';
 
-interface ICallToAction {
+interface Props {
   title: string;
   desc: string;
   textBtn: string;
+  reviewsCount?: number; // si StarClientsGoogle le lit, sinon ignoré
 }
 
-/** Palettes */
-const ELECTRIC = 'rgba(0,168,232'; // #00A8E8
-const ROYAL = 'rgba(37,99,235'; // #2563EB
-
-export default function CallToAction({ title, desc, textBtn }: ICallToAction) {
+/**
+ * Notes:
+ * - Utilise la variable CSS `--primary` (shadcn/tailwind) : ex. 197 100% 50%
+ * - Le fond “stripes” = 8 colonnes (lignes verticales plein écran), en primary/10
+ * - Verre: géré via variables --glass-a / --glass-b pour light/dark sans dupliquer le style
+ * - Boutons: focus-visible + variantes dark
+ */
+export default function CallToAction({
+  title,
+  desc,
+  textBtn,
+  reviewsCount = 67,
+}: Props) {
   return (
-    <section className="  py-32">
-      {/* Backdrop global (halos bleus subtils) */}
+    <section className="relative mx-auto w-full max-w-[120rem] px-2 sm:px-6 py-28 md:py-40">
+      {/* Stripes verticales (8 colonnes), teintées en primary/10 */}
       <div
         aria-hidden
-        className="pointer-events-none relative mx-auto max-w-5xl"
-      >
-        <span
-          className="absolute -top-28 left-1/2 z-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full blur-[140px]"
-          style={{
-            background: `radial-gradient(closest-side, ${ELECTRIC},.28), ${ELECTRIC},0)`,
-          }}
-        />
-        <span
-          className="absolute -bottom-28 right-1/2 z-0 h-[26rem] w-[26rem] translate-x-1/2 rounded-full blur-[160px]"
-          style={{
-            background: `radial-gradient(closest-side, ${ROYAL},.22), ${ROYAL},0)`,
-          }}
-        />
-      </div>
-
-      {/* Carte “Liquid Glass” */}
-      <div
-        className={[
-          'relative mx-auto max-w-5xl z-10 overflow-hidden rounded-[28px]',
-          'px-4 xss:px-8 pt-24 md:pt-36 pb-12 md:pb-24 text-center',
-
-          // teinte base — zéro blanc en dark
-          'bg-[radial-gradient(120%_120%_at_50%_0%,rgba(255,255,255,0.92),rgba(244,250,251,0.55))]',
-          'dark:bg-[linear-gradient(180deg,rgba(8,12,18,0.90),rgba(8,12,18,0.62))]',
-          // profondeur
-          'shadow-[0_28px_90px_rgba(6,24,44,0.14),0_6px_16px_rgba(6,24,44,0.08)]',
-        ].join(' ')}
+        className="pointer-events-none absolute inset-0 opacity-100"
         style={{
-          // bordure conique façon verre (light)
-          border: '1px solid transparent',
-          backgroundImage:
-            'radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,.92), rgba(244,250,251,.52)),' + // contenu
-            `conic-gradient(from 210deg, rgba(255,255,255,.85), ${ELECTRIC},.40), rgba(255,255,255,.55), ${ROYAL},.28), rgba(255,255,255,.85))`, // liseré
-          backgroundClip: 'padding-box, border-box',
-          // glow externe (plus présent, “brillant”)
-          boxShadow: `
-            0 0 38px ${ELECTRIC},.22),
-            0 0 86px ${ROYAL},.22),
-            0 0 140px ${ELECTRIC},.16)
-          `,
+          background:
+            'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.1) 0 1px, transparent 1px calc(12.5%))',
+        }}
+      />
+
+      {/* Halos (subtils, OK light/dark) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full blur-[140px]"
+        style={{
+          background:
+            'radial-gradient(closest-side, hsl(var(--primary) / 0.16), transparent 70%)',
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 bottom-0 h-96 w-96 rounded-full blur-[160px]"
+        style={{
+          background:
+            // un “secondaire” en mixant un peu la primaire vers le cyan
+            'radial-gradient(closest-side, color-mix(in oklab, hsl(var(--primary)) 75%, #00E5FF) / 0.14, transparent 70%)',
+        }}
+      />
+
+      {/* Carte verre + bordure conique (light/dark via CSS vars) */}
+      <div
+        className={cn(
+          'relative z-10 mx-auto max-w-6xl overflow-hidden rounded-[36px] sm:p-12 p-5 md:p-20 text-center',
+          'shadow-[0_60px_120px_-48px_rgba(0,0,0,.35)] backdrop-blur-xl',
+          // variables light/dark pour le dégradé “verre”
+          '[--glass-a:rgba(255,255,255,.95)] [--glass-b:rgba(255,255,255,.88)]',
+          'dark:[--glass-a:rgba(10,10,12,.92)] dark:[--glass-b:rgba(12,12,16,.86)]',
+          // teinte de reflet en dark un peu plus douce
+          'dark:[--gloss:white/20]'
+        )}
+        style={{
+          border: '0.5px solid transparent',
+          background:
+            // 1. le “verre” (padding-box)  2. la bordure conique (border-box)
+            'linear-gradient(180deg, var(--glass-a), var(--glass-b)) padding-box, conic-gradient(from 160deg, hsl(var(--primary)), color-mix(in oklab, hsl(var(--primary)) 80%, white)',
         }}
       >
-        {/* RIM override dark (aucun blanc) */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 hidden rounded-[28px] dark:block"
-          style={{
-            border: '1px solid transparent',
-            backgroundImage:
-              'linear-gradient(180deg, rgba(8,12,18,0.92), rgba(8,12,18,0.92)),' +
-              `conic-gradient(from 210deg, ${ELECTRIC},.28), ${ROYAL},.22), ${ELECTRIC},.26))`,
-            backgroundClip: 'padding-box, border-box',
-            mixBlendMode: 'normal',
-          }}
-        />
+        {/* reflets luxe */}
+        <div className="pointer-events-none absolute inset-x-10 top-4 h-14 rounded-full bg-white/40 blur-lg dark:bg-[var(--gloss)]" />
+        <div className="pointer-events-none absolute inset-x-10 bottom-0 h-20 translate-y-6 rounded-full bg-[radial-gradient(50%_60%_at_50%_50%,rgba(0,0,0,.06),transparent_70%)] dark:bg-[radial-gradient(50%_60%_at_50%_50%,rgba(255,255,255,.04),transparent_70%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--primary)/0.5)] to-transparent" />
 
-        {/* Streak haut — bleu faiblement lumineux en dark */}
-        <span className="pointer-events-none absolute left-6 right-6 top-3 h-6 rounded-full blur-[10px] bg-black/5 dark:bg-sky-400/12" />
-
-        {/* Glow bas (royal/electric), légèrement plus fort */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -bottom-10 left-1/2 h-16 w-[82%] -translate-x-1/2 rounded-full blur-3xl"
-          style={{
-            background: `radial-gradient(ellipse at center, ${ELECTRIC},.62), ${ROYAL},.42), transparent 70%)`,
-          }}
-        />
-
-        {/* Inset “liquid” bleu (effet vitre épaisse) */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 rounded-[28px]"
-          style={{
-            boxShadow: `
-              inset 0 -22px 140px 0 ${ROYAL},.35),
-              inset 0 -38px 46px 0 ${ELECTRIC},.40)
-            `,
-          }}
-        />
-
-        {/* Contenu */}
-        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-6 sm:gap-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-neutral-900 dark:text-neutral-100">
-            {title}
-          </h2>
-
-          <p className="max-w-2xl text-sm xss:text-base md:text-lg xl:text-xl 2xl:text-2xl text-neutral-800 dark:text-neutral-300">
-            {desc}
-          </p>
-
-          <LiquidLink href="contact" className="z-10">
-            {textBtn}
-          </LiquidLink>
+        {/* étoiles (ton composant) */}
+        <div className="flex justify-center">
+          <StarClientsGoogle /* reviews={reviewsCount} */ />
         </div>
 
+        {/* titre + description */}
+        <h2 className="mt-6 text-balance text-3xl font-extrabold leading-tight tracking-tight text-neutral-900 md:text-6xl lg:text-7xl dark:text-neutral-50">
+          {title}
+        </h2>
+        <p className="mx-auto mt-5 max-w-3xl text-pretty text-[18px] leading-8 text-neutral-700 md:text-[19px] dark:text-neutral-300">
+          {desc}
+        </p>
+
+        {/* CTAs */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          {/* primaire (dégradé + gloss) */}
+          <Link
+            href="/contact"
+            className={cn(
+              'group relative inline-flex items-center justify-center rounded-full px-7 py-4 text-[15px] font-semibold text-white',
+              'shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.7)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))/0.45]',
+              'transition'
+            )}
+            style={{
+              background:
+                'linear-gradient(135deg, hsl(var(--primary)), color-mix(in oklab, hsl(var(--primary)) 78%, #00E5FF))',
+            }}
+          >
+            <span className="relative z-10">{textBtn}</span>
+            <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-white/25" />
+            <svg
+              aria-hidden
+              className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M5 12h14" strokeWidth="2" />
+              <path d="M13 5l7 7-7 7" strokeWidth="2" />
+            </svg>
+          </Link>
+
+          {/* secondaire (ghost luxe) */}
+          <Link
+            href="/projects"
+            className={cn(
+              'inline-flex items-center justify-center rounded-full px-6 py-4 text-[15px] font-semibold transition',
+              'bg-white/80 text-neutral-800 ring-1 ring-black/10 hover:bg-white',
+              'dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/10 dark:hover:bg-neutral-900'
+            )}
+          >
+            Voir nos projets
+          </Link>
+        </div>
+
+        {/* micro-confiance */}
+        <div className="mt-5 text-xs text-neutral-500 dark:text-neutral-400">
+          Réponse sous 24h • Devis gratuit
+        </div>
+
+        {/* halo interne très léger pour profondeur */}
         <div
-          className="pointer-events-none absolute inset-0 rounded-[28px]"
-          style={{
-            boxShadow: `
-              0 0 32px ${ELECTRIC},.28),
-              0 0 72px ${ROYAL},.24),
-              0 0 120px ${ELECTRIC},.18)
-            `,
-          }}
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{ boxShadow: 'inset 0 -120px 220px -80px hsl(var(--primary) / 0.12)' }}
         />
       </div>
     </section>

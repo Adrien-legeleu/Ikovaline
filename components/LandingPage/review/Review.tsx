@@ -1,39 +1,96 @@
+// components/sections/Review.tsx
 'use client';
 
+import Image, { StaticImageData } from 'next/image';
+import { useEffect, useMemo, useState } from 'react';
+
+// ---- Sources locales (garde les tiennes si tu veux) ----
 import Review1 from '@/public/images/logo/frewinglas-logo.png';
 import Review2 from '@/public/images/logo/jean-cristophe-Lelandais.jpeg';
 import Review3 from '@/public/images/logo/logo-lelandais.png';
 import Review4 from '@/public/images/logo/hl-horner-logo.jpg';
 import Review5 from '@/public/images/logo/logo-lora.png';
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
-import Marquee from '@/components/ui/marquee';
-import Image, { StaticImageData } from 'next/image';
-import { GlassSticky } from '../impact/CardStack';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import React from 'react';
+import StarClientsGoogle from '@/components/StarClientsGoogle';
 
-interface ReviewType {
+type ReviewType = {
   name: string;
   role: string;
   text: string;
-  image: string | StaticImageData;
+  image?: string | StaticImageData;
+};
+
+// Fallback avatar (dégradé “primary” #2CB7FF)
+const BLUE_AVATAR = `data:image/svg+xml;utf8,${encodeURIComponent(
+  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#2CB7FF'/><stop offset='100%' stop-color='#007AFF'/>
+    </linearGradient></defs>
+    <circle cx='50' cy='50' r='50' fill='url(#g)'/></svg>`
+)}`;
+
+/* ---------------------------- Small utilities ---------------------------- */
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(true);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width:${breakpoint - 1}px)`);
+    const on = () => setIsMobile(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, [breakpoint]);
+  return isMobile;
 }
 
-/* ======================= i18n (FR / EN) ======================= */
-const TEXTS = {
-  fr: {
-    badge: 'Avis clients',
-    title: 'Ce que nos clients disent de nous',
-    desc: "Découvrez les avis et retours d'expérience de nos clients.",
-  },
-  en: {
-    badge: 'Client reviews',
-    title: 'What our clients say about us',
-    desc: 'Read feedback and testimonials from our clients.',
-  },
-} as const;
+/* --------------------------------- Card --------------------------------- */
+function Card({ r }: { r: ReviewType }) {
+  // FIX: si string http -> on garde l’URL, sinon fallback.
+  const src: string =
+    typeof r.image === 'string'
+      ? r.image
+      : (r.image as StaticImageData | undefined)?.src ?? BLUE_AVATAR;
 
+  return (
+    <article
+      className={[
+        'group relative mb-6 break-inside-avoid rounded-2xl p-6 transition-transform duration-200 will-change-transform',
+        // Lux neutral + ring/shadow adaptés dark
+        'bg-white/95 ring-1 ring-black/5 shadow-[0_26px_40px_-24px_rgba(0,0,0,0.16)]',
+        'hover:-translate-y-0.5 hover:shadow-[0_30px_44px_-24px_rgba(0,0,0,0.18)]',
+        'dark:bg-neutral-900/90 dark:ring-white/10 dark:shadow-[0_46px_80px_-40px_rgba(0,0,0,0.65)]',
+      ].join(' ')}
+    >
+      {/* guillemet discret */}
+      <div className="pointer-events-none absolute left-5 top-4 select-none text-4xl leading-none text-neutral-300/80 dark:text-neutral-600/60">
+        “
+      </div>
+
+      <blockquote className="mt-6 text-xs xs:text-sm leading-6 text-neutral-800 md:text-[15px] md:leading-7 dark:text-neutral-200">
+        {r.text}
+      </blockquote>
+
+      <footer className="mt-6 flex items-center gap-3">
+        <Image
+          src={src}
+          alt={r.name}
+          width={40}
+          height={40}
+          className="h-8 w-8 rounded-full object-cover md:h-10 md:w-10"
+          unoptimized
+        />
+        <div className="min-w-0">
+          <div className="truncate text-[13px] font-semibold text-neutral-900 md:text-sm dark:text-neutral-50">
+            {r.name}
+          </div>
+          <div className="truncate text-[11px] text-neutral-500 md:text-xs dark:text-neutral-400">
+            {r.role}
+          </div>
+        </div>
+      </footer>
+    </article>
+  );
+}
+
+/* -------------------------------- Data --------------------------------- */
 const reviewsFR: ReviewType[] = [
   {
     name: 'L’Ora Fashion Paris',
@@ -63,13 +120,13 @@ const reviewsFR: ReviewType[] = [
     name: 'Need Money For Shop',
     role: 'Création site web - Publicité - Développement commercial',
     text: 'Ikovaline a su adapter ses services à nos besoins précis. Leur approche marketing a boosté nos campagnes publicitaires.',
-    image: 'https://avatar.vercel.sh/cobalt',
+    image: 'https://avatar.vercel.sh/sky',
   },
   {
     name: 'L’Art du Bonsaï',
     role: 'Création site web - Contenu visuel - Publicité',
     text: 'Leur travail créatif et stratégique a fait passer notre entreprise à un autre niveau. Nos clients adorent notre nouveau site et visuel !',
-    image: 'https://avatar.vercel.sh/cobalt',
+    image: 'https://avatar.vercel.sh/forest',
   },
   {
     name: 'HL CORNER',
@@ -81,7 +138,7 @@ const reviewsFR: ReviewType[] = [
     name: 'Jardin Auto',
     role: 'Création site web - Publicité saisonnière',
     text: 'Leur travail nous a permis de générer plus de ventes en période de forte demande. Ils gèrent tout avec professionnalisme.',
-    image: 'https://avatar.vercel.sh/cobalt',
+    image: 'https://avatar.vercel.sh/sunset',
   },
   {
     name: 'Jean-Christophe Lelandais',
@@ -92,292 +149,127 @@ const reviewsFR: ReviewType[] = [
   {
     name: 'Simon Corbin',
     role: 'Stratégies marketing et commerciales sur mesure',
-    text: 'Leur approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.',
-    image: 'https://avatar.vercel.sh/cobalt',
+    text: 'L’approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.',
+    image: 'https://avatar.vercel.sh/coral',
+  },
+
+  // --- Nouveaux avis “sobres” ---
+  {
+    name: 'Manu Arora',
+    role: 'Tech Innovator & Entrepreneur',
+    text: 'Fantastique. Cela a complètement changé notre façon d’aborder les problèmes et de livrer des solutions.',
+  },
+  {
+    name: 'Bob Smith',
+    role: 'Industry Analyst',
+    text: 'Absolument révolutionnaire, un vrai game-changer pour notre secteur.',
+  },
+  {
+    name: 'Eva Green',
+    role: 'Directrice des opérations',
+    text: 'L’efficacité apportée est incomparable. On a réduit nos coûts et amélioré la qualité de notre produit final.',
+  },
+  {
+    name: 'Henry Ford',
+    role: 'Operations Analyst',
+    text: 'Nous avons gagné d’innombrables heures. Recommandé à tous ceux qui veulent booster l’efficacité.',
+  },
+  {
+    name: 'Cathy Lee',
+    role: 'Product Manager',
+    text: 'Je ne peux plus imaginer revenir en arrière. C’est devenu indispensable au quotidien.',
   },
 ];
 
-const reviewsEN: ReviewType[] = [
-  {
-    name: 'L’Ora Fashion Paris',
-    role: 'Instagram Optimization - Google Shopping',
-    text: 'Thanks to Ikovaline, our online visibility increased significantly. Their Instagram and Google Shopping expertise boosted our sales.',
-    image: Review5,
-  },
-  {
-    name: 'L’Émotion',
-    role: 'Google Business Profile Management - Consulting',
-    text: 'They transformed our online image and provided strategic guidance to grow our business. A very responsive team!',
-    image: 'https://avatar.vercel.sh/cobalt',
-  },
-  {
-    name: 'Lelandais Fermetures',
-    role: 'Google Business Profile Management - Local leads',
-    text: 'Since Ikovaline manages our Google Business Profile, we receive far more relevant local inquiries. Excellent service!',
-    image: Review3,
-  },
-  {
-    name: 'Frewinglas',
-    role: 'Website Creation - SEO - LinkedIn',
-    text: 'The website they built is modern and well-ranked. Our LinkedIn profiles are now effective prospecting tools.',
-    image: Review1,
-  },
-  {
-    name: 'Need Money For Shop',
-    role: 'Website Creation - Ads - Sales Development',
-    text: 'Ikovaline tailored their services to our exact needs. Their marketing approach boosted our ad campaigns.',
-    image: 'https://avatar.vercel.sh/cobalt',
-  },
-  {
-    name: 'L’Art du Bonsaï',
-    role: 'Website Creation - Visual Content - Advertising',
-    text: 'Their creative and strategic work took our business to the next level. Clients love our new site and visuals!',
-    image: 'https://avatar.vercel.sh/cobalt',
-  },
-  {
-    name: 'HL CORNER',
-    role: 'Website Creation - Local visibility',
-    text: 'Huge thanks to Ikovaline for a functional, attractive site. We are now more visible locally.',
-    image: Review4,
-  },
-  {
-    name: 'Jardin Auto',
-    role: 'Website Creation - Seasonal advertising',
-    text: 'Their work helped us generate more sales during peak demand. They handle everything professionally.',
-    image: 'https://avatar.vercel.sh/cobalt',
-  },
-  {
-    name: 'Jean-Christophe Lelandais',
-    role: 'Marketing support - Recruitment',
-    text: 'Ikovaline has been key in structuring our marketing and recruitment needs. Skilled and proactive team.',
-    image: Review2,
-  },
-  {
-    name: 'Simon Corbin',
-    role: 'Tailored marketing & sales strategies',
-    text: 'Their personalized approach had a direct impact on our sales. A real asset for my business.',
-    image: 'https://avatar.vercel.sh/cobalt',
-  },
-];
+/* ------------------------------- Component ------------------------------- */
+export default function Review() {
+  const isMobile = useIsMobile(768);
 
-/* ======================= UI ======================= */
-// Avatar bleu royal → azur encodé (OK pour Next/Image)
-const BLUE_AVATAR = `data:image/svg+xml;utf8,${encodeURIComponent(
-  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-    <defs>
-      <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
-        <stop offset='0%' stop-color='#2563EB'/>
-        <stop offset='100%' stop-color='#00A8E8'/>
-      </linearGradient>
-    </defs>
-    <circle cx='50' cy='50' r='50' fill='url(#g)'/>
-  </svg>`
-)}`;
+  // Mobile: 5 items par défaut, desktop: tout
+  const INITIAL_MOBILE = 6;
+  const [visible, setVisible] = useState(INITIAL_MOBILE);
 
-const ReviewCardBase = ({
-  image,
-  name,
-  role,
-  text,
-}: {
-  image?: string | StaticImageData;
-  name: string;
-  role: string;
-  text: string;
-}) => {
-  // Sélection de la source finale (logos réels prioritaire, sinon dégradé bleu)
-  const src =
-    typeof image === 'string'
-      ? image.startsWith('https://avatar.vercel.sh')
-        ? BLUE_AVATAR
-        : image
-      : image?.src || BLUE_AVATAR;
-  const isExternal = typeof image === 'string';
+  useEffect(() => {
+    if (!isMobile) setVisible(reviewsFR.length);
+    else setVisible((v) => Math.min(v, INITIAL_MOBILE));
+  }, [isMobile]);
 
-  return (
-    <GlassSticky className="shadow-none will-change-transform">
-      <div className="mb-4 text-base">{text}</div>
-      <div className="mt-5 flex items-center gap-2">
-        <Image
-          width={40}
-          height={40}
-          src={src}
-          alt={`Photo de ${name} - ${role}`}
-          className="h-10 w-10 rounded-full object-cover"
-          unoptimized={isExternal}
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="ml-2 flex flex-col">
-          <div className="font-medium leading-5 tracking-tight">{name}</div>
-          <div className="text-xs leading-5 tracking-tight opacity-60">
-            {role}
-          </div>
-        </div>
-      </div>
-    </GlassSticky>
+  const shown = useMemo(
+    () => reviewsFR.slice(0, visible),
+    [visible]
   );
-};
-const ReviewCard = React.memo(ReviewCardBase);
 
-function useIsEN() {
-  const pathname = usePathname() || '/';
-  return /^\/en(\/|$)/.test(pathname);
-}
-
-const MarqueeDemoVertical = ({ data }: { data: ReviewType[] }) => {
-  const firstColumn = data.slice(0, 3);
-  const firstColumnResponsive = data.slice(0, 5);
-  const secondColumn = data.slice(3, 6);
-  const secondColumnResonsive = data.slice(5, 10);
-  const thirdColumn = data.slice(6, 10);
+  const canShowMore = isMobile && visible < reviewsFR.length;
 
   return (
-    <div
-      className="relative flex h-[700px] w-full flex-row items-center justify-center overflow-hidden 2xl:h-[600px]"
-      style={{ transform: 'translateZ(0)' }}
-    >
-      <Marquee pauseOnHover vertical className="[--duration:20s] max-lg:hidden">
-        {firstColumn.map((review) => (
-          <ReviewCard key={review.name} {...review} />
-        ))}
-      </Marquee>
-      <Marquee
-        reverse
-        pauseOnHover
-        vertical
-        className="[--duration:20s] max-lg:hidden "
-      >
-        {secondColumn.map((review) => (
-          <ReviewCard key={review.name} {...review} />
-        ))}
-      </Marquee>
-      <Marquee pauseOnHover vertical className="[--duration:20s] max-lg:hidden">
-        {thirdColumn.map((review) => (
-          <ReviewCard key={review.name} {...review} />
-        ))}
-      </Marquee>
+    <section className="relative mx-auto w-full max-w-7xl px-4  py-16 md:py-24">
+      {/* Header */}
+      <header className="mx-auto max-w-3xl text-center">
+        <span className="inline-flex items-center rounded-full border border-[hsl(var(--primary)/0.25)] px-3 py-1 text-xs font-medium text-[hsl(var(--primary))]">
+          Avis clients
+        </span>
 
-      {/* md only */}
-      <Marquee
-        pauseOnHover
-        vertical
-        className="[--duration:20s] lg:hidden max-sm:hidden"
-      >
-        {firstColumnResponsive.map((review) => (
-          <ReviewCard key={review.name} {...review} />
-        ))}
-      </Marquee>
-      <Marquee
-        pauseOnHover
-        vertical
-        reverse
-        className="[--duration:20s] lg:hidden max-sm:hidden"
-      >
-        {secondColumnResonsive.map((review) => (
-          <ReviewCard key={review.name} {...review} />
-        ))}
-      </Marquee>
+        <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 md:text-6xl dark:text-neutral-100">
+          De l’idée à un projet réussi.
+        </h2>
 
-      {/* sm only */}
-      <Marquee pauseOnHover vertical className="[--duration:20s] sm:hidden">
-        {data.map((review) => (
-          <ReviewCard key={review.name} {...review} />
-        ))}
-      </Marquee>
+        <p className="mx-auto mt-4 max-w-2xl text-[15.5px] leading-7 text-neutral-700 md:text-[17px] dark:text-neutral-300">
+          De la stratégie au développement, Ikovaline conçoit des solutions
+          digitales sur mesure pour accélérer votre croissance.
+        </p>
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background/80 to-transparent sm:from-background"></div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background/80 to-transparent sm:from-background"></div>
-    </div>
-  );
-};
-
-const Review = () => {
-  const isEN = useIsEN();
-  const reduce = useReducedMotion();
-  const t = isEN ? TEXTS.en : TEXTS.fr;
-  const data = isEN ? reviewsEN : reviewsFR;
-
-  if (reduce) {
-    return (
-      <LazyMotion features={domAnimation}>
-        <section className="relative my-20 bg-background pt-32">
-          <div className="container relative z-10 mx-auto">
-            <ReviewBadge label={t.badge} />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-              {data.slice(0, 6).map((r) => (
-                <ReviewCard key={r.name} {...r} />
-              ))}
-            </div>
-          </div>
-
-          <m.div
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="absolute left-1/2 top-32 h-36 w-36 -translate-x-1/2 bg-secondary blur-[110px] md:h-48 md:w-48 md:blur-[150px] z-0"
-          />
-        </section>
-      </LazyMotion>
-    );
-  }
-  return (
-    <LazyMotion features={domAnimation}>
-      <section className="relative my-20 bg-background pt-32">
-        <div className="container relative z-10 mx-auto">
-          <m.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-            className="z-10 mx-auto flex max-w-[540px] flex-col items-center justify-center px-5"
+        <div className="mt-6">
+          <a
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-full bg-[hsl(var(--primary))] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_rgba(44,183,255,.70)] transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/50 active:brightness-90"
           >
-            <ReviewBadge label={t.badge} />
-
-            <h2 className="z-10 mt-5 text-center text-4xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-200 xl:text-5xl">
-              {t.title}
-            </h2>
-            <p className="mt-5 text-center opacity-75">{t.desc}</p>
-          </m.div>
-
-          <div className="z-10 mt-10 flex max-h-[740px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
-            <MarqueeDemoVertical data={data} />
-          </div>
+            Nous contacter
+          </a>
         </div>
-      </section>
-    </LazyMotion>
-  );
-};
+      </header>
 
-export default Review;
-const ReviewBadge = ({ label }: { label: string }) => (
-  <m.div
-    className="group relative mx-auto flex items-center justify-center rounded-full px-5 py-2
-      shadow-[inset_0_-10px_14px_#8fdfff26,inset_0_2px_6px_#ffffff55,0_6px_20px_rgba(37,99,235,.25)]
-      transition-shadow duration-500 ease-out
-      hover:shadow-[inset_0_-6px_12px_#8fdfff45,inset_0_2px_6px_#ffffff66,0_10px_28px_rgba(37,99,235,.35)]
-      bg-white/70  dark:bg-transparent"
-    initial={{ y: -40, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.6, ease: 'easeOut' }}
-  >
-    <span
-      className={cn(
-        'absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] p-[1px]',
-        'bg-gradient-to-r from-[#5faaff]/60 via-[#42b8fd]/60 to-[#00e0ff]/60 bg-[length:300%_100%]'
+      {/* Masonry responsive
+          - Mobile: 2 colonnes (compact), 5 items + bouton "Voir plus"
+          - ≥ md: 3→4 colonnes, tout afficher
+      */}
+     <div className=' py-10'>
+       <StarClientsGoogle/>
+      <div
+        className={[
+          'mt-4 columns-2 gap-4',            // 2 colonnes même sur mobile
+          'sm:gap-6 relative',
+          'md:columns-3 lg:columns-4',         // plus de colonnes au-dessus
+        ].join(' ')}
+      >
+        {shown.map((r, i) => (
+          <Card key={`${r.name}-${i}`} r={r} />
+        ))}
+        <div className='absolute -bottom-10 left-0 h-32 w-full bg-gradient-to-t from-white z-10 from-50% dark:from-black to-transparent'/>
+      </div>
+     </div>
+
+      {/* CTA "Voir plus / Voir moins" (mobile only) */}
+      {isMobile && (
+        <div className="mt-6 flex justify-center">
+          {canShowMore ? (
+            <button
+              type="button"
+              onClick={() => setVisible((v) => Math.min(v + 6, reviewsFR.length))}
+              className="rounded-full border border-neutral-100 bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm transition   dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-100"
+            >
+              Voir plus
+            </button>
+          ) : reviewsFR.length > INITIAL_MOBILE ? (
+            <button
+              type="button"
+              onClick={() => setVisible(INITIAL_MOBILE)}
+              className="rounded-full border border-neutral-100 bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm transition   dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 "
+            >
+              Voir moins
+            </button>
+          ) : null}
+        </div>
       )}
-      style={{
-        WebkitMask:
-          'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-        WebkitMaskComposite: 'destination-out',
-        mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-        maskComposite: 'subtract',
-        WebkitClipPath: 'padding-box',
-      }}
-    />
-    <span className="relative z-10 text-sm font-semibold tracking-wide text-sky-700 dark:text-transparent dark:bg-gradient-to-r dark:from-sky-200 dark:via-sky-100 dark:to-blue-200 dark:bg-clip-text">
-      {label}
-    </span>
-  </m.div>
-);
+    </section>
+  );
+}

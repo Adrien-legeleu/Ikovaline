@@ -1,60 +1,51 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import type { Testimonial } from '@/components/ui/testimonial-slider';
+import {
+  IconRocket,
+  IconChartLine,
+  IconMapPin,
+  IconRobot,
+  IconTrophy,
+  IconCertificate,
+} from '@tabler/icons-react';
 
-// ✅ on garde le dynamic import mais sans `ssr: false`
 const TestimonialSlider = dynamic(() =>
   import('@/components/ui/testimonial-slider').then((m) => m.TestimonialSlider)
 );
 
-const testimonialsFR: Testimonial[] = [
+const data: Testimonial[] = [
   {
-    emoji: '🚀',
-    quote: 'Nos clients augmentent en moyenne de 30% leur conversion web',
+    icon: <IconRocket stroke={2} />,
+    quote: 'Jusqu’à +30% de conversion après refonte.',
   },
   {
-    emoji: '📈',
-    quote: 'De 5 000€/mois à 20 000€/mois grâce à notre IkoSystem',
+    icon: <IconChartLine stroke={2} />,
+    quote: 'De 5 000 € à 20 000 € / mois avec IkoSystem.',
   },
-  { emoji: '📍', quote: 'Référencé dans le top 3 Google Maps' },
-  { emoji: '🤖', quote: 'Présent sur ChatGPT et autres IA de recherche' },
-  { emoji: '🏆', quote: 'Référencé meilleure agence sur Bark.com' },
-  { emoji: '💯', quote: '＋99 recommandations clients' },
-  { emoji: '✅', quote: 'Certifié Google Search et Google Analytics' },
-];
-
-const testimonialsEN: Testimonial[] = [
   {
-    emoji: '🚀',
-    quote: 'Our clients increase web conversion by 30% on average',
+    icon: <IconMapPin stroke={2} />,
+    quote: 'Top 3 Google Maps confirmé sur nos secteurs.',
   },
-  { emoji: '📈', quote: 'From €5,000/mo to €20,000/mo with our IkoSystem' },
-  { emoji: '📍', quote: 'Ranked in Google Maps top 3' },
-  { emoji: '🤖', quote: 'Featured on ChatGPT and other AI search tools' },
-  { emoji: '🏆', quote: 'Rated best agency on Bark.com' },
-  { emoji: '💯', quote: '99+ client recommendations' },
-  { emoji: '✅', quote: 'Google Search and Google Analytics certified' },
+  {
+    icon: <IconRobot stroke={2} />,
+    quote: 'Intégration IA (ChatGPT, RAG) au service du ROI.',
+  },
+  {
+    icon: <IconTrophy stroke={2} />,
+    quote: 'Récompensés pour la qualité et la rapidité d’exécution.',
+  },
+  {
+    icon: <IconCertificate stroke={2} />,
+    quote: 'Certifié Google Search & Analytics.',
+  },
 ];
 
 export default function ComponentDemo() {
-  const pathname = usePathname() || '/';
-  const isEN = /^\/en(\/|$)/.test(pathname);
-  const testimonials = isEN ? testimonialsEN : testimonialsFR;
-
   return (
-    <div className="relative h-[420px] w-full rounded-2xl bg-white/70 p-4 dark:bg-neutral-950/50">
-      {/* halo sombre haut */}
-      <div className="absolute top-0 left-0 h-32 w-full -translate-y-[70%] bg-gradient-to-t from-black to-transparent dark:block hidden" />
-
-      {/* slider */}
-      <div className="mt-10  flex justify-center ">
-        <TestimonialSlider
-          key={isEN ? 'en' : 'fr'}
-          testimonials={testimonials}
-        />
-      </div>
+    <div className="relative w-full">
+      <TestimonialSlider testimonials={data} autorotateMs={4200} />
     </div>
   );
 }
