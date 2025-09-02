@@ -10,10 +10,8 @@ import { cn } from '@/lib/utils';
 import { motion } from 'motion/react';
 import Image, { ImageProps } from 'next/image';
 import Link from 'next/link';
-import { LiquidLink } from './liquid-link';
 import { usePathname } from 'next/navigation';
 import type { BlogType } from '@/components/BlogPage/Blog';
-import { LiquidButton } from './liquid-glass-button';
 import { Button } from './button';
 
 interface CarouselProps {
