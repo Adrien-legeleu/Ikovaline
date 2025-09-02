@@ -16,7 +16,6 @@ import Img8 from '@/public/images/About/team-victor-profil.jpg';
 import Img9 from '@/public/images/About/team-rafeal-profil.jpg';
 
 import type { StaticImageData } from 'next/image';
-import { cn } from '@/lib/utils';
 import { Highlighter } from '@/components/magicui/highlighter';
 
 /* ===================== Team data ===================== */
