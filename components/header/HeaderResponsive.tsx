@@ -96,7 +96,7 @@ export function HeaderResponsive() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] lg:hidden"
+            className="fixed inset-0 z-[1000000] lg:hidden"
           >
             <div aria-hidden className="absolute inset-0 bg-white/70 backdrop-blur-2xl dark:bg-black/70" />
             <div
