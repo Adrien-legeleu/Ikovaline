@@ -24,24 +24,21 @@ const PILLARS: Pillar[] = [
     id: 'saas-apps',
     icon: <IconCpu className="h-7 w-7 text-sky-500 dark:text-sky-400" />,
     title: 'Applications & SaaS',
-    desc:
-      "Conception sur-mesure d'applications web, mobiles et SaaS performantes.",
+    desc: "Conception sur-mesure d'applications web, mobiles et SaaS performantes.",
     href: '/nos-services/#saas-apps',
   },
   {
     id: 'automatisation-ia',
     icon: <IconRobot className="h-7 w-7 text-sky-500 dark:text-sky-400" />,
     title: 'Automatisation & IA',
-    desc:
-      "Optimisez vos processus avec l'intelligence artificielle et l'automatisation.",
+    desc: "Optimisez vos processus avec l'intelligence artificielle et l'automatisation.",
     href: '/nos-services/#automatisation-ia',
   },
   {
     id: 'scaling',
     icon: <IconTrendingUp className="h-7 w-7 text-sky-500 dark:text-sky-400" />,
     title: 'Croissance digitale',
-    desc:
-      'Boostez votre visibilité, attirez plus de clients et accélérez vos résultats.',
+    desc: 'Boostez votre visibilité, attirez plus de clients et accélérez vos résultats.',
     href: '/nos-services/#scaling',
   },
 ];
@@ -128,7 +125,7 @@ export default function ServicesHero() {
           >
             <Link
               href={p.href}
-              className="group block h-full rounded-[28px] border border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,.9),rgba(240,245,252,.55))] p-7 text-left shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)] backdrop-blur-2xl transition-all hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.22)] dark:border-[rgba(56,130,246,0.2)] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.9),rgba(10,14,20,.65))] dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.15)]"
+              className="group block h-full rounded-[28px] border border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,.9),rgba(240,245,252,.55))] p-7 text-left shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)]  transition-all hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.22)] dark:border-[rgba(56,130,246,0.2)] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.9),rgba(10,14,20,.65))] dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.15)]"
             >
               <div className="mb-4 inline-flex items-center gap-2 rounded-2xl bg-white/70 px-3 py-2 shadow-inner ring-1 ring-black/5 dark:bg-neutral-900/60 dark:ring-white/10">
                 {p.icon}

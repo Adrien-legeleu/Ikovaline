@@ -97,10 +97,10 @@ function FeatureCard({
   return (
     <motion.article
       initial={{ y: 22 }}
-      whileInView={{ y: 0}}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.55, ease: 'easeOut', delay }}
-      className="relative h-full overflow-hidden rounded-2xl p-7 backdrop-blur-2xl
+      className="relative h-full overflow-hidden rounded-2xl p-7 
                  bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]
                  dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]
                  border border-white/50 dark:border-[rgba(56,130,246,0.20)]
@@ -108,13 +108,6 @@ function FeatureCard({
                  dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]
                  transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]"
     >
-      {/* glow bas */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -bottom-12 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-full blur-3xl
-                   bg-[radial-gradient(ellipse_at_center,rgba(0,168,232,.48),rgba(37,99,235,.35),transparent_70%)]"
-      />
-
       <div className="relative z-10 flex items-start gap-3">
         <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/70 dark:bg-neutral-900/60 border border-white/40 dark:border-white/10 shadow-inner">
           <Icon className="h-6 w-6 text-sky-600 dark:text-sky-400" />
@@ -127,9 +120,6 @@ function FeatureCard({
       <p className="relative z-10 mt-3 text-neutral-700 dark:text-neutral-300 text-sm xl:text-[15px] leading-relaxed">
         {description}
       </p>
-
-      {/* reflet top */}
-      <span className="pointer-events-none absolute left-6 right-6 top-3 h-6 rounded-full blur-[10px] bg-black/5 dark:bg-sky-400/12" />
     </motion.article>
   );
 }
