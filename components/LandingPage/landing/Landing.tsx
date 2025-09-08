@@ -50,7 +50,7 @@ export default function HeroNoiseLight() {
         </motion.div>
 
         {/* Visuel / screenshot */}
-        <div className="z-40 mt-12 flex w-full   justify-center">
+        <div className="z-40 my-12 flex w-full   justify-center">
           <Services />
         </div>
       </div>

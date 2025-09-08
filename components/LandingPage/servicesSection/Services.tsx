@@ -11,34 +11,6 @@ import {
   IconChartLine,
 } from '@tabler/icons-react';
 
-/* ====================== Fond “8 colonnes” (primary/10) ====================== */
-function GridLines8() {
-  return (
-    <svg
-      aria-hidden
-      className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
-      viewBox="0 0 100 100"
-      preserveAspectRatio="none"
-    >
-      {Array.from({ length: 8 }).map((_, i) => {
-        const x = (i + 0.5) * (100 / 8);
-        return (
-          <line
-            key={i}
-            x1={x}
-            y1="0"
-            x2={x}
-            y2="100"
-            stroke="currentColor"
-            className="text-[hsl(var(--primary)/0.10)]"
-            strokeWidth="0.14"
-          />
-        );
-      })}
-    </svg>
-  );
-}
-
 type CardShellProps<As extends React.ElementType = 'article'> = {
   children: React.ReactNode;
   as?: As;
