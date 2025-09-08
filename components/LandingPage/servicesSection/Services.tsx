@@ -26,7 +26,7 @@ function CardShell<As extends React.ElementType = 'article'>({
   return (
     <Comp
       className={[
-        'relative flex h-full justify-between flex-col overflow-hidden rounded-2xl p-6 md:p-7 transition-transform',
+        'relative flex h-full justify-between flex-col overflow-hidden rounded-2xl p-6 md:p-7 lg:p-5 xl:p-7 transition-transform',
         'bg-white/90 backdrop-blur-xl shadow-[0_40px_120px_-52px_rgba(0,0,0,.35)] border border-black/10 dark:border-white/10',
         'dark:bg-neutral-900/80 dark:ring-white/10 dark:shadow-[0_60px_150px_-60px_rgba(0,0,0,.70)]',
         'before:pointer-events-none before:absolute before:inset-0',
@@ -380,7 +380,7 @@ export default function ServicesGridRefined() {
     <section className="bg-transparent">
       <div className="relative z-10 mx-auto  px-4">
         {/* Passe automatiquement en 2 colonnes (md) / 3 (lg) */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
           {SERVICES.map((s) => (
             <Link
               key={s.id}
