@@ -317,14 +317,12 @@ function AcquisitionMock() {
   );
 }
 
-/* =============================== Données =============================== */
 const SERVICES = [
   {
     id: 'saas',
     tag: 'SaaS',
-    // REFAIT
-    title: 'SaaS sur-mesure, scalable & sécurisé',
-    desc: 'De l’architecture au billing : base produit robuste (auth, RBAC, plans, facturation), CI/CD propre et observabilité pour itérer vite sans dette.',
+    title: 'SaaS sur-mesure',
+    desc: 'On crée ton logiciel en ligne de A à Z : connexion des utilisateurs, abonnements, paiements, tout est prêt et simple à utiliser.',
     icon: <IconCpu className="h-5 w-5" />,
     href: 'https://ikovaline.com/nos-services/creation-saas-sur-mesure',
     illustration: <SaaSMock />,
@@ -333,7 +331,7 @@ const SERVICES = [
     id: 'apps',
     tag: 'Apps',
     title: 'Web & Mobile Apps hautes performances',
-    desc: 'Next.js / Expo. Accessibilité, offline-first, sync en temps réel, design premium. Du MVP au scale, sans friction.',
+    desc: 'On développe ton site ou ton appli mobile rapide, facile à utiliser, qui marche partout et même sans internet.',
     icon: <IconDeviceMobileCode className="h-5 w-5" />,
     href: 'https://ikovaline.com/nos-services/web-apps-applications-mobiles/',
     illustration: <AppsMock />,
@@ -341,8 +339,8 @@ const SERVICES = [
   {
     id: 'automation',
     tag: 'IA & Automation',
-    title: 'Automatisation & IA orientées résultats',
-    desc: 'Workflows, intégrations API, RAG/agents. Moins de tâches répétitives, plus de valeur. Mesure claire du ROI.',
+    title: 'Automatisation & IA',
+    desc: 'On installe des robots et de l’IA pour faire les tâches chiantes à ta place, gagner du temps et être plus efficace.',
     icon: <IconRobot className="h-5 w-5" />,
     href: 'https://ikovaline.com/nos-services#automatisation-ia',
     illustration: <AutomationMock />,
@@ -350,9 +348,8 @@ const SERVICES = [
   {
     id: 'sites',
     tag: 'Sites & SEO',
-    // REFAIT
     title: 'Sites sur-mesure • SEO & GEO',
-    desc: 'Design haut de gamme, vitesse extrême, schémas & maillage SEO, pages locales (GEO) prêtes pour ranker en zone ciblée.',
+    desc: 'On fait un site beau, rapide, bien référencé sur Google, et optimisé pour que les gens près de chez toi te trouvent facilement.',
     icon: <IconSparkles className="h-5 w-5" />,
     href: 'https://ikovaline.com/nos-services#sites-seo-geo',
     illustration: <SitesMock />,
@@ -361,18 +358,18 @@ const SERVICES = [
     id: 'gmb',
     tag: 'Local',
     title: 'Google My Business (GBP) qui convertit',
-    desc: 'Création/optimisation de fiche, catégories, posts, avis, photos, suivi des positions et conversions locales (appels, itinéraires).',
+    desc: 'On règle ta fiche Google pour que tu sois bien vu sur Maps : infos claires, avis clients, photos et appels qui arrivent directement.',
     icon: <IconMapPin className="h-5 w-5" />,
-    href: 'https://ikovaline.com/nos-services/google-my-business',
+    href: 'https://ikovaline.com/nos-services#scaling',
     illustration: <GMBMock />,
   },
   {
     id: 'acquisition',
     tag: 'Acquisition',
     title: 'SEA + SEO : acquisition rentable',
-    desc: 'Campagnes Google Ads (Search/Shopping/PMAX) + SEO technique & contenu. Suivi ROAS, dashboards clairs, croissance maîtrisée.',
+    desc: 'On t’amène des clients grâce à la pub Google et au référencement naturel. Tu vois clairement combien ça rapporte.',
     icon: <IconChartLine className="h-5 w-5" />,
-    href: 'https://ikovaline.com/nos-services/sea-seo-acquisition',
+    href: 'https://ikovaline.com/nos-services#scaling',
     illustration: <AcquisitionMock />,
   },
 ] as const;
@@ -421,7 +418,7 @@ export default function ServicesGridRefined() {
                   </p>
                 </div>
 
-                <div className="">
+                <div className="mt-2">
                   <div className="relative w-full overflow-hidden rounded-2xl">
                     <div className="aspect-[16/10]">{s.illustration}</div>
                   </div>

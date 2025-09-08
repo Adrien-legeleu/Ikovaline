@@ -79,13 +79,21 @@ function Background() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="absolute inset-0 z-0 flex [mask-image:radial-gradient(circle_at_center,white_0%,white_10%,transparent_90%)]"
+      className="absolute inset-0 z-0 flex 
+             [mask-image:radial-gradient(circle_at_center,white_0%,black_40%,transparent_90%)]"
     >
+      {/* Fond bleu */}
+      <div className="absolute inset-0 bg-[#01B7FF]/20" />
+
+      {/* Bruit + Stripes */}
       <Noise />
       {strips.map((i) => (
         <div
           key={i}
-          className="h-full w-20 bg-gradient-to-r border-primary/30 border-[0.5px] from-slate-100 to-white shadow-[2px_0_0_0_#e5e7eb] dark:from-neutral-900 dark:to-neutral-950 dark:shadow-[2px_0_0_0_#262626]"
+          className="h-full w-20 bg-gradient-to-r border-primary/30 border-[0.5px] 
+                 from-slate-100 to-white 
+                 shadow-[2px_0_0_0_#e5e7eb] 
+                 dark:from-neutral-900 dark:to-neutral-950 dark:shadow-[2px_0_0_0_#262626]"
         />
       ))}
     </motion.div>

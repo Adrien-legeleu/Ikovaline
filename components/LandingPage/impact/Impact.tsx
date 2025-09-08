@@ -252,8 +252,8 @@ export default function MethodologieSticky() {
           De l’idée à un <span className="text-[#2CB7FF]">projet réussi</span>.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-[17px] leading-7 text-neutral-600 dark:text-neutral-300">
-          Une progression claire, visuelle, et orientée résultats — avec un
-          aperçu concret de chaque étape.
+          Une progression claire, visuelle, et orientée résultats avec un aperçu
+          concret de chaque étape.
         </p>
       </header>
 

@@ -29,8 +29,8 @@ const DEFAULT_CONFIG: COBEOptions = {
     { location: [51.5074, -0.1278], size: 0.1 }, // Londres
     { location: [25.276987, 55.296249], size: 0.1 }, // Dubaï
     { location: [-4.4419, 15.2663], size: 0.1 }, // Kinshasa
-    { location: [-4.2634, 15.2429], size: 0.08 }, // Brazzaville
     { location: [46.9481, 7.4474], size: 0.08 }, // Berne
+    { location: [45.5019, -73.5674], size: 0.1 }, // Montréal
   ],
 };
 

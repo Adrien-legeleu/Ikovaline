@@ -168,9 +168,9 @@ export default function Map() {
           transition={{ duration: 0.35 }}
           className="mt-6 text-lg leading-relaxed text-neutral-700 dark:text-neutral-300"
         >
-          De Paris à Londres, Dubaï, Kinshasa, Brazzaville et Berne, nous aidons
+          De Paris à Londres, Dubaï, Kinshasa, Montréal et Genève, nous aidons
           les entreprises à gagner en visibilité, automatiser leurs process et
-          mieux convertir — avec des sites, applications et produits SaaS conçus
+          mieux convertir avec des sites, applications et produits SaaS conçus
           pour scaler.
         </motion.p>
       </header>
