@@ -145,8 +145,8 @@ export const TestimonialSlider = React.memo(function TestimonialSlider({
       {/* Viewport */}
       <div className="relative z-10 overflow-hidden">
         {/* Track horizontal — flex, cartes à largeur fixe */}
-        <div className="bg-gradient-to-r z-30 from-white to-transparent h-full absolute top-0 left-0 w-28" />
-        <div className="bg-gradient-to-l z-30 from-white to-transparent h-full absolute top-0 right-0 w-28" />
+        <div className="bg-gradient-to-r z-30 from-white dark:from-black to-transparent h-full absolute top-0 left-0 w-28" />
+        <div className="bg-gradient-to-l z-30 from-white dark:from-black to-transparent h-full absolute top-0 right-0 w-28" />
         <motion.div
           className={cn('flex')}
           animate={controls}
