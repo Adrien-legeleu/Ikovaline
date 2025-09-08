@@ -47,7 +47,7 @@ function Card({ r }: { r: ReviewType }) {
   const src: string =
     typeof r.image === 'string'
       ? r.image
-      : (r.image as StaticImageData | undefined)?.src ?? BLUE_AVATAR;
+      : ((r.image as StaticImageData | undefined)?.src ?? BLUE_AVATAR);
 
   return (
     <article
@@ -194,10 +194,7 @@ export default function Review() {
     else setVisible((v) => Math.min(v, INITIAL_MOBILE));
   }, [isMobile]);
 
-  const shown = useMemo(
-    () => reviewsFR.slice(0, visible),
-    [visible]
-  );
+  const shown = useMemo(() => reviewsFR.slice(0, visible), [visible]);
 
   const canShowMore = isMobile && visible < reviewsFR.length;
 
@@ -221,7 +218,7 @@ export default function Review() {
         <div className="mt-6">
           <a
             href="/contact"
-            className="inline-flex items-center justify-center rounded-full bg-[hsl(var(--primary))] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_rgba(44,183,255,.70)] transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/50 active:brightness-90"
+            className="inline-flex items-center justify-center rounded-xl bg-[hsl(var(--primary))] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_rgba(44,183,255,.70)] transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/50 active:brightness-90"
           >
             Nous contacter
           </a>
@@ -232,21 +229,21 @@ export default function Review() {
           - Mobile: 2 colonnes (compact), 5 items + bouton "Voir plus"
           - ≥ md: 3→4 colonnes, tout afficher
       */}
-     <div className='z-50 relative py-10'>
-       <StarClientsGoogle/>
-      <div
-        className={[
-          'mt-4 z-50 columns-2 gap-4',            // 2 colonnes même sur mobile
-          'sm:gap-6 relative',
-          'md:columns-3 lg:columns-4',         // plus de colonnes au-dessus
-        ].join(' ')}
-      >
-        {shown.map((r, i) => (
-          <Card key={`${r.name}-${i}`} r={r} />
-        ))}
-        <div className='absolute -bottom-10 left-0 h-32 w-full bg-gradient-to-t from-white z-10 from-50% dark:from-black to-transparent'/>
+      <div className="z-50 relative py-10">
+        <StarClientsGoogle />
+        <div
+          className={[
+            'mt-4 z-50 columns-2 gap-4', // 2 colonnes même sur mobile
+            'sm:gap-6 relative',
+            'md:columns-3 lg:columns-4', // plus de colonnes au-dessus
+          ].join(' ')}
+        >
+          {shown.map((r, i) => (
+            <Card key={`${r.name}-${i}`} r={r} />
+          ))}
+          <div className="absolute -bottom-10 left-0 h-32 w-full bg-gradient-to-t from-white z-10 from-50% dark:from-black to-transparent" />
+        </div>
       </div>
-     </div>
 
       {/* CTA "Voir plus / Voir moins" (mobile only) */}
       {isMobile && (
@@ -254,7 +251,9 @@ export default function Review() {
           {canShowMore ? (
             <button
               type="button"
-              onClick={() => setVisible((v) => Math.min(v + 6, reviewsFR.length))}
+              onClick={() =>
+                setVisible((v) => Math.min(v + 6, reviewsFR.length))
+              }
               className="rounded-full border border-neutral-100 bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm transition   dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-100"
             >
               Voir plus
