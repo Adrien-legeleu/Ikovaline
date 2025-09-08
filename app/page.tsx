@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 
 import Landing from '@/components/LandingPage/landing/Landing';
-import About from '@/components/LandingPage/about/About';
-import Services from '@/components/LandingPage/servicesSection/Services';
 import dynamic from 'next/dynamic';
 
 const ComponentDemo = dynamic(
@@ -12,14 +10,7 @@ const ComponentDemo = dynamic(
     loading: () => <div style={{ height: 220 }} aria-hidden />,
   }
 );
-const ProjectsTeaser = dynamic(
-  () => import('@/components/Projects/ProjectTeaser'),
-  {
-    ssr: false,
-    loading: () => <div style={{ height: 240 }} aria-hidden />,
-  }
-);
-// Below-the-fold → client-only to avoid heavy SSR HTML
+
 const Map = dynamic(() => import('@/components/LandingPage/map/Map'), {
   ssr: false,
 });
@@ -70,27 +61,23 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <div className="max-w-[1450px] mx-auto ">
-        <div className="overflow-hidden">
-          <Landing />
+      <div className="">
+        <Landing />
 
-          <ComponentDemo />
-          <ProjectsTeaser />
+        <div className="max-w-[1450px] mx-auto ">
+          <div className="overflow-hidden">
+            <Map />
+            <ComponentDemo />
+          </div>
+          <Methodologie />
 
-          <About />
+          <div className="overflow-hidden">
+            <Review />
 
-          <Services />
+            <CTAHome />
 
-          <Map />
-        </div>
-        <Methodologie />
-
-        <div className="overflow-hidden">
-          <Review />
-
-          <CTAHome />
-
-          <Blog />
+            <Blog />
+          </div>
         </div>
       </div>
     </>

@@ -45,7 +45,7 @@ const data: Testimonial[] = [
 export default function ComponentDemo() {
   return (
     <div className="relative w-full">
-      <TestimonialSlider testimonials={data} autorotateMs={4200} />
+      <TestimonialSlider testimonials={data} autorotateMs={3000} />
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
-import Image from 'next/image';
+import Services from '@/components/LandingPage/servicesSection/Services';
 import Link from 'next/link';
 
 export default function HeroNoiseLight() {
@@ -11,7 +11,7 @@ export default function HeroNoiseLight() {
     <section className="relative flex w-full items-center justify-center overflow-hidden bg-white px-4 py-20 md:py-40 dark:bg-black">
       <Background />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl">
+      <div className="relative z-10 mx-auto w-full   max-w-[1700px]">
         <StarClientsGoogle />
 
         <motion.h1
@@ -30,8 +30,8 @@ export default function HeroNoiseLight() {
           transition={{ duration: 0.3, delay: 0.15 }}
           className="mx-auto mt-4 max-w-xl text-center text-sm text-slate-600 md:text-xl dark:text-slate-300"
         >
-          De la stratégie au développement, Ikovaline conçoit des solutions
-          digitales sur mesure pour accélérer votre croissance.
+          Ikovaline, conçoit des solutions digitales sur mesure pour développer
+          vos projets et accélérer votre croissance digital.
         </motion.p>
 
         {/* CTA */}
@@ -50,26 +50,11 @@ export default function HeroNoiseLight() {
         </motion.div>
 
         {/* Visuel / screenshot */}
-        <div className="z-40 mt-12 flex w-full bg-white dark:bg-black justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.35, delay: 0.3 }}
-            className="relative w-full overflow-hidden rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 [mask-image:linear-gradient(to_bottom,white,white_45%,transparent)]"
-          >
-            <Image
-              src="/heroImage.png" // ← place ton image ici
-              alt="Aperçu du produit"
-              className="h-auto w-full object-cover"
-              width={1280}
-              height={720}
-              priority
-            />
-            {/* léger fondu pour la lisibilité (plus marqué en dark) */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent dark:from-black/40" />
-          </motion.div>
+        <div className="z-40 mt-12 flex w-full   justify-center">
+          <Services />
         </div>
       </div>
+      <div className="absolute bottom-0 h-32  w-full bg-gradient-to-t from-white dark:from-black to-transparent" />
     </section>
   );
 }
@@ -94,13 +79,13 @@ function Background() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="absolute inset-0 z-0 flex [mask-image:radial-gradient(circle_at_center,white_0%,white_32%,transparent_70%)]"
+      className="absolute inset-0 z-0 flex [mask-image:radial-gradient(circle_at_center,white_0%,white_10%,transparent_90%)]"
     >
       <Noise />
       {strips.map((i) => (
         <div
           key={i}
-          className="h-full w-20 bg-gradient-to-r from-slate-100 to-white shadow-[2px_0_0_0_#e5e7eb] dark:from-neutral-900 dark:to-neutral-950 dark:shadow-[2px_0_0_0_#262626]"
+          className="h-full w-20 bg-gradient-to-r border-primary/30 border-[0.5px] from-slate-100 to-white shadow-[2px_0_0_0_#e5e7eb] dark:from-neutral-900 dark:to-neutral-950 dark:shadow-[2px_0_0_0_#262626]"
         />
       ))}
     </motion.div>
