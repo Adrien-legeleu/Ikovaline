@@ -106,7 +106,7 @@ function FeatureCard({
                  border border-white/50 dark:border-[rgba(56,130,246,0.20)]
                  shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)]
                  dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]
-                 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]"
+                 transition-all duration-500 "
     >
       <div className="relative z-10 flex items-start gap-3">
         <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/70 dark:bg-neutral-900/60 border border-white/40 dark:border-white/10 shadow-inner">

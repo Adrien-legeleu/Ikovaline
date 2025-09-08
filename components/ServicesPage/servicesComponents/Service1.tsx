@@ -106,10 +106,6 @@ export function Service1() {
               className="group"
             >
               <motion.article
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="relative h-full flex flex-col justify-between rounded-2xl p-8 overflow-hidden
                            
                            bg-[linear-gradient(135deg,rgba(255,255,255,.99),rgba(240,245,252,.9))]
@@ -117,7 +113,7 @@ export function Service1() {
                            border border-white/50 dark:border-[rgba(56,130,246,0.20)]
                            shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)]
                            dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]
-                           transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_90px_rgba(37,99,235,.25)]"
+                           transition-all duration-500 "
               >
                 <span
                   aria-hidden
