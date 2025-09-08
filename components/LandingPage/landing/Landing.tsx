@@ -83,7 +83,8 @@ function Background() {
              [mask-image:radial-gradient(circle_at_center,white_0%,black_40%,transparent_90%)]"
     >
       {/* Fond bleu */}
-      <div className="absolute inset-0 bg-[#01B7FF]/20" />
+      <div className="absolute inset-0 bg-primary/10 max-md:hidden" />
+      <div className="absolute top-56 left-1/2 w-full -translate-x-1/2 h-96 blur-3xl  bg-primary/80 md:hidden" />
 
       {/* Bruit + Stripes */}
       <Noise />
