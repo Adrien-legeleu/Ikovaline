@@ -57,6 +57,8 @@ const SECTIONS: Section[] = [
       },
     ],
   },
+  { title: 'Nos Projets', href: '/projects' },
+  { title: 'Conseils Digitaux', href: '/blog' },
   {
     title: 'À Propos',
     href: '/about',
@@ -78,8 +80,6 @@ const SECTIONS: Section[] = [
       },
     ],
   },
-  { title: 'Conseils Digitaux', href: '/blog' },
-  { title: 'Nos Projets', href: '/projects' },
 ];
 
 export function HeaderResponsive() {

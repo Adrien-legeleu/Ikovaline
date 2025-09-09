@@ -138,6 +138,20 @@ export function Header({ className }: { className?: string }) {
                 <MenuItem
                   setActive={setActive}
                   active={active}
+                  item="Nos Projets"
+                  link="/projects"
+                />
+
+                <MenuItem
+                  setActive={setActive}
+                  active={active}
+                  item="Conseils Digitaux"
+                  link="/blog"
+                />
+
+                <MenuItem
+                  setActive={setActive}
+                  active={active}
                   item="À Propos"
                   link="/about"
                 >
@@ -156,19 +170,6 @@ export function Header({ className }: { className?: string }) {
                     </HoveredLink>
                   </div>
                 </MenuItem>
-
-                <MenuItem
-                  setActive={setActive}
-                  active={active}
-                  item="Conseils Digitaux"
-                  link="/blog"
-                />
-                <MenuItem
-                  setActive={setActive}
-                  active={active}
-                  item="Nos Projets"
-                  link="/projects"
-                />
               </Menu>
             </div>
 
