@@ -27,8 +27,8 @@ function CardShell<As extends React.ElementType = 'article'>({
     <Comp
       className={[
         'relative flex h-full justify-between flex-col overflow-hidden rounded-2xl p-6 md:p-7 lg:p-5 xl:p-7 transition-transform',
-        'bg-white/90 backdrop-blur-xl shadow-[0_40px_120px_-52px_rgba(0,0,0,.35)] border border-black/10 dark:border-white/10',
-        'dark:bg-neutral-900/80 dark:ring-white/10 dark:shadow-[0_60px_150px_-60px_rgba(0,0,0,.70)]',
+        'bg-white/90 backdrop-blur-sm shadow-[0_40px_120px_-52px_rgba(0,0,0,.35)] border border-black/10 dark:border-white/10',
+        'dark:bg-neutral-900/20 dark:ring-white/10 dark:shadow-[0_60px_150px_-60px_rgba(0,0,0,.70)]',
         'before:pointer-events-none before:absolute before:inset-0',
         'before:[background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,255,255,.85))_padding-box,linear-gradient(135deg,#d4d4d8,#e5e7eb)]',
         'dark:before:[background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.85))_padding-box,linear-gradient(135deg,#52525b,#71717a)]',

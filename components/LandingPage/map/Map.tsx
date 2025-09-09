@@ -22,7 +22,6 @@ const Globe = dynamic(
 
 /* ----------------------------- Données villes ----------------------------- */
 const citiesEssonne = [
-  'Bailly-Romainvilliers',
   'Massy',
   'Evry',
   'Verrières-le-Buisson',

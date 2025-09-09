@@ -3,7 +3,6 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { motion } from 'motion/react';
 import { IconArrowRight } from '@tabler/icons-react';
 
 type Feature = {
@@ -92,11 +91,7 @@ export function Service3() {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6" id="scaling">
-        <motion.h2
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+        <h2
           className="text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight
                      bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
                      dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
@@ -104,20 +99,14 @@ export function Service3() {
           Stratégies Digitales &{' '}
           <span className="text-sky-500 dark:text-sky-400">Croissance</span>{' '}
           sur-mesure
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.1 }}
-          className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg"
-        >
-          Nous activons les bons <b>leviers</b> — marketing digital,
-          prospection, SEO, campagnes, social — pour{' '}
+        <p className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg">
+          Nous activons les bons <b>leviers</b> de marketing digital,
+          prospection, SEO, campagnes, social pour{' '}
           <b>accélérer votre croissance</b>, générer des leads qualifiés et
           gagner de nouveaux marchés.
-        </motion.p>
+        </p>
 
         <div className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRID.map((feature) => (
@@ -126,7 +115,7 @@ export function Service3() {
               key={feature.title}
               className="group"
             >
-              <motion.article
+              <article
                 className="relative overflow-hidden h-full flex flex-col justify-between rounded-2xl p-6 xl:p-7
                      
                            bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.9))]
@@ -153,7 +142,7 @@ export function Service3() {
                     <IconArrowRight className="h-5 w-5 text-sky-600 dark:text-sky-400" />
                   </span>
                 </div>
-              </motion.article>
+              </article>
             </Link>
           ))}
         </div>

@@ -30,20 +30,52 @@ const SECTIONS: Section[] = [
     title: 'Nos Services',
     href: '/nos-services',
     links: [
-      { label: 'Applications Web, Mobiles & SaaS', href: '/nos-services#saas-apps', icon: <IconDeviceLaptop stroke={2} className="shrink-0" /> },
-      { label: 'Automatisation & IA', href: '/nos-services#automatisation-ia', icon: <IconCpu stroke={2} className="shrink-0" /> },
-      { label: 'Stratégies Digitales & Croissance', href: '/nos-services#scaling', icon: <IconChartLine stroke={2} className="shrink-0" /> },
-      { label: 'Ce qui fait notre différence', href: '/nos-services#pourquoi-nous', icon: <IconThumbUp stroke={2} className="shrink-0" /> },
-      { label: 'Foire aux questions', href: '/nos-services#faq', icon: <IconHelpHexagon stroke={2} className="shrink-0" /> },
+      {
+        label: 'Applications Web, Mobiles & SaaS',
+        href: '/nos-services#saas-apps',
+        icon: <IconDeviceLaptop stroke={2} className="shrink-0" />,
+      },
+      {
+        label: 'Automatisation & IA',
+        href: '/nos-services#automatisation-ia',
+        icon: <IconCpu stroke={2} className="shrink-0" />,
+      },
+      {
+        label: 'Stratégies Digitales & Croissance',
+        href: '/nos-services#scaling',
+        icon: <IconChartLine stroke={2} className="shrink-0" />,
+      },
+      {
+        label: 'Ce qui fait notre différence',
+        href: '/nos-services#pourquoi-nous',
+        icon: <IconThumbUp stroke={2} className="shrink-0" />,
+      },
+      {
+        label: 'Foire aux questions',
+        href: '/nos-services#faq',
+        icon: <IconHelpHexagon stroke={2} className="shrink-0" />,
+      },
     ],
   },
   {
     title: 'À Propos',
     href: '/about',
     links: [
-      { label: 'Notre Histoire', href: '/about#notre-histoire', icon: <IconHistory stroke={2} className="shrink-0" /> },
-      { label: 'Notre Vision', href: '/about#notre-vision', icon: <IconEye stroke={2} className="shrink-0" /> },
-      { label: 'Notre Garantie', href: '/about#notre-garantie', icon: <IconHelpHexagon stroke={2} className="shrink-0" /> },
+      {
+        label: 'Notre Histoire',
+        href: '/about#notre-histoire',
+        icon: <IconHistory stroke={2} className="shrink-0" />,
+      },
+      {
+        label: 'Notre Vision',
+        href: '/about#notre-vision',
+        icon: <IconEye stroke={2} className="shrink-0" />,
+      },
+      {
+        label: 'Notre Garantie',
+        href: '/about#notre-garantie',
+        icon: <IconHelpHexagon stroke={2} className="shrink-0" />,
+      },
     ],
   },
   { title: 'Conseils Digitaux', href: '/blog' },
@@ -70,9 +102,27 @@ export function HeaderResponsive() {
       {/* Header mobile transparent */}
       <header className="fixed inset-x-0 top-0 z-[10000] lg:hidden">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
-          <Link href="/" aria-label="Accueil" className="flex items-center gap-2">
-            <Image src={IkovalineLogo} alt="Ikovaline" width={120} height={36} className="h-8 w-auto object-contain dark:hidden" priority />
-            <Image src={IkovalineLogoDark} alt="Ikovaline" width={120} height={36} className="hidden h-8 w-auto object-contain dark:block" priority />
+          <Link
+            href="/"
+            aria-label="Accueil"
+            className="flex items-center gap-2"
+          >
+            <Image
+              src={IkovalineLogo}
+              alt="Ikovaline"
+              width={120}
+              height={36}
+              className="h-8 w-auto object-contain dark:hidden"
+              priority
+            />
+            <Image
+              src={IkovalineLogoDark}
+              alt="Ikovaline"
+              width={120}
+              height={36}
+              className="hidden h-8 w-auto object-contain dark:block"
+              priority
+            />
           </Link>
 
           <div className="flex items-center gap-4">
@@ -82,7 +132,7 @@ export function HeaderResponsive() {
               aria-label="Ouvrir le menu"
               className="grid size-10 p-1  place-items-center rounded-xl bg-white/70 text-neutral-900 shadow-sm ring-1 ring-black/10 backdrop-blur dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/10"
             >
-              <IconMenu3 className='w-full h-full'/>
+              <IconMenu3 className="w-full h-full" />
             </button>
           </div>
         </div>
@@ -98,7 +148,10 @@ export function HeaderResponsive() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[1000000] lg:hidden"
           >
-            <div aria-hidden className="absolute inset-0 bg-white/70 backdrop-blur-2xl dark:bg-black/70" />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-white/70 backdrop-blur-2xl dark:bg-black/70"
+            />
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-100"
@@ -110,12 +163,18 @@ export function HeaderResponsive() {
             <div
               aria-hidden
               className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full blur-[120px]"
-              style={{ background: 'radial-gradient(closest-side, hsl(var(--primary)/0.16), transparent 70%)' }}
+              style={{
+                background:
+                  'radial-gradient(closest-side, hsl(var(--primary)/0.16), transparent 70%)',
+              }}
             />
             <div
               aria-hidden
               className="pointer-events-none absolute right-0 bottom-0 h-96 w-96 translate-x-1/4 rounded-full blur-[160px]"
-              style={{ background: 'radial-gradient(closest-side, color-mix(in oklab, hsl(var(--primary)) 75%, #00E5FF) / 0.14, transparent 70%)' }}
+              style={{
+                background:
+                  'radial-gradient(closest-side, color-mix(in oklab, hsl(var(--primary)) 75%, #00E5FF) / 0.14, transparent 70%)',
+              }}
             />
 
             <m.aside
@@ -127,9 +186,25 @@ export function HeaderResponsive() {
               className="relative z-10 flex h-full w-full flex-col"
             >
               <div className="flex items-center justify-between px-5 pt-4">
-                <Link href="/" aria-label="Accueil" onClick={() => setOpen(false)}>
-                  <Image src={IkovalineLogo} alt="Ikovaline" width={120} height={36} className="h-8 w-auto object-contain dark:hidden" />
-                  <Image src={IkovalineLogoDark} alt="Ikovaline" width={120} height={36} className="hidden h-8 w-auto object-contain dark:block" />
+                <Link
+                  href="/"
+                  aria-label="Accueil"
+                  onClick={() => setOpen(false)}
+                >
+                  <Image
+                    src={IkovalineLogo}
+                    alt="Ikovaline"
+                    width={120}
+                    height={36}
+                    className="h-8 w-auto object-contain dark:hidden"
+                  />
+                  <Image
+                    src={IkovalineLogoDark}
+                    alt="Ikovaline"
+                    width={120}
+                    height={36}
+                    className="hidden h-8 w-auto object-contain dark:block"
+                  />
                 </Link>
 
                 <button
@@ -146,7 +221,9 @@ export function HeaderResponsive() {
                 animate="show"
                 exit="hidden"
                 variants={{
-                  hidden: { transition: { staggerChildren: 0.04, staggerDirection: -1 } },
+                  hidden: {
+                    transition: { staggerChildren: 0.04, staggerDirection: -1 },
+                  },
                   show: { transition: { staggerChildren: 0.06 } },
                 }}
                 className="relative mx-auto mt-6 w-full max-w-3xl grow overflow-y-auto px-5 pb-28"
@@ -191,7 +268,9 @@ export function HeaderResponsive() {
                             }}
                             className="ml-3 grid size-9 place-items-center rounded-xl text-neutral-700 transition group-hover:scale-105 hover:bg-black/10 dark:text-neutral-300 dark:hover:bg-white/10"
                           >
-                            <IconChevronDown className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                            <IconChevronDown
+                              className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                            />
                           </button>
                         )}
                       </div>
@@ -217,7 +296,9 @@ export function HeaderResponsive() {
                                   onClick={() => setOpen(false)}
                                   className="mt-1 flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] text-neutral-800 transition hover:bg-black/5 dark:text-neutral-200 dark:hover:bg-white/5"
                                 >
-                                  <span className="grid size-6 place-items-center">{l.icon}</span>
+                                  <span className="grid size-6 place-items-center">
+                                    {l.icon}
+                                  </span>
                                   <span className="truncate">{l.label}</span>
                                 </Link>
                               </li>

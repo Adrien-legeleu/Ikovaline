@@ -5,15 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   IconApps,
-  IconChartLine,
-  IconDeviceLaptop,
-  IconEye,
   IconHelpHexagon,
   IconHistory,
   IconShieldCheck,
   IconThumbUp,
   IconUser,
   IconMessage,
+  IconInputAi,
+  IconAdjustments,
+  IconUsersGroup,
 } from '@tabler/icons-react';
 
 import { cn } from '@/lib/utils';
@@ -41,7 +41,10 @@ export function Header({ className }: { className?: string }) {
 
       {/* Desktop navbar */}
       <div
-        className={cn('fixed inset-x-0 top-0 z-[10000] hidden lg:block', className)}
+        className={cn(
+          'fixed inset-x-0 top-0 z-[10000] hidden lg:block',
+          className
+        )}
       >
         <div className="mx-auto mt-2 max-w-6xl px-4">
           <nav
@@ -49,8 +52,8 @@ export function Header({ className }: { className?: string }) {
               'flex h-16 items-center justify-between rounded-2xl border px-4',
               'bg-white/60 backdrop-blur-sm text-neutral-900 dark:bg-black dark:text-neutral-100',
               scrolled
-                ? 'border-neutral-200 shadow-xl shadow-black/5 dark:border-neutral-800'
-                : 'border-transparent'
+                ? 'border-neutral-100 shadow-xl shadow-black/5 dark:border-neutral-800'
+                : 'border-transparent bg-transparent'
             )}
           >
             {/* Logo */}
@@ -108,14 +111,19 @@ export function Header({ className }: { className?: string }) {
                   link="/nos-services"
                 >
                   <div className="flex flex-col space-y-3 text-sm">
-                    <HoveredLink href="/nos-services/#buisness-developpement">
-                      <IconChartLine stroke={2} />
-                      Accélérez votre croissance
+                    <HoveredLink href="/nos-services/#saas-apps">
+                      <IconApps stroke={2} />
+                      Application Web, Mobile & sur-mesure
                     </HoveredLink>
-                    <HoveredLink href="/nos-services/#developpement-digital">
-                      <IconDeviceLaptop stroke={2} />
-                      Modernisez votre présence
+                    <HoveredLink href="/nos-services/#automatisation-ia">
+                      <IconInputAi stroke={2} />
+                      Automatisation & IA
                     </HoveredLink>
+                    <HoveredLink href="/nos-services/#scaling">
+                      <IconAdjustments stroke={2} />
+                      Stratégies Digitales & sur-mesure
+                    </HoveredLink>
+
                     <HoveredLink href="/nos-services/#pourquoi-nous">
                       <IconThumbUp stroke={2} />
                       Notre différence
@@ -139,8 +147,8 @@ export function Header({ className }: { className?: string }) {
                       Notre Histoire
                     </HoveredLink>
                     <HoveredLink href="/about/#notre-vision">
-                      <IconEye stroke={2} />
-                      Notre Vision
+                      <IconUsersGroup stroke={2} />
+                      Notre Équipe
                     </HoveredLink>
                     <HoveredLink href="/about/#notre-garantie">
                       <IconShieldCheck stroke={2} />

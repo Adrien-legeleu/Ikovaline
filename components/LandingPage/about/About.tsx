@@ -92,32 +92,17 @@ const TEAM_ROW_2: Person[] = [
 /* ===================== Hero with beams/lines ===================== */
 export default function HeroBeamsTeam() {
   return (
-    <section className="relative w-full bg-white dark:bg-black">
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 md:py-24 lg:py-32">
+    <section className="relative w-full  ">
+      <div className="relative z-10 mx-auto max-w-7xl px-4">
         {/* Beams & gradients (décor) */}
-        <div className="relative my-6 overflow-hidden rounded-3xl bg-neutral-50 py-10 md:py-20 dark:bg-black">
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white dark:from-neutral-900 z-20 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white dark:from-neutral-900 z-30 to-transparent" />
-          <TopLines />
-          <BottomLines />
-          <SideLines />
-
+        <div className="relative my-6 overflow-hidden rounded-3xl  pb-10 ">
           {/* Contenu */}
           <div className="relative z-40  mx-auto max-w-5xl px-4 text-center">
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="mx-auto mb-3 inline-flex items-center rounded-full border border-neutral-300/60 bg-white px-3 py-1 text-xs font-medium text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
-            >
-              Experts produit & croissance
-            </motion.p>
-
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.12 }}
-              className=" text-xl md:text-2xl lg:text-3xl 2xl:text-4xl"
+              className=" text-md md:text-lg lg:text-xl 2xl:text-2xl"
             >
               <span className="text-balance font-semibold  bg-gradient-to-b from-black to-neutral-600 bg-clip-text  text-transparent  dark:from-white dark:to-neutral-400">
                 Une équipe{' '}
@@ -162,12 +147,6 @@ export default function HeroBeamsTeam() {
                 >
                   <Link href="/contact">Parler à un expert</Link>
                 </Button>
-                <Link
-                  href="/about"
-                  className="rounded-xl border border-neutral-200 bg-white px-6 py-2 text-sm font-medium text-neutral-800 hover:bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 dark:hover:bg-neutral-800"
-                >
-                  Découvrir notre équipe
-                </Link>
               </div>
             </motion.div>
           </div>

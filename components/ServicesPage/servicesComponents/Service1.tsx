@@ -3,7 +3,6 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { motion } from 'motion/react';
 import { IconArrowRight } from '@tabler/icons-react';
 
 type Feature = {
@@ -72,11 +71,7 @@ export function Service1() {
       </div>
 
       <div id="saas-apps" className="relative mx-auto max-w-6xl px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+        <h2
           className="text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight
                      bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
                      dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
@@ -84,19 +79,13 @@ export function Service1() {
           Applications Web, Mobiles &{' '}
           <span className="text-sky-500 dark:text-sky-400">SaaS</span>{' '}
           sur-mesure
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.1 }}
-          className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg"
-        >
+        <p className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg">
           Des produits <b>robustes</b>, <b>scalables</b> et orientés{' '}
-          <b>conversion</b> — de l’idée à la prod, avec un soin particulier pour
+          <b>conversion</b> de l’idée à la prod, avec un soin particulier pour
           l’UX, la performance et la maintenabilité.
-        </motion.p>
+        </p>
 
         <div className="relative mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRID.map((feature) => (
@@ -105,7 +94,7 @@ export function Service1() {
               key={feature.title}
               className="group"
             >
-              <motion.article
+              <article
                 className="relative h-full flex flex-col justify-between rounded-2xl p-8 overflow-hidden
                            
                            bg-[linear-gradient(135deg,rgba(255,255,255,.99),rgba(240,245,252,.9))]
@@ -132,7 +121,7 @@ export function Service1() {
                     <IconArrowRight className="h-5 w-5 text-sky-600 dark:text-sky-400" />
                   </span>
                 </div>
-              </motion.article>
+              </article>
             </Link>
           ))}
         </div>

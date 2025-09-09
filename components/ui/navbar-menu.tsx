@@ -1,8 +1,15 @@
 'use client';
-
 import * as React from 'react';
-import Link, { LinkProps } from 'next/link';
-import { motion as m, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+type MenuItemProps = {
+  setActive: (item: string) => void;
+  active: string | null;
+  item: string;
+  link: string;
+  children?: React.ReactNode;
+};
 
 type MenuProps = {
   setActive: (item: string | null) => void;
@@ -11,9 +18,23 @@ type MenuProps = {
 };
 
 export const Menu = ({ setActive, upToZero, children }: MenuProps) => {
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const CLOSE_DELAY = 130;
+
+  const safeClose = () => {
+    timeoutRef.current = setTimeout(() => setActive(null), CLOSE_DELAY);
+  };
+  const cancelClose = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
+
   return (
     <div
-      onMouseLeave={() => setActive(null)}
+      onMouseLeave={safeClose}
+      onMouseEnter={cancelClose}
       className={['relative flex items-center gap-8', upToZero ? '' : ''].join(
         ' '
       )}
@@ -21,14 +42,6 @@ export const Menu = ({ setActive, upToZero, children }: MenuProps) => {
       {children}
     </div>
   );
-};
-
-type MenuItemProps = {
-  setActive: (item: string) => void;
-  active: string | null;
-  item: string;
-  link: string;
-  children?: React.ReactNode;
 };
 
 export const MenuItem = ({
@@ -41,30 +54,56 @@ export const MenuItem = ({
   const isOpen = active === item && !!children;
 
   return (
-    <div className="relative">
+    <div className="relative " onMouseEnter={() => setActive(item)}>
+      {/* Le trigger */}
       <Link
         href={link}
-        onMouseEnter={() => setActive(item)}
-        className=" font-medium text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white"
+        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
       >
         {item}
       </Link>
 
-      <AnimatePresence>
-        {isOpen && (
-          <m.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            transition={{ duration: 0.18 }}
-            className="absolute left-0 z-30 mt-3 w-max -translate-x-1/2"
-          >
-            <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
-              {children}
+      {/* Bridge anti-trou juste sous le trigger */}
+      <div
+        aria-hidden
+        className="absolute left-0 right-0 top-full h-4"
+        onMouseEnter={() => setActive(item)}
+      />
+
+      {/* Panel */}
+      {active !== null && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.25, ease: 'easeInOut' }}
+        >
+          {isOpen && (
+            <div
+              className="absolute left-1/2 top-[calc(100%_+_0.5rem)] -translate-x-1/2 pt-0"
+              onMouseEnter={() => setActive(item)} // ← garde ouvert
+            >
+              <motion.div
+                layoutId="active"
+                initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                className="
+    rounded-2xl overflow-hidden shadow-xl 
+    
+    bg-white dark:bg-neutral-900
+    backdrop-blur-md backdrop-saturate-150
+
+   
+  "
+              >
+                <motion.div layout className="w-max h-full p-4">
+                  {children}
+                </motion.div>
+              </motion.div>
             </div>
-          </m.div>
-        )}
-      </AnimatePresence>
+          )}
+        </motion.div>
+      )}
     </div>
   );
 };
@@ -73,7 +112,7 @@ export const HoveredLink = ({
   children,
   className,
   ...rest
-}: LinkProps & { children: React.ReactNode; className?: string }) => {
+}: React.ComponentProps<typeof Link> & { className?: string }) => {
   return (
     <Link
       {...rest}

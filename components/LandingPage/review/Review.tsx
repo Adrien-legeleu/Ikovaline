@@ -102,7 +102,6 @@ const reviewsFR: ReviewType[] = [
     name: 'L’Émotion',
     role: 'Gestion Google My Business - Consulting',
     text: 'Ils ont transformé notre image en ligne et apporté des conseils stratégiques pour développer notre activité. Une équipe très réactive !',
-    image: 'https://avatar.vercel.sh/cobalt',
   },
   {
     name: 'Lelandais Fermetures',
@@ -120,13 +119,11 @@ const reviewsFR: ReviewType[] = [
     name: 'Need Money For Shop',
     role: 'Création site web - Publicité - Développement commercial',
     text: 'Ikovaline a su adapter ses services à nos besoins précis. Leur approche marketing a boosté nos campagnes publicitaires.',
-    image: 'https://avatar.vercel.sh/sky',
   },
   {
     name: 'L’Art du Bonsaï',
     role: 'Création site web - Contenu visuel - Publicité',
     text: 'Leur travail créatif et stratégique a fait passer notre entreprise à un autre niveau. Nos clients adorent notre nouveau site et visuel !',
-    image: 'https://avatar.vercel.sh/forest',
   },
   {
     name: 'HL CORNER',
@@ -138,7 +135,6 @@ const reviewsFR: ReviewType[] = [
     name: 'Jardin Auto',
     role: 'Création site web - Publicité saisonnière',
     text: 'Leur travail nous a permis de générer plus de ventes en période de forte demande. Ils gèrent tout avec professionnalisme.',
-    image: 'https://avatar.vercel.sh/sunset',
   },
   {
     name: 'Jean-Christophe Lelandais',
@@ -150,7 +146,6 @@ const reviewsFR: ReviewType[] = [
     name: 'Simon Corbin',
     role: 'Stratégies marketing et commerciales sur mesure',
     text: 'L’approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.',
-    image: 'https://avatar.vercel.sh/coral',
   },
 
   // --- Nouveaux avis “sobres” ---

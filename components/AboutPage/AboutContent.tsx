@@ -4,15 +4,15 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
-  IconQuote,
   IconSparkles,
-  IconTargetArrow,
+  IconUsersGroup,
   IconShieldCheck,
 } from '@tabler/icons-react';
 import { TracingBeam } from '@/components/ui/tracing-beam';
 import { Highlighter } from '../magicui/highlighter';
 import ImageHistory1 from '@/public/images/About/team-ikovaline (3).jpg';
 import ImageHistory2 from '@/public/images/About/team-ikovaline (4).jpg';
+import HeroBeamsTeam from '../LandingPage/about/About';
 
 type Block = {
   id: string;
@@ -120,49 +120,12 @@ export default function AboutContent() {
       ),
     },
     {
-      id: 'vision',
-      badge: { label: 'Vision', Icon: IconTargetArrow },
-      title: 'Une Vision Ambitieuse',
-      body: (
-        <>
-          {/* Paragraphe vision */}
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            transition={{ duration: 0.55, ease: 'easeOut' }}
-            className="relative leading-8 text-neutral-700 dark:text-neutral-300"
-          >
-            Ikovaline porte une vision claire : atteindre un chiffre
-            d&apos;affaires de{' '}
-            <Highlighter action="highlight" color="#87CEFA" noWrap>
-              300&nbsp;000&nbsp;€
-            </Highlighter>{' '}
-            d&apos;ici 2026. Cette ambition s&apos;appuie sur notre capacité à
-            proposer des services digitaux performants et à offrir un
-            accompagnement personnalisé pour chaque entreprise.
-          </motion.p>
-
-          {/* Citation */}
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="relative leading-8 italic text-neutral-600 dark:text-neutral-400"
-          >
-            <IconQuote className="mr-2 inline-block h-5 w-5" stroke={2} />
-            Nous croyons que la réussite passe par une stratégie numérique
-            adaptée
-            <IconQuote className="ml-2 inline-block h-5 w-5" stroke={2} />
-            <span className="not-italic font-semibold">
-              {' '}
-              — Florent Ghizzoni.
-            </span>
-          </motion.p>
-        </>
-      ),
+      id: 'team',
+      badge: { label: 'notre équipe', Icon: IconUsersGroup },
+      title: 'Notre Équipe',
+      body: <HeroBeamsTeam />,
     },
+
     {
       id: 'garantie',
       badge: { label: 'Remboursement garanti', Icon: IconShieldCheck },
@@ -249,9 +212,14 @@ export default function AboutContent() {
             transition={{ duration: 0.4, ease: 'easeOut' }}
             className="relative mt-5 space-y-2"
           >
-            <p className="font-semibold">3. 📤 Livraison et réception des livrables</p>
+            <p className="font-semibold">
+              3. 📤 Livraison et réception des livrables
+            </p>
             <ul className="relative list-disc space-y-1 pl-5 text-neutral-700 dark:text-neutral-300">
-              <li>Assister aux réunions de restitution ou aux démonstrations prévues.</li>
+              <li>
+                Assister aux réunions de restitution ou aux démonstrations
+                prévues.
+              </li>
               <li>
                 Réceptionner les livrables{' '}
                 <Highlighter action="highlight" color="#87CEFA" noWrap>

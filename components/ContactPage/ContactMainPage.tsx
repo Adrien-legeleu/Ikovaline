@@ -13,7 +13,7 @@ export default function ContactMainPage() {
 
   return (
     <section className="relative mx-auto grid max-w-[1300px]  grid-cols-1 gap-10 px-5 py-20 lg:grid-cols-[1fr_380px]">
-       <div
+      <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-100"
         style={{
@@ -21,8 +21,8 @@ export default function ContactMainPage() {
             'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.1) 0 1px, transparent 1px calc(12.5%))',
         }}
       />
-       <div className='absolute top-0 left-0 bg-gradient-to-b from-white dark:from-black to-transparent w-full h-32'/>
-        <div className='absolute bottom-0 left-0 bg-gradient-to-t from-white dark:from-black to-transparent w-full h-32'/>
+      <div className="absolute top-0 left-0 bg-gradient-to-b from-white dark:from-black to-transparent w-full h-32" />
+      <div className="absolute bottom-0 left-0 bg-gradient-to-t from-white dark:from-black to-transparent w-full h-32" />
 
       <h1 className="lg:hidden z-10 text-center text-3xl font-extrabold bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-600 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent">
         Contactez-nous pour booster votre présence digitale
@@ -40,7 +40,7 @@ export default function ContactMainPage() {
       {/* Aside */}
       <aside className="max-lg:order-1 mx-auto w-full max-w-md space-y-6">
         <div
-          className="relative overflow-hidden rounded-[26px] p-6 backdrop-blur-2xl
+          className="relative overflow-hidden rounded-xl p-6 backdrop-blur-2xl
           bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(240,245,252,0.5))]
           dark:bg-[linear-gradient(135deg,rgba(10,14,20,0.92),rgba(10,14,20,0.6))]
           border border-white/50 dark:border-white/10
@@ -49,26 +49,28 @@ export default function ContactMainPage() {
           <p className="text-center text-neutral-800 dark:text-neutral-300">
             {isBusiness ? (
               <>
-                Vous êtes une entreprise ? Ikovaline vous aide à <b>optimiser votre visibilité</b>, générer des{' '}
-                <b>leads</b> et réussir votre <b>transformation numérique</b>.
+                Vous êtes une entreprise ? Ikovaline vous aide à{' '}
+                <b>optimiser votre visibilité</b>, générer des <b>leads</b> et
+                réussir votre <b>transformation numérique</b>.
               </>
             ) : (
               <>
-                Étudiant(e) passionné(e) ? Rejoignez une équipe dynamique et <b>boostez vos compétences</b> sur des projets concrets.
+                Étudiant(e) passionné(e) ? Rejoignez une équipe dynamique et{' '}
+                <b>boostez vos compétences</b> sur des projets concrets.
               </>
             )}
           </p>
 
           <button
             onClick={() => setIsBusiness((s) => !s)}
-            className="mt-4 w-full rounded-full h-12 text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]"
+            className="mt-4 w-full rounded-xl h-12 text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]"
           >
             {isBusiness ? 'Vous êtes étudiant ?' : 'Vous êtes une entreprise ?'}
           </button>
         </div>
 
         <div
-          className="relative overflow-hidden rounded-[26px] p-6 backdrop-blur-2xl
+          className="relative overflow-hidden rounded-xl p-6 backdrop-blur-2xl
           bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(240,245,252,0.5))]
           dark:bg-[linear-gradient(135deg,rgba(10,14,20,0.92),rgba(10,14,20,0.6))]
           border border-white/50 dark:border-white/10
