@@ -2,7 +2,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'motion/react';
 import {
   IconDiscountCheck,
   IconCash,
@@ -95,11 +94,7 @@ function FeatureCard({
   const { title, description, icon: Icon } = feature;
 
   return (
-    <motion.article
-      initial={{ y: 22 }}
-      whileInView={{ y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.55, ease: 'easeOut', delay }}
+    <article
       className="relative h-full overflow-hidden rounded-2xl p-7 
                  bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]
                  dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]
@@ -120,6 +115,6 @@ function FeatureCard({
       <p className="relative z-10 mt-3 text-neutral-700 dark:text-neutral-300 text-sm xl:text-[15px] leading-relaxed">
         {description}
       </p>
-    </motion.article>
+    </article>
   );
 }
