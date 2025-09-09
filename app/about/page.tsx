@@ -4,7 +4,6 @@ import Head from 'next/head';
 import AboutContent from '@/components/AboutPage/AboutContent';
 import CTAABout from '@/components/AboutPage/CTAAbout';
 import Glow from '@/components/ui/glow';
-import HeroBeamsTeam from '@/components/LandingPage/about/About';
 
 export const metadata: Metadata = {
   title: "À propos d'Ikovaline - Notre Histoire et Équipe",
