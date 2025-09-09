@@ -76,7 +76,7 @@ export default function Why() {
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {FEATURES.map((f, i) => (
-            <FeatureCard key={f.title} feature={f} delay={i * 0.06} />
+            <FeatureCard key={f.title} feature={f} />
           ))}
         </div>
       </div>
@@ -84,13 +84,7 @@ export default function Why() {
   );
 }
 
-function FeatureCard({
-  feature,
-  delay = 0,
-}: {
-  feature: Feature;
-  delay?: number;
-}) {
+function FeatureCard({ feature }: { feature: Feature }) {
   const { title, description, icon: Icon } = feature;
 
   return (
