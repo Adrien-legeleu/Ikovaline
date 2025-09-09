@@ -3,12 +3,6 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 
 type FaqItem = { question: React.ReactNode; answer: React.ReactNode };
 
@@ -16,7 +10,7 @@ const FAQ_FR: FaqItem[] = [
   {
     question: "Qu'est-ce qu'Ikovaline ?",
     answer:
-      "Ikovaline est une start-up spécialisée en marketing digital et transformation numérique. Nous aidons les entreprises à améliorer leur visibilité en ligne, optimiser leur Google Business Profile, gérer leur e-réputation et piloter leurs projets de croissance. Notre force : des solutions sur-mesure pour chaque étape de votre développement.",
+      'Ikovaline est une start-up spécialisée en marketing digital et transformation numérique. Nous aidons les entreprises à améliorer leur visibilité en ligne, optimiser leur Google Business Profile, gérer leur e-réputation et piloter leurs projets de croissance. Notre force : des solutions sur-mesure pour chaque étape de votre développement.',
   },
   {
     question: 'Comment Ikovaline peut-elle aider mon entreprise ?',
@@ -27,7 +21,7 @@ const FAQ_FR: FaqItem[] = [
     question:
       'Quels résultats puis-je attendre en travaillant avec Ikovaline ?',
     answer:
-      "En moyenne, nos clients constatent une hausse de la visibilité en ligne, un trafic qualifié en progression et une meilleure notoriété. Résultat : une croissance du chiffre d’affaires pouvant atteindre +70% selon les cas.",
+      'En moyenne, nos clients constatent une hausse de la visibilité en ligne, un trafic qualifié en progression et une meilleure notoriété. Résultat : une croissance du chiffre d’affaires pouvant atteindre +70% selon les cas.',
   },
   {
     question: "Quels types d'entreprises pouvez-vous aider ?",
@@ -43,7 +37,9 @@ const FAQ_FR: FaqItem[] = [
         <li>Social media (LinkedIn, TikTok, Instagram…)</li>
         <li>Création de sites vitrine & e-commerce</li>
         <li>Campagnes Google Ads & Social Ads</li>
-        <li>Conseil en stratégie, développement commercial & gestion de projet</li>
+        <li>
+          Conseil en stratégie, développement commercial & gestion de projet
+        </li>
       </ul>
     ),
   },
@@ -66,7 +62,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative mx-auto max-w-6xl px-6 py-16 sm:py-20"
+      className="relative mx-auto max-w-6xl sm:px-6 px-4 py-16 sm:py-20"
     >
       {/* halo discret */}
       <span
@@ -89,47 +85,26 @@ export default function FAQ() {
         </p>
       </div>
 
-      {/* < md : Accordéon sobre */}
-      <div className="md:hidden">
-        <Accordion type="single" collapsible >
-          {FAQ_FR.map((item, i) => (
-            <AccordionItem
-              key={i}
-              value={`item-${i + 1}`}
-         
-            >
-              <AccordionTrigger >
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent >
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-
       {/* >= md : Masonry cartes visibles */}
       <div
-        className="hidden md:block"
         aria-hidden // pour éviter double lecture par les lecteurs d'écran
       >
         <div
           className="
-            columns-2 lg:columns-3
-            gap-x-5 lg:gap-x-6
+            sm:columns-2 columns-2 lg:columns-3
+            sm:gap-x-5 gap-x-4 lg:gap-x-6
             [column-fill:_balance]
           "
         >
           {FAQ_FR.map((item, i) => (
             <article
               key={i}
-              className="mb-5 lg:mb-6 break-inside-avoid rounded-2xl bg-white p-6 shadow-[0_18px_50px_-28px_rgba(0,0,0,.25)] ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10 transition-transform duration-300 will-change-transform hover:-translate-y-0.5"
+              className="sm:mb-5 mb-5 lg:mb-6 break-inside-avoid rounded-2xl bg-white sm:p-6 p-3 shadow-[0_18px_50px_-28px_rgba(0,0,0,.25)] ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10 transition-transform duration-300 will-change-transform hover:-translate-y-0.5"
             >
-              <h3 className="text-[17px] font-semibold text-neutral-900 dark:text-white">
+              <h3 className="sm:text-[17px] text-sm font-semibold text-neutral-900 dark:text-white">
                 {item.question}
               </h3>
-              <div className="mt-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+              <div className="mt-3 sm:text-sm text-xs sm:leading-7 leading-5 text-neutral-700 dark:text-neutral-300">
                 {item.answer}
               </div>
             </article>
