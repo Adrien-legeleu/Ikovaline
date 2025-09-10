@@ -476,8 +476,8 @@ export function AcquisitionMock() {
     <MacWindow title="Acquisition · SEA & SEO">
       <div className="space-y-4">
         {/* KPIs */}
-        <div className="grid grid-cols-3 gap-3">
-          {['CPC', 'CTR', 'ROAS'].map((k) => (
+        <div className="grid grid-cols-2 gap-3">
+          {['CPC', 'CTR'].map((k) => (
             <div
               key={k}
               className="rounded-xl bg-white p-3 shadow-[0_18px_40px_-24px_rgba(0,0,0,.22)] ring-1 ring-black/5 dark:bg-neutral-900"
@@ -485,7 +485,7 @@ export function AcquisitionMock() {
               <div className="text-[11px] uppercase tracking-wide text-neutral-500">
                 {k}
               </div>
-              <Shimmer className="mt-2 h-6 w-20 bg-neutral-200 dark:bg-neutral-700" />
+              <Shimmer className="mt-2 h-6 w-full bg-neutral-200 dark:bg-neutral-700" />
             </div>
           ))}
         </div>
