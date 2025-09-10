@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import Landing from '@/components/LandingPage/landing/Landing';
 import dynamic from 'next/dynamic';
+import FAQ from '@/components/LandingPage/faq/FAQ';
 
 const ComponentDemo = dynamic(
   () => import('@/components/LandingPage/impact/TextImpact'),
@@ -77,6 +78,7 @@ export default function Home() {
             <CTAHome />
 
             <Blog />
+            <FAQ />
           </div>
         </div>
       </div>

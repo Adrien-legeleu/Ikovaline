@@ -1,4 +1,3 @@
-// components/ServicesPage/faq/FAQ.tsx
 'use client';
 
 import * as React from 'react';
