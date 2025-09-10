@@ -19,24 +19,6 @@ const Shimmer: React.FC<{ className?: string }> = ({ className = '' }) => (
     `}</style>
   </span>
 );
-const SoftPulse: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <span className={['relative block rounded-full', className].join(' ')}>
-    <span className="pointer-events-none absolute inset-0 rounded-full animate-[softpulse_2.6s_ease-in-out_infinite] bg-current/10" />
-    <style jsx>{`
-      @keyframes softpulse {
-        0%,
-        100% {
-          opacity: 0.2;
-          transform: scale(0.98);
-        }
-        50% {
-          opacity: 0.6;
-          transform: scale(1.02);
-        }
-      }
-    `}</style>
-  </span>
-);
 
 function MacWindow({
   children,
@@ -495,7 +477,7 @@ export function AcquisitionMock() {
       <div className="space-y-4">
         {/* KPIs */}
         <div className="grid grid-cols-3 gap-3">
-          {['CPC', 'CTR', 'ROAS'].map((k, i) => (
+          {['CPC', 'CTR', 'ROAS'].map((k) => (
             <div
               key={k}
               className="rounded-xl bg-white p-3 shadow-[0_18px_40px_-24px_rgba(0,0,0,.22)] ring-1 ring-black/5 dark:bg-neutral-900"
