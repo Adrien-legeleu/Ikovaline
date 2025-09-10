@@ -43,7 +43,7 @@ export const blogMetadata: Record<
     date: '2025-05-14',
     title: 'creation digital : 10 tendances et outils pour projet réussi',
     description:
-      'Boostez votre référencement Google grâce à un SEO optimisé, contenu de qualité et structure site web pour visibilité et trafic qualifié.',
+      'Guide pratique pour lancer un projet digital : méthodes, UX, choix d’outils (no-code/IA/stack), budget et roadmap pour un lancement rapide et durable.',
     ogImage: '/blog/blog4/creation-digitale.png',
   },
   'definition-site-institutionnel': {

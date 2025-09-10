@@ -1,21 +1,21 @@
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Mentions légales - Ikovaline",
+  title: 'Mentions légales du site Ikovaline',
   description:
-    "Consultez les mentions légales du site Ikovaline : éditeur, hébergeur, propriété intellectuelle, traitement des données personnelles et politique de cookies.",
+    'Consultez les mentions légales du site Ikovaline : éditeur, hébergeur, propriété intellectuelle, traitement des données personnelles et politique de cookies.',
   openGraph: {
-    title: "Mentions légales - Ikovaline",
+    title: 'Mentions légales du site Ikovaline',
     description:
-      "Toutes les informations légales concernant le site Ikovaline : éditeur, données personnelles, propriété intellectuelle, hébergement et plus encore.",
-    url: "https://ikovaline.com/mentions-legales",
-    type: "article",
+      'Toutes les informations légales concernant le site Ikovaline : éditeur, données personnelles, propriété intellectuelle, hébergement et plus encore.',
+    url: 'https://ikovaline.com/mentions-legales',
+    type: 'article',
   },
   twitter: {
-    card: "summary",
-    title: "Mentions légales - Ikovaline",
+    card: 'summary',
+    title: 'Mentions légales du site Ikovaline',
     description:
-      "Découvrez les informations légales d’Ikovaline : données personnelles, éditeur, droits, cookies et hébergement du site.",
+      'Découvrez les informations légales d’Ikovaline : données personnelles, éditeur, droits, cookies et hébergement du site.',
   },
 };
 export default function LegalMentions() {
@@ -36,7 +36,7 @@ export default function LegalMentions() {
           <br />
           Adresse :19 RUE DE LA CHEVRILLE, 77700 BAILLY-ROMAINVILLIERS
           <br />
-          Email :{" "}
+          Email :{' '}
           <a
             href="mailto:contact@ikovaline.com"
             className="text-blue-600 dark:text-blue-400  hover:underline"
@@ -44,7 +44,7 @@ export default function LegalMentions() {
             contact@ikovaline.com
           </a>
           <br />
-          Téléphone :{" "}
+          Téléphone :{' '}
           <a
             href="tel:+33785902238"
             className="text-blue-600 dark:text-blue-400  hover:underline"
@@ -68,7 +68,7 @@ export default function LegalMentions() {
           Adresse : Hostinger International Ltd., 61 Lordou Vironos Street, 6023
           Larnaca, Chypre
           <br />
-          Téléphone :{" "}
+          Téléphone :{' '}
           <a
             href="tel:+35724030194"
             className="text-blue-600  dark:text-blue-400-400  hover:underline"
@@ -76,7 +76,7 @@ export default function LegalMentions() {
             +357 24 03 0194
           </a>
           <br />
-          Site web :{" "}
+          Site web :{' '}
           <a
             href="https://hostinger.com"
             className="text-blue-600 hover:underline"
@@ -91,7 +91,7 @@ export default function LegalMentions() {
           Propriété intellectuelle
         </h2>
         <p className="text-neutral-600 dark:text-neutral-400 ">
-          Tous les contenus présents sur le site{" "}
+          Tous les contenus présents sur le site{' '}
           <span className="font-medium">Ikovaline</span> (textes, images,
           vidéos, logos, etc.) sont protégés par les lois en vigueur sur la
           propriété intellectuelle. Toute reproduction, distribution,
@@ -108,7 +108,7 @@ export default function LegalMentions() {
           Conformément au Règlement Général sur la Protection des Données
           (RGPD), vous disposez d’un droit d’accès, de rectification et de
           suppression de vos données personnelles. Pour exercer ce droit,
-          veuillez nous contacter à l’adresse suivante :{" "}
+          veuillez nous contacter à l’adresse suivante :{' '}
           <a
             href="mailto:contact@ikovaline.com"
             className="text-blue-600 hover:underline"

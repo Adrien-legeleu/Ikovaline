@@ -1,31 +1,31 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image';
+import React from 'react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import CallToAction from "../callToAction/CallToAction";
-import Link from "next/link";
-import { Button } from "../ui/button";
+} from '@/components/ui/accordion';
+import CallToAction from '../callToAction/CallToAction';
+import Link from 'next/link';
+import { Button } from '../ui/button';
 
 const faqData = [
   {
     question: "Quel est le prix d'une prestation SEO ?",
     answer:
-      "Un audit SEO coûte entre 800 € et 10 000 €. Les tarifs horaires varient de 70 € à 500 €. Pour une PME, prévoir entre 10 000 € et 20 000 € par an.",
+      'Un audit SEO coûte entre 800 € et 10 000 €. Les tarifs horaires varient de 70 € à 500 €. Pour une PME, prévoir entre 10 000 € et 20 000 € par an.',
   },
   {
-    question: "Quels sont les 3 types de référencement ?",
+    question: 'Quels sont les 3 types de référencement ?',
     answer:
-      "Le SEO (référencement naturel), le SEA (référencement payant via publicité) et le SMO (optimisation sur les réseaux sociaux).",
+      'Le SEO (référencement naturel), le SEA (référencement payant via publicité) et le SMO (optimisation sur les réseaux sociaux).',
   },
   {
     question:
-      "Comment faire pour que mon entreprise soit présente sur Google ?",
+      'Comment faire pour que mon entreprise soit présente sur Google ?',
     answer:
-      "Créez et optimisez une fiche Google My Business avec des mots-clés pertinents pour améliorer votre visibilité locale.",
+      'Créez et optimisez une fiche Google My Business avec des mots-clés pertinents pour améliorer votre visibilité locale.',
   },
 ];
 
@@ -41,7 +41,7 @@ export default function Blog3() {
         <p className="text-center lg:text-lg">
           Vous rêvez de voir votre site en tête des résultats Google ? Le
           référencement naturel n&apos;a plus de secrets pour nous ! Découvrez
-          les techniques simples et efficaces pour{" "}
+          les techniques simples et efficaces pour{' '}
           <strong>améliorer votre visibilité sur Google</strong>, optimiser vos
           pages web et attirer plus de trafic qualifié. On vous dévoile les
           codes du SEO pour transformer votre site en véritable moteur de
@@ -73,7 +73,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "/blog/comment-etre-reference-sur-google-gratuitement/#comprendre-le-référencement"
+                  '/blog/comment-etre-reference-sur-google-gratuitement/#comprendre-le-référencement'
                 }
               >
                 Comprendre le référencement sur Google
@@ -82,7 +82,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "/blog/comment-etre-reference-sur-google-gratuitement/#créer-un-contenu-de-qualité"
+                  '/blog/comment-etre-reference-sur-google-gratuitement/#créer-un-contenu-de-qualité'
                 }
               >
                 Créer un contenu de qualité pour Google
@@ -91,7 +91,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "/blog/comment-etre-reference-sur-google-gratuitement/#optimiser-la-structure"
+                  '/blog/comment-etre-reference-sur-google-gratuitement/#optimiser-la-structure'
                 }
               >
                 Optimiser la structure de son site web
@@ -100,7 +100,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "/blog/comment-etre-reference-sur-google-gratuitement/#développer-une-stratégie-de-backlinks"
+                  '/blog/comment-etre-reference-sur-google-gratuitement/#développer-une-stratégie-de-backlinks'
                 }
               >
                 Développer une stratégie de backlinks efficace
@@ -109,7 +109,7 @@ export default function Blog3() {
             <li className="underline">
               <Link
                 href={
-                  "/blog/comment-etre-reference-sur-google-gratuitement/#mesurer-et-améliorer-ses-résultats"
+                  '/blog/comment-etre-reference-sur-google-gratuitement/#mesurer-et-améliorer-ses-résultats'
                 }
               >
                 Mesurer et améliorer ses résultats de référencement
@@ -127,13 +127,13 @@ export default function Blog3() {
             Les fondamentaux du référencement naturel
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            Le référencement naturel, ou SEO, consiste à{" "}
+            Le référencement naturel, ou SEO, consiste à{' '}
             <strong>améliorer la visibilité d’un site</strong> dans les
             résultats de recherche sans payer. Google explore le web, indexe,
             puis classe les résultats selon la pertinence et la qualité.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            Pour aller plus loin, consultez la{" "}
+            Pour aller plus loin, consultez la{' '}
             <a
               href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=fr"
               className="text-blue-600 underline"
@@ -149,7 +149,7 @@ export default function Blog3() {
           <p className="lg:text-lg 2xl:text-xl">
             Le SEO se distingue du SEA (référencement payant) par son approche
             durable. Le SEA permet une visibilité immédiate mais temporaire,
-            tandis que le SEO construit un{" "}
+            tandis que le SEO construit un{' '}
             <strong>trafic organique qualifié sur le long terme</strong>.
           </p>
 
@@ -228,7 +228,7 @@ export default function Blog3() {
           <p className="lg:text-lg 2xl:text-xl">
             Utilisez des outils comme Google Keyword Planner, Ahrefs ou
             Ubersuggest pour identifier les volumes de recherche et les
-            intentions utilisateurs. Concentrez-vous sur les mots-clés{" "}
+            intentions utilisateurs. Concentrez-vous sur les mots-clés{' '}
             <strong>pertinents pour votre activité</strong> et votre audience
             cible.
           </p>
@@ -237,7 +237,7 @@ export default function Blog3() {
             Les critères techniques du référencement
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            <strong> Un site rapide améliore l’expérience utilisateur</strong>{" "}
+            <strong> Un site rapide améliore l’expérience utilisateur</strong>{' '}
             et les classements. Plus de 50 % des visiteurs quittent un site qui
             met plus de 3 secondes à charger. L’optimisation mobile est
             aujourd’hui essentielle : la majorité du trafic vient des
@@ -254,7 +254,7 @@ export default function Blog3() {
               <strong>Screaming Frog</strong>pour l’audit technique
             </li>
             <li>
-              {" "}
+              {' '}
               <strong>PageSpeed Insights </strong>pour les performances
             </li>
             <li>
@@ -262,7 +262,7 @@ export default function Blog3() {
             </li>
           </ul>
           <p className="lg:text-lg 2xl:text-xl">
-            Les balises <code>title</code>, <code>meta description</code> et{" "}
+            Les balises <code>title</code>, <code>meta description</code> et{' '}
             <code>headings</code> structurent le contenu. Un bon H1, des H2
             clairs et une description bien pensée peuvent améliorer le taux de
             clics (CTR) et la compréhension par les moteurs.
@@ -284,7 +284,7 @@ export default function Blog3() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Google valorise le contenu de haute qualité. Son objectif ? Proposer
-            les informations les plus utiles aux internautes.{" "}
+            les informations les plus utiles aux internautes.{' '}
             <strong>Un bon contenu améliore le classement</strong> dans les
             résultats de recherche.
           </p>
@@ -295,14 +295,14 @@ export default function Blog3() {
             plus de trafic naturel et renforce la crédibilité d’un site.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            Le{" "}
+            Le{' '}
             <a
               href="https://www.francenum.gouv.fr/guides-et-conseils/communication-et-publicite/referencement/comment-referencer-votre-entreprise-sur"
               target="_blank"
               className="text-blue-600 underline"
             >
               guide officiel du gouvernement français
-            </a>{" "}
+            </a>{' '}
             partage également des statistiques sur l’impact du SEO local et du
             trafic organique pour les entreprises.
           </p>
@@ -320,8 +320,8 @@ export default function Blog3() {
               H2, H3), des paragraphes courts et un vocabulaire simple.
             </li>
             <li>
-              <strong>Optimiser les balises HTML</strong> comme le{" "}
-              <code>title</code>, la <code>meta description</code> et les{" "}
+              <strong>Optimiser les balises HTML</strong> comme le{' '}
+              <code>title</code>, la <code>meta description</code> et les{' '}
               <code>headings</code>.
             </li>
             <li>
@@ -329,7 +329,7 @@ export default function Blog3() {
               contenus pour améliorer la navigation et le maillage.
             </li>
             <li>
-              <strong>Optimiser les images</strong> (taille, compression, balise{" "}
+              <strong>Optimiser les images</strong> (taille, compression, balise{' '}
               <code>alt</code>).
             </li>
             <li>
@@ -353,7 +353,7 @@ export default function Blog3() {
           <p className="lg:text-lg 2xl:text-xl">
             Pour bien rédiger, commencez par une recherche de mots-clés
             pertinente. Structurez vos textes avec des titres accrocheurs, des
-            données concrètes, des listes, des images et une{" "}
+            données concrètes, des listes, des images et une{' '}
             <strong>vraie clarté rédactionnelle</strong>.
           </p>
 
@@ -399,19 +399,19 @@ export default function Blog3() {
             Créer une architecture de site efficace
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            <strong>Une structure claire guide les visiteurs et Google</strong>{" "}
+            <strong>Une structure claire guide les visiteurs et Google</strong>{' '}
             dans la navigation. Cela améliore à la fois votre visibilité SEO et
             l’expérience utilisateur.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            Une{" "}
+            Une{' '}
             <Link
               href="/nos-services/creation-sites-web-vitrine-e-commerce"
               className="text-blue-600 underline"
               target="_blank"
             >
               architecture de site bien conçue
-            </Link>{" "}
+            </Link>{' '}
             facilite l’exploration par les robots d’indexation. Google analyse
             l’arborescence, les liens internes et la hiérarchie de vos contenus.
           </p>
@@ -426,7 +426,7 @@ export default function Blog3() {
             Optimiser les URLs et balises HTML
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            Les{" "}
+            Les{' '}
             <strong>
               URLs doivent être courtes, lisibles et contenir un mot-clé
               principal
@@ -436,7 +436,7 @@ export default function Blog3() {
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             La balise <code>title</code> doit faire entre 50 et 60 caractères
-            pour ne pas être tronquée. Rédigez une{" "}
+            pour ne pas être tronquée. Rédigez une{' '}
             <strong>meta description attractive</strong> (120–155 caractères)
             pour inciter au clic, même si Google peut la réécrire.
           </p>
@@ -453,7 +453,7 @@ export default function Blog3() {
           />
           <p className="lg:text-lg 2xl:text-xl">
             Un site lent fait fuir vos visiteurs et pénalise votre
-            référencement.{" "}
+            référencement.{' '}
             <strong>Plus de 50 % quittent une page après 3 secondes</strong>.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
@@ -475,7 +475,7 @@ export default function Blog3() {
             Google se base sur la version mobile pour indexer votre site.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            Assurez-vous que votre site est totalement{" "}
+            Assurez-vous que votre site est totalement{' '}
             <strong>responsive</strong> : il doit s’adapter automatiquement aux
             smartphones, tablettes et écrans divers. Testez-le avec Chrome
             DevTools ou Lighthouse.
@@ -495,7 +495,7 @@ export default function Blog3() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Les backlinks sont des liens externes pointant vers votre site. Pour
-            Google, ils sont un{" "}
+            Google, ils sont un{' '}
             <strong>signal de confiance et de qualité</strong>. Plus vous
             recevez de liens depuis des sources fiables, plus votre autorité
             augmente.
@@ -592,13 +592,13 @@ export default function Blog3() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Le guest blogging reste une stratégie efficace et naturelle.
-            Proposer du contenu original à des blogs pertinents permet de{" "}
+            Proposer du contenu original à des blogs pertinents permet de{' '}
             <strong>gagner des liens tout en apportant de la valeur</strong>.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Les infographies, les études de cas ou les outils gratuits sont
             également très efficaces pour générer des backlinks organiques.
-            Selon une étude, un contenu original attire en moyenne{" "}
+            Selon une étude, un contenu original attire en moyenne{' '}
             <strong>42 % de backlinks supplémentaires</strong>.
           </p>
 
@@ -622,12 +622,12 @@ export default function Blog3() {
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
             Même s’ils n’ont pas d’impact direct sur le SEO, les réseaux sociaux
-            augmentent la visibilité d’un contenu et peuvent générer{" "}
+            augmentent la visibilité d’un contenu et peuvent générer{' '}
             <strong>des backlinks naturels</strong>.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
             Partagez vos contenus sur LinkedIn, Twitter, Facebook… Engagez avec
-            votre communauté.{" "}
+            votre communauté.{' '}
             <strong>
               Plus un contenu est visible, plus il a de chances d’être repris
             </strong>
@@ -635,7 +635,7 @@ export default function Blog3() {
           </p>
 
           <p className="lg:text-lg 2xl:text-xl">
-            Vous pouvez aussi renforcer votre stratégie de netlinking avec des{" "}
+            Vous pouvez aussi renforcer votre stratégie de netlinking avec des{' '}
             <Link
               href="/nos-services"
               className="text-blue-600 underline"
@@ -688,8 +688,8 @@ export default function Blog3() {
             pages explorées et résoudre les erreurs.
           </p>
           <p className="lg:text-lg 2xl:text-xl">
-            Dans Analytics, allez dans{" "}
-            <code>Acquisition &gt; Tous les canaux &gt; Organic Search</code>{" "}
+            Dans Analytics, allez dans{' '}
+            <code>Acquisition &gt; Tous les canaux &gt; Organic Search</code>{' '}
             pour voir les performances SEO : trafic organique, durée des
             visites, taux de rebond, conversions.
           </p>
@@ -717,7 +717,7 @@ export default function Blog3() {
             Suivre les mises à jour de l&apos;algorithme
           </h3>
           <p className="lg:text-lg 2xl:text-xl">
-            Google améliore constamment son algorithme. En 2024, pas moins de{" "}
+            Google améliore constamment son algorithme. En 2024, pas moins de{' '}
             <strong>7 mises à jour majeures</strong> ont été déployées, dont la
             Core Update d’août qui a renforcé l’importance du contenu de
             qualité.
@@ -798,7 +798,7 @@ export default function Blog3() {
           Le référencement naturel est un levier essentiel pour toute entreprise
           souhaitant développer sa présence en ligne. En misant sur un contenu
           utile, une structure bien pensée, une stratégie de backlinks solide et
-          un suivi régulier des performances, vous posez les bases d’une{" "}
+          un suivi régulier des performances, vous posez les bases d’une{' '}
           <strong>croissance durable sur Google</strong>.
         </p>
         <p className="lg:text-lg 2xl:text-xl">

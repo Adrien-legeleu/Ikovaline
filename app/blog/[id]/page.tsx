@@ -42,13 +42,13 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     title: meta.title,
     description: meta.description,
     alternates: {
-      canonical: `htps://ikovaline.com/blog/${id}`,
+      canonical: `https://ikovaline.com/blog/${id}`,
     },
     robots: 'index , follow',
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: `https://ikovaline.com//blog/${id}`,
+      url: `https://ikovaline.com/blog/${id}`,
       images: [
         {
           url: `https://ikovaline.com${meta.ogImage}`,

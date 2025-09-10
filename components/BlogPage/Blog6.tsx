@@ -1,14 +1,14 @@
-import Image from "next/image";
-import React from "react";
-import Link from "next/link";
-import { Button } from "../ui/button";
+import Image from 'next/image';
+import React from 'react';
+import Link from 'next/link';
+import { Button } from '../ui/button';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import CallToAction from "../callToAction/CallToAction";
+} from '@/components/ui/accordion';
+import CallToAction from '../callToAction/CallToAction';
 
 export default function Blog6() {
   return (
@@ -20,17 +20,17 @@ export default function Blog6() {
         </h1>
         <p className="text-center lg:text-lg 2xl:text-xl">
           Vous peinez à faire rayonner votre entreprise seine-et-marnaise sur le
-          web ? Une agence seo Seine-et-Marne spécialisée transformera votre{" "}
-          <strong>référencement naturel</strong>{" "}
-          <strong>en levier de croissance locale</strong>. Découvrez des{" "}
+          web ? Une agence seo Seine-et-Marne spécialisée transformera votre{' '}
+          <strong>référencement naturel</strong>{' '}
+          <strong>en levier de croissance locale</strong>. Découvrez des{' '}
           <Link href="/nos-services">
-            {" "}
-            <u>solutions sur mesure</u>{" "}
+            {' '}
+            <u>solutions sur mesure</u>{' '}
           </Link>
-          conçues pour amplifier votre{" "}
-          <Link href="/seo-referencement-naturel">
+          conçues pour amplifier votre{' '}
+          <Link href="/nos-services/seo-referencement-naturel">
             <ins>visibilité en ligne</ins>
-          </Link>{" "}
+          </Link>{' '}
           et capter les clients de demain.
         </p>
 
@@ -309,7 +309,7 @@ export default function Blog6() {
               className="text-blue-600 underline ml-1"
             >
               Découvrez nos solutions de
-            </Link>{" "}
+            </Link>{' '}
             site vitrine ou e-commerce conçues pour un référencement optimal et
             une navigation intuitive. Optez pour un
             <Link
@@ -317,7 +317,7 @@ export default function Blog6() {
               className="text-blue-600 underline ml-1"
             >
               site web sur-mesure intégrant
-            </Link>{" "}
+            </Link>{' '}
             SEO et performance pour votre entreprise en Seine-et-Marne.
           </p>
           <Image
@@ -422,17 +422,17 @@ export default function Blog6() {
           </p>
           <ul className="list-disc list-inside lg:text-lg 2xl:text-xl space-y-2">
             <li>
-              Les établissements agricoles{" "}
+              Les établissements agricoles{' '}
               <strong>valorisent leur ancrage territorial</strong> dans les
               descriptions et les balises de leur site web
             </li>
             <li>
-              Les commerçants de proximité{" "}
+              Les commerçants de proximité{' '}
               <strong>optimisent leur présence</strong> sur les plateformes
               locales et cartographiques
             </li>
             <li>
-              Les PME industrielles mettent en avant{" "}
+              Les PME industrielles mettent en avant{' '}
               <strong>leur implantation régionale</strong> dans leur
               communication digitale
             </li>
@@ -592,7 +592,7 @@ export default function Blog6() {
             <li>
               <strong>
                 Xaltis capitalise sur 15 ans d’expérience pour le référencement
-              </strong>{" "}
+              </strong>{' '}
               d’e-commerces et sites vitrines
             </li>
             <li>
@@ -703,7 +703,7 @@ export default function Blog6() {
           <Accordion type="single" className="gap-3 flex flex-col" collapsible>
             {[
               {
-                question: "Quels sont les pièges à éviter en SEO local ?",
+                question: 'Quels sont les pièges à éviter en SEO local ?',
                 answer:
                   "En SEO local, il est crucial d'éviter certains écueils pour optimiser votre visibilité. Il faut notamment choisir des mots-clés pertinents et spécifiques à votre niche plutôt que des termes ultra-compétitifs. De plus, il est impératif de proposer un contenu unique sur chaque page, car la duplication est pénalisée par les moteurs de recherche.\n\nL'optimisation des balises (title, meta description, H1) est essentielle, tout comme l'optimisation de votre profil Google My Business. Il est également important d'obtenir des backlinks de qualité et d'adopter un design responsive pour assurer la compatibilité mobile. Enfin, n'oubliez pas d'utiliser Google Analytics et Search Console pour ajuster votre stratégie.",
               },
@@ -719,7 +719,7 @@ export default function Blog6() {
                   "Le maillage interne, c'est-à-dire les liens entre les pages de votre site, est crucial pour le SEO. Il facilite l'exploration et l'indexation du site par les moteurs de recherche, leur permettant de découvrir plus facilement votre contenu. Un site bien maillé est donc plus susceptible d'être entièrement exploré et indexé, ce qui est essentiel pour sa visibilité.\n\nLe maillage interne joue un rôle important dans la distribution de l'autorité de la page. Lorsqu'une page reçoit des liens internes d'autres pages du site, elle reçoit une partie de leur autorité, ce qui peut améliorer son positionnement. De plus, il améliore l'expérience utilisateur en facilitant la navigation et la découverte de contenu pertinent.",
               },
               {
-                question: "Comment gérer les avis clients négatifs en SEO ?",
+                question: 'Comment gérer les avis clients négatifs en SEO ?',
                 answer:
                   "La gestion des avis clients négatifs est essentielle pour le SEO, car elle influence la perception de votre entreprise. Répondre aux avis, en particulier les négatifs, est crucial. Cela montre que vous valorisez les clients et leurs retours. Remerciez le client pour son retour honnête, excusez-vous pour l'expérience négative et adaptez votre réponse à votre image de marque.\n\nConsidérez chaque avis négatif comme une opportunité d'engagement client et de transformation de l'expérience négative en quelque chose de positif. Évitez de supprimer les avis négatifs ou d'en rédiger de faux positifs, car cela peut biaiser les avis et empêcher les clients potentiels de recevoir des informations authentiques. Surveillez activement votre réputation en ligne pour identifier rapidement les avis négatifs et y répondre de manière appropriée.",
               },
@@ -752,10 +752,10 @@ export default function Blog6() {
             Conclusion
           </h2>
           <p className="lg:text-lg 2xl:text-xl">
-            Maîtriser le référencement naturel local grâce à une{" "}
+            Maîtriser le référencement naturel local grâce à une{' '}
             <strong>
               agence SEO Seine-Marne représente un levier incontournable
-            </strong>{" "}
+            </strong>{' '}
             pour rayonner dans la région. Leur proximité et expertise ciblée
             transforment votre visibilité sur Google en avantage concurrentiel
             durable. Chaque clic vers votre site web est une opportunité à

@@ -1,21 +1,21 @@
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialité - Ikovaline",
+  title: 'Politique de confidentialité – Données personnelles | Ikovaline',
   description:
-    "Découvrez la politique de confidentialité d’Ikovaline : gestion des données personnelles, sécurité, conservation et droits des utilisateurs.",
+    'Découvrez la politique de confidentialité d’Ikovaline : gestion des données personnelles, sécurité, conservation et droits des utilisateurs.',
   openGraph: {
-    title: "Politique de confidentialité - Ikovaline",
+    title: 'Politique de confidentialité – Données personnelles | Ikovaline',
     description:
-      "Toutes les informations sur la façon dont Ikovaline collecte, utilise, protège et conserve vos données personnelles.",
-    url: "https://ikovaline.com/politique-confidentialite",
-    type: "article",
+      'Toutes les informations sur la façon dont Ikovaline collecte, utilise, protège et conserve vos données personnelles.',
+    url: 'https://ikovaline.com/politique-confidentialite',
+    type: 'article',
   },
   twitter: {
-    card: "summary",
-    title: "Politique de confidentialité - Ikovaline",
+    card: 'summary',
+    title: 'Politique de confidentialité – Données personnelles | Ikovaline',
     description:
-      "Politique de confidentialité d’Ikovaline : traitement des données personnelles, finalités, conservation et droits RGPD.",
+      'Politique de confidentialité d’Ikovaline : traitement des données personnelles, finalités, conservation et droits RGPD.',
   },
 };
 
@@ -78,7 +78,7 @@ export default function PrivacyPolicy() {
         <p className="text-neutral-600 dark:text-neutral-400">
           Conformément au RGPD, vous disposez d’un droit d’accès, de
           rectification, de suppression et d’opposition au traitement de vos
-          données. Pour exercer ces droits, contactez-nous à :{" "}
+          données. Pour exercer ces droits, contactez-nous à :{' '}
           <a
             href="mailto:contact@ikovaline.com"
             className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -96,7 +96,7 @@ export default function PrivacyPolicy() {
         <p className="text-neutral-600 dark:text-neutral-400">
           Pour en savoir plus sur notre politique de cookies, vous pouvez
           consulter notre module de gestion des cookies en bas de page ou
-          visiter la section dédiée dans les{" "}
+          visiter la section dédiée dans les{' '}
           <a
             href="/mentions-legales"
             className="text-blue-600 dark:text-blue-400 hover:underline"

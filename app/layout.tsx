@@ -66,55 +66,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-<html lang="fr" className={poppins.className}>
+    <html lang="fr" className={poppins.className}>
       <head>
-        {/* <Script
-          src="/tarteaucitron/tarteaucitron.js"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="/tarteaucitron/tarteaucitron.services.js"
-          strategy="beforeInteractive"
-        />
-        <Script id="tarteaucitron-init" strategy="afterInteractive">
-          {`
-    tarteaucitron.init({
-      privacyUrl: "/politique-confidentialite",
-      orientation: "bottom",
-      removeCredit: true,
-      useExternalCss: false, // on surcharge via ton globals.css
-      showAlertSmall: false,
-      cookieslist: false,
-      cookieslistEmbed: false,
-      highPrivacy: true,
-      DenyAllCta: true,
-      AcceptAllCta: true,
-      showIcon: false,
-      alwaysNeedConsent: false,
-      readmoreLink: false,
-      mandatory: false,
-      debug: false
-    });
-
-    tarteaucitron.services.rgpdinfo = {
-      key: "rgpdinfo",
-      type: "other",
-      name: "Cookies strictement nécessaires",
-      needConsent: true,
-      cookies: [],
-      js: function () {
-        console.log("Consentement donné pour les cookies essentiels.");
-      },
-      fallback: function () {
-        console.log("Consentement refusé.");
-      }
-    };
-
-    tarteaucitron.job = tarteaucitron.job || [];
-    tarteaucitron.job.push("rgpdinfo");
-  `}
-        </Script> */}
-
         <meta name="next-size-adjust" content="100" />
 
         <Script
@@ -134,7 +87,6 @@ export default function RootLayout({
         />
 
         <link rel="icon" href={Favicon.src} type="image/png" />
-        <link rel="canonical" href="https://ikovaline.com/" />
 
         <script
           type="application/ld+json"

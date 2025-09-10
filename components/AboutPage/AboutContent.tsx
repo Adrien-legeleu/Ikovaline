@@ -281,10 +281,15 @@ export default function AboutContent() {
             <div className="mb-5 flex justify-center">
               <SectionBadge Icon={b.badge.Icon} label={b.badge.label} />
             </div>
-
-            <h2 className="mx-auto mb-8 text-center text-3xl xs:text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-t from-neutral-900 via-neutral-800 to-neutral-600 bg-clip-text text-transparent dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400">
-              {b.title}
-            </h2>
+            {b.id === 'les-origines' ? (
+              <h1 className="mx-auto mb-8 pb-2 text-center text-3xl xs:text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-t from-neutral-900 via-neutral-800 to-neutral-600 bg-clip-text text-transparent dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400">
+                {b.title}
+              </h1>
+            ) : (
+              <h2 className="mx-auto mb-8 pb-2 text-center text-3xl xs:text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-t from-neutral-900 via-neutral-800 to-neutral-600 bg-clip-text text-transparent dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400">
+                {b.title}
+              </h2>
+            )}
 
             <div className="space-y-6 text-center text-base leading-relaxed text-neutral-700 dark:text-neutral-300 sm:text-lg">
               {b.body}

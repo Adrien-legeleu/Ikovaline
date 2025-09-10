@@ -7,7 +7,7 @@ import type { Project } from '@/data/projects';
 
 export default function ProjectsGrid({
   projects,
-  baseHref = '/projets',
+  baseHref = '/projects',
 }: {
   projects: Project[];
   baseHref?: string;

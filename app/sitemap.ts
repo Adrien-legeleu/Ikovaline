@@ -10,9 +10,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { route: '', priority: 1.0 },
     { route: '/about', priority: 0.8 },
     { route: '/contact', priority: 0.8 },
-    { route: '/mentions-legales', priority: 0.8 },
     { route: '/nos-services', priority: 0.8 },
     { route: '/blog', priority: 0.8 },
+    { route: '/mentions-legales', priority: 0.8 },
+    { route: '/politique-confidentialite', priority: 0.8 },
   ];
 
   const staticUrls = staticRoutes.map(({ route, priority }) => ({
