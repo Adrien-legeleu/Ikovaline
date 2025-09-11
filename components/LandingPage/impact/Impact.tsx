@@ -423,8 +423,8 @@ function CodeMock() {
         {/* Editor */}
         <motion.div
           className="rounded-xl bg-[#0B1020] p-4 font-mono text-[12px] leading-6 text-slate-200 ring-1 ring-black/20 shadow-[0_24px_48px_-24px_rgba(0,0,0,.45)]"
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 8 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
         >
           <div className="text-[11px] text-slate-400">/components/Hero.tsx</div>
@@ -436,8 +436,8 @@ function CodeMock() {
         {/* Preview */}
         <motion.div
           className="relative rounded-xl bg-white p-4 ring-1 ring-black/5 shadow-[0_28px_56px_-28px_rgba(0,0,0,.35)] dark:bg-neutral-950 dark:ring-white/10"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 10 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           animate={reduced ? {} : { y: [0, -1.2, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
