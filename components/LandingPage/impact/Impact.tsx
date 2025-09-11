@@ -207,7 +207,7 @@ function AnalyticsMock() {
 
           <svg
             viewBox="0 0 360 120"
-            className="absolute max-sm:-translate-y-1/3 bottom-0 left-0 z-10"
+            className="absolute max-xsss:-translate-y-2/3 max-sm:-translate-y-1/3 bottom-0 left-0 z-10"
             preserveAspectRatio="none"
           >
             {/* zone sous la courbe (teinte légère) */}

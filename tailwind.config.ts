@@ -26,6 +26,7 @@ const config: Config = {
       screens: {
         xs: '450px',
         xss: '400px',
+        xsss: '380px',
       },
       gridTemplateColumns: {
         '40/60': '40% 60%',
