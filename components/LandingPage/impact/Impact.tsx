@@ -286,60 +286,63 @@ function KanbanMock() {
 
     return (
       <div className="relative overflow-hidden rounded-lg bg-white p-3 text-xs ring-1 ring-black/5 shadow-[0_14px_28px_-18px_rgba(0,0,0,.3)] dark:bg-neutral-900 dark:ring-white/10">
-        {/* sheen continu (reset hors cadre) */}
+        {/* sheen continu SANS retour arrière (fond répétitif + position animée) */}
         {!reduced && (
           <div
-            className="pointer-events-none absolute inset-y-0 -left-1 w-1/3"
+            className="pointer-events-none absolute rounded-full inset-y-0 left-0 w-full"
             style={{
               background:
+                // bande claire au centre du motif (transparent -> blanc -> transparent)
                 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.25) 50%, rgba(255,255,255,0) 100%)',
-              animation: `sweep 4.2s linear ${delay}s infinite`,
+              backgroundSize: '220px 100%', // largeur du motif
+              backgroundRepeat: 'repeat-x', // se répète à l’infini
+              animation: `sheen-scroll 4.2s linear ${delay}s infinite`,
             }}
           />
         )}
 
         <div className="relative z-10">{children}</div>
 
-        {/* progress bar : défilement **continu** */}
-        <div className="relative mt-2 h-1 w-full overflow-hidden rounded bg-neutral-200 dark:bg-neutral-800">
+        {/* progress bar : **vrai** flux continu (pas de ping-pong, pas de reset visible) */}
+        <div className="relative mt-2 h-1 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800">
           {!reduced && (
             <div
-              className="absolute inset-y-0 rounded"
+              className="absolute inset-0 rounded-full"
               style={{
-                // largeur du “runner” (bande bleue)
-                width: '40%',
-                backgroundImage: 'linear-gradient(90deg, #2CB7FF, #00A8FF)',
-                backgroundSize: '200% 100%',
-                // le reset se fait quand la bande est déjà sortie à droite
-                animation: `runner 2.6s linear ${delay + 0.15}s infinite`,
+                // motif: 60% vide, 40% bande bleue dégradée
+                background:
+                  'linear-gradient(90deg, transparent 0 60%, #2CB7FF 60% 80%, #00A8FF 80% 100%)',
+                backgroundSize: '240px 100%', // taille du motif
+                backgroundRepeat: 'repeat-x', // répète à l’infini
+                animation: `bar-scroll 2.6s linear ${delay + 0.15}s infinite`,
+                borderRadius: 'inherit',
               }}
             />
           )}
         </div>
 
-        {/* keyframes locales */}
+        {/* keyframes locales (défilement **uni-directionnel** en continu) */}
         <style jsx>{`
-          @keyframes sweep {
-            0% {
-              transform: translateX(-40%);
+          @keyframes sheen-scroll {
+            from {
+              background-position-x: -220px;
             }
-            100% {
-              transform: translateX(140%);
+            to {
+              background-position-x: 0px;
             }
           }
-          @keyframes runner {
-            0% {
-              transform: translateX(-40%);
+          @keyframes bar-scroll {
+            from {
+              background-position-x: -240px;
             }
-            100% {
-              transform: translateX(100%);
+            to {
+              background-position-x: 0px;
             }
           }
         `}</style>
       </div>
     );
   };
-
   return (
     <MacWindow title="Plan d’acquisition">
       <div className="grid h-full grid-cols-3 gap-4 max-sm:hidden">
