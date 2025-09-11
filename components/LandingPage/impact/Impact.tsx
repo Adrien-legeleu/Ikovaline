@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { StickyItem, StickyScroll } from './StickyScroll';
 
 /* ----------------------------- EASINGS & HELPERS ---------------------------- */
@@ -47,7 +47,9 @@ function TypewriterLoop({
       setI(text.length);
       return;
     }
-    let id: any;
+
+    let id: ReturnType<typeof setTimeout> | null = null;
+
     if (i === text.length && dir === 1) {
       id = setTimeout(() => setDir(-1), pause);
     } else if (i === 0 && dir === -1) {
@@ -56,7 +58,10 @@ function TypewriterLoop({
       const s = dir === 1 ? 1000 / speed : 1000 / backspeed;
       id = setTimeout(() => setI((n) => n + dir), s);
     }
-    return () => clearTimeout(id);
+
+    return () => {
+      if (id) clearTimeout(id);
+    };
   }, [i, dir, text, speed, backspeed, pause, reduced]);
 
   return (
@@ -276,47 +281,64 @@ function KanbanMock() {
   }: {
     children: React.ReactNode;
     delay?: number;
-  }) => (
-    <div className="relative overflow-hidden rounded-lg bg-white p-3 text-xs ring-1 ring-black/5 shadow-[0_14px_28px_-18px_rgba(0,0,0,.3)] dark:bg-neutral-900 dark:ring-white/10">
-      {/* sheen (lueur) qui balaye la carte */}
-      {!reduced && (
-        <motion.div
-          className="pointer-events-none absolute inset-y-0 -left-1 w-1/3"
-          style={{
-            background:
-              'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.25) 50%, rgba(255,255,255,0) 100%)',
-          }}
-          animate={{ x: ['-120%', '140%'] }}
-          transition={{
-            duration: 3.4,
-            repeat: Infinity,
-            ease: 'linear',
-            delay,
-          }}
-        />
-      )}
-      <div className="relative z-10">{children}</div>
-      {/* progress bar infinie */}
-      <div className="relative mt-2 h-1 w-full overflow-hidden rounded bg-neutral-200 dark:bg-neutral-800">
+  }) => {
+    const reduced = useReducedMotion();
+
+    return (
+      <div className="relative overflow-hidden rounded-lg bg-white p-3 text-xs ring-1 ring-black/5 shadow-[0_14px_28px_-18px_rgba(0,0,0,.3)] dark:bg-neutral-900 dark:ring-white/10">
+        {/* sheen continu (reset hors cadre) */}
         {!reduced && (
-          <motion.div
-            className="absolute inset-y-0 left-0 w-1/2 rounded"
+          <div
+            className="pointer-events-none absolute inset-y-0 -left-1 w-1/3"
             style={{
-              backgroundImage: 'linear-gradient(90deg, #2CB7FF, #00A8FF)',
-              backgroundSize: '200% 100%',
-            }}
-            animate={{ x: ['-60%', '120%'] }}
-            transition={{
-              duration: 2.6,
-              repeat: Infinity,
-              ease: 'linear',
-              delay: delay + 0.15,
+              background:
+                'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.25) 50%, rgba(255,255,255,0) 100%)',
+              animation: `sweep 4.2s linear ${delay}s infinite`,
             }}
           />
         )}
+
+        <div className="relative z-10">{children}</div>
+
+        {/* progress bar : défilement **continu** */}
+        <div className="relative mt-2 h-1 w-full overflow-hidden rounded bg-neutral-200 dark:bg-neutral-800">
+          {!reduced && (
+            <div
+              className="absolute inset-y-0 rounded"
+              style={{
+                // largeur du “runner” (bande bleue)
+                width: '40%',
+                backgroundImage: 'linear-gradient(90deg, #2CB7FF, #00A8FF)',
+                backgroundSize: '200% 100%',
+                // le reset se fait quand la bande est déjà sortie à droite
+                animation: `runner 2.6s linear ${delay + 0.15}s infinite`,
+              }}
+            />
+          )}
+        </div>
+
+        {/* keyframes locales */}
+        <style jsx>{`
+          @keyframes sweep {
+            0% {
+              transform: translateX(-40%);
+            }
+            100% {
+              transform: translateX(140%);
+            }
+          }
+          @keyframes runner {
+            0% {
+              transform: translateX(-40%);
+            }
+            100% {
+              transform: translateX(100%);
+            }
+          }
+        `}</style>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <MacWindow title="Plan d’acquisition">
