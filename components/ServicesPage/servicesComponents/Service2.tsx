@@ -4,7 +4,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { IconArrowRight } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
 
 type Feature = {
   title: string;
