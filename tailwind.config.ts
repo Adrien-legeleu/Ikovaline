@@ -25,6 +25,7 @@ const config: Config = {
     extend: {
       screens: {
         lgxl: '1100px',
+        smmd: '670px',
         xs: '450px',
         xss: '400px',
         xsss: '380px',

@@ -69,11 +69,11 @@ const Card = ({
     whileInView={{ y: 0, opacity: 1 }}
     viewport={{ once: true, amount: 0.3 }}
     transition={{ duration: 0.5, ease: 'easeOut', delay }}
-    className="group  h-full justify-between flex flex-col rounded-2xl border border-white/45
+    className="group   h-full justify-between flex flex-col rounded-2xl  border border-black/10 dark:border-white/10
                bg-[linear-gradient(135deg,rgba(255,255,255,.92),rgba(240,245,252,.65))]
-               p-7 text-left shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)]
+              p-6 md:p-7  text-left shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)]
             
-               dark:border-[rgba(56,130,246,0.22)]
+            
                dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]
                dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.15)]
                will-change-transform"
@@ -83,7 +83,7 @@ const Card = ({
 );
 
 const Chip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <span className="inline-flex items-center gap-1.5 rounded-2xl bg-white/70 px-3 py-2 text-sm font-semibold shadow-inner ring-1 ring-black/5 dark:bg-neutral-900/60 dark:text-neutral-200 dark:ring-white/10">
+  <span className="inline-flex items-center gap-1.5 rounded-2xl bg-white/70 px-3 py-2 text-sm font-semibold shadow-inner ring-1 ring-black/5 dark:bg-neutral-900/60 text-primary dark:ring-white/10">
     {icon}
     {label}
   </span>
@@ -92,8 +92,8 @@ const Chip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
 const LearnMore = ({ href }: { href: string }) => (
   <Link
     href={href}
-    className="inline-flex items-center gap-1.5 rounded-2xl bg-white/55 px-3 py-2 text-sm font-semibold text-sky-700 ring-1 ring-sky-200/60 shadow-sm
-               hover:bg-white/75 dark:bg-sky-900/20 dark:text-sky-300 dark:ring-sky-800/50"
+    className="inline-flex items-center gap-1.5 rounded-2xl bg-white/55 px-3 py-2 text-sm font-semibold text-primary ring-1 ring-sky-200/60 shadow-sm
+               hover:bg-white/75 dark:bg-sky-900/20  dark:ring-sky-800/50"
   >
     En savoir plus
     <svg
@@ -348,7 +348,7 @@ export default function ServicesHero() {
       </div>
 
       {/* Cartes piliers */}
-      <div className="mt-16 grid w-full max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lgxl:grid-cols-3">
+      <div className="mt-16 grid w-full max-w-7xl grid-cols-1 gap-6 smmd:grid-cols-2 lgxl:grid-cols-3">
         {PILLARS.map((pillar, i) => (
           <Card key={pillar.id} delay={i * 0.1}>
             <div className="flex justify-between items-center">
@@ -356,14 +356,14 @@ export default function ServicesHero() {
 
               <LearnMore href={pillar.href} />
             </div>
-            <h3 className="mt-4 text-xl font-bold text-neutral-900 dark:text-white">
+            <h3 className="mt-2 text-xl font-bold text-neutral-900 dark:text-white">
               {pillar.title}
             </h3>
-            <p className="mt-2 text-[15px] leading-7 text-neutral-700 dark:text-neutral-300">
+            <p className="mt-1 text-[13px] leading-6 text-neutral-700 dark:text-neutral-300">
               {pillar.desc}
             </p>
 
-            <div className="mt-5">
+            <div>
               {pillar.id === 'saas-apps' && <SaaSMock />}
               {pillar.id === 'automatisation-ia' && <AutomationMock />}
               {pillar.id === 'scaling' && <AppsMock />}
