@@ -69,7 +69,7 @@ const Card = ({
     whileInView={{ y: 0, opacity: 1 }}
     viewport={{ once: true, amount: 0.3 }}
     transition={{ duration: 0.5, ease: 'easeOut', delay }}
-    className="group  h-full justify-between flex flex-col rounded-[28px] border border-white/45
+    className="group  h-full justify-between flex flex-col rounded-2xl border border-white/45
                bg-[linear-gradient(135deg,rgba(255,255,255,.92),rgba(240,245,252,.65))]
                p-7 text-left shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)]
             
@@ -112,9 +112,9 @@ const BrowserFrame: React.FC<{
   label: string;
   children: React.ReactNode;
 }> = ({ label, children }) => (
-  <div className="mt-5 rounded-[22px] border border-black/10 bg-white/90 p-4 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.25)] backdrop-blur dark:border-white/10 dark:bg-neutral-950/70">
-    <div className="mb-3 flex items-center justify-between">
-      <div className="flex items-center gap-2">
+  <div className="mt-5 rounded-2xl border border-black/10 bg-white/90 p-2 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.25)] backdrop-blur dark:border-white/10 dark:bg-neutral-950/70">
+    <div className="mb-3 flex  items-center justify-between">
+      <div className="flex items-center gap-2 pl-2">
         <span className="h-2.5 w-2.5 rounded-full bg-red-300/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-yellow-300/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-green-300/80" />

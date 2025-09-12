@@ -60,7 +60,7 @@ const Chip = ({ label }: { label: string }) => (
 
 function CardShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative min-h-[56px] max-h-[72px] w-full rounded-xl border border-white/60 dark:border-white/15 bg-white/65 dark:bg-black backdrop-blur-md shadow-sm px-2.5 py-2 overflow-hidden">
+    <div className="relative min-h-[56px] max-h-[72px] w-full rounded-xl border border-white/60 dark:border-white/15 bg-white/65 dark:bg-black backdrop-blur-md shadow-sm px-2 py-2 overflow-hidden">
       {children}
     </div>
   );
@@ -188,7 +188,7 @@ export function Service2() {
               <article
                 className="
                   relative h-full  justify-between overflow-hidden
-                  rounded-3xl border border-white/60 dark:border-[rgba(56,130,246,0.18)]
+                  rounded-xl border border-white/60 dark:border-[rgba(56,130,246,0.18)]
                   bg-[linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,244,252,.92))]
                   dark:bg-[linear-gradient(135deg,rgba(12,16,24,.92),rgba(12,16,24,.86))]
                   shadow-[0_20px_60px_-24px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,.55)]
@@ -201,7 +201,7 @@ export function Service2() {
                 {/* halo subtil */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-3xl
+                  className="pointer-events-none absolute inset-0 rounded-xl
                   bg-[radial-gradient(120%_90%_at_20%_0%,rgba(2,132,199,.08),transparent_60%)]
                   dark:bg-[radial-gradient(120%_90%_at_20%_0%,rgba(59,130,246,.10),transparent_60%)]"
                 />

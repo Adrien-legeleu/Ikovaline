@@ -221,7 +221,7 @@ export function Service1() {
               <article
                 className="
                   relative justify-between h-full  overflow-hidden
-                  rounded-3xl border border-white/60 dark:border-[rgba(56,130,246,0.18)]
+                  rounded-xl border border-white/60 dark:border-[rgba(56,130,246,0.18)]
                   bg-[linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,244,252,.92))]
                   dark:bg-[linear-gradient(135deg,rgba(12,16,24,.92),rgba(12,16,24,.86))]
                   shadow-[0_20px_60px_-24px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,.55)]
@@ -234,7 +234,7 @@ export function Service1() {
                 {/* halo subtil */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-3xl
+                  className="pointer-events-none absolute inset-0 rounded-xl
                   bg-[radial-gradient(120%_90%_at_20%_0%,rgba(2,132,199,.08),transparent_60%)]
                   dark:bg-[radial-gradient(120%_90%_at_20%_0%,rgba(59,130,246,.10),transparent_60%)]"
                 />
