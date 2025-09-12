@@ -1,5 +1,4 @@
 import FAQ from '@/components/ServicesPage/FAQ/FAQ';
-import Landing from '@/components/ServicesPage/landing/Landing';
 import { Service1 } from '@/components/ServicesPage/servicesComponents/Service1';
 import { Service2 } from '@/components/ServicesPage/servicesComponents/Service2';
 import { Service3 } from '@/components/ServicesPage/servicesComponents/Services3';
@@ -12,6 +11,7 @@ import { FAQ_SEO_FR } from '@/components/ServicesPage/FAQ/faq-seo.fr';
 import CTAServices from '@/components/ServicesPage/CTAServices';
 import Glow from '@/components/ui/glow';
 import { Background } from '@/components/ServicesPage/servicesComponents/GridOverlay';
+import ServicesHero from '@/components/ServicesPage/landing/Landing';
 
 export const metadata: Metadata = {
   title: 'Nos Services - Solutions Digitales sur Mesure | Ikovaline',
@@ -83,9 +83,9 @@ export default function Page() {
             className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
           />
         </div>
-        <Landing />
+        <ServicesHero />
         <div className="relative">
-          <Background/>
+          <Background />
           <Service1 />
           <Service2 />
           <Service3 />

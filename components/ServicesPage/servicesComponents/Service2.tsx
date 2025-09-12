@@ -161,11 +161,7 @@ export function Service2() {
   return (
     <section className="relative pb-20 pt-14 md:pt-20">
       <div className="relative mx-auto max-w-6xl px-6" id="automatisation-ia">
-        <motion.h2
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.45 }}
+        <h2
           className="text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight
                      bg-gradient-to-t from-neutral-900 via-neutral-700 to-neutral-500
                      dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
@@ -173,20 +169,14 @@ export function Service2() {
           Automatisation &{' '}
           <span className="text-sky-500 dark:text-sky-400">IA</span> au service
           de votre efficacité
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.45, delay: 0.05 }}
-          className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg"
-        >
+        <p className="mx-auto mt-4 max-w-3xl text-center text-neutral-700 dark:text-neutral-300 text-base md:text-lg">
           Libérez du temps et <b>optimisez vos conversions</b> grâce à nos{' '}
           <b>solutions d’automatisation</b> et d’
           <b>intelligence artificielle</b>. Du CRM intelligent aux assistants
           vocaux, nous intégrons des outils qui travaillent pour vous.
-        </motion.p>
+        </p>
 
         {/* GRID — même pattern que Service1, mais cartes carrées pour stabilité */}
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -196,11 +186,7 @@ export function Service2() {
               href={`/nos-services/${feature.slug}`}
               className="group"
             >
-              <motion.article
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.45, delay: idx * 0.04 }}
+              <article
                 className="
                   relative h-full  justify-between overflow-hidden
                   rounded-3xl border border-white/60 dark:border-[rgba(56,130,246,0.18)]
@@ -256,7 +242,7 @@ export function Service2() {
                   bg-[radial-gradient(ellipse_at_center,rgba(0,168,232,.30),rgba(37,99,235,.18),transparent_70%)]
                   dark:bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,.20),rgba(37,99,235,.14),transparent_70%)]"
                 />
-              </motion.article>
+              </article>
             </Link>
           ))}
         </div>
