@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
 import Services from '@/components/LandingPage/servicesSection/Services';
 import Link from 'next/link';
+import WhatsAppButton from '@/components/WhatsappButton';
 
 export default function HeroNoiseLight() {
   return (
@@ -43,10 +44,15 @@ export default function HeroNoiseLight() {
         >
           <Link
             href="/contact"
-            className="rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:opacity-95"
+            className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
           >
             Nous contacter
           </Link>
+          <WhatsAppButton
+            className=" px-6 py-3  gap-2 rounded-lg flex items-center justify-center"
+            message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
+            label="WhatsApp"
+          />
         </motion.div>
 
         {/* Visuel / screenshot */}

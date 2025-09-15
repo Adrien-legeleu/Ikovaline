@@ -14,6 +14,7 @@ import {
   IconInputAi,
   IconAdjustments,
   IconUsersGroup,
+  IconBrandWhatsapp,
 } from '@tabler/icons-react';
 
 import { cn } from '@/lib/utils';
@@ -22,6 +23,7 @@ import { HeaderResponsive } from './HeaderResponsive';
 import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
 import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
 import { AnimatedThemeToggler } from '../magicui/animated-theme-toggler';
+import { usePathname } from 'next/navigation';
 
 export function Header({ className }: { className?: string }) {
   const [active, setActive] = React.useState<string | null>(null);
@@ -33,6 +35,24 @@ export function Header({ className }: { className?: string }) {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim();
+  const pathname = usePathname();
+
+  // Sécurité: numéro requis
+  if (!number) {
+    return;
+  }
+  const href = React.useMemo(() => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const page = origin && pathname ? `${origin}${pathname}` : '';
+    const text = page
+      ? `Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?`
+      : 'Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?';
+
+    // wa.me attend un numéro sans + et le paramètre text encodé
+    const encoded = encodeURIComponent(text);
+    return `https://wa.me/${number}?text=${encoded}`;
+  }, [number, pathname]);
 
   return (
     <>
@@ -46,7 +66,7 @@ export function Header({ className }: { className?: string }) {
           className
         )}
       >
-        <div className="mx-auto mt-2 max-w-6xl px-4">
+        <div className="mx-auto mt-2 max-w-7xl px-4">
           <nav
             className={cn(
               'flex h-16 items-center justify-between rounded-2xl border px-4',
@@ -67,7 +87,7 @@ export function Header({ className }: { className?: string }) {
                 alt="Ikovaline"
                 width={150}
                 height={40}
-                className="h-10 w-auto object-contain dark:hidden"
+                className="xl:h-10 lg:h-8 h-10 w-auto object-contain dark:hidden"
                 priority
               />
               <Image
@@ -75,7 +95,7 @@ export function Header({ className }: { className?: string }) {
                 alt="Ikovaline"
                 width={150}
                 height={40}
-                className="hidden h-10 w-auto object-contain dark:block"
+                className="hidden xl:h-10 lg:h-8 h-10  w-auto object-contain dark:block"
                 priority
               />
             </Link>
@@ -174,14 +194,33 @@ export function Header({ className }: { className?: string }) {
             </div>
 
             {/* Actions à droite (exigées) */}
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center justify-center gap-2">
               <AnimatedThemeToggler />
               <Link
                 href="/contact"
-                className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:opacity-95"
+                className="rounded-lg bg-primary px-4 py-2 text-xs xl:text-sm font-semibold text-white hover:opacity-95"
               >
                 Contactez-nous
               </Link>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Nous contacter sur WhatsApp"
+                className={[
+                  ' z-50',
+                  'inline-flex items-center gap-1 rounded-xl px-4 py-2 shadow-lg',
+                  'bg-[#25D366] text-white hover:opacity-90 active:scale-[0.98]',
+                  'transition will-change-transform',
+                  'focus:outline-none focus:ring-2 focus:ring-white/70',
+                  className,
+                ].join(' ')}
+              >
+                <IconBrandWhatsapp className="lg:h-4 h-6 xl:h-6 " />
+                <span className="lg:text-xs xl:text-sm text-sm font-semibold">
+                  WhatsApp
+                </span>
+              </a>
             </div>
           </nav>
         </div>

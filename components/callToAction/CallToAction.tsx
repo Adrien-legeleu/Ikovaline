@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import StarClientsGoogle from '../StarClientsGoogle';
+import WhatsAppButton from '../WhatsappButton';
 
 interface Props {
   title: string;
@@ -18,11 +19,7 @@ interface Props {
  * - Verre: géré via variables --glass-a / --glass-b pour light/dark sans dupliquer le style
  * - Boutons: focus-visible + variantes dark
  */
-export default function CallToAction({
-  title,
-  desc,
-  textBtn,
-}: Props) {
+export default function CallToAction({ title, desc, textBtn }: Props) {
   return (
     <section className="relative mx-auto w-full max-w-[120rem] px-2 sm:px-6 py-28 md:py-40">
       {/* Stripes verticales (8 colonnes), teintées en primary/10 */}
@@ -57,7 +54,7 @@ export default function CallToAction({
       {/* Carte verre + bordure conique (light/dark via CSS vars) */}
       <div
         className={cn(
-          'relative z-10 mx-auto max-w-6xl overflow-hidden rounded-[36px] sm:p-12 p-5 md:p-20 text-center',
+          'relative z-10 mx-auto max-w-6xl overflow-hidden rounded-2xl sm:p-12 p-5 md:p-20 text-center',
           'shadow-[0_60px_120px_-48px_rgba(0,0,0,.35)] backdrop-blur-xl',
           // variables light/dark pour le dégradé “verre”
           '[--glass-a:rgba(255,255,255,.95)] [--glass-b:rgba(255,255,255,.88)]',
@@ -96,7 +93,7 @@ export default function CallToAction({
           <Link
             href="/contact"
             className={cn(
-              'group relative inline-flex items-center justify-center rounded-full px-7 py-4 text-[15px] font-semibold text-white',
+              'group relative inline-flex items-center justify-center rounded-xl px-7 py-4 text-[15px] font-semibold text-white',
               'shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.7)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))/0.45]',
               'transition'
             )}
@@ -106,7 +103,7 @@ export default function CallToAction({
             }}
           >
             <span className="relative z-10">{textBtn}</span>
-            <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-white/25" />
+            <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/25" />
             <svg
               aria-hidden
               className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -118,12 +115,16 @@ export default function CallToAction({
               <path d="M13 5l7 7-7 7" strokeWidth="2" />
             </svg>
           </Link>
-
+          <WhatsAppButton
+            className=" px-6 py-4  gap-2 rounded-lg flex items-center justify-center"
+            message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
+            label="WhatsApp"
+          />
           {/* secondaire (ghost luxe) */}
           <Link
             href="/projects"
             className={cn(
-              'inline-flex items-center justify-center rounded-full px-6 py-4 text-[15px] font-semibold transition',
+              'inline-flex items-center justify-center rounded-xl px-6 py-4 text-[15px] font-semibold transition',
               'bg-white/80 text-neutral-800 ring-1 ring-black/10 hover:bg-white',
               'dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/10 dark:hover:bg-neutral-900'
             )}
@@ -141,7 +142,9 @@ export default function CallToAction({
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
-          style={{ boxShadow: 'inset 0 -120px 220px -80px hsl(var(--primary) / 0.12)' }}
+          style={{
+            boxShadow: 'inset 0 -120px 220px -80px hsl(var(--primary) / 0.12)',
+          }}
         />
       </div>
     </section>

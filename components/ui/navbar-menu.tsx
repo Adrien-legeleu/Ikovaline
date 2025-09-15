@@ -35,9 +35,10 @@ export const Menu = ({ setActive, upToZero, children }: MenuProps) => {
     <div
       onMouseLeave={safeClose}
       onMouseEnter={cancelClose}
-      className={['relative flex items-center gap-8', upToZero ? '' : ''].join(
-        ' '
-      )}
+      className={[
+        'relative flex items-center gap-8 lg:gap-5 xl:gap-8',
+        upToZero ? '' : '',
+      ].join(' ')}
     >
       {children}
     </div>
@@ -58,7 +59,7 @@ export const MenuItem = ({
       {/* Le trigger */}
       <Link
         href={link}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
+        className="cursor-pointer text-sm xl:text-md  text-black hover:opacity-[0.9] dark:text-white"
       >
         {item}
       </Link>

@@ -11,6 +11,8 @@ import Review3 from '@/public/images/logo/logo-lelandais.png';
 import Review4 from '@/public/images/logo/hl-horner-logo.jpg';
 import Review5 from '@/public/images/logo/logo-lora.png';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
+import Link from 'next/link';
+import WhatsAppButton from '@/components/WhatsappButton';
 
 type ReviewType = {
   name: string;
@@ -210,13 +212,18 @@ export default function Review() {
           digitales sur mesure pour accélérer votre croissance.
         </p>
 
-        <div className="mt-6">
-          <a
+        <div className="mt-6 flex sm:flex-row gap-4 flex-col items-center justify-center">
+          <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-xl bg-[hsl(var(--primary))] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_rgba(44,183,255,.70)] transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/50 active:brightness-90"
+            className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
           >
             Nous contacter
-          </a>
+          </Link>
+          <WhatsAppButton
+            className=" px-6 py-3  gap-2 rounded-lg flex items-center justify-center"
+            message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
+            label="WhatsApp"
+          />
         </div>
       </header>
 

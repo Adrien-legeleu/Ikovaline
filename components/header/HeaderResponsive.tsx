@@ -20,6 +20,7 @@ import {
 import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
 import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
 import { AnimatedThemeToggler } from '../magicui/animated-theme-toggler';
+import WhatsAppButton from '../WhatsappButton';
 
 type SubLink = { label: string; href: string; icon?: React.ReactNode };
 type Section = { title: string; href: string; links?: SubLink[] };
@@ -312,11 +313,16 @@ export function HeaderResponsive() {
               </m.nav>
 
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/5 to-transparent dark:from-white/5" />
-              <div className="relative z-10 mx-auto mb-6 w-full max-w-3xl px-5">
+              <div className="relative z-10 space-y-2 mx-auto mb-6 w-full max-w-3xl px-5">
+                <WhatsAppButton
+                  className=" px-5 py-4 text-[15px] gap-2 w-full flex items-center justify-center"
+                  message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
+                  label="WhatsApp"
+                />
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-5 py-4 text-[15px] font-semibold text-white shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary)/0.45)]"
+                  className="inline-flex w-full items-center justify-center rounded-xl bg-[hsl(var(--primary))] px-5 py-4 text-[15px] font-semibold text-white shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary)/0.45)]"
                 >
                   Contactez-nous
                 </Link>

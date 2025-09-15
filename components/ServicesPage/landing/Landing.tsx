@@ -10,6 +10,7 @@ import {
   IconTrendingUp,
   IconStarFilled,
 } from '@tabler/icons-react';
+import WhatsAppButton from '@/components/WhatsappButton';
 
 /* ---------------------------------- DATA ---------------------------------- */
 
@@ -335,16 +336,18 @@ export default function ServicesHero() {
         robustes, évolutives et centrées sur vos besoins.
       </motion.p>
 
-      {/* CTA principal */}
-      <div className="mt-8">
+      <div className="mt-8 flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
         <Link
           href="/contact"
-          className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-[15px] font-semibold
-                     bg-sky-500 text-white shadow-[0_12px_30px_-10px_rgba(2,132,199,.65)]
-                     hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70"
+          className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
         >
           Nous contacter
         </Link>
+        <WhatsAppButton
+          className=" px-6 py-3  gap-2 rounded-lg flex items-center justify-center"
+          message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
+          label="WhatsApp"
+        />
       </div>
 
       {/* Cartes piliers */}
