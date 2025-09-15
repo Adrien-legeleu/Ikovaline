@@ -18,11 +18,6 @@ export default function WhatsAppButton({
   const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim();
   const pathname = usePathname();
 
-  // Sécurité: numéro requis
-  if (!number) {
-    return;
-  }
-
   // Message enrichi: ajoute l’URL courante pour le contexte
   const href = useMemo(() => {
     if (!number) return null;

@@ -38,10 +38,6 @@ export function Header({ className }: { className?: string }) {
   const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim();
   const pathname = usePathname();
 
-  // Sécurité: numéro requis
-  if (!number) {
-    return;
-  }
   const href = React.useMemo(() => {
     if (!number) return null;
 
