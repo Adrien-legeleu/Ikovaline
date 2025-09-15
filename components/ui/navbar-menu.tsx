@@ -59,7 +59,7 @@ export const MenuItem = ({
       {/* Le trigger */}
       <Link
         href={link}
-        className="cursor-pointer text-sm xl:text-md  text-black hover:opacity-[0.9] dark:text-white"
+        className="cursor-pointer text-sm xl:text-base  text-black hover:opacity-[0.9] dark:text-white"
       >
         {item}
       </Link>

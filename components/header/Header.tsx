@@ -214,7 +214,7 @@ export function Header({ className }: { className?: string }) {
                   className,
                 ].join(' ')}
               >
-                <IconBrandWhatsapp className="lg:h-4 h-6 xl:h-6 " />
+                <IconBrandWhatsapp className="lg:h-4 xl:h-5 " />
                 <span className="lg:text-xs xl:text-sm text-sm font-semibold">
                   WhatsApp
                 </span>
