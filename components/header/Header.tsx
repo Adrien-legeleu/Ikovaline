@@ -43,6 +43,8 @@ export function Header({ className }: { className?: string }) {
     return;
   }
   const href = React.useMemo(() => {
+    if (!number) return null;
+
     const origin = typeof window !== 'undefined' ? window.location.origin : '';
     const page = origin && pathname ? `${origin}${pathname}` : '';
     const text = page
@@ -53,7 +55,7 @@ export function Header({ className }: { className?: string }) {
     const encoded = encodeURIComponent(text);
     return `https://wa.me/${number}?text=${encoded}`;
   }, [number, pathname]);
-
+  if (!href) return null;
   return (
     <>
       {/* Mobile burger */}

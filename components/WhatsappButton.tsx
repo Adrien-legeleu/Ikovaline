@@ -25,6 +25,7 @@ export default function WhatsAppButton({
 
   // Message enrichi: ajoute l’URL courante pour le contexte
   const href = useMemo(() => {
+    if (!number) return null;
     const origin = typeof window !== 'undefined' ? window.location.origin : '';
     const page = origin && pathname ? `${origin}${pathname}` : '';
     const text = page ? `${message}` : message;
@@ -33,7 +34,7 @@ export default function WhatsAppButton({
     const encoded = encodeURIComponent(text);
     return `https://wa.me/${number}?text=${encoded}`;
   }, [message, number, pathname]);
-
+  if (!href) return null;
   return (
     <a
       href={href}
