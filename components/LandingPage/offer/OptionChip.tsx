@@ -1,5 +1,7 @@
+// app/(site)/components/OptionChip.tsx
 'use client';
 
+import { memo, useCallback, useMemo, useState, startTransition } from 'react';
 import { IconInfoCircle, IconSparkles } from '@tabler/icons-react';
 import {
   Tooltip,
@@ -16,23 +18,8 @@ import {
 } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 import type { OptionId } from '@/lib/offers/pricing';
-import { useState } from 'react';
 
-const FALLBACK: Record<string, string[]> = {
-  speed: ['Améliore LCP/INP', 'Perf mobile ↑', 'Peut booster les conversions'],
-  uxui: ['Parcours simplifié', 'Confiance renforcée', 'Peut ↑ CR'],
-  seo: ['Structure & contenu', 'Gains progressifs', 'Trafic organique'],
-};
-
-export default function OptionChip({
-  id,
-  label,
-  price,
-  highlight,
-  tooltip,
-  checked,
-  onToggle,
-}: {
+type Props = {
   id: OptionId;
   label: string;
   price: number;
@@ -40,9 +27,36 @@ export default function OptionChip({
   tooltip?: string[];
   checked: boolean;
   onToggle: (id: OptionId) => void;
-}) {
-  const tips = (tooltip?.length ? tooltip : FALLBACK[id] || []).slice(0, 4);
+};
+
+// fallback immuable hors composant (pas recréé à chaque render)
+const FALLBACK: Record<OptionId | string, string[]> = {
+  speed: ['Améliore LCP/INP', 'Perf mobile ↑', 'Peut booster les conversions'],
+  uxui: ['Parcours simplifié', 'Confiance renforcée', 'Peut ↑ CR'],
+  seo: ['Structure & contenu', 'Gains progressifs', 'Trafic organique'],
+};
+
+function OptionChipBase({
+  id,
+  label,
+  price,
+  highlight,
+  tooltip,
+  checked,
+  onToggle,
+}: Props) {
   const [open, setOpen] = useState(false);
+
+  // évite de recalculer quand rien ne change
+  const tips = useMemo(
+    () => (tooltip?.length ? tooltip : FALLBACK[id] || []).slice(0, 4),
+    [tooltip, id]
+  );
+
+  // handler stable + transition non bloquante
+  const handleToggle = useCallback(() => {
+    startTransition(() => onToggle(id));
+  }, [id, onToggle]);
 
   return (
     <div
@@ -54,15 +68,12 @@ export default function OptionChip({
         highlight ? 'border-primary/40 dark:border-primary/50' : '',
         'bg-white dark:bg-neutral-900/60',
       ].join(' ')}
-      onClick={() => onToggle(id)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') onToggle(id);
-      }}
+      // important: on ne toggle plus toute la carte (pour éviter double render),
+      // on laisse le Switch faire le job. Le clic carte peut OUVRIR infos si tu veux.
+      role="group"
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
-      <div className="flex items-center gap-3 pointer-events-none">
+      <div className="flex items-center gap-3">
         <div
           className={[
             'size-7 rounded-2xl flex items-center justify-center',
@@ -83,13 +94,8 @@ export default function OptionChip({
         </div>
       </div>
 
-      {/* actions à droite (pas de propagation) */}
-      <div
-        className="flex items-center gap-2"
-        onClick={(e) => e.stopPropagation()}
-        onPointerDown={(e) => e.stopPropagation()}
-        onTouchStart={(e) => e.stopPropagation()}
-      >
+      {/* actions à droite */}
+      <div className="flex items-center gap-2">
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -148,8 +154,23 @@ export default function OptionChip({
           </DialogContent>
         </Dialog>
 
-        <Switch checked={checked} onCheckedChange={() => onToggle(id)} />
+        <Switch checked={checked} onCheckedChange={handleToggle} />
       </div>
     </div>
   );
 }
+
+// évite les re-renders quand props inchangées
+function areEqual(prev: Props, next: Props) {
+  return (
+    prev.id === next.id &&
+    prev.label === next.label &&
+    prev.price === next.price &&
+    prev.highlight === next.highlight &&
+    prev.checked === next.checked &&
+    prev.onToggle === next.onToggle && // handler stable requis
+    JSON.stringify(prev.tooltip ?? []) === JSON.stringify(next.tooltip ?? [])
+  );
+}
+
+export default memo(OptionChipBase, areEqual);

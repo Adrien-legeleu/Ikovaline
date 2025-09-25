@@ -1,7 +1,15 @@
 // app/(site)/components/OffersSection.tsx
 'use client';
 
-import { useEffect, useMemo, useRef, useState, useDeferredValue } from 'react';
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useDeferredValue,
+  useCallback,
+  startTransition,
+} from 'react';
 import {
   OFFER_TIERS,
   OPTION_DEFS,
@@ -41,7 +49,6 @@ type SelectedOptionSummary = {
   label: string;
   price: number;
 };
-
 type InquirySummary = {
   tierId: OfferTierId;
   tierName: string;
@@ -54,7 +61,6 @@ type InquirySummary = {
   kpi: KPI;
   createdAtISO: string;
 };
-
 type InquiryPayload = {
   firstName: string;
   email: string;
@@ -62,7 +68,6 @@ type InquiryPayload = {
   message: string;
   summary: InquirySummary;
 };
-
 type ApiError = { error?: string };
 
 export default function OffersSection() {
@@ -88,11 +93,39 @@ export default function OffersSection() {
   ]);
   const [adsBudget, setAdsBudget] = useState<number>(500);
 
+  // handlers stables (évite de casser memo)
+  const handleDetails = useCallback((id: OfferTierId) => {
+    setActiveTier(id);
+    requestAnimationFrame(() => {
+      detailsRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+      setGlow(true);
+      setTimeout(() => setGlow(false), 1200);
+    });
+  }, []);
+
+  const toggleOption = useCallback((id: OptionId) => {
+    // déporter la grosse MAJ en transition non bloquante
+    startTransition(() => {
+      setSelectedOptions((prev) =>
+        prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+      );
+    });
+  }, []);
+
+  const onBudgetChange = useCallback((val: number) => {
+    startTransition(() => setAdsBudget(val));
+  }, []);
+
+  // data courante
   const tier = useMemo(
     () => OFFER_TIERS.find((t) => t.id === activeTier)!,
     [activeTier]
   );
 
+  // perf: déférer les entrées utilisateur
   const deferredOptions = useDeferredValue(selectedOptions);
   const deferredAds = useDeferredValue(adsBudget);
 
@@ -111,6 +144,7 @@ export default function OffersSection() {
     [tier.showConfigurator, basePrice, optionsTotal]
   );
 
+  // KPI (coût ~constant mais on le calcule sur valeurs déférées)
   const baseKpi = useMemo(
     () => computeKPI(tier.showConfigurator ? deferredOptions : []),
     [tier.showConfigurator, deferredOptions]
@@ -119,12 +153,14 @@ export default function OffersSection() {
   const kpi: KPI = useMemo(() => {
     if (!tier.showConfigurator || !deferredAds || deferredAds <= 0)
       return baseKpi;
+
     const visitorsMin = Math.round(deferredAds / 3);
     const visitorsMax = Math.round(deferredAds / 1);
     const leadsMin =
       baseKpi.leads[0] + Math.round((visitorsMin * baseKpi.convRate[0]) / 100);
     const leadsMax =
       baseKpi.leads[1] + Math.round((visitorsMax * baseKpi.convRate[1]) / 100);
+
     return {
       traffic: [
         baseKpi.traffic[0] + visitorsMin,
@@ -135,19 +171,7 @@ export default function OffersSection() {
     };
   }, [tier.showConfigurator, baseKpi, deferredAds]);
 
-  const handleDetails = (id: OfferTierId) => {
-    setActiveTier(id);
-    requestAnimationFrame(() => {
-      detailsRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-      setGlow(true);
-      setTimeout(() => setGlow(false), 1200);
-    });
-  };
-
-  // ===== Modal état + envoi =====
+  // ===== Modal + envoi =====
   const [openDialog, setOpenDialog] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
@@ -174,11 +198,12 @@ export default function OffersSection() {
           'fr-FR'
         )}€ TTC`;
 
-  function requiredFieldsMissing(): boolean {
-    return !firstName.trim() || !email.trim() || !tel.trim();
-  }
+  const requiredFieldsMissing = useCallback(
+    () => !firstName.trim() || !email.trim() || !tel.trim(),
+    [firstName, email, tel]
+  );
 
-  async function submitInquiry() {
+  const submitInquiry = useCallback(async () => {
     setError(null);
 
     if (requiredFieldsMissing()) {
@@ -225,12 +250,11 @@ export default function OffersSection() {
           const j = (await res.json()) as ApiError;
           if (j?.error) serverMsg = j.error;
         } catch {
-          /* ignore JSON parse */
+          /* ignore */
         }
         throw new Error(serverMsg);
       }
 
-      // Succès
       toast({
         title: 'Configuration envoyée',
         description:
@@ -253,7 +277,24 @@ export default function OffersSection() {
     } finally {
       setSending(false);
     }
-  }
+  }, [
+    requiredFieldsMissing,
+    toast,
+    firstName,
+    email,
+    tel,
+    msg,
+    tier.id,
+    tier.name,
+    priceLabel,
+    selectedOptionObjs,
+    optionsTotal,
+    adsBudget,
+    basePrice,
+    totalPrice,
+    kpi,
+    tier.baseDelayDays,
+  ]);
 
   return (
     <section className="relative w-full">
@@ -285,9 +326,7 @@ export default function OffersSection() {
 
           {/* OFFRES */}
           <div
-            className={`grid grid-cols-1 md:grid-cols-3 gap-5 ${
-              expanded ? 'md:items-start' : ''
-            }`}
+            className={`grid grid-cols-1 md:grid-cols-3 gap-5 ${expanded ? 'md:items-start' : ''}`}
           >
             {OFFER_TIERS.map((t) => (
               <TierCompact
@@ -367,7 +406,7 @@ export default function OffersSection() {
                               initial={{ opacity: 0, y: 6 }}
                               whileInView={{ opacity: 1, y: 0 }}
                               viewport={{ once: true, amount: 0.2 }}
-                              transition={{ duration: 0.18 }}
+                              transition={{ duration: 0.15 }}
                             >
                               <OptionChip
                                 id={opt.id}
@@ -376,13 +415,7 @@ export default function OffersSection() {
                                 highlight={opt.highlight}
                                 tooltip={opt.tooltip}
                                 checked={selectedOptions.includes(opt.id)}
-                                onToggle={(id) =>
-                                  setSelectedOptions((prev) =>
-                                    prev.includes(id)
-                                      ? prev.filter((x) => x !== id)
-                                      : [...prev, id]
-                                  )
-                                }
+                                onToggle={toggleOption}
                               />
                             </motion.div>
                           ))}
@@ -405,7 +438,7 @@ export default function OffersSection() {
                             step={50}
                             value={adsBudget}
                             onChange={(e) =>
-                              setAdsBudget(parseInt(e.target.value, 10))
+                              onBudgetChange(parseInt(e.target.value, 10))
                             }
                             className="mt-3 w-full h-2 dark:accent-primary dark:bg-black rounded-full cursor-pointer"
                           />
