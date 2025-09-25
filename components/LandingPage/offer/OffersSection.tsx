@@ -606,19 +606,18 @@ export default function OffersSection() {
 
                     {/* ===> Bouton Appel découverte */}
                     <Button
+                      asChild
                       variant="secondary"
                       className="bg-white hover:bg-black/5 text-black border border-black/10 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:border-white/10"
-                      onClick={() =>
-                        toast({
-                          title: 'Appel découverte',
-                          description:
-                            'On vous appelle pour cadrer vos objectifs (—20% offert).',
-                        })
-                      }
                     >
-                      <IconPhone className="mr-1 size-4" />
-                      <span className=" font-semibold"> -20% </span>-
-                      <span>Appel découverte</span>
+                      <a
+                        href="https://calendly.com/florent-ghizzoni/meeting"
+                        target="_blank"
+                      >
+                        <IconPhone className="mr-1 size-4" />
+                        <span className=" font-semibold"> -20% </span>-
+                        <span>Appel découverte</span>
+                      </a>
                     </Button>
                   </div>
                 </Card>
