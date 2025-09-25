@@ -4,6 +4,7 @@ import Landing from '@/components/LandingPage/landing/Landing';
 import dynamic from 'next/dynamic';
 import FAQ from '@/components/LandingPage/faq/FAQ';
 import OffersSection from '@/components/LandingPage/offer/OffersSection';
+import Agences from '@/components/LandingPage/Agences';
 
 const ComponentDemo = dynamic(
   () => import('@/components/LandingPage/impact/TextImpact'),
@@ -84,7 +85,7 @@ export default function Home() {
 
           <div className="overflow-hidden">
             <Review />
-
+            <Agences />
             <CTAHome />
 
             <Blog />

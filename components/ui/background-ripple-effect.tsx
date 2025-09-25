@@ -1,3 +1,4 @@
+// app/(site)/components/BackgroundRippleEffect.tsx
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -10,6 +11,13 @@ type Props = {
   className?: string;
 };
 
+type ClickedCell = { row: number; col: number } | null;
+
+type CSSVars = React.CSSProperties & {
+  ['--ripple']?: string;
+  ['--ripple-end']?: string;
+};
+
 export default function BackgroundRippleEffect({
   cellSize = 56,
   ripple = 'rgba(44,183,255,0.04)', // bleu subtil (clair)
@@ -17,26 +25,28 @@ export default function BackgroundRippleEffect({
   className,
 }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
-  const [dims, setDims] = useState({ w: 0, h: 0 });
-  const [clicked, setClicked] = useState<{ row: number; col: number } | null>(
-    null
-  );
-  const [rev, setRev] = useState(0);
+  const [dims, setDims] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
+  const [clicked, setClicked] = useState<ClickedCell>(null);
+  const [rev, setRev] = useState<number>(0);
 
   // ——— Thème (dark) détecté via la classe <html class="dark"> ———
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState<boolean>(false);
   useEffect(() => {
     if (typeof document === 'undefined') return;
     const root = document.documentElement;
+
     const sync = () => setIsDark(root.classList.contains('dark'));
     sync();
+
     const obs = new MutationObserver(sync);
     obs.observe(root, { attributes: true, attributeFilter: ['class'] });
-    // fallback prefers-color-scheme
+
     const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
-    const onMQ = () =>
-      !root.classList.contains('dark') && setIsDark(!!mq?.matches);
+    const onMQ = () => {
+      if (!root.classList.contains('dark')) setIsDark(!!mq?.matches);
+    };
     mq?.addEventListener?.('change', onMQ);
+
     return () => {
       obs.disconnect();
       mq?.removeEventListener?.('change', onMQ);
@@ -51,11 +61,14 @@ export default function BackgroundRippleEffect({
   useEffect(() => {
     const parent = rootRef.current?.parentElement;
     if (!parent) return;
-    const ro = new ResizeObserver(([e]) => {
-      const r = e.contentRect;
+
+    const ro = new ResizeObserver((entries) => {
+      const r = entries[0]?.contentRect;
+      if (!r) return;
       setDims({ w: Math.ceil(r.width), h: Math.ceil(r.height) });
     });
     ro.observe(parent);
+
     return () => ro.disconnect();
   }, []);
 
@@ -67,6 +80,7 @@ export default function BackgroundRippleEffect({
     const onClick = (ev: MouseEvent) => {
       const host = rootRef.current;
       if (!host) return;
+
       const rect = host.getBoundingClientRect();
       const x = ev.clientX - rect.left;
       const y = ev.clientY - rect.top;
@@ -90,19 +104,22 @@ export default function BackgroundRippleEffect({
       });
     };
 
-    parent.addEventListener('click', onClick, { capture: true, passive: true });
-    return () =>
-      parent.removeEventListener(
-        'click',
-        onClick as any,
-        { capture: true } as any
-      );
+    const opts: AddEventListenerOptions = { capture: true, passive: true };
+    parent.addEventListener('click', onClick, opts);
+
+    // removeEventListener accepte EventListenerOptions|boolean — on réutilise le même objet (typé)
+    return () => parent.removeEventListener('click', onClick, opts);
   }, [cellSize]);
 
   const cols = Math.max(1, Math.ceil(dims.w / cellSize));
   const rows = Math.max(1, Math.ceil(dims.h / cellSize));
   const gridW = cols * cellSize;
   const gridH = rows * cellSize;
+
+  const styleVars: CSSVars = {
+    ['--ripple']: isDark ? rippleDark : ripple,
+    ['--ripple-end']: isDark ? rippleEndDark : rippleEnd,
+  };
 
   return (
     <div
@@ -114,11 +131,7 @@ export default function BackgroundRippleEffect({
         'dark:[--cell-border-color:rgba(255,255,255,0.08)] dark:[--cell-fill-color:transparent]',
         className
       )}
-      style={{
-        // couleurs d’ondes selon thème
-        ['--ripple' as any]: isDark ? rippleDark : ripple,
-        ['--ripple-end' as any]: isDark ? rippleEndDark : rippleEnd,
-      }}
+      style={styleVars}
       aria-hidden
     >
       {/* Vignette/mask — teinte adoucie en dark */}
@@ -214,9 +227,9 @@ function Grid({
   cellSize: number;
   borderColor: string;
   fillColor: string;
-  clickedCell: { row: number; col: number } | null;
+  clickedCell: ClickedCell;
 }) {
-  const cells = useMemo(
+  const cells = useMemo<number[]>(
     () => Array.from({ length: rows * cols }, (_, i) => i),
     [rows, cols]
   );

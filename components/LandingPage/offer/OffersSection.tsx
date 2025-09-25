@@ -34,6 +34,36 @@ import BackgroundRippleEffect from '@/components/ui/background-ripple-effect';
 import CircleFade from '@/components/ui/circleFade';
 import AnimatedNumber from '@/components/AnimatedNumber';
 import StatsEstimateDynamic from './StatsEstimate';
+import { useToast } from '@/hooks/use-toast';
+
+type SelectedOptionSummary = {
+  id: OptionId;
+  label: string;
+  price: number;
+};
+
+type InquirySummary = {
+  tierId: OfferTierId;
+  tierName: string;
+  priceLabel: string;
+  delayDays: number;
+  options: SelectedOptionSummary[];
+  optionsTotal: number;
+  adsBudget: number;
+  totals: { base: number; grandTotal: number };
+  kpi: KPI;
+  createdAtISO: string;
+};
+
+type InquiryPayload = {
+  firstName: string;
+  email: string;
+  tel: string;
+  message: string;
+  summary: InquirySummary;
+};
+
+type ApiError = { error?: string };
 
 export default function OffersSection() {
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -126,7 +156,9 @@ export default function OffersSection() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const selectedOptionObjs = useMemo(
+  const { toast } = useToast();
+
+  const selectedOptionObjs: SelectedOptionSummary[] = useMemo(
     () =>
       deferredOptions.map((id) => {
         const o = OPTION_DEFS.find((x) => x.id === id)!;
@@ -142,19 +174,31 @@ export default function OffersSection() {
           'fr-FR'
         )}€ TTC`;
 
+  function requiredFieldsMissing(): boolean {
+    return !firstName.trim() || !email.trim() || !tel.trim();
+  }
+
   async function submitInquiry() {
     setError(null);
-    if (!firstName || !email || !tel) {
-      setError('Merci de renseigner Prénom, Email et Téléphone.');
+
+    if (requiredFieldsMissing()) {
+      const msgErr = 'Merci de renseigner Prénom, Email et Téléphone.';
+      setError(msgErr);
+      toast({
+        variant: 'destructive',
+        title: 'Champs manquants',
+        description: msgErr,
+      });
       return;
     }
+
     setSending(true);
     try {
-      const payload = {
-        firstName,
-        email,
-        tel,
-        message: msg,
+      const payload: InquiryPayload = {
+        firstName: firstName.trim(),
+        email: email.trim(),
+        tel: tel.trim(),
+        message: msg.trim(),
         summary: {
           tierId: tier.id,
           tierName: tier.name,
@@ -176,17 +220,36 @@ export default function OffersSection() {
       });
 
       if (!res.ok) {
-        const j = await res.json().catch(() => ({}));
-        throw new Error(j?.error ?? `HTTP ${res.status}`);
+        let serverMsg = `HTTP ${res.status}`;
+        try {
+          const j = (await res.json()) as ApiError;
+          if (j?.error) serverMsg = j.error;
+        } catch {
+          /* ignore JSON parse */
+        }
+        throw new Error(serverMsg);
       }
+
+      // Succès
+      toast({
+        title: 'Configuration envoyée',
+        description:
+          "Merci ! On revient vers vous rapidement avec un devis et un créneau d'appel.",
+      });
 
       setOpenDialog(false);
       setFirstName('');
       setEmail('');
       setTel('');
       setMsg('');
-    } catch (e: any) {
-      setError(e?.message ?? 'Erreur inconnue');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Erreur inconnue';
+      setError(message);
+      toast({
+        variant: 'destructive',
+        title: "Échec de l'envoi",
+        description: message,
+      });
     } finally {
       setSending(false);
     }
@@ -344,8 +407,7 @@ export default function OffersSection() {
                             onChange={(e) =>
                               setAdsBudget(parseInt(e.target.value, 10))
                             }
-                            className="mt-3 w-full h-2  dark:accent-primary dark:bg-black rounded-full cursor-pointer
-                                       "
+                            className="mt-3 w-full h-2 dark:accent-primary dark:bg-black rounded-full cursor-pointer"
                           />
                           <div className="mt-2 flex justify-between text-xs text-black/50 dark:text-white/50">
                             <span>0€</span>
@@ -415,7 +477,16 @@ export default function OffersSection() {
                     {/* ===> Modal "Envoyer ma configuration" */}
                     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
                       <DialogTrigger asChild>
-                        <Button className="bg-primary text-white hover:bg-primary/90 active:scale-[.99]">
+                        <Button
+                          className="bg-primary text-white hover:bg-primary/90 active:scale-[.99]"
+                          onClick={() =>
+                            toast({
+                              title: 'Simulation prête',
+                              description:
+                                'Ajoutez vos coordonnées pour recevoir un devis.',
+                            })
+                          }
+                        >
                           Envoyer ma configuration
                           <IconArrowRight className="ml-1 size-4" />
                         </Button>
@@ -500,10 +571,17 @@ export default function OffersSection() {
                       </DialogContent>
                     </Dialog>
 
-                    {/* ===> Bouton Appel découverte : copy optimisée (même UI) */}
+                    {/* ===> Bouton Appel découverte */}
                     <Button
                       variant="secondary"
                       className="bg-white hover:bg-black/5 text-black border border-black/10 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:border-white/10"
+                      onClick={() =>
+                        toast({
+                          title: 'Appel découverte',
+                          description:
+                            'On vous appelle pour cadrer vos objectifs (—20% offert).',
+                        })
+                      }
                     >
                       <IconPhone className="mr-1 size-4" />
                       <span className=" font-semibold"> -20% </span>-
