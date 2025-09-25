@@ -524,7 +524,7 @@ export default function OffersSection() {
                           <IconArrowRight className="ml-1 size-4" />
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="sm:max-w-[520px] dark:bg-neutral-900 dark:text-white">
+                      <DialogContent className="sm:max-w-[520px] rounded-2xl w-[90%] dark:bg-neutral-900 dark:text-white">
                         <DialogHeader>
                           <DialogTitle>
                             Recevoir un devis / être rappelé
