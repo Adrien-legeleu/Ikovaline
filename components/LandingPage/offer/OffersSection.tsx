@@ -511,7 +511,7 @@ export default function OffersSection() {
                     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
                       <DialogTrigger asChild>
                         <Button
-                          className="bg-primary text-white hover:bg-primary/90 active:scale-[.99]"
+                          className="bg-primary rounded-xl text-white hover:bg-primary/90 active:scale-[.99]"
                           onClick={() =>
                             toast({
                               title: 'Simulation prête',
@@ -608,7 +608,7 @@ export default function OffersSection() {
                     <Button
                       asChild
                       variant="secondary"
-                      className="bg-white hover:bg-black/5 text-black border border-black/10 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:border-white/10"
+                      className="bg-white rounded-xl hover:bg-black/5 text-black border border-black/10 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:border-white/10"
                     >
                       <a
                         href="https://calendly.com/florent-ghizzoni/meeting"
