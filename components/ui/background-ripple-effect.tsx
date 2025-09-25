@@ -57,8 +57,8 @@ export default function BackgroundRippleEffect({
       ref={rootRef}
       className={cn(
         'absolute inset-0 z-0 pointer-events-none overflow-hidden select-none',
-        '[--cell-border-color:rgba(0,0,0,0.04)] [--cell-fill-color:transparent]',
-        'dark:[--cell-border-color:rgba(255,255,255,0.08)] dark:[--cell-fill-color:transparent]',
+        '[--cell-border-color:rgba(0,0,0,0.05)] [--cell-fill-color:transparent]',
+        'dark:[--cell-border-color:rgba(255,255,255,0.1)] dark:[--cell-fill-color:transparent]',
         className
       )}
       aria-hidden
@@ -129,7 +129,7 @@ function Grid({
       {cells.map((idx) => (
         <div
           key={idx}
-          className="rip-cell relative border-[0.5px]"
+          className="rip-cell relative border-[1px]"
           style={{
             borderColor: 'var(--cell-border-color)',
             backgroundColor: 'var(--cell-fill-color)',

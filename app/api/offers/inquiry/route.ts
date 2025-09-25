@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: 'contact@ikovaline.com',
-      to: ['adrienlegeleu@gmail.com'],
+      to: ['contact@ikovaline.com'],
       subject: `Offre ${summary.tierName} — ${firstName} vous a envoyé une configuration`,
       react: PricingInquiryEmail({
         firstName,
