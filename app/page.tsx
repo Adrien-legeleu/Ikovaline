@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Landing from '@/components/LandingPage/landing/Landing';
 import dynamic from 'next/dynamic';
 import FAQ from '@/components/LandingPage/faq/FAQ';
+import OffersSection from '@/components/LandingPage/offer/OffersSection';
 
 const ComponentDemo = dynamic(
   () => import('@/components/LandingPage/impact/TextImpact'),
@@ -69,6 +70,15 @@ export default function Home() {
           <div className="overflow-hidden">
             <Map />
             <ComponentDemo />
+          </div>
+          <div
+            className="
+    min-h-dvh
+    bg-[radial-gradient(ellipse_at_top_left,rgba(0,0,0,0.04),transparent_40%),linear-gradient(to_bottom,white,white)]
+    dark:bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.02),transparent_45%),linear-gradient(to_bottom,#0a0a0a,#0a0a0a)]
+  "
+          >
+            <OffersSection />
           </div>
           <Methodologie />
 
