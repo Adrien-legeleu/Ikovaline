@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import ProjectsPageClient from '@/components/Projects/ProjectsPageClient';
 
 export const metadata: Metadata = {
-  title: 'Projets — Ikovaline',
+  title: 'Projets, Ikovaline',
   description:
     'Sélection de projets Ikovaline : sites, SaaS, SEO, automation. Résultats concrets et design performant.',
   openGraph: {
