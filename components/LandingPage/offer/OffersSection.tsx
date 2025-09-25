@@ -510,16 +510,7 @@ export default function OffersSection() {
                     {/* ===> Modal "Envoyer ma configuration" */}
                     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
                       <DialogTrigger asChild>
-                        <Button
-                          className="bg-primary rounded-xl text-white hover:bg-primary/90 active:scale-[.99]"
-                          onClick={() =>
-                            toast({
-                              title: 'Simulation prête',
-                              description:
-                                'Ajoutez vos coordonnées pour recevoir un devis.',
-                            })
-                          }
-                        >
+                        <Button className="bg-primary rounded-xl text-white hover:bg-primary/90 active:scale-[.99]">
                           Envoyer ma configuration
                           <IconArrowRight className="ml-1 size-4" />
                         </Button>
