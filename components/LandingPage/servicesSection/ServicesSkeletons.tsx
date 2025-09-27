@@ -1,8 +1,8 @@
 'use client';
 
-import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import React, { memo, useMemo } from 'react';
 import Link from 'next/link';
-import { motion, useAnimationControls, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   IconCpu,
   IconDeviceMobileCode,
