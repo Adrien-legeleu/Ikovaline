@@ -1,19 +1,15 @@
 import type { Metadata } from 'next';
-
 import Landing from '@/components/LandingPage/landing/Landing';
 import dynamic from 'next/dynamic';
 import FAQ from '@/components/LandingPage/faq/FAQ';
 import OffersSection from '@/components/LandingPage/offer/OffersSection';
 import Agences from '@/components/LandingPage/Agences';
+import OnView from '@/components/onView';
 
 const ComponentDemo = dynamic(
   () => import('@/components/LandingPage/impact/TextImpact'),
-  {
-    ssr: false,
-    loading: () => <div style={{ height: 220 }} aria-hidden />,
-  }
+  { ssr: false, loading: () => <div style={{ height: 220 }} aria-hidden /> }
 );
-
 const Map = dynamic(() => import('@/components/LandingPage/map/Map'), {
   ssr: false,
 });
@@ -63,36 +59,45 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
-      <div className="">
-        <Landing />
+    <div>
+      <Landing />
 
-        <div className="max-w-[1450px] mx-auto ">
-          <div className="overflow-hidden">
+      <div className="max-w-[1450px] mx-auto">
+        <div className="overflow-hidden">
+          <OnView>
             <Map />
+          </OnView>
+          <OnView>
             <ComponentDemo />
-          </div>
-          <div
-            className="
-    min-h-dvh
-    bg-[radial-gradient(ellipse_at_top_left,rgba(0,0,0,0.04),transparent_50%),linear-gradient(to_bottom,white,white)]
-    dark:bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.02),transparent_50%),linear-gradient(to_bottom,#0a0a0a,#0a0a0a)]
-  "
-          >
-            <OffersSection />
-          </div>
-          <Methodologie />
+          </OnView>
+        </div>
 
-          <div className="overflow-hidden">
+        <div
+          className="
+            min-h-dvh
+            bg-[radial-gradient(ellipse_at_top_left,rgba(0,0,0,0.04),transparent_50%),linear-gradient(to_bottom,white,white)]
+            dark:bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.02),transparent_50%),linear-gradient(to_bottom,#0a0a0a,#0a0a0a)]
+          "
+        >
+          <OffersSection />
+        </div>
+
+        <Methodologie />
+
+        <div className="overflow-hidden">
+          <OnView>
             <Review />
-            <Agences />
+          </OnView>
+          <Agences />
+          <OnView>
             <CTAHome />
-
+          </OnView>
+          <OnView>
             <Blog />
-            <FAQ />
-          </div>
+          </OnView>
+          <FAQ />
         </div>
       </div>
-    </>
+    </div>
   );
 }
