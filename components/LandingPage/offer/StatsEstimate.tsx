@@ -1,7 +1,6 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { ResponsiveContainer, AreaChart, Area } from 'recharts';
 import CountUp from 'react-countup';
 import { useMemo } from 'react';
 
@@ -78,28 +77,65 @@ export default function StatsEstimateDynamic({
 
   const showBudget = tierId === 'boost';
 
+  // -------- SVG helpers (responsive via viewBox 0..100) --------
+  const { lineD, areaD } = useMemo(() => {
+    const n = data.length;
+    const xs = (i: number) => (i * 100) / (n - 1);
+    const vals = data.map((d) => d.v);
+    const vMin = Math.min(...vals);
+    const vMax = Math.max(...vals);
+    const padTop = 6; // % padding top
+    const padBot = 8; // % padding bottom
+    const y = (v: number) => {
+      if (vMax === vMin) return 100 - padBot; // évite division par 0
+      const t = (v - vMin) / (vMax - vMin); // 0..1
+      return padTop + (1 - t) * (100 - padTop - padBot);
+    };
+
+    const points = data.map((d, i) => [xs(i), y(d.v)] as const);
+
+    const line = points
+      .map(([x, yy], i) => (i === 0 ? `M ${x},${yy}` : `L ${x},${yy}`))
+      .join(' ');
+
+    const area = `${line} L 100,100 L 0,100 Z`; // ferme vers le bas pour le remplissage
+
+    return { lineD: line, areaD: area };
+  }, [data]);
+
   return (
     <Card className="rounded-2xl p-0 overflow-hidden border border-black/10 shadow-md bg-white/70 dark:bg-neutral-900/70 dark:border-white/10">
       <div className="relative w-full h-[320px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
-            <defs>
-              <linearGradient id="ikovaBlue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="8%" stopColor="#2CB7FF" stopOpacity={0.35} />
-                <stop offset="100%" stopColor="#2CB7FF" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <Area
-              type="monotone"
-              dataKey="v"
-              stroke="#2CB7FF"
-              strokeWidth={2.2}
-              fill="url(#ikovaBlue)"
-              isAnimationActive
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+        {/* ---- GRAPH SVG (lightweight, no lib) ---- */}
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="absolute inset-0 w-full h-full"
+        >
+          <defs>
+            <linearGradient id="ikovaBlue" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="8%" stopColor="#2CB7FF" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#2CB7FF" stopOpacity="0" />
+            </linearGradient>
+            <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="0.3" />
+            </filter>
+          </defs>
 
+          {/* Zone remplie */}
+          <path d={areaD} fill="url(#ikovaBlue)" />
+
+          {/* Ligne */}
+          <path
+            d={lineD}
+            fill="none"
+            stroke="#2CB7FF"
+            strokeWidth="1.8"
+            filter="url(#soft)"
+          />
+        </svg>
+
+        {/* KPIs au centre */}
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
           <h3 className="text-5xl font-extrabold text-neutral-900 drop-shadow-sm dark:text-white">
             <CountUp end={visitorsMid} duration={1.4} separator=" " />
@@ -109,6 +145,7 @@ export default function StatsEstimateDynamic({
           </p>
         </div>
 
+        {/* Badge top */}
         <div className="absolute left-1/2 -translate-x-1/2 top-3 z-20 bg-white/95 backdrop-blur rounded-xl shadow p-3 flex gap-3 w-[95%] dark:bg-neutral-900/95">
           <div>
             <p className="text-base font-semibold text-neutral-900 dark:text-white">

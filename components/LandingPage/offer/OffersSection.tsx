@@ -10,6 +10,8 @@ import {
   useCallback,
   startTransition,
 } from 'react';
+import dynamic from 'next/dynamic';
+
 import {
   OFFER_TIERS,
   OPTION_DEFS,
@@ -31,18 +33,76 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-
 import { IconArrowRight, IconPhone, IconCrown } from '@tabler/icons-react';
-import { LazyMotion, domAnimation, m as motion } from 'framer-motion';
-
-import TierCompact from './TierCompact';
-import OptionChip from './OptionChip';
-import ImpactPanel from './ImpactPanel';
-import BackgroundRippleEffect from '@/components/ui/background-ripple-effect';
-import CircleFade from '@/components/ui/circleFade';
-import AnimatedNumber from '@/components/AnimatedNumber';
-import StatsEstimateDynamic from './StatsEstimate';
 import { useToast } from '@/hooks/use-toast';
+
+// === Imports dynamiques (réduisent le first load) ===
+const TierCompact = dynamic(() => import('./TierCompact'), { ssr: true }); // utile au-dessus de la ligne de flottaison, on garde SSR
+const OptionChip = dynamic(() => import('./OptionChip'), { ssr: true }); // idem
+const ImpactPanel = dynamic(() => import('./ImpactPanel'), { ssr: false }); // non critique -> client-only
+const BackgroundRippleEffect = dynamic(
+  () => import('@/components/ui/background-ripple-effect'),
+  { ssr: false }
+);
+const CircleFade = dynamic(() => import('@/components/ui/circleFade'), {
+  ssr: false,
+});
+const AnimatedNumber = dynamic(() => import('@/components/AnimatedNumber'), {
+  ssr: false,
+});
+const StatsEstimateDynamic = dynamic(() => import('./StatsEstimate'), {
+  ssr: false,
+});
+
+// === Petit utilitaire d’apparition (remplace framer-motion) ===
+function useReveal(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '80px', threshold: 0.1, ...options }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [options]);
+
+  return { ref, visible };
+}
+
+// === Composant Reveal: applique une classe d’animation CSS légère ===
+function Reveal({
+  children,
+  className,
+  once = true,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  once?: boolean;
+}) {
+  const { ref, visible } = useReveal();
+  return (
+    <div
+      ref={ref}
+      className={[
+        className ?? '',
+        'transition-all duration-500 ease-out will-change-transform',
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
+      ].join(' ')}
+      data-reveal-once={once ? 'true' : 'false'}
+    >
+      {children}
+    </div>
+  );
+}
 
 type SelectedOptionSummary = {
   id: OptionId;
@@ -74,14 +134,26 @@ export default function OffersSection() {
   const detailsRef = useRef<HTMLDivElement>(null);
   const [glow, setGlow] = useState(false);
 
+  // Effets décoratifs seulement ≥ md et côté client
   const [showRipple, setShowRipple] = useState(false);
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia('(min-width: 768px)');
-    setShowRipple(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setShowRipple(e.matches);
-    mq.addEventListener?.('change', onChange);
-    return () => mq.removeEventListener?.('change', onChange);
+    const run = () => {
+      if (typeof window === 'undefined') return;
+      const mq = window.matchMedia('(min-width: 768px)');
+      setShowRipple(mq.matches);
+      const onChange = (e: MediaQueryListEvent) => setShowRipple(e.matches);
+      mq.addEventListener?.('change', onChange);
+      return () => mq.removeEventListener?.('change', onChange);
+    };
+    // décalé après idle pour ne pas gêner le first paint
+    const id = (window as any).requestIdleCallback
+      ? (window as any).requestIdleCallback(run)
+      : setTimeout(run, 150);
+    return () => {
+      (window as any).cancelIdleCallback
+        ? (window as any).cancelIdleCallback(id)
+        : clearTimeout(id);
+    };
   }, []);
 
   const [expanded, setExpanded] = useState(false);
@@ -93,21 +165,21 @@ export default function OffersSection() {
   ]);
   const [adsBudget, setAdsBudget] = useState<number>(500);
 
-  // handlers stables (évite de casser memo)
+  // Handlers stables
   const handleDetails = useCallback((id: OfferTierId) => {
     setActiveTier(id);
+    // Smooth scroll non bloquant
     requestAnimationFrame(() => {
       detailsRef.current?.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
       });
       setGlow(true);
-      setTimeout(() => setGlow(false), 1200);
+      setTimeout(() => setGlow(false), 900);
     });
   }, []);
 
   const toggleOption = useCallback((id: OptionId) => {
-    // déporter la grosse MAJ en transition non bloquante
     startTransition(() => {
       setSelectedOptions((prev) =>
         prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
@@ -119,13 +191,13 @@ export default function OffersSection() {
     startTransition(() => setAdsBudget(val));
   }, []);
 
-  // data courante
+  // Data courante
   const tier = useMemo(
     () => OFFER_TIERS.find((t) => t.id === activeTier)!,
     [activeTier]
   );
 
-  // perf: déférer les entrées utilisateur
+  // Déférer les entrées utilisateur
   const deferredOptions = useDeferredValue(selectedOptions);
   const deferredAds = useDeferredValue(adsBudget);
 
@@ -144,7 +216,7 @@ export default function OffersSection() {
     [tier.showConfigurator, basePrice, optionsTotal]
   );
 
-  // KPI (coût ~constant mais on le calcule sur valeurs déférées)
+  // KPI (coût ~constant mais calcule sur valeurs déférées)
   const baseKpi = useMemo(
     () => computeKPI(tier.showConfigurator ? deferredOptions : []),
     [tier.showConfigurator, deferredOptions]
@@ -242,6 +314,8 @@ export default function OffersSection() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
+        // keepalive pour ne pas bloquer la navigation si l’utilisateur ferme vite
+        keepalive: true,
       });
 
       if (!res.ok) {
@@ -298,332 +372,317 @@ export default function OffersSection() {
 
   return (
     <section className="relative w-full">
-      <LazyMotion features={domAnimation}>
-        {showRipple ? <BackgroundRippleEffect cellSize={56} /> : null}
-        <CircleFade />
+      {/* Effets décoratifs (dynamiques, client-only) */}
+      {showRipple ? <BackgroundRippleEffect cellSize={56} /> : null}
+      <CircleFade />
 
-        <div className="relative mx-auto max-w-7xl px-4 md:px-8 py-16 md:py-20">
-          {/* HERO */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="mb-10 flex flex-col items-center text-center">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-primary shadow-sm">
-                <IconCrown className="size-4" /> Studio de Projet
-              </div>
-              <h2 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
-                Composez votre site, voyez{' '}
-                <span className="text-[#2CB7FF]">l’impact en direct</span>.
-              </h2>
-              <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
-                Prix, délais, conversions estimées, tout s’actualise
-                instantanément.
-              </p>
+      <div className="relative mx-auto max-w-7xl px-4 md:px-8 py-16 md:py-20">
+        {/* HERO */}
+        <Reveal>
+          <div className="mb-10 flex flex-col items-center text-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-primary shadow-sm">
+              <IconCrown className="size-4" /> Studio de Projet
             </div>
-          </motion.div>
-
-          {/* OFFRES */}
-          <div
-            className={`grid grid-cols-1 md:grid-cols-3 gap-5 ${expanded ? 'md:items-start' : ''}`}
-          >
-            {OFFER_TIERS.map((t) => (
-              <TierCompact
-                key={t.id}
-                active={t.id === activeTier}
-                name={t.name}
-                tagline={t.tagline}
-                price={t.basePrice}
-                delayDays={t.baseDelayDays}
-                bullets={t.bullets}
-                ribbon={t.ribbon}
-                expanded={expanded}
-                onToggleExpand={() => setExpanded((x) => !x)}
-                onSelect={() => setActiveTier(t.id)}
-                onDetails={() => handleDetails(t.id)}
-              />
-            ))}
+            <h2 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
+              Composez votre site, voyez{' '}
+              <span className="text-[#2CB7FF]">l’impact en direct</span>.
+            </h2>
+            <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
+              Prix, délais, conversions estimées, tout s’actualise
+              instantanément.
+            </p>
           </div>
+        </Reveal>
 
-          {/* DÉTAILS */}
-          <div
-            ref={detailsRef}
-            className="mt-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-black/10 shadow-xl dark:border-white/10 dark:bg-white/5"
-          >
-            <div className="p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Atelier + Impact */}
-              <div className="lg:col-span-2 space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
+        {/* OFFRES */}
+        <div
+          className={`grid grid-cols-1 md:grid-cols-3 gap-5 ${
+            expanded ? 'md:items-start' : ''
+          }`}
+        >
+          {OFFER_TIERS.map((t) => (
+            <TierCompact
+              key={t.id}
+              active={t.id === activeTier}
+              name={t.name}
+              tagline={t.tagline}
+              price={t.basePrice}
+              delayDays={t.baseDelayDays}
+              bullets={t.bullets}
+              ribbon={t.ribbon}
+              expanded={expanded}
+              onToggleExpand={() => setExpanded((x) => !x)}
+              onSelect={() => setActiveTier(t.id)}
+              onDetails={() => handleDetails(t.id)}
+            />
+          ))}
+        </div>
+
+        {/* DÉTAILS */}
+        <div
+          ref={detailsRef}
+          className="mt-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-black/10 shadow-xl dark:border-white/10 dark:bg-white/5"
+        >
+          <div className="p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Atelier + Impact */}
+            <div className="lg:col-span-2 space-y-6">
+              <Reveal>
+                <Card
+                  className={[
+                    'rounded-2xl p-6 bg-white/60 border border-black/10 shadow-md transition-shadow dark:bg-neutral-900/60 dark:border-white/10',
+                    glow ? 'ring-2 ring-primary/40 shadow-primary/30' : '',
+                  ].join(' ')}
                 >
-                  <Card
-                    className={[
-                      'rounded-2xl p-6 bg-white/60 border border-black/10 shadow-md transition-shadow dark:bg-neutral-900/60 dark:border-white/10',
-                      glow ? 'ring-2 ring-primary/40 shadow-primary/30' : '',
-                    ].join(' ')}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-lg font-semibold text-neutral-900 dark:text-white">
-                          {tier.name}
-                        </div>
-                        <div className="text-sm text-black/60 dark:text-white/60">
-                          {tier.tagline}
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-extrabold text-neutral-900 dark:text-white">
-                          {tier.id === 'luxe' ? (
-                            'Sur devis'
-                          ) : (
-                            <>
-                              <AnimatedNumber
-                                value={
-                                  tier.showConfigurator ? totalPrice : basePrice
-                                }
-                              />
-                              €
-                            </>
-                          )}
-                        </div>
-                        <div className="text-xs text-black/60 dark:text-white/60">
-                          ~ {tier.baseDelayDays} j
-                        </div>
-                      </div>
-                    </div>
-
-                    <Separator className="my-4 dark:bg-white/10" />
-
-                    {tier.showConfigurator ? (
-                      <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {OPTION_DEFS.map((opt) => (
-                            <motion.div
-                              key={opt.id}
-                              initial={{ opacity: 0, y: 6 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              viewport={{ once: true, amount: 0.2 }}
-                              transition={{ duration: 0.15 }}
-                            >
-                              <OptionChip
-                                id={opt.id}
-                                label={opt.label}
-                                price={opt.price}
-                                highlight={opt.highlight}
-                                tooltip={opt.tooltip}
-                                checked={selectedOptions.includes(opt.id)}
-                                onToggle={toggleOption}
-                              />
-                            </motion.div>
-                          ))}
-                        </div>
-
-                        {/* Slider budget pub */}
-                        <div className="mt-5 rounded-2xl p-4 border border-black/10 bg-none shadow-sm dark:border-white/10">
-                          <div className="flex items-center justify-between">
-                            <div className="font-medium text-neutral-900 dark:text-white">
-                              Budget publicitaire mensuel
-                            </div>
-                            <div className="text-sm text-black/70 dark:text-white/70">
-                              {adsBudget.toLocaleString('fr-FR')}€
-                            </div>
-                          </div>
-                          <input
-                            type="range"
-                            min={0}
-                            max={5000}
-                            step={50}
-                            value={adsBudget}
-                            onChange={(e) =>
-                              onBudgetChange(parseInt(e.target.value, 10))
-                            }
-                            className="mt-3 w-full h-2 dark:accent-primary dark:bg-black rounded-full cursor-pointer"
-                          />
-                          <div className="mt-2 flex justify-between text-xs text-black/50 dark:text-white/50">
-                            <span>0€</span>
-                            <span>2 500€</span>
-                            <span>5 000€</span>
-                          </div>
-                        </div>
-                      </>
-                    ) : (
-                      <div className="text-sm text-black/60 dark:text-white/60">
-                        Le niveau <b>{tier.name}</b> est livré{' '}
-                        <b>clé-en-main</b>. Pour des options avancées,
-                        choisissez <b>Boost</b> ou <b>Sur-Mesure Luxe</b>.
-                      </div>
-                    )}
-                  </Card>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                >
-                  <ImpactPanel
-                    selected={tier.showConfigurator ? deferredOptions : []}
-                  />
-                </motion.div>
-              </div>
-
-              {/* Colonne sticky : Résumé + CTA Modal */}
-              <div className="lg:sticky lg:top-24 h-fit lg:self-start space-y-4">
-                <Card className="rounded-2xl p-6 bg-white/70 border border-black/10 shadow-md dark:bg-neutral-900/70 dark:border-white/10">
-                  <div className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white">
-                    Résumé
-                  </div>
                   <div className="flex items-center justify-between">
-                    <div className="text-sm text-black/60 dark:text-white/60">
-                      Total
+                    <div>
+                      <div className="text-lg font-semibold text-neutral-900 dark:text-white">
+                        {tier.name}
+                      </div>
+                      <div className="text-sm text-black/60 dark:text-white/60">
+                        {tier.tagline}
+                      </div>
                     </div>
-                    <div className="text-xl font-bold text-neutral-900 dark:text-white">
-                      {tier.id === 'luxe' ? (
-                        'Sur devis'
-                      ) : (
-                        <>
-                          <AnimatedNumber
-                            value={
-                              tier.showConfigurator ? totalPrice : basePrice
-                            }
-                          />
-                          €
-                        </>
-                      )}
+                    <div className="text-right">
+                      <div className="text-2xl font-extrabold text-neutral-900 dark:text-white">
+                        {tier.id === 'luxe' ? (
+                          'Sur devis'
+                        ) : (
+                          <>
+                            <AnimatedNumber
+                              value={
+                                tier.showConfigurator ? totalPrice : basePrice
+                              }
+                            />
+                            €
+                          </>
+                        )}
+                      </div>
+                      <div className="text-xs text-black/60 dark:text-white/60">
+                        ~ {tier.baseDelayDays} j
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-2 flex items-center justify-between text-sm">
-                    <span className="text-black/60 dark:text-white/60">
-                      Délai estimé
-                    </span>
-                    <span className="font-medium text-neutral-900 dark:text-white">
-                      ~ {tier.baseDelayDays} jours
-                    </span>
                   </div>
 
                   <Separator className="my-4 dark:bg-white/10" />
 
-                  <div className="grid grid-cols-1 gap-2">
-                    {/* ===> Modal "Envoyer ma configuration" */}
-                    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-                      <DialogTrigger asChild>
-                        <Button className="bg-primary rounded-xl text-white hover:bg-primary/90 active:scale-[.99]">
-                          Envoyer ma configuration
-                          <IconArrowRight className="ml-1 size-4" />
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[520px] rounded-2xl w-[90%] dark:bg-neutral-900 dark:text-white">
-                        <DialogHeader>
-                          <DialogTitle>
-                            Recevoir un devis / être rappelé
-                          </DialogTitle>
-                        </DialogHeader>
+                  {tier.showConfigurator ? (
+                    <>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {OPTION_DEFS.map((opt) => (
+                          <Reveal key={opt.id}>
+                            <OptionChip
+                              id={opt.id}
+                              label={opt.label}
+                              price={opt.price}
+                              highlight={opt.highlight}
+                              tooltip={opt.tooltip}
+                              checked={selectedOptions.includes(opt.id)}
+                              onToggle={toggleOption}
+                            />
+                          </Reveal>
+                        ))}
+                      </div>
 
-                        <div className="grid gap-4 py-2">
-                          <div className="grid grid-cols-4 items-center gap-3">
-                            <Label htmlFor="firstName" className="text-right">
-                              Prénom*
-                            </Label>
-                            <Input
-                              id="firstName"
-                              className="col-span-3"
-                              value={firstName}
-                              onChange={(e) => setFirstName(e.target.value)}
-                            />
+                      {/* Slider budget pub */}
+                      <div className="mt-5 rounded-2xl p-4 border border-black/10 bg-none shadow-sm dark:border-white/10">
+                        <div className="flex items-center justify-between">
+                          <div className="font-medium text-neutral-900 dark:text-white">
+                            Budget publicitaire mensuel
                           </div>
-                          <div className="grid grid-cols-4 items-center gap-3">
-                            <Label htmlFor="email" className="text-right">
-                              Email*
-                            </Label>
-                            <Input
-                              id="email"
-                              type="email"
-                              className="col-span-3"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                            />
-                          </div>
-                          <div className="grid grid-cols-4 items-center gap-3">
-                            <Label htmlFor="tel" className="text-right">
-                              Téléphone*
-                            </Label>
-                            <Input
-                              id="tel"
-                              className="col-span-3"
-                              value={tel}
-                              onChange={(e) => setTel(e.target.value)}
-                            />
-                          </div>
-                          <div className="grid grid-cols-4 items-start gap-3">
-                            <Label htmlFor="msg" className="text-right pt-2">
-                              Message
-                            </Label>
-                            <Textarea
-                              id="msg"
-                              className="col-span-3"
-                              rows={4}
-                              value={msg}
-                              onChange={(e) => setMsg(e.target.value)}
-                              placeholder="Contexte, objectifs, deadline…"
-                            />
-                          </div>
-
-                          {error ? (
-                            <p className="text-sm text-red-600">{error}</p>
-                          ) : null}
-
-                          <div className="flex justify-end gap-2">
-                            <Button
-                              variant="secondary"
-                              onClick={() => setOpenDialog(false)}
-                            >
-                              Annuler
-                            </Button>
-                            <Button disabled={sending} onClick={submitInquiry}>
-                              {sending ? 'Envoi…' : 'Envoyer'}
-                            </Button>
+                          <div className="text-sm text-black/70 dark:text-white/70">
+                            {adsBudget.toLocaleString('fr-FR')}€
                           </div>
                         </div>
-
-                        <div className="rounded-xl bg-black/5 dark:bg-white/10 p-3 text-xs text-black/60 dark:text-white/60">
-                          Votre configuration (offre, options, budget pub, KPIs)
-                          sera jointe automatiquement.
+                        <input
+                          type="range"
+                          min={0}
+                          max={5000}
+                          step={50}
+                          value={adsBudget}
+                          onChange={(e) =>
+                            onBudgetChange(parseInt(e.target.value, 10))
+                          }
+                          className="mt-3 w-full h-2 dark:accent-primary dark:bg-black rounded-full cursor-pointer"
+                          aria-label="Budget publicitaire mensuel"
+                        />
+                        <div className="mt-2 flex justify-between text-xs text-black/50 dark:text-white/50">
+                          <span>0€</span>
+                          <span>2 500€</span>
+                          <span>5 000€</span>
                         </div>
-                      </DialogContent>
-                    </Dialog>
-
-                    {/* ===> Bouton Appel découverte */}
-                    <Button
-                      asChild
-                      variant="secondary"
-                      className="bg-white rounded-xl hover:bg-black/5 text-black border border-black/10 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:border-white/10"
-                    >
-                      <a
-                        href="https://calendly.com/florent-ghizzoni/meeting"
-                        target="_blank"
-                      >
-                        <IconPhone className="mr-1 size-4" />
-                        <span className=" font-semibold"> -20% </span>-
-                        <span>Appel découverte</span>
-                      </a>
-                    </Button>
-                  </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-sm text-black/60 dark:text-white/60">
+                      Le niveau <b>{tier.name}</b> est livré <b>clé-en-main</b>.
+                      Pour des options avancées, choisissez <b>Boost</b> ou{' '}
+                      <b>Sur-Mesure Luxe</b>.
+                    </div>
+                  )}
                 </Card>
+              </Reveal>
 
-                <StatsEstimateDynamic
-                  kpi={kpi}
-                  tierId={activeTier}
-                  tierName={tier.name}
-                  adsBudget={adsBudget}
+              <Reveal>
+                <ImpactPanel
+                  selected={tier.showConfigurator ? deferredOptions : []}
                 />
-              </div>
+              </Reveal>
+            </div>
+
+            {/* Colonne sticky : Résumé + CTA Modal */}
+            <div className="lg:sticky lg:top-24 h-fit lg:self-start space-y-4">
+              <Card className="rounded-2xl p-6 bg-white/70 border border-black/10 shadow-md dark:bg-neutral-900/70 dark:border-white/10">
+                <div className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white">
+                  Résumé
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-black/60 dark:text-white/60">
+                    Total
+                  </div>
+                  <div className="text-xl font-bold text-neutral-900 dark:text-white">
+                    {tier.id === 'luxe' ? (
+                      'Sur devis'
+                    ) : (
+                      <>
+                        <AnimatedNumber
+                          value={tier.showConfigurator ? totalPrice : basePrice}
+                        />
+                        €
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-2 flex items-center justify-between text-sm">
+                  <span className="text-black/60 dark:text-white/60">
+                    Délai estimé
+                  </span>
+                  <span className="font-medium text-neutral-900 dark:text-white">
+                    ~ {tier.baseDelayDays} jours
+                  </span>
+                </div>
+
+                <Separator className="my-4 dark:bg-white/10" />
+
+                <div className="grid grid-cols-1 gap-2">
+                  {/* === Modal "Envoyer ma configuration" === */}
+                  <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                    <DialogTrigger asChild>
+                      <Button className="bg-primary rounded-xl text-white hover:bg-primary/90 active:scale-[.99]">
+                        Envoyer ma configuration
+                        <IconArrowRight className="ml-1 size-4" />
+                      </Button>
+                    </DialogTrigger>
+
+                    {/* Le contenu du Dialog se charge uniquement à l’ouverture (portail/light dom) */}
+                    <DialogContent className="sm:max-w-[520px] rounded-2xl w-[90%] dark:bg-neutral-900 dark:text-white">
+                      <DialogHeader>
+                        <DialogTitle>
+                          Recevoir un devis / être rappelé
+                        </DialogTitle>
+                      </DialogHeader>
+
+                      <div className="grid gap-4 py-2">
+                        <div className="grid grid-cols-4 items-center gap-3">
+                          <Label htmlFor="firstName" className="text-right">
+                            Prénom*
+                          </Label>
+                          <Input
+                            id="firstName"
+                            className="col-span-3"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-3">
+                          <Label htmlFor="email" className="text-right">
+                            Email*
+                          </Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            className="col-span-3"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-3">
+                          <Label htmlFor="tel" className="text-right">
+                            Téléphone*
+                          </Label>
+                          <Input
+                            id="tel"
+                            className="col-span-3"
+                            value={tel}
+                            onChange={(e) => setTel(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-start gap-3">
+                          <Label htmlFor="msg" className="text-right pt-2">
+                            Message
+                          </Label>
+                          <Textarea
+                            id="msg"
+                            className="col-span-3"
+                            rows={4}
+                            value={msg}
+                            onChange={(e) => setMsg(e.target.value)}
+                            placeholder="Contexte, objectifs, deadline…"
+                          />
+                        </div>
+
+                        {error ? (
+                          <p className="text-sm text-red-600">{error}</p>
+                        ) : null}
+
+                        <div className="flex justify-end gap-2">
+                          <Button
+                            variant="secondary"
+                            onClick={() => setOpenDialog(false)}
+                          >
+                            Annuler
+                          </Button>
+                          <Button disabled={sending} onClick={submitInquiry}>
+                            {sending ? 'Envoi…' : 'Envoyer'}
+                          </Button>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl bg-black/5 dark:bg-white/10 p-3 text-xs text-black/60 dark:text-white/60">
+                        Votre configuration (offre, options, budget pub, KPIs)
+                        sera jointe automatiquement.
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+
+                  {/* Bouton Appel découverte */}
+                  <Button
+                    asChild
+                    variant="secondary"
+                    className="bg-white rounded-xl hover:bg-black/5 text-black border border-black/10 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:border-white/10"
+                  >
+                    <a
+                      href="https://calendly.com/florent-ghizzoni/meeting"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <IconPhone className="mr-1 size-4" />
+                      <span className=" font-semibold"> -20% </span>-
+                      <span>Appel découverte</span>
+                    </a>
+                  </Button>
+                </div>
+              </Card>
+
+              <StatsEstimateDynamic
+                kpi={kpi}
+                tierId={activeTier}
+                tierName={tier.name}
+                adsBudget={adsBudget}
+              />
             </div>
           </div>
         </div>
-      </LazyMotion>
+      </div>
     </section>
   );
 }
