@@ -24,18 +24,6 @@ export const metadata: Metadata = {
   title: 'Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs',
   description:
     'Agence digitale à Bailly-Romainvilliers : SEO, sites web, publicité en ligne. Ikovaline propulse votre visibilité en Essonne et dans toute la France.',
-  keywords: [
-    'agence digitale Essonne',
-    'agence web Bailly-Romainvilliers',
-    'SEO local Essonne',
-    'référencement naturel Essonne',
-    'création site web Essonne',
-    'publicité en ligne Essonne',
-    'marketing digital Essonne',
-    'consultant SEO Bailly-Romainvilliers',
-    'Google Ads Essonne',
-    'agence web Paris',
-  ],
   openGraph: {
     title:
       'Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs',
@@ -63,11 +51,54 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fr" className={poppins.className}>
       <head>
-        {/* Préconnect pour accélérer LCP / DNS */}
+        {/* Cookiebot — AUTO BLOCKING en premier (exécution avant tout le reste) */}
+        <Script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid="d43f627c-6949-4c51-9d22-db3eeb6957e1"
+          data-blockingmode="auto"
+          strategy="beforeInteractive"
+        />
+
+        {/* Consent Mode v2 — défaut denied */}
+        <Script id="gcm-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              analytics_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              functionality_storage: 'granted',
+              security_storage: 'granted'
+            });
+            gtag('set', 'ads_data_redaction', true);
+
+            window.addEventListener('CookieConsentDeclaration', function() {
+              try {
+                var c = window.Cookiebot?.consented || {};
+                var analyticsGranted = !!c.statistics;
+                var marketingGranted  = !!c.marketing;
+                gtag('consent', 'update', {
+                  analytics_storage: analyticsGranted ? 'granted' : 'denied',
+                  ad_storage:       marketingGranted  ? 'granted' : 'denied',
+                  ad_user_data:     marketingGranted  ? 'granted' : 'denied',
+                  ad_personalization: marketingGranted ? 'granted' : 'denied'
+                });
+              } catch(e){}
+            });
+          `}
+        </Script>
+
+        {/* Préconnect (ok, non bloquant) */}
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -79,10 +110,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://analytics.ahrefs.com" />
         <link rel="preconnect" href="https://cdn.vercel-insights.com" />
 
-        {/* Icône */}
+        {/* Favicon */}
         <link rel="icon" href={Favicon.src} type="image/png" />
 
-        {/* JSON-LD (non bloquant) */}
+        {/* JSON-LD */}
         <Script
           id="org-schema"
           type="application/ld+json"
@@ -108,7 +139,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* GTM (non bloquant) */}
+        {/* GTM (restera neutre tant que consent = denied) */}
         <Script id="gtm-main" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -118,18 +149,19 @@ export default function RootLayout({
           })(window,document,'script','dataLayer','GTM-NDKCHTFH');`}
         </Script>
 
-        {/* Ahrefs analytics (async, non bloquant) */}
+        {/* Ahrefs — forcé en "statistics" pour garantir le blocage avant consent */}
         <Script
           id="ahrefs-analytics"
           src="https://analytics.ahrefs.com/analytics.js"
           strategy="afterInteractive"
-          async
+          type="text/plain"
+          data-cookieconsent="statistics"
           data-key="4SH1YnVFNKyaaU3AE50yFg"
         />
       </head>
 
       <body className="antialiased">
-        {/* GTM noscript au tout début du body */}
+        {/* GTM noscript */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NDKCHTFH"
@@ -143,11 +175,8 @@ export default function RootLayout({
           <ScrollManager />
         </Suspense>
 
-        {/* Vercel perf + analytics (non bloquants) */}
         <SpeedInsights />
         <Analytics />
-
-        {/* Styles complémentaires non critiques */}
         <LazyExtraStyle />
 
         <ThemeProvider
