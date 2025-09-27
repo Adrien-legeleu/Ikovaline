@@ -122,7 +122,6 @@ export function HeaderResponsive() {
               width={120}
               height={36}
               className="hidden h-8 w-auto object-contain dark:block"
-              priority
             />
           </Link>
 

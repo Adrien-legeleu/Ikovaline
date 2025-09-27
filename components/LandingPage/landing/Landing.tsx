@@ -3,10 +3,37 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
-import Services from '@/components/LandingPage/servicesSection/Services'; // ← ton composant existant
+import dynamic from 'next/dynamic';
+
+// skeleton identique en taille → pas de shift, LCP ultra rapide
+const Services = dynamic(
+  () => import('@/components/LandingPage/servicesSection/Services'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full max-w-[1200px]">
+        <div
+          className="h-[420px] w-full rounded-2xl border border-black/10 bg-white/70 shadow-[0_10px_30px_-15px_rgba(0,0,0,.25)]
+                     dark:border-white/10 dark:bg-neutral-950/60 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,.6)]"
+          aria-hidden
+        />
+      </div>
+    ),
+  }
+);
 import Link from 'next/link';
 import WhatsAppButton from '@/components/WhatsappButton';
+type DeferredStyle = React.CSSProperties & {
+  contentVisibility?: string;
+  contain?: string;
+  containIntrinsicSize?: string;
+};
 
+const deferred: DeferredStyle = {
+  contentVisibility: 'auto',
+  contain: 'layout paint style',
+  containIntrinsicSize: '420px 1200px', // même empreinte que les cartes
+};
 export default function HeroNoiseLight() {
   const reduce = useReducedMotion();
 
@@ -56,9 +83,7 @@ export default function HeroNoiseLight() {
             label="WhatsApp"
           />
         </motion.div>
-
-        {/* Visuel / screenshot */}
-        <div className="z-40 my-12 flex w-full justify-center">
+        <div className="z-40 my-12 flex w-full justify-center" style={deferred}>
           <Services />
         </div>
       </div>
