@@ -19,7 +19,7 @@ export function Background() {
         className="absolute inset-0 dark:opacity-100 opacity-0 mix-blend-normal dark:mix-blend-normal"
         style={{
           background:
-            'repeating-linear-gradient(90deg, rgba(23,23,23,1) 0 20px, rgba(10,10,10,1) 20px 40px)',
+            'repeating-linear-gradient(90deg, rgba(23,23,23,0.7) 0 30px, rgba(10,10,10,1) 80px 80px)',
         }}
       />
       {/* bruit léger */}
