@@ -37,9 +37,9 @@ import { IconArrowRight, IconPhone, IconCrown } from '@tabler/icons-react';
 import { useToast } from '@/hooks/use-toast';
 
 // === Imports dynamiques (réduisent le first load) ===
-const TierCompact = dynamic(() => import('./TierCompact'), { ssr: true }); // utile au-dessus de la ligne de flottaison, on garde SSR
-const OptionChip = dynamic(() => import('./OptionChip'), { ssr: true }); // idem
-const ImpactPanel = dynamic(() => import('./ImpactPanel'), { ssr: false }); // non critique -> client-only
+const TierCompact = dynamic(() => import('./TierCompact'), { ssr: true });
+const OptionChip = dynamic(() => import('./OptionChip'), { ssr: true });
+const ImpactPanel = dynamic(() => import('./ImpactPanel'), { ssr: false });
 const BackgroundRippleEffect = dynamic(
   () => import('@/components/ui/background-ripple-effect'),
   { ssr: false }
@@ -54,17 +54,54 @@ const StatsEstimateDynamic = dynamic(() => import('./StatsEstimate'), {
   ssr: false,
 });
 
-// === Petit utilitaire d’apparition (remplace framer-motion) ===
+// ---- Types & helpers strictement typés (pas de any) ----
+type IdleCancel = () => void;
+
+interface RequestIdleCallbackDeadline {
+  didTimeout: boolean;
+  timeRemaining: () => number;
+}
+type RequestIdleCallbackHandle = number;
+interface RequestIdleCallbackOptions {
+  timeout?: number;
+}
+interface RICWindow {
+  requestIdleCallback?: (
+    cb: (deadline: RequestIdleCallbackDeadline) => void,
+    opts?: RequestIdleCallbackOptions
+  ) => RequestIdleCallbackHandle;
+  cancelIdleCallback?: (handle: RequestIdleCallbackHandle) => void;
+}
+
+function runWhenIdle(cb: () => void, timeoutMs = 150): IdleCancel {
+  if (typeof window === 'undefined') return () => undefined;
+
+  const w = window as unknown as RICWindow;
+
+  if (typeof w.requestIdleCallback === 'function') {
+    const handle = w.requestIdleCallback(() => cb(), { timeout: timeoutMs });
+    return () => {
+      if (typeof w.cancelIdleCallback === 'function') {
+        w.cancelIdleCallback(handle);
+      }
+    };
+  }
+  const handle = window.setTimeout(cb, timeoutMs);
+  return () => window.clearTimeout(handle);
+}
+
+// === Hook d’apparition (remplace framer-motion) ===
 function useReveal(options?: IntersectionObserverInit) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
     const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
+      ([entry]) => {
+        if (entry.isIntersecting) {
           setVisible(true);
           io.disconnect();
         }
@@ -132,31 +169,24 @@ type ApiError = { error?: string };
 
 export default function OffersSection() {
   const detailsRef = useRef<HTMLDivElement>(null);
-  const [glow, setGlow] = useState(false);
+  const [glow, setGlow] = useState<boolean>(false);
 
   // Effets décoratifs seulement ≥ md et côté client
-  const [showRipple, setShowRipple] = useState(false);
+  const [showRipple, setShowRipple] = useState<boolean>(false);
   useEffect(() => {
-    const run = () => {
+    const cancel = runWhenIdle(() => {
       if (typeof window === 'undefined') return;
       const mq = window.matchMedia('(min-width: 768px)');
       setShowRipple(mq.matches);
       const onChange = (e: MediaQueryListEvent) => setShowRipple(e.matches);
       mq.addEventListener?.('change', onChange);
+      // cleanup
       return () => mq.removeEventListener?.('change', onChange);
-    };
-    // décalé après idle pour ne pas gêner le first paint
-    const id = (window as any).requestIdleCallback
-      ? (window as any).requestIdleCallback(run)
-      : setTimeout(run, 150);
-    return () => {
-      (window as any).cancelIdleCallback
-        ? (window as any).cancelIdleCallback(id)
-        : clearTimeout(id);
-    };
+    });
+    return cancel;
   }, []);
 
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState<boolean>(false);
   const [activeTier, setActiveTier] = useState<OfferTierId>('boost');
   const [selectedOptions, setSelectedOptions] = useState<OptionId[]>([
     'speed',
@@ -175,7 +205,7 @@ export default function OffersSection() {
         block: 'start',
       });
       setGlow(true);
-      setTimeout(() => setGlow(false), 900);
+      window.setTimeout(() => setGlow(false), 900);
     });
   }, []);
 
@@ -203,8 +233,8 @@ export default function OffersSection() {
 
   const optionsTotal = useMemo(
     () =>
-      deferredOptions.reduce(
-        (s, id) => s + (OPTION_DEFS.find((o) => o.id === id)?.price ?? 0),
+      deferredOptions.reduce<number>(
+        (sum, id) => sum + (OPTION_DEFS.find((o) => o.id === id)?.price ?? 0),
         0
       ),
     [deferredOptions]
@@ -222,7 +252,7 @@ export default function OffersSection() {
     [tier.showConfigurator, deferredOptions]
   );
 
-  const kpi: KPI = useMemo(() => {
+  const kpi: KPI = useMemo((): KPI => {
     if (!tier.showConfigurator || !deferredAds || deferredAds <= 0)
       return baseKpi;
 
@@ -244,31 +274,34 @@ export default function OffersSection() {
   }, [tier.showConfigurator, baseKpi, deferredAds]);
 
   // ===== Modal + envoi =====
-  const [openDialog, setOpenDialog] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [email, setEmail] = useState('');
-  const [tel, setTel] = useState('');
-  const [msg, setMsg] = useState('');
-  const [sending, setSending] = useState(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [firstName, setFirstName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [tel, setTel] = useState<string>('');
+  const [msg, setMsg] = useState<string>('');
+  const [sending, setSending] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const { toast } = useToast();
 
   const selectedOptionObjs: SelectedOptionSummary[] = useMemo(
     () =>
-      deferredOptions.map((id) => {
+      deferredOptions.map<SelectedOptionSummary>((id) => {
         const o = OPTION_DEFS.find((x) => x.id === id)!;
         return { id: o.id, label: o.label, price: o.price };
       }),
     [deferredOptions]
   );
 
-  const priceLabel =
-    tier.id === 'luxe'
-      ? 'Sur devis'
-      : `${(tier.showConfigurator ? totalPrice : basePrice).toLocaleString(
-          'fr-FR'
-        )}€ TTC`;
+  const priceLabel = useMemo<string>(
+    () =>
+      tier.id === 'luxe'
+        ? 'Sur devis'
+        : `${(tier.showConfigurator ? totalPrice : basePrice).toLocaleString(
+            'fr-FR'
+          )}€ TTC`,
+    [tier.id, tier.showConfigurator, totalPrice, basePrice]
+  );
 
   const requiredFieldsMissing = useCallback(
     () => !firstName.trim() || !email.trim() || !tel.trim(),
@@ -314,7 +347,6 @@ export default function OffersSection() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-        // keepalive pour ne pas bloquer la navigation si l’utilisateur ferme vite
         keepalive: true,
       });
 
@@ -324,7 +356,7 @@ export default function OffersSection() {
           const j = (await res.json()) as ApiError;
           if (j?.error) serverMsg = j.error;
         } catch {
-          /* ignore */
+          /* ignore JSON parse error */
         }
         throw new Error(serverMsg);
       }
@@ -573,7 +605,7 @@ export default function OffersSection() {
                       </Button>
                     </DialogTrigger>
 
-                    {/* Le contenu du Dialog se charge uniquement à l’ouverture (portail/light dom) */}
+                    {/* Le contenu du Dialog se charge uniquement à l’ouverture */}
                     <DialogContent className="sm:max-w-[520px] rounded-2xl w-[90%] dark:bg-neutral-900 dark:text-white">
                       <DialogHeader>
                         <DialogTitle>
