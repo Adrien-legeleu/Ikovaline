@@ -7,6 +7,11 @@ import StarClientsGoogle from '@/components/StarClientsGoogle';
 import Link from 'next/link';
 import WhatsAppButton from '@/components/WhatsappButton';
 
+type SectionStyle = React.CSSProperties & {
+  contain?: string;
+  contentVisibility?: string;
+};
+
 /* ============================================================================
    1) Services en import dynamique avec skeleton de même taille (zéro CLS)
    -------------------------------------------------------------------------- */
@@ -32,14 +37,16 @@ const Services = dynamic(
    -------------------------------------------------------------------------- */
 export default function HeroNoiseLight() {
   const reduce = useReducedMotion();
+  const sectionStyle: SectionStyle = {
+    contain: 'paint layout style',
+    contentVisibility: 'auto',
+  };
 
   return (
     <section
       className="relative flex w-full items-center justify-center overflow-hidden bg-white px-4 py-20 md:py-40 dark:bg-black"
       // évite le coût de layout/painters hors-écran
-      style={
-        { contain: 'paint layout style', contentVisibility: 'auto' } as any
-      }
+      style={sectionStyle}
     >
       <Background reduce={reduce} />
 
