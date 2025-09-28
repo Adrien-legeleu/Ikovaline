@@ -23,11 +23,6 @@ const Services = dynamic(
 );
 import Link from 'next/link';
 import WhatsAppButton from '@/components/WhatsappButton';
-type DeferredStyle = React.CSSProperties & {
-  contentVisibility?: string;
-  contain?: string;
-  containIntrinsicSize?: string;
-};
 
 export default function HeroNoiseLight() {
   const reduce = useReducedMotion();
