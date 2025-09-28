@@ -223,7 +223,7 @@ export default function Agences() {
                     }}
                     onClick={() => setDepart(d.slug)}
                     className={cn(
-                      'relative z-10 rounded-xl px-5 py-2 text-sm md:text-base transition-colors',
+                      'relative z-10 rounded-xl px-3 md:px-5 py-2 text-[0.5rem] xsss:text-[0.6rem]  md:text-base transition-colors',
                       isActive
                         ? 'text-primary font-semibold'
                         : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100'
