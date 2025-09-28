@@ -1,25 +1,46 @@
 import { removeAccents } from '@/components/pageSatellite/CityAround';
 import Link from 'next/link';
 
+const ALL_VILLES_92 = [
+  'Boulogne-Billancourt',
+  'Neuilly-sur-Seine',
+  'Courbevoie',
+  'Levallois-Perret',
+  'Nanterre',
+  'Suresnes',
+  'Clamart',
+  'Colombes',
+  'Montrouge',
+  'Asnières-sur-Seine',
+  'Malakoff',
+  'Gennevilliers',
+  'Clichy',
+  'Meudon',
+  'Puteaux',
+  'Bagneux',
+  'Issy-les-Moulineaux',
+] as const;
+
 export const dataAgenceHautsSeine = [
+  // ========= 1) Boulogne-Billancourt =========
   {
     id: 'agence-web-boulogne-billancourt',
     ville: 'Boulogne-Billancourt',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Boulogne-Billancourt ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Vous recherchez une agence web à Boulogne-Billancourt ? Ikovaline vous accompagne dans la création de site internet, la refonte, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
 
     text1: (
       <span>
         Notre <strong>agence web à Boulogne-Billancourt</strong> met à votre
-        service son expertise en création de site internet, refonte web,
-        référencement naturel (SEO) et campagnes marketing. Que vous soyez situé
-        à{' '}
+        service son expertise en <strong>création de site</strong>,{' '}
+        <strong>refonte</strong>, <strong>SEO</strong> et{' '}
+        <strong>campagnes Ads</strong>. Que vous soyez à{' '}
         <Link href="/agence-web-boulogne-billancourt">
           Boulogne-Billancourt
         </Link>{' '}
-        ou dans une commune voisine, profitez de solutions digitales sur-mesure,
-        pensées pour générer des résultats concrets dans le 92.
+        ou dans une commune voisine, profitez de solutions sur-mesure pensées
+        pour générer des résultats concrets dans le 92.
       </span>
     ),
 
@@ -27,25 +48,25 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Boulogne-Billancourt conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Vitrine ou e-commerce : design moderne, vitesse, responsive et SEO local intégré.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Boulogne-Billancourt et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Stratégie “métier + ville”, contenus optimisés, netlinking, technique irréprochable.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Boulogne-Billancourt.',
+          'Sécurité, mises à jour, sauvegardes, monitoring : un site stable et rapide.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Boulogne-Billancourt avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'Google Ads, Meta Ads, remarketing, tableaux de bord ROI et optimisation continue.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
@@ -53,93 +74,52 @@ export const dataAgenceHautsSeine = [
     objectifs: {
       objectifTitle:
         'Notre mission à Boulogne-Billancourt : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Boulogne-Billancourt dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+      text1:
+        'Structurer un entonnoir clair (landing → preuve → conversion) et cibler les requêtes locales à forte intention.',
+      text2:
+        'Mesurer et itérer : CRO, heatmaps, A/B tests, suivi GA4/CRM pour améliorer durablement le coût par lead.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Boulogne-Billancourt mais aussi dans les communes
-        suivantes des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline intervient à Boulogne-Billancourt et dans ces communes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
     CTATitle: 'Prêt à lancer votre projet web à Boulogne-Billancourt ?',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Boulogne-Billancourt avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Boulogne-Billancourt',
+      'Création de site, SEO, Ads, maintenance : on construit un dispositif d’acquisition solide et mesurable.',
+    CTATextBtn: 'Lancer mon projet à Boulogne-Billancourt',
 
     metaTitle:
-      'Agence web Boulogne-Billancourt (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Boulogne-Billancourt (92) – Création site internet, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Boulogne-Billancourt : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : sites performants, SEO local et Ads à Boulogne-Billancourt. Refonte, maintenance et reporting ROI pour votre croissance.',
   },
+
+  // ========= 2) Neuilly-sur-Seine =========
   {
     id: 'agence-web-neuilly-sur-seine',
     ville: 'Neuilly-sur-Seine',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Neuilly-sur-Seine ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Agence web à Neuilly-sur-Seine : création/refonte de site internet, SEO local, SEA et contenus pour générer des leads qualifiés dans les Hauts-de-Seine.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Neuilly-sur-Seine</strong> met à votre
-        service son expertise en création de site internet, refonte web,
-        référencement naturel (SEO) et campagnes marketing. Que vous soyez situé
-        à <Link href="/agence-web-neuilly-sur-seine">Neuilly-sur-Seine</Link> ou
-        dans une commune voisine, profitez de solutions digitales sur-mesure,
-        pensées pour générer des résultats concrets dans le 92.
+        À <strong>Neuilly-sur-Seine</strong>, Ikovaline conçoit des{' '}
+        <strong>sites web</strong> crédibles et rapides, un <strong>SEO</strong>{' '}
+        robuste et des <strong>Ads</strong> rentables. Découvrez notre offre :{' '}
+        <Link href="/agence-web-neuilly-sur-seine">Neuilly</Link>.
       </span>
     ),
 
@@ -147,119 +127,77 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Neuilly-sur-Seine conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Design premium, UX, conversions nettes et Core Web Vitals maîtrisés.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Neuilly-sur-Seine et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Pages locales, sémantique, maillage interne, netlinking ciblé 92.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Neuilly-sur-Seine.',
+        text: 'Maintenance & support',
+        subtext: 'SLA, sécurité, sauvegardes, roadmap d’évolutions continues.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Neuilly-sur-Seine avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'SEA multi-réseaux, retargeting, brand search, reporting décisionnel.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Neuilly-sur-Seine : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Neuilly-sur-Seine dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Neuilly : image pro & performance commerciale',
+      text1:
+        'Aligner proposition de valeur, preuves sociales et offres pour lever les frictions.',
+      text2:
+        'Suivre les KPIs clés (trafic qualifié, conversion, CPA) et itérer chaque mois.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Neuilly-sur-Seine mais aussi dans les communes
-        suivantes des Hauts-de-Seine :
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Présents à Neuilly-sur-Seine et dans toutes ces villes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Neuilly-sur-Seine ?',
+    CTATitle: 'Un site qui convertit à Neuilly-sur-Seine ?',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Neuilly-sur-Seine avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Neuilly-sur-Seine',
+      'Site, SEO, Ads et data : on assemble un mix acquisition adapté à votre marché.',
+    CTATextBtn: 'Parler à un expert – Neuilly',
 
     metaTitle:
-      'Agence web Neuilly-sur-Seine (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Neuilly-sur-Seine (92) – Site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Neuilly-sur-Seine : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Création/refonte de site, SEO local et Ads à Neuilly-sur-Seine. Ikovaline, partenaire acquisition pour TPE/PME du 92.',
   },
+
+  // ========= 3) Courbevoie =========
   {
     id: 'agence-web-courbevoie',
     ville: 'Courbevoie',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Courbevoie ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Ikovaline, agence web à Courbevoie : création de site internet, refonte, SEO local, SEA et contenus pour accélérer votre acquisition dans le 92.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Courbevoie</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-courbevoie">Courbevoie</Link> ou dans une
-        commune voisine, profitez de solutions digitales sur-mesure, pensées
-        pour générer des résultats concrets dans le 92.
+        À <strong>Courbevoie</strong>, nous livrons des{' '}
+        <strong>sites web</strong> performants et une{' '}
+        <strong>stratégie SEO</strong> locale efficace. Plus d’infos :{' '}
+        <Link href="/agence-web-courbevoie">notre offre Courbevoie</Link>.
       </span>
     ),
 
@@ -267,119 +205,77 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Courbevoie conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Vitrine, e-commerce, landing pages : structure orientée conversion.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Courbevoie et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Intention locale, on-page, technique, maillage, pages “ville + service”.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Courbevoie.',
+        text: 'Maintenance & support',
+        subtext: 'Mises à jour, sécurité, monitoring, améliorations continues.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
-        subtext:
-          'Faites décoller votre activité à Courbevoie avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+        subtext: 'Google/Meta Ads, retargeting, AB tests, dashboards ROI.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Courbevoie : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Courbevoie dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Courbevoie : trafic utile & conversions mesurables',
+      text1:
+        'Positionner vos offres sur les requêtes locales à forte intention commerciale.',
+      text2:
+        'Optimiser formulaires, devis & réservation, plus suivi analytics propre.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Courbevoie mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline intervient à Courbevoie et dans ces villes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Courbevoie ?',
+    CTATitle: 'Accélérer votre acquisition à Courbevoie',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Courbevoie avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Courbevoie',
+      'Site, SEO, Ads et CRO : on met en place une machine à leads durable.',
+    CTATextBtn: 'Démarrer à Courbevoie',
 
     metaTitle:
-      'Agence web Courbevoie (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Courbevoie (92) – Création site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Courbevoie : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Sites performants, SEO local et Ads à Courbevoie. Ikovaline : acquisition prévisible, KPIs suivis et CRO.',
   },
+
+  // ========= 4) Levallois-Perret =========
   {
     id: 'agence-web-levallois-perret',
     ville: 'Levallois-Perret',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Levallois-Perret ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Agence web à Levallois-Perret (92) : création/refonte de site internet, SEO local, SEA et développement de l’acquisition pour entreprises et commerces.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Levallois-Perret</strong> met à votre service
-        son expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-levallois-perret">Levallois-Perret</Link> ou
-        dans une commune voisine, profitez de solutions digitales sur-mesure,
-        pensées pour générer des résultats concrets dans le 92.
+        À <strong>Levallois-Perret</strong>, Ikovaline conçoit des{' '}
+        <strong>sites web</strong> crédibles et orientés conversion, avec un{' '}
+        <strong>SEO</strong> local performant et des <strong>Ads</strong>{' '}
+        maîtrisés. Découvrir :{' '}
+        <Link href="/agence-web-levallois-perret">notre page Levallois</Link>.
       </span>
     ),
 
@@ -387,119 +283,75 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Levallois-Perret conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Branding, UX, performance, CMS maîtrisé pour publier vite et bien.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Levallois-Perret et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Audit, cocon “ville + service”, contenus, netlinking régional.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Levallois-Perret.',
+        text: 'Maintenance & support',
+        subtext: 'Uptime, sécurité, correctifs, évolutions planifiées (CWV).',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
-        subtext:
-          'Faites décoller votre activité à Levallois-Perret avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+        subtext: 'SEA full-funnel, retargeting, email marketing, ROAS.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Levallois-Perret : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Levallois-Perret dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Levallois : acquisition prévisible et rentable',
+      text1:
+        'Industrialiser les pages services & locales, avec messages orientés bénéfices.',
+      text2:
+        'Maximiser la conversion par itérations rapides (CRO + tests A/B).',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Levallois-Perret mais aussi dans les communes
-        suivantes des Hauts-de-Seine :
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Présence à Levallois-Perret et dans tout le 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Levallois-Perret ?',
-    CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Levallois-Perret avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Levallois-Perret',
+    CTATitle: 'Booster votre acquisition à Levallois-Perret',
+    CTADesc: 'Site + SEO + Ads + data : on déploie un plan clair et mesurable.',
+    CTATextBtn: 'Lancer mon projet à Levallois',
 
     metaTitle:
-      'Agence web Levallois-Perret (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Levallois-Perret (92) – Site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Levallois-Perret : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : création/refonte, SEO local, Ads et maintenance à Levallois-Perret pour générer plus de demandes.',
   },
+
+  // ========= 5) Nanterre =========
   {
     id: 'agence-web-nanterre',
     ville: 'Nanterre',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Nanterre ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Ikovaline, agence web à Nanterre : création de site, refonte, SEO local, SEA et contenus. Objectif : un pipeline de demandes qualifiées.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Nanterre</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-nanterre">Nanterre</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        À <strong>Nanterre</strong>, nous alignons <strong>site</strong>,{' '}
+        <strong>SEO</strong> et <strong>Ads</strong> pour capter une demande
+        qualifiée. En savoir plus :{' '}
+        <Link href="/agence-web-nanterre">offre Nanterre</Link>.
       </span>
     ),
 
@@ -507,359 +359,224 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Nanterre conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Architecture conversion, preuves, CTA, vitesse & mobile-first.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
-        subtext:
-          'Soyez visible à Nanterre et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+        subtext: 'Intention locale, on-page, technique, E-E-A-T, netlinking.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Nanterre.',
+        text: 'Maintenance & support',
+        subtext: 'Sécurité, sauvegardes, monitoring, MCO.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Nanterre avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'Google Ads/Meta, retargeting, reporting clair, optimisation CPA.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Nanterre : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Nanterre dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Nanterre : un système acquisition → qualification → conversion',
+      text1:
+        'Cibler les requêtes locales “service + Nanterre” et requêtes concurrentielles.',
+      text2:
+        'Mettre en place un suivi data fiable (GA4, events, CRM) pour piloter le ROI.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Nanterre mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline couvre Nanterre et tout le 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Nanterre ?',
+    CTATitle: 'Construire une acquisition solide à Nanterre',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Nanterre avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Nanterre',
+      'Création/refonte, SEO, Ads et data : on vise un deal-flow régulier.',
+    CTATextBtn: 'Démarrer à Nanterre',
 
     metaTitle:
-      'Agence web Nanterre (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Nanterre (92) – Création site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Nanterre : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Sites rapides, SEO local, Ads et CRO à Nanterre. Ikovaline, votre partenaire acquisition.',
   },
+
+  // ========= 6) Suresnes =========
   {
     id: 'agence-web-suresnes',
     ville: 'Suresnes',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Suresnes ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Agence web Suresnes (92) : création de site internet, refonte, SEO local, SEA et optimisation de conversion pour TPE/PME.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Suresnes</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-suresnes">Suresnes</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        À <strong>Suresnes</strong>, nous créons des <strong>sites web</strong>{' '}
+        rapides et <strong>SEO-ready</strong> avec un plan d’acquisition
+        actionnable (contenu + Ads). Voir :{' '}
+        <Link href="/agence-web-suresnes">offre Suresnes</Link>.
       </span>
     ),
 
     services: [
       {
         text: 'Création de sites web',
-        subtext:
-          'Site vitrine ou e-commerce : notre agence web à Suresnes conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+        subtext: 'Structure ROI : CTA visibles, preuves, formulaires clairs.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
-        subtext:
-          'Soyez visible à Suresnes et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+        subtext: 'Plan sémantique local, pages “ville + service”, schema.org.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Suresnes.',
+        text: 'Maintenance & support',
+        subtext: 'Disponibilité, sécurité, correctifs et évolutions continues.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
-        subtext:
-          'Faites décoller votre activité à Suresnes avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+        subtext: 'Ads multi-réseaux, retargeting, reporting décisionnel.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Suresnes : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Suresnes dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Suresnes : leads qualifiés & croissance durable',
+      text1:
+        'Mettre en place un funnel court et rassurant pour maximiser la prise de contact.',
+      text2:
+        'Optimiser le coût par lead via CRO + itérations sur messages/offres.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Suresnes mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Présents à Suresnes et dans ces villes des Hauts-de-Seine :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Suresnes ?',
+    CTATitle: 'Générer plus de demandes à Suresnes',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Suresnes avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Suresnes',
+      'Site, SEO, Ads : on assemble une stack digitale orientée résultats.',
+    CTATextBtn: 'Parler à Ikovaline – Suresnes',
 
-    metaTitle:
-      'Agence web Suresnes (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+    metaTitle: 'Agence web Suresnes (92) – Site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Suresnes : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : création/refonte de site, SEO local, Ads et CRO à Suresnes. Visez une acquisition rentable.',
   },
+
+  // ========= 7) Clamart =========
   {
     id: 'agence-web-clamart',
     ville: 'Clamart',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Clamart ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Ikovaline, agence web à Clamart : création de site internet, refonte, SEO local, SEA et maintenance pour un dispositif fiable et performant.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Clamart</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-clamart">Clamart</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        Notre <strong>agence web à Clamart</strong> conçoit des sites rapides et
+        crédibles, avec une stratégie <strong>SEO</strong> locale efficace.
+        Découvrir : <Link href="/agence-web-clamart">offre Clamart</Link>.
       </span>
     ),
 
     services: [
       {
         text: 'Création de sites web',
-        subtext:
-          'Site vitrine ou e-commerce : notre agence web à Clamart conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+        subtext: 'Design soigné, UX claire, mobile-first, conversions nettes.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Clamart et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Cocon sémantique, contenus experts, optimisation on-page/technique.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Clamart.',
+        text: 'Maintenance & support',
+        subtext: 'SLA, sécurité, backups, monitoring 24/7.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Clamart avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'SEA, social ads, email marketing, analytics et tableaux de bord.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Clamart : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Clamart dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Clamart : visibilité locale & conversions',
+      text1: 'Rassurer (preuves, avis, FAQ) et simplifier la prise de contact.',
+      text2: 'Réduire le CPA par itérations (CRO + data + Ads).',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Clamart mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline couvre Clamart et ces villes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Clamart ?',
+    CTATitle: 'Un site qui performe à Clamart',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Clamart avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Clamart',
+      'Création/refonte, SEO local, Ads et data : un mix acquisition efficace.',
+    CTATextBtn: 'Lancer mon projet à Clamart',
 
     metaTitle:
-      'Agence web Clamart (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Clamart (92) – Création site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Clamart : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Sites rapides, SEO local, Ads et maintenance à Clamart. Ikovaline, partenaire acquisition dans le 92.',
   },
+
+  // ========= 8) Colombes =========
   {
     id: 'agence-web-colombes',
     ville: 'Colombes',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Colombes ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Agence web à Colombes (92) : création/refonte de site, SEO local, SEA et contenus pour générer du trafic qualifié et des leads.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Colombes</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-colombes">Colombes</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        À <strong>Colombes</strong>, Ikovaline conçoit un dispositif digital
+        complet : <strong>site</strong>, <strong>SEO</strong>,{' '}
+        <strong>Ads</strong> et <strong>CRO</strong>. Voir :{' '}
+        <Link href="/agence-web-colombes">offre Colombes</Link>.
       </span>
     ),
 
@@ -867,239 +584,147 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Colombes conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Vitrine/e-commerce, pages conversion (devis/RDV), vitesse & UX.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
-        subtext:
-          'Soyez visible à Colombes et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+        subtext: 'Plan local, contenus, netlinking régional, rich snippets.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Colombes.',
+        text: 'Maintenance & support',
+        subtext: 'Correctifs, mises à jour, performance continue (CWV).',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Colombes avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'SEA B2B/B2C, tracking conversions, ROAS & CPA suivis mensuellement.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
-      objectifTitle:
-        'Notre mission à Colombes : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Colombes dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+      objectifTitle: 'Notre mission à Colombes : pipeline de demandes',
+      text1:
+        'Cibler “service + Colombes” et les requêtes transactionnelles du 92.',
+      text2:
+        'Optimiser le funnel et le suivi analytics pour des décisions data-driven.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Colombes mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Intervention à Colombes et dans ces villes des Hauts-de-Seine :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Colombes ?',
-    CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Colombes avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Colombes',
+    CTATitle: 'Déployer une acquisition sérieuse à Colombes',
+    CTADesc: 'Site + SEO + Ads + produit digital : un plan clair et mesurable.',
+    CTATextBtn: 'Démarrer à Colombes',
 
     metaTitle:
-      'Agence web Colombes (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Colombes (92) – Création site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Colombes : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : sites performants, SEO local, Ads et CRO à Colombes pour une acquisition prévisible.',
   },
+
+  // ========= 9) Montrouge =========
   {
     id: 'agence-web-montrouge',
     ville: 'Montrouge',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Montrouge ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Ikovaline, agence web à Montrouge : création/refonte de site, SEO local, SEA et maintenance pour artisans, commerces et PME.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Montrouge</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-montrouge">Montrouge</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        À <strong>Montrouge</strong>, nous livrons des{' '}
+        <strong>sites web</strong> rapides et une stratégie <strong>SEO</strong>{' '}
+        locale solide, couplés à des <strong>Ads</strong> rentables. Découvrir :{' '}
+        <Link href="/agence-web-montrouge">offre Montrouge</Link>.
       </span>
     ),
 
     services: [
       {
         text: 'Création de sites web',
-        subtext:
-          'Site vitrine ou e-commerce : notre agence web à Montrouge conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+        subtext: 'Architecture SEO + conversion, messages orientés bénéfices.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
-        subtext:
-          'Soyez visible à Montrouge et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+        subtext: 'Ciblage local, on-page, technique, maillage & avis clients.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Montrouge.',
+        text: 'Maintenance & support',
+        subtext: 'Support réactif, sécurité, sauvegardes, évolutions.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
-        subtext:
-          'Faites décoller votre activité à Montrouge avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+        subtext: 'Ads, social, email, ABM léger selon le contexte.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Montrouge : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Montrouge dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Montrouge : transformer le trafic en clients',
+      text1:
+        'Clarifier l’offre et les preuves pour lever les freins et augmenter le taux de contact.',
+      text2:
+        'Améliorer la conversion par itérations (CRO + A/B testing + analyse).',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Montrouge mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline intervient à Montrouge et dans tout le 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Montrouge ?',
-    CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Montrouge avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Montrouge',
+    CTATitle: 'Prendre de l’avance à Montrouge',
+    CTADesc: 'Site + SEO + Ads + data : une stratégie locale qui convertit.',
+    CTATextBtn: 'Lancer mon projet à Montrouge',
 
-    metaTitle:
-      'Agence web Montrouge (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+    metaTitle: 'Agence web Montrouge (92) – Site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Montrouge : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Création/refonte, SEO local, Ads et CRO à Montrouge. Ikovaline, votre partenaire acquisition.',
   },
+
+  // ========= 10) Asnières-sur-Seine =========
   {
     id: 'agence-web-asnieres-sur-seine',
     ville: 'Asnières-sur-Seine',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Asnières-sur-Seine ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Agence web à Asnières-sur-Seine : création de site, refonte, SEO local, SEA et suivi analytics pour un business mesurable.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Asnières-sur-Seine</strong> met à votre
-        service son expertise en création de site internet, refonte web,
-        référencement naturel (SEO) et campagnes marketing. Que vous soyez situé
-        à <Link href="/agence-web-asnieres-sur-seine">Asnières-sur-Seine</Link>{' '}
-        ou dans une commune voisine, profitez de solutions digitales sur-mesure,
-        pensées pour générer des résultats concrets dans le 92.
+        À <strong>Asnières-sur-Seine</strong>, Ikovaline assemble{' '}
+        <strong>site</strong>, <strong>SEO</strong> et <strong>Ads</strong> pour
+        un maximum d’impact. Voir :{' '}
+        <Link href="/agence-web-asnieres-sur-seine">offre Asnières</Link>.
       </span>
     ),
 
@@ -1107,119 +732,77 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Asnières-sur-Seine conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Vitesse, UX, crédibilité : un site pensé pour convertir dès le 1er jour.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Asnières-sur-Seine et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Ciblage “ville + service”, contenus, rich snippets et netlinking.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
+        text: 'Maintenance & support',
         subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Asnières-sur-Seine.',
+          'Sécurité, MCO, correctifs, évolutions, disponibilité maîtrisée.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
-        subtext:
-          'Faites décoller votre activité à Asnières-sur-Seine avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+        subtext: 'SEA/Search, Social Ads, retargeting, email nurturing.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Asnières-sur-Seine : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Asnières-sur-Seine dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Asnières : visibilité forte, conversion simple',
+      text1:
+        'Captez les requêtes locales à forte intention (devis, RDV, commande).',
+      text2:
+        'Suivi GA4/CRM, entonnoirs & cohortes pour des arbitrages éclairés.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Asnières-sur-Seine mais aussi dans les communes
-        suivantes des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Présence à Asnières-sur-Seine et dans ces villes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Asnières-sur-Seine ?',
+    CTATitle: 'Un site qui vend à Asnières-sur-Seine',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Asnières-sur-Seine avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Asnières-sur-Seine',
+      'Création/refonte, SEO local, Ads et data : on vise des résultats mesurables.',
+    CTATextBtn: 'Parler à Ikovaline – Asnières',
 
     metaTitle:
-      'Agence web Asnières-sur-Seine (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Asnières-sur-Seine (92) – Site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Asnières-sur-Seine : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : sites performants, SEO local et Ads à Asnières-sur-Seine. Développez vos leads dans le 92.',
   },
+
+  // ========= 11) Malakoff =========
   {
     id: 'agence-web-malakoff',
     ville: 'Malakoff',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Malakoff ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Ikovaline, agence web à Malakoff : création/refonte de site, SEO, Ads et maintenance pour une acquisition durable.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Malakoff</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-malakoff">Malakoff</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        À <strong>Malakoff</strong>, nous combinons <strong>site</strong>,{' '}
+        <strong>SEO</strong> et <strong>SEA</strong> pour générer des leads
+        qualifiés localement. Voir :{' '}
+        <Link href="/agence-web-malakoff">offre Malakoff</Link>.
       </span>
     ),
 
@@ -1227,119 +810,76 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Malakoff conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Modernes, rapides, responsive et optimisés pour le SEO local du 92.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
-        subtext:
-          'Soyez visible à Malakoff et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+        subtext: 'Mots-clés, contenu, maillage, technique, avis & GBP.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Malakoff.',
+        text: 'Maintenance & support',
+        subtext: 'Sécurité, sauvegardes, support réactif et évolutions.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Malakoff avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'Campagnes Ads, social, content marketing & marketing automation.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Malakoff : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Malakoff dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Malakoff : baisser le CPL, augmenter la conversion',
+      text1:
+        'Messages orientés bénéfices, CTA visibles, preuves sociales solides.',
+      text2:
+        'Tests continus (A/B, heatmaps) et dashboards ROI pour piloter les dépenses.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Malakoff mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline intervient à Malakoff et dans ces villes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
     CTATitle: 'Prêt à lancer votre projet web à Malakoff ?',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Malakoff avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Malakoff',
+      'Création de site, refonte, SEO, marketing : boostez votre visibilité à Malakoff.',
+    CTATextBtn: 'Lancer mon projet à Malakoff',
 
     metaTitle:
-      'Agence web Malakoff (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Malakoff (92) – Création site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Malakoff : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline, agence web à Malakoff : site, SEO local, Ads et CRO pour générer plus de demandes.',
   },
+
+  // ========= 12) Gennevilliers =========
   {
     id: 'agence-web-gennevilliers',
     ville: 'Gennevilliers',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Gennevilliers ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Agence web à Gennevilliers : création de site, refonte, SEO local, SEA et CRO pour une croissance mesurable.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Gennevilliers</strong> met à votre service
-        son expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-gennevilliers">Gennevilliers</Link> ou dans une
-        commune voisine, profitez de solutions digitales sur-mesure, pensées
-        pour générer des résultats concrets dans le 92.
+        À <strong>Gennevilliers</strong>, Ikovaline déploie une approche
+        business : <strong>site</strong>, <strong>SEO</strong>,{' '}
+        <strong>Ads</strong>, <strong>data</strong>. Découvrir :{' '}
+        <Link href="/agence-web-gennevilliers">offre Gennevilliers</Link>.
       </span>
     ),
 
@@ -1347,119 +887,74 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Gennevilliers conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Design propre, structure conversion, Core Web Vitals excellents.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Gennevilliers et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Intention locale, contenus, maillage, netlinking, rich results.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
+        text: 'Maintenance & support',
         subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Gennevilliers.',
+          'Monitoring, correctifs, sécurité, performance continue (CWV).',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
-        subtext:
-          'Faites décoller votre activité à Gennevilliers avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+        subtext: 'SEA/Search, Social Ads, remarketing, reporting ROI.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
-      objectifTitle:
-        'Notre mission à Gennevilliers : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Gennevilliers dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+      objectifTitle: 'Notre mission à Gennevilliers : une acquisition scalable',
+      text1: 'Standardiser les pages “ville + service” et renforcer l’E-E-A-T.',
+      text2:
+        'Optimiser le CPA via CRO, tests publicitaires et suivi analytics.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Gennevilliers mais aussi dans les communes
-        suivantes des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Présents à Gennevilliers et dans ces villes des Hauts-de-Seine :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Gennevilliers ?',
+    CTATitle: 'Accélérer votre croissance à Gennevilliers',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Gennevilliers avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Gennevilliers',
+      'Site + SEO + Ads + CRO : un plan d’acquisition qui s’améliore chaque mois.',
+    CTATextBtn: 'Démarrer à Gennevilliers',
 
     metaTitle:
-      'Agence web Gennevilliers (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Gennevilliers (92) – Site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Gennevilliers : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : création/refonte, SEO local, Ads et data à Gennevilliers. Acquisition mesurable et durable.',
   },
+
+  // ========= 13) Clichy =========
   {
     id: 'agence-web-clichy',
     ville: 'Clichy',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Clichy ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Ikovaline, agence web à Clichy : création/refonte de site, SEO local, SEA, email & social ads pour développer vos leads.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Clichy</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-clichy">Clichy</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        À <strong>Clichy</strong>, nous concevons des <strong>sites web</strong>{' '}
+        optimisés <strong>SEO</strong> et des <strong>campagnes Ads</strong>{' '}
+        rentables. Voir : <Link href="/agence-web-clichy">offre Clichy</Link>.
       </span>
     ),
 
@@ -1467,119 +962,74 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Clichy conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'UX claire, messages orientés bénéfices, CTA visibles, vitesse.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Clichy et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Pages locales, on-page/technique, avis et fiche établissement.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Clichy.',
+        text: 'Maintenance & support',
+        subtext: 'Sécurité, mises à jour, backups, support réactif.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
-        subtext:
-          'Faites décoller votre activité à Clichy avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+        subtext: 'Google Ads & Meta, retargeting, email marketing, dashboards.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Clichy : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Clichy dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Clichy : visibilité locale & demandes entrantes',
+      text1:
+        'Capter les recherches “création site internet + ville” et “service + Clichy”.',
+      text2: 'Optimiser le parcours (mobile-first, preuves, FAQ, offres).',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Clichy mais aussi dans les communes suivantes des
-        Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline opère à Clichy et dans ces villes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Clichy ?',
+    CTATitle: 'Créer un site qui vend à Clichy',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Clichy avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Clichy',
+      'Site + SEO + Ads : on construit votre moteur d’acquisition local.',
+    CTATextBtn: 'Parler à Ikovaline – Clichy',
 
     metaTitle:
-      'Agence web Clichy (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Clichy (92) – Création site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Clichy : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : sites performants, SEO local et Ads à Clichy. Développez votre acquisition dans le 92.',
   },
+
+  // ========= 14) Meudon =========
   {
     id: 'agence-web-meudon',
     ville: 'Meudon',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Meudon ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Agence web à Meudon : création/refonte de site internet, SEO local, SEA et produit digital pour une présence qui rassure et qui vend.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Meudon</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-meudon">Meudon</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        À <strong>Meudon</strong>, nous allions design premium,{' '}
+        <strong>performance</strong> et <strong>SEO</strong>. Découvrez :{' '}
+        <Link href="/agence-web-meudon">notre offre Meudon</Link>.
       </span>
     ),
 
@@ -1587,119 +1037,76 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Meudon conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Design soigné, crédibilité, UX et tunnel de conversion sans friction.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Meudon et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Contenus experts, maillage interne, pages locales, rich snippets.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
+        text: 'Maintenance & support',
         subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Meudon.',
+          'Support réactif, sécurité, sauvegardes, roadmap d’améliorations.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Meudon avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'SEA, social ads, email marketing et reporting orienté décisions.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
-      objectifTitle:
-        'Notre mission à Meudon : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Meudon dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+      objectifTitle: 'Notre mission à Meudon : image pro & ROI',
+      text1:
+        'Élever la perception de marque sans compromettre la performance commerciale.',
+      text2: 'Suivi précis (events, entonnoirs, cohortes) et itérations.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Meudon mais aussi dans les communes suivantes des
-        Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Présence à Meudon et dans ces villes des Hauts-de-Seine :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Meudon ?',
+    CTATitle: 'Construire un site haut de gamme à Meudon',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Meudon avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Meudon',
+      'Site premium, SEO, Ads et produit digital : une présence qui rassure et qui vend.',
+    CTATextBtn: 'Parler à Ikovaline – Meudon',
 
     metaTitle:
-      'Agence web Meudon (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Meudon (92) – Site premium, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Meudon : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : création/refonte de site, SEO local, Ads et CRO à Meudon. Performance & image de marque.',
   },
+
+  // ========= 15) Puteaux =========
   {
     id: 'agence-web-puteaux',
     ville: 'Puteaux',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Puteaux ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Ikovaline, agence web à Puteaux : création de site, refonte, SEO local, SEA et analytics. Objectif : un deal-flow régulier.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Puteaux</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-puteaux">Puteaux</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        À <strong>Puteaux</strong>, nous capitalisons sur un{' '}
+        <strong>site rapide</strong>, un <strong>SEO</strong> local robuste et
+        des <strong>Ads</strong> maîtrisés. Voir :{' '}
+        <Link href="/agence-web-puteaux">offre Puteaux</Link>.
       </span>
     ),
 
@@ -1707,119 +1114,76 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Puteaux conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Landing B2B/B2C, e-commerce, blog : structure data-driven orientée MQL/SQL.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Puteaux et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Recherche d’intentions, contenus “ville+service”, technique, netlinking.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
+        text: 'Maintenance & support',
         subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Puteaux.',
+          'Monitoring, correctifs, sécurité, performance continue (CWV).',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Puteaux avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'SEA, social ads, nurturing, dashboards décisionnels (GA4/Looker).',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Puteaux : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Puteaux dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Puteaux : des demandes qualifiées en continu',
+      text1: 'Aligner SEO, Ads et contenu bas de funnel pour un CPA optimisé.',
+      text2:
+        'Mettre en place qualification → relance → conversion pour maximiser la LTV.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Puteaux mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline couvre Puteaux et ces villes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
-    CTATitle: 'Prêt à lancer votre projet web à Puteaux ?',
+    CTATitle: 'Déployer une acquisition sérieuse à Puteaux',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Puteaux avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Puteaux',
+      'Création/refonte, SEO local, SEA et data : on vise un pipeline régulier.',
+    CTATextBtn: 'Démarrer à Puteaux',
 
     metaTitle:
-      'Agence web Puteaux (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Puteaux (92) – Création site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Puteaux : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Sites rapides, SEO local, Ads et solutions data à Puteaux. Ikovaline, partenaire acquisition.',
   },
+
+  // ========= 16) Bagneux =========
   {
     id: 'agence-web-bagneux',
     ville: 'Bagneux',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Bagneux ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Agence web à Bagneux (92) : création de site internet, refonte, SEO local, SEA et maintenance pour une acquisition durable.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Bagneux</strong> met à votre service son
-        expertise en création de site internet, refonte web, référencement
-        naturel (SEO) et campagnes marketing. Que vous soyez situé à{' '}
-        <Link href="/agence-web-bagneux">Bagneux</Link> ou dans une commune
-        voisine, profitez de solutions digitales sur-mesure, pensées pour
-        générer des résultats concrets dans le 92.
+        Notre <strong>agence web à Bagneux</strong> conçoit des sites modernes
+        et <strong>SEO-ready</strong>, avec un plan d’acquisition complet. Voir
+        : <Link href="/agence-web-bagneux">offre Bagneux</Link>.
       </span>
     ),
 
@@ -1827,120 +1191,76 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Bagneux conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Modernes, performants, responsive, orientés conversions locales.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
-        subtext:
-          'Soyez visible à Bagneux et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+        subtext: 'Mots-clés locaux, contenus, netlinking, technique propre.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
-        subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Bagneux.',
+        text: 'Maintenance & support',
+        subtext: 'Sécurité, mises à jour, support réactif, sauvegardes, SLA.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Bagneux avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'Ads, réseaux sociaux, content marketing et automation selon vos besoins.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Bagneux : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Bagneux dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Bagneux : plus de contacts qualifiés, moins de friction',
+      text1:
+        'Rendre la prise de contact ultra-simple (CTA, formulaires, offres claires).',
+      text2:
+        'Faire baisser le CPL via CRO et tests continus (pages, messages, preuves).',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Bagneux mais aussi dans les communes suivantes
-        des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Intervention à Bagneux et dans ces villes des Hauts-de-Seine :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
     CTATitle: 'Prêt à lancer votre projet web à Bagneux ?',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Bagneux avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Bagneux',
+      'Création de site, SEO, Ads : boostez votre visibilité locale à Bagneux.',
+    CTATextBtn: 'Lancer mon projet à Bagneux',
 
     metaTitle:
-      'Agence web Bagneux (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Bagneux (92) – Création site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Bagneux : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : site, SEO local, Ads et maintenance à Bagneux. Visez une acquisition rentable.',
   },
+
+  // ========= 17) Issy-les-Moulineaux =========
   {
     id: 'agence-web-issy-les-moulineaux',
     ville: 'Issy-les-Moulineaux',
     departement: 'Hauts-de-Seine',
 
-    intro: `Vous recherchez une agence web à Issy-les-Moulineaux ? Ikovaline vous accompagne dans la création de site internet, la refonte de site web, le SEO local et le webmarketing. Boostez votre visibilité dans les Hauts-de-Seine grâce à une stratégie digitale performante.`,
+    intro: `Ikovaline, agence web à Issy-les-Moulineaux : création/refonte de site internet, SEO local, SEA, contenus et data pour augmenter vos leads.`,
 
     text1: (
       <span>
-        Notre <strong>agence web à Issy-les-Moulineaux</strong> met à votre
-        service son expertise en création de site internet, refonte web,
-        référencement naturel (SEO) et campagnes marketing. Que vous soyez situé
-        à{' '}
-        <Link href="/agence-web-issy-les-moulineaux">Issy-les-Moulineaux</Link>{' '}
-        ou dans une commune voisine, profitez de solutions digitales sur-mesure,
-        pensées pour générer des résultats concrets dans le 92.
+        À <strong>Issy-les-Moulineaux</strong>, nous livrons des{' '}
+        <strong>sites web</strong> performants, un <strong>SEO</strong> local
+        solide et des <strong>Ads</strong> rentables. Découvrir :{' '}
+        <Link href="/agence-web-issy-les-moulineaux">offre Issy</Link>.
       </span>
     ),
 
@@ -1948,102 +1268,61 @@ export const dataAgenceHautsSeine = [
       {
         text: 'Création de sites web',
         subtext:
-          'Site vitrine ou e-commerce : notre agence web à Issy-les-Moulineaux conçoit des sites modernes, performants, responsive et optimisés pour le SEO local.',
+          'Site vitrine/e-commerce : UX, vitesse, conversions, CWV maîtrisés.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Issy-les-Moulineaux et en Île-de-France avec une stratégie de référencement naturel complète : mots-clés, contenu, netlinking, technique.',
+          'Stratégie locale, contenus “métier + ville”, optimisation on-page/technique.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
-        text: 'Maintenance et support',
+        text: 'Maintenance & support',
         subtext:
-          'Sécurité, mises à jour, support technique : bénéficiez d’un site toujours fonctionnel grâce à notre service de maintenance web à Issy-les-Moulineaux.',
+          'MCO, sécurité, sauvegardes et évolutions sans rupture de service.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Faites décoller votre activité à Issy-les-Moulineaux avec nos campagnes Ads, réseaux sociaux, content marketing et marketing automation.',
+          'Google/Meta Ads, retargeting, email marketing, dashboards ROI.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
 
     objectifs: {
       objectifTitle:
-        'Notre mission à Issy-les-Moulineaux : transformer votre site en machine à clients',
-      text1: `Ikovaline accompagne les entreprises de Issy-les-Moulineaux dans leur digitalisation : création ou refonte de site web, stratégie SEO, campagnes d’acquisition.`,
-      text2: `Présents dans tout le 92, nous faisons de votre réussite locale une priorité. Nos prestations sur-mesure sont pensées pour générer du trafic qualifié, des contacts concrets, et des ventes.`,
+        'Notre mission à Issy-les-Moulineaux : transformer votre visibilité en clients',
+      text1:
+        'Capter l’intention locale et convertir via un parcours simple et rassurant.',
+      text2:
+        'Piloter avec la donnée (GA4, events, CRM) pour arbitrer budget & messages.',
     },
 
-    villesVoisines: [
-      'Boulogne-Billancourt',
-      'Neuilly-sur-Seine',
-      'Courbevoie',
-      'Levallois-Perret',
-      'Nanterre',
-      'Suresnes',
-      'Clamart',
-      'Colombes',
-      'Montrouge',
-      'Asnières-sur-Seine',
-      'Malakoff',
-      'Gennevilliers',
-      'Clichy',
-      'Meudon',
-      'Puteaux',
-      'Bagneux',
-      'Issy-les-Moulineaux',
-    ],
+    villesVoisines: [...ALL_VILLES_92],
 
     cityAroundText: (
       <span className="text-center">
-        Ikovaline intervient à Issy-les-Moulineaux mais aussi dans les communes
-        suivantes des Hauts-de-Seine :{' '}
-        {[
-          'Boulogne-Billancourt',
-          'Neuilly-sur-Seine',
-          'Courbevoie',
-          'Levallois-Perret',
-          'Nanterre',
-          'Suresnes',
-          'Clamart',
-          'Colombes',
-          'Montrouge',
-          'Asnières-sur-Seine',
-          'Malakoff',
-          'Gennevilliers',
-          'Clichy',
-          'Meudon',
-          'Puteaux',
-          'Bagneux',
-          'Issy-les-Moulineaux',
-        ].map((v, i, arr) => (
+        Ikovaline intervient à Issy-les-Moulineaux et dans ces villes du 92 :{' '}
+        {ALL_VILLES_92.map((v, i, arr) => (
           <span key={v}>
-            {' '}
-            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>{' '}
-            {i < arr.length - 2
-              ? ', '
-              : i === arr.length - 2
-                ? ' et '
-                : ''}{' '}
+            <Link href={`/agence-web-${removeAccents(v)}`}>{v}</Link>
+            {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        . Ensemble, donnons un coup d’accélérateur à votre stratégie digitale
-        locale.
+        .
       </span>
     ),
 
     CTATitle: 'Prêt à lancer votre projet web à Issy-les-Moulineaux ?',
     CTADesc:
-      'Création de site, refonte, SEO, marketing… boostez votre visibilité à Issy-les-Moulineaux avec Ikovaline, votre agence digitale locale dans le 92.',
-    CTATextBtn: 'Lancez votre projet web à Issy-les-Moulineaux',
+      'Création/refonte, SEO, Ads, maintenance : cap sur des résultats mesurables.',
+    CTATextBtn: 'Lancer mon projet à Issy',
 
     metaTitle:
-      'Agence web Issy-les-Moulineaux (92) – Création site internet, SEO, refonte Hauts-de-Seine',
+      'Agence web Issy-les-Moulineaux (92) – Site, SEO, SEA – Hauts-de-Seine',
     metaDescription:
-      'Ikovaline, agence web à Issy-les-Moulineaux : création de site internet, refonte, SEO local et stratégie digitale. Donnez un coup de boost à votre visibilité dans les Hauts-de-Seine.',
+      'Ikovaline : sites performants, SEO local et Ads à Issy-les-Moulineaux. Développez votre acquisition.',
   },
-];
+] as const;

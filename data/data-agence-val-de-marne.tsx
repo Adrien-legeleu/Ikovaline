@@ -1,3 +1,4 @@
+// dataAgenceValDeMarne.tsx
 import { removeAccents } from '@/components/pageSatellite/CityAround';
 import Link from 'next/link';
 
@@ -68,9 +69,9 @@ export const dataAgenceValDeMarne = [
       objectifTitle:
         'Notre mission à Créteil : un dispositif digital qui génère des clients',
       text1:
-        'Aligner produit (site/SaaS), SEO local et campagnes pour capter une demande qualifiée à Créteil.',
+        'Concevoir un écosystème cohérent qui relie votre site, votre référencement local et vos campagnes payantes afin de capter la demande autour de Créteil. Nous structurons vos pages “service + ville”, clarifions votre proposition de valeur, intégrons des preuves (avis, certifications, cas clients) et installons des CTA visibles à chaque étape. L’objectif est simple : augmenter la part de trafic qualifié et raccourcir le temps entre la découverte et la prise de contact.',
       text2:
-        'Mesurer, tester, itérer : CRO, heatmaps, A/B tests pour améliorer durablement la conversion.',
+        'Mettre la data au cœur des décisions : configuration GA4 + GSC, évènements clés (clics, formulaires, appels), tableaux de bord par canal, et itérations rapides (A/B tests sur titres, sections de preuve, offres d’essai). Nous suivons des KPIs concrets (taux de conversion, coût par lead, panier moyen, LTV) et optimisons en continu les performances (Core Web Vitals, SEO technique, entonnoirs). Résultat : une acquisition durable, prédictible et rentable sur Créteil et le 94.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -148,9 +149,9 @@ export const dataAgenceValDeMarne = [
       objectifTitle:
         'Notre mission à Vitry : trafic utile et conversions mesurables',
       text1:
-        'Positionner votre activité sur les requêtes locales à intention commerciale.',
+        'Multiplier les points d’entrée qualifiés sur Vitry : pages locales, articles à intention commerciale, landing pages pour campagnes, et optimisation de Google Business Profile. Nous cartographions les intentions (informationnelles vs transactionnelles), priorisons les mots-clés “rapides” à ranker et créons des offres claires (diagnostic, devis en 24h, audit gratuit) pour déclencher la prise de contact.',
       text2:
-        'Optimiser le funnel (formulaires, devis, réservation) et le suivi analytics.',
+        'Mesurer pour améliorer : heatmaps, enregistrements de sessions, formulaires “step-by-step” et tests A/B sur les sections critiques (héros, social proof, FAQ). Nous alimentons un tableau de bord (GA4 + Looker/Datastudio) pour suivre CPA, taux de conversion par canal et valeur par lead. Les enseignements guident les itérations SEO/SEA et les corrections UX jusqu’à obtenir un funnel stable et scalable à Vitry-sur-Seine.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -226,9 +227,9 @@ export const dataAgenceValDeMarne = [
       objectifTitle:
         'Notre mission à Ivry-sur-Seine : visibilité forte, conversion simple',
       text1:
-        'Captez les requêtes locales à forte intention (devis, rdv, commande).',
+        'Faire émerger votre marque sur les requêtes locales à forte intention (devis, réservation, appel). Nous mettons en avant vos différenciants (expertise, délais, garanties) et simplifions le parcours : prise de RDV en ligne, devis instantané, chat pro, numéro cliquable. Chaque page est pensée pour rassurer (avis, références, labels) et guider vers l’action.',
       text2:
-        'Améliorez le taux de conversion et la LTV via un site rapide et rassurant.',
+        'Optimiser la performance business dans la durée : suivi de cohorte des leads, qualification CRM, boucles d’amélioration entre SEO/SEA et contenus. Nous travaillons la vitesse (CWV), l’accessibilité et la sémantique pour stabiliser le ranking, tout en testant des leviers d’upsell/cross-sell (packs, offres saisonnières). Objectif : plus de conversions utiles et une LTV en hausse à Ivry.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -304,9 +305,10 @@ export const dataAgenceValDeMarne = [
     objectifs: {
       objectifTitle:
         'Notre mission à Villejuif : leads qualifiés et croissance durable',
-      text1: 'Mettre en place un tunnel clair (landing → preuve → conversion).',
+      text1:
+        'Construire un tunnel limpide de la découverte à la prise de contact : section héros orientée bénéfices, éléments de réassurance (avis, garanties), FAQ anti-freins et CTA récurrents. Nous créons des aimants à leads (ebooks, checklists, simulateurs) adaptés au tissu local et mettons en place un nurturing léger (emails, retargeting) pour convertir les hésitants.',
       text2:
-        'Suivre les KPIs clés : trafic qualifié, taux de conversion, coût par lead.',
+        'Piloter les performances comme un P&L marketing : coût par session utile, coût par lead, taux de signature et valeur moyenne. Nous synchronisons analytics et CRM pour mesurer la qualité des demandes, automatisons les relances (email/SMS) et priorisons les chantiers à plus fort ROI (pages locales gagnantes, ads gagnantes, optimisations CRO). Objectif : une croissance maîtrisée à Villejuif.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -383,8 +385,9 @@ export const dataAgenceValDeMarne = [
       objectifTitle:
         'Notre mission à Maisons-Alfort : visibilité locale et conversions',
       text1:
-        'Rassurer (preuves, avis, réassurance) et simplifier la prise de contact.',
-      text2: 'Optimiser le coût par lead par itérations (CRO + data + Ads).',
+        'Déployer une stratégie “confiance + clarté” : identité visuelle lisible, messages orientés résultats, preuves sociales fortes et pages locales qui répondent aux attentes des habitants et entreprises. Nous simplifions les formulaires, proposons des rendez-vous express et des offres d’appel pour réduire la friction et augmenter la prise de contact.',
+      text2:
+        'Industrialiser l’optimisation : sprint CRO mensuel (hypothèse → test → décision), suivi des appels et des formulaires dans le CRM, scoring des leads, et arbitrages budgétaires SEO/SEA en fonction du CPA réel. En parallèle, nous consolidons la technique (vitesse, sécurité, uptime) pour assurer une expérience fluide et des positions stables sur le long terme à Maisons-Alfort.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -463,8 +466,9 @@ export const dataAgenceValDeMarne = [
       objectifTitle:
         'Notre mission à Saint-Maur : un parcours simple qui convertit',
       text1:
-        'Clarifier la proposition de valeur et lever les frictions (preuves, FAQ, CTA).',
-      text2: 'Suivi data propre (GA4, events, CRM) pour piloter les décisions.',
+        'Clarifier le message et lever les doutes : structure de page en entonnoir (problème → bénéfices → preuve → action), sections “avant/après”, garanties, et comparatifs. Nous adaptons le ton et les offres aux quartiers et aux usages locaux (services à domicile, B2B, retail), pour un ressenti de proximité et une conversion naturelle.',
+      text2:
+        'Outiller la prise de décision : instrumentation GA4 propre, micro-conversions suivies (scroll, clics CTA, téléchargements), tableaux de bord hebdos, et rituels d’itération. Nous optimisons la vitesse, le maillage interne et le netlinking, tout en orchestrant Ads et SEO pour maximiser la présence sur les requêtes clés de Saint-Maur-des-Fossés.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -542,8 +546,10 @@ export const dataAgenceValDeMarne = [
     objectifs: {
       objectifTitle:
         'Notre mission à Champigny : acquisition prévisible et rentable',
-      text1: 'Industrialiser les pages locales et les pages services.',
-      text2: 'Maximiser la conversion par itérations rapides (CRO).',
+      text1:
+        'Standardiser ce qui marche : gabarits de pages locales/services, librairie de sections “preuves” (avis, réalisations, logos), et offres testées. Nous concentrons l’effort sur les requêtes à forte intention et déployons un calendrier éditorial pour occuper progressivement tout le champ sémantique de Champigny et alentours.',
+      text2:
+        'Mettre en place un cycle d’amélioration continue : revues mensuelles des KPIs (trafic qualifié, taux de conversion, coût par lead), tests CRO en continu (titres, visuels, ordonnancement des blocs), optimisation des annonces et des audiences. L’objectif est d’obtenir un pipeline stable de demandes pertinentes avec un CPA sous contrôle.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -617,8 +623,10 @@ export const dataAgenceValDeMarne = [
     objectifs: {
       objectifTitle:
         'Notre mission à Nogent : image pro et performance commerciale',
-      text1: 'Élever la perception de marque tout en maximisant le ROI.',
-      text2: 'Mettre en place un suivi précis (events, entonnoirs, cohortes).',
+      text1:
+        'Aligner perception de marque et génération de chiffre d’affaires : identité visuelle exigeante, lignes éditoriales soignées, cas clients chiffrés et pages services à haute valeur. Nous travaillons la preuve (labels, presse, témoignages vidéo) et des offres packagées premium pour élever le panier moyen.',
+      text2:
+        'Objectiver la performance : suivi des conversions multi-touch, analyse des sources haut de funnel vs bas de funnel, et réallocation budgétaire vers les combinaisons page+mot-clé+annonce qui délivrent le meilleur ROAS. Nous optimisons la vitesse, la qualité mobile et l’accessibilité pour sécuriser le SEO et maximiser la conversion sur Nogent-sur-Marne.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -694,8 +702,10 @@ export const dataAgenceValDeMarne = [
     objectifs: {
       objectifTitle:
         'Notre mission à Charenton : pipeline de demandes qualifiées',
-      text1: 'Structurer un système acquisition → qualification → conversion.',
-      text2: 'Aligner SEO, Ads et contenu bas de funnel pour un CPA optimisé.',
+      text1:
+        'Structurer une mécanique claire acquisition → qualification → conversion : ciblage des décideurs, messages par persona, pages d’atterrissage dédiées, et formulaires intelligents (progressifs, contextualisés). Nous connectons les canaux (SEO/SEA/LinkedIn/Email) pour multiplier les points de contact et nourrir votre pipeline.',
+      text2:
+        'Mettre en musique la data : scoring des leads dans le CRM, SLAs marketing-vente, reporting hebdo sur le coût/opportunité et le taux de closing. Nous ajustons enchères, audiences et contenus bas de funnel pour diminuer le CPA et accélérer la vélocité commerciale à Charenton-le-Pont, tout en consolidant les fondamentaux SEO.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
@@ -771,9 +781,9 @@ export const dataAgenceValDeMarne = [
       objectifTitle:
         'Notre mission à Choisy-le-Roi : visibilité locale et demandes entrantes',
       text1:
-        'Capter les recherches “création site internet + ville” et “service + Choisy”.',
+        'Captez les recherches locales “service + Choisy-le-Roi” avec des pages dédiées, des offres claires (devis en 24h, diagnostic) et une présence soignée sur Google Business Profile. Nous optimisons la lisibilité mobile, la hiérarchie des informations, et la réassurance pour encourager les appels et formulaires depuis Choisy et les communes limitrophes.',
       text2:
-        'Optimiser le parcours (mobile-first, preuve sociale, offres, FAQ).',
+        'Transformer l’intérêt en rendez-vous : suivi fin des micro-conversions (clic téléphone, WhatsApp, email), campagnes de retargeting, emailing de relance, et tests A/B sur tarifs/packaging. Nous monitorons la qualité des leads dans le CRM, ajustons SEO/SEA en conséquence, et consolidons la performance technique (vitesse, sécurité) pour des résultats fiables et reproductibles.',
     },
 
     villesVoisines: [...ALL_VILLES_94],
