@@ -285,15 +285,15 @@ function KanbanMock() {
     const reduced = useReducedMotion();
 
     return (
-      <div className="relative overflow-hidden rounded-lg bg-white p-3 text-xs ring-1 ring-black/5 shadow-[0_14px_28px_-18px_rgba(0,0,0,.3)] dark:bg-neutral-900 dark:ring-white/10">
+      <div className="relative overflow-hidden rounded-lg bg-white  p-3 text-xs ring-1 ring-black/5 shadow-[0_14px_28px_-18px_rgba(0,0,0,.3)] dark:bg-neutral-900 dark:ring-white/10">
         {/* sheen continu SANS retour arrière (fond répétitif + position animée) */}
         {!reduced && (
           <div
-            className="pointer-events-none absolute rounded-full inset-y-0 left-0 w-full"
+            className="pointer-events-none absolute rounded-lg inset-y-0 left-0 w-full"
             style={{
               background:
                 // bande claire au centre du motif (transparent -> blanc -> transparent)
-                'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.25) 50%, rgba(255,255,255,0) 100%)',
+                'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.05) 50%, rgba(255,255,255,0) 100%)',
               backgroundSize: '220px 100%', // largeur du motif
               backgroundRepeat: 'repeat-x', // se répète à l’infini
               animation: `sheen-scroll 4.2s linear ${delay}s infinite`,

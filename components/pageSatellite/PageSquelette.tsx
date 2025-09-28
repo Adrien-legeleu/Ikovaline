@@ -5,6 +5,7 @@ import dataEssonne from '@/data/data-essonne.json';
 import dataHautsDeSeine from '@/data/data-hauts-de-seine.json';
 import dataSeineEtMarne from '@/data/data-seine-et-marne.json'; // 👈 ton JSON carte 77
 import dataValDeMarne from '@/data/data-val-de-marne.json'; // 👈 ton JSON carte 77
+import dataYvelines from '@/data/data-yvelines.json'; // 👈 ton JSON carte 77
 
 import Services from '@/components/pageSatellite/Services';
 import Objectif from '@/components/pageSatellite/Objectif';
@@ -85,6 +86,13 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
               width={800}
               height={800}
               data={dataValDeMarne.features}
+              highlighted={data.ville.toLowerCase()}
+            />
+          ) : data.departement === 'Yvelines' ? (
+            <CarteEssonne
+              width={800}
+              height={800}
+              data={dataYvelines.features}
               highlighted={data.ville.toLowerCase()}
             />
           ) : null
