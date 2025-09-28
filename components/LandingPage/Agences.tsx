@@ -29,6 +29,7 @@ const citiesEssonne = [
   'Athis-Mons',
   'Draveil',
 ];
+
 const citiesHautsSeine = [
   'Neuilly-sur-Seine',
   'Courbevoie',
@@ -47,6 +48,7 @@ const citiesHautsSeine = [
   'Bagneux',
   'Issy-les-Moulineaux',
 ];
+
 const citiesSeineEtMarne = [
   'Serris',
   'Chessy',
@@ -60,15 +62,34 @@ const citiesSeineEtMarne = [
   'Meaux',
 ];
 
+/* ----------------------------- Val-de-Marne (NOUVEAU) ----------------------------- */
+const citiesValDeMarne = [
+  'Créteil',
+  'Vitry-sur-Seine',
+  'Ivry-sur-Seine',
+  'Villejuif',
+  'Maisons-Alfort',
+  'Saint-Maur-des-Fossés',
+  'Champigny-sur-Marne',
+  'Nogent-sur-Marne',
+  'Charenton-le-Pont',
+  'Choisy-le-Roi',
+];
+
 /* ------------------------------- Composant principal ------------------------------- */
 export default function Agences() {
-  type Depart = 'essonne' | 'hauts-de-seine' | 'seine-et-marne';
+  type Depart =
+    | 'essonne'
+    | 'hauts-de-seine'
+    | 'seine-et-marne'
+    | 'val-de-marne';
   const [depart, setDepart] = useState<Depart>('essonne');
 
   const departs: { slug: Depart; name: string }[] = [
     { slug: 'essonne', name: 'Essonne' },
     { slug: 'hauts-de-seine', name: 'Hauts-de-Seine' },
     { slug: 'seine-et-marne', name: 'Seine-et-Marne' },
+    { slug: 'val-de-marne', name: 'Val-de-Marne' }, // NEW
   ];
 
   /* ---------------------- Segmented control slider ---------------------- */
@@ -93,14 +114,15 @@ export default function Agences() {
   }, []);
 
   /* ---------------------- Liste villes ---------------------- */
-
   const renderCities = () => {
     const arr =
       depart === 'essonne'
         ? citiesEssonne
         : depart === 'hauts-de-seine'
           ? citiesHautsSeine
-          : citiesSeineEtMarne;
+          : depart === 'seine-et-marne'
+            ? citiesSeineEtMarne
+            : citiesValDeMarne; // val-de-marne
 
     return (
       <AnimatePresence mode="wait">
@@ -173,7 +195,7 @@ export default function Agences() {
                   <button
                     key={d.slug}
                     ref={(el) => {
-                      buttonRefs.current[i] = el; // ✅ correction : ne rien return
+                      buttonRefs.current[i] = el;
                     }}
                     onClick={() => setDepart(d.slug)}
                     className={cn(
@@ -194,13 +216,13 @@ export default function Agences() {
 
             <p className="text-center text-lg leading-8 text-neutral-900 dark:text-neutral-300 mt-8 max-w-2xl">
               Ikovaline est une agence web qui accompagne les entreprises dans
-              toute la France, avec un ancrage fort en Essonne et en
-              Île-de-France, à travers la{' '}
+              toute la France, avec un ancrage fort en Essonne, Val-de-Marne et
+              en Île-de-France, à travers la{' '}
               <Link
                 href="/nos-services/creation-sites-web-vitrine-e-commerce"
                 className="text-primary underline-offset-4 hover:underline"
               >
-                création de sites web{' '}
+                création de sites web
               </Link>{' '}
               et{' '}
               <Link
@@ -216,6 +238,7 @@ export default function Agences() {
     </div>
   );
 }
+
 function Background() {
   const [strips, setStrips] = useState<number[]>([]);
 
