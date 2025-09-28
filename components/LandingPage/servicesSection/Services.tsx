@@ -130,7 +130,7 @@ export default function ServicesGridRefined() {
   return (
     <section className="bg-transparent">
       <div className="relative z-10 mx-auto px-4">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2  lg:grid-cols-3 xl:gap-10">
           {SERVICES.map((s, idx) => {
             const Icon = s.icon;
             return (

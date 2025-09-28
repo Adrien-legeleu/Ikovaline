@@ -29,11 +29,6 @@ type DeferredStyle = React.CSSProperties & {
   containIntrinsicSize?: string;
 };
 
-const deferred: DeferredStyle = {
-  contentVisibility: 'auto',
-  contain: 'layout paint style',
-  containIntrinsicSize: '420px 1200px', // même empreinte que les cartes
-};
 export default function HeroNoiseLight() {
   const reduce = useReducedMotion();
 
@@ -83,7 +78,7 @@ export default function HeroNoiseLight() {
             label="WhatsApp"
           />
         </motion.div>
-        <div className="z-40 my-12 flex w-full justify-center" style={deferred}>
+        <div className="z-40 my-12 flex w-full justify-center">
           <Services />
         </div>
       </div>
