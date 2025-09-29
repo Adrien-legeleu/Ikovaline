@@ -117,7 +117,7 @@ export default function Footer() {
                 alt="Ikovaline"
                 width={200}
                 height={80}
-                className="h-20 w-auto object-contain dark:hidden"
+                className="h-16 w-auto object-contain dark:hidden"
                 priority
               />
               <Image

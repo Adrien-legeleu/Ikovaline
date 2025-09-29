@@ -24,15 +24,6 @@ function useIsMdUp() {
 function Card({ children }: { children: React.ReactNode }) {
   return (
     <div className={cn('overflow-hidden rounded-2xl')}>
-      {/* Reflet doux */}
-      <span
-        aria-hidden
-        className="pointer-events-none mx-8 block h-16 rounded-b-[48px] bg-white/40 blur-xl dark:hidden"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none mx-8 hidden h-16 rounded-b-[48px] bg-white/5 blur-lg dark:block"
-      />
       <div className="relative px-6 py-10 sm:px-8 sm:py-12">{children}</div>
     </div>
   );
