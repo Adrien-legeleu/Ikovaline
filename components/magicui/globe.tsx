@@ -31,6 +31,8 @@ const DEFAULT_CONFIG: COBEOptions = {
     { location: [-4.4419, 15.2663], size: 0.1 }, // Kinshasa
     { location: [46.9481, 7.4474], size: 0.08 }, // Berne
     { location: [45.5019, -73.5674], size: 0.1 }, // Montréal
+    { location: [35.6762, 139.6503], size: 0.12 },
+    { location: [1.3521, 103.8198], size: 0.11 }, // Singapour
   ],
 };
 
@@ -64,7 +66,7 @@ export function Globe({
         ...config,
         // globe vraiment sombre en dark
         dark: 1,
-        mapBrightness: 1.05,
+        mapBrightness: 1.9,
         diffuse: 0.35,
         baseColor: [0.3, 0.3, 0.3], // gris quasi noir
         glowColor: [0.1, 0.1, 0.12], // glow discret sombre
@@ -75,7 +77,7 @@ export function Globe({
     return {
       ...config,
       dark: 0,
-      mapBrightness: 1.2,
+      mapBrightness: 1.9,
       diffuse: 0.4,
       baseColor: [1, 1, 1],
       glowColor: [1, 1, 1],
@@ -145,7 +147,7 @@ export function Globe({
       )}
     >
       {/* Masque de fondu bas : blanc en light, noir en dark */}
-      <div className="absolute z-50 bottom-0 bg-gradient-to-t from-white from-40% dark:from-black to-transparent left-0 w-full h-1/2" />
+      <div className="" />
 
       <canvas
         ref={canvasRef}
