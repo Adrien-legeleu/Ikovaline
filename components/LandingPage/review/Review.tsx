@@ -16,6 +16,9 @@ import Review8 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne 
 import Review9 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (4).png";
 import Review10 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (5).png";
 import Review11 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (6).png";
+import Review12 from '@/public/images/logo/logo teka somba.png';
+import Review13 from '@/public/images/logo/logo-lynelec.webp';
+import Review14 from '@/public/images/logo/logo.svg';
 import StarClientsGoogle from '@/components/StarClientsGoogle';
 import Link from 'next/link';
 import WhatsAppButton from '@/components/WhatsappButton';
@@ -82,7 +85,7 @@ function Card({ r }: { r: ReviewType }) {
           alt={r.name}
           width={40}
           height={40}
-          className="h-8 w-8 rounded-full object-cover md:h-10 md:w-10"
+          className="h-8 w-8 rounded-full object-contain md:h-10 md:w-10"
           unoptimized
         />
         <div className="min-w-0">
@@ -100,6 +103,24 @@ function Card({ r }: { r: ReviewType }) {
 
 /* -------------------------------- Data --------------------------------- */
 const reviewsFR: ReviewType[] = [
+  {
+    name: 'Teka Somba',
+    image: Review12,
+    role: 'Plateforme de petites annonces - Congo',
+    text: 'Ikovaline a développé une application moderne et scalable, adaptée au marché africain. Leur expertise technique et leur accompagnement stratégique ont été déterminants pour le lancement.',
+  },
+  {
+    name: 'Lynelec',
+    role: 'Site e-commerce B2B - Grossiste câbles électriques',
+    image: Review13,
+    text: 'Grâce à Ikovaline, nous disposons aujourd’hui d’un site professionnel et optimisé SEO. L’ergonomie et le design reflètent parfaitement notre savoir-faire.',
+  },
+  {
+    name: 'Skillize',
+    image: Review14,
+    role: 'Plateforme de mise en relation freelances & entreprises',
+    text: 'Ikovaline a conçu une solution fluide et performante pour connecter freelances et entreprises. Leur sens du détail et de l’UX fait toute la différence.',
+  },
   {
     name: 'L’Ora Fashion Paris',
     role: 'Optimisation Instagram - Google Shopping',
