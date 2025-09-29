@@ -10,6 +10,12 @@ import Review2 from '@/public/images/logo/jean-cristophe-Lelandais.jpeg';
 import Review3 from '@/public/images/logo/logo-lelandais.png';
 import Review4 from '@/public/images/logo/hl-horner-logo.jpg';
 import Review5 from '@/public/images/logo/logo-lora.png';
+import Review6 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (1).png";
+import Review7 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo.png";
+import Review8 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (3).png";
+import Review9 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (4).png";
+import Review10 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (5).png";
+import Review11 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (6).png";
 import StarClientsGoogle from '@/components/StarClientsGoogle';
 import Link from 'next/link';
 import WhatsAppButton from '@/components/WhatsappButton';
@@ -147,7 +153,10 @@ const reviewsFR: ReviewType[] = [
   {
     name: 'Simon Corbin',
     role: 'Stratégies marketing et commerciales sur mesure',
+
     text: 'L’approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.',
+
+    image: Review9,
   },
 
   // --- Nouveaux avis “sobres” ---
@@ -155,26 +164,31 @@ const reviewsFR: ReviewType[] = [
     name: 'Manu Arora',
     role: 'Tech Innovator & Entrepreneur',
     text: 'Fantastique. Cela a complètement changé notre façon d’aborder les problèmes et de livrer des solutions.',
+    image: Review11,
   },
   {
     name: 'Bob Smith',
     role: 'Industry Analyst',
     text: 'Absolument révolutionnaire, un vrai game-changer pour notre secteur.',
+    image: Review7,
   },
   {
     name: 'Eva Green',
     role: 'Directrice des opérations',
     text: 'L’efficacité apportée est incomparable. On a réduit nos coûts et amélioré la qualité de notre produit final.',
+    image: Review10,
   },
   {
     name: 'Henry Ford',
     role: 'Operations Analyst',
     text: 'Nous avons gagné d’innombrables heures. Recommandé à tous ceux qui veulent booster l’efficacité.',
+    image: Review8,
   },
   {
     name: 'Cathy Lee',
     role: 'Product Manager',
     text: 'Je ne peux plus imaginer revenir en arrière. C’est devenu indispensable au quotidien.',
+    image: Review6,
   },
 ];
 
