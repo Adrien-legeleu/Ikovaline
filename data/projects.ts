@@ -67,6 +67,59 @@ export const PROJECTS_FR: Project[] = [
     coverImage: '/images/sophie.png',
     lien: 'https://sophiedeneriaz.ch/',
   },
+  {
+    id: 'ty-klouyou-2025',
+    titre: 'Site vitrine – Ty Klouyou',
+    client: 'Ty Klouyou',
+    secteur: 'Tourisme & Locations saisonnières',
+    periode: 'Septembre 2025',
+    services: ['Next.js', 'Design UI', 'Optimisation mobile'],
+    objectif:
+      'Créer un site vitrine moderne et immersif pour valoriser la localisation et faciliter la recherche des visiteurs.',
+    resultat:
+      'Site responsive avec identité visuelle forte et mise en avant du territoire de Saint-Gildas de Rhuys.',
+    coverImage: '/images/villa-tyklouyou.netlify.app_(Nest Hub Max).png',
+    lien: 'https://villa-tyklouyou.netlify.app/',
+  },
+  {
+    id: 'sturmayr-2025',
+    titre: 'Site vitrine – STURMAYR Coiffure',
+    client: 'STURMAYR',
+    secteur: 'Coiffure & Beauté',
+    periode: 'Septembre 2025',
+    services: ['Site vitrine', 'Réservation en ligne', 'UI/UX'],
+    objectif:
+      'Développer une plateforme en ligne pour présenter les services coiffure et permettre une prise de rendez-vous simple et rapide.',
+    resultat: 'Site élégant avec prise de rendez-vous intégrée.',
+    coverImage: '/images/sturmayr.netlify.app_(Nest Hub Max).png',
+    lien: 'https://sturmayr.netlify.app/',
+  },
+  {
+    id: 'or-lumiere-2025',
+    titre: 'Site e-commerce – Or & Lumière',
+    client: 'Or & Lumière',
+    secteur: 'Bijouterie & Joaillerie',
+    periode: 'Septembre 2025',
+    services: ['E-commerce', 'Design UI', 'SEO'],
+    objectif:
+      'Concevoir un site élégant pour mettre en valeur les collections de bijoux et encourager les ventes en ligne.',
+    resultat: 'Expérience utilisateur raffinée, mise en avant des produits.',
+    coverImage: '/images/orlumiere.netlify.app_(Nest Hub Max).png',
+    lien: 'https://orlumiere.netlify.app/',
+  },
+  {
+    id: 'sushi-food-2025',
+    titre: 'Site vitrine – Sushi Food',
+    client: 'Sushi Food',
+    secteur: 'Restauration / Sushi',
+    periode: 'Septembre 2025',
+    services: ['Site vitrine', 'Design UI', 'Réservation'],
+    objectif:
+      'Mettre en avant la gastronomie japonaise et faciliter les réservations en ligne.',
+    resultat: 'Site moderne, immersif et optimisé pour le mobile.',
+    coverImage: '/images/sushifood.netlify.app_(Nest Hub Max).png',
+    lien: 'https://sushifood.netlify.app/',
+  },
 ];
 
 /* =================== VERSION EN =================== */
@@ -123,5 +176,53 @@ export const PROJECTS_EN: Project[] = [
     resultat: 'Top 3 Google Maps ranking for 6 local queries in Switzerland',
     coverImage: '/images/sophie.png',
     lien: 'https://sophiedeneriaz.ch/',
+  },
+  {
+    id: 'ty-klouyou-2025',
+    titre: 'Showcase Website – Ty Klouyou',
+    client: 'Ty Klouyou',
+    secteur: 'Tourism & Seasonal Rentals',
+    periode: 'September 2025',
+    services: ['Next.js', 'UI Design', 'Mobile Optimization'],
+    objectif:
+      'Design a modern showcase website to highlight the location and simplify visitor search.',
+    resultat:
+      'Responsive site with strong branding, showcasing Saint-Gildas de Rhuys.',
+    coverImage: '/images/tyklouyou.png',
+  },
+  {
+    id: 'sturmayr-2025',
+    titre: 'Showcase Website – STURMAYR Hair Salon',
+    client: 'STURMAYR',
+    secteur: 'Hairdressing & Beauty',
+    periode: 'September 2025',
+    services: ['Showcase Website', 'Online Booking', 'UI/UX'],
+    objectif:
+      'Build a website to present hairdressing services and enable easy online booking.',
+    resultat: 'Elegant website with integrated booking system.',
+    coverImage: '/images/sturmayr.png',
+  },
+  {
+    id: 'or-lumiere-2025',
+    titre: 'E-commerce Website – Or & Lumière',
+    client: 'Or & Lumière',
+    secteur: 'Jewelry & Fine Jewelry',
+    periode: 'September 2025',
+    services: ['E-commerce', 'UI Design', 'SEO'],
+    objectif:
+      'Create an elegant website to showcase jewelry collections and boost online sales.',
+    resultat: 'Refined user experience, product-focused showcase.',
+    coverImage: '/images/orlumiere.png',
+  },
+  {
+    id: 'sushi-food-2025',
+    titre: 'Showcase Website – Sushi Food',
+    client: 'Sushi Food',
+    secteur: 'Restaurant / Sushi',
+    periode: 'September 2025',
+    services: ['Showcase Website', 'UI Design', 'Reservation'],
+    objectif: 'Highlight Japanese gastronomy and simplify online reservations.',
+    resultat: 'Modern, immersive, mobile-optimized site.',
+    coverImage: '/images/sushifood.png',
   },
 ];
