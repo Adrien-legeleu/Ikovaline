@@ -17,8 +17,8 @@ import {
   IconThumbUp,
 } from '@tabler/icons-react';
 
-import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
-import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
+import IkovalineLogo from '@/public/images/logo/ikovaline-logo-full-light.svg';
+import IkovalineLogoDark from '@/public/images/logo/ikovaline-logo-full-dark.svg';
 import { AnimatedThemeToggler } from '../magicui/animated-theme-toggler';
 import WhatsAppButton from '../WhatsappButton';
 

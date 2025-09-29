@@ -3,8 +3,8 @@ import React from 'react';
 import { TextHoverEffect } from '../ui/text-hover-effect';
 import Link from 'next/link';
 import Image from 'next/image';
-import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
-import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
+import IkovalineLogo from '@/public/images/logo/ikovaline-logo-full-light.svg';
+import IkovalineLogoDark from '@/public/images/logo/ikovaline-logo-full-dark.svg';
 import { usePathname } from 'next/navigation';
 
 export default function Footer() {
@@ -108,23 +108,24 @@ export default function Footer() {
         <TextHoverEffect text="IKOVALINE" />
       </div>
 
-      <div className="grid sm:grid-cols-40/60 max-w-5xl mx-auto grid-cols-1 px-2 max-sm:gap-10 text-left max-lg:items-center justify-center">
-        <div className="flex justify-left w-full ">
+      <div className="grid sm:grid-cols-40/60 max-w-5xl mx-auto grid-cols-1 px-2 max-sm:gap-10 text-left items-center justify-center">
+        <div className="flex justify-left items-end w-full ">
           <div className="space-y-5">
-            <h2 className="text-4xl font-semibold flex items-center max-sm:justify-center">
-              <Image
-                src={IkovalineLogoDark}
-                alt="Ikovaline logo"
-                width={150}
-                height={150}
-                className="min-h-10 w-auto dark:block hidden relative right-1 object-contain"
-              />
+            <h2 className="text-4xl font-semibold flex  items-center max-sm:justify-center">
               <Image
                 src={IkovalineLogo}
-                alt="Ikovaline logo"
-                width={150}
-                height={150}
-                className="min-h-10 w-auto dark:hidden block relative right-1 object-contain"
+                alt="Ikovaline"
+                width={200}
+                height={80}
+                className="h-20 w-auto object-contain dark:hidden"
+                priority
+              />
+              <Image
+                src={IkovalineLogoDark}
+                alt="Ikovaline"
+                width={200}
+                height={80}
+                className="hidden h-20 w-auto object-contain dark:block"
               />
             </h2>
             <div className="space-y-2">

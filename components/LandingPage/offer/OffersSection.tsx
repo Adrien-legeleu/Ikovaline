@@ -548,7 +548,7 @@ export default function OffersSection() {
                     <div className="text-sm text-black/60 dark:text-white/60">
                       Le niveau <b>{tier.name}</b> est livré <b>clé-en-main</b>.
                       Pour des options avancées, choisissez <b>Boost</b> ou{' '}
-                      <b>Sur-Mesure Luxe</b>.
+                      <b>Sur-Mesure</b>.
                     </div>
                   )}
                 </Card>

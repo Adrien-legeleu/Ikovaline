@@ -20,8 +20,8 @@ import {
 import { cn } from '@/lib/utils';
 import { Menu, MenuItem, HoveredLink } from '../ui/navbar-menu';
 import { HeaderResponsive } from './HeaderResponsive';
-import IkovalineLogo from '@/public/images/logo/ikovaline_logo.png';
-import IkovalineLogoDark from '@/public/images/logo/ikovaline_logo_dark.png';
+import IkovalineLogo from '@/public/images/logo/ikovaline-logo-full-light.svg';
+import IkovalineLogoDark from '@/public/images/logo/ikovaline-logo-full-dark.svg';
 import { AnimatedThemeToggler } from '../magicui/animated-theme-toggler';
 import { usePathname } from 'next/navigation';
 
@@ -83,18 +83,17 @@ export function Header({ className }: { className?: string }) {
               <Image
                 src={IkovalineLogo}
                 alt="Ikovaline"
-                width={150}
-                height={40}
-                className="xl:h-10 lg:h-8 h-10 w-auto object-contain dark:hidden"
+                width={120}
+                height={36}
+                className="h-8 w-auto object-contain dark:hidden"
                 priority
               />
               <Image
                 src={IkovalineLogoDark}
                 alt="Ikovaline"
-                width={150}
-                height={40}
-                className="hidden xl:h-10 lg:h-8 h-10  w-auto object-contain dark:block"
-                priority
+                width={120}
+                height={36}
+                className="hidden h-8 w-auto object-contain dark:block"
               />
             </Link>
 

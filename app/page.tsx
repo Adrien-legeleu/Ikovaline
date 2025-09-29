@@ -71,7 +71,6 @@ export default function Home() {
             <ComponentDemo />
           </OnView>
         </div>
-
         <div
           className="
             min-h-dvh
@@ -81,9 +80,7 @@ export default function Home() {
         >
           <OffersSection />
         </div>
-
         <Methodologie />
-
         <div className="overflow-hidden">
           <OnView>
             <Review />

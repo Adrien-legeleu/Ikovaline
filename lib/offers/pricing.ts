@@ -80,7 +80,7 @@ export const OFFER_TIERS: OfferTier[] = [
   },
   {
     id: 'luxe',
-    name: 'Sur-Mesure Luxe',
+    name: 'Sur-Mesure',
     tagline: 'Haute couture digitale (brand, 3D, motion, e-commerce…)',
     basePrice: 0, // 👈 affichage "Sur devis" en UI
     baseDelayDays: 90,
