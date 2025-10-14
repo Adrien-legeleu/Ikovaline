@@ -17,7 +17,7 @@ import { IconMessage2 } from '@tabler/icons-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { use, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const CarteEssonne = dynamic(() => import('@/components/CarteEssonne'), {
   ssr: false,
