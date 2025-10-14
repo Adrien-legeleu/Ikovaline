@@ -461,8 +461,10 @@ export default function OffersSection() {
               <Reveal>
                 <Card
                   className={[
-                    'rounded-2xl p-6 bg-white/60 border border-black/10 shadow-md transition-shadow dark:bg-neutral-900/60 dark:border-white/10',
-                    glow ? 'ring-2 ring-primary/40 shadow-primary/30' : '',
+                    'sm:rounded-2xl sm:p-6 sm:bg-white/60 max-sm:bg-transparent max-sm:shadow-none max-sm:border-none sm:border sm:border-black/10 sm:shadow-md sm:transition-shadow sm:dark:bg-neutral-900/60 sm:dark:border-white/10',
+                    glow
+                      ? 'sm:ring-2 sm:ring-primary/40 sm:shadow-primary/30'
+                      : '',
                   ].join(' ')}
                 >
                   <div className="flex items-center justify-between">
