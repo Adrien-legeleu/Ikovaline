@@ -1,0 +1,264 @@
+// components/sections/Review.tsx
+'use client';
+
+import Image, { StaticImageData } from 'next/image';
+import { useEffect, useMemo, useState } from 'react';
+
+import Review1 from '@/public/images/logo/frewinglas-logo.png';
+import Review2 from '@/public/images/logo/jean-cristophe-Lelandais.jpeg';
+import Review3 from '@/public/images/logo/logo-lelandais.png';
+import Review4 from '@/public/images/logo/hl-horner-logo.jpg';
+import Review5 from '@/public/images/logo/logo-lora.png';
+import Review6 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (1).png";
+import Review7 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo.png";
+import Review8 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (3).png";
+import Review9 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (4).png";
+import Review10 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (5).png";
+import Review11 from "@/public/images/logo/Bleu Blanc Minimaliste Simple Moderne Typographic Ciel Azur Galerie D'art Logo (6).png";
+import Review12 from '@/public/images/logo/logo teka somba.png';
+import Review13 from '@/public/images/logo/logo-lynelec.webp';
+import Review14 from '@/public/images/logo/logo.svg';
+import StarClientsGoogle from '@/components/StarClientsGoogle';
+import Link from 'next/link';
+import WhatsAppButton from '@/components/WhatsappButton';
+
+type ReviewType = {
+  name: string;
+  role: string;
+  text: string;
+  image?: string | StaticImageData;
+};
+
+const BLUE_AVATAR = `data:image/svg+xml;utf8,${encodeURIComponent(
+  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#2CB7FF'/><stop offset='100%' stop-color='#007AFF'/>
+    </linearGradient></defs>
+    <circle cx='50' cy='50' r='50' fill='url(#g)'/></svg>`
+)}`;
+
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(true);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width:${breakpoint - 1}px)`);
+    const on = () => setIsMobile(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, [breakpoint]);
+  return isMobile;
+}
+
+function Card({ r }: { r: ReviewType }) {
+  const src: string =
+    typeof r.image === 'string'
+      ? r.image
+      : ((r.image as StaticImageData | undefined)?.src ?? BLUE_AVATAR);
+
+  return (
+    <article
+      className={[
+        'group relative mb-6 break-inside-avoid rounded-2xl p-6 transition-transform duration-200 will-change-transform',
+        'bg-white/95 ring-1 ring-black/5 shadow-[0_26px_40px_-24px_rgba(0,0,0,0.16)]',
+        'hover:-translate-y-0.5 hover:shadow-[0_30px_44px_-24px_rgba(0,0,0,0.18)]',
+        'dark:bg-neutral-900/90 dark:ring-white/10 dark:shadow-[0_46px_80px_-40px_rgba(0,0,0,0.65)]',
+      ].join(' ')}
+    >
+      <div className="pointer-events-none absolute left-5 top-4 select-none text-4xl leading-none text-neutral-300/80 dark:text-neutral-600/60">
+        “
+      </div>
+
+      <blockquote className="mt-6 text-xs xs:text-sm leading-6 text-neutral-800 md:text-[15px] md:leading-7 dark:text-neutral-200">
+        {r.text}
+      </blockquote>
+
+      <footer className="mt-6 flex items-center gap-3">
+        <Image
+          src={src}
+          alt={r.name}
+          width={40}
+          height={40}
+          className="h-8 w-8 rounded-full object-contain md:h-10 md:w-10"
+          unoptimized
+        />
+        <div className="min-w-0">
+          <div className="truncate text-[13px] font-semibold text-neutral-900 md:text-sm dark:text-neutral-50">
+            {r.name}
+          </div>
+          <div className="truncate text-[11px] text-neutral-500 md:text-xs dark:text-neutral-400">
+            {r.role}
+          </div>
+        </div>
+      </footer>
+    </article>
+  );
+}
+
+const reviewsFR: ReviewType[] = [
+  {
+    name: 'Teka Somba',
+    image: Review12,
+    role: 'Plateforme de petites annonces - Congo',
+    text: 'Ikovaline a développé une application moderne et scalable, adaptée au marché africain. Leur expertise technique et leur accompagnement stratégique ont été déterminants pour le lancement.',
+  },
+  {
+    name: 'Lynelec',
+    role: 'Site e-commerce B2B - Grossiste câbles électriques',
+    image: Review13,
+    text: 'Grâce à Ikovaline, nous disposons aujourd’hui d’un site professionnel et optimisé SEO. L’ergonomie et le design reflètent parfaitement notre savoir-faire.',
+  },
+  {
+    name: 'Skillize',
+    image: Review14,
+    role: 'Plateforme de mise en relation freelances & entreprises',
+    text: 'Ikovaline a conçu une solution fluide et performante pour connecter freelances et entreprises. Leur sens du détail et de l’UX fait toute la différence.',
+  },
+  {
+    name: 'L’Ora Fashion Paris',
+    role: 'Optimisation Instagram - Google Shopping',
+    text: 'Grâce à Ikovaline, nous avons considérablement augmenté notre visibilité en ligne. Leur expertise sur Instagram et Google Shopping a dynamisé nos ventes.',
+    image: Review5,
+  },
+  {
+    name: 'L’Émotion',
+    role: 'Gestion Google My Business - Consulting',
+    text: 'Ils ont transformé notre image en ligne et apporté des conseils stratégiques pour développer notre activité. Une équipe très réactive !',
+  },
+  {
+    name: 'Lelandais Fermetures',
+    role: 'Gestion Google My Business - Leads locaux',
+    text: 'Depuis qu’Ikovaline gère notre Google My Business, nous recevons beaucoup plus de demandes locales pertinentes. Excellent service !',
+    image: Review3,
+  },
+  {
+    name: 'Frewinglas',
+    role: 'Création site web - SEO - LinkedIn',
+    text: 'Le site qu’ils ont créé est moderne et bien référencé. Nos profils LinkedIn sont désormais des outils de prospection efficaces.',
+    image: Review1,
+  },
+  {
+    name: 'Need Money For Shop',
+    role: 'Création site web - Publicité - Développement commercial',
+    text: 'Ikovaline a su adapter ses services à nos besoins précis. Leur approche marketing a boosté nos campagnes publicitaires.',
+  },
+  {
+    name: 'L’Art du Bonsaï',
+    role: 'Création site web - Contenu visuel - Publicité',
+    text: 'Leur travail créatif et stratégique a fait passer notre entreprise à un autre niveau. Nos clients adorent notre nouveau site et visuel !',
+  },
+  {
+    name: 'HL CORNER',
+    role: 'Création site web - Visibilité locale',
+    text: 'Un grand merci à Ikovaline pour notre site fonctionnel et attrayant. Nous sommes désormais plus visibles localement.',
+    image: Review4,
+  },
+  {
+    name: 'Jardin Auto',
+    role: 'Création site web - Publicité saisonnière',
+    text: 'Leur travail nous a permis de générer plus de ventes en période de forte demande. Ils gèrent tout avec professionnalisme.',
+  },
+  {
+    name: 'Jean-Christophe Lelandais',
+    role: 'Accompagnement marketing - Recrutement',
+    text: 'Ikovaline a été un partenaire clé pour structurer nos besoins en marketing et en recrutement. Une équipe compétente et proactive.',
+    image: Review2,
+  },
+  {
+    name: 'Simon Corbin',
+    role: 'Stratégies marketing et commerciales sur mesure',
+    text: 'L’approche personnalisée a eu un impact direct sur nos ventes. Ikovaline est un vrai atout pour mon entreprise.',
+    image: Review9,
+  },
+  {
+    name: 'Manu Arora',
+    role: 'Tech Innovator & Entrepreneur',
+    text: 'Fantastique. Cela a complètement changé notre façon d’aborder les problèmes et de livrer des solutions.',
+    image: Review11,
+  },
+  {
+    name: 'Bob Smith',
+    role: 'Industry Analyst',
+    text: 'Absolument révolutionnaire, un vrai game-changer pour notre secteur.',
+    image: Review7,
+  },
+  {
+    name: 'Eva Green',
+    role: 'Directrice des opérations',
+    text: 'L’efficacité apportée est incomparable. On a réduit nos coûts et amélioré la qualité de notre produit final.',
+    image: Review10,
+  },
+  {
+    name: 'Henry Ford',
+    role: 'Operations Analyst',
+    text: 'Nous avons gagné d’innombrables heures. Recommandé à tous ceux qui veulent booster l’efficacité.',
+    image: Review8,
+  },
+  {
+    name: 'Cathy Lee',
+    role: 'Product Manager',
+    text: 'Je ne peux plus imaginer revenir en arrière. C’est devenu indispensable au quotidien.',
+    image: Review6,
+  },
+];
+
+export default function Review() {
+  const isMobile = useIsMobile(768);
+  const INITIAL_MOBILE = 6;
+  const [visible, setVisible] = useState(INITIAL_MOBILE);
+
+  useEffect(() => {
+    if (!isMobile) setVisible(reviewsFR.length);
+    else setVisible((v) => Math.min(v, INITIAL_MOBILE));
+  }, [isMobile]);
+  const shown = useMemo(() => reviewsFR.slice(0, visible), [visible]);
+  const canShowMore = isMobile && visible < reviewsFR.length;
+
+  return (
+    <section className="relative mx-auto w-full max-w-7xl px-4 py-16 md:py-24">
+      <header className="mx-auto max-w-3xl text-center">
+        <span className="inline-flex items-center rounded-full border border-[hsl(var(--primary)/0.25)] px-3 py-1 text-xs font-medium text-[hsl(var(--primary))]">
+          Avis clients
+        </span>
+        <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 md:text-6xl dark:text-neutral-100">
+          De l’idée à un projet réussi.
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-[15.5px] leading-7 text-neutral-700 md:text-[17px] dark:text-neutral-300">
+          De la stratégie au développement, Ikovaline conçoit des solutions
+          digitales sur mesure pour accélérer votre croissance.
+        </p>
+      </header>
+
+      <div className="relative z-50 py-10">
+        <StarClientsGoogle />
+        <div className="mt-4 z-50 columns-2 gap-4 sm:gap-6 md:columns-3 lg:columns-4">
+          {shown.map((r, i) => (
+            <Card key={`${r.name}-${i}`} r={r} />
+          ))}
+          <div className="absolute -bottom-10 left-0 h-32 w-full bg-gradient-to-t from-white z-10 from-50% dark:from-black to-transparent" />
+        </div>
+      </div>
+
+      {isMobile && (
+        <div className="mt-6 flex justify-center">
+          {canShowMore ? (
+            <button
+              onClick={() =>
+                setVisible((v) => Math.min(v + 6, reviewsFR.length))
+              }
+              className="rounded-full border border-neutral-100 bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-100"
+            >
+              Voir plus
+            </button>
+          ) : reviewsFR.length > INITIAL_MOBILE ? (
+            <button
+              onClick={() => setVisible(INITIAL_MOBILE)}
+              className="rounded-full border border-neutral-100 bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-100"
+            >
+              Voir moins
+            </button>
+          ) : null}
+        </div>
+      )}
+    </section>
+  );
+}

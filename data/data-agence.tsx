@@ -5,61 +5,61 @@ export const dataAgence = [
   {
     id: 'agence-web-massy',
     departement: 'Essonne',
-
     ville: 'Massy',
-    intro: `Vous cherchez une agence web à Massy pour booster votre présence en ligne ? Ikovaline est spécialisée dans la création de site internet à Massy, le référencement SEO local, la refonte de site vitrine ou e-commerce, ainsi que dans la mise en place de stratégies digitales efficaces. Que vous soyez une TPE, PME ou indépendant basé à Massy ou dans le département de l’Essonne, nous mettons tout en œuvre pour assurer la réussite de votre projet web.`,
+    intro: `Vous cherchez une agence web en Essonne (Massy) pour une création de site internet, d’app ou de plateforme SaaS qui génère des clients ? Ikovaline conçoit des sites rapides, des applications web performantes et des expériences digitales orientées ROI. Spécialistes du SEO local en Essonne, de la refonte de site vitrine/e-commerce et des stratégies d’acquisition, nous aidons TPE, PME et indépendants de Massy à transformer le web en levier de chiffre d’affaires.`,
     text1: (
       <span>
-        Notre <strong>agence web à Massy</strong> accompagne les professionnels
-        dans leur transformation digitale. Vous êtes une entreprise implantée à{' '}
-        <Link href="/agence-web-massy">Massy</Link> ou à proximité (Évry,
-        Palaiseau, Verrières-le-Buisson, Saclay…) ? Confiez-nous votre{' '}
+        Notre <strong>agence web à Massy (Essonne)</strong> combine design, tech
+        et SEO pour livrer des <strong>sites web</strong>, <strong>apps</strong>{' '}
+        et
+        <strong> produits SaaS</strong> qui convertissent. Basés près de{' '}
+        <Link href="/agence-web-massy">Massy</Link> (Évry, Palaiseau,
+        Verrières-le-Buisson, Saclay…), nous prenons en charge votre{' '}
         <strong>création de site internet</strong>, votre{' '}
-        <strong>refonte de site web</strong>, ou votre{' '}
-        <strong>référencement SEO à Massy</strong>.
+        <strong>refonte</strong>, votre <strong>SEO local Essonne</strong> et
+        vos campagnes d’acquisition.
         <br />
-        Grâce à notre expertise locale, nous vous proposons un accompagnement
-        100% sur-mesure : audit de visibilité, conception UX/UI, développement
-        technique,{' '}
+        Avec Ikovaline, vous bénéficiez d’un accompagnement 100% sur-mesure :
+        audit de visibilité, UX/UI, développement (Next.js),{' '}
         <Link href="nos-services/seo-referencement-naturel">
           optimisation SEO
         </Link>
-        , hébergement et maintenance. À chaque étape, notre objectif est clair :
-        faire de votre site un levier de croissance durable à Massy et en
-        Essonne.
+        , hébergement, sécurité et maintenance. Objectif : faire de votre
+        présence digitale à Massy un
+        <em> actif rentable et durable</em>.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Confiez la création de votre site internet vitrine ou e-commerce à notre agence web basée à Massy. Nous concevons des sites modernes, rapides, et optimisés pour le référencement naturel local.',
+          'Concevez avec Ikovaline un site vitrine ou e-commerce à Massy (Essonne) pensé pour la conversion, prêt pour le SEO et extensible vers une app/SaaS.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Améliorez votre visibilité en ligne avec une stratégie de référencement SEO ciblée sur Massy, l’Essonne, et vos clients potentiels. Mots-clés, contenu, backlinks, performance technique : on s’occupe de tout.',
+          'SEO local Essonne, contenu optimisé et netlinking pour faire remonter votre entreprise de Massy sur Google et capter une demande qualifiée.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance régulière, mises à jour, sauvegardes, sécurité, support 24/7… Votre site web à Massy est entre de bonnes mains avec notre agence digitale locale.',
+          'Supervision 24/7, mises à jour, sécurité, performance Core Web Vitals : gardez un site/app fiable et rapide avec Ikovaline à Massy.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Développez votre notoriété à Massy et au-delà avec des campagnes Google Ads, réseaux sociaux, stratégie de contenu et marketing automation.',
+          'Campagnes Google Ads & Social, analytics, contenu et automation : accélérez votre acquisition locale à Massy et en Essonne.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
       objectifTitle:
-        'Notre mission à Massy : faire de votre site un outil de croissance',
-      text1: `Notre agence web à Massy a pour ambition de vous accompagner de A à Z : de la conception de votre site internet à sa mise en ligne, en passant par sa refonte, son optimisation SEO, et sa maintenance. Nous construisons avec vous une stratégie digitale cohérente et alignée sur vos objectifs commerciaux.`,
-      text2: `Nous intervenons à Massy mais aussi dans tout le département de l’Essonne. Nos services de création de site web, de refonte de site existant, et de référencement naturel vous assurent une visibilité accrue. Avec Ikovaline, vous bénéficiez d’un partenaire fiable, réactif, et engagé pour vos résultats. Et si vous n’êtes pas satisfait, nous vous remboursons.`,
+        'Notre mission à Massy : transformer votre site, app ou SaaS en moteur de croissance',
+      text1: `De la stratégie à la mise en ligne, Ikovaline orchestre votre création/refonte de site et votre SEO local à Massy. Nous priorisons ce qui impacte votre acquisition et votre conversion, avec un pilotage chiffré.`,
+      text2: `Présents en Essonne, nous intervenons sur Massy et alentours pour livrer des résultats concrets (trafic qualifié, leads, ventes). Partenaire fiable et réactif, Ikovaline s’engage sur la performance.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -78,10 +78,8 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Nous proposons nos services de création de site internet, de
-        référencement SEO, et de refonte web non seulement à{' '}
-        <Link href="/agence-web-massy">Massy</Link>, mais aussi dans les villes
-        voisines d’Essonne et d’Île-de-France comme{' '}
+        Ikovaline intervient à <Link href="/agence-web-massy">Massy</Link> et
+        dans les villes voisines d’Essonne/Île-de-France comme{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -102,69 +100,70 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        pour accompagner les entrepreneurs dans leur transformation numérique
-        locale.
+        pour vos projets de création de site web, d’app et de SaaS en Essonne.
       </span>
     ),
-    CTATitle: 'Créons votre site internet à Massy dès aujourd’hui !',
+    CTATitle: 'Créons votre site, app ou SaaS à Massy (Essonne)',
     CTADesc:
-      'Attirez de nouveaux clients, améliorez votre visibilité locale à Massy, et développez votre activité en ligne avec Ikovaline, votre agence web de proximité.',
+      'Visibilité locale, performance SEO et conversion : Ikovaline met en place une stratégie digitale mesurable à Massy.',
     CTATextBtn: 'Lancez votre projet web à Massy',
     metaTitle:
-      'Agence web à Massy (Essonne) – Création de site internet, SEO, refonte',
+      'Agence web Massy (Essonne) – Ikovaline : création de site, app & SaaS, SEO local',
     metaDescription:
-      'Besoin d’un site web à Massy ? Ikovaline est votre agence digitale locale : création, refonte de site internet, référencement SEO, web marketing en Essonne.',
+      'Ikovaline, agence web à Massy (Essonne) : création/refonte de site internet, apps & SaaS, SEO local, marketing digital, maintenance. Obtenez des résultats concrets.',
   },
 
   {
     id: 'agence-web-evry',
     departement: 'Essonne',
-
     ville: 'Évry',
-    intro: `Découvrez notre agence web basée à Évry, spécialisée dans la création de sites internet. Nous aidons les entreprises et indépendants d'Évry et de l'Essonne à développer leur activité en ligne grâce à des solutions concrètes : création de site web, référencement naturel, maintenance, etc.`,
+    intro: `Ikovaline, agence web en Essonne à Évry, conçoit des sites internet rapides, des applications web et des produits SaaS alignés sur vos objectifs business. Notre équipe combine UX, tech et SEO local pour générer du trafic qualifié et des leads à Évry et dans tout le territoire essonnien.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-evry">Évry</Link> ou dans l’Essonne ? Notre
-        agence web locale vous aide à renforcer votre visibilité en ligne. De la{' '}
+        Vous êtes une entreprise basée à{' '}
+        <Link href="/agence-web-evry">Évry</Link> (Essonne) ? Ikovaline vous
+        accompagne de A à Z :{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
-        </Link>{' '}
-        à l’<Link href="nos-services/seo-referencement-naturel">audit SEO</Link>
-        , nous vous aidons à développer efficacement votre présence sur le web à
-        Évry.
+          création de site vitrine/e-commerce
+        </Link>
+        , refonte,{' '}
+        <Link href="nos-services/seo-referencement-naturel">
+          audit & SEO local
+        </Link>
+        , performance, sécurité, analytics. Notre priorité : transformer votre
+        visibilité en revenus avec une approche pragmatique et mesurable.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Évry, en Essonne.',
+          'Site vitrine, e-commerce, portail B2B : une base solide pour évoluer vers l’app ou le SaaS, optimisée pour Google et la conversion à Évry.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Boostez votre visibilité et attirez du trafic qualifié à Évry, en Essonne et au-delà, grâce à notre stratégie SEO locale.',
+          'SEO local Essonne (pages, contenu, netlinking) : gagnez des positions sur les requêtes clés à Évry et captez des leads chauds.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Assurez la performance de votre site web avec notre maintenance dédiée et un support continu depuis notre agence à Évry.',
+          'MCO, SLA, sauvegardes, sécurité : gardez un site/app robuste et conforme aux exigences de performance.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Promevez votre marque localement et nationalement avec nos campagnes Google Ads, social media, stratégie de contenu et emailings ciblés.',
+          'SEA (Google Ads), social, contenu et tracking : pilotez l’acquisition d’Évry à tout l’écosystème Essonne.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Évry',
-      text1: `Notre objectif est de vous accompagner tout au long de votre projet, en vous proposant une stratégie sur-mesure pour votre entreprise, que ce soit la création ou la refonte de votre site internet à Évry. Nous garantissons un accompagnement complet, de la conception du site à sa maintenance, partout en Essonne.`,
-      text2: `Grâce à notre expertise en développement web et en marketing digital (SEO, SEA, etc.), nous vous assurons des résultats mesurables. Notre agence web locale, implantée à Évry et active dans tout l'Essonne, vous accompagne avec un support 24h/24. Si les résultats ne sont pas au rendez-vous, nous vous remboursons.`,
+      objectifTitle: 'Objectif : un canal d’acquisition rentable à Évry',
+      text1: `Plan d’action clair, livrables rapides, itérations courtes : Ikovaline structure votre création/refonte et votre SEO pour délivrer un ROI visible à Évry.`,
+      text2: `Basés en Essonne, nous intervenons sur tout Évry-Courcouronnes et communes voisines avec un suivi rapproché et des indicateurs partagés.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -183,8 +182,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Nous intervenons également partout en Essonne et aux alentours pour la
-        création de sites web, que ce soit à{' '}
+        Nous intervenons partout en Essonne depuis Évry :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -205,72 +203,70 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        avec des projets de création de site, d’app et de SaaS pilotés par la
+        donnée.
       </span>
     ),
-    CTATitle: 'Passez à l’action maintenant !',
+    CTATitle: 'Passez à l’action à Évry (Essonne)',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Évry.',
+      'Création/refonte de site, SEO local et acquisition : Ikovaline aligne votre présence web sur vos objectifs commerciaux.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Évry - Création de site web, SEO, marketing digital',
+      'Agence web Évry (Essonne) – Ikovaline : site, app & SaaS, SEO local',
     metaDescription:
-      'Boostez votre entreprise à Évry avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Ikovaline à Évry : sites internet, apps & SaaS, SEO local Essonne, webmarketing et maintenance. Une approche ROI pour générer des leads qualifiés.',
   },
+
   {
     id: 'agence-web-verrieres-le-buisson',
     ville: 'Verrières-le-Buisson',
     departement: 'Essonne',
-
-    intro: `Découvrez notre agence web à Verrières-le-Buisson, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Verrières-le-Buisson et de l'Essonne environnante pour développer leur visibilité en ligne grâce à des solutions concrètes : création de site web, SEO, maintenance, etc.`,
+    intro: `À Verrières-le-Buisson (Essonne), Ikovaline crée des sites web rapides, des apps modernes et des produits SaaS évolutifs. Notre spécialité : associer UX, tech et SEO local pour transformer votre visibilité en demandes concrètes.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-verriere-le-buisson">Verrières-le-Buisson</Link>{' '}
-        ou dans les environs ? Notre agence web locale est là pour booster votre
-        visibilité en ligne. De la{' '}
+        Basée près de{' '}
+        <Link href="/agence-web-verriere-le-buisson">Verrières-le-Buisson</Link>
+        , notre <strong>agence web Essonne</strong> prend en charge votre{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
+          création de site
         </Link>{' '}
-        à l’
-        <Link href="nos-services/seo-referencement-naturel">
-          optimisation SEO
-        </Link>
-        , nous vous aidons à développer efficacement votre activité sur le web à
-        Verrières-le-Buisson.
+        (vitrine/e-commerce), votre{' '}
+        <Link href="nos-services/seo-referencement-naturel">SEO local</Link> et
+        la performance technique. Résultat : un site/app qui charge vite, se
+        positionne mieux et convertit plus.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Verrières-le-Buisson, en Essonne.',
+          'Un site pensé conversion et SEO, extensible vers une app ou un SaaS, dédié aux acteurs de Verrières-le-Buisson et d’Essonne.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Augmentez votre visibilité en Essonne et au-delà avec un référencement naturel adapté à votre activité.',
+          'Stratégie sémantique locale, optimisation on-site, netlinking : gagnez des positions sur Google dans votre zone.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance, mises à jour et support continu pour votre site web : notre équipe implantée à Verrières-le-Buisson vous accompagne.',
+          'Disponibilité, sécurité, mises à jour et monitoring : votre site/app reste fiable au quotidien.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Boostez votre communication en ligne avec nos campagnes publicitaires efficaces, le community management et la stratégie de contenu.',
+          'SEA et social ads, contenu et reporting : des actions claires, mesurées, alignées sur vos objectifs locaux.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Verrières-le-Buisson',
-      text1: `Notre objectif est de vous accompagner à chaque étape de votre projet digital, en proposant une stratégie personnalisée à votre entreprise, qu’il s’agisse de la création ou de la refonte de votre site internet à Verrières-le-Buisson. Nous offrons un service complet, de la conception du site à sa maintenance, partout en Essonne.`,
-      text2: `Grâce à notre expertise en création de site web et en stratégies digitales (SEO, SEA, etc.), nous nous engageons à vous fournir des résultats concrets. Notre agence web, implantée à Verrières-le-Buisson et active dans toute l’Essonne, vous soutient avec un support disponible 24h/24. Si les résultats ne répondent pas à vos attentes, nous vous remboursons.`,
+      objectifTitle:
+        'Objectif à Verrières-le-Buisson : visibilité utile et leads qualifiés',
+      text1: `Ikovaline structure votre projet (site, app, SaaS) avec un plan d’actions SEO local Essonne et une roadmap claire.`,
+      text2: `Nous suivons vos indicateurs de trafic, positions et conversions pour piloter une croissance durable en Essonne.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -289,8 +285,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Notre équipe se déplace aussi dans toute l'Essonne et les environs pour
-        la création de sites web, que ce soit à{' '}
+        Nous accompagnons aussi les professionnels d’Essonne et alentours :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -311,72 +306,70 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        pour des projets de création de site, app et SaaS performants.
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Verrières-le-Buisson.',
+      'Plus de visibilité, plus de conversions : Ikovaline, votre agence web Essonne à Verrières-le-Buisson.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Verrières-le-Buisson - Création de site web, SEO, marketing digital',
+      'Agence web Verrières-le-Buisson (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Boostez votre entreprise à Verrières-le-Buisson avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Création/refonte de site, apps & SaaS, SEO local Essonne. Ikovaline accompagne les pros de Verrières-le-Buisson avec une approche orientée résultats.',
   },
+
   {
     id: 'agence-web-saclay',
     departement: 'Essonne',
-
     ville: 'Saclay',
-    intro: `Découvrez notre agence web sur le plateau de Saclay, spécialisée dans la création de sites web. Nous aidons les entreprises et indépendants de Saclay et du nord de l'Essonne à développer leur présence en ligne grâce à des solutions performantes : création de site web, référencement naturel, maintenance, etc.`,
+    intro: `Sur le plateau de Saclay (Essonne), Ikovaline accompagne startups, PME et acteurs innovants : sites web performants, apps modernes, produits SaaS scalables et SEO local. Notre promesse : un digital utile qui sert la croissance.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-saclay">Saclay</Link> ou dans les communes
-        environnantes ? Notre agence web locale est là pour renforcer votre
-        visibilité en ligne. De la{' '}
+        À <Link href="/agence-web-saclay">Saclay</Link> et communes voisines,
+        notre <strong>agence web Essonne</strong> livre des interfaces rapides
+        et accessibles (Core Web Vitals), une architecture SEO propre et des
+        contenus pertinents. De la{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
+          création de site
         </Link>{' '}
         à l’
         <Link href="nos-services/seo-referencement-naturel">
           optimisation SEO
         </Link>
-        , nous vous aidons à développer efficacement votre activité sur internet
-        à Saclay.
+        , nous bâtissons une base solide pour évoluer vers l’app ou le SaaS.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Saclay, en Essonne.',
+          'Design, performance, SEO et évolutivité : le socle idéal pour votre app/SaaS à Saclay en Essonne.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Gagnez en visibilité sur Google et attirez du trafic ciblé à Saclay et en Essonne grâce à notre stratégie SEO locale.',
+          'Devenez la référence locale : structure sémantique, technique, contenu et popularité pilotés sur Saclay.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance technique et support continu pour votre site web : notre agence locale assure un suivi permanent de vos projets.',
+          'Nous sécurisons et faisons évoluer votre site/app au rythme de votre activité (MCO, monitoring, backups).',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Accélérez votre croissance avec nos campagnes SEA, publicités sur réseaux sociaux, contenu digital et analyse de performances.',
+          'SEA, social, contenu et analytics : une acquisition lisible et orientée ROI en Essonne.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Saclay',
-      text1: `Notre objectif est de vous accompagner à chaque étape de votre projet digital en proposant une stratégie sur mesure pour votre entreprise, qu'il s'agisse de la création ou de la refonte de votre site internet à Saclay. Nous mettons tout en œuvre pour offrir un service global, de la conception du site à sa maintenance, partout en Essonne.`,
-      text2: `Forte de son expertise en création de site web et en marketing digital (SEO, SEA, etc.), notre agence vous garantit des résultats tangibles. Implantée à Saclay et active dans tout l'Essonne, notre équipe vous accompagne avec un support disponible 24h/24. Et si les résultats sont en deçà de vos attentes, vous êtes remboursé.`,
+      objectifTitle: 'Objectif à Saclay : visibilité, performance, conversion',
+      text1: `Ikovaline définit un plan d’exécution court-terme (quick wins SEO/UX) et un cap long-terme (autorité, contenus, maillage).`,
+      text2: `Résultat : un actif digital qui grandit avec votre entreprise, depuis Saclay vers tout l’écosystème Essonne.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -395,8 +388,8 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Nous intervenons également partout en Essonne et aux alentours pour la
-        création de sites web, que ce soit à{' '}
+        Nous intervenons sur le plateau de Saclay et dans tout le réseau Essonne
+        :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -417,69 +410,68 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        avec des projets site/app/SaaS qui performent.
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Saclay.',
+      'Ikovaline – agence web Essonne à Saclay : un site rapide, un SEO solide, une acquisition claire.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Saclay - Création de site web, SEO, marketing digital',
+      'Agence web Saclay (Essonne) – Création de site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Boostez votre entreprise à Saclay avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Ikovaline à Saclay : sites performants, apps et SaaS, SEO local Essonne, webmarketing et maintenance. Croissance pilotée par les données.',
   },
+
   {
     id: 'agence-web-courcouronnes',
     ville: 'Courcouronnes',
     departement: 'Essonne',
-
-    intro: `Découvrez notre agence web à Courcouronnes, spécialisée dans la création de sites internet sur mesure. Nous accompagnons les entreprises et indépendants de Courcouronnes et de l'Essonne pour booster leur activité en ligne grâce à des services digitaux : création de site web, référencement, maintenance, etc.`,
+    intro: `Ikovaline accompagne les entreprises de Courcouronnes (Essonne) : création de site internet, refonte, SEO local, apps et SaaS. Notre approche : des livrables soignés, des temps de chargement faibles et un marketing mesurable.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-courcouronnes">Courcouronnes</Link> ou dans les
-        environs (Évry, Essonne) ? Notre équipe est à votre service pour
-        améliorer votre visibilité en ligne. De la{' '}
+        Vous êtes à <Link href="/agence-web-courcouronnes">Courcouronnes</Link>{' '}
+        ? Nous prenons en charge votre{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
-        </Link>{' '}
-        à l'<Link href="nos-services/seo-referencement-naturel">audit SEO</Link>
-        , nous vous aidons à développer efficacement votre présence sur le web à
-        Courcouronnes.
+          site vitrine/e-commerce
+        </Link>
+        , votre{' '}
+        <Link href="nos-services/seo-referencement-naturel">SEO local</Link> et
+        vos fondations techniques (sécurité, performances, accessibilité) pour
+        accroître votre visibilité en Essonne.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Courcouronnes, en Essonne.',
+          'Un site clair, rapide et évolutif pour Courcouronnes, prêt à devenir une app ou un SaaS selon vos besoins.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Optimisez votre référencement pour attirer des visiteurs qualifiés à Courcouronnes et dans tout le département.',
+          'Captez la demande locale (intention “près de moi”) avec une stratégie SEO Essonne pilotée par les data.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance continue et support pour votre site internet : notre agence basée en Essonne veille à son bon fonctionnement et sa sécurité.',
+          'Mises à jour, sécurité et supervision : un socle tranquille pour grandir sans rupture.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Dynamisez votre marketing en ligne avec nos campagnes publicitaires (SEA), gestion des réseaux sociaux et campagnes e-mailing personnalisées.',
+          'SEA, social, email : mix acquisition + contenus pour activer la croissance locale.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Courcouronnes',
-      text1: `Notre objectif est de vous accompagner tout au long de votre projet digital, en vous proposant une stratégie adaptée à votre entreprise, par exemple la création ou la refonte de votre site internet à Courcouronnes. Nous proposons un service global, de la conception du site à sa maintenance, partout en Essonne.`,
-      text2: `Avec notre expertise en développement web et marketing digital (SEO, SEA, etc.), nous vous garantissons des résultats mesurables. Notre agence web, implantée à Courcouronnes et active dans toute l'Essonne, vous suit de près avec un support 24h/24. Si les résultats ne sont pas au rendez-vous, nous vous remboursons.`,
+      objectifTitle:
+        'Objectif à Courcouronnes : trafic qualifié et conversions',
+      text1: `Ikovaline enlève le superflu et concentre l’effort sur les pages et contenus qui convertissent.`,
+      text2: `Nous priorisons les quick wins à impact court terme tout en construisant votre autorité en Essonne.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -498,8 +490,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Nous intervenons également partout en Essonne et aux alentours pour la
-        création de sites web, que ce soit à{' '}
+        Interventions Essonne et alentours :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -520,74 +511,71 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        pour vos projets site/app/SaaS avec Ikovaline.
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Courcouronnes.',
+      'Ikovaline – agence web Essonne : création/refonte, SEO, marketing et maintenance à Courcouronnes.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Courcouronnes - Création de site web, SEO, marketing digital',
+      'Agence web Courcouronnes (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Boostez votre entreprise à Courcouronnes avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Création de site, refonte, apps & SaaS, SEO local Essonne et webmarketing à Courcouronnes. Ikovaline livre des résultats mesurables.',
   },
+
   {
     id: 'agence-web-villeneuve-saint-georges',
     ville: 'Villeneuve-Saint-Georges',
     departement: 'Essonne',
-
-    intro: `Découvrez notre agence web à Villeneuve-Saint-Georges, spécialisée dans la création de sites internet professionnels. Nous accompagnons les entreprises et indépendants de Villeneuve-Saint-Georges et des communes voisines pour développer leur présence en ligne via des solutions sur mesure : création de site web, référencement, maintenance, etc.`,
+    intro: `Ikovaline conçoit des sites internet, apps et produits SaaS pour les entreprises de Villeneuve-Saint-Georges et de l’Essonne. Notre promesse : visibilité locale, performance, conversions.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
+        À{' '}
         <Link href="/agence-web-villeneuve-saint-georges">
           Villeneuve-Saint-Georges
-        </Link>{' '}
-        ou dans les communes voisines ? Notre agence web locale est là pour
-        booster votre visibilité en ligne. De la{' '}
-        <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
-        </Link>{' '}
-        à l’
-        <Link href="nos-services/seo-referencement-naturel">
-          optimisation SEO
         </Link>
-        , nous vous aidons à développer efficacement votre activité sur internet
-        à Villeneuve-Saint-Georges.
+        , notre <strong>agence web</strong> gère votre{' '}
+        <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
+          création de site
+        </Link>{' '}
+        (vitrine/e-commerce), votre{' '}
+        <Link href="nos-services/seo-referencement-naturel">SEO</Link> et la
+        performance technique (temps de chargement, sécurité, référencement). Un
+        socle fiable pour développer une app ou un SaaS.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Villeneuve-Saint-Georges, en Île-de-France.',
+          'Site moderne, rapide, SEO-ready : une base idéale pour votre croissance digitale locale.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Renforcez votre visibilité locale et nationale grâce à un référencement optimisé pour toucher plus de clients.',
+          'Optimisations on-site/off-site, contenu et netlinking : gagnez des positions utiles autour de Villeneuve-Saint-Georges.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance et support 24h/24 pour votre site web : notre agence assure un service de qualité et une disponibilité permanente.',
+          'Surveillance, mises à jour, sauvegardes : un site/app stable qui tient la charge au quotidien.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Maximisez votre audience avec nos campagnes publicitaires en ligne (Google Ads, réseaux sociaux), votre stratégie de contenu et votre campagne e-mailing.',
+          'SEA, social, email et contenus pour amplifier votre présence et votre génération de leads.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Villeneuve-Saint-Georges',
-      text1: `Notre objectif est de vous accompagner dans chaque étape de votre projet digital, en proposant une stratégie adaptée à votre entreprise, comme la création ou la refonte de votre site internet à Villeneuve-Saint-Georges. Nous proposons un accompagnement complet, de la conception du site à son exploitation continue, partout en Essonne.`,
-      text2: `Grâce à notre expertise en création de site internet et en stratégie digitale (SEO, SEA, etc.), nous vous garantissons un retour sur investissement concret. Implantée à Villeneuve-Saint-Georges et active dans toute l'Île-de-France, notre agence vous soutient avec un support disponible 24h/24. Et si les résultats ne sont pas au rendez-vous, nous assurons un remboursement.`,
+      objectifTitle:
+        'Objectif à Villeneuve-Saint-Georges : une présence web qui vend',
+      text1: `Nous structurons vos pages piliers, vos silos SEO et votre tracking pour relier trafic et chiffre d’affaires.`,
+      text2: `Approche orientée Essonne/Île-de-France, avec un suivi d’indicateurs partagé et actionnable.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -606,8 +594,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Nous intervenons également partout en Essonne et aux alentours pour la
-        création de sites web, que ce soit à{' '}
+        Nous couvrons Villeneuve-Saint-Georges et l’Essonne voisine :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -628,72 +615,70 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        avec Ikovaline (site, app, SaaS, SEO).
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Villeneuve-Saint-Georges.',
+      'Ikovaline – agence web locale : création de site, SEO, marketing et maintenance.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Villeneuve-Saint-Georges - Création de site web, SEO, marketing digital',
+      'Agence web Villeneuve-Saint-Georges – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Boostez votre entreprise à Villeneuve-Saint-Georges avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Création/refonte de site, apps & SaaS, SEO local, SEA et maintenance. Ikovaline propulse votre visibilité et vos ventes.',
   },
+
   {
     id: 'agence-web-yerres',
     ville: 'Yerres',
     departement: 'Essonne',
-
-    intro: `Découvrez notre agence web à Yerres, spécialisée dans la création de sites internet sur mesure. Nous aidons les entreprises et indépendants de Yerres (Essonne) et de ses environs à développer leur activité en ligne grâce à nos solutions concrètes : création de site web, SEO, maintenance, etc.`,
+    intro: `Ikovaline, agence web Essonne à Yerres : création de site internet, apps et SaaS, SEO local et webmarketing. Nous livrons des interfaces belles, rapides et efficaces pour générer des appels et des devis.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-yerres">Yerres</Link> ou dans les communes
-        voisines ? Notre agence web locale est à votre disposition pour
-        améliorer votre visibilité en ligne. De la{' '}
+        À <Link href="/agence-web-yerres">Yerres</Link>, nous concevons des
+        <strong> sites web</strong> et des <strong>apps</strong> orientés
+        conversion : structure claire, contenus pertinents, SEO local Essonne,
+        performances soignées. De la{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
+          création
         </Link>{' '}
         à l’
         <Link href="nos-services/seo-referencement-naturel">
           optimisation SEO
         </Link>
-        , nous vous aidons à développer efficacement votre présence sur le web à
-        Yerres.
+        , vous progressez étape par étape.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Yerres, en Essonne.',
+          'Site vitrine/e-commerce extensible vers app/SaaS, avec un focus conversion et Google.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Améliorez votre positionnement sur Google pour attirer plus de clients à Yerres et dans toute l’Île-de-France.',
+          'Travail sémantique, technique et popularité : grimpez sur les requêtes locales Yerres/Essonne.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance et support 24/7 pour votre site web : nous veillons à sa sécurité et à ses performances.',
+          'Nous sécurisons et maintenons votre site/app pour éviter les pannes et pertes de données.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Renforcez votre présence en ligne avec des stratégies efficaces : campagnes SEA, community management et email marketing.',
+          'Acquisition pilotée (SEA/social), contenu et reporting pour un ROI lisible.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Yerres',
-      text1: `Notre objectif est de vous accompagner à chaque étape de votre projet digital, en proposant une stratégie sur mesure pour votre entreprise, comme la création ou la refonte de votre site internet à Yerres. Nous proposons un suivi complet, de la conception du site à sa maintenance, partout en Essonne.`,
-      text2: `Grâce à notre savoir-faire en développement web et en marketing digital (SEO, SEA, etc.), nous vous assurons des résultats concrets. Notre agence web locale, implantée à Yerres et active dans toute l’Essonne, vous guide et vous offre un support 24h/24. Si les résultats ne répondent pas à vos attentes, vous êtes remboursé.`,
+      objectifTitle: 'Objectif à Yerres : capter la demande locale qualifiée',
+      text1: `Pages locales, avis, Google Business Profile, contenus utiles : nous construisons un entonnoir simple et efficace.`,
+      text2: `Suivi mensuel des KPI pour piloter vos priorités en Essonne.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -712,8 +697,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Notre agence propose ses services dans toute l'Essonne et ses environs
-        pour la création de sites web, que ce soit à{' '}
+        Interventions à Yerres et autour (Essonne/IDF) :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -734,69 +718,68 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        avec Ikovaline (site, app, SaaS).
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Yerres.',
+      'Création/refonte, SEO local et marketing : Ikovaline propulse vos résultats à Yerres.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Yerres - Création de site web, SEO, marketing digital',
+      'Agence web Yerres (Essonne) – Ikovaline : site, app & SaaS, SEO local',
     metaDescription:
-      'Boostez votre entreprise à Yerres avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Ikovaline à Yerres : sites web performants, apps/SaaS, SEO Essonne, campagnes d’acquisition, maintenance et sécurité.',
   },
+
   {
     id: 'agence-web-marcoussis',
     departement: 'Essonne',
-
     ville: 'Marcoussis',
-    intro: `Découvrez notre agence web à Marcoussis, spécialisée dans la création de sites internet sur mesure. Nous aidons les entreprises et artisans de Marcoussis (sud de l’Essonne) et de ses alentours à développer leur présence en ligne via des solutions personnalisées : création de site web, référencement, maintenance, etc.`,
+    intro: `À Marcoussis (Essonne), Ikovaline conçoit des sites internet efficaces, des apps web et des produits SaaS adaptés aux artisans, commerçants et PME. Nous mettons le SEO local et la conversion au centre.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-marcoussis">Marcoussis</Link> ou dans les
-        environs ? Notre agence web locale est prête à booster votre visibilité
-        en ligne. De la{' '}
+        Entreprise implantée à{' '}
+        <Link href="/agence-web-marcoussis">Marcoussis</Link> ? Confiez-nous
+        votre{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
-        </Link>{' '}
-        à l’<Link href="nos-services/seo-referencement-naturel">audit SEO</Link>
-        , nous vous aidons à développer efficacement votre activité sur internet
-        à Marcoussis.
+          création de site
+        </Link>
+        , votre{' '}
+        <Link href="nos-services/seo-referencement-naturel">audit/SEO</Link> et
+        votre maintenance. Notre approche : un site rapide, clair, bien
+        positionné en Essonne, qui transforme vos visites en demandes.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et améliorez votre image en ligne grâce à notre agence web basée à Marcoussis, en Essonne.',
+          'Site vitrine ou e-commerce prêt pour le SEO et l’évolution vers app/SaaS, pensé pour Marcoussis et l’Essonne.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Attirez des visiteurs qualifiés depuis Marcoussis et toute la région grâce à un référencement optimisé pour votre activité.',
+          'Cocon sémantique local, on-site/technical SEO et netlinking pour capter vos clients autour de Marcoussis.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance proactive et support 24/7 : notre équipe assure la stabilité et la sécurité de votre site web.',
+          'Protection, mises à jour, backups et supervision : un site serein au quotidien.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Dynamisez votre marketing local grâce à nos campagnes publicitaires ciblées (Google Ads, réseaux sociaux), stratégie de contenu et campagnes emailing.',
+          'SEA, social, contenus et analytics pour des campagnes rentables et suivies.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Marcoussis',
-      text1: `Notre objectif est de vous accompagner tout au long de votre projet digital, en vous proposant une stratégie personnalisée adaptée à votre entreprise, notamment pour la création ou la refonte de votre site internet à Marcoussis. Nous garantissons un service complet, du développement du site à sa maintenance opérationnelle, partout en Essonne.`,
-      text2: `Grâce à notre expertise en création de site web et en marketing digital (SEO, SEA, etc.), nous nous engageons à fournir des résultats concrets. Notre agence web locale, implantée à Marcoussis et présente dans toute l’Essonne, vous accompagne de près avec un support disponible 24h/24. Et si les résultats ne sont pas au rendez-vous, nous vous remboursons.`,
+      objectifTitle: 'Objectif à Marcoussis : visibilité locale qui convertit',
+      text1: `Nous priorisons les pages utiles, les appels à l’action visibles et la preuve sociale (avis, cas).`,
+      text2: `Cap sur la croissance durable en Essonne, avec des itérations courtes et mesurées.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -815,8 +798,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Notre agence web locale intervient aussi dans toute l'Essonne et
-        alentours pour la création de sites web, que ce soit à{' '}
+        Ikovaline intervient en Essonne et alentours depuis Marcoussis :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -837,69 +819,65 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        création de site, app, SaaS et SEO local.
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Marcoussis.',
+      'Ikovaline – votre partenaire web à Marcoussis pour un digital utile et rentable.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Marcoussis - Création de site web, SEO, marketing digital',
+      'Agence web Marcoussis (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Boostez votre entreprise à Marcoussis avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Sites, apps & SaaS, SEO local Essonne, SEA et maintenance à Marcoussis. Ikovaline construit votre croissance digitale.',
   },
+
   {
     id: 'agence-web-vauhallan',
     ville: 'Vauhallan',
     departement: 'Essonne',
-
-    intro: `Découvrez notre agence web à Vauhallan, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Vauhallan (plateau de Saclay) et de ses environs pour développer leur activité en ligne grâce à nos solutions : création de site web, référencement, maintenance, etc.`,
+    intro: `Ikovaline, agence web Essonne à Vauhallan : création de site internet, app et SaaS, SEO local et marketing. Des fondations techniques solides et des contenus qui performent.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-vauhallan">Vauhallan</Link> ou dans les communes
-        proches ? Notre agence web locale est prête à renforcer votre visibilité
-        en ligne. De la{' '}
+        À <Link href="/agence-web-vauhallan">Vauhallan</Link>, nous livrons des
+        sites/app rapides, accessibles et bien structurés. De la{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
+          création de site
         </Link>{' '}
-        à l’<Link href="nos-services/seo-referencement-naturel">audit SEO</Link>
-        , nous vous aidons à développer efficacement votre présence sur le web à
-        Vauhallan.
+        à l’<Link href="nos-services/seo-referencement-naturel">audit/SEO</Link>
+        , Ikovaline pose un socle durable pour votre visibilité en Essonne.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Vauhallan, en Essonne.',
+          'Un site soigné, SEO-ready et évolutif (app/SaaS) pour Vauhallan et l’écosystème Essonne.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Optimisez votre référencement pour attirer des clients de Vauhallan et des communes voisines.',
+          'Structure sémantique locale, contenu utile et liens : captez les requêtes pertinentes autour de Vauhallan.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance proactive et support 24/7 pour votre site web : nous assurons sa sécurité et sa performance.',
+          'Sécurité, mises à jour, sauvegardes et supervision : votre actif digital reste fiable.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Développez votre stratégie digitale avec nos campagnes SEA ciblées, gestion des réseaux sociaux, content marketing et email marketing.',
+          'Publicités (SEA/social), contenu et tracking pour accélérer l’acquisition.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Vauhallan',
-      text1: `Notre objectif est de vous accompagner dans chaque étape de votre projet digital, en proposant une stratégie adaptée à votre entreprise, telle que la création ou la refonte de votre site internet à Vauhallan. Nous proposons un service global, du design du site à sa maintenance, partout en Essonne.`,
-      text2: `Grâce à notre expertise en création de site web et en marketing digital (SEO, SEA, etc.), nous garantissons des résultats concrets. Notre agence web, implantée à Vauhallan et active dans toute l’Essonne, vous soutient avec un support 24h/24. Si les résultats escomptés ne sont pas atteints, vous êtes remboursé.`,
+      objectifTitle: 'Objectif à Vauhallan : un site qui travaille pour vous',
+      text1: `CTA visibles, pages locales, preuve sociale et SEO technique : nous activons les bons leviers.`,
+      text2: `Pilotage mensuel des KPI pour des décisions simples et efficaces en Essonne.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -918,8 +896,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Notre équipe se déplace également dans toute l'Essonne et ses alentours
-        pour la création de sites web, que ce soit à{' '}
+        Présents à Vauhallan, nous couvrons l’Essonne voisine :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -940,72 +917,66 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        avec Ikovaline (site, app, SaaS, SEO).
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Vauhallan.',
+      'Ikovaline – agence web Essonne à Vauhallan : un digital clair, rapide et rentable.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Vauhallan - Création de site web, SEO, marketing digital',
+      'Agence web Vauhallan (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Boostez votre entreprise à Vauhallan avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Création de site, apps & SaaS, SEO local Essonne et marketing. Ikovaline développe votre visibilité à Vauhallan.',
   },
+
   {
     id: 'agence-web-wissous',
     ville: 'Wissous',
     departement: 'Essonne',
-
-    intro: `Découvrez notre agence web à Wissous, spécialisée dans la création de sites internet professionnels. Nous aidons les entreprises et indépendants de Wissous (Essonne) et de ses environs à développer leur présence en ligne grâce à nos services : création de site web, référencement naturel, maintenance, etc.`,
+    intro: `À Wissous (Essonne), Ikovaline réalise des sites web rapides, des apps web et des projets SaaS qui transforment la visibilité en prospects. Notre méthode : UX + SEO + performance.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-wissous">Wissous</Link> ou dans les communes
-        voisines ? Notre agence web locale est là pour booster votre visibilité
-        en ligne. De la{' '}
+        Entreprise basée à <Link href="/agence-web-wissous">Wissous</Link> ?
+        Ikovaline conçoit votre{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
-        </Link>{' '}
-        à l’
-        <Link href="nos-services/seo-referencement-naturel">
-          optimisation SEO
+          site vitrine/e-commerce
         </Link>
-        , nous vous aidons à développer efficacement votre activité sur internet
-        à Wissous.
+        , assure votre{' '}
+        <Link href="nos-services/seo-referencement-naturel">SEO local</Link> et
+        votre maintenance pour une croissance sereine en Essonne.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Wissous, en Essonne.',
+          'Design premium, architecture SEO et vitesse : un socle qui peut évoluer vers l’app/SaaS.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Accroissez votre visibilité en ligne et attirez des clients depuis Wissous et ses alentours grâce à un référencement optimisé.',
+          'Optimisations locales et contenu utile pour ressortir sur Google autour de Wissous et en Essonne.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance et support complet pour votre site web : notre équipe assure un suivi technique 24/7.',
+          'Sécurité, mises à jour, sauvegardes et monitoring : un site/app qui tient la charge.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Augmentez votre notoriété avec nos campagnes publicitaires ciblées, gestion des réseaux sociaux, stratégie de contenu et campagnes emailing.',
+          'SEA, social, email et analytics : un plan d’acquisition clair et mesurable.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Wissous',
-      text1: `Notre objectif est de vous accompagner tout au long de votre projet digital, en vous proposant une stratégie personnalisée pour votre entreprise, notamment la création ou la refonte de votre site internet à Wissous. Nous offrons un service complet, du développement du site à sa maintenance, partout en Essonne.`,
-      text2: `Grâce à notre expertise en création de site web et en marketing digital (SEO, SEA, etc.), nous vous promettons des résultats tangibles. Notre agence web, implantée à Wissous et active dans toute l’Essonne, vous suit avec un support disponible 24h/24. Et si les résultats ne répondent pas à vos attentes, vous nous remboursons.`,
+      objectifTitle: 'Objectif à Wissous : plus de visibilité, plus de clients',
+      text1: `Pages locales, contenus, avis et tracking : on relie vos efforts à vos résultats.`,
+      text2: `Approche Essonne, indicateurs partagés et itérations rapides avec Ikovaline.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -1024,8 +995,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Nous intervenons également partout en Essonne et aux alentours pour la
-        création de sites web, que ce soit à{' '}
+        Ikovaline opère à Wissous et dans les villes voisines d’Essonne/IDF :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -1046,77 +1016,73 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        (site, app, SaaS, SEO local).
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Wissous.',
+      'Ikovaline – agence web Essonne à Wissous : des projets web qui performent.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Wissous - Création de site web, SEO, marketing digital',
+      'Agence web Wissous (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Boostez votre entreprise à Wissous avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Sites, apps & SaaS, SEO local Essonne, SEA et maintenance à Wissous. Ikovaline accélère votre acquisition.',
   },
+
   {
     id: 'agence-web-palaiseau',
     ville: 'Palaiseau',
     departement: 'Essonne',
-
-    intro: `Vous êtes à la recherche d’une agence web à Palaiseau pour créer ou refondre votre site internet ? Ikovaline vous accompagne dans tous vos projets digitaux. Nous sommes spécialisés dans la création de site internet à Palaiseau, le référencement SEO local, le web marketing et la maintenance technique. Faites confiance à une agence digitale de proximité pour développer votre visibilité en ligne dans toute l’Essonne.`,
+    intro: `Ikovaline, agence web à Palaiseau (Essonne) : création/refonte de site internet, développement d’apps et de SaaS, SEO local et webmarketing. Notre objectif : transformer votre présence en ligne en résultats concrets.`,
     text1: (
       <span>
-        Notre <strong>agence web à Palaiseau</strong> accompagne les entreprises
-        locales, entrepreneurs et indépendants dans la création de site vitrine,
-        e-commerce ou sur-mesure. Située au cœur de l’Essonne, notre agence vous
-        propose des solutions digitales clés en main :{' '}
+        Notre <strong>agence web à Palaiseau</strong> conçoit des sites
+        vitrines, e-commerce et sur-mesure, avec un focus{' '}
+        <Link href="nos-services/seo-referencement-naturel">
+          SEO local Essonne
+        </Link>
+        , performance et conversion. De Palaiseau à Massy, Saclay ou
+        Verrières-le-Buisson, nous livrons des projets propres, rapides et
+        évolutifs vers l’app/SaaS.
+        <br />
+        Démarrez avec une{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
           création de site internet
-        </Link>
-        ,{' '}
-        <Link href="nos-services/seo-referencement-naturel">
-          référencement SEO
         </Link>{' '}
-        local à Palaiseau, campagnes publicitaires, refonte de site web,
-        hébergement sécurisé, etc.
-        <br />
-        Que vous soyez à Palaiseau, Massy, Saclay ou Verrières-le-Buisson, nous
-        concevons des sites performants, optimisés pour les moteurs de recherche
-        et adaptés aux besoins de votre activité locale.
+        robuste et une stratégie de contenus utile : Google vous le rendra.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Création de site internet professionnel à Palaiseau : vitrine, e-commerce, ou sur-mesure, notre agence vous propose des solutions performantes, modernes et adaptées à votre secteur.',
+          'Base solide (design, vitesse, SEO) pour un développement futur en app/SaaS à Palaiseau.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Optimisez votre présence sur Google grâce à une stratégie de référencement SEO local ciblée sur Palaiseau et les alentours. Analyse de mots-clés, rédaction de contenu, netlinking… on s’occupe de tout.',
+          'Silos locaux, contenu, optimisation technique et popularité : grimpez sur vos requêtes clés.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Mises à jour, sécurité, hébergement, sauvegardes : notre agence web à Palaiseau assure la maintenance complète de votre site internet avec un support réactif 7j/7.',
+          'Sécurité, sauvegardes, supervision et corrections : un site/app fiable jour après jour.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Déployez une stratégie de webmarketing efficace à Palaiseau : Google Ads, réseaux sociaux, emailings, création de contenus, tunnel de conversion, reporting mensuel…',
+          'SEA, social, contenu et reporting pour accélérer votre génération de leads à Palaiseau.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
       objectifTitle:
         'Notre objectif à Palaiseau : propulser votre présence digitale',
-      text1: `Notre agence web à Palaiseau vous accompagne à chaque étape de votre projet : de la définition de vos besoins à la mise en ligne de votre site internet, en passant par le SEO, les contenus, la performance et l’UX design. Nous proposons un accompagnement sur-mesure à tous les professionnels de Palaiseau et d’Essonne.`,
-      text2: `Que ce soit pour la création d’un site web à Palaiseau, la refonte d’un site existant, ou le déploiement d’une stratégie SEO locale, notre équipe d’experts vous garantit des résultats concrets. Chez Ikovaline, nous croyons en une approche orientée résultats, avec un suivi réactif et un service fiable. Et si les résultats ne suivent pas, vous êtes remboursé.`,
+      text1: `Plan d’exécution clair, priorisation par impact, mesures continues : Ikovaline aligne votre budget sur ce qui compte.`,
+      text2: `Résultats recherchés : meilleure visibilité locale, plus de conversions et un actif digital qui dure en Essonne.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -1135,11 +1101,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Notre <strong>agence web à Palaiseau</strong> intervient dans toute
-        l’Essonne et en Île-de-France pour la{' '}
-        <strong>création de site internet</strong>, la <strong>refonte</strong>,
-        le <strong>SEO local</strong> et la maintenance. Nous travaillons
-        également dans les villes voisines comme{' '}
+        Notre <strong>agence web à Palaiseau</strong> intervient en Essonne :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -1160,72 +1122,69 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin de soutenir les entreprises locales dans leur transformation
-        digitale.
+        pour la création de site, l’app, le SaaS et le SEO local.
       </span>
     ),
     CTATitle: 'Passez à l’action à Palaiseau !',
     CTADesc:
-      'Vous avez un projet de création de site web à Palaiseau ? Attirez plus de clients, améliorez votre image, soyez visible en ligne avec notre agence digitale locale.',
+      'Ikovaline – création de site, SEO, acquisition et maintenance à Palaiseau.',
     CTATextBtn: 'Lancez votre projet web à Palaiseau',
     metaTitle:
-      'Agence web à Palaiseau (Essonne) – Création de site internet, SEO, refonte',
+      'Agence web Palaiseau (Essonne) – Ikovaline : site, app & SaaS, SEO',
     metaDescription:
-      'Ikovaline, votre agence web à Palaiseau : création de sites internet, SEO local, refonte de site, web marketing et accompagnement sur-mesure pour les pros en Essonne.',
+      'Sites rapides, apps & SaaS, SEO local Essonne et campagnes rentables à Palaiseau. Un accompagnement orienté résultats.',
   },
+
   {
     id: 'agence-web-corbeil-essonnes',
     ville: 'Corbeil-Essonnes',
     departement: 'Essonne',
-
-    intro: `Découvrez notre agence web à Corbeil-Essonnes, spécialisée dans la création de sites internet. Nous accompagnons les entreprises et indépendants de Corbeil-Essonnes et du sud de l'Essonne dans le développement de leur présence en ligne grâce à nos services personnalisés : création de site web, référencement, maintenance, etc.`,
+    intro: `Ikovaline, agence web à Corbeil-Essonnes (Essonne) : création/refonte de site internet, développement d’apps et de SaaS, SEO local et marketing digital. Nous faisons rimer esthétique, vitesse et conversion.`,
     text1: (
       <span>
-        Vous êtes une entreprise située à{' '}
-        <Link href="/agence-web-corbeil-essonnes">Corbeil-Essonnes</Link> ou
-        dans les environs (Essonne) ? Notre agence web locale est prête à
-        renforcer votre visibilité en ligne. De la{' '}
+        À <Link href="/agence-web-corbeil-essonnes">Corbeil-Essonnes</Link>,
+        Ikovaline construit des sites/app robustes et évolutifs. De la{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site vitrine
+          création de site
         </Link>{' '}
         à l’
         <Link href="nos-services/seo-referencement-naturel">
           optimisation SEO
         </Link>
-        , nous vous aidons à développer efficacement votre activité sur internet
-        à Corbeil-Essonnes.
+        , nous livrons un socle durable pour votre acquisition en Essonne.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Créer un site internet vitrine, e-commerce ou sur-mesure, et développez votre image en ligne grâce à notre agence web basée à Corbeil-Essonnes, en Essonne.',
+          'Un site moderne, rapide et SEO-ready, pensé pour évoluer vers app/SaaS si besoin.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Optimisez votre positionnement pour attirer davantage de visiteurs à Corbeil-Essonnes et dans la région.',
+          'SEO local Corbeil-Essonnes/Essonne : structure, contenu, liens et avis pour ressortir sur Google.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Maintenance, mises à jour et support 24/7 pour votre site web : notre agence assure son bon fonctionnement.',
+          'Supervision, sécurité, sauvegardes et corrections : stabilité et sérénité au quotidien.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Boostez votre visibilité en ligne avec nos campagnes SEA, annonces sur réseaux sociaux, contenu marketing et emailing.',
+          'SEA, social, contenu et analytics : un plan d’acquisition piloté par les données.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
-      objectifTitle: 'Objectif de notre agence web à Corbeil-Essonnes',
-      text1: `Notre objectif est de vous accompagner du début à la fin de votre projet digital, en vous proposant une stratégie sur mesure pour votre entreprise, comme la création ou la refonte de votre site internet à Corbeil-Essonnes. Nous proposons un service global, de la conception du site à sa maintenance opérationnelle, partout en Essonne.`,
-      text2: `Grâce à notre expertise en création de site web et en stratégie digitale (SEO, SEA, etc.), nous vous garantissons des résultats mesurables. Notre agence web locale, implantée à Corbeil-Essonnes et active dans tout le sud de l'Essonne, vous accompagne avec un support disponible 24h/24. Si les résultats ne sont pas à la hauteur de vos attentes, vous êtes remboursé.`,
+      objectifTitle:
+        'Objectif à Corbeil-Essonnes : un actif digital qui rapporte',
+      text1: `CTA clairs, pages percutantes, contenus utiles : nous alignons votre site et votre SEO sur vos priorités business.`,
+      text2: `Indicateurs suivis, décisions éclairées : cap sur la croissance locale en Essonne.`,
     },
     villesVoisines: [
       'Bailly-Romainvilliers',
@@ -1244,8 +1203,8 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Nous intervenons également partout en Essonne et aux alentours pour la
-        création de sites web, que ce soit à{' '}
+        Ikovaline intervient à Corbeil-Essonnes et dans les villes voisines
+        d’Essonne/IDF :{' '}
         {[
           'Bailly-Romainvilliers',
           'Massy',
@@ -1266,71 +1225,70 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’accompagner les entreprises et indépendants dans leur stratégie
-        de présence en ligne.
+        (site, app, SaaS, SEO).
       </span>
     ),
     CTATitle: 'Passez à l’action maintenant !',
     CTADesc:
-      'Attirez plus de clients, augmentez vos ventes, développez votre notoriété. Avec Ikovaline, c’est possible à Corbeil-Essonnes.',
+      'Création/refonte, SEO et acquisition : Ikovaline, votre agence web Essonne à Corbeil-Essonnes.',
     CTATextBtn: 'Lancez votre projet',
     metaTitle:
-      'Agence web à Corbeil-Essonnes - Création de site web, SEO, marketing digital',
+      'Agence web Corbeil-Essonnes (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Boostez votre entreprise à Corbeil-Essonnes avec une agence web locale : création de site internet, référencement SEO, webmarketing, accompagnement sur-mesure.',
+      'Sites performants, apps/SaaS, SEO local Essonne et campagnes pilotées à Corbeil-Essonnes. Résultats concrets avec Ikovaline.',
   },
+
   {
     id: 'agence-web-savigny-sur-orge',
     ville: 'Savigny-sur-Orge',
     departement: 'Essonne',
-
-    intro: `Vous cherchez une agence web à Savigny-sur-Orge pour créer votre site internet ou améliorer votre visibilité en ligne ? Ikovaline est spécialisée dans la création de sites web à Savigny-sur-Orge, la refonte de site vitrine ou e-commerce, et le référencement SEO local. Nous accompagnons les professionnels et indépendants en Essonne dans leur transition digitale.`,
+    intro: `À Savigny-sur-Orge (Essonne), Ikovaline conçoit des sites web élégants et rapides, des apps et des SaaS orientés business. Nous vous aidons à gagner des positions sur Google et à transformer vos visites en clients.`,
     text1: (
       <span>
-        Notre <strong>agence web à Savigny-sur-Orge</strong> vous propose des
-        solutions performantes et sur-mesure. Que vous ayez besoin d’un site
-        vitrine, d’un e-commerce ou d’un site sur-mesure, notre équipe est là
-        pour vous. De la{' '}
+        Notre <strong>agence web à Savigny-sur-Orge</strong> propose des
+        solutions sur-mesure :{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
           création de site internet
-        </Link>{' '}
-        à la{' '}
-        <Link href="nos-services/seo-referencement-naturel">refonte SEO</Link>,
-        nous accompagnons votre développement digital à Savigny-sur-Orge et dans
-        toute l’Essonne.
+        </Link>
+        , refonte,{' '}
+        <Link href="nos-services/seo-referencement-naturel">
+          SEO local Essonne
+        </Link>
+        , sécurité, maintenance, campagnes et reporting. Un accompagnement
+        complet pour une présence digitale qui travaille pour vous.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Confiez la création de votre site vitrine ou e-commerce à notre agence web à Savigny-sur-Orge. Un design moderne, une navigation fluide, et un site pensé pour Google.',
+          'Site vitrine/e-commerce pensé conversion et SEO, évolutif vers app/SaaS à Savigny-sur-Orge.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Améliorez votre visibilité locale à Savigny-sur-Orge avec une stratégie SEO ciblée : optimisation technique, rédaction web, netlinking, etc.',
+          'Optimisations locales, contenu utile et maillage : captez la demande autour de Savigny et en Essonne.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Gardez votre site à jour, sécurisé et performant grâce à notre service de maintenance continue à Savigny-sur-Orge.',
+          'Mises à jour, sécurité, backups et supervision : gardez un actif digital sain et rapide.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Développez votre notoriété à Savigny-sur-Orge avec des campagnes Google Ads, gestion des réseaux sociaux, stratégie de contenu, newsletters, etc.',
+          'Google Ads, social, contenu, email : accélérez votre acquisition avec un pilotage chiffré.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
       objectifTitle:
-        'Notre mission à Savigny-sur-Orge : faire de votre site web un levier de croissance',
-      text1: `Chez Ikovaline, notre agence web à Savigny-sur-Orge vous accompagne de la création de votre site internet jusqu’à son optimisation complète. Notre objectif est de mettre en place une stratégie digitale cohérente et efficace pour développer votre activité dans l’Essonne.`,
-      text2: `Qu’il s’agisse de la création de site web à Savigny-sur-Orge, de la refonte d’un site existant, ou du référencement SEO local, nous assurons des résultats mesurables. Notre accompagnement est personnalisé, et si vous n’êtes pas satisfait, nous vous remboursons.`,
+        'Notre mission à Savigny-sur-Orge : faire de votre site un levier de croissance',
+      text1: `Nous alignons conception, SEO local et preuve sociale pour générer des leads qualifiés.`,
+      text2: `Approche Essonne et indicateurs partagés : des décisions rapides et pragmatiques avec Ikovaline.`,
     },
     villesVoisines: [
       'Savigny-sur-Orge',
@@ -1347,8 +1305,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Notre <strong>agence web à Savigny-sur-Orge</strong> intervient aussi
-        dans les communes proches de l’Essonne comme{' '}
+        Notre <strong>agence web à Savigny-sur-Orge</strong> intervient aussi à{' '}
         {[
           'Sainte-Geneviève-des-Bois',
           'Viry-Châtillon',
@@ -1366,72 +1323,69 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        pour aider les entreprises locales à réussir leur transition numérique.
+        pour créer des sites, apps et SaaS performants en Essonne.
       </span>
     ),
     CTATitle: 'Créons votre site internet à Savigny-sur-Orge dès maintenant !',
     CTADesc:
-      'Faites confiance à notre agence web à Savigny-sur-Orge pour booster votre visibilité, générer plus de clients et réussir votre transformation digitale en Essonne.',
+      'Ikovaline : visibilité locale, performance SEO et conversion au service de votre business.',
     CTATextBtn: 'Lancez votre projet web à Savigny-sur-Orge',
     metaTitle:
-      'Agence web à Savigny-sur-Orge – Création de site internet, SEO Essonne',
+      'Agence web Savigny-sur-Orge (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Ikovaline, agence web à Savigny-sur-Orge : création de site internet, refonte de site vitrine, SEO local et marketing digital. Solutions sur-mesure pour entreprises en Essonne.',
+      'Création/refonte, apps & SaaS, SEO local Essonne et marketing digital à Savigny-sur-Orge. Avec Ikovaline, obtenez des résultats concrets.',
   },
+
   {
     id: 'agence-web-sainte-genevieve-des-bois',
     ville: 'Sainte-Geneviève-des-Bois',
     departement: 'Essonne',
-
-    intro: `Vous recherchez une agence web à Sainte-Geneviève-des-Bois pour créer un site internet professionnel ou refondre votre site existant ? Ikovaline accompagne les entreprises et indépendants de l’Essonne dans leur développement digital : création de site web, refonte, SEO local, web marketing, maintenance.`,
+    intro: `Ikovaline, agence web Essonne à Sainte-Geneviève-des-Bois : sites internet, apps/SaaS, SEO local et acquisition. Nous livrons des projets utiles, mesurables et pérennes.`,
     text1: (
       <span>
-        Notre <strong>agence web à Sainte-Geneviève-des-Bois</strong> propose
-        des services sur-mesure pour booster votre présence en ligne. Que ce
-        soit pour la{' '}
+        Notre <strong>agence web à Sainte-Geneviève-des-Bois</strong> conçoit
+        des sites vitrines/e-commerce orientés performance et conversion. De la{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création d’un site internet
+          création
         </Link>{' '}
-        moderne, une <strong>refonte de site web</strong> obsolète ou une
-        stratégie de{' '}
+        à la{' '}
         <Link href="nos-services/seo-referencement-naturel">
-          référencement SEO
-        </Link>{' '}
-        local, nous sommes à vos côtés à Sainte-Geneviève-des-Bois et dans toute
-        l’Essonne.
+          stratégie SEO locale
+        </Link>
+        , Ikovaline structure une progression durable en Essonne.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Notre agence web à Sainte-Geneviève-des-Bois conçoit des sites vitrines, e-commerce ou sur-mesure adaptés à votre activité locale et optimisés pour la conversion.',
+          'Un site beau, rapide et SEO-ready, prêt à évoluer vers l’app ou le SaaS à Sainte-Geneviève.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible localement à Sainte-Geneviève-des-Bois et dans tout l’Essonne grâce à une stratégie SEO efficace : mots-clés, contenu optimisé, netlinking, etc.',
+          'Travail sémantique local, on-site et netlinking : gagnez des positions durables en Essonne.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Nous assurons la maintenance technique de votre site web, sa sécurité, ses mises à jour et un support réactif pour votre entreprise à Sainte-Geneviève-des-Bois.',
+          'Sécurité, mises à jour et supervision : un site fiable qui sert votre croissance.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Déployez une stratégie de webmarketing locale avec notre agence : publicité Google Ads, réseaux sociaux, stratégie de contenu et campagnes e-mailing.',
+          'SEA/social, contenu et reporting : une acquisition lisible et rentable.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
       objectifTitle:
-        'Notre objectif à Sainte-Geneviève-des-Bois : faire de votre site web un outil rentable',
-      text1: `Notre agence web à Sainte-Geneviève-des-Bois vous aide à créer un site internet efficace, visible, et aligné avec vos objectifs business. Nous vous accompagnons dans votre stratégie digitale en Essonne, de la conception à la maintenance continue.`,
-      text2: `Que vous souhaitiez créer un site web à Sainte-Geneviève-des-Bois, refondre un site existant ou améliorer votre SEO local, nous proposons un accompagnement sur-mesure et un suivi régulier. Et si les résultats ne sont pas au rendez-vous, nous vous remboursons.`,
+        'Notre objectif à Sainte-Geneviève-des-Bois : un digital qui convertit',
+      text1: `Pages locales, avis clients, FAQ et contenus utiles : nous activons les ressorts qui comptent pour Google et vos visiteurs.`,
+      text2: `Suivi des KPI et ajustements continus avec Ikovaline (Essonne).`,
     },
     villesVoisines: [
       'Savigny-sur-Orge',
@@ -1448,8 +1402,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        En plus de <strong>Sainte-Geneviève-des-Bois</strong>, notre{' '}
-        <strong>agence web</strong> intervient dans les communes voisines comme{' '}
+        En plus de <strong>Sainte-Geneviève-des-Bois</strong>, Ikovaline opère à{' '}
         {[
           'Savigny-sur-Orge',
           'Viry-Châtillon',
@@ -1467,73 +1420,65 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’aider les professionnels locaux à réussir leur présence en ligne.
+        pour la création de site, l’app, le SaaS et le SEO local en Essonne.
       </span>
     ),
     CTATitle:
-      'Vous avez un projet web à Sainte-Geneviève-des-Bois ? Contactez-nous !',
+      'Vous avez un projet web à Sainte-Geneviève-des-Bois ? Parlons-en !',
     CTADesc:
-      'Création ou refonte de site internet, SEO local, stratégie web : notre agence vous accompagne à Sainte-Geneviève-des-Bois pour générer plus de clients.',
+      'Ikovaline – agence web Essonne : résultats mesurables, livrables soignés, accompagnement réactif.',
     CTATextBtn: 'Lancez votre projet à Sainte-Geneviève-des-Bois',
     metaTitle:
-      'Agence web à Sainte-Geneviève-des-Bois – Création de site internet, SEO Essonne',
+      'Agence web Sainte-Geneviève-des-Bois (Essonne) – Site, app & SaaS, SEO',
     metaDescription:
-      'Ikovaline, agence web à Sainte-Geneviève-des-Bois : création de site internet, refonte, référencement SEO local, accompagnement digital pour entreprises en Essonne.',
+      'Sites, apps/SaaS, SEO local Essonne et webmarketing à Sainte-Geneviève-des-Bois. Ikovaline aligne design, tech et business.',
   },
+
   {
     id: 'agence-web-viry-chatillon',
     ville: 'Viry-Châtillon',
     departement: 'Essonne',
-
-    intro: `Vous êtes à la recherche d’une agence web à Viry-Châtillon pour créer un site internet professionnel, moderniser votre site actuel ou améliorer votre référencement local ? Ikovaline accompagne les entreprises et indépendants de l’Essonne dans leur stratégie digitale : création de site web, refonte, SEO, web marketing, maintenance.`,
+    intro: `Ikovaline, agence web à Viry-Châtillon (Essonne), crée des sites internet rapides, des apps et des produits SaaS qui transforment la visibilité en clients. SEO local et performance inclus dès le départ.`,
     text1: (
       <span>
-        Notre <strong>agence web à Viry-Châtillon</strong> est spécialisée dans
-        la <strong>création de site internet</strong>, la{' '}
-        <strong>refonte de site web</strong> et le{' '}
-        <Link href="nos-services/seo-referencement-naturel">
-          référencement SEO local
-        </Link>
-        . Nous accompagnons les commerçants, artisans, PME, associations et
-        indépendants dans leur développement en ligne à Viry-Châtillon et
-        partout en Essonne.
-        <br />
-        Que vous souhaitiez lancer un nouveau site ou repenser votre présence
-        web, notre agence vous propose des solutions clés en main adaptées à vos
-        objectifs.
+        Notre <strong>agence web à Viry-Châtillon</strong> est experte en{' '}
+        <strong>création de site</strong>, <strong>refonte</strong> et{' '}
+        <Link href="nos-services/seo-referencement-naturel">SEO local</Link>.
+        Nous accompagnons commerçants, artisans, PME et associations pour une
+        présence web rentable en Essonne et IDF.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Confiez à notre agence web la création de votre site vitrine ou e-commerce à Viry-Châtillon. Design sur-mesure, responsive, rapide et bien référencé.',
+          'Design sur-mesure, vitesse et SEO-ready : un site prêt à évoluer vers app/SaaS à Viry-Châtillon.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Attirez plus de visiteurs et de clients à Viry-Châtillon grâce à notre expertise en SEO local : contenu optimisé, technique, netlinking, Google My Business, etc.',
+          'Cocon local, on-site/technical, netlinking et avis : ressortez sur les recherches proches de vous.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Notre agence web à Viry-Châtillon assure la maintenance de votre site internet : mises à jour, sécurité, sauvegardes et assistance rapide 7j/7.',
+          'Stabilité, sécurité et supervision 24/7 : un site/app fiable et rapide toute l’année.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Développez votre notoriété et générez des leads avec des campagnes Google Ads, réseaux sociaux, marketing de contenu et stratégie digitale sur-mesure.',
+          'SEA, social, contenu : des campagnes pilotées par les données pour générer des leads.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
       objectifTitle:
         'Notre mission à Viry-Châtillon : vous aider à performer en ligne',
-      text1: `Notre agence web à Viry-Châtillon vous accompagne à chaque étape de votre projet digital : conception du site, refonte, stratégie SEO, web marketing. Nous concevons des solutions sur-mesure pour faire de votre présence web un levier de croissance.`,
-      text2: `Nous intervenons à Viry-Châtillon et dans tout le département de l’Essonne. Création de site internet, refonte de site web, référencement SEO : faites confiance à une agence locale réactive, experte et orientée résultats. Satisfaction garantie ou remboursée.`,
+      text1: `Roadmap claire, quick wins, contenus utiles et tracking : chaque action sert un objectif précis.`,
+      text2: `Accompagnement Essonne avec indicateurs partagés : visibilité, conversions, réputation.`,
     },
     villesVoisines: [
       'Savigny-sur-Orge',
@@ -1550,8 +1495,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Notre <strong>agence web à Viry-Châtillon</strong> intervient aussi dans
-        les communes proches de l’Essonne comme{' '}
+        Notre <strong>agence web à Viry-Châtillon</strong> intervient aussi à{' '}
         {[
           'Savigny-sur-Orge',
           'Sainte-Geneviève-des-Bois',
@@ -1569,72 +1513,66 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        pour aider les professionnels à réussir leur transformation digitale.
+        pour des projets site/app/SaaS et SEO local performants.
       </span>
     ),
     CTATitle: 'Lancez votre site internet à Viry-Châtillon avec Ikovaline !',
     CTADesc:
-      'Profitez de notre expertise locale pour créer un site performant, référencé et aligné avec vos objectifs à Viry-Châtillon. Contactez notre agence web dès maintenant.',
+      'Création/refonte, SEO Essonne, campagnes et maintenance : une approche orientée résultats.',
     CTATextBtn: 'Démarrer mon projet à Viry-Châtillon',
     metaTitle:
-      'Agence web à Viry-Châtillon – Création de site internet, SEO local (Essonne)',
+      'Agence web Viry-Châtillon (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Besoin d’un site web à Viry-Châtillon ? Ikovaline vous accompagne : création, refonte de site internet, SEO local, stratégie digitale, maintenance web en Essonne.',
+      'Sites rapides, apps/SaaS, SEO local Essonne et webmarketing à Viry-Châtillon. Ikovaline construit votre croissance digitale.',
   },
+
   {
     id: 'agence-web-athis-mons',
     ville: 'Athis-Mons',
     departement: 'Essonne',
-
-    intro: `Vous avez besoin d’une agence web à Athis-Mons pour créer un site internet, refondre votre site existant ou améliorer votre visibilité sur Google ? Ikovaline accompagne les entreprises, commerçants et indépendants d’Athis-Mons et de l’Essonne dans leur stratégie digitale : création de site web, refonte, SEO local, web marketing.`,
+    intro: `Ikovaline, agence web Essonne à Athis-Mons : création de site, refonte, apps/SaaS, SEO local et marketing. Nous concevons des expériences qui chargent vite, rankent mieux et convertissent davantage.`,
     text1: (
       <span>
-        Notre <strong>agence web à Athis-Mons</strong> est spécialisée dans la{' '}
-        <strong>création de site internet</strong>, la{' '}
-        <strong>refonte de site web</strong> et le{' '}
-        <Link href="nos-services/seo-referencement-naturel">
-          référencement naturel
+        À <Link href="/agence-web-athis-mons">Athis-Mons</Link>, Ikovaline
+        conçoit des sites UX-first, SEO-ready et techniquement solides. De la{' '}
+        <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
+          création
         </Link>{' '}
-        local. Nous accompagnons les professionnels de tous secteurs dans leur
-        développement numérique à Athis-Mons, avec des solutions sur-mesure,
-        adaptées aux enjeux locaux en Essonne.
-        <br />
-        De la conception à la mise en ligne, nous mettons en œuvre les
-        meilleures pratiques UX, SEO et techniques pour maximiser les
-        performances de votre site.
+        à l’<Link href="nos-services/seo-referencement-naturel">audit SEO</Link>
+        , nous posons des fondations durables pour votre présence en Essonne.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Création de site vitrine, e-commerce ou sur-mesure à Athis-Mons : design responsive, ergonomie optimisée, SEO-ready… pour un site performant dès le départ.',
+          'Vitrine/e-commerce conçu pour la conversion et l’évolution vers app/SaaS à Athis-Mons.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Notre agence web améliore votre positionnement local à Athis-Mons sur Google grâce à une stratégie SEO complète : audit, contenu, technique et popularité.',
+          'Couverture sémantique locale, technique et popularité : remontez sur les requêtes utiles.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Assurez la stabilité et la sécurité de votre site web à Athis-Mons avec notre service de maintenance technique et de support réactif.',
+          'Sécurité, mises à jour, sauvegardes, monitoring : gardez un actif digital sain et prêt à scaler.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Publicité en ligne, stratégie de contenu, gestion des réseaux sociaux et emailings ciblés : développez votre activité avec notre agence web à Athis-Mons.',
+          'Campagnes d’acquisition (SEA/social), contenu et analytics : un ROI lisible et partageable.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
       objectifTitle:
         'Notre mission à Athis-Mons : développer votre visibilité en ligne',
-      text1: `Chez Ikovaline, notre agence web à Athis-Mons vous aide à créer un site web qui convertit : design sur-mesure, performance, référencement local, sécurité, marketing digital. Nous vous accompagnons de A à Z dans votre projet numérique en Essonne.`,
-      text2: `Que vous soyez commerçant, artisan ou entrepreneur à Athis-Mons, nous vous proposons un accompagnement complet : création ou refonte de site, stratégie SEO, campagnes marketing. Notre engagement : des résultats mesurables ou vous êtes remboursé.`,
+      text1: `Pages locales, contenus utiles, avis et GBP : on active le local pack et les requêtes d’intention.`,
+      text2: `Suivi mensuel, décisions simples : croissance progressive en Essonne avec Ikovaline.`,
     },
     villesVoisines: [
       'Savigny-sur-Orge',
@@ -1651,12 +1589,12 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Nous accompagnons les entreprises à Athis-Mons mais aussi dans les
-        villes voisines comme{' '}
+        Nous accompagnons Athis-Mons et les villes voisines d’Essonne :{' '}
         {[
           'Savigny-sur-Orge',
           'Sainte-Geneviève-des-Bois',
           'Viry-Châtillon',
+          'Athis-Mons',
           'Draveil',
           'Massy',
           'Évry',
@@ -1670,74 +1608,70 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        pour vous aider à réussir votre projet digital dans toute l’Essonne.
+        (site, app, SaaS, SEO).
       </span>
     ),
-    CTATitle: 'Besoin d’un site internet à Athis-Mons ? Parlons-en !',
+    CTATitle: 'Besoin d’un site à Athis-Mons ? Parlons-en !',
     CTADesc:
-      'Notre agence web locale vous accompagne dans la création de votre site internet à Athis-Mons, l’optimisation SEO et votre stratégie digitale globale.',
+      'Ikovaline – agence web Essonne : création/refonte, SEO local et marketing performant.',
     CTATextBtn: 'Lancer mon projet web à Athis-Mons',
     metaTitle:
-      'Agence web à Athis-Mons – Création de site internet, SEO Essonne',
+      'Agence web Athis-Mons (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Ikovaline, agence web à Athis-Mons : création et refonte de site internet, SEO local, maintenance web et stratégie digitale complète. Présence en ligne optimisée en Essonne.',
+      'Création de site, apps/SaaS, SEO local Essonne et campagnes à Athis-Mons. Ikovaline aligne design, tech et business.',
   },
+
   {
     id: 'agence-web-draveil',
     departement: 'Essonne',
-
     ville: 'Draveil',
-    intro: `À la recherche d’une agence web à Draveil pour créer ou refondre votre site internet ? Ikovaline vous accompagne dans tous vos projets digitaux : création de site vitrine ou e-commerce, refonte, SEO local, stratégie de visibilité, maintenance web. Basée en Essonne, notre agence digitale est proche de vos besoins.`,
+    intro: `Ikovaline, agence web à Draveil (Essonne) : sites internet performants, apps/SaaS, SEO local et stratégie d’acquisition. Nous créons des expériences utiles qui génèrent des demandes.`,
     text1: (
       <span>
-        Notre <strong>agence web à Draveil</strong> met à votre service son
-        expertise pour concevoir un <strong>site internet</strong> performant,
-        visible et rentable. Nous intervenons pour la{' '}
+        À <Link href="/agence-web-draveil">Draveil</Link>, nous concevons des
+        <strong> sites/app</strong> rapides, accessibles et bien référencés. De
+        la{' '}
         <Link href="nos-services/creation-sites-web-vitrine-e-commerce">
-          création de site web
-        </Link>
-        , la <strong>refonte de site existant</strong> et le{' '}
-        <Link href="nos-services/seo-referencement-naturel">
-          référencement SEO
+          création de site
         </Link>{' '}
-        local à Draveil et dans l’ensemble de l’Essonne.
-        <br />
-        Professionnels, commerçants, artisans ou indépendants : notre agence
-        vous propose des solutions sur-mesure adaptées à votre activité et à vos
-        objectifs de croissance.
+        à l’
+        <Link href="nos-services/seo-referencement-naturel">
+          optimisation SEO
+        </Link>
+        , Ikovaline installe une dynamique de croissance locale en Essonne.
       </span>
     ),
     services: [
       {
         text: 'Création de sites web',
         subtext:
-          'Notre agence web à Draveil conçoit des sites vitrines ou e-commerce modernes, responsives, rapides et optimisés pour le SEO. Un site qui vous ressemble et qui convertit.',
+          'Vitrine/e-commerce SEO-ready et prêt à évoluer vers l’app/SaaS pour Draveil et l’Essonne.',
         link: 'nos-services/creation-sites-web-vitrine-e-commerce',
       },
       {
         text: 'Référencement SEO',
         subtext:
-          'Soyez visible à Draveil et en Essonne grâce à notre stratégie SEO locale : analyse de mots-clés, contenus optimisés, SEO technique, netlinking, Google Business Profile.',
+          'Structure, contenus, netlinking et avis : remontez sur les requêtes locales qui comptent.',
         link: 'nos-services/seo-referencement-naturel',
       },
       {
         text: 'Maintenance et support',
         subtext:
-          'Nous assurons la maintenance et le support de votre site internet à Draveil : mises à jour, sécurité, surveillance, assistance, sauvegardes automatiques.',
+          'Surveillance, sécurité, sauvegardes et corrections : gardez un site/app stable et performant.',
         link: 'nos-services/creation-site-web-sur-mesure',
       },
       {
         text: 'Web marketing',
         subtext:
-          'Développez votre notoriété à Draveil avec nos stratégies de webmarketing : Google Ads, réseaux sociaux, campagnes emailing, tunnel de conversion, reporting.',
+          'SEA, social, contenu et reporting : un plan d’acquisition actionnable et mesuré.',
         link: 'nos-services/gestion-campagnes-sea',
       },
     ],
     objectifs: {
       objectifTitle:
         'Notre mission à Draveil : booster votre présence en ligne',
-      text1: `Notre agence web à Draveil vous accompagne dans toutes les étapes de votre projet digital : définition de vos besoins, création ou refonte de site, référencement SEO, marketing digital. Nous construisons une présence en ligne durable et performante pour votre activité.`,
-      text2: `Nous intervenons à Draveil et dans toutes les villes d’Essonne pour des projets sur-mesure, adaptés à vos objectifs et à votre marché local. Et parce que nous croyons en l’efficacité de notre méthode, nous vous remboursons si vous n’êtes pas satisfait.`,
+      text1: `Nous activons les fondamentaux (structure, contenus, preuve sociale) et pilotons vos priorités par la donnée.`,
+      text2: `Cap sur la croissance durable en Essonne avec Ikovaline.`,
     },
     villesVoisines: [
       'Savigny-sur-Orge',
@@ -1754,8 +1688,7 @@ export const dataAgence = [
     ],
     cityAroundText: (
       <span className="text-center">
-        Notre <strong>agence web à Draveil</strong> intervient aussi dans les
-        communes voisines comme{' '}
+        Notre <strong>agence web à Draveil</strong> intervient aussi à{' '}
         {[
           'Savigny-sur-Orge',
           'Sainte-Geneviève-des-Bois',
@@ -1773,17 +1706,17 @@ export const dataAgence = [
             {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' et ' : ''}
           </span>
         ))}{' '}
-        afin d’aider les entrepreneurs locaux à réussir leur projet web.
+        pour la création de site, l’app, le SaaS et le SEO local en Essonne.
       </span>
     ),
     CTATitle:
       'Vous avez un projet à Draveil ? Créons votre site dès aujourd’hui',
     CTADesc:
-      'Notre agence web à Draveil est là pour créer ou refondre votre site internet, améliorer votre SEO local et construire une stratégie digitale performante.',
+      'Ikovaline – résultats concrets, design soigné, performances mesurées.',
     CTATextBtn: 'Démarrer mon projet web à Draveil',
     metaTitle:
-      'Agence web à Draveil – Création de site internet, SEO, refonte en Essonne',
+      'Agence web Draveil (Essonne) – Site, app & SaaS, SEO | Ikovaline',
     metaDescription:
-      'Ikovaline, votre agence web à Draveil : création de site vitrine ou e-commerce, refonte de site internet, stratégie SEO locale et web marketing en Essonne.',
+      'Création/refonte de site, apps/SaaS, SEO local Essonne et campagnes à Draveil. Ikovaline pilote votre croissance digitale.',
   },
 ];

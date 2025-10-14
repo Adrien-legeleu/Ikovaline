@@ -95,6 +95,21 @@ const citiesYvelines = [
   'Conflans-Sainte-Honorine',
   'Rambouillet',
 ];
+/* ----------------------------- Val-d'Oise (NOUVEAU) ----------------------------- */
+const citiesValDOise = [
+  'Argenteuil',
+  'Cergy',
+  'Sarcelles',
+  'Garges-lès-Gonesse',
+  'Goussainville',
+  'Gonesse',
+  'Villiers-le-Bel',
+  'Bezons',
+  'Franconville',
+  'Herblay-sur-Seine',
+  "Saint-Ouen-l'Aumône",
+  'Pontoise',
+];
 
 /* ------------------------------- Composant principal ------------------------------- */
 export default function Agences() {
@@ -103,7 +118,9 @@ export default function Agences() {
     | 'hauts-de-seine'
     | 'seine-et-marne'
     | 'val-de-marne'
-    | 'yvelines';
+    | 'yvelines'
+    | 'val-d-oise'; // NEW
+
   const [depart, setDepart] = useState<Depart>('essonne');
 
   const departs: { slug: Depart; name: string }[] = [
@@ -111,7 +128,8 @@ export default function Agences() {
     { slug: 'hauts-de-seine', name: 'Hauts-de-Seine' },
     { slug: 'seine-et-marne', name: 'Seine-et-Marne' },
     { slug: 'val-de-marne', name: 'Val-de-Marne' },
-    { slug: 'yvelines', name: 'Yvelines' }, // NEW
+    { slug: 'yvelines', name: 'Yvelines' },
+    { slug: 'val-d-oise', name: "Val-d'Oise" }, // NEW
   ];
 
   /* ---------------------- Segmented control slider ---------------------- */
@@ -146,7 +164,9 @@ export default function Agences() {
             ? citiesSeineEtMarne
             : depart === 'val-de-marne'
               ? citiesValDeMarne
-              : citiesYvelines; // yvelines
+              : depart === 'val-d-oise'
+                ? citiesValDOise // NEW
+                : citiesYvelines;
 
     return (
       <AnimatePresence mode="wait">

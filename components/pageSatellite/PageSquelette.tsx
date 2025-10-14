@@ -6,6 +6,7 @@ import dataHautsDeSeine from '@/data/data-hauts-de-seine.json';
 import dataSeineEtMarne from '@/data/data-seine-et-marne.json'; // 👈 ton JSON carte 77
 import dataValDeMarne from '@/data/data-val-de-marne.json'; // 👈 ton JSON carte 77
 import dataYvelines from '@/data/data-yvelines.json'; // 👈 ton JSON carte 77
+import dataValOise from '@/data/data-val-oise.json'; // 👈 ton JSON carte 77
 
 import Services from '@/components/pageSatellite/Services';
 import Objectif from '@/components/pageSatellite/Objectif';
@@ -16,17 +17,32 @@ import { IconMessage2 } from '@tabler/icons-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { useRef } from 'react';
+import { use, useEffect, useRef } from 'react';
 
 const CarteEssonne = dynamic(() => import('@/components/CarteEssonne'), {
   ssr: false,
 });
 
 const Glow = dynamic(() => import('@/components/ui/glow'), { ssr: false });
+const toSlug = (s: string) =>
+  s
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // sans accents
+    .replace(/['’]+/g, '-') // apostrophes → tiret
+    .replace(/[^a-zA-Z0-9]+/g, '-') // tout le reste → tiret
+    .replace(/^-+|-+$/g, '') // trim
+    .toLowerCase();
 
 export default function PageSquelette({ idAgence }: { idAgence: string }) {
-  const data = dataAgenceGlobal.find((item) => item.id === idAgence);
+  const data = dataAgenceGlobal.find(
+    (item) => toSlug(item.id) === toSlug(idAgence)
+  );
   const svgRef = useRef<SVGSVGElement>(null);
+  useEffect(() => {
+    console.log('ueueiu');
+
+    console.log(idAgence, data);
+  }, [idAgence, data]);
 
   const projectPoint = (lat: number, lng: number) => {
     const minLat = 41.0;
@@ -56,7 +72,6 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
           className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
         />
       </div>
-
       <div className="h-screen overflow-hidden w-full flex flex-col items-center justify-between relative md:pt-24 pt-20">
         {
           // 🗺️ Choix de la carte selon le département
@@ -93,6 +108,13 @@ export default function PageSquelette({ idAgence }: { idAgence: string }) {
               width={800}
               height={800}
               data={dataYvelines.features}
+              highlighted={data.ville.toLowerCase()}
+            />
+          ) : data.departement === 'Val-d’Oise' ? (
+            <CarteEssonne
+              width={800}
+              height={800}
+              data={dataValOise.features}
               highlighted={data.ville.toLowerCase()}
             />
           ) : null

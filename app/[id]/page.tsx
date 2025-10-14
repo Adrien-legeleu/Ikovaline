@@ -40,5 +40,6 @@ export async function generateMetadata({ params }: ParamsIdProps) {
 
 export default function Page({ params }: ParamsIdProps) {
   const { id } = params;
+
   return <PageSquelette idAgence={id} />;
 }
