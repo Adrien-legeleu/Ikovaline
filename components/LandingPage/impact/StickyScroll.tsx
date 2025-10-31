@@ -69,7 +69,7 @@ export function StickyScrollDesktop({
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     const idx = Math.min(
       cardLength - 1,
-      Math.max(0, Math.floor(latest * cardLength + 0.0001))
+      Math.max(0, Math.floor(latest * cardLength - 0.7))
     );
     setActiveCard(idx);
   });
@@ -86,13 +86,12 @@ export function StickyScrollDesktop({
   return (
     <motion.section
       ref={containerRef}
-      animate={{ backgroundColor }}
       className={cn(
         'relative grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(28rem,36rem)]',
-        'gap-6 md:gap-8 rounded-3xl border border-black/5 dark:border-white/5',
-        'shadow-[0_24px_50px_-20px_rgba(0,0,0,.2)]',
+        'gap-6 md:gap-8 ',
+        'shadow-[0_24px_60px_-20px_rgba(0,0,0,.15)]',
         'p-5 md:p-8 lg:p-10',
-        'min-h-[160vh] md:min-h-[180vh] lg:min-h-[160vh]',
+        'min-h-[160vh] md:min-h-[120vh] lg:min-h-[140vh]',
         className
       )}
     >
@@ -103,12 +102,12 @@ export function StickyScrollDesktop({
       />
 
       {/* Colonne gauche — textes */}
-      <div className="relative z-10">
-        <div className="mx-auto max-w-2xl">
+      <div className="relative z-10 h-full">
+        <div className=" h-full  flex flex-col justify-between  relative">
           {content.map((item, index) => {
             const isActive = index === activeCard;
             return (
-              <article key={item.title + index} className="my-20 md:my-28">
+              <article key={item.title + index} className="my-20 md:my-32">
                 <motion.h2
                   initial={{ opacity: 0.5, y: 8 }}
                   animate={{ opacity: isActive ? 1 : 0.5, y: 0 }}
@@ -171,9 +170,9 @@ export function StickyScrollDesktop({
         <div
           style={{ background: backgroundGradient }}
           className={cn(
-            'sticky top-24 h-[30rem] xl:h-[32rem] w-full overflow-hidden',
-            'rounded-2xl bg-white shadow-[0_40px_80px_-32px_rgba(0,0,0,.35)]',
-            'ring-1 ring-black/10 dark:ring-white/10',
+            'sticky top-24  w-full overflow-hidden',
+            'rounded-[3rem] bg-white shadow-[0_20px_40px_2px_rgba(0,0,0,.05)]',
+
             contentClassName
           )}
         >
@@ -215,15 +214,9 @@ export function StickyScrollMobile({
   const gradList = isDark ? darkGradients : gradients;
 
   return (
-    <section
-      className={cn(
-        'relative rounded-3xl border border-black/5 dark:border-white/5 p-5 md:p-8',
-        className
-      )}
-    >
+    <section className={cn('relative rounded-3xl  p-5 md:p-8', className)}>
       <div className="mx-auto max-w-2xl">
         {content.map((item, index) => {
-          const grad = gradList[index % gradList.length];
           return (
             <article key={item.title + index} className="py-8 md:py-12">
               <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-white">
@@ -235,11 +228,9 @@ export function StickyScrollMobile({
 
               {item.content && (
                 <div
-                  style={{ background: grad }}
                   className={cn(
-                    'mt-6 h-[22rem] sm:h-[26rem] md:h-[28rem] w-full overflow-hidden',
-                    'rounded-2xl bg-white shadow-[0_32px_64px_-36px_rgba(0,0,0,.35)]',
-                    'ring-1 ring-black/10 dark:ring-white/10',
+                    'mt-6  w-full',
+
                     contentClassName
                   )}
                 >

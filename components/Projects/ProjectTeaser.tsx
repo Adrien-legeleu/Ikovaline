@@ -172,12 +172,12 @@ export default function ProjectsCarousel() {
     ? {
         title: 'Our Projects',
         all: 'See all projects →',
-        baseHref: '/en/projects',
+        baseHref: '/en/our-projects',
       }
     : {
         title: 'Nos Projets',
         all: 'Voir tous les projets →',
-        baseHref: '/projects',
+        baseHref: '/our-projects',
       };
 
   // 3 projets uniquement

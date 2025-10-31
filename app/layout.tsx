@@ -1,17 +1,17 @@
-// app/layout.tsx
+// app/layout.tsx  (ROOT LAYOUT OBLIGATOIRE)
 import type { Metadata } from 'next';
 import './globals.css';
-import { Header } from '@/components/header/Header';
-import Footer from '@/components/footer/Footer';
-import Favicon from '@/app/ikovaline_logo-favicon.png';
+
 import { ThemeProvider } from '@/components/theme.provider';
 import { Toaster } from '@/components/ui/toaster';
-import { Poppins } from 'next/font/google';
-import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import LazyExtraStyle from '@/app/LazyExtraStyle';
 import { Analytics } from '@vercel/analytics/next';
 import { ScrollManager } from '@/components/ScrollManager';
+import LazyExtraStyle from '@/app/LazyExtraStyle';
+
+import Script from 'next/script';
+import { Poppins } from 'next/font/google';
+import Favicon from '@/app/ikovaline_logo-favicon.png';
 import { Suspense } from 'react';
 
 const poppins = Poppins({
@@ -47,6 +47,7 @@ export const metadata: Metadata = {
       'Boostez votre visibilité avec Ikovaline, start-up étudiante experte en marketing digital et stratégies de transformation numérique.',
     images: ['/images/logo/ikovaline_logo.png'],
   },
+  icons: [{ rel: 'icon', url: Favicon.src }],
 };
 
 export default function RootLayout({
@@ -57,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={poppins.className}>
       <head>
-        {/* Cookiebot — AUTO BLOCKING en premier (exécution avant tout le reste) */}
+        {/* Cookiebot */}
         <Script
           id="Cookiebot"
           src="https://consent.cookiebot.com/uc.js"
@@ -67,38 +68,34 @@ export default function RootLayout({
         />
 
         {/* Consent Mode v2 — défaut denied */}
-        <Script id="gcm-default" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){ dataLayer.push(arguments); }
+        <Script id="gcm-default" strategy="beforeInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          gtag('consent', 'default', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            functionality_storage: 'granted',
+            security_storage: 'granted'
+          });
+          gtag('set', 'ads_data_redaction', true);
+          window.addEventListener('CookieConsentDeclaration', function() {
+            try {
+              var c = window.Cookiebot?.consented || {};
+              var analyticsGranted = !!c.statistics;
+              var marketingGranted  = !!c.marketing;
+              gtag('consent', 'update', {
+                analytics_storage: analyticsGranted ? 'granted' : 'denied',
+                ad_storage:       marketingGranted  ? 'granted' : 'denied',
+                ad_user_data:     marketingGranted  ? 'granted' : 'denied',
+                ad_personalization: marketingGranted ? 'granted' : 'denied'
+              });
+            } catch(e){}
+          });
+        `}</Script>
 
-            gtag('consent', 'default', {
-              ad_storage: 'denied',
-              analytics_storage: 'denied',
-              ad_user_data: 'denied',
-              ad_personalization: 'denied',
-              functionality_storage: 'granted',
-              security_storage: 'granted'
-            });
-            gtag('set', 'ads_data_redaction', true);
-
-            window.addEventListener('CookieConsentDeclaration', function() {
-              try {
-                var c = window.Cookiebot?.consented || {};
-                var analyticsGranted = !!c.statistics;
-                var marketingGranted  = !!c.marketing;
-                gtag('consent', 'update', {
-                  analytics_storage: analyticsGranted ? 'granted' : 'denied',
-                  ad_storage:       marketingGranted  ? 'granted' : 'denied',
-                  ad_user_data:     marketingGranted  ? 'granted' : 'denied',
-                  ad_personalization: marketingGranted ? 'granted' : 'denied'
-                });
-              } catch(e){}
-            });
-          `}
-        </Script>
-
-        {/* Préconnect (ok, non bloquant) */}
+        {/* Préconnect */}
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -110,46 +107,18 @@ export default function RootLayout({
         <link rel="preconnect" href="https://analytics.ahrefs.com" />
         <link rel="preconnect" href="https://cdn.vercel-insights.com" />
 
-        {/* Favicon */}
-        <link rel="icon" href={Favicon.src} type="image/png" />
-
-        {/* JSON-LD */}
+        {/* GTM */}
         <Script
-          id="org-schema"
-          type="application/ld+json"
+          id="gtm-main"
           strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'Ikovaline',
-              url: 'https://ikovaline.com',
-              logo: 'https://ikovaline.com/images/logo/ikovaline_logo.png',
-              contactPoint: {
-                '@type': 'ContactPoint',
-                telephone: '+33 7 85 90 22 38',
-                contactType: 'customer service',
-                areaServed: 'FR',
-              },
-              sameAs: [
-                'https://linkedin.com/company/ikovaline',
-                'https://instagram.com/ikovaline',
-              ],
-            }),
-          }}
-        />
+        >{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+          j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+          f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NDKCHTFH');`}</Script>
 
-        {/* GTM (restera neutre tant que consent = denied) */}
-        <Script id="gtm-main" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
-            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-            f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-NDKCHTFH');`}
-        </Script>
-
-        {/* Ahrefs — forcé en "statistics" pour garantir le blocage avant consent */}
+        {/* Ahrefs (bloqué avant consent) */}
         <Script
           id="ahrefs-analytics"
           src="https://analytics.ahrefs.com/analytics.js"
@@ -185,14 +154,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header>
-            <Header />
-          </header>
-          <main>{children}</main>
+          {/* ⚠️ PAS de Header/Footer ici */}
+          {children}
           <Toaster />
-          <footer>
-            <Footer />
-          </footer>
         </ThemeProvider>
       </body>
     </html>

@@ -126,7 +126,7 @@ export function SaaSMock() {
         {['MRR', 'Active users'].map((k, i) => (
           <div
             key={k}
-            className="rounded-xl bg-white p-4 shadow-[0_18px_40px_-24px_rgba(0,0,0,.25)] ring-1 ring-black/5 dark:bg-neutral-900"
+            className="rounded-xl bg-white p-4 shadow-[0_18px_40px_-24px_rgba(0,0,0,.25)] ring-1 ring-black/[0.02] dark:bg-neutral-900"
           >
             <div className="text-[11px] uppercase tracking-wide text-neutral-500">
               {k}
@@ -145,7 +145,7 @@ export function SaaSMock() {
         ))}
       </div>
 
-      <div className="mt-5 rounded-2xl bg-gradient-to-b from-white to-white/70 p-4 shadow-[0_28px_56px_-28px_rgba(0,0,0,.28)] ring-1 ring-black/5 dark:from-neutral-900 dark:to-neutral-900/60">
+      <div className="mt-5 rounded-2xl bg-gradient-to-b from-white to-white/70 p-4 shadow-[0_28px_56px_-28px_rgba(0,0,0,.28)] ring-1 ring-black/[0.02] dark:from-neutral-900 dark:to-neutral-900/60">
         <motion.div
           className="h-40 w-full rounded-lg bg-[linear-gradient(to_right,rgba(0,0,0,.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,.06)_1px,transparent_1px)] bg-[size:28px_28px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.06)_1px,transparent_1px)]"
           animate={
@@ -156,7 +156,7 @@ export function SaaSMock() {
         <div className="-mt-1 h-[2px] w-full bg-gradient-to-r from-neutral-400 to-neutral-500 dark:from-neutral-300 dark:to-neutral-400" />
       </div>
 
-      <div className="mt-5 rounded-2xl bg-white p-4 shadow-[0_24px_48px_-28px_rgba(0,0,0,.22)] ring-1 ring-black/5 dark:bg-neutral-900">
+      <div className="mt-5 rounded-2xl bg-white p-4 shadow-[0_24px_48px_-28px_rgba(0,0,0,.22)] ring-1 ring-black/[0.02] dark:bg-neutral-900">
         <div className="mb-3 grid grid-cols-5 gap-3 text-[11px] font-semibold text-neutral-500">
           <div>Plan</div>
           <div>Customer</div>
@@ -192,7 +192,7 @@ export function AppsMock() {
       <div className="relative grid place-items-center py-2">
         <div className="relative z-10 -rotate-6 -translate-x-1/4">
           <motion.div
-            className="h-72 w-40 rounded-[2rem] border border-black/10 bg-white shadow-[0_24px_60px_-28px_rgba(0,0,0,.35)] dark:border-white/10 dark:bg-neutral-900 will-change-transform"
+            className="h-72 w-40 rounded-[2rem] border border-black/[0.04] bg-white shadow-[0_24px_60px_-28px_rgba(0,0,0,.35)] dark:border-white/[0.05] dark:bg-neutral-900 will-change-transform"
             animate={
               reduce ? undefined : { y: [-8, 0, -8], rotate: [-1, 0, -1] }
             }
@@ -211,7 +211,7 @@ export function AppsMock() {
 
         <div className="absolute left-1/2 top-1/2 -translate-x-1/4 -translate-y-1/3 rotate-6 z-0">
           <motion.div
-            className="h-72 w-40 rounded-[2rem] border border-black/10 bg-white shadow-[0_28px_70px_-30px_rgba(0,0,0,.35)] dark:border-white/10 dark:bg-neutral-900 will-change-transform"
+            className="h-72 w-40 rounded-[2rem] border border-black/[0.04] bg-white shadow-[0_28px_70px_-30px_rgba(0,0,0,.35)] dark:border-white/5 dark:bg-neutral-900 will-change-transform"
             animate={reduce ? undefined : { y: [10, 0, 10], rotate: [1, 0, 1] }}
             transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut' }}
           >
@@ -230,7 +230,7 @@ export function AutomationMock() {
   const reduce = useReducedMotion();
   return (
     <MacWindow title="Automation · Workflow">
-      <div className="relative h-64 rounded-xl bg-white dark:bg-neutral-950 ring-1 ring-black/5 dark:ring-white/10">
+      <div className="relative h-64 rounded-xl bg-white dark:bg-neutral-950 ring-1 ring-black/[0.04] dark:ring-white/5">
         <motion.div
           className="absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-100 ring-2 ring-[hsl(var(--primary)/0.35)] dark:bg-neutral-900 shadow-[0_0_28px_rgba(59,130,246,0.25)]"
           animate={
@@ -324,7 +324,7 @@ export function SitesMock() {
   return (
     <MacWindow title="Sites · SEO & GEO">
       <div className="space-y-4">
-        <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-[0_18px_40px_-24px_rgba(0,0,0,.22)] dark:border-neutral-800 dark:bg-neutral-900">
+        <div className="rounded-xl border border-black/[0.04] bg-white p-4 shadow-[0_18px_40px_-24px_rgba(0,0,0,.22)] dark:border-neutral-800 dark:bg-neutral-900">
           <Shimmer className="h-3 w-44 bg-neutral-200 dark:bg-neutral-700" />
           <div className="mt-2 h-4 w-3/4 rounded bg-neutral-100 dark:bg-neutral-800" />
           <div className="mt-1 h-3 w-1/2 rounded bg-neutral-100 dark:bg-neutral-800" />
@@ -419,12 +419,12 @@ export function GMBMock() {
   return (
     <MacWindow title="Google Business Profile · Local">
       <div className="space-y-4">
-        <div className="relative h-28 rounded-xl ring-1 ring-black/10 dark:ring-white/10 overflow-hidden">
+        <div className="relative h-28 rounded-xl ring-1 ring-black/[0.04] dark:ring-white/5 overflow-hidden">
           <motion.div
             className="absolute inset-0 will-change-transform"
             style={{
               background:
-                'repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 1px, transparent 1px 28px), repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 1px, transparent 1px 28px)',
+                'repeating-linear-gradient(90deg, rgba(0,0,0,.02) 0 1px, transparent 1px 28px), repeating-linear-gradient(0deg, rgba(0,0,0,.02) 0 1px, transparent 1px 28px)',
             }}
             animate={
               reduce ? undefined : { backgroundPositionX: ['0px', '28px'] }
@@ -543,7 +543,7 @@ export function AcquisitionMock() {
           {['CPC', 'CTR'].map((k) => (
             <div
               key={k}
-              className="rounded-xl bg-white p-3 shadow-[0_18px_40px_-24px_rgba(0,0,0,.22)] ring-1 ring-black/5 dark:bg-neutral-900"
+              className="rounded-xl bg-white p-3 shadow-[0_18px_40px_-24px_rgba(0,0,0,.22)] ring-1 ring-black/[0.02] dark:bg-neutral-900"
             >
               <div className="text-[11px] uppercase tracking-wide text-neutral-500">
                 {k}
@@ -553,13 +553,13 @@ export function AcquisitionMock() {
           ))}
         </div>
         <motion.div
-          className="h-32 rounded-xl bg-[linear-gradient(to_right,rgba(0,0,0,.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,.06)_1px,transparent_1px)] bg-[size:28px_28px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.06)_1px,transparent_1px)]"
+          className="h-32 rounded-xl bg-[linear-gradient(to_right,rgba(0,0,0,.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,.02)_1px,transparent_1px)] bg-[size:28px_28px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.03)_1px,transparent_1px)]"
           animate={
             reduce ? undefined : { backgroundPositionX: ['0px', '28px'] }
           }
           transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
         />
-        <div className="rounded-xl bg-white p-3 ring-1 ring-black/5 shadow-[0_18px_40px_-24px_rgba(0,0,0,.22)] dark:bg-neutral-900">
+        <div className="rounded-xl bg-white p-3 ring-1 ring-black/[0.04] shadow-[0_18px_40px_-24px_rgba(0,0,0,.12)] dark:bg-neutral-900">
           <div className="mb-2 grid grid-cols-4 gap-2 text-[11px] font-semibold text-neutral-500">
             <div>Mot-clé</div>
             <div>Qualité</div>

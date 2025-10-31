@@ -78,14 +78,14 @@ const GRID: Feature[] = [
 ];
 
 const Chip = ({ label }: { label: string }) => (
-  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/10 px-1.5 py-[2px] text-[8px] leading-none text-neutral-600 dark:text-neutral-400 bg-white/70 dark:bg-neutral-900/70 whitespace-nowrap">
+  <span className="inline-flex items-center rounded-full border border-black/[0.04] dark:border-white/[0.04] px-1.5 py-[2px] text-[8px] leading-none text-neutral-600 dark:text-neutral-400 bg-white/70 dark:bg-neutral-900/70 whitespace-nowrap">
     {label}
   </span>
 );
 
 function CardShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative min-h-[56px] max-h-[72px] w-full rounded-xl border border-white/60 dark:border-white/15 bg-white/65 dark:bg-black backdrop-blur-md shadow-sm px-2.5 py-2 overflow-hidden">
+    <div className="relative min-h-[56px]  w-full rounded-3xl h-20 bg-white/65 dark:bg-black shadow-2xl shadow-black/[0.05] px-2 py-2 overflow-hidden">
       {children}
     </div>
   );
@@ -198,7 +198,7 @@ function MockSEA() {
   return (
     <CardShell>
       <div className="flex items-center gap-2" aria-hidden>
-        <span className="px-1.5 py-[2px] text-[10px] rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-neutral-900/70 text-neutral-600 dark:text-neutral-400">
+        <span className="px-1.5 py-[2px] text-[10px] rounded-full border border-black/[0.04] dark:border-white/[0.04] bg-white/70 dark:bg-neutral-900/70 text-neutral-600 dark:text-neutral-400">
           Ad
         </span>
         <div className="h-3 flex-1 rounded bg-neutral-100 dark:bg-neutral-800" />
@@ -270,10 +270,11 @@ export function Service3() {
               className="group"
             >
               <article
-                className="relative h-full justify-between overflow-hidden rounded-xl border border-white/60 dark:border-[rgba(56,130,246,0.18)]
-                  bg-[linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,244,252,.92))]
+                className="relative justify-between h-full overflow-hidden rounded-[3rem] 
+                backdrop-blur-sm
+                  bg-[linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,244,252,.32))]
                   dark:bg-[linear-gradient(135deg,rgba(12,16,24,.92),rgba(12,16,24,.86))]
-                  shadow-[0_20px_60px_-24px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,.55)]
+                  shadow-[0_20px_60px_-24px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,.35)]
                   dark:shadow-[0_18px_60px_-22px_rgba(0,0,0,.6),inset_0_1px_0_rgba(59,130,246,.12)]
                   p-6 md:p-7 lg:p-8 flex flex-col transition-transform duration-300 will-change-transform hover:-translate-y-0.5"
               >
@@ -297,10 +298,10 @@ export function Service3() {
                   </div>
 
                   <span
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/90 dark:bg-neutral-900/85 ring-1 ring-black/10 dark:ring-white/10 shadow-[0_10px_28px_-14px_rgba(0,0,0,0.35)] group-hover:translate-x-0.5 transition-transform"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-[1.2rem] bg-white/90 dark:bg-neutral-900/85 ring-1 ring-black/[0.02] dark:ring-white/[0.02] shadow-[0_10px_28px_-14px_rgba(0,0,0,0.25)] group-hover:translate-x-0.5 transition-transform"
                     aria-hidden
                   >
-                    <IconArrowRight className="h-5 w-5 text-sky-600 dark:text-sky-400" />
+                    <IconArrowRight className="h-5 w-5 text-primary dark:text-primary" />
                   </span>
                 </div>
 
@@ -317,7 +318,7 @@ export function Service3() {
           <Link
             href="/contact"
             prefetch={false}
-            className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-[15px] font-semibold bg-sky-500 text-white shadow-[0_12px_30px_-10px_rgba(2,132,199,.65)] hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70"
+            className="inline-flex items-center justify-center rounded-3xl px-5 py-3 text-[15px] font-semibold bg-sky-500 text-white shadow-[0_12px_30px_-10px_rgba(2,132,199,.65)] hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70"
           >
             Booster ma croissance
           </Link>

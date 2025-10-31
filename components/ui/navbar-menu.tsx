@@ -59,7 +59,7 @@ export const MenuItem = ({
       {/* Le trigger */}
       <Link
         href={link}
-        className="cursor-pointer text-sm xl:text-base  text-black hover:opacity-[0.9] dark:text-white"
+        className="cursor-pointer text-sm  text-black hover:opacity-[0.9] dark:text-white"
       >
         {item}
       </Link>
@@ -89,7 +89,7 @@ export const MenuItem = ({
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
                 className="
-    rounded-2xl overflow-hidden shadow-xl 
+    rounded-[2rem] overflow-hidden shadow-xl 
     
     bg-white dark:bg-neutral-900
     backdrop-blur-md backdrop-saturate-150

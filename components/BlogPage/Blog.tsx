@@ -213,19 +213,12 @@ function Blog() {
                 height={1000}
                 src={bl.img}
                 alt={bl.slug}
-                className="rounded-3xl w-full object-cover aspect-video"
+                className="rounded-[3rem] w-full object-cover aspect-video"
               />
 
-              <div className="flex flex-row gap-4 items-center">
-                <Badge>{badgeNew}</Badge>
-                <p className="flex flex-row gap-2 text-sm items-center">
-                  <span className="text-muted-foreground">{byTxt}</span>
-                  <Avatar className="h-6 w-6">
-                    <AvatarImage src="/images/logo/ikovaline_logo_unique.png" />
-                    <AvatarFallback>IK</AvatarFallback>
-                  </Avatar>
-                  <span>{bl.by}</span>
-                </p>
+              <div className="flex flex-row gap-2 text-xs items-center">
+                Par
+                <Badge className="text-white">Ikovaline</Badge>
               </div>
 
               <div className="flex flex-col gap-1">

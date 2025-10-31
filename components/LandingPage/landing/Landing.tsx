@@ -11,12 +11,15 @@ const Services = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full max-w-[1200px]">
-        <div
-          className="h-[420px] w-full rounded-2xl border border-black/10 bg-white/70 shadow-[0_10px_30px_-15px_rgba(0,0,0,.25)]
-                     dark:border-white/10 dark:bg-neutral-950/60 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,.6)]"
-          aria-hidden
-        />
+      <div className="w-full px-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2  lg:grid-cols-3 xl:gap-10">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-96 rounded-[3rem] bg-white dark:bg-neutral-900 animate-pulse"
+            />
+          ))}
+        </div>
       </div>
     ),
   }
@@ -38,7 +41,7 @@ export default function HeroNoiseLight() {
           initial={reduce ? undefined : { opacity: 0, y: 10 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="mt-2 text-center text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl lg:text-7xl dark:text-white"
+          className="mt-3 text-center text-3xl font-bold tracking-wide text-slate-900 md:text-5xl lg:text-[5rem] dark:text-white"
         >
           De l’idée à un <br className="hidden sm:block" />
           projet réussi.
@@ -48,7 +51,7 @@ export default function HeroNoiseLight() {
           initial={reduce ? undefined : { opacity: 0, y: 10 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.15 }}
-          className="mx-auto mt-4 max-w-xl text-center text-sm text-slate-600 md:text-xl dark:text-slate-300"
+          className="mx-auto mt-8 max-w-xl text-center text-sm text-slate-600 md:text-lg dark:text-slate-300"
         >
           Ikovaline, conçoit des solutions digitales sur mesure pour développer
           vos projets et accélérer votre croissance digital.
@@ -62,10 +65,10 @@ export default function HeroNoiseLight() {
           className="mt-8 flex w-full flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Link
-            href="/contact"
-            className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
+            href="/signup"
+            className="rounded-3xl bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
           >
-            Nous contacter
+            Lancer mon projet
           </Link>
           <WhatsAppButton
             className="px-6 py-3 gap-2 rounded-lg flex items-center justify-center"
@@ -125,7 +128,7 @@ function Background({ reduce }: { reduce: boolean | null }) {
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className="h-full w-20 bg-gradient-to-r border-primary/30 border-[0.5px] from-slate-100 to-white shadow-[2px_0_0_0_#e5e7eb] dark:from-neutral-900 dark:to-neutral-950 dark:shadow-[2px_0_0_0_#262626]"
+          className="h-full w-20 bg-gradient-to-r border-primary/15 border-[0.5px] from-slate-100 to-white shadow-[2px_0_0_0_#e5e7eb] dark:from-neutral-900 dark:to-neutral-950 dark:shadow-[2px_0_0_0_#262626]"
         />
       ))}
     </motion.div>

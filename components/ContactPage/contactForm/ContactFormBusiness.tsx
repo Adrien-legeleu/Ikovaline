@@ -67,14 +67,13 @@ export default function ContactFormBusiness({
   };
 
   const fieldCls =
-    'rounded-xl border border-white/60 dark:border-white/10 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl ' +
+    'rounded-3xl border-none py-6 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl ' +
     'shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_6px_16px_rgba(0,0,0,.06)] ' +
-    'dark:shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_22px_rgba(0,0,0,.5)] ' +
-    'focus-visible:ring-1 focus-visible:ring-sky-400/60';
+    'dark:shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_22px_rgba(0,0,0,.5)] ';
 
   return (
     <div
-      className="relative overflow-hidden rounded-xl p-8 backdrop-blur-2xl
+      className="relative overflow-hidden rounded-[3rem] p-8 backdrop-blur-2xl
       bg-[linear-gradient(135deg,rgba(255,255,255,.9),rgba(240,245,252,.5))]
       dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.6))]
       border border-white/50 dark:border-white/10
@@ -91,9 +90,11 @@ export default function ContactFormBusiness({
       </p>
 
       <form className="my-8" onSubmit={onSubmit}>
-        <div className="mb-4 flex flex-col gap-2 md:flex-row">
+        <div className="mb-6 flex flex-col gap-6 md:flex-row">
           <LabelInputContainer>
-            <Label htmlFor="firstname">Nom</Label>
+            <Label htmlFor="firstname" className="text-xs ml-1">
+              Nom
+            </Label>
             <Input
               id="firstname"
               required
@@ -104,7 +105,9 @@ export default function ContactFormBusiness({
             />
           </LabelInputContainer>
           <LabelInputContainer>
-            <Label htmlFor="lastname">Prénom</Label>
+            <Label htmlFor="lastname" className="text-xs ml-1">
+              Prénom
+            </Label>
             <Input
               id="lastname"
               required
@@ -116,8 +119,10 @@ export default function ContactFormBusiness({
           </LabelInputContainer>
         </div>
 
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Adresse mail</Label>
+        <LabelInputContainer className="mb-6">
+          <Label htmlFor="email" className="text-xs ml-1">
+            Adresse mail
+          </Label>
           <Input
             id="email"
             required
@@ -129,8 +134,10 @@ export default function ContactFormBusiness({
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="buisnessname">Nom Entreprise</Label>
+        <LabelInputContainer className="mb-6">
+          <Label htmlFor="buisnessname" className="text-xs ml-1">
+            Nom Entreprise
+          </Label>
           <Input
             id="buisnessname"
             required
@@ -141,8 +148,10 @@ export default function ContactFormBusiness({
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="tel">Téléphone</Label>
+        <LabelInputContainer className="mb-6">
+          <Label htmlFor="tel" className="text-xs ml-1">
+            Téléphone
+          </Label>
           <Input
             id="tel"
             required
@@ -153,8 +162,10 @@ export default function ContactFormBusiness({
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="secteur">Secteur</Label>
+        <LabelInputContainer className="mb-6">
+          <Label htmlFor="secteur" className="text-xs ml-1">
+            Secteur
+          </Label>
           <Input
             id="secteur"
             required
@@ -165,8 +176,10 @@ export default function ContactFormBusiness({
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="message">Message</Label>
+        <LabelInputContainer className="mb-6">
+          <Label htmlFor="message" className="text-xs ml-1">
+            Message
+          </Label>
           <Textarea
             id="message"
             placeholder="Entrez votre message…"
@@ -179,16 +192,16 @@ export default function ContactFormBusiness({
         <div className="w-full">
           <button
             type="submit"
-            className="mt-8 block h-12 w-full rounded-xl text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]"
+            className="mt-8 block h-14 w-full rounded-3xl text-[15px] font-semibold tracking-wide text-white bg-primary"
           >
             Envoyer
           </button>
 
-          <div className="my-5 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent" />
+          <div className="my-5 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-200 dark:via-neutral-800 to-transparent" />
           <button
             type="button"
             onClick={onSwitch}
-            className="h-11 w-full rounded-xl font-semibold text-neutral-800 dark:text-neutral-100 border border-white/60 dark:border-white/10 bg-white/70 dark:bg-neutral-900/60"
+            className="h-14 w-full rounded-3xl font-semibold text-neutral-800 dark:text-neutral-100 border border-white/60 dark:border-white/10 bg-white/70 dark:bg-neutral-900/60"
           >
             Étudiant ?
           </button>

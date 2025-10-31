@@ -41,10 +41,9 @@ export default function ContactMainPage() {
         {/* Aside */}
         <aside className="max-lg:order-1 mx-auto w-full max-w-md space-y-6">
           <div
-            className="relative overflow-hidden rounded-xl p-6 backdrop-blur-2xl
+            className="relative overflow-hidden rounded-[3rem] p-8 
           bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(240,245,252,0.5))]
           dark:bg-[linear-gradient(135deg,rgba(10,14,20,0.92),rgba(10,14,20,0.6))]
-          border border-white/50 dark:border-white/10
           shadow-[0_18px_60px_rgba(6,24,44,0.12)] dark:shadow-[0_18px_60px_rgba(0,0,0,0.65)]"
           >
             <p className="text-center text-neutral-800 dark:text-neutral-300">
@@ -64,7 +63,7 @@ export default function ContactMainPage() {
 
             <button
               onClick={() => setIsBusiness((s) => !s)}
-              className="mt-4 w-full rounded-xl h-12 text-[15px] font-semibold tracking-wide text-white bg-[linear-gradient(135deg,#2563EB,#00A8E8)]"
+              className="mt-4 w-full rounded-3xl h-12 text-[15px] font-semibold tracking-wide text-white bg-primary"
             >
               {isBusiness
                 ? 'Vous êtes étudiant ?'
@@ -73,20 +72,20 @@ export default function ContactMainPage() {
           </div>
 
           <div
-            className="relative overflow-hidden rounded-xl p-6 backdrop-blur-2xl
+            className="relative overflow-hidden rounded-[3rem] p-8 
           bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(240,245,252,0.5))]
           dark:bg-[linear-gradient(135deg,rgba(10,14,20,0.92),rgba(10,14,20,0.6))]
-          border border-white/50 dark:border-white/10
+  
           shadow-[0_18px_60px_rgba(6,24,44,0.12)] dark:shadow-[0_18px_60px_rgba(0,0,0,0.65)]"
           >
             <p className="mb-3 text-center text-md font-semibold text-neutral-700 dark:text-neutral-200">
               Coordonnées directes
             </p>
             <div className="grid gap-3">
-              <div className="rounded-3xl border border-white/50 dark:border-white/10 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl p-4">
+              <div className="rounded-[3rem] border border-white/10 dark:border-white/[0.04] bg-white/70 dark:bg-zinc-900/60  p-4">
                 <ScriptCopyBtn commandMap={telData} />
               </div>
-              <div className="rounded-3xl border border-white/50 dark:border-white/10 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl p-4">
+              <div className="rounded-[3rem] border border-white/10 dark:border-white/[0.04] bg-white/70 dark:bg-zinc-900/60  p-4">
                 <ScriptCopyBtn commandMap={emailData} />
               </div>
             </div>

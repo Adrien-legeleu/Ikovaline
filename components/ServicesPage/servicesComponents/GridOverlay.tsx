@@ -11,7 +11,7 @@ export function Background() {
         className="absolute dark:opacity-0 inset-0"
         style={{
           background:
-            'repeating-linear-gradient(90deg, rgba(241,245,249,0.7) 0 30px, rgba(255,255,255,1) 80px 80px)',
+            'repeating-linear-gradient(90deg, rgba(241,245,249,0.4) 0 30px, rgba(255,255,255,1) 80px 80px)',
         }}
       />
       {/* variante dark via mix-blend */}

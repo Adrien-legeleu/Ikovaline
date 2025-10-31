@@ -118,7 +118,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                   },
                 }}
                 key={'card' + index}
-                className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
+                className="!rounded-[3rem] last:pr-[5%] md:last:pr-[33%]"
               >
                 {item}
               </motion.div>
@@ -127,7 +127,10 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         </div>
 
         <div className="mx-10 flex items-center justify-between gap-2">
-          <Link href={`/${isEN ? 'en/' : ''}blog`} className="z-10 bg-primary text-white py-2 rounded-xl px-4">
+          <Link
+            href={`/${isEN ? 'en/' : ''}blog`}
+            className="z-10 bg-primary text-white py-2 rounded-3xl px-4"
+          >
             <span className="flex items-center justify-center gap-2">
               <span aria-hidden="true">
                 <IconNews />
@@ -173,7 +176,7 @@ export const Blog = ({
     <Link href={`/${isEN ? 'en/' : ''}blog/${blog.slug}`} className="relative">
       <motion.div
         layoutId={layout ? `blog-${blog.title}` : undefined}
-        className="relative shadow-xl shadow-black/20 z-10 flex h-56 md:h-80 w-80 md:w-[480px] flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
+        className="relative shadow-xl shadow-black/20 z-10 flex h-56 md:h-80 w-80 md:w-[480px] flex-col items-start justify-start overflow-hidden rounded-[3rem] bg-gray-100 dark:bg-neutral-900"
       >
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-full bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         <div className="relative z-40 p-4 md:p-8 flex h-full justify-end items-end">

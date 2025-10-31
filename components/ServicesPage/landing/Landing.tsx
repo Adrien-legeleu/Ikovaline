@@ -70,9 +70,9 @@ const Card = ({
     whileInView={{ y: 0, opacity: 1 }}
     viewport={{ once: true, amount: 0.3 }}
     transition={{ duration: 0.5, ease: 'easeOut', delay }}
-    className="group   h-full justify-between flex flex-col rounded-2xl  border border-black/10 dark:border-white/10
-               bg-[linear-gradient(135deg,rgba(255,255,255,.92),rgba(240,245,252,.65))]
-              p-6 md:p-7  text-left shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.5)]
+    className="group   h-full justify-between flex flex-col rounded-[3rem]  border border-black/[0.02] dark:border-white/[0.04]
+               bg-[linear-gradient(135deg,rgba(255,255,255,.92),rgba(240,255,252,.95))]
+              p-6 md:p-7  text-left shadow-[0_18px_60px_rgba(6,24,44,.05),inset_0_1px_0_rgba(255,255,255,.04)]
             
             
                dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]
@@ -84,7 +84,7 @@ const Card = ({
 );
 
 const Chip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <span className="inline-flex items-center gap-1.5 rounded-2xl bg-white/70 px-3 py-2 text-sm font-semibold shadow-inner ring-1 ring-black/5 dark:bg-neutral-900/60 text-primary dark:ring-white/10">
+  <span className="inline-flex items-center gap-1.5 rounded-[2rem] bg-white/70 px-3 py-2 text-xs font-semibold shadow-inner shadow-black/[0.02] ring-1 ring-black/[0.02] dark:bg-neutral-900/60 text-primary dark:ring-white/[0.04]">
     {icon}
     {label}
   </span>
@@ -93,8 +93,8 @@ const Chip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
 const LearnMore = ({ href }: { href: string }) => (
   <Link
     href={href}
-    className="inline-flex items-center gap-1.5 rounded-2xl bg-white/55 px-3 py-2 text-sm font-semibold text-primary ring-1 ring-sky-200/60 shadow-sm
-               hover:bg-white/75 dark:bg-sky-900/20  dark:ring-sky-800/50"
+    className="inline-flex items-center gap-1.5  rounded-[2rem] bg-white/55 px-3 py-2 text-xs font-semibold text-primary ring-1 ring-sky-200/20 
+               hover:bg-white/75 dark:bg-sky-900/20  dark:ring-sky-800/10"
   >
     En savoir plus
     <svg
@@ -113,14 +113,14 @@ const BrowserFrame: React.FC<{
   label: string;
   children: React.ReactNode;
 }> = ({ label, children }) => (
-  <div className="mt-5 rounded-2xl border border-black/10 bg-white/90 p-2 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.25)] backdrop-blur dark:border-white/10 dark:bg-neutral-950/70">
+  <div className="mt-5 rounded-[2rem] border border-black/[0.02] bg-white/90 p-2 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.15)] backdrop-blur dark:border-white/[0.04] dark:bg-neutral-950/70">
     <div className="mb-3 flex  items-center justify-between">
       <div className="flex items-center gap-2 pl-2">
         <span className="h-2.5 w-2.5 rounded-full bg-red-300/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-yellow-300/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-green-300/80" />
       </div>
-      <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-semibold text-neutral-500 ring-1 ring-black/10 dark:bg-neutral-900 dark:text-neutral-400 dark:ring-white/10">
+      <span className="rounded-full bg-neutral-100 px-3 py-1 text-[10px] font-semibold text-neutral-500 ring-1 ring-black/[0.04] dark:bg-neutral-900 dark:text-neutral-400 dark:ring-white/[0.04]">
         {label}
       </span>
     </div>
@@ -203,9 +203,9 @@ const SaaSMock = () => (
       {['MRR', 'ACTIVE USERS'].map((t, i) => (
         <div
           key={t}
-          className="rounded-2xl border border-black/10 p-4 dark:border-white/10"
+          className="rounded-3xl border border-black/[0.04] p-4 dark:border-white/[0.04]"
         >
-          <div className="text-[11px] font-semibold tracking-wide text-neutral-500 dark:text-neutral-400">
+          <div className="text-[10px] font-semibold tracking-wide text-neutral-500 dark:text-neutral-400">
             {t}
           </div>
           <div className="mt-2 h-3 rounded bg-neutral-100 dark:bg-neutral-800" />
@@ -240,7 +240,7 @@ const AutomationMock = () => (
     </div>
 
     {/* Badge d’état (statique, premium) */}
-    <div className="absolute right-4 top-4 rounded-full border px-2.5 py-1 text-[10px] font-semibold text-sky-700 border-sky-200/70 bg-white/70 shadow-sm dark:border-sky-800/40 dark:bg-neutral-900/60 dark:text-sky-300">
+    <div className="absolute right-4 top-4 rounded-full border px-2.5 py-1 text-[10px] font-semibold text-sky-700 border-sky-200/10 bg-white/70 shadow-xl shadow-black/[0.05] dark:border-sky-800/40 dark:bg-neutral-900/60 dark:text-sky-300">
       Workflow
     </div>
 
@@ -254,7 +254,7 @@ const AppsMock = () => (
     <div className="absolute inset-0 flex items-center justify-center gap-6">
       {/* Carte style iPhone */}
       <motion.div
-        className="relative h-32 w-20 rounded-xl border border-black/10 bg-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.25)] dark:border-white/10 dark:bg-neutral-900"
+        className="relative h-32 w-20 rounded-[1.1rem] border border-black/[0.04] bg-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.05)] dark:border-white/[0.04] dark:bg-neutral-900"
         initial={{ y: 20, opacity: 0, rotate: -4 }}
         animate={{ y: 0, opacity: 1, rotate: -4 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -269,7 +269,7 @@ const AppsMock = () => (
 
       {/* Carte style Web dashboard */}
       <motion.div
-        className="relative h-36 w-48 rounded-xl border border-black/10 bg-white shadow-[0_10px_28px_-8px_rgba(0,0,0,0.25)] dark:border-white/10 dark:bg-neutral-900"
+        className="relative h-36 w-48 rounded-[1.1rem] border border-black/[0.04] bg-white shadow-[0_10px_28px_-8px_rgba(0,0,0,0.05)] dark:border-white/[0.04] dark:bg-neutral-900"
         initial={{ y: 30, opacity: 0, rotate: 6 }}
         animate={{ y: 0, opacity: 1, rotate: 6 }}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
@@ -299,19 +299,13 @@ const AppsMock = () => (
 
 export default function ServicesHero() {
   return (
-    <section className="relative overflow-hidden flex flex-col items-center text-center pt-24 md:pt-28 pb-20 md:pb-28 px-6">
-      {/* halos background */}
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <span className="absolute -top-40 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full blur-[200px] bg-[radial-gradient(closest-side,#00A8E8,transparent_70%)] opacity-30 dark:opacity-40" />
-        <span className="absolute bottom-0 right-1/2 h-[32rem] w-[32rem] translate-x-1/2 rounded-full blur-[160px] bg-[radial-gradient(closest-side,#2563EB,transparent_70%)] opacity-25 dark:opacity-35" />
-      </div>
-
+    <section className="relative overflow-hidden z-10 flex flex-col items-center text-center pt-24 md:pt-28 pb-20 md:pb-28 px-6">
       {/* Avis Google */}
       <div className="mb-6 flex items-center gap-2 text-sky-500">
         {Array.from({ length: 5 }).map((_, i) => (
           <IconStarFilled key={i} className="h-5 w-5" />
         ))}
-        <span className="ml-2 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
+        <span className="ml-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300">
           +67 avis Google
         </span>
       </div>
@@ -321,7 +315,7 @@ export default function ServicesHero() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="max-w-4xl text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-gradient-to-t from-neutral-900 via-neutral-800 to-neutral-600 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent"
+        className="max-w-4xl text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-black dark:bg-white bg-clip-text text-transparent"
       >
         Des solutions digitales modernes pour propulser votre entreprise
       </motion.h1>
@@ -339,12 +333,12 @@ export default function ServicesHero() {
       <div className="mt-8 flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
         <Link
           href="/contact"
-          className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
+          className="rounded-3xl bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
         >
           Nous contacter
         </Link>
         <WhatsAppButton
-          className=" px-6 py-3  gap-2 rounded-lg flex items-center justify-center"
+          className=" px-6 py-3  gap-2 rounded-3xl flex items-center justify-center"
           message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
           label="WhatsApp"
         />

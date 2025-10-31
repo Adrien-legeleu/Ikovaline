@@ -26,7 +26,7 @@ export default function ProjectsPageClient() {
         </p>
       </header>
 
-      <ProjectsGrid projects={PROJECTS_FR} baseHref="/projects" />
+      <ProjectsGrid projects={PROJECTS_FR} baseHref="/our-projects" />
     </section>
   );
 }

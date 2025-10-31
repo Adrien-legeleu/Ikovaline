@@ -7,14 +7,14 @@ import type { Project } from '@/data/projects';
 
 export default function ProjectsGrid({
   projects,
-  baseHref = '/projects',
+  baseHref = '/our-projects',
 }: {
   projects: Project[];
   baseHref?: string;
 }) {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-3">
         {projects.map((p) => (
           <ProjectCard
             key={p.id}

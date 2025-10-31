@@ -100,12 +100,12 @@ export default function FAQ() {
           {FAQ_FR.map((item, i) => (
             <article
               key={i}
-              className="sm:mb-5 mb-5 lg:mb-6 break-inside-avoid rounded-2xl bg-white sm:p-6 p-3 shadow-[0_18px_50px_-28px_rgba(0,0,0,.25)] ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10 transition-transform duration-300 will-change-transform hover:-translate-y-0.5"
+              className="sm:mb-5 mb-5 lg:mb-6 break-inside-avoid rounded-[3rem] bg-white sm:p-8 p-6 shadow-[0_18px_50px_-28px_rgba(0,0,0,.15)] ring-1 ring-black/[0.02] dark:bg-neutral-900 dark:ring-white/[0.04] transition-transform duration-300 will-change-transform hover:-translate-y-0.5"
             >
-              <h3 className="sm:text-[17px] text-sm font-semibold text-neutral-900 dark:text-white">
+              <h3 className="sm:text-sm text-xs font-semibold text-neutral-900 dark:text-white">
                 {item.question}
               </h3>
-              <div className="mt-3 sm:text-sm text-xs sm:leading-7 leading-5 text-neutral-700 dark:text-neutral-300">
+              <div className="mt-3 sm:text-sm text-[9px] sm:leading-7 leading-4 text-neutral-700 dark:text-neutral-300">
                 {item.answer}
               </div>
             </article>

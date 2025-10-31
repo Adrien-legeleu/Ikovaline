@@ -5,13 +5,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import {
-  IconCpu,
-  IconDeviceMobileCode,
-  IconRobot,
-  IconSparkles,
-  IconMapPin,
-  IconChartLine,
-} from '@tabler/icons-react';
+  Cpu,
+  Bot,
+  Sparkles,
+  MapPin,
+  LineChart,
+  Smartphone,
+} from 'lucide-react';
 import {
   AcquisitionMock,
   AppsMock,
@@ -40,8 +40,8 @@ function CardShell<As extends React.ElementType = 'article'>({
   return (
     <Comp
       className={clsx(
-        'relative flex h-full flex-col justify-between overflow-hidden rounded-2xl p-6 md:p-7 lg:p-5 xl:p-7',
-        'bg-white/90 backdrop-blur-sm shadow-[0_40px_120px_-52px_rgba(0,0,0,.35)] border border-black/10 dark:border-white/10',
+        'relative flex h-full flex-col justify-between overflow-hidden rounded-[3rem] p-6 md:p-7 lg:p-5 xl:p-7',
+        'bg-white/90 backdrop-blur-sm shadow-[0_40px_120px_-52px_rgba(0,0,0,.35)]',
         'dark:bg-neutral-900/20 dark:shadow-[0_60px_150px_-60px_rgba(0,0,0,.70)]',
         'before:pointer-events-none before:absolute before:inset-0',
         'before:[background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,255,255,.85))_padding-box,linear-gradient(135deg,#d4d4d8,#e5e7eb)]',
@@ -49,7 +49,7 @@ function CardShell<As extends React.ElementType = 'article'>({
         className
       )}
     >
-      {/* Soft highlight */}
+      {/* Highlight */}
       <span className="pointer-events-none absolute inset-x-6 top-3 h-8 rounded-full bg-black/5 dark:bg-white/5 blur-xl" />
       {/* Hover lift */}
       <style jsx>{`
@@ -72,7 +72,7 @@ const SERVICES = [
     tag: 'SaaS',
     title: 'SaaS sur-mesure',
     desc: 'On crée ton logiciel en ligne de A à Z : connexion des utilisateurs, abonnements, paiements, tout est prêt et simple à utiliser.',
-    icon: IconCpu,
+    icon: Cpu,
     href: 'https://ikovaline.com/nos-services/creation-saas-sur-mesure',
     illustration: <SaaSMock />,
   },
@@ -81,34 +81,34 @@ const SERVICES = [
     tag: 'Apps',
     title: 'Web & Mobile Apps hautes performances',
     desc: 'On développe ton site ou ton appli mobile rapide, facile à utiliser, qui marche partout et même sans internet.',
-    icon: IconDeviceMobileCode,
+    icon: Smartphone,
     href: 'https://ikovaline.com/nos-services/web-apps-applications-mobiles/',
     illustration: <AppsMock />,
+  },
+  {
+    id: 'sites',
+    tag: 'Sites & SEO',
+    title: 'Sites sur-mesure',
+    desc: 'On fait un site beau, rapide, bien référencé sur Google, et optimisé pour que les gens près de chez toi te trouvent facilement.',
+    icon: Sparkles,
+    href: 'https://ikovaline.com/nos-services#sites-seo-geo',
+    illustration: <SitesMock />,
   },
   {
     id: 'automation',
     tag: 'IA & Automation',
     title: 'Automatisation & IA',
     desc: 'On installe des robots et de l’IA pour faire les tâches chiantes à ta place, gagner du temps et être plus efficace.',
-    icon: IconRobot,
+    icon: Bot,
     href: 'https://ikovaline.com/nos-services#automatisation-ia',
     illustration: <AutomationMock />,
-  },
-  {
-    id: 'sites',
-    tag: 'Sites & SEO',
-    title: 'Sites sur-mesure • SEO & GEO',
-    desc: 'On fait un site beau, rapide, bien référencé sur Google, et optimisé pour que les gens près de chez toi te trouvent facilement.',
-    icon: IconSparkles,
-    href: 'https://ikovaline.com/nos-services#sites-seo-geo',
-    illustration: <SitesMock />,
   },
   {
     id: 'gmb',
     tag: 'Local',
     title: 'Google My Business (GBP) qui convertit',
     desc: 'On règle ta fiche Google pour que tu sois bien vu sur Maps : infos claires, avis clients, photos et appels qui arrivent directement.',
-    icon: IconMapPin,
+    icon: MapPin,
     href: 'https://ikovaline.com/nos-services#scaling',
     illustration: <GMBMock />,
   },
@@ -117,7 +117,7 @@ const SERVICES = [
     tag: 'Acquisition',
     title: 'SEA + SEO : acquisition rentable',
     desc: 'On t’amène des clients grâce à la pub Google et au référencement naturel. Tu vois clairement combien ça rapporte.',
-    icon: IconChartLine,
+    icon: LineChart,
     href: 'https://ikovaline.com/nos-services#scaling',
     illustration: <AcquisitionMock />,
   },
@@ -130,7 +130,7 @@ export default function ServicesGridRefined() {
   return (
     <section className="bg-transparent">
       <div className="relative z-10 mx-auto px-4">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2  lg:grid-cols-3 xl:gap-10">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
           {SERVICES.map((s, idx) => {
             const Icon = s.icon;
             return (
@@ -154,7 +154,7 @@ export default function ServicesGridRefined() {
                             repeat: Infinity,
                           }}
                         >
-                          <Icon className="h-5 w-5" />
+                          <Icon className="h-4 w-4" />
                         </motion.span>
                         {s.tag}
                       </span>

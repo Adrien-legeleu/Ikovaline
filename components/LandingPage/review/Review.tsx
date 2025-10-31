@@ -23,7 +23,7 @@ import StarClientsGoogle from '@/components/StarClientsGoogle';
 import Link from 'next/link';
 import WhatsAppButton from '@/components/WhatsappButton';
 
-type ReviewType = {
+export type ReviewType = {
   name: string;
   role: string;
   text: string;
@@ -63,19 +63,19 @@ function Card({ r }: { r: ReviewType }) {
   return (
     <article
       className={[
-        'group relative mb-6 break-inside-avoid rounded-2xl p-6 transition-transform duration-200 will-change-transform',
+        'group relative mb-6 break-inside-avoid rounded-[3rem] p-8 transition-transform duration-200 will-change-transform',
         // Lux neutral + ring/shadow adaptés dark
-        'bg-white/95 ring-1 ring-black/5 shadow-[0_26px_40px_-24px_rgba(0,0,0,0.16)]',
-        'hover:-translate-y-0.5 hover:shadow-[0_30px_44px_-24px_rgba(0,0,0,0.18)]',
-        'dark:bg-neutral-900/90 dark:ring-white/10 dark:shadow-[0_46px_80px_-40px_rgba(0,0,0,0.65)]',
+        'bg-white/95 ring-1 ring-black/[0.04] shadow-[0_26px_40px_-24px_rgba(0,0,0,0.06)]',
+        'hover:-translate-y-0.5 hover:shadow-[0_30px_44px_-24px_rgba(0,0,0,0.08)]',
+        'dark:bg-neutral-900/90 dark:ring-white/[0.04] dark:shadow-[0_46px_80px_-40px_rgba(0,0,0,0.55)]',
       ].join(' ')}
     >
       {/* guillemet discret */}
-      <div className="pointer-events-none absolute left-5 top-4 select-none text-4xl leading-none text-neutral-300/80 dark:text-neutral-600/60">
+      <div className="pointer-events-none absolute left-6 top-6 select-none text-4xl leading-none text-neutral-300/80 dark:text-neutral-600/60">
         “
       </div>
 
-      <blockquote className="mt-6 text-xs xs:text-sm leading-6 text-neutral-800 md:text-[15px] md:leading-7 dark:text-neutral-200">
+      <blockquote className="mt-6 text-[10px] xs:text-sm leading-5A text-neutral-800 md:text-[15px] md:leading-7 dark:text-neutral-200">
         {r.text}
       </blockquote>
 
@@ -102,7 +102,7 @@ function Card({ r }: { r: ReviewType }) {
 }
 
 /* -------------------------------- Data --------------------------------- */
-const reviewsFR: ReviewType[] = [
+export const reviewsFR: ReviewType[] = [
   {
     name: 'Teka Somba',
     image: Review12,
@@ -250,7 +250,7 @@ export default function Review() {
         <div className="mt-6 flex sm:flex-row gap-4 flex-col items-center justify-center">
           <Link
             href="/contact"
-            className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
+            className="rounded-3xl bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
           >
             Nous contacter
           </Link>

@@ -26,7 +26,7 @@ function Card({ children }: { children: React.ReactNode }) {
     <div className={cn('overflow-hidden rounded-2xl')}>
       {/* Reflet doux */}
 
-      <div className="relative px-6 py-10 sm:px-8 sm:py-12">{children}</div>
+      <div className="relative px-6 py-12 sm:px-8 sm:py-16">{children}</div>
     </div>
   );
 }
@@ -36,20 +36,17 @@ function CardInner({ icon, quote }: Testimonial) {
     <div className="flex flex-col items-center gap-7 text-center">
       {/* Pastille icône */}
       <div className="relative">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-full h-6 w-28 -translate-x-1/2 -translate-y-2 rounded-full bg-black/25 blur-xl dark:bg-white/15"
-        />
+        {/* Effet Neumorphism */}
         <div
           className={cn(
-            'grid size-16 sm:size-20 place-items-center rounded-full',
-            'bg-white text-primary',
-            'shadow-[inset_0_-10px_18px_rgba(0,0,0,.06),0_14px_30px_rgba(0,0,0,.16)]',
-            'ring-1 ring-black/5',
-            'dark:bg-neutral-900 dark:ring-white/10 dark:shadow-[inset_0_-10px_18px_rgba(255,255,255,.03),0_14px_30px_rgba(0,0,0,.6)]'
+            'grid size-20 place-items-center rounded-[2rem] select-none',
+            'bg-[#ffffff] text-primary transition-all duration-300',
+            'shadow-[0px_6px_12px_rgba(0,0,0,0.1),0px_0px_12px_rgba(155,155,155,0.1)]',
+            'dark:bg-[#0f0f0f] dark:shadow-[6px_6px_12px_rgba(0,0,0,0.7),-6px_-6px_12px_rgba(255,255,255,0.05)] hover:scale-[1.03]',
+            '[&>*]:w-10 [&>*]:h-10 [&>*]:text-2xl'
           )}
         >
-          <span className="text-[26px] sm:text-[28px]">{icon}</span>
+          {icon}
         </div>
       </div>
 
@@ -57,7 +54,7 @@ function CardInner({ icon, quote }: Testimonial) {
       <p
         className={cn(
           'max-w-xl text-balance font-semibold leading-tight',
-          'text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px]',
+          'text-xs sm:text-sm md:text-md lg:text-xl',
           'text-primary'
         )}
       >

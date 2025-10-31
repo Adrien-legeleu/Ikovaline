@@ -21,7 +21,9 @@ type CardProps = {
 
 const BLUR =
   'data:image/svg+xml;utf8,' +
-  encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='24' height='16'></svg>");
+  encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='16'></svg>"
+  );
 
 export default function ProjectCard({
   titre,
@@ -37,10 +39,10 @@ export default function ProjectCard({
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-[28px] border',
-        'border-white/50 dark:border-white/10',
-        'bg-[linear-gradient(135deg,rgba(255,255,255,.9),rgba(240,245,252,.45))] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.6))]',
-        'backdrop-blur-2xl shadow-[0_18px_60px_rgba(6,24,44,.12)] dark:shadow-[0_18px_60px_rgba(0,0,0,.65)]',
+        'group relative overflow-hidden rounded-[2rem] ',
+
+        'bg-[linear-gradient(135deg,rgba(255,255,255,.7),rgba(240,245,252,.45))] dark:bg-[linear-gradient(135deg,rgba(10,14,20,.72),rgba(10,14,20,.5))]',
+        'backdrop-blur-2xl shadow-[0_18px_60px_rgba(6,14,24,.05)] dark:shadow-[0_18px_60px_rgba(0,0,0,.35)]',
         'transition-transform duration-300 hover:-translate-y-1.5',
         className
       )}
@@ -57,7 +59,7 @@ export default function ProjectCard({
           unoptimized
           sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 520px"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0 opacity-70 mix-blend-multiply dark:opacity-80" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 via-black/0 to-black/0 opacity-70 mix-blend-multiply dark:opacity-80" />
       </div>
 
       {/* content */}
@@ -75,7 +77,7 @@ export default function ProjectCard({
           {services.slice(0, 4).map((s, i) => (
             <li
               key={i}
-              className="rounded-full px-3 py-1 text-[11px] font-medium text-neutral-700 dark:text-neutral-200 border border-white/50 dark:border-white/10 bg-white/60 dark:bg-neutral-900/50 backdrop-blur-xl"
+              className="rounded-full px-3 py-1 text-[11px] font-medium text-neutral-700 dark:text-neutral-200 border  border-black/[0.03] dark:border-white/5 bg-white/60 dark:bg-neutral-900/50 backdrop-blur-xl"
             >
               {s}
             </li>
@@ -97,8 +99,6 @@ export default function ProjectCard({
               Démo <IconArrowRight className="size-4" />
             </a>
           )}
-
-          
         </div>
       </div>
     </article>

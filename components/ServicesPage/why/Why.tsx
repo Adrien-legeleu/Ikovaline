@@ -85,14 +85,22 @@ function FeatureCard({ feature }: { feature: Feature }) {
   const { title, description, icon: Icon } = feature;
   return (
     <article
-      className="relative h-full overflow-hidden rounded-2xl p-7 
+      className="relative h-full overflow-hidden rounded-[3rem] p-8 
                  bg-[linear-gradient(135deg,rgba(255,255,255,.86),rgba(240,245,252,.46))]
                  dark:bg-[linear-gradient(135deg,rgba(10,14,20,.92),rgba(10,14,20,.65))]
                  border border-white/50 dark:border-[rgba(56,130,246,0.20)]
-                 shadow-[0_18px_60px_rgba(6,24,44,.12),inset_0_1px_0_rgba(255,255,255,.55)]
-                 dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.12)]
+                 shadow-[0_18px_60px_rgba(6,14,04,.05),inset_0_1px_0_rgba(255,255,255,.55)]
+                 dark:shadow-[0_18px_60px_rgba(2,6,12,.65),inset_0_1px_0_rgba(59,130,246,.05)]
                  transition-all duration-500"
     >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-10 left-1/2 h-16 w-[80%] -translate-x-1/2 rounded-full blur-2xl bg-[radial-gradient(ellipse_at_center,rgba(0,168,232,.10),rgba(37,99,235,.08),transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,.10),rgba(37,99,235,.04),transparent_70%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(120%_90%_at_20%_0%,rgba(2,132,199,.02),transparent_60%)] dark:bg-[radial-gradient(120%_90%_at_20%_0%,rgba(59,130,246,.10),transparent_60%)]"
+      />
       <div className="relative z-10 flex items-start gap-3">
         <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/70 dark:bg-neutral-900/60 border border-white/40 dark:border-white/10 shadow-inner">
           <Icon

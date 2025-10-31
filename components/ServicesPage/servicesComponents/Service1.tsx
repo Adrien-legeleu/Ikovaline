@@ -52,7 +52,7 @@ const GRID: Feature[] = [
 /* ----------------------------- Mini Mockups ----------------------------- */
 function MockSaaS() {
   return (
-    <div className="relative h-20 w-full rounded-xl border border-white/60 dark:border-white/15 bg-white/65 dark:bg-black backdrop-blur-md shadow-sm px-3 py-2">
+    <div className="relative h-20 w-full rounded-3xl border border-white/10 dark:border-white/10 bg-white/65 dark:bg-black shadow-2xl shadow-black/[0.05] px-3 py-2">
       <div className="flex items-center gap-1" aria-hidden>
         <span className="h-1.5 w-1.5 rounded-full bg-neutral-300/80 dark:bg-neutral-600" />
         <span className="h-1.5 w-1.5 rounded-full bg-neutral-300/80 dark:bg-neutral-600" />
@@ -82,7 +82,7 @@ function MockSaaS() {
           </svg>
         </div>
       </div>
-      <div className="absolute right-2 bottom-2 text-[10px] text-neutral-500 dark:text-neutral-400 px-1.5 py-[2px] rounded-full border border-black/10 dark:border-white/10">
+      <div className="absolute right-2 bottom-2 text-[10px] text-neutral-500 dark:text-neutral-400 px-1.5 py-[2px] rounded-full border border-black/[0.04] dark:border-white/[0.04]">
         Plans · Users · MRR
       </div>
     </div>
@@ -91,7 +91,7 @@ function MockSaaS() {
 
 function MockWebApp() {
   return (
-    <div className="relative h-20 w-full rounded-xl border border-white/60 dark:border-white/15 bg-white/65 dark:bg-black backdrop-blur-md shadow-sm px-3 py-2">
+    <div className="relative h-20 w-full rounded-3xl border border-white/10 dark:border-white/10 bg-white/65 dark:bg-black shadow-2xl shadow-black/[0.05] px-3 py-2">
       <div className="flex items-center gap-2" aria-hidden>
         <div className="h-10 w-10 rounded-lg bg-neutral-100 dark:bg-neutral-800" />
         <div className="flex-1">
@@ -100,7 +100,7 @@ function MockWebApp() {
             {['Web', 'iOS', 'Android'].map((t) => (
               <span
                 key={t}
-                className="text-[10px] px-1.5 py-[2px] rounded-full border border-black/10 dark:border-white/10 text-neutral-600 dark:text-neutral-400 bg-white/70 dark:bg-neutral-900/70"
+                className="text-[10px] px-1.5 py-[2px] rounded-full border border-black/[0.04] dark:border-white/[0.04] text-neutral-600 dark:text-neutral-400 bg-white/70 dark:bg-neutral-900/70"
               >
                 {t}
               </span>
@@ -124,7 +124,7 @@ function MockWebApp() {
 
 function MockSite() {
   return (
-    <div className="relative h-20 w-full rounded-xl border border-white/60 dark:border-white/15 bg-white/65 dark:bg-black backdrop-blur-md shadow-sm px-3 py-2">
+    <div className="relative h-20 w-full rounded-3xl border border-white/10 dark:border-white/10 bg-white/65 dark:bg-black shadow-2xl shadow-black/[0.05] px-3 py-2">
       <div
         className="h-3 rounded bg-neutral-100 dark:bg-neutral-800"
         aria-hidden
@@ -148,7 +148,7 @@ function MockSite() {
 
 function MockCustom() {
   return (
-    <div className="relative h-20 w-full rounded-xl border border-white/60 dark:border-white/15 bg-white/65 dark:bg-black backdrop-blur-md shadow-sm px-3 py-2">
+    <div className="relative h-20 w-full rounded-3xl border border-white/10 dark:border-white/10 bg-white/65 dark:bg-black backdrop-blur-md shadow-2xl shadow-black/[0.05] px-3 py-2">
       <svg
         viewBox="0 0 200 60"
         className="absolute inset-0 text-neutral-300 dark:text-neutral-600"
@@ -175,7 +175,7 @@ function MockCustom() {
         {['CMS', 'Roles', 'Workflow'].map((t) => (
           <span
             key={t}
-            className="text-[10px] px-1.5 py-[2px] rounded-full border border-black/10 dark:border-white/10 text-neutral-600 dark:text-neutral-400 bg-white/70 dark:bg-neutral-900/70"
+            className="text-[10px] px-1.5 py-[2px] rounded-full border border-black/[0.04] dark:border-white/[0.04] text-neutral-600 dark:text-neutral-400 bg-white/70 dark:bg-neutral-900/70"
           >
             {t}
           </span>
@@ -219,16 +219,16 @@ export function Service1() {
               className="group"
             >
               <article
-                className="relative justify-between h-full overflow-hidden rounded-xl border border-white/60 dark:border-[rgba(56,130,246,0.18)]
-                  bg-[linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,244,252,.92))]
+                className="relative justify-between h-full overflow-hidden rounded-[3rem] 
+                backdrop-blur-sm                  bg-[linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,244,252,.32))]
                   dark:bg-[linear-gradient(135deg,rgba(12,16,24,.92),rgba(12,16,24,.86))]
-                  shadow-[0_20px_60px_-24px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,.55)]
+                  shadow-[0_20px_60px_-24px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,.35)]
                   dark:shadow-[0_18px_60px_-22px_rgba(0,0,0,.6),inset_0_1px_0_rgba(59,130,246,.12)]
                   p-6 md:p-7 lg:p-8 flex flex-col transition-transform duration-300 will-change-transform hover:-translate-y-0.5"
               >
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(120%_90%_at_20%_0%,rgba(2,132,199,.08),transparent_60%)] dark:bg-[radial-gradient(120%_90%_at_20%_0%,rgba(59,130,246,.10),transparent_60%)]"
+                  className="pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(120%_90%_at_20%_0%,rgba(2,132,199,.06),transparent_60%)] dark:bg-[radial-gradient(120%_90%_at_20%_0%,rgba(59,130,246,.10),transparent_60%)]"
                 />
                 <div className="relative z-10">
                   <h3 className="text-xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
@@ -245,10 +245,10 @@ export function Service1() {
                   </div>
 
                   <span
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/90 dark:bg-neutral-900/85 ring-1 ring-black/10 dark:ring-white/10 shadow-[0_10px_28px_-14px_rgba(0,0,0,0.35)] group-hover:translate-x-0.5 transition-transform"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-[1.2rem] bg-white/90 dark:bg-neutral-900/85 ring-1 ring-black/[0.02] dark:ring-white/[0.02] shadow-[0_10px_28px_-14px_rgba(0,0,0,0.25)] group-hover:translate-x-0.5 transition-transform"
                     aria-hidden
                   >
-                    <IconArrowRight className="h-5 w-5 text-sky-600 dark:text-sky-400" />
+                    <IconArrowRight className="h-5 w-5 text-primary dark:text-primary" />
                   </span>
                 </div>
 
@@ -265,7 +265,7 @@ export function Service1() {
           <Link
             href="/contact"
             prefetch={false}
-            className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-[15px] font-semibold bg-sky-500 text-white shadow-[0_12px_30px_-10px_rgba(2,132,199,.65)] hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70"
+            className="inline-flex items-center justify-center rounded-3xl px-5 py-3 text-[15px] font-semibold bg-sky-500 text-white shadow-[0_12px_30px_-10px_rgba(2,132,199,.65)] hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70"
           >
             Discutons de votre projet
           </Link>

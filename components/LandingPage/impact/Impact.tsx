@@ -100,7 +100,7 @@ function MacWindow({
   const reduced = useReducedMotion();
   return (
     <motion.div
-      className="h-full w-full overflow-hidden rounded-2xl bg-white dark:bg-neutral-900"
+      className="h-full w-full overflow-hidden rounded-[3rem] bg-white dark:bg-neutral-900"
       animate={
         reduced
           ? {}
@@ -176,7 +176,7 @@ function AnalyticsMock() {
         ].map((item, i) => (
           <motion.div
             key={i}
-            className="rounded-xl bg-white p-4 ring-1 ring-black/5 shadow-[0_18px_40px_-24px_rgba(0,0,0,.25)] dark:bg-neutral-900/90 dark:ring-white/10"
+            className="rounded-[2rem] bg-white p-4 ring-1 ring-black/[0.02] shadow-[0_18px_40px_-24px_rgba(0,0,0,.15)] dark:bg-neutral-900/90 dark:ring-white/[0.04]"
             initial={{ opacity: 0.85, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: EASEIO, delay: i * 0.06 }}
@@ -193,14 +193,14 @@ function AnalyticsMock() {
       </div>
 
       {/* Chart */}
-      <div className="mt-6 rounded-2xl bg-gradient-to-b from-white to-white/60 p-4 ring-1 ring-black/5 shadow-[0_28px_56px_-28px_rgba(0,0,0,.28)] dark:from-neutral-900 dark:to-neutral-900/60 dark:ring-white/10">
-        <div className="relative h-40 w-full overflow-hidden rounded-lg">
+      <div className="mt-6 rounded-[3rem] bg-gradient-to-b from-white to-white/60 p-4 ring-1 ring-black/[0.02] shadow-[0_28px_56px_-28px_rgba(0,0,0,.1)] dark:from-neutral-900 dark:to-neutral-900/60 dark:ring-white/[0.04]">
+        <div className="relative h-40 w-full overflow-hidden rounded-[2rem]">
           {/* grille lisible */}
           <div
-            className="absolute inset-0 z-0 rounded-lg"
+            className="absolute inset-0 z-0 rounded-[2rem]"
             style={{
               backgroundImage:
-                'linear-gradient(to right, rgba(0,0,0,.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,.10) 1px, transparent 1px)',
+                'linear-gradient(to right, rgba(0,0,0,.01) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,.05) 1px, transparent 1px)',
               backgroundSize: '28px 28px',
             }}
           />
@@ -256,21 +256,7 @@ function KanbanMock() {
   const reduced = useReducedMotion();
 
   const Badge = ({ children }: { children: React.ReactNode }) => (
-    <motion.span
-      className="rounded-full bg-[#2CB7FF1a] px-2 py-0.5 text-[10px] font-semibold text-[#2CB7FF]"
-      animate={
-        reduced
-          ? {}
-          : {
-              boxShadow: [
-                '0 0 0 0 rgba(44,183,255,.0)',
-                '0 0 0 6px rgba(44,183,255,.08)',
-                '0 0 0 0 rgba(44,183,255,.0)',
-              ],
-            }
-      }
-      transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-    >
+    <motion.span className="rounded-full bg-[#2CB7FF1a] px-2.5 py-1 text-[8px] font-semibold text-[#2CB7FF]">
       {children}
     </motion.span>
   );
@@ -285,11 +271,11 @@ function KanbanMock() {
     const reduced = useReducedMotion();
 
     return (
-      <div className="relative overflow-hidden rounded-lg bg-white  p-3 text-xs ring-1 ring-black/5 shadow-[0_14px_28px_-18px_rgba(0,0,0,.3)] dark:bg-neutral-900 dark:ring-white/10">
+      <div className="relative overflow-hidden rounded-[1.2rem] bg-white  p-3 text-[10px] ring-1 ring-black/[0.02] shadow-[0_14px_28px_-18px_rgba(0,0,0,.13)] dark:bg-neutral-900 dark:ring-white/[0.04]">
         {/* sheen continu SANS retour arrière (fond répétitif + position animée) */}
         {!reduced && (
           <div
-            className="pointer-events-none absolute rounded-lg inset-y-0 left-0 w-full"
+            className="pointer-events-none absolute rounded-[1.5rem] inset-y-0 left-0 w-full"
             style={{
               background:
                 // bande claire au centre du motif (transparent -> blanc -> transparent)
@@ -304,14 +290,14 @@ function KanbanMock() {
         <div className="relative z-10">{children}</div>
 
         {/* progress bar : **vrai** flux continu (pas de ping-pong, pas de reset visible) */}
-        <div className="relative mt-2 h-1 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800">
+        <div className="relative mt-2 h-[2px] w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
           {!reduced && (
             <div
               className="absolute inset-0 rounded-full"
               style={{
                 // motif: 60% vide, 40% bande bleue dégradée
                 background:
-                  'linear-gradient(90deg, transparent 0 60%, #2CB7FF 60% 80%, #00A8FF 80% 100%)',
+                  'linear-gradient(90deg, transparent 0 60%, #2CB7FF90 60% 80%, #00A8FF90 80% 100%)',
                 backgroundSize: '240px 100%', // taille du motif
                 backgroundRepeat: 'repeat-x', // répète à l’infini
                 animation: `bar-scroll 2.6s linear ${delay + 0.15}s infinite`,
@@ -349,7 +335,7 @@ function KanbanMock() {
         {cols.map((col, i) => (
           <motion.div
             key={col}
-            className="flex flex-col rounded-xl bg-white/90 p-3 ring-1 ring-black/5 shadow-[0_18px_40px_-24px_rgba(0,0,0,.25)] dark:bg-neutral-900/80 dark:ring-white/10"
+            className="flex flex-col rounded-[2rem] bg-white/90 p-3 ring-1 ring-black/[0.02] shadow-[0_18px_40px_-24px_rgba(0,0,0,.15)] dark:bg-neutral-900/80 dark:ring-white/[0.04]"
             initial={{ opacity: 0, y: 12, scale: 0.985, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             transition={{
@@ -366,7 +352,7 @@ function KanbanMock() {
               <Badge>{['To-do', 'Running', 'Review'][i]}</Badge>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-4">
               <Card delay={0.0}>• Task #1 — {col}</Card>
               <Card delay={0.35}>• Task #2 — {col}</Card>
               <Card delay={0.7}>• Task #3 — {col}</Card>
@@ -380,7 +366,7 @@ function KanbanMock() {
         {['SEO', 'Ads'].map((col, i) => (
           <motion.div
             key={col}
-            className="flex flex-col rounded-xl bg-white/90 p-3 ring-1 ring-black/5 shadow-[0_18px_40px_-24px_rgba(0,0,0,.25)] dark:bg-neutral-900/80 dark:ring-white/10"
+            className="flex flex-col rounded-[2rem] bg-white/90 p-3 ring-1 ring-black/[0.02] shadow-[0_18px_40px_-24px_rgba(0,0,0,.15)] dark:bg-neutral-900/80 dark:ring-white/[0.04]"
             initial={{ opacity: 0, y: 12, scale: 0.985, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             transition={{
@@ -396,7 +382,7 @@ function KanbanMock() {
               </span>
               <Badge>{['To-do', 'Running'][i]}</Badge>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-4">
               <Card delay={0.0}>• Task #1 — {col}</Card>
               <Card delay={0.35}>• Task #2 — {col}</Card>
               <Card delay={0.7}>• Task #3 — {col}</Card>
@@ -422,7 +408,7 @@ function CodeMock() {
       <div className="grid h-full grid-cols-[1.2fr_.9fr] gap-4">
         {/* Editor */}
         <motion.div
-          className="rounded-xl bg-[#0B1020] p-4 font-mono text-[12px] leading-6 text-slate-200 ring-1 ring-black/20 shadow-[0_24px_48px_-24px_rgba(0,0,0,.45)]"
+          className="rounded-[2rem] bg-[#000000] p-4 font-mono text-[12px] leading-6 text-slate-200 ring-1 ring-black/10 shadow-[0_24px_48px_-24px_rgba(0,0,0,.35)]"
           initial={{ y: 8 }}
           whileInView={{ y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
@@ -435,12 +421,10 @@ function CodeMock() {
 
         {/* Preview */}
         <motion.div
-          className="relative rounded-xl bg-white p-4 ring-1 ring-black/5 shadow-[0_28px_56px_-28px_rgba(0,0,0,.35)] dark:bg-neutral-950 dark:ring-white/10"
+          className="relative rounded-[2rem] bg-white p-4 ring-1 ring-black/[0.02] shadow-[0_24px_48px_-24px_rgba(0,0,0,.15)] dark:bg-neutral-950 dark:ring-white/[0.04]"
           initial={{ y: 10 }}
           whileInView={{ y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          animate={reduced ? {} : { y: [0, -1.2, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
         >
           <div className="h-full rounded-lg bg-gradient-to-br from-[#2CB7FF1a] to-transparent p-4">
             <motion.div
@@ -481,11 +465,11 @@ function KPIMock() {
 
   return (
     <MacWindow title="Reporting · KPI hebdo">
-      <div className="grid h-full grid-cols-2 gap-4">
+      <div className="grid h-full grid-cols-2 gap-6 mt-2">
         {items.map((k, i) => (
           <motion.div
             key={i}
-            className="relative overflow-hidden rounded-xl bg-white p-4 ring-1 ring-black/5 shadow-[0_24px_48px_-24px_rgba(0,0,0,.28)] dark:bg-neutral-900 dark:ring-white/10"
+            className="relative overflow-hidden rounded-[2rem] bg-white p-4 ring-1 ring-black/[0.02] shadow-[0_14px_48px_-14px_rgba(0,0,0,.08)] dark:bg-neutral-900 dark:ring-white/[0.04]"
             initial={{ y: 10, scale: 0.98 }}
             whileInView={{ y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -575,11 +559,7 @@ export default function MethodologieSticky() {
       </header>
 
       <div className="mt-10">
-        <StickyScroll
-          content={content}
-          contentClassName="ring-1 ring-black/10 dark:ring-white/10"
-          className="rounded-3xl"
-        />
+        <StickyScroll content={content} className="rounded-[3rem]" />
       </div>
     </section>
   );
