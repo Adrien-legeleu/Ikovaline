@@ -4,18 +4,11 @@ import * as React from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-/* ───────────────── helpers UI ───────────────── */
-function Shimmer({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        'animate-pulse bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-200 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800',
-        className
-      )}
-    />
-  );
-}
+/* ====== constants ====== */
+const FACT_MS = 3600; // durée d’affichage d’une phrase (ms)
+const EASE = [0.16, 1, 0.3, 1] as const;
 
+/* ───────────────── helpers UI ───────────────── */
 function CardShell({
   children,
   className,
@@ -65,33 +58,56 @@ function MockConversion() {
 
       <div className="grid grid-cols-2 gap-4">
         {/* Variant A */}
-        <div className="rounded-2xl bg-white/80 p-4 ring-1 ring-black/[0.04] dark:bg-white/[0.04] dark:ring-white/[0.06]">
+        <motion.div
+          initial={{ y: 8, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.35, ease: EASE }}
+          className="rounded-2xl bg-white/80 p-4 ring-1 ring-black/[0.04] dark:bg-white/[0.04] dark:ring-white/[0.06]"
+        >
           <p className="mb-3 text-xs font-medium text-neutral-500">Variant A</p>
           <div className="space-y-2">
             <div className="h-2 rounded bg-neutral-200 dark:bg-neutral-800" />
             <div className="h-2 w-3/4 rounded bg-neutral-200 dark:bg-neutral-800" />
           </div>
-          {/* barres */}
           <div className="mt-4 space-y-2">
-            <div className="h-3 w-[62%] rounded bg-neutral-300 dark:bg-neutral-700" />
-            <div className="h-3 w-[48%] rounded bg-neutral-300 dark:bg-neutral-700" />
-            <div className="h-3 w-[53%] rounded bg-neutral-300 dark:bg-neutral-700" />
+            {[62, 48, 53].map((w, i) => (
+              <motion.div
+                key={i}
+                initial={{ width: 0, opacity: 0.6 }}
+                animate={{ width: `${w}%`, opacity: 1 }}
+                transition={{ duration: 0.5, delay: i * 0.06, ease: 'easeOut' }}
+                className="h-3 rounded bg-neutral-300 dark:bg-neutral-700"
+              />
+            ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Variant B (winner) */}
-        <div className="rounded-2xl bg-white/90 p-4 ring-1 ring-black/[0.04] shadow-[0_18px_36px_-18px_rgba(0,0,0,.25)] dark:bg-white/[0.06] dark:ring-white/[0.06]">
+        <motion.div
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, ease: EASE, delay: 0.05 }}
+          className="rounded-2xl bg-white/90 p-4 ring-1 ring-black/[0.04] shadow-[0_18px_36px_-18px_rgba(0,0,0,.25)] dark:bg-white/[0.06] dark:ring-white/[0.06]"
+        >
           <p className="mb-3 text-xs font-medium text-neutral-500">Variant B</p>
           <div className="space-y-2">
             <div className="h-2 rounded bg-neutral-200 dark:bg-neutral-800" />
             <div className="h-2 w-3/4 rounded bg-neutral-200 dark:bg-neutral-800" />
           </div>
-          <div className="mt-4 space-y-2">
-            <div className="h-3 w-[78%] rounded bg-[hsl(var(--primary)/0.35)]" />
-            <div className="h-3 w-[66%] rounded bg-[hsl(var(--primary)/0.35)]" />
-            <div className="h-3 w-[72%] rounded bg-[hsl(var(--primary)/0.35)]" />
-          </div>
-        </div>
+          {[78, 66, 72].map((w, i) => (
+            <motion.div
+              key={i}
+              initial={{ width: 0, opacity: 0.6 }}
+              animate={{ width: `${w}%`, opacity: 1 }}
+              transition={{
+                duration: 0.55,
+                delay: 0.15 + i * 0.08,
+                ease: 'easeOut',
+              }}
+              className="mt-2 h-3 rounded bg-[linear-gradient(180deg,hsl(var(--primary)/0.55),hsl(var(--primary)/0.22))]"
+            />
+          ))}
+        </motion.div>
       </div>
     </CardShell>
   );
@@ -140,9 +156,12 @@ function MockMaps() {
         </div>
       </div>
       <div className="space-y-2">
-        {[1, 2, 3].map((rank) => (
-          <div
+        {[1, 2, 3].map((rank, i) => (
+          <motion.div
             key={rank}
+            initial={{ x: -8, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.35, ease: EASE, delay: i * 0.08 }}
             className="flex items-center gap-3 rounded-2xl bg-white/90 p-4 ring-1 ring-black/[0.04] shadow-[0_12px_24px_-16px_rgba(0,0,0,.25)] dark:bg-white/[0.06] dark:ring-white/[0.06]"
           >
             <span className="grid size-6 place-items-center rounded-full bg-[hsl(var(--primary)/0.12)] text-[11px] font-bold text-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary)/0.35)]">
@@ -152,8 +171,19 @@ function MockMaps() {
               <div className="h-3 w-40 rounded bg-neutral-200 dark:bg-neutral-800" />
               <div className="mt-1 h-2 w-24 rounded bg-neutral-200 dark:bg-neutral-800" />
             </div>
-            <div className="text-[11px] text-neutral-500">4.9 ★</div>
-          </div>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{
+                duration: 0.25,
+                ease: EASE,
+                delay: 0.12 + i * 0.08,
+              }}
+              className="text-[11px] text-neutral-500"
+            >
+              4.9 ★
+            </motion.div>
+          </motion.div>
         ))}
         <div className="mt-1 text-center text-[12px] text-neutral-500">
           Top 3 confirmé sur nos secteurs.
@@ -177,7 +207,7 @@ function MockAI() {
       <div className="grid grid-cols-[1.1fr_0.9fr] gap-4">
         {/* code noir */}
         <div className="rounded-2xl bg-black p-4 font-mono text-[12px] leading-6 text-slate-200 ring-1 ring-black/10">
-          <div className="text-[11px] text-slate-400 mb-1">
+          <div className="mb-1 text-[11px] text-slate-400">
             /rag/pipeline.ts
           </div>
           <motion.pre
@@ -191,26 +221,31 @@ return answer;`}</motion.pre>
         {/* KPI */}
         <div className="rounded-2xl bg-white/90 p-4 ring-1 ring-black/[0.04] dark:bg-white/[0.06] dark:ring-white/[0.06]">
           <p className="mb-2 text-xs font-medium text-neutral-500">KPIs</p>
-          <div className="space-y-2 text-[12px]">
-            <div className="flex items-center justify-between">
-              <span>Coût</span>
-              <span className="rounded-md bg-emerald-500/15 px-2 py-0.5 font-semibold text-emerald-600">
-                ↓ 38%
+          {[
+            ['Coût', '↓ 38%'],
+            ['Temps de réponse', '↓ 55%'],
+            ['CSAT', '↑ 21%'],
+          ].map(([k, v], i) => (
+            <motion.div
+              key={k}
+              initial={{ y: 6, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.3, ease: EASE, delay: i * 0.06 }}
+              className="flex items-center justify-between text-[12px]"
+            >
+              <span>{k}</span>
+              <span
+                className={cn(
+                  'rounded-md px-2 py-0.5 font-semibold',
+                  k === 'CSAT'
+                    ? 'bg-[hsl(var(--primary)/0.12)] text-[hsl(var(--primary))]'
+                    : 'bg-emerald-500/15 text-emerald-600'
+                )}
+              >
+                {v}
               </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>Temps de réponse</span>
-              <span className="rounded-md bg-emerald-500/15 px-2 py-0.5 font-semibold text-emerald-600">
-                ↓ 55%
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>CSAT</span>
-              <span className="rounded-md bg-[hsl(var(--primary)/0.12)] px-2 py-0.5 font-semibold text-[hsl(var(--primary))]">
-                ↑ 21%
-              </span>
-            </div>
-          </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </CardShell>
@@ -232,7 +267,12 @@ function MockQuality() {
       <div className="flex items-center justify-between rounded-2xl bg-white/90 p-5 ring-1 ring-black/[0.04] dark:bg-white/[0.06] dark:ring-white/[0.06]">
         {['Brief', 'Design', 'Build', 'QA', 'Go-Live'].map((s, i, arr) => (
           <div key={s} className="flex flex-1 items-center">
-            <div className="grid place-items-center">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.25, ease: EASE, delay: i * 0.07 }}
+              className="grid place-items-center"
+            >
               <div className="grid size-8 place-items-center rounded-full bg-white ring-1 ring-black/[0.06] dark:bg-white/[0.08] dark:ring-white/[0.06]">
                 <div
                   className={cn(
@@ -244,9 +284,18 @@ function MockQuality() {
                 />
               </div>
               <div className="mt-2 text-[11px] text-neutral-500">{s}</div>
-            </div>
+            </motion.div>
             {i < arr.length - 1 && (
-              <div className="mx-2 h-[2px] w-full rounded bg-[hsl(var(--primary)/0.25)]" />
+              <motion.div
+                initial={{ width: 0, opacity: 0.6 }}
+                animate={{ width: '100%', opacity: 1 }}
+                transition={{
+                  duration: 0.5,
+                  ease: 'easeOut',
+                  delay: 0.05 + i * 0.07,
+                }}
+                className="mx-2 h-[2px] rounded bg-[hsl(var(--primary)/0.25)]"
+              />
             )}
           </div>
         ))}
@@ -254,6 +303,67 @@ function MockQuality() {
       <div className="mt-3 text-center text-xs text-neutral-500">
         Reconnu pour la qualité et la rapidité d’exécution.
       </div>
+    </CardShell>
+  );
+}
+
+/* 6) Certifié Google Search & Analytics : badge + cartes */
+function MockCert() {
+  return (
+    <CardShell>
+      <div className="mb-4 flex items-center justify-between">
+        <span className="rounded-full bg-black/[0.04] px-3 py-1 text-xs font-medium dark:bg-white/[0.06]">
+          Certifications
+        </span>
+        <motion.span
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.35, ease: EASE, delay: 0.1 }}
+          className="inline-flex items-center gap-2 rounded-full bg-[hsl(var(--primary)/0.12)] px-3 py-1 text-xs font-semibold text-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary)/0.35)]"
+        >
+          ✓ Validé
+        </motion.span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        {[
+          { title: 'Google Search', sub: 'SEO Fundamentals' },
+          { title: 'Google Analytics', sub: 'GA4 Measurement' },
+        ].map((c, i) => (
+          <motion.div
+            key={c.title}
+            initial={{ y: 8, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.35, ease: EASE, delay: i * 0.08 }}
+            className="rounded-2xl bg-white/90 p-4 ring-1 ring-black/[0.04] shadow-[0_12px_24px_-16px_rgba(0,0,0,.25)] dark:bg-white/[0.06] dark:ring-white/[0.06]"
+          >
+            <div className="mb-2 h-6 w-24 rounded bg-[hsl(var(--primary)/0.2)]" />
+            <div className="h-3 w-32 rounded bg-neutral-200 dark:bg-neutral-800" />
+            <div className="mt-2 h-2 w-20 rounded bg-neutral-200 dark:bg-neutral-800" />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{
+                duration: 0.25,
+                ease: EASE,
+                delay: 0.15 + i * 0.08,
+              }}
+              className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-2 py-1 text-[11px] font-semibold text-emerald-600"
+            >
+              Validé
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.45, ease: EASE, delay: 0.2 }}
+        className="pointer-events-none absolute right-6 top-6 grid size-10 place-items-center rounded-full bg-white/90 ring-1 ring-black/[0.04] shadow-[0_10px_30px_-12px_rgba(0,0,0,.25)] dark:bg-white/[0.06] dark:ring-white/[0.06]"
+      >
+        <div className="size-5 rounded-full bg-[hsl(var(--primary))]" />
+      </motion.div>
     </CardShell>
   );
 }
@@ -268,7 +378,7 @@ const FACTS = [
   'Certifié Google Search & Analytics.',
 ] as const;
 
-function useAutoIndex(len: number, ms = 3500) {
+function useAutoIndex(len: number, ms = FACT_MS) {
   const [i, setI] = React.useState(0);
   React.useEffect(() => {
     const id = setInterval(() => setI((x) => (x + 1) % len), ms);
@@ -284,6 +394,7 @@ function MockupByIndex({ i }: { i: number }) {
     <MockMaps />,
     <MockAI />,
     <MockQuality />,
+    <MockCert />,
   ];
   return map[i] ?? map[0];
 }
@@ -293,7 +404,7 @@ export default function ImpactMap() {
   const i = useAutoIndex(FACTS.length);
 
   return (
-    <section className="relative mx-auto w-full max-w-7xl px-6 md:px-10 py-28">
+    <section className="relative mx-auto w-full max-w-7xl px-6 md:px-10 pb-20 pt-10">
       {/* halos brand discrets */}
       <div
         aria-hidden
@@ -317,7 +428,7 @@ export default function ImpactMap() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: EASE }}
           className="relative mx-auto w-full max-w-md"
         >
           <div className="overflow-hidden rounded-[2rem] border border-black/[0.04] bg-white/60 p-8 backdrop-blur-xl dark:border-white/[0.06] dark:bg-white/[0.04]">
@@ -327,25 +438,44 @@ export default function ImpactMap() {
               Une exécution sobre.
             </h2>
 
-            <p className="mt-4 text-[15px] leading-relaxed text-neutral-800 dark:text-neutral-300">
-              Moins d’effets, plus d’impact—avec un delivery net et maitrisé.
+            <p className="mt-4 text-[16px] md:text-[17px] font-medium leading-relaxed text-neutral-900/85 dark:text-neutral-100/90">
+              Moins d’effets, plus d’impact — un delivery net et maîtrisé.
             </p>
 
-            <div className="mt-6 relative overflow-hidden rounded-2xl border border-black/[0.05] bg-white/70 px-5 py-4 backdrop-blur-md dark:border-white/[0.07] dark:bg-white/[0.05]">
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[hsl(var(--primary)/0.7)] to-[hsl(var(--primary)/0.4)]" />
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={i}
-                  initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -8, filter: 'blur(6px)' }}
-                  transition={{ duration: 0.28, ease: 'easeOut' }}
-                  className="relative z-[1] text-[15px] text-neutral-900 dark:text-neutral-100"
-                >
-                  <span className="mr-3 inline-block h-[7px] w-[7px] -translate-y-[2px] rounded-full bg-[hsl(var(--primary))] shadow-[0_8px_16px_hsl(var(--primary)/0.6)]" />
-                  {FACTS[i]}
-                </motion.p>
-              </AnimatePresence>
+            {/* Bloc phrase + barre de progression + dot */}
+            <div className="mt-6 relative overflow-hidden rounded-2xl border border-black/[0.05] bg-white/70 px-5 py-5 backdrop-blur-md dark:border-white/[0.07] dark:bg-white/[0.05]">
+              {/* track */}
+              <div className="absolute inset-x-4 top-2 h-[3px] rounded-full bg-neutral-200/80 dark:bg-white/10" />
+              {/* progress bar */}
+              <motion.span
+                key={`bar-${i}`}
+                className="absolute top-2 left-4 h-[3px] rounded-full bg-[hsl(var(--primary))]"
+                initial={{ width: 0 }}
+                animate={{ width: 'calc(100% - 2rem)' }}
+                transition={{ duration: FACT_MS / 1000, ease: 'linear' }}
+              />
+              {/* cursor dot */}
+              <motion.span
+                key={`dot-${i}`}
+                className="absolute top-[6px] left-4 size-2 rounded-full bg-[hsl(var(--primary))] shadow-[0_0_0_6px_hsl(var(--primary)/0.18)]"
+              />
+
+              {/* zone texte fixe pour empêcher le saut */}
+              <div className="relative z-[1] mt-2 min-h-[60px]">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={i}
+                    initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -8, filter: 'blur(6px)' }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                    className="text-[16px] md:text-[17px] font-medium text-neutral-900 dark:text-neutral-100"
+                  >
+                    <span className="mr-3 inline-block h-[8px] w-[8px] -translate-y-[1px] rounded-full bg-[hsl(var(--primary))] shadow-[0_8px_16px_hsl(var(--primary)/0.6)]" />
+                    {FACTS[i]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -355,7 +485,7 @@ export default function ImpactMap() {
           className="flex justify-center"
           initial={{ opacity: 0, scale: 0.985 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: EASE }}
         >
           <AnimatePresence mode="wait">
             <motion.div

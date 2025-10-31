@@ -405,7 +405,7 @@ export function HeaderResponsive() {
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Fermer le menu"
-                  className="grid size-10 place-items-center rounded-2xl bg-white/70 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur hover:opacity-95 dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/5"
+                  className="grid size-9 place-items-center rounded-2xl bg-white/70 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur hover:opacity-95 dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/5"
                 >
                   <IconX />
                 </button>
