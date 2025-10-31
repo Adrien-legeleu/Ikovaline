@@ -1,11 +1,11 @@
 // app/(auth)/finish/page.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/SupabaseClient';
 
-export default function Finish() {
+function FinishInner() {
   const router = useRouter();
   const sp = useSearchParams();
   const next = sp.get('next') || undefined;
@@ -14,16 +14,15 @@ export default function Finish() {
   useEffect(() => {
     const run = async () => {
       try {
-        // 1) Échange PKCE via l’URL complète (?code=...)
         const { error } = await supabase.auth.exchangeCodeForSession(
           window.location.href
         );
         if (error) throw error;
 
-        // 2) (optionnel) sync cookies HTTP-only côté serveur
         const { data: sessionData, error: sErr } =
           await supabase.auth.getSession();
         if (sErr) throw sErr;
+
         await fetch('/api/auth/set', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -37,10 +36,8 @@ export default function Finish() {
           }),
         });
 
-        // 3) route selon rôle / next
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
+        const { data: userData } = await supabase.auth.getUser();
+        const user = userData.user;
         if (!user) throw new Error('Session introuvable');
 
         const { data: profile } = await supabase
@@ -53,19 +50,14 @@ export default function Finish() {
         else if (profile?.role === 'admin') router.replace('/admin/dashboard');
         else router.replace('/dashboard');
       } catch (e) {
-        // Fallback implicite: si jamais le provider a renvoyé un fragment #access_token=...
-        // supabase-js sait parser automatiquement à l’arrivée sur la page.
         setTimeout(async () => {
           const { data: sessionData } = await supabase.auth.getSession();
           if (sessionData.session) {
-            // on a bien une session -> route comme plus haut
-            const {
-              data: { user },
-            } = await supabase.auth.getUser();
+            const { data: userData } = await supabase.auth.getUser();
             const { data: profile } = await supabase
               .from('profiles')
               .select('role')
-              .eq('id', user!.id)
+              .eq('id', userData.user!.id)
               .single();
 
             if (next) router.replace(next);
@@ -75,9 +67,8 @@ export default function Finish() {
             return;
           }
 
-          // Toujours pas de session -> message explicite (PKCE)
           setMsg(
-            "Lien invalide ou expiré. Ouvre le lien dans le même navigateur que celui utilisé pour demander l'e-mail, puis réessaie."
+            'Lien invalide ou expiré. Réessaie depuis le même navigateur.'
           );
           setTimeout(() => router.replace('/signin'), 1800);
         }, 150);
@@ -90,5 +81,17 @@ export default function Finish() {
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="rounded-2xl border p-6 bg-card/70 text-sm">{msg}</div>
     </div>
+  );
+}
+
+export default function Finish() {
+  return (
+    <Suspense
+      fallback={
+        <div className="p-8 text-center text-muted-foreground">Chargement…</div>
+      }
+    >
+      <FinishInner />
+    </Suspense>
   );
 }

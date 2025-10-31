@@ -1,18 +1,16 @@
+// app/(auth)/signup/page.tsx
 'use client';
 
+import { Suspense, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
-import { useMemo } from 'react';
-
 import { ProjectGaugeCard } from '@/components/ClientSpace/ProgressCard';
 
-/* ================= Animations (identiques à signin) ================= */
-
+/* ================= Animations ================= */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
 const fadeUpSoft: Variants = {
   hidden: { opacity: 0, y: 14, filter: 'blur(6px)' },
   show: {
@@ -22,15 +20,10 @@ const fadeUpSoft: Variants = {
     transition: { duration: 0.75, ease: EASE },
   },
 };
-
 const staggerCol: Variants = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.08 },
-  },
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.08 } },
 };
-
-// Colonne droite (aurora) — entre par la gauche + blur
 const slideInPanel: Variants = {
   hidden: { opacity: 0, x: -24, filter: 'blur(10px)' },
   show: {
@@ -41,28 +34,8 @@ const slideInPanel: Variants = {
   },
 };
 
-/* ================= Page ================= */
-
-function StarRow() {
-  return (
-    <div className="flex items-center gap-1">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg
-          key={i}
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="text-yellow-300"
-        >
-          <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-        </svg>
-      ))}
-    </div>
-  );
-}
-
-export default function SignupPage() {
+/* ================= Sous-composant ================= */
+function SignupInner() {
   const search = useSearchParams();
   const nextParam = search.get('next') ?? '';
   const nextQS = useMemo(
@@ -72,7 +45,7 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-[100dvh] w-[100dvw] overflow-hidden bg-background text-foreground grid md:grid-cols-2">
-      {/* Top bar : retour + “Se connecter” */}
+      {/* Top bar */}
       <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-4 md:p-8 z-20">
         <div className="pointer-events-auto">
           <Link
@@ -101,7 +74,7 @@ export default function SignupPage() {
         </div>
       </div>
 
-      {/* Colonne gauche : contenu marketing + CTA (animations comme signin) */}
+      {/* Colonne gauche */}
       <section className="flex items-center justify-center p-6 md:p-10">
         <motion.div
           variants={staggerCol}
@@ -115,7 +88,6 @@ export default function SignupPage() {
           >
             Lancez votre site, sans friction.
           </motion.h1>
-
           <motion.p
             variants={fadeUpSoft}
             className="mt-3 text-muted-foreground"
@@ -124,8 +96,6 @@ export default function SignupPage() {
             offre claire et activons la production. Validation rapide, pilotage
             transparent, résultats concrets.
           </motion.p>
-
-          {/* 3 bénéfices courts */}
           <motion.ul
             variants={staggerCol}
             className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm"
@@ -156,10 +126,6 @@ export default function SignupPage() {
               </div>
             </motion.li>
           </motion.ul>
-
-          {/* Micro-note plus “marketing”, sans “astuce” */}
-
-          {/* CTA vers /demarrer */}
           <motion.div variants={fadeUpSoft} className="mt-7">
             <Link
               href={`/demarrer${nextQS}`}
@@ -173,7 +139,7 @@ export default function SignupPage() {
         </motion.div>
       </section>
 
-      {/* Colonne droite : HERO (aurora) identique style à signin */}
+      {/* Colonne droite */}
       <section className="hidden md:flex items-center p-4 relative overflow-hidden">
         <motion.div
           variants={slideInPanel}
@@ -189,66 +155,30 @@ export default function SignupPage() {
                   'radial-gradient(1200px 600px at 10% 0%, rgba(59,130,246,.35), transparent 60%), radial-gradient(1100px 600px at 90% 20%, rgba(147,197,253,.45), transparent 55%), radial-gradient(900px 900px at 70% 110%, rgba(191,219,254,.45), transparent 50%)',
               }}
             />
-            <motion.div
-              className="absolute -top-12 -left-10 h-72 w-72 rounded-full bg-blue-300/40 blur-[90px]"
-              animate={{ x: [0, 10, -8, 0], y: [0, -8, 12, 0] }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <motion.div
-              className="absolute -bottom-20 -right-14 h-80 w-80 rounded-full bg-blue-200/50 blur-[110px]"
-              animate={{ x: [0, -12, 10, 0], y: [0, 12, -8, 0] }}
-              transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-            />
             <div className="absolute inset-0 bg-white/35 backdrop-blur-md" />
           </div>
         </motion.div>
 
-        {/* Contenu par-dessus */}
-        <div className="relative z-10 mx-auto w-full max-w-[560px] px-2">
-          <motion.div
-            initial={{ opacity: 0, y: 12, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 1.0, ease: EASE, delay: 0.25 }}
-            className="text-center"
-          >
-            <h2 className="text-slate-800 text-[28px] leading-tight sm:text-[36px] font-semibold">
-              Suivez & maîtrisez votre projet.
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 1.0, ease: EASE, delay: 0.42 }}
-            className="mt-4 flex items-center justify-center gap-2 text-slate-700"
-          >
-            <Image
-              src="/laurel-left.png"
-              alt="laurier"
-              width={40}
-              height={40}
-              className="opacity-90 rotate-12"
-              priority={false}
-            />
-            <span className="flex flex-col gap-1 items-center justify-center">
-              <StarRow />
-              <span className="text-xs tracking-[0.18em] font-semibold">
-                67+ AVIS
-              </span>
-            </span>
-            <Image
-              src="/laurel-right.png"
-              alt="laurier"
-              width={40}
-              height={40}
-              className="opacity-90 -rotate-12"
-              priority={false}
-            />
-          </motion.div>
-
+        <div className="relative z-10 mx-auto w-full max-w-[560px] px-2 text-center">
+          <h2 className="text-slate-800 text-[28px] leading-tight sm:text-[36px] font-semibold mb-4">
+            Suivez & maîtrisez votre projet.
+          </h2>
           <ProjectGaugeCard percent={58} />
         </div>
       </section>
     </div>
+  );
+}
+
+/* ================= Wrapper avec Suspense ================= */
+export default function SignupPageWrapper() {
+  return (
+    <Suspense
+      fallback={
+        <div className="p-8 text-center text-muted-foreground">Chargement…</div>
+      }
+    >
+      <SignupInner />
+    </Suspense>
   );
 }

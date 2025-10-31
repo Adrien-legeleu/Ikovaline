@@ -1,6 +1,6 @@
-import AuthCard from '@/components/ClientSpace/AuthCard';
+'use client';
 
-export const metadata = { title: 'Connexion — Ikovaline' };
+import AuthCard from '@/components/ClientSpace/AuthCard';
 
 export default function Page() {
   return <AuthCard mode="signin" />;
