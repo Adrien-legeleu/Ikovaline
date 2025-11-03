@@ -1,3 +1,4 @@
+// app/projects/[id]/page.tsx
 export const dynamic = 'force-dynamic';
 
 import { cookies } from 'next/headers';
@@ -14,6 +15,7 @@ export default async function ProjectDetail({ params }: Props) {
     { cookies: { get: (n: string) => cookieStore.get(n)?.value } }
   );
 
+  // --- Auth obligatoire (RLS en a besoin) ---
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -29,7 +31,7 @@ export default async function ProjectDetail({ params }: Props) {
     );
   }
 
-  // projet principal
+  // --- Projet (la policy RLS peut déjà filtrer; on garde le check app pour être clair) ---
   const { data: proj } = await supabase
     .from('projects')
     .select('*')
@@ -44,10 +46,23 @@ export default async function ProjectDetail({ params }: Props) {
     );
   }
 
-  // autorisation
+  // --- Autorisation: owner OU client_email OU collaborateur dans project_members ---
+  let isCollaborator = false;
+  {
+    const { count } = await supabase
+      .from('project_members')
+      .select('id', { count: 'exact', head: true })
+      .eq('project_id', proj.id)
+      .or(
+        `user_id.eq.${user.id},invited_email.eq.${user.email ?? '___null___'}`
+      );
+    isCollaborator = (count ?? 0) > 0;
+  }
+
   const allowed =
     proj.owner_user_id === user.id ||
-    (proj.client_email && proj.client_email === user.email);
+    (!!proj.client_email && proj.client_email === user.email) ||
+    isCollaborator;
 
   if (!allowed) {
     return (
@@ -60,16 +75,16 @@ export default async function ProjectDetail({ params }: Props) {
     );
   }
 
-  // siblings pour index humain si besoin
+  // --- Siblings: si collaborateur “pur”, on ne liste pas les autres projets du client/owner
   let siblings: { id: string; created_at: string }[] = [];
-  if (proj.owner_user_id) {
+  if (!isCollaborator && proj.owner_user_id) {
     const { data } = await supabase
       .from('projects')
       .select('id, created_at')
       .eq('owner_user_id', proj.owner_user_id)
       .order('created_at', { ascending: true });
     siblings = data ?? [];
-  } else if (proj.client_email) {
+  } else if (!isCollaborator && proj.client_email) {
     const { data } = await supabase
       .from('projects')
       .select('id, created_at')
@@ -84,16 +99,14 @@ export default async function ProjectDetail({ params }: Props) {
   const humanIndex = index >= 0 ? index + 1 : 1;
   const displayTitle = (proj.title || '').trim() || `Projet ${humanIndex}`;
 
-  // updates du projet
+  // --- Updates (RLS sur project_updates à calquer sur projects)
   const { data: updates } = await supabase
     .from('project_updates')
     .select('id,progress,message,created_at')
     .eq('project_id', proj.id)
     .order('created_at', { ascending: false });
 
-  // on n’a plus "payload" dans submissions côté prod actuel,
-  // donc on ne va pas charger d’ancienne submission (pour éviter erreurs avec ancien schéma).
-  // On check juste s’il y a un contrat signé côté projet.
+  // --- Contrat signé (si tu gardes un tableau de fichiers)
   const signedPdf =
     Array.isArray(proj.signed_contract_files) &&
     proj.signed_contract_files.length > 0

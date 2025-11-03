@@ -255,7 +255,7 @@ export default function Review() {
             Nous contacter
           </Link>
           <WhatsAppButton
-            className=" px-6 py-3  gap-2 rounded-lg flex items-center justify-center"
+            className=" px-6 py-3 sm:hidden  gap-2 rounded-lg flex items-center justify-center"
             message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
             label="WhatsApp"
           />

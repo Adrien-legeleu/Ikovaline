@@ -11,101 +11,125 @@ import {
   IconCpu,
   IconChartLine,
   IconDeviceLaptop,
-  IconEye,
   IconHelpHexagon,
-  IconHistory,
   IconThumbUp,
 } from '@tabler/icons-react';
 
 import IkovalineLogo from '@/public/images/logo/ikovaline-logo-full-light.svg';
 import IkovalineLogoDark from '@/public/images/logo/ikovaline-logo-full-dark.svg';
 import { AnimatedThemeToggler } from '../magicui/animated-theme-toggler';
-import WhatsAppButton from '../WhatsappButton';
 import { supabase } from '@/lib/SupabaseClient';
-import { useEffect, useState, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
-/* 🔒 même hook que dans Header (copie locale ici) */
+/* ====================================================== */
+/* 🔒 Hook de session robuste                            */
+/* ====================================================== */
+
+type Role = 'admin' | 'dev' | 'user';
+
+function computeSpaceHref(logged: boolean | null, role: Role | null): string {
+  if (!logged) return '/signin';
+  switch (role) {
+    case 'admin':
+      return '/admin/dashboard';
+    case 'dev':
+      return '/dev/projects';
+    case 'user':
+    default:
+      return '/dashboard';
+  }
+}
+
 function useSessionRole() {
-  const [logged, setLogged] = useState(false);
-  const [role, setRole] = useState<'admin' | 'dev' | 'user' | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [logged, setLogged] = React.useState<boolean | null>(null);
+  const [role, setRole] = React.useState<Role | null>(null);
+  const [loading, setLoading] = React.useState(true);
+  const [spaceHref, setSpaceHref] = React.useState('/signin');
 
-  useEffect(() => {
-    let mounted = true;
+  React.useEffect(() => {
+    setSpaceHref(computeSpaceHref(logged, role));
+  }, [logged, role]);
 
-    async function load() {
-      setLoading(true);
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+  React.useEffect(() => {
+    let active = true;
 
-      if (!mounted) return;
-      setLogged(!!user);
+    async function syncFromUser(userFromEvent: any | null) {
+      try {
+        setLoading(true);
 
-      if (user) {
-        const { data } = await supabase
+        // 1. Récupération user : soit depuis l’événement, soit depuis Supabase
+        let user = userFromEvent;
+        if (!user) {
+          const { data, error } = await supabase.auth.getUser();
+          if (error) {
+            if (!active) return;
+            setLogged(false);
+            setRole(null);
+            return;
+          }
+          user = data.user;
+        }
+
+        if (!active) return;
+
+        if (!user) {
+          // pas connecté
+          setLogged(false);
+          setRole(null);
+          return;
+        }
+
+        // 2. User connecté → on récupère le rôle
+        setLogged(true);
+
+        const { data: profile, error: profileError } = await supabase
           .from('profiles')
           .select('role')
           .eq('id', user.id)
           .maybeSingle();
 
-        if (!mounted) return;
-        setRole((data?.role as 'admin' | 'dev' | 'user') ?? 'user');
-        setLoading(false);
-      } else {
+        if (!active) return;
+
+        if (profileError) {
+          // en cas d’erreur, on considère "user" par défaut
+          setRole('user');
+        } else {
+          const r = (profile?.role as Role) ?? 'user';
+          setRole(r);
+        }
+      } catch (e) {
+        if (!active) return;
+        // En cas d’erreur réseau / autre → on retombe en mode invité
+        setLogged(false);
         setRole(null);
-        setLoading(false);
+      } finally {
+        if (active) setLoading(false);
       }
     }
 
-    load();
+    // 🔁 Premier chargement
+    syncFromUser(null);
 
-    const { data: sub } = supabase.auth.onAuthStateChange(
-      async (_e, session) => {
-        const u = session?.user ?? null;
-        setLogged(!!u);
-
-        if (u) {
-          setLoading(true);
-          const { data } = await supabase
-            .from('profiles')
-            .select('role')
-            .eq('id', u.id)
-            .maybeSingle();
-
-          setRole((data?.role as 'admin' | 'dev' | 'user') ?? 'user');
-          setLoading(false);
-        } else {
-          setRole(null);
-          setLoading(false);
-        }
+    // 🔁 Abonnement aux changements de session (login, logout, refresh)
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        const user = session?.user ?? null;
+        syncFromUser(user);
       }
     );
 
     return () => {
-      mounted = false;
-      sub.subscription.unsubscribe();
+      active = false;
+      authListener?.subscription?.unsubscribe();
     };
   }, []);
 
-  const spaceHref = useMemo(() => {
-    if (!logged) return '/signin';
-    if (loading) return '/dashboard';
-    switch (role) {
-      case 'admin':
-        return '/admin/dashboard';
-      case 'dev':
-        return '/dev/projects';
-      default:
-        return '/dashboard';
-    }
-  }, [logged, role, loading]);
-
-  return { logged, loading, spaceHref };
+  return { logged, role, loading, spaceHref };
 }
 
-/* ================= MOBILE NAV DATA ================== */
+/* ====================================================== */
+/* 📚 Données menu                                       */
+/* ====================================================== */
 type SubLink = { label: string; href: string; icon?: React.ReactNode };
 type Section = { title: string; href: string; links?: SubLink[] };
 
@@ -118,27 +142,27 @@ const SECTIONS: Section[] = [
       {
         label: 'Applications Web, Mobiles & SaaS',
         href: '/nos-services#saas-apps',
-        icon: <IconDeviceLaptop stroke={2} className="shrink-0" />,
+        icon: <IconDeviceLaptop stroke={2} />,
       },
       {
         label: 'Automatisation & IA',
         href: '/nos-services#automatisation-ia',
-        icon: <IconCpu stroke={2} className="shrink-0" />,
+        icon: <IconCpu stroke={2} />,
       },
       {
         label: 'Stratégies Digitales & Croissance',
         href: '/nos-services#scaling',
-        icon: <IconChartLine stroke={2} className="shrink-0" />,
+        icon: <IconChartLine stroke={2} />,
       },
       {
-        label: 'Ce qui fait notre différence',
+        label: 'Notre Différence',
         href: '/nos-services#pourquoi-nous',
-        icon: <IconThumbUp stroke={2} className="shrink-0" />,
+        icon: <IconThumbUp stroke={2} />,
       },
       {
-        label: 'Foire aux questions',
+        label: 'FAQ',
         href: '/nos-services#faq',
-        icon: <IconHelpHexagon stroke={2} className="shrink-0" />,
+        icon: <IconHelpHexagon stroke={2} />,
       },
     ],
   },
@@ -147,192 +171,207 @@ const SECTIONS: Section[] = [
   {
     title: 'À Propos',
     href: '/about',
-    links: [
-      {
-        label: 'Notre Histoire',
-        href: '/about#notre-histoire',
-        icon: <IconHistory stroke={2} className="shrink-0" />,
-      },
-      {
-        label: 'Notre Vision',
-        href: '/about#notre-vision',
-        icon: <IconEye stroke={2} className="shrink-0" />,
-      },
-      {
-        label: 'Notre Garantie',
-        href: '/about#notre-garantie',
-        icon: <IconHelpHexagon stroke={2} className="shrink-0" />,
-      },
-    ],
   },
   { title: 'Contact', href: '/contact' },
 ];
 
-/* ================= COMPONENT ================== */
+/* ====================================================== */
+/* 💫 HeaderResponsive (mobile)                          */
+/* ====================================================== */
 export function HeaderResponsive() {
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState<number | null>(null);
 
   const { logged, loading, spaceHref } = useSessionRole();
 
-  // body scroll lock quand menu ouvert
+  // lock scroll body quand menu est ouvert
   React.useEffect(() => {
     document.documentElement.classList.toggle('overflow-hidden', open);
-    return () => document.documentElement.classList.remove('overflow-hidden');
+    return () => {
+      document.documentElement.classList.remove('overflow-hidden');
+    };
   }, [open]);
 
-  // ESC pour fermer
+  // ESC pour fermer le menu
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
-  // ===== Effet mobile "magnétique + parallax" (sans framer hooks) =====
+
+  /* ====================================================== */
+  /* 🍏 Effet Dynamic Island fluide                        */
+  /* ====================================================== */
+
   const barRef = React.useRef<HTMLElement>(null);
-
-  // détecte le thème pour le verre clair/sombre
-  const [isDark, setIsDark] = React.useState(false);
-  React.useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const update = () => setIsDark(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
+  const innerRef = React.useRef<HTMLDivElement>(null);
+  const leftRef = React.useRef<HTMLAnchorElement>(null);
+  const rightRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const el = barRef.current;
-    if (!el) return;
+    const barEl = barRef.current;
+    const innerEl = innerRef.current;
+    const leftEl = leftRef.current;
+    const rightEl = rightRef.current;
+    if (!barEl || !innerEl || !leftEl || !rightEl) return;
 
+    let curOuterY = 0;
+    let curOuterScale = 1;
+    let curInnerY = 0;
+    let curInnerScaleX = 1;
+    let curInnerScaleY = 1;
+
+    let targetOuterY = 0;
+    let targetOuterScale = 1;
+    let targetInnerY = 0;
+    let targetInnerScaleX = 1;
+    let targetInnerScaleY = 1;
+
+    let lastScrollY = window.scrollY;
     let raf = 0;
-    let lastY = window.scrollY;
-    let lastT = performance.now();
-    let cur = 0; // position animée actuelle (y)
-    let target = 0; // cible aimantée (y)
 
-    const clamp = (v: number, min: number, max: number) =>
-      Math.max(min, Math.min(max, v));
+    const lerp = (from: number, to: number, f: number) =>
+      from + (to - from) * f;
 
-    const tick = () => {
-      // 🎚️ Inertie plus douce
-      const SPRING = 0.14; // (avant 0.18)
-      const DAMP = 0.99; // (avant 0.99)
+    const animate = () => {
+      curOuterY = lerp(curOuterY, targetOuterY, 0.18);
+      curOuterScale = lerp(curOuterScale, targetOuterScale, 0.18);
 
-      const next = cur + (target - cur) * SPRING;
-      cur = next * DAMP + target * (1 - DAMP);
+      curInnerY = lerp(curInnerY, targetInnerY, 0.22);
+      curInnerScaleX = lerp(curInnerScaleX, targetInnerScaleX, 0.22);
+      curInnerScaleY = lerp(curInnerScaleY, targetInnerScaleY, 0.22);
 
-      // Parallax très léger, recalé sur nouvelle plage [-12 .. +6]
-      const ratio = Math.max(0, Math.min(1, (cur + 12) / 18)); // [-12..+6] -> [0..1]
-      const scale = 0.992 + ratio * (1.006 - 0.992); // 0.992 -> 1.006
+      barEl.style.transform = `translateY(${curOuterY.toFixed(
+        2
+      )}px) scale(${curOuterScale.toFixed(3)})`;
 
-      el.style.transform = `translateY(${cur.toFixed(2)}px) scale(${scale.toFixed(3)})`;
+      innerEl.style.transform = `translateY(${curInnerY.toFixed(
+        2
+      )}px) scale(${curInnerScaleX.toFixed(3)}, ${curInnerScaleY.toFixed(3)})`;
+      innerEl.style.transformOrigin = 'center center';
 
-      raf = requestAnimationFrame(tick);
+      const childScaleX = curInnerScaleX * 1.012;
+      const childScaleY = curInnerScaleY * 0.988;
+      const childY = curInnerY * 0.55;
+
+      leftEl.style.transform = `translateY(${childY.toFixed(
+        2
+      )}px) scale(${childScaleX.toFixed(3)}, ${childScaleY.toFixed(3)})`;
+      leftEl.style.transformOrigin = 'left center';
+
+      rightEl.style.transform = `translateY(${childY.toFixed(
+        2
+      )}px) scale(${childScaleX.toFixed(3)}, ${childScaleY.toFixed(3)})`;
+      rightEl.style.transformOrigin = 'right center';
+
+      raf = requestAnimationFrame(animate);
     };
 
     const onScroll = () => {
-      const now = performance.now();
-      const y = window.scrollY;
-      const dt = Math.max(1, now - lastT);
+      const yNow = window.scrollY;
+      const dy = yNow - lastScrollY;
+      lastScrollY = yNow;
 
-      const vel = (y - lastY) * (1000 / dt); // px/s
+      const raw = -dy / 8;
+      const clamped = Math.max(Math.min(raw, 10), -12);
 
-      // 🎛️ Réglages "moins fort"
-      const K = 220; // plus grand = moins sensible (avant 100)
-      const MAX_UP = -12; // montant max (avant -28)
-      const MAX_DOWN = 6; // descendant max (avant +14)
+      targetOuterY = clamped;
+      targetOuterScale = 1 + clamped / 900;
 
-      let mapped = -vel / K; // vel>0 (descente) => y négatif (monte un peu)
+      const opposite = -clamped * 0.4;
+      targetInnerY = opposite;
 
-      // petite dead-zone pour éviter le frémissement
-      if (Math.abs(mapped) < 0.8) mapped = 0;
-
-      // clamp l’amplitude
-      mapped = Math.max(Math.min(mapped, MAX_DOWN), MAX_UP);
-
-      // lissage vers la cible (évite les bonds)
-      target += (mapped - target) * 0.18;
-
-      lastY = y;
-      lastT = now;
-
-      if (!raf) raf = requestAnimationFrame(tick);
+      const intensity = Math.min(Math.abs(clamped) / 12, 1);
+      targetInnerScaleX = 1 + 0.03 * intensity;
+      targetInnerScaleY = 1 - 0.03 * intensity;
     };
 
-    // init + listener
-    onScroll();
+    raf = requestAnimationFrame(animate);
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
       cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
     };
-  }, [isDark]);
+  }, []);
 
   return (
     <>
-      {/* Header mobile transparent */}
+      {/* ===== Header mobile flottant ===== */}
       <header
         ref={barRef}
-        className="fixed inset-x-0 top-0 z-[10000] flex items-center justify-between px-4 py-2 lg:hidden will-change-transform"
+        className="fixed inset-x-0 top-0 z-[10000000000000] will-change-transform lg:hidden"
       >
-        {/* logo */}
-        <Link href="/" aria-label="Accueil" className="flex items-center gap-2">
-          <Image
-            src={IkovalineLogo}
-            alt="Ikovaline"
-            width={80}
-            height={36}
-            className="h-6 w-auto object-contain dark:hidden"
-            priority
-          />
-          <Image
-            src={IkovalineLogoDark}
-            alt="Ikovaline"
-            width={80}
-            height={36}
-            className="hidden h-6 w-auto object-contain dark:block"
-          />
-        </Link>
-
-        <div className="flex items-center gap-3">
-          <AnimatedThemeToggler />
-          {logged ? (
-            <Link
-              href={spaceHref}
-              aria-disabled={loading}
-              className={cn(
-                'rounded-2xl bg-primary flex items-center justify-center h-[2.25rem] px-3 py-2 text-[12px] font-semibold text-white shadow-lg transition',
-                loading
-                  ? 'opacity-50 pointer-events-none cursor-default'
-                  : 'active:scale-[0.98]'
-              )}
-            >
-              {loading ? '...' : 'Dashboard'}
-            </Link>
-          ) : (
-            <Link
-              href="/signup"
-              className={cn(
-                'rounded-2xl h-[2.25rem] flex items-center justify-center px-3 py-2 text-[12px] font-semibold bg-primary text-white active:scale-[0.98]'
-              )}
-            >
-              Lancer
-            </Link>
-          )}
-
-          {/* burger */}
-          <button
-            onClick={() => setOpen(true)}
-            aria-label="Ouvrir le menu"
-            className="grid size-9 place-items-center rounded-2xl bg-white/70 p-1 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/5"
+        <div
+          ref={innerRef}
+          className="flex items-center justify-between px-4 py-2 will-change-transform"
+        >
+          <Link
+            ref={leftRef}
+            href="/"
+            aria-label="Accueil"
+            className="flex items-center gap-2 will-change-transform"
           >
-            <IconMenu3 className="h-full w-full" />
-          </button>
+            <Image
+              src={IkovalineLogo}
+              alt="Ikovaline"
+              width={80}
+              height={36}
+              className="h-6 w-auto object-contain dark:hidden"
+              priority
+            />
+            <Image
+              src={IkovalineLogoDark}
+              alt="Ikovaline"
+              width={80}
+              height={36}
+              className="hidden h-6 w-auto object-contain dark:block"
+              priority
+            />
+          </Link>
+
+          <div
+            ref={rightRef}
+            className="flex items-center gap-3 will-change-transform"
+          >
+            <AnimatedThemeToggler />
+
+            {/* ✅ CTA sécurisé : pas de mauvais lien pendant le chargement */}
+            {logged ? (
+              <Link
+                href={spaceHref}
+                aria-disabled={loading}
+                className={cn(
+                  'rounded-2xl bg-primary flex items-center justify-center h-[2.25rem] px-3 text-[12px] font-semibold text-white shadow-lg transition will-change-transform active:scale-[0.97]',
+                  loading ? 'opacity-50 pointer-events-none' : ''
+                )}
+              >
+                {loading ? '...' : 'Dashboard'}
+              </Link>
+            ) : loading ? (
+              // skeleton pendant qu’on ne sait pas encore si la personne est connectée
+              <div className="h-[2.25rem] w-20 rounded-2xl bg-white/40 dark:bg-neutral-800 animate-pulse" />
+            ) : (
+              <Link
+                href="/signup"
+                className="rounded-2xl h-[2.25rem] flex items-center justify-center px-3 text-[12px] font-semibold bg-primary text-white will-change-transform active:scale-[0.97]"
+              >
+                Lancer
+              </Link>
+            )}
+
+            <button
+              onClick={() => setOpen(true)}
+              aria-label="Ouvrir le menu"
+              className="grid size-9 place-items-center rounded-2xl bg-white/80 p-1 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/5 active:scale-[0.96] will-change-transform"
+            >
+              <IconMenu3 className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Menu plein écran */}
+      {/* ===== Overlay menu fullscreen ===== */}
       <AnimatePresence>
         {open && (
           <m.div
@@ -340,78 +379,96 @@ export function HeaderResponsive() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[1000000] lg:hidden"
+            transition={{
+              duration: 0.28,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="fixed inset-0 z-[1000000000000] lg:hidden"
           >
-            <div
+            <m.div
               aria-hidden
-              className="absolute inset-0 bg-white/70 backdrop-blur-2xl dark:bg-black/70"
+              className="absolute inset-0 backdrop-blur-2xl"
+              initial={{
+                backgroundColor:
+                  typeof window !== 'undefined' &&
+                  document.documentElement.classList.contains('dark')
+                    ? 'rgba(0,0,0,1)'
+                    : 'rgba(255,255,255,1)',
+                opacity: 0,
+              }}
+              animate={{
+                backgroundColor:
+                  typeof window !== 'undefined' &&
+                  document.documentElement.classList.contains('dark')
+                    ? 'rgba(0,0,0,0.7)'
+                    : 'rgba(255,255,255,0.7)',
+                opacity: 1,
+              }}
+              exit={{ opacity: 0 }}
+              transition={{
+                backgroundColor: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+                opacity: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+              }}
             />
+
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-60"
+              className="pointer-events-none absolute inset-0 opacity-50"
               style={{
                 background:
                   'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.08) 0 1px, transparent 1px calc(12.5%))',
               }}
             />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full blur-[120px]"
-              style={{
-                background:
-                  'radial-gradient(closest-side, hsl(var(--primary)/0.16), transparent 70%)',
-              }}
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute right-0 bottom-0 h-96 w-96 translate-x-1/4 rounded-full blur-[160px]"
-              style={{
-                background:
-                  'radial-gradient(closest-side, color-mix(in oklab, hsl(var(--primary)) 75%, #00E5FF) / 0.14, transparent 70%)',
-              }}
-            />
 
             <m.aside
               key="panel"
-              initial={{ y: 24, opacity: 0, scale: 0.98 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 12, opacity: 0, scale: 0.995 }}
-              transition={{ duration: 0.28, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: 18, scale: 0.99 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: [0.99, 1.02, 1],
+              }}
+              exit={{ opacity: 0, y: 16, scale: 0.97 }}
+              transition={{
+                duration: 0.38,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="relative z-10 flex h-full w-full flex-col"
             >
-              {/* top bar in menu */}
-              <div className="flex items-center justify-between px-4 pt-2">
+              <div className="flex items-center justify-between px-4 pt-3">
                 <Link
                   href="/"
                   aria-label="Accueil"
                   onClick={() => setOpen(false)}
+                  className="active:scale-[0.97] will-change-transform"
+                  style={{ transformOrigin: 'left center' }}
                 >
                   <Image
                     src={IkovalineLogo}
                     alt="Ikovaline"
-                    width={120}
-                    height={36}
-                    className="h-8 w-auto object-contain dark:hidden"
+                    width={110}
+                    height={32}
+                    className="dark:hidden"
                   />
                   <Image
                     src={IkovalineLogoDark}
                     alt="Ikovaline"
-                    width={120}
-                    height={36}
-                    className="hidden h-8 w-auto object-contain dark:block"
+                    width={110}
+                    height={32}
+                    className="hidden dark:block"
                   />
                 </Link>
 
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Fermer le menu"
-                  className="grid size-9 place-items-center rounded-2xl bg-white/70 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur hover:opacity-95 dark:bg-neutral-900/60 dark:text-neutral-100 dark:ring-white/5"
+                  className="grid size-9 place-items-center rounded-2xl bg-white/80 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/5 active:scale-[0.96] will-change-transform"
+                  style={{ transformOrigin: 'right center' }}
                 >
-                  <IconX />
+                  <IconX className="h-5 w-5" />
                 </button>
               </div>
 
-              {/* nav list */}
               <m.nav
                 initial="hidden"
                 animate="show"
@@ -420,9 +477,14 @@ export function HeaderResponsive() {
                   hidden: {
                     transition: { staggerChildren: 0.04, staggerDirection: -1 },
                   },
-                  show: { transition: { staggerChildren: 0.06 } },
+                  show: {
+                    transition: {
+                      staggerChildren: 0.06,
+                      ease: [0.16, 1, 0.3, 1],
+                    },
+                  },
                 }}
-                className="relative mx-auto mt-6 w-full max-w-3xl grow overflow-y-auto px-5 pb-28"
+                className="mx-auto mt-6 w-full max-w-3xl grow overflow-y-auto px-6 pb-24"
                 style={{ scrollbarWidth: 'none' }}
               >
                 {SECTIONS.map((s, idx) => {
@@ -433,17 +495,29 @@ export function HeaderResponsive() {
                     <m.div
                       key={s.title}
                       variants={{
-                        hidden: { opacity: 0, y: 12, filter: 'blur(4px)' },
-                        show: { opacity: 1, y: 0, filter: 'blur(0px)' },
+                        hidden: {
+                          opacity: 0,
+                          y: 14,
+                          filter: 'blur(6px)',
+                        },
+                        show: {
+                          opacity: 1,
+                          y: 0,
+                          filter: 'blur(0px)',
+                          transition: {
+                            duration: 0.28,
+                            ease: [0.16, 1, 0.3, 1],
+                          },
+                        },
                       }}
-                      className="mb-2"
+                      className="mb-3"
                     >
-                      {/* ligne principale */}
-                      <div className="group relative flex items-center justify-between rounded-2xl px-4 py-4">
+                      <div className="group flex items-center justify-between rounded-2xl px-4 py-4">
                         <Link
                           href={s.href}
                           onClick={() => setOpen(false)}
-                          className="text-xl font-semibold tracking-tight text-neutral-900 hover:opacity-80 dark:text-neutral-50"
+                          className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 active:scale-[0.98] will-change-transform"
+                          style={{ transformOrigin: 'left center' }}
                         >
                           {s.title}
                         </Link>
@@ -462,7 +536,8 @@ export function HeaderResponsive() {
                               e.preventDefault();
                               e.stopPropagation();
                             }}
-                            className="ml-3 grid size-9 place-items-center rounded-xl text-neutral-700 transition group-hover:scale-105 hover:bg-black/10 dark:text-neutral-300 dark:hover:bg-white/10"
+                            className="ml-3 grid size-9 place-items-center rounded-xl text-neutral-700 transition hover:bg-black/10 active:scale-[0.96] dark:text-neutral-300 dark:hover:bg-white/10 will-change-transform"
+                            style={{ transformOrigin: 'right center' }}
                           >
                             <IconChevronDown
                               className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
@@ -471,10 +546,6 @@ export function HeaderResponsive() {
                         )}
                       </div>
 
-                      {/* hairline */}
-                      <div className="pointer-events-none mt-2 h-px w-full bg-gradient-to-r from-transparent via-black/5 to-transparent dark:via-white/5" />
-
-                      {/* sous-liens */}
                       <AnimatePresence initial={false}>
                         {hasChildren && isOpen && (
                           <m.ul
@@ -482,65 +553,67 @@ export function HeaderResponsive() {
                             initial={{ height: 0, opacity: 0, y: -4 }}
                             animate={{ height: 'auto', opacity: 1, y: 0 }}
                             exit={{ height: 0, opacity: 0, y: -4 }}
-                            transition={{ duration: 0.24, ease: 'easeOut' }}
-                            className="overflow-hidden px-1"
+                            transition={{
+                              duration: 0.28,
+                              ease: [0.16, 1, 0.3, 1],
+                            }}
+                            className="overflow-hidden px-2"
                           >
                             {s.links!.map((l) => (
                               <li key={l.href}>
                                 <Link
                                   href={l.href}
                                   onClick={() => setOpen(false)}
-                                  className="mt-1 flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] text-neutral-800 transition hover:bg-black/5 dark:text-neutral-200 dark:hover:bg-white/5"
+                                  className="mt-1 flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] text-neutral-800 hover:bg-black/5 active:scale-[0.98] dark:text-neutral-200 dark:hover:bg-white/5 will-change-transform"
+                                  style={{ transformOrigin: 'left center' }}
                                 >
-                                  <span className="grid size-6 place-items-center">
-                                    {l.icon}
-                                  </span>
-                                  <span className="truncate">{l.label}</span>
+                                  {l.icon && (
+                                    <span className="grid size-6 place-items-center text-neutral-700 dark:text-neutral-300">
+                                      {l.icon}
+                                    </span>
+                                  )}
+                                  <span>{l.label}</span>
                                 </Link>
                               </li>
                             ))}
                           </m.ul>
                         )}
                       </AnimatePresence>
+
+                      <div className="pointer-events-none mt-3 h-px w-full bg-gradient-to-r from-transparent via-black/5 to-transparent dark:via-white/5" />
                     </m.div>
                   );
                 })}
               </m.nav>
 
-              {/* gradient bottom overlay */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/5 to-transparent dark:from-white/5" />
-
-              {/* footer actions */}
-              <div className="relative z-10 mx-auto mb-6 w-full max-w-3xl space-y-2 px-5">
-                {!logged && (
-                  <div className="absolute h-12 w-full z-10 top-0 -translate-y-1/2 left-0 bg-[#F5F8FA] blur-md" />
-                )}
-                <WhatsAppButton
-                  className="w-full flex items-center justify-center gap-2 px-5 py-4 text-[15px]"
-                  message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
-                  label="WhatsApp"
-                />
-
+              {/* CTA bas sécurisé aussi */}
+              <div className="mx-auto mb-6 w-full max-w-3xl space-y-2 px-5">
                 {logged ? (
                   <Link
                     href={spaceHref}
                     aria-disabled={loading}
                     onClick={() => setOpen(false)}
                     className={cn(
-                      'inline-flex w-full items-center justify-center rounded-3xl bg-[hsl(var(--primary))] px-5 py-4 text-[15px] font-semibold text-white shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary)/0.45)]',
+                      'inline-flex w-full items-center justify-center rounded-3xl bg-[hsl(var(--primary))] px-5 py-4 text-[15px] font-semibold text-white shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.6)] active:scale-[0.98] will-change-transform',
                       loading
                         ? 'opacity-50 pointer-events-none cursor-default'
-                        : 'active:scale-[0.98]'
+                        : ''
                     )}
+                    style={{ transformOrigin: 'center center' }}
                   >
                     {loading ? 'Chargement…' : 'Accéder à mon espace'}
                   </Link>
+                ) : loading ? (
+                  <div className="inline-flex w-full items-center justify-center rounded-3xl bg-neutral-100/70 dark:bg-neutral-900/70 px-5 py-4 text-[15px] font-semibold text-neutral-500 dark:text-neutral-400 animate-pulse">
+                    Vérification de votre espace…
+                  </div>
                 ) : (
                   <>
                     <Link
                       href="/signup"
                       onClick={() => setOpen(false)}
-                      className="inline-flex w-full items-center justify-center rounded-3xl bg-neutral-100 px-5 py-4 text-[15px] font-semibold text-black  ring-1 ring-white/15 transition active:scale-[0.98] dark:bg-white dark:text-neutral-900"
+                      className="inline-flex w-full items-center justify-center rounded-3xl bg-neutral-100 dark:bg-neutral-900 px-5 py-4 text-[15px] font-semibold text-black active:scale-[0.98] will-change-transform  dark:text-neutral-200"
+                      style={{ transformOrigin: 'center center' }}
                     >
                       Lancer mon projet
                     </Link>
@@ -548,7 +621,8 @@ export function HeaderResponsive() {
                     <Link
                       href="/signin"
                       onClick={() => setOpen(false)}
-                      className="inline-flex w-full items-center justify-center rounded-3xl bg-[hsl(var(--primary))] px-5 py-4 text-[15px] font-semibold text-white shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary)/0.45)]"
+                      className="inline-flex w-full items-center justify-center rounded-3xl bg-[hsl(var(--primary))] px-5 py-4 text-[15px] font-semibold text-white shadow-[0_28px_56px_-22px_hsl(var(--primary)/0.6)] active:scale-[0.98] will-change-transform"
+                      style={{ transformOrigin: 'center center' }}
                     >
                       Se connecter
                     </Link>

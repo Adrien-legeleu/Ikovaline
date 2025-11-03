@@ -94,62 +94,6 @@ export function EstimatePanel({
             onValueChange={(v) => onAds(v[0] ?? 0)}
           />
 
-          {/* Légende explicative */}
-          <p className="text-[11px] text-neutral-400 dark:text-neutral-500 pt-1">
-            Projection indicative : plus le budget publicitaire augmente, plus
-            le nombre de leads potentiels croît.
-          </p>
-
-          {/* Graphique */}
-          <div className="h-28 rounded-2xl ring-1 ring-black/[0.03] dark:ring-white/[0.06] bg-white/60 dark:bg-neutral-900/60 overflow-hidden">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={data}>
-                <Tooltip
-                  formatter={(value: number) =>
-                    `${value.toLocaleString('fr-FR')} leads / mois`
-                  }
-                  labelFormatter={(budget: number) =>
-                    `Budget : ${budget.toLocaleString('fr-FR')} €`
-                  }
-                  contentStyle={{
-                    fontSize: 12,
-                    borderRadius: '0.75rem',
-                    border: 'none',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                  }}
-                  cursor={{ stroke: 'rgba(2,132,199,0.3)' }}
-                />
-
-                <Area
-                  type="monotone"
-                  dataKey="leads"
-                  stroke="rgb(2,132,199)"
-                  fill="rgba(2,132,199,0.20)"
-                  strokeWidth={2}
-                />
-
-                {/* Point actuel du budget sélectionné */}
-                {selectedPoint && (
-                  <ReferenceDot
-                    x={selectedPoint.budget}
-                    y={selectedPoint.leads}
-                    r={4}
-                    fill="rgb(2,132,199)"
-                    stroke="white"
-                    strokeWidth={1.5}
-                  />
-                )}
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* Graduation */}
-          <div className="mt-1 flex justify-between text-[11px] text-neutral-400 dark:text-neutral-500">
-            <span>0€</span>
-            <span>2 500€</span>
-            <span>5 000€</span>
-          </div>
-
           {/* Indicateur résumé */}
           <div className="text-[11px] text-right text-neutral-500 dark:text-neutral-400">
             Votre budget actuel : {adsBudget.toLocaleString('fr-FR')}€ ≈{' '}

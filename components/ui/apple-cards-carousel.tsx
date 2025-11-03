@@ -129,14 +129,19 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         <div className="mx-10 flex items-center justify-between gap-2">
           <Link
             href={`/${isEN ? 'en/' : ''}blog`}
-            className="z-10 bg-primary text-white py-2 rounded-3xl px-4"
+            className={cn(
+              'group relative z-10 inline-flex items-center gap-2 rounded-[2rem] px-4 py-3 text-sm font-semibold leading-none text-white',
+              'bg-[hsl(var(--primary))] shadow-[0_20px_40px_-10px_hsl(var(--primary)/0.6)]',
+              'transition active:scale-[0.97] hover:shadow-[0_28px_60px_-10px_hsl(var(--primary)/0.7)] hover:brightness-[1.07]'
+            )}
           >
-            <span className="flex items-center justify-center gap-2">
-              <span aria-hidden="true">
-                <IconNews />
-              </span>
-              {seeAll}
+            <span
+              aria-hidden="true"
+              className="grid h-4 w-4 place-items-center text-white/90"
+            >
+              <IconNews className="h-4 w-4" />
             </span>
+            <span>{seeAll}</span>
           </Link>
 
           <div className="flex gap-2">

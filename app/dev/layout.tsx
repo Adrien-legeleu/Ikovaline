@@ -1,6 +1,7 @@
 import { cookies, headers } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 import DevTopNav from '@/components/ClientSpace/DevTopNav';
+import { ThemeLockLight } from '@/components/ThemeLock';
 
 export const dynamic = 'force-dynamic';
 
@@ -40,6 +41,7 @@ export default async function DevLayout({
   if (!allowed) return <div className="p-6">Accès interdit.</div>;
   return (
     <div className="min-h-dvh">
+      <ThemeLockLight />
       <DevTopNav />
       <div className="h-[20px] md:h-[90px]" />
 

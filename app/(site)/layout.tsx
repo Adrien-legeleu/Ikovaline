@@ -1,6 +1,7 @@
 // app/(site)/layout.tsx
 import { Header } from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
+import ChatbotBubble from '@/components/chatbot/ChatbotBubble';
 
 export default function SiteLayout({
   children,
@@ -12,7 +13,9 @@ export default function SiteLayout({
       <header>
         <Header />
       </header>
+
       <main>{children}</main>
+      <ChatbotBubble />
       <footer>
         <Footer />
       </footer>

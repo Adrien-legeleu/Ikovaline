@@ -331,100 +331,143 @@ export default function StatsDashboard() {
         </div>
 
         {/* DATE RANGE */}
-        <div className="flex items-center flex-wrap gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-end">
           <Popover open={openDate} onOpenChange={setOpenDate}>
             <PopoverTrigger asChild>
-              <button className="h-11 px-4 rounded-[2rem] border border-neutral-200/50 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 text-sm text-neutral-700 dark:text-neutral-200 flex items-center gap-2 shadow-[0_20px_40px_-8px_rgba(0,0,0,0.08)] hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
-                <CalendarIcon className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
-                <span className="font-medium tabular-nums">
-                  {from} → {to}
+              <button className="w-full sm:w-auto h-11 px-4 rounded-[2rem] border border-neutral-200/50 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 text-sm text-neutral-700 dark:text-neutral-200 flex items-center justify-between sm:justify-center gap-2 shadow-[0_20px_40px_-8px_rgba(0,0,0,0.08)] hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+                <div className="flex items-center gap-2 min-w-0">
+                  <CalendarIcon className="w-4 h-4 text-neutral-400 dark:text-neutral-500 shrink-0" />
+                  <span className="font-medium tabular-nums truncate">
+                    {from} → {to}
+                  </span>
+                </div>
+                <span className="ml-auto text-[11px] text-neutral-500 dark:text-neutral-400 sm:hidden">
+                  Modifier
                 </span>
               </button>
             </PopoverTrigger>
 
             <PopoverContent
-              className="w-auto p-4 rounded-[2rem] border border-neutral-200/50 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 shadow-[0_24px_48px_-8px_rgba(0,0,0,0.4)] flex flex-col sm:flex-row gap-4"
               align="end"
+              className="w-[min(92vw,400px)] sm:w-auto p-4 rounded-[1.5rem] border border-neutral-200/50 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 shadow-[0_24px_48px_-8px_rgba(0,0,0,0.4)]"
             >
               {/*
-                IMPORTANT:
-                - on interdit le futur
-                - on autorise le passé
+                MOBILE UX:
+                - On met les 2 calendriers côte à côte dans un slide horizontal
+                  (scroll-x) → donc c'est PAS une énorme colonne.
+                - Sur desktop (≥640px), ils sont vraiment côte à côte flex-row sans scroll.
               */}
-              {/* FROM */}
-              <div className="flex flex-col gap-2">
-                <span className="text-[11px] font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                  Début
-                </span>
-                <Calendar
-                  mode="single"
-                  selected={from ? new Date(from) : undefined}
-                  onSelect={(d: Date | undefined) => {
-                    if (!d) return;
-                    const today = startOfDayUTC(new Date());
-                    if (d > today) return; // refuse futur
-                    setFrom(toISODateUTC(d));
-                  }}
-                  disabled={(date) => date > startOfDayUTC(new Date())}
-                  className="rounded-[2rem] border border-neutral-200/50 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 shadow-sm"
-                />
-              </div>
+              <div className="flex flex-col gap-6 sm:flex-row sm:gap-4">
+                {/* CALENDARS WRAPPER */}
+                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4 max-w-full overflow-x-auto no-scrollbar snap-x snap-mandatory -mx-2 px-2 sm:overflow-visible sm:-mx-0 sm:px-0">
+                  {/* FROM */}
+                  <div className="flex flex-col gap-2 min-w-[260px] snap-center shrink-0">
+                    <span className="text-[11px] font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                      Début
+                    </span>
+                    <Calendar
+                      mode="single"
+                      // ✅ on passe la Date en LOCAL, pas UTC
+                      selected={from ? fromISODateLocal(from) : undefined}
+                      onSelect={(d: Date | undefined) => {
+                        if (!d) return;
+                        // interdiction futur
+                        const todayLocal = startOfDayLocal(new Date());
+                        const pickedLocal = startOfDayLocal(d);
+                        if (pickedLocal > todayLocal) return;
+                        setFrom(toISODateLocal(pickedLocal));
 
-              {/* TO */}
-              <div className="flex flex-col gap-2">
-                <span className="text-[11px] font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                  Fin
-                </span>
-                <Calendar
-                  mode="single"
-                  selected={to ? new Date(to) : undefined}
-                  onSelect={(d: Date | undefined) => {
-                    if (!d) return;
-                    const today = startOfDayUTC(new Date());
-                    if (d > today) return;
-                    setTo(toISODateUTC(d));
-                  }}
-                  disabled={(date) => date > startOfDayUTC(new Date())}
-                  className="rounded-[2rem] border border-neutral-200/50 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 shadow-sm"
-                />
-              </div>
+                        // si la fin est avant le début, on sync
+                        if (to) {
+                          const toDateLocal = fromISODateLocal(to);
+                          if (
+                            toDateLocal &&
+                            startOfDayLocal(toDateLocal) < pickedLocal
+                          ) {
+                            setTo(toISODateLocal(pickedLocal));
+                          }
+                        }
+                      }}
+                      disabled={(date) =>
+                        startOfDayLocal(date) > startOfDayLocal(new Date())
+                      }
+                      className="rounded-[1rem] border border-neutral-200/50 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 shadow-sm text-[13px] [&_.rdp-caption_label]:text-[12px]"
+                    />
+                  </div>
 
-              {/* ACTIONS */}
-              <div className="flex flex-col justify-end gap-2 min-w-[160px]">
-                <Button
-                  onClick={() => {
-                    const today = startOfDayUTC(new Date());
-                    const start = new Date(
-                      Date.UTC(
-                        today.getUTCFullYear(),
-                        today.getUTCMonth() - 11,
-                        1
-                      )
-                    );
-                    setFrom(toISODateUTC(start));
-                    setTo(toISODateUTC(today));
-                  }}
-                  className="h-10 rounded-[1rem] bg-neutral-100 text-neutral-700 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 text-[12px] font-medium shadow-sm"
-                  variant="secondary"
-                >
-                  12 derniers mois
-                </Button>
+                  {/* TO */}
+                  <div className="flex flex-col gap-2 min-w-[260px] snap-center shrink-0">
+                    <span className="text-[11px] font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                      Fin
+                    </span>
+                    <Calendar
+                      mode="single"
+                      selected={to ? fromISODateLocal(to) : undefined}
+                      onSelect={(d: Date | undefined) => {
+                        if (!d) return;
+                        const todayLocal = startOfDayLocal(new Date());
+                        const pickedLocal = startOfDayLocal(d);
+                        if (pickedLocal > todayLocal) return;
+                        setTo(toISODateLocal(pickedLocal));
 
-                <Button
-                  onClick={() => {
-                    setOpenDate(false);
-                    load();
-                  }}
-                  className="h-10 rounded-[1rem] bg-primary text-white hover:bg-primary/90 text-[12px] font-medium shadow-sm"
-                >
-                  Appliquer
-                </Button>
+                        // si la fin < début, on ajuste début aussi
+                        if (from) {
+                          const fromDateLocal = fromISODateLocal(from);
+                          if (
+                            fromDateLocal &&
+                            startOfDayLocal(fromDateLocal) > pickedLocal
+                          ) {
+                            setFrom(toISODateLocal(pickedLocal));
+                          }
+                        }
+                      }}
+                      disabled={(date) =>
+                        startOfDayLocal(date) > startOfDayLocal(new Date())
+                      }
+                      className="rounded-[1rem] border border-neutral-200/50 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 shadow-sm text-[13px] [&_.rdp-caption_label]:text-[12px]"
+                    />
+                  </div>
+                </div>
+
+                {/* ACTIONS */}
+                <div className="flex flex-col gap-2 sm:justify-between sm:min-w-[160px] w-full sm:w-auto">
+                  <Button
+                    onClick={() => {
+                      const todayLocal = startOfDayLocal(new Date());
+                      const startLocal = new Date(
+                        todayLocal.getFullYear(),
+                        todayLocal.getMonth() - 11,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0
+                      );
+                      setFrom(toISODateLocal(startLocal));
+                      setTo(toISODateLocal(todayLocal));
+                    }}
+                    className="h-10 rounded-[1rem] bg-neutral-100 text-neutral-700 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 text-[12px] font-medium shadow-sm w-full"
+                    variant="secondary"
+                  >
+                    12 derniers mois
+                  </Button>
+
+                  <Button
+                    onClick={() => {
+                      setOpenDate(false);
+                      load();
+                    }}
+                    className="h-10 rounded-[1rem] bg-primary text-white hover:bg-primary/90 text-[12px] font-medium shadow-sm w-full"
+                  >
+                    Appliquer
+                  </Button>
+                </div>
               </div>
             </PopoverContent>
           </Popover>
 
           <Button
-            className="h-11 rounded-[2rem] bg-primary text-white hover:bg-primary/90 text-sm font-medium shadow-[0_20px_40px_-8px_rgba(0,0,0,0.08)]"
+            className="h-11 rounded-[2rem] bg-primary text-white hover:bg-primary/90 text-sm font-medium shadow-[0_20px_40px_-8px_rgba(0,0,0,0.08)] w-full sm:w-auto"
             onClick={load}
           >
             Actualiser
@@ -816,15 +859,25 @@ function capitalize(str: string) {
 }
 
 // empêche qu'on choisisse une date future
-function startOfDayUTC(d: Date) {
-  return new Date(
-    Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())
-  );
+// début de journée en LOCAL (pas UTC)
+function startOfDayLocal(d: Date) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
 }
-function toISODateUTC(d: Date) {
-  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()))
-    .toISOString()
-    .slice(0, 10);
+
+// "2025-11-28" -> Date(28 nov 2025 à 00:00 locale)
+function fromISODateLocal(s: string): Date | undefined {
+  if (!s) return undefined;
+  const [yy, mm, dd] = s.split('-').map(Number);
+  if (!yy || !mm || !dd) return undefined;
+  return new Date(yy, mm - 1, dd, 0, 0, 0, 0);
+}
+
+// Date(28 nov 2025 locale) -> "2025-11-28"
+function toISODateLocal(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const da = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${da}`;
 }
 
 // -------------------- Chart Blocks --------------------

@@ -6,7 +6,7 @@ const {
   default: flattenColorPalette,
 } = require('tailwindcss/lib/util/flattenColorPalette');
 const config: Config = {
-  darkMode: ['class', 'class'],
+  darkMode: 'class',
 
   safelist: [
     'animate-marquee',

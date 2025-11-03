@@ -1,228 +1,134 @@
-// data/projects.ts
 export type Project = {
   id: string;
-  titre: string;
-  client: string;
-  secteur: string;
-  periode: string;
-  services: string[];
-  objectif: string;
-  resultat: string;
-  coverImage: string; // URL absolue ou chemin local ex: /images/local
-  lien?: string;
+  titre: string; // affiché sous l'image ("Lynelec", "Teka Somba", ...)
+  services: string[]; // affiché sous le titre ("Marketplace", "Stripe", etc.)
+  coverImage: string; // mockup / screenshot
+  lien?: string; // URL publique du projet (ouvre _blank)
 };
 
 /* =================== VERSION FR =================== */
 export const PROJECTS_FR: Project[] = [
   {
     id: 'lynelec-2025',
-    titre: 'Création du site Lynelec',
-    client: 'Lynelec',
-    secteur: 'Grossiste en câbles électriques',
-    periode: 'Mai – Septembre 2025',
-    services: ['Next.js', 'Tailwind CSS', 'SEO', 'UI/UX'],
-    objectif:
-      "Donner à Lynelec une présence en ligne professionnelle pour présenter son catalogue et renforcer son image (déjà beaucoup de demandes existantes, l'objectif était surtout la vitrine et la crédibilité).",
-    resultat: 'Site moderne et responsive, optimisation SEO en cours',
-    coverImage: '/images/lynelec.png',
+    titre: 'Lynelec',
+    services: ['Site vitrine B2B', 'SEO', 'Catalogue produits'],
+    coverImage: '/images/lynelec.vercel.app_(Nest Hub Max).png',
     lien: 'https://lynelec.vercel.app',
   },
   {
     id: 'teka-somba-2025',
-    titre: 'Teka Somba – Marketplace au Congo',
-    client: 'Teka Somba',
-    secteur: 'Marketplace / Petites annonces',
-    periode: 'Août 2025 – en cours',
-    services: ['Next.js', 'Prisma', 'Supabase', 'Stripe', 'SEO'],
-    objectif:
-      "Développer le 'Leboncoin' pour l'Afrique francophone, en commençant par le Congo (Brazzaville & Kinshasa), avec une vision d'expansion long terme.",
-    resultat:
-      'Plateforme déjà en ligne et utilisée, en amélioration continue avec de nouvelles fonctionnalités premium.',
+    titre: 'Teka Somba',
+    services: ['Marketplace', 'Paiement Stripe', 'Annonces géolocalisées'],
     coverImage: '/images/tekasomba.png',
     lien: 'https://teka-somba.com/',
   },
   {
     id: 'skillize-2025',
-    titre: 'Plateforme Skillize',
-    client: 'Skillize',
-    secteur: 'EdTech / Freelances IA & automatisation',
-    periode: 'Juillet 2025 – en cours',
-    services: ['SaaS', 'Design System', 'Multi-tenant', 'RBAC'],
-    objectif:
-      'Créer une plateforme SaaS permettant aux entreprises de se connecter instantanément aux meilleurs freelances IA & automatisation.',
-    resultat: 'MVP en cours, onboarding B2B fluide et scalable',
+    titre: 'Skillize',
+    services: ['SaaS', 'Multi-tenant', 'Onboarding B2B'],
     coverImage: '/images/skilize.png',
     lien: 'https://skillize.fr/',
   },
   {
-    id: 'sophie-deneriez-2025',
-    titre: 'Site vitrine & branding – Sophie Dénériaz',
-    client: 'Sophie Dénériaz',
-    secteur: 'Massothérapie & Bien-être',
-    periode: 'Juillet 2025',
-    services: ['Site vitrine', 'SEO local', 'Branding'],
-    objectif:
-      'Développer une image professionnelle pour attirer des clients en Suisse dans les domaines du massage, drainage lymphatique et bien-être.',
-    resultat: 'Top 3 Google Maps sur 6 requêtes locales en Suisse',
+    id: 'sophie-deneriaz-2025',
+    titre: 'Sophie Dénériaz',
+    services: ['Branding', 'SEO local', 'Site bien-être'],
     coverImage: '/images/sophie.png',
     lien: 'https://sophiedeneriaz.ch/',
   },
   {
     id: 'ty-klouyou-2025',
-    titre: 'Site vitrine – Ty Klouyou',
-    client: 'Ty Klouyou',
-    secteur: 'Tourisme & Locations saisonnières',
-    periode: 'Septembre 2025',
-    services: ['Next.js', 'Design UI', 'Optimisation mobile'],
-    objectif:
-      'Créer un site vitrine moderne et immersif pour valoriser la localisation et faciliter la recherche des visiteurs.',
-    resultat:
-      'Site responsive avec identité visuelle forte et mise en avant du territoire de Saint-Gildas de Rhuys.',
+    titre: 'Ty Klouyou',
+    services: ['Site hébergement', 'Immersif mobile'],
     coverImage: '/images/villa-tyklouyou.netlify.app_(Nest Hub Max).png',
     lien: 'https://villa-tyklouyou.netlify.app/',
   },
   {
     id: 'sturmayr-2025',
-    titre: 'Site vitrine – STURMAYR Coiffure',
-    client: 'STURMAYR',
-    secteur: 'Coiffure & Beauté',
-    periode: 'Septembre 2025',
-    services: ['Site vitrine', 'Réservation en ligne', 'UI/UX'],
-    objectif:
-      'Développer une plateforme en ligne pour présenter les services coiffure et permettre une prise de rendez-vous simple et rapide.',
-    resultat: 'Site élégant avec prise de rendez-vous intégrée.',
+    titre: 'STURMAYR',
+    services: ['Prise de rdv', 'UI/UX salon', 'Vitrine haut de gamme'],
     coverImage: '/images/sturmayr.netlify.app_(Nest Hub Max).png',
     lien: 'https://sturmayr.netlify.app/',
   },
   {
     id: 'or-lumiere-2025',
-    titre: 'Site e-commerce – Or & Lumière',
-    client: 'Or & Lumière',
-    secteur: 'Bijouterie & Joaillerie',
-    periode: 'Septembre 2025',
-    services: ['E-commerce', 'Design UI', 'SEO'],
-    objectif:
-      'Concevoir un site élégant pour mettre en valeur les collections de bijoux et encourager les ventes en ligne.',
-    resultat: 'Expérience utilisateur raffinée, mise en avant des produits.',
+    titre: 'Or & Lumière',
+    services: ['E-commerce', 'Luxe', 'Mise en avant produits'],
     coverImage: '/images/orlumiere.netlify.app_(Nest Hub Max).png',
     lien: 'https://orlumiere.netlify.app/',
   },
   {
     id: 'sushi-food-2025',
-    titre: 'Site vitrine – Sushi Food',
-    client: 'Sushi Food',
-    secteur: 'Restauration / Sushi',
-    periode: 'Septembre 2025',
-    services: ['Site vitrine', 'Design UI', 'Réservation'],
-    objectif:
-      'Mettre en avant la gastronomie japonaise et faciliter les réservations en ligne.',
-    resultat: 'Site moderne, immersif et optimisé pour le mobile.',
+    titre: 'Sushi Food',
+    services: ['Resto', 'Réservation', 'Identité visuelle'],
     coverImage: '/images/sushifood.netlify.app_(Nest Hub Max).png',
     lien: 'https://sushifood.netlify.app/',
   },
-];
 
-/* =================== VERSION EN =================== */
-export const PROJECTS_EN: Project[] = [
+  /* ======== NOUVEAUX PROJETS IMPORTÉS / CAPTURES ======== */
+
   {
-    id: 'lynelec-2025',
-    titre: 'Lynelec Website Creation',
-    client: 'Lynelec',
-    secteur: 'Wholesale Electrical Cables',
-    periode: 'May – September 2025',
-    services: ['Next.js', 'Tailwind CSS', 'SEO', 'UI/UX'],
-    objectif:
-      'Provide Lynelec with a strong online presence to showcase its catalog and modernize its brand image (the company already had strong demand, the website was meant as a professional showcase).',
-    resultat: 'Modern responsive website launched, SEO optimization ongoing',
-    coverImage: '/images/lynelec.png',
-    lien: 'https://lynelec.vercel.app',
+    id: 'artea-audit',
+    titre: 'Artea Audit',
+    services: ['Site vitrine', 'Cabinet', 'Confiance / crédibilité'],
+    coverImage: '/images/artea-audit.com_(Nest Hub Max).png',
+    lien: 'https://artea-audit.com', // mets-le si t’en as un public
   },
   {
-    id: 'teka-somba-2025',
-    titre: 'Teka Somba – African Marketplace',
-    client: 'Teka Somba',
-    secteur: 'Marketplace / Classifieds',
-    periode: 'August 2025 – ongoing',
-    services: ['Next.js', 'Prisma', 'Supabase', 'Stripe', 'SEO'],
-    objectif:
-      "Build the 'Leboncoin' of Francophone Africa, starting with Congo (Brazzaville & Kinshasa), with a long-term vision of expanding to other countries.",
-    resultat:
-      'Live and growing platform, with continuous improvements and premium features being added.',
-    coverImage: '/images/tekasomba.png',
-    lien: 'https://teka-somba.com/',
+    id: 'inovaya',
+    titre: 'Inovaya',
+    services: ['Site corporate', 'Tech', 'Innovation'],
+    coverImage: '/images/inovaya.com_(Nest Hub Max).png',
+    lien: 'https://inovaya.com',
+  },
+
+  {
+    id: 'musee-plaisance',
+    titre: 'Musée de la Plaisance',
+    services: ['Site culturel', 'Patrimoine', 'Événements'],
+    coverImage: '/images/museedelaplaisance.com_(Nest Hub Max).png',
+    lien: 'https://museedelaplaisance.com',
   },
   {
-    id: 'skillize-2025',
-    titre: 'Skillize SaaS Platform',
-    client: 'Skillize',
-    secteur: 'EdTech / Freelance AI & Automation',
-    periode: 'July 2025 – ongoing',
-    services: ['SaaS', 'Design System', 'Multi-tenant', 'RBAC'],
-    objectif:
-      'Develop a SaaS platform connecting companies instantly with the best AI & automation freelancers.',
-    resultat: 'MVP in progress, smooth and scalable B2B onboarding',
-    coverImage: '/images/skilize.png',
-    lien: 'https://skillize.fr/',
+    id: 'or-lumiere-alt',
+    titre: 'Or & Lumière (alt)',
+    services: ['E-commerce bijoux', 'UI claire', 'Focus produit'],
+    coverImage: '/images/orlumiere.netlify.app_(Nest Hub Max).png',
+    lien: 'https://orlumiere.netlify.app/',
   },
   {
-    id: 'sophie-deneriez-2025',
-    titre: 'Showcase Website & Branding – Sophie Dénériaz',
-    client: 'Sophie Dénériaz',
-    secteur: 'Massage Therapy & Wellness',
-    periode: 'July 2025',
-    services: ['Showcase Website', 'Local SEO', 'Branding'],
-    objectif:
-      'Create a professional image to attract clients in Switzerland for massage, lymphatic drainage and wellness services.',
-    resultat: 'Top 3 Google Maps ranking for 6 local queries in Switzerland',
-    coverImage: '/images/sophie.png',
-    lien: 'https://sophiedeneriaz.ch/',
+    id: 'qwerio',
+    titre: 'Qwerio',
+    services: ['Plateforme web', 'Produit digital'],
+    coverImage: '/images/qwerio.net_(Nest Hub Max) (2).png',
+    lien: 'https://qwerio.net',
   },
   {
-    id: 'ty-klouyou-2025',
-    titre: 'Showcase Website – Ty Klouyou',
-    client: 'Ty Klouyou',
-    secteur: 'Tourism & Seasonal Rentals',
-    periode: 'September 2025',
-    services: ['Next.js', 'UI Design', 'Mobile Optimization'],
-    objectif:
-      'Design a modern showcase website to highlight the location and simplify visitor search.',
-    resultat:
-      'Responsive site with strong branding, showcasing Saint-Gildas de Rhuys.',
-    coverImage: '/images/tyklouyou.png',
+    id: 'restauran-tony',
+    titre: 'Restaurant Onyx',
+    services: ['Resto haut de gamme', 'Réservation', 'Carte en ligne'],
+    coverImage: '/images/restaurantonyx.com_(Nest Hub Max).png',
+    lien: 'https://restaurantonyx.com',
   },
   {
-    id: 'sturmayr-2025',
-    titre: 'Showcase Website – STURMAYR Hair Salon',
-    client: 'STURMAYR',
-    secteur: 'Hairdressing & Beauty',
-    periode: 'September 2025',
-    services: ['Showcase Website', 'Online Booking', 'UI/UX'],
-    objectif:
-      'Build a website to present hairdressing services and enable easy online booking.',
-    resultat: 'Elegant website with integrated booking system.',
-    coverImage: '/images/sturmayr.png',
+    id: 'laurence-equilbey',
+    titre: 'Laurence Equilbey',
+    services: ['Site artiste', 'Direction artistique'],
+    coverImage: '/images/www.laurenceequilbey.com_(Nest Hub Max).png',
+    lien: 'https://www.laurenceequilbey.com',
   },
   {
-    id: 'or-lumiere-2025',
-    titre: 'E-commerce Website – Or & Lumière',
-    client: 'Or & Lumière',
-    secteur: 'Jewelry & Fine Jewelry',
-    periode: 'September 2025',
-    services: ['E-commerce', 'UI Design', 'SEO'],
-    objectif:
-      'Create an elegant website to showcase jewelry collections and boost online sales.',
-    resultat: 'Refined user experience, product-focused showcase.',
-    coverImage: '/images/orlumiere.png',
+    id: 'signitic',
+    titre: 'Signitic',
+    services: ['SaaS', 'Produit digital', 'Identité'],
+    coverImage: '/images/www.signitic.com_fr(Nest Hub Max).png',
+    lien: 'https://www.signitic.com',
   },
   {
-    id: 'sushi-food-2025',
-    titre: 'Showcase Website – Sushi Food',
-    client: 'Sushi Food',
-    secteur: 'Restaurant / Sushi',
-    periode: 'September 2025',
-    services: ['Showcase Website', 'UI Design', 'Reservation'],
-    objectif: 'Highlight Japanese gastronomy and simplify online reservations.',
-    resultat: 'Modern, immersive, mobile-optimized site.',
-    coverImage: '/images/sushifood.png',
+    id: 'transcure-bio',
+    titre: 'Transcure Bioservices',
+    services: ['Biotech', 'Site pro', 'Crédibilité scientifique'],
+    coverImage: '/images/www.transcurebioservices.com_fr_(Nest Hub Max).png',
+    lien: 'https://www.transcurebioservices.com',
   },
 ];

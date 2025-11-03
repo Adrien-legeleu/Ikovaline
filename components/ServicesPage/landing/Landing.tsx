@@ -338,7 +338,7 @@ export default function ServicesHero() {
           Nous contacter
         </Link>
         <WhatsAppButton
-          className=" px-6 py-3  gap-2 rounded-3xl flex items-center justify-center"
+          className=" px-6 sm:hidden py-3  gap-2 rounded-3xl flex items-center justify-center"
           message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
           label="WhatsApp"
         />

@@ -36,7 +36,7 @@ export const Menu = ({ setActive, upToZero, children }: MenuProps) => {
       onMouseLeave={safeClose}
       onMouseEnter={cancelClose}
       className={[
-        'relative flex items-center gap-8 lg:gap-5 xl:gap-8',
+        'relative flex items-center gap-8 lg:gap-8 xl:gap-8',
         upToZero ? '' : '',
       ].join(' ')}
     >

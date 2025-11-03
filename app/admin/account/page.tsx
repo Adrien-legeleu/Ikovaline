@@ -149,7 +149,7 @@ export default function AdminAccountPage() {
   }
 
   return (
-    <section className="space-y-6 px-2">
+    <section className="space-y-6 max-md:pb-16 px-2">
       {/* HEADER PAGE */}
       <motion.div
         initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}

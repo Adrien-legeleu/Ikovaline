@@ -40,7 +40,7 @@ export default function AdminTopNav() {
           <div
             className={cn(
               'relative flex items-center justify-between xss:gap-4 gap-2 sm:gap-8',
-              'backdrop-blur-lg rounded-t-[2rem] sm:rounded-[2rem] px-4 py-2 sm:py-3',
+              'backdrop-blur-lg rounded-t-[2rem] sm:rounded-[2rem] px-4 py-2 pb-4 sm:py-3',
               'bg-white text-neutral-900 shadow-[14px_14px_36px_rgba(0,0,0,0.07),-14px_-14px_36px_rgba(255,255,255,0.6)]',
               'dark:bg-neutral-900/60 dark:text-white dark:shadow-[14px_14px_36px_rgba(0,0,0,0.8),-14px_-14px_36px_rgba(255,255,255,0.07)]'
             )}

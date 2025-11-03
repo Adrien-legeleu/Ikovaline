@@ -86,14 +86,14 @@ export function OptionsPanel({
       <AnimatePresence initial={false}>
         {Object.keys(radiosByGroup).length ? (
           <Section title="Choix exclusifs (1 sélection)">
-            {Object.entries(radiosByGroup).map(([groupId, items]) => (
-              <div key={groupId} className="overflow-x-auto pb-1">
+            {Object.entries(radiosByGroup).map(([groupId, items], i) => (
+              <div key={`${groupId}-${i}`} className="overflow-x-auto pb-1">
                 <RadioGroup
                   groupId={groupId}
-                  options={items.map((i) => ({
-                    id: i.id,
-                    label: i.label,
-                    price: i.price,
+                  options={items.map((item, j) => ({
+                    id: item.id || `radio-${i}-${j}`,
+                    label: item.label,
+                    price: item.price,
                   }))}
                   value={sel.radios[groupId]}
                   onChange={(id) => setRadio(groupId, id)}
@@ -106,9 +106,9 @@ export function OptionsPanel({
         {toggles.length ? (
           <Section title="Options recommandées">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {toggles.map((o) => (
+              {toggles.map((o, i) => (
                 <TogglePill
-                  key={o.id}
+                  key={o.id || `toggle-${i}`}
                   selected={isOptionSelected(sel, o)}
                   label={o.label}
                   price={o.price}
@@ -123,9 +123,9 @@ export function OptionsPanel({
         {qtys.length ? (
           <Section title="Quantités">
             <div className="space-y-4">
-              {qtys.map((o) => (
+              {qtys.map((o, i) => (
                 <QtyPill
-                  key={o.id}
+                  key={o.id || `qty-${i}`}
                   label={o.label}
                   unitPrice={o.price}
                   note={o.note}
@@ -140,17 +140,16 @@ export function OptionsPanel({
         {showMobile ? (
           <Section title="Application mobile (options cumulables)">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {mobile.map((m) => (
+              {mobile.map((m, i) => (
                 <TogglePill
-                  key={m.id}
+                  key={m.id || `mobile-${i}`}
                   selected={sel.toggles.has(m.id)}
                   label={m.label}
                   price={m.price}
                   note={m.note}
                   onToggle={() => {
                     const next = new Set(sel.toggles);
-                    if (next.has(m.id)) next.delete(m.id);
-                    else next.add(m.id);
+                    next.has(m.id) ? next.delete(m.id) : next.add(m.id);
                     onSel({ ...sel, toggles: next });
                   }}
                 />

@@ -1,57 +1,37 @@
-// app/api/send-config/route.ts
-import { ProjectConfigEmail } from '@/emails/ProjectConfigEmail';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
+  const data = await req.json();
+
+  const { email, categoryLabel, tierLabel, totalTTC, delayDays, kpi, options } =
+    data;
+
   try {
-    const body = await req.json();
-
-    // on récupère tout ce qu’on a besoin
-    const {
-      categoryLabel,
-      tierLabel,
-      options,
-      adsBudget,
-      totalTTC,
-      delayDays,
-      kpi,
-    } = body ?? {};
-
-    if (!categoryLabel || !tierLabel) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
-    }
-
-    // envoi Resend
-    const { data, error } = await resend.emails.send({
-      from:
-        process.env.RESEND_FROM_EMAIL || 'Ikovaline <contact@ikovaline.com>',
-      to: ['contact@ikovaline.com'],
-      subject: `🆕 Nouvelle config: ${categoryLabel} / ${tierLabel}`,
-      react: ProjectConfigEmail({
-        categoryLabel,
-        tierLabel,
-        options,
-        adsBudget,
-        totalTTC,
-        delayDays,
-        kpi,
-      }) as React.ReactElement, // Resend veut un ReactNode
+    await resend.emails.send({
+      from: 'Ikovaline <contact@ikovaline.com>',
+      to: 'Ikovaline <contact@ikovaline.com>', // ✅ ton adresse perso où tu veux recevoir
+      subject: `Nouvelle configuration de projet - ${categoryLabel}`,
+      html: `
+        <h2>Nouvelle estimation reçue</h2>
+        <p><b>Email client :</b> ${email}</p>
+        <p><b>Projet :</b> ${categoryLabel} (${tierLabel})</p>
+        <p><b>Total TTC :</b> ${totalTTC} €</p>
+        <p><b>Délai estimé :</b> ${delayDays} jours</p>
+        <p><b>KPI :</b> ${kpi.convMid} ${kpi.convLabel} / mois (~${kpi.convRatePct})</p>
+        <hr />
+        <h3>Options choisies :</h3>
+        <ul>
+          ${options.map((o: any) => `<li>${o.label} — ${o.price} €</li>`).join('')}
+        </ul>
+      `,
     });
 
-    if (error) {
-      console.error('[send-config] resend error', error);
-      return NextResponse.json({ error: 'Resend error' }, { status: 500 });
-    }
-
-    return NextResponse.json({ ok: true, data });
+    return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error('[send-config] route error', err);
-    return NextResponse.json({ error: 'Server exception' }, { status: 500 });
+    console.error(err);
+    return NextResponse.json({ error: 'Erreur envoi email' }, { status: 500 });
   }
 }

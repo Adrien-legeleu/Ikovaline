@@ -168,7 +168,7 @@ export default function WelcomePage() {
 
           <button
             onClick={onSubmit}
-            className="mt-4 w-full rounded-3xl px-5 py-3 font-semibold bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 hover:brightness-110 active:scale-[.99] transition"
+            className="mt-4 w-full rounded-3xl px-5 py-3 font-semibold bg-primary text-white dark:bg-white dark:text-neutral-900 hover:brightness-110 active:scale-[.99] transition"
           >
             Valider et se connecter
           </button>

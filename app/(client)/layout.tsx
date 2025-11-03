@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Home, UserCog, LogOut, LayoutDashboard } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ThemeLockLight } from '@/components/ThemeLock';
 
 const NAV_ITEMS = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -20,6 +21,7 @@ export default function ClientLayout({
 
   return (
     <>
+      <ThemeLockLight />
       {/* NAV BAR */}
       <header
         className={cn(
@@ -40,7 +42,7 @@ export default function ClientLayout({
               // ligne principale
               'relative flex items-center justify-between gap-4 sm:gap-8',
               // shape
-              'backdrop-blur-lg rounded-t-[2rem] sm:rounded-[2rem] px-4 py-2 sm:py-3',
+              'backdrop-blur-lg rounded-t-[2rem] sm:rounded-[2rem] px-4 py-2 pb-4 sm:py-3',
               // fond glass
               'bg-white text-neutral-900 shadow-[14px_14px_36px_rgba(0,0,0,0.07),-14px_-14px_36px_rgba(255,255,255,0.6)] backdrop-blur-xl',
               'dark:bg-neutral-900/60 dark:text-white dark:shadow-[14px_14px_36px_rgba(0,0,0,0.8),-14px_-14px_36px_rgba(255,255,255,0.07)]'

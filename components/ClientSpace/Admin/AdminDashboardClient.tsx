@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { motion, cubicBezier } from 'framer-motion';
 import type { Variants, Transition } from 'framer-motion';
+import { Plus } from 'lucide-react';
 
 export type Submission = {
   id: string;
@@ -340,9 +341,9 @@ export default function AdminDashboardClient({
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/admin/projects/new"
-              className="inline-flex items-center h-10 rounded-[1rem] bg-primary text-white px-4 text-sm font-medium leading-none hover:bg-primary/90 transition shadow-[0_20px_40px_-8px_rgba(0,0,0,0.08)]"
+              className="inline-flex items-center justify-center h-10 rounded-[1rem] bg-primary text-white px-4 text-sm font-medium leading-none hover:bg-primary/90 transition shadow-[0_20px_40px_-8px_rgba(0,0,0,0.08)]"
             >
-              + Nouveau projet
+              <Plus className="w-4 h-4 mr-2" /> Nouveau projet
             </Link>
 
             <Link

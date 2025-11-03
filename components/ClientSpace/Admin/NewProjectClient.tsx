@@ -5,7 +5,10 @@ import { motion, cubicBezier } from 'framer-motion';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
-import { createProjectAction } from '@/components/ClientSpace/Admin/_actions';
+import {
+  createProjectAction,
+  CreateProjectPayload,
+} from '@/components/ClientSpace/Admin/_actions';
 import { CATALOG, getVisibleOptions } from '@/lib/catalog';
 import { supabase } from '@/lib/SupabaseClient';
 
@@ -138,16 +141,19 @@ function Chip({
 function DatePicker({
   value,
   onChange,
+  isAdmin = false,
   placeholder = 'Choisir une date',
 }: {
   value: Date | null;
   onChange: (d: Date | null) => void;
   placeholder?: string;
+  isAdmin?: boolean;
 }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
+          type="button"
           variant="outline"
           className="w-full shadow-sm shadow-black/5 h-9 py-0 border-black/[0.04] justify-start"
         >
@@ -165,6 +171,7 @@ function DatePicker({
           onSelect={(d) => onChange(d ?? null)}
           initialFocus
           locale={fr}
+          isAdmin={isAdmin}
         />
       </PopoverContent>
     </Popover>
@@ -350,6 +357,9 @@ export default function NewProjectClient() {
   const toDateString = (d: Date | null): string | undefined =>
     d ? format(d, 'yyyy-MM-dd') : undefined;
 
+  const isValidEmail = (s: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
+
   // reset après succès
   function softResetForm() {
     setClientEmail('');
@@ -406,9 +416,25 @@ export default function NewProjectClient() {
   const onSubmit = () => {
     setToast(null);
 
-    // sécurité front : check les champs minimum
-    if (!clientEmail.trim() || !title.trim() || !price || !status) {
-      setToast('Remplis au moins email, nom projet, prix, statut.');
+    // sécurité front : champs minimum
+    if (!isValidEmail(clientEmail)) {
+      setToast('Email client invalide.');
+      return;
+    }
+    if (!title.trim()) {
+      setToast('Le titre du projet est obligatoire.');
+      return;
+    }
+    if (!price || Number.isNaN(Number(price))) {
+      setToast('Prix vendu invalide.');
+      return;
+    }
+    if (!status) {
+      setToast('Statut requis.');
+      return;
+    }
+    if (!category || !tier || !currency) {
+      setToast('Catégorie, palier et devise requis.');
       return;
     }
 
@@ -425,46 +451,59 @@ export default function NewProjectClient() {
         'contracts'
       );
 
-      // 2) build propre : on enlève les champs vides
-      const payload = {
+      // 2) normalisation URLs
+      const normalizedUrls = urls
+        ? urls
+            .split('\n')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : [];
+
+      // 3) build payload TYPÉ (sans as const)
+      const payload: CreateProjectPayload = {
+        // client / invite
         clientEmail: clientEmail.trim(),
         clientName: clientName.trim() || undefined,
         inviteClient,
 
+        // core
         title: title.trim(),
         description: description.trim() || undefined,
         industry: industry.trim() || undefined,
 
-        offerCategory: category,
+        offerCategory: category, // CategoryId est string compatible avec string
         offerTier: tier,
         offerPrice: Number(price),
         currency,
 
+        // options
         selectedOptions: [...selectedOptionIds, ...selectedAdminExtraIds],
 
+        // pub
         wantsAds,
         adsBudget: Number(adsBudget || 0),
 
+        // planning
         startAt: combineStartAtISO(),
         deadline: toDateString(deadlineDate),
 
+        // maintenance
         maintenanceType: maintenanceType || undefined,
         maintenanceStart: toDateString(maintenanceStart),
         maintenanceEnd: toDateString(maintenanceEnd),
 
+        // refs
         repoUrl: repoUrl.trim() || undefined,
-        urls: urls
-          ? urls
-              .split('\n')
-              .map((s) => s.trim())
-              .filter(Boolean)
-          : [],
+        urls: normalizedUrls,
 
+        // fichiers
         briefFiles: briefPaths,
         signedContractFiles: signedPaths,
 
-        devEmails: devs.map((d) => d.email),
+        // équipe
+        devEmails: devs.map((d) => d.email.trim()).filter(Boolean),
 
+        // KPI / statut / factu
         status,
         billingStatus,
         riskLevel,
@@ -472,17 +511,23 @@ export default function NewProjectClient() {
         progress,
 
         paymentTotal:
-          typeof paymentTotal === 'number' && !Number.isNaN(paymentTotal)
-            ? paymentTotal
-            : undefined,
+          paymentTotal === ''
+            ? undefined
+            : Number.isNaN(Number(paymentTotal))
+              ? undefined
+              : Number(paymentTotal),
         paymentCaptured:
-          typeof paymentCaptured === 'number' && !Number.isNaN(paymentCaptured)
-            ? paymentCaptured
-            : undefined,
-        paymentInstallments: Number.isFinite(paymentInstallments)
-          ? paymentInstallments
-          : 1,
+          paymentCaptured === ''
+            ? undefined
+            : Number.isNaN(Number(paymentCaptured))
+              ? undefined
+              : Number(paymentCaptured),
+        paymentInstallments:
+          Number.isFinite(paymentInstallments) && paymentInstallments > 0
+            ? paymentInstallments
+            : 1,
 
+        // extra -> JSONB
         extra: {
           languages,
           tone: tones,
@@ -492,7 +537,7 @@ export default function NewProjectClient() {
 
       const res = await createProjectAction(payload);
 
-      if (res.ok) {
+      if (res?.ok) {
         setToast(
           inviteClient
             ? 'Projet créé • Invitation client envoyée ✅'
@@ -500,14 +545,14 @@ export default function NewProjectClient() {
         );
         softResetForm();
       } else {
-        setToast(res.error || 'Erreur inconnue.');
+        setToast(res?.error || 'Erreur inconnue.');
       }
     });
   };
 
   // ================== RENDER ==================
   return (
-    <section className="mx-auto max-w-7xl px-4 md:px-8 pb-10 space-y-6">
+    <section className="mx-auto max-w-7xl px-2 md:px-8 pb-16 space-y-6">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
@@ -618,10 +663,11 @@ export default function NewProjectClient() {
           <Field label="Catégorie">
             <Select
               value={category}
-              onValueChange={(val: keyof typeof CATALOG) => {
-                setCategory(val);
-                setTier(CATALOG[val].tiers[0].id);
-                setPrice(CATALOG[val].tiers[0].price);
+              onValueChange={(val: string) => {
+                const v = val as keyof typeof CATALOG;
+                setCategory(v);
+                setTier(CATALOG[v].tiers[0].id);
+                setPrice(CATALOG[v].tiers[0].price);
               }}
             >
               <SelectTrigger>
@@ -658,13 +704,16 @@ export default function NewProjectClient() {
             <div className="flex items-center gap-2">
               <Input
                 type="number"
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
+                inputMode="decimal"
+                value={String(price)}
+                onChange={(e) => setPrice(Number(e.target.value || 0))}
                 required
               />
               <Select
                 value={currency}
-                onValueChange={(v: 'EUR' | 'USD') => setCurrency(v)}
+                onValueChange={(v: string) =>
+                  setCurrency((v as 'EUR' | 'USD') ?? 'EUR')
+                }
               >
                 <SelectTrigger className="w-[120px]">
                   <SelectValue />
@@ -692,10 +741,11 @@ export default function NewProjectClient() {
               <div className="mt-3 flex items-center gap-2">
                 <Input
                   type="number"
+                  inputMode="numeric"
                   min={0}
                   placeholder="Ex. 300"
-                  value={adsBudget}
-                  onChange={(e) => setAdsBudget(Number(e.target.value))}
+                  value={String(adsBudget)}
+                  onChange={(e) => setAdsBudget(Number(e.target.value || 0))}
                 />
                 <span className="text-sm text-neutral-500">€/mois</span>
               </div>
@@ -830,7 +880,7 @@ export default function NewProjectClient() {
           </div>
 
           <Field label="Objectif principal">
-            <Select value={goal} onValueChange={setGoal}>
+            <Select value={goal} onValueChange={(v) => setGoal(v)}>
               <SelectTrigger>
                 <SelectValue placeholder="Choisir…" />
               </SelectTrigger>
@@ -860,7 +910,11 @@ export default function NewProjectClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Field label="Démarrage (date)">
-            <DatePicker value={startDate} onChange={setStartDate} />
+            <DatePicker
+              isAdmin={true}
+              value={startDate}
+              onChange={setStartDate}
+            />
           </Field>
 
           <Field label="Heure de démarrage">
@@ -872,7 +926,11 @@ export default function NewProjectClient() {
           </Field>
 
           <Field label="Deadline">
-            <DatePicker value={deadlineDate} onChange={setDeadlineDate} />
+            <DatePicker
+              isAdmin={true}
+              value={deadlineDate}
+              onChange={setDeadlineDate}
+            />
           </Field>
         </div>
 
@@ -880,7 +938,7 @@ export default function NewProjectClient() {
           <Field label="Type de maintenance">
             <Select
               value={maintenanceType || undefined}
-              onValueChange={setMaintenanceType}
+              onValueChange={(v) => setMaintenanceType(v)}
             >
               <SelectTrigger>
                 <SelectValue placeholder="—" />
@@ -905,11 +963,16 @@ export default function NewProjectClient() {
             <DatePicker
               value={maintenanceStart}
               onChange={setMaintenanceStart}
+              isAdmin={true}
             />
           </Field>
 
           <Field label="Maint. fin">
-            <DatePicker value={maintenanceEnd} onChange={setMaintenanceEnd} />
+            <DatePicker
+              value={maintenanceEnd}
+              onChange={setMaintenanceEnd}
+              isAdmin={true}
+            />
           </Field>
         </div>
       </motion.div>
@@ -928,7 +991,7 @@ export default function NewProjectClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Field label="Statut du projet">
-            <Select value={status} onValueChange={(v: any) => setStatus(v)}>
+            <Select value={status} onValueChange={(v) => setStatus(v as any)}>
               <SelectTrigger>
                 <SelectValue placeholder="Statut…" />
               </SelectTrigger>
@@ -946,7 +1009,7 @@ export default function NewProjectClient() {
           <Field label="Facturation">
             <Select
               value={billingStatus}
-              onValueChange={(v: any) => setBillingStatus(v)}
+              onValueChange={(v) => setBillingStatus(v as any)}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -961,7 +1024,10 @@ export default function NewProjectClient() {
           </Field>
 
           <Field label="Priorité">
-            <Select value={priority} onValueChange={(v: any) => setPriority(v)}>
+            <Select
+              value={priority}
+              onValueChange={(v) => setPriority(v as any)}
+            >
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -977,7 +1043,7 @@ export default function NewProjectClient() {
           <Field label="Risque">
             <Select
               value={riskLevel}
-              onValueChange={(v: any) => setRiskLevel(v)}
+              onValueChange={(v) => setRiskLevel(v as any)}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -1008,7 +1074,8 @@ export default function NewProjectClient() {
           <Field label="Total à facturer (€)">
             <Input
               type="number"
-              value={paymentTotal}
+              inputMode="decimal"
+              value={paymentTotal === '' ? '' : String(paymentTotal)}
               onChange={(e) =>
                 setPaymentTotal(
                   e.target.value === '' ? '' : Number(e.target.value)
@@ -1020,7 +1087,8 @@ export default function NewProjectClient() {
           <Field label="Déjà encaissé (€)">
             <Input
               type="number"
-              value={paymentCaptured}
+              inputMode="decimal"
+              value={paymentCaptured === '' ? '' : String(paymentCaptured)}
               onChange={(e) =>
                 setPaymentCaptured(
                   e.target.value === '' ? '' : Number(e.target.value)
@@ -1069,14 +1137,6 @@ export default function NewProjectClient() {
                   setBriefFiles(Array.from(e.target.files ?? []))
                 }
               />
-              <Button
-                type="button"
-                variant="outline"
-                className="shadow-sm border-black/5"
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                Importer
-              </Button>
             </div>
             <div className="mt-1 text-xs text-neutral-500">
               {briefFiles.length
@@ -1095,14 +1155,6 @@ export default function NewProjectClient() {
                   setSignedFiles(Array.from(e.target.files ?? []))
                 }
               />
-              <Button
-                type="button"
-                variant="outline"
-                className="shadow-sm border-black/5"
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                Importer
-              </Button>
             </div>
             <div className="mt-1 text-xs text-neutral-500">
               {signedFiles.length
@@ -1111,67 +1163,24 @@ export default function NewProjectClient() {
             </div>
           </Field>
         </div>
-
-        <div className="mt-6">
-          <Label className="text-sm">Associer des développeurs</Label>
-          <div className="mt-2 flex items-center gap-2">
-            <Input
-              placeholder="dev@ikovaline.com"
-              value={devInput}
-              onChange={(e) => setDevInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  addDev();
-                }
-              }}
-            />
-            <Button
-              type="button"
-              onClick={addDev}
-              className="shadow-sm text-white"
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              Ajouter
-            </Button>
-          </div>
-
-          {devs.length ? (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {devs.map((d) => (
-                <span
-                  key={d.email}
-                  className="inline-flex items-center gap-2 rounded-3xl px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 ring-1 ring-neutral-200/70 dark:ring-neutral-700"
-                >
-                  {d.email}
-                  <button
-                    onClick={() => removeDev(d.email)}
-                    className="opacity-60 hover:opacity-100"
-                    aria-label="Supprimer"
-                    title="Supprimer"
-                    type="button"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </span>
-              ))}
-            </div>
-          ) : null}
-        </div>
       </motion.div>
 
       {/* SUBMIT */}
       <div className="mt-8 flex justify-center">
         <Button
+          type="button"
           disabled={
             isPending ||
             !clientEmail.trim() ||
             !title.trim() ||
             !price ||
-            !status
+            !status ||
+            !category ||
+            !tier ||
+            !currency
           }
           onClick={onSubmit}
-          className="px-8 py-6 text-base"
+          className="px-8 py-6 text-base bg-primary hover:opacity-95 text-white"
         >
           {isPending
             ? 'Création…'

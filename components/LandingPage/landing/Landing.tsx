@@ -31,8 +31,13 @@ export default function HeroNoiseLight() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative flex w-full items-center justify-center overflow-hidden bg-white px-4 py-20 md:py-40 dark:bg-black">
-      <Background reduce={reduce} />
+    <section className="relative flex w-full items-center justify-center bg-white px-4 py-20 md:py-40 dark:bg-black">
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden
+      >
+        <Background reduce={reduce} />
+      </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1700px]">
         <StarClientsGoogle />
@@ -41,7 +46,7 @@ export default function HeroNoiseLight() {
           initial={reduce ? undefined : { opacity: 0, y: 10 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="mt-3 text-center text-3xl font-bold tracking-wide text-slate-900 md:text-5xl lg:text-[5rem] dark:text-white"
+          className="mt-3 text-center sm:text-7xl text-5xl font-bold tracking-[0.02em] text-slate-900 md:text-8xl lg:text-[6.5rem] dark:text-white"
         >
           De l’idée à un <br className="hidden sm:block" />
           projet réussi.
@@ -62,7 +67,7 @@ export default function HeroNoiseLight() {
           initial={reduce ? undefined : { opacity: 0, y: 10 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.25 }}
-          className="mt-8 flex w-full flex-col items-center justify-center gap-4 sm:flex-row"
+          className="mt-8 flex w-full  items-center justify-center gap-4 flex-row"
         >
           <Link
             href="/signup"
@@ -71,7 +76,7 @@ export default function HeroNoiseLight() {
             Lancer mon projet
           </Link>
           <WhatsAppButton
-            className="px-6 py-3 gap-2 rounded-lg flex items-center justify-center"
+            className="px-6 py-3 sm:hidden gap-2 rounded-lg flex items-center justify-center"
             message="Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?"
             label="WhatsApp"
           />
@@ -121,7 +126,7 @@ function Background({ reduce }: { reduce: boolean | null }) {
       aria-hidden
     >
       {/* Fond bleu */}
-      <div className="absolute inset-0 md:bg-primary/30 bg-primary/20" />
+      <div className="absolute inset-0 md:bg-primary/60 md:dark:bg-primary/50 bg-primary/40" />
       {/* Bruit */}
       <Noise />
       {/* Stripes (DOM minimal, reflow throttlé) */}

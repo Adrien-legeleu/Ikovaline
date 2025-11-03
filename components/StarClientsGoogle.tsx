@@ -2,29 +2,59 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export default function StarClientsGoogle() {
+  const { resolvedTheme } = useTheme();
+
+  // <- ADD
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  // -----
+
+  // si pas encore monté côté client → on renvoie rien
+  // comme ça pas de flash mauvais laurier
+  if (!mounted) {
+    return (
+      <div className="z-10 pb-5 h-[60px] flex items-end justify-center">
+        {/* petit placeholder pour garder la hauteur et éviter le layout shift */}
+      </div>
+    );
+  }
+
+  const leftLaurelSrc =
+    resolvedTheme === 'dark'
+      ? '/laurier-gauche-dark.svg'
+      : '/laurier-gauche.svg';
+
+  const rightLaurelSrc =
+    resolvedTheme === 'dark'
+      ? '/laurier-droite-dark.svg'
+      : '/laurier-droite.svg';
+
   return (
     <div className="z-10 pb-5">
       <a
         target="_blank"
-        href="https://www.google.com/search?rlz=1C1CHZN_frFR1084FR1084&q=Ikovaline%20Avis&rflfq=1&num=20&rldimm=10167155926367019769&tbm=lcl&hl=fr"
+        href="https://www.google.com/search?rlz=1C1CHZN_frFR1084FR1084&q=Ikovaline%20Avis"
         className="flex items-end justify-center gap-2 cursor-pointer"
       >
         <motion.div
           initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1, ease: 'easeInOut', delay: 0.4 }}
-          className="mt-4 flex items-center justify-center gap-3 text-slate-700 dark:text-slate-100"
+          className="mt-4 flex items-center justify-center gap-1 text-slate-700 dark:text-slate-100"
         >
           {/* 🌿 Laurier gauche */}
           <Image
-            src="/laurel-left.png"
+            src={leftLaurelSrc}
             alt="laurier gauche"
-            width={42}
-            height={42}
+            width={46}
+            height={46}
             className="opacity-90 rotate-12 drop-shadow-[0_0_16px_rgba(44,183,255,0.7)]"
-            priority={false}
           />
 
           {/* ⭐ Bloc central */}
@@ -42,12 +72,11 @@ export default function StarClientsGoogle() {
 
           {/* 🌿 Laurier droit */}
           <Image
-            src="/laurel-right.png"
+            src={rightLaurelSrc}
             alt="laurier droit"
-            width={42}
-            height={42}
+            width={46}
+            height={46}
             className="opacity-85 -rotate-12 drop-shadow-[0_0_16px_rgba(44,183,255,0.7)]"
-            priority={false}
           />
         </motion.div>
       </a>
@@ -55,7 +84,7 @@ export default function StarClientsGoogle() {
   );
 }
 
-function StarRow() {
+export function StarRow() {
   return (
     <div className="flex items-center gap-1">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -74,8 +103,8 @@ function StarRow() {
           <svg width="0" height="0">
             <defs>
               <linearGradient id="ikovalineBlue" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stopColor="#2CB7FF" />
-                <stop offset="100%" stopColor="#0072FF" />
+                <stop offset="0%" stopColor="#20A8FF" />
+                <stop offset="100%" stopColor="#01B7FF" />
               </linearGradient>
             </defs>
           </svg>

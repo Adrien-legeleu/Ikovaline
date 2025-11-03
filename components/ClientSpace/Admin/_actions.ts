@@ -2,21 +2,15 @@
 
 import { revalidatePath } from 'next/cache';
 
-// IMPORTANT : URL absolue pour fetch interne
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
-/**
- * Payload envoyé depuis le client.
- * -> Il contient plus d'info que ce qu'on va insérer direct en DB,
- *    notamment inviteClient (logique d'invite) et extra (lang/tone/goal).
- */
 export type CreateProjectPayload = {
-  // --- client / identité ---
-  clientEmail: string; // requis côté action pour savoir à qui rattacher
+  // client / identité
+  clientEmail: string;
   clientName?: string;
-  inviteClient: boolean; // sert juste à décider si on invite / crée le compte
+  inviteClient: boolean;
 
-  // --- core projet ---
+  // core projet
   title: string;
   description?: string;
   industry?: string;
@@ -47,8 +41,8 @@ export type CreateProjectPayload = {
   urls: string[];
 
   // fichiers
-  briefFiles: string[]; // storage paths
-  signedContractFiles: string[]; // storage paths
+  briefFiles: string[];
+  signedContractFiles: string[];
 
   // équipe
   devEmails: string[];
@@ -70,7 +64,7 @@ export type CreateProjectPayload = {
   paymentCaptured?: number;
   paymentInstallments?: number; // int >=1
 
-  // bloc extra qui part dans la colonne jsonb `extra`
+  // extra (colonne JSONB)
   extra?: {
     languages?: string[];
     tone?: string[];
@@ -78,18 +72,10 @@ export type CreateProjectPayload = {
   };
 };
 
-/**
- * Action serveur appelée par le client.
- * Elle forward vers ton endpoint /api/admin/projects/create
- * qui fera réellement :
- *   - création projet dans table public.projects
- *   - si inviteClient === true => créer/associer user + envoyer invit
- *   - si inviteClient === false => juste créer le projet historique
- */
 export async function createProjectAction(payload: CreateProjectPayload) {
-  // sécurisation: enlever les champs vides/optionnels pour ne pas envoyer null inutilement
+  // sécurisation: enlever les champs vides/optionnels
   const body = {
-    // ---- champs DB directs ----
+    // ---- champs DB (snake_case) + quelques camel utiles ----
     clientEmail: payload.clientEmail,
     clientName: payload.clientName ?? undefined,
 
@@ -144,20 +130,12 @@ export async function createProjectAction(payload: CreateProjectPayload) {
         ? payload.paymentInstallments
         : undefined,
 
-    // pour ta colonne JSONB extra
+    // JSONB extra
     extra: payload.extra ?? {},
 
-    /**
-     * Note:
-     * total_sold, payment_currency etc:
-     * - total_sold ~ ce que tu as vendu => on peut mettre offer_price par défaut côté API
-     * - payment_currency => on peut réutiliser currency
-     * Tu peux en déduire tout ça côté route /api/admin/projects/create.
-     */
-
     // ---- metadata logique côté backend ----
-    inviteClient: payload.inviteClient, // <- info pour l'API (création compte client ou non)
-    devEmails: payload.devEmails ?? [], // assigner équipe
+    inviteClient: payload.inviteClient,
+    devEmails: payload.devEmails ?? [],
   };
 
   const resp = await fetch(`${SITE_URL}/api/admin/projects/create`, {
@@ -185,7 +163,6 @@ export async function createProjectAction(payload: CreateProjectPayload) {
     };
   }
 
-  // invalider les listes côté admin si besoin
   revalidatePath('/admin/projects');
 
   return {

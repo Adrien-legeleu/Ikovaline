@@ -1,4 +1,5 @@
 import AdminTopNav from '@/components/ClientSpace/Admin/AdminTopNav';
+import { ThemeLockLight } from '@/components/ThemeLock';
 import { createServerClient } from '@supabase/ssr';
 import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -45,7 +46,7 @@ export default async function AdminLayout({
   // Shell admin : top-nav à icônes + zone de contenu
   return (
     <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,rgba(12,60,255,0.02),transparent_55%)]">
-      {/* barre supérieure */}
+      <ThemeLockLight />
       <AdminTopNav />
       <div className="h-[20px] md:h-[40px]" />
 

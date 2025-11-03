@@ -17,12 +17,15 @@ import { TierPicker } from './TierPicker';
 import { KPIBoard } from './KPIBoard';
 import { EstimatePanel } from './EstimatePanel';
 import { OptionsPanel } from './OptionsPanel';
+import { Phone } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Simulator() {
   const [category, setCategory] = useState<CategoryId | null>(null);
   const [tier, setTier] = useState<TierDef | null>(null);
   const [sel, setSel] = useState<SelectionState>(emptySelection());
   const [ads, setAds] = useState<number>(500);
+  const [email, setEmail] = useState('');
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -125,6 +128,7 @@ export default function Simulator() {
           : 'Leads/mois';
 
     const payload = {
+      email,
       categoryLabel: cat.name, // Exemple: "Landing Page"
       tierLabel: tier.name, // Exemple: "Starter"
       options: getChosenOptions(), // [{label, qty, price}, ...]
@@ -333,6 +337,7 @@ export default function Simulator() {
               </div>
 
               {/* Colonne droite (Résumé + CTA) */}
+              {/* Colonne droite (Résumé + CTA) */}
               <div className="lg:sticky lg:top-20 h-fit space-y-4">
                 {totals && kpi ? (
                   <EstimatePanel
@@ -347,25 +352,61 @@ export default function Simulator() {
 
                 <div
                   className="
-                    rounded-[3rem] p-5 flex items-center justify-center flex-col
-                    bg-white dark:bg-neutral-900
-                    ring-1 ring-black/[0.03] dark:ring-white/[0.06]
-                    shadow-[0_28px_64px_rgba(0,0,0,0.06),0_2px_4px_rgba(0,0,0,0.03)]
-                  "
+      rounded-[3rem] p-6 flex flex-col items-center justify-center
+      bg-white dark:bg-neutral-900
+      ring-1 ring-black/[0.03] dark:ring-white/[0.06]
+      shadow-[0_28px_64px_rgba(0,0,0,0.06),0_2px_4px_rgba(0,0,0,0.03)]
+      space-y-4
+    "
                 >
+                  {/* Champ email moderne */}
+                  <div className="w-full">
+                    <input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="exemple@entreprise.fr"
+                      className="
+    w-full rounded-3xl border border-neutral-100 dark:border-neutral-900
+    bg-neutral-50 dark:bg-neutral-950
+    px-4 py-3 text-sm text-neutral-800 dark:text-neutral-100
+    placeholder:text-neutral-400 dark:placeholder:text-neutral-600
+    focus:outline-none focus:ring-2 focus:ring-sky-500/60 focus:border-sky-400
+    transition-all duration-150
+  "
+                      required
+                    />
+                  </div>
+
+                  {/* Bouton envoyer */}
                   <button
                     onClick={handleSend}
                     disabled={sending}
                     className="
-                      w-full mx-auto rounded-3xl bg-sky-600 text-white py-3
-                      font-semibold tracking-[-0.02em] text-sm
-                      hover:brightness-110 active:scale-[.99] transition
-                      disabled:opacity-60
-                    "
+        w-full rounded-3xl bg-black/[0.04] text-black py-3
+        font-semibold tracking-[-0.02em] text-sm
+        hover:brightness-110 active:scale-[.99] transition
+        disabled:opacity-60
+      "
                   >
                     {sending ? 'Envoi…' : 'Envoyer ma configuration'}
                   </button>
-                  <div className="mt-2 w-full text-center text-[10px] text-neutral-500 dark:text-neutral-400">
+                  <Link
+                    href={'https://calendly.com/florent-ghizzoni/meeting'}
+                    target="_blank"
+                    className="
+        w-full rounded-3xl bg-sky-600 text-white py-3
+   tracking-[-0.02em] text-sm
+        hover:brightness-110 active:scale-[.99] transition
+        disabled:opacity-60 flex items-center justify-center
+      "
+                  >
+                    <Phone className="h-4 mr-2 w-4" />{' '}
+                    <strong className="mr-2">-10% </strong> Appel de découverte
+                  </Link>
+
+                  <div className="text-center text-[10px] text-neutral-500 dark:text-neutral-400">
                     Offre, options, budget pub & KPI seront joints
                     automatiquement.
                   </div>

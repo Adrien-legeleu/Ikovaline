@@ -182,7 +182,7 @@ export default async function AdminProjectDetail({ params }: Props) {
   };
 
   return (
-    <section className="px-6 py-8 space-y-8">
+    <section className="px-2 pb-16 space-y-8">
       <ProjectDetailClient mode="admin" view={view} updates={updates} />
 
       {/* bloc équipe admin (invite / remove) */}

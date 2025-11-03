@@ -1,32 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies, headers } from 'next/headers';
-import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@supabase/supabase-js';
 import { resend, DEFAULT_FROM, APP_URL } from '@/lib/resend';
 import ProjectInviteEmail from '@/emails/ProjectInvite';
 
-async function getSB() {
-  const cookieStore = await cookies();
-  const headerList = await headers();
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: { get: (n: string) => cookieStore.get(n)?.value },
-      global: {
-        headers: { 'x-forwarded-for': headerList.get('x-forwarded-for') ?? '' },
-      },
-    }
-  );
-}
+// --- Supabase admin (SERVICE ROLE) : bypass RLS en back ---
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+  auth: { persistSession: false },
+});
 
+// GET /api/projects/:id/members
 export async function GET(
   _req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const supabase = await getSB();
-
-  // 1️⃣ Devs assignés
-  const { data: assignments, error: assignErr } = await supabase
+  // 1) Assignations actives
+  const { data: assignments, error: assignErr } = await supabaseAdmin
     .from('project_assignments')
     .select('id, user_id, staff_role, active')
     .eq('project_id', params.id)
@@ -35,9 +25,10 @@ export async function GET(
   if (assignErr)
     return NextResponse.json({ error: assignErr.message }, { status: 500 });
 
-  // 2️⃣ Récupère les profils associés
   const userIds = (assignments ?? []).map((a) => a.user_id);
-  const { data: profiles, error: profErr } = await supabase
+
+  // 2) Profils des assignés
+  const { data: profiles, error: profErr } = await supabaseAdmin
     .from('profiles')
     .select('id, full_name, email, role')
     .in('id', userIds);
@@ -45,54 +36,61 @@ export async function GET(
   if (profErr)
     return NextResponse.json({ error: profErr.message }, { status: 500 });
 
-  const assignedTeam = (assignments ?? []).map((a) => {
-    const p = profiles?.find((pr) => pr.id === a.user_id);
-    return {
-      id: a.id,
-      user_id: a.user_id,
-      staff_role: a.staff_role,
-      role: p?.role ?? 'user',
-      name: p?.full_name ?? null,
-      email: p?.email ?? null,
-    };
-  });
+  const assignedTeam =
+    (assignments ?? []).map((a) => {
+      const p = profiles?.find((pr) => pr.id === a.user_id);
+      return {
+        id: a.id,
+        user_id: a.user_id,
+        staff_role: a.staff_role, // ⬅️ IMPORTANT : staff_role (pas "role")
+        role: p?.role ?? 'user', // rôle global du profil (user/dev/admin)
+        name: p?.full_name ?? null,
+        email: p?.email ?? null,
+      };
+    }) ?? [];
 
-  // 3️⃣ Ajoute les admins globaux
-  const { data: admins } = await supabase
+  // 3) Admins globaux (toujours visibles)
+  const { data: admins, error: adminsErr } = await supabaseAdmin
     .from('profiles')
     .select('id, full_name, email, role')
     .eq('role', 'admin')
     .eq('status', 'active');
 
-  const adminTeam = (admins ?? []).map((a) => ({
-    id: `admin-${a.id}`,
-    user_id: a.id,
-    staff_role: 'admin',
-    role: 'admin',
-    name: a.full_name ?? null,
-    email: a.email ?? null,
-  }));
+  if (adminsErr)
+    return NextResponse.json({ error: adminsErr.message }, { status: 500 });
 
-  // 4️⃣ Fusion unique (pas de doublons d’email)
+  const adminTeam =
+    (admins ?? []).map((a) => ({
+      id: `admin-${a.id}`,
+      user_id: a.id,
+      staff_role: 'admin',
+      role: 'admin',
+      name: a.full_name ?? null,
+      email: a.email ?? null,
+    })) ?? [];
+
+  // 4) Merge sans doublon d’email
   const all = [...assignedTeam];
   for (const a of adminTeam) {
-    if (!all.find((m) => m.email === a.email)) all.push(a);
+    if (!all.find((m) => m.email && a.email && m.email === a.email)) {
+      all.push(a);
+    }
   }
 
   return NextResponse.json({ items: all });
 }
+
 // POST /api/projects/:id/members
 export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const supabase = await getSB();
   const body = await req.json().catch(() => ({}));
 
-  const { email, staff_role } = body as {
-    email?: string;
-    staff_role?: 'dev' | 'lead_dev' | 'design' | 'pm' | 'seo' | 'video';
-  };
+  // on accepte staff_role (préféré) et fallback sur role si vieux front
+  const email: string | undefined = body.email;
+  const staff_role: 'dev' | 'lead_dev' | 'design' | 'pm' | 'seo' | 'video' =
+    body.staff_role ?? body.role;
 
   if (!email || !staff_role) {
     return NextResponse.json(
@@ -101,12 +99,13 @@ export async function POST(
     );
   }
 
-  // 1) Vérifier projet (pour l'email de notif + 404 propre si projet inexistant)
-  const { data: proj, error: projErr } = await supabase
+  // 1) Projet (pour l’email)
+  const { data: proj, error: projErr } = await supabaseAdmin
     .from('projects')
     .select('id, title')
     .eq('id', params.id)
     .single();
+
   if (projErr || !proj) {
     return NextResponse.json(
       { error: projErr?.message || 'Projet introuvable' },
@@ -114,11 +113,11 @@ export async function POST(
     );
   }
 
-  // 2) Récupérer l'utilisateur par email
-  const { data: userProfile, error: userErr } = await supabase
+  // 2) Lookup profil par email (SERVICE ROLE => bypass RLS)
+  const { data: userProfile, error: userErr } = await supabaseAdmin
     .from('profiles')
-    .select('id, email, full_name')
-    .eq('email', email)
+    .select('id, email, full_name, status')
+    .eq('email', email.toLowerCase())
     .maybeSingle();
 
   if (userErr) {
@@ -128,8 +127,7 @@ export async function POST(
     );
   }
 
-  if (!userProfile || !userProfile.id) {
-    // on ne crée PAS d'user ici, on demande qu'il existe déjà
+  if (!userProfile?.id) {
     return NextResponse.json(
       {
         error:
@@ -139,26 +137,56 @@ export async function POST(
     );
   }
 
+  // Optionnel : refuser si profil disabled
+  if (userProfile.status && userProfile.status !== 'active') {
+    return NextResponse.json(
+      { error: 'Ce compte existe mais est désactivé.' },
+      { status: 403 }
+    );
+  }
+
   const userId = userProfile.id as string;
 
-  // 3) Assigner au projet (si déjà assigné actif=true on peut juste renvoyer ok)
-  // on essaie d'insérer; si doublon RLS, à toi de gérer unique si tu veux plus tard
-  const { error: assignErr } = await supabase
+  // 3) Assigner (idempotent light : si déjà actif, on renvoie OK)
+  const { data: existingAssign } = await supabaseAdmin
     .from('project_assignments')
-    .insert({
-      project_id: params.id,
-      user_id: userId,
-      staff_role,
-      active: true,
-    });
+    .select('id, active')
+    .eq('project_id', params.id)
+    .eq('user_id', userId)
+    .maybeSingle();
 
-  if (assignErr) {
-    return NextResponse.json({ error: assignErr.message }, { status: 500 });
+  if (existingAssign?.active) {
+    return NextResponse.json({ ok: true }); // déjà assigné
+  }
+
+  if (existingAssign && existingAssign.id) {
+    // réactive si existait inactif
+    const { error: reactErr } = await supabaseAdmin
+      .from('project_assignments')
+      .update({ active: true, staff_role })
+      .eq('id', existingAssign.id);
+
+    if (reactErr) {
+      return NextResponse.json({ error: reactErr.message }, { status: 500 });
+    }
+  } else {
+    // insert normal
+    const { error: assignErr } = await supabaseAdmin
+      .from('project_assignments')
+      .insert({
+        project_id: params.id,
+        user_id: userId,
+        staff_role,
+        active: true,
+      });
+
+    if (assignErr) {
+      return NextResponse.json({ error: assignErr.message }, { status: 500 });
+    }
   }
 
   // 4) Email d’invitation
   const ctaUrl = `${APP_URL}/dev/projects/${encodeURIComponent(params.id)}`;
-
   try {
     await resend.emails.send({
       from: DEFAULT_FROM,
@@ -172,13 +200,9 @@ export async function POST(
       }),
     });
   } catch (e: any) {
-    // l'assign a réussi, l'email a raté → on le dit mais pas d'erreur 500
+    // assign OK, email KO → on informe quand même
     return NextResponse.json(
-      {
-        ok: true,
-        warn: 'assigné, mais email non envoyé',
-        error: e?.message,
-      },
+      { ok: true, warn: 'assigné, mais email non envoyé', error: e?.message },
       { status: 200 }
     );
   }
@@ -187,20 +211,18 @@ export async function POST(
 }
 
 // DELETE /api/projects/:id/members?user_id=...
-// DELETE /api/projects/:id/members?user_id=...
 export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const supabase = await getSB();
   const { searchParams } = new URL(req.url);
   const user_id = searchParams.get('user_id');
   if (!user_id) {
     return NextResponse.json({ error: 'user_id requis' }, { status: 400 });
   }
 
-  // 🧩 Vérifie si le user est admin
-  const { data: profile, error: profErr } = await supabase
+  // si admin global → refuse
+  const { data: profile, error: profErr } = await supabaseAdmin
     .from('profiles')
     .select('role')
     .eq('id', user_id)
@@ -216,8 +238,7 @@ export async function DELETE(
     );
   }
 
-  // ✅ Supprime uniquement si non-admin
-  const { error } = await supabase
+  const { error } = await supabaseAdmin
     .from('project_assignments')
     .update({ active: false })
     .eq('project_id', params.id)

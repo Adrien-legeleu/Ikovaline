@@ -19,7 +19,7 @@ export default function ProjectTeamAdmin({ projectId }: { projectId: string }) {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
-  const [staffRole, setStaffRole] = useState<
+  const [role, setRole] = useState<
     'dev' | 'lead_dev' | 'design' | 'pm' | 'seo' | 'video'
   >('dev');
   const [submitting, setSubmitting] = useState(false);
@@ -47,15 +47,17 @@ export default function ProjectTeamAdmin({ projectId }: { projectId: string }) {
     setSubmitting(true);
     setErr(null);
     try {
+      // dans ProjectTeamAdmin (client)
       const r = await fetch(`/api/projects/${projectId}/members`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, staff_role: staffRole }),
+        body: JSON.stringify({ email, staff_role: role }), // ⬅️ IMPORTANT
       });
+
       const j = await r.json();
       if (!r.ok) throw new Error(j?.error || 'Invitation impossible');
       setEmail('');
-      setStaffRole('dev');
+      setRole('dev');
       await fetchMembers();
     } catch (e: any) {
       setErr(e?.message || 'Erreur');
@@ -148,9 +150,9 @@ export default function ProjectTeamAdmin({ projectId }: { projectId: string }) {
 
           <select
             className="h-10 rounded-[0.9rem] px-3 bg-black/5 dark:bg-white/10 outline-none"
-            value={staffRole}
+            value={role}
             onChange={(e) =>
-              setStaffRole(
+              setRole(
                 e.target.value as
                   | 'dev'
                   | 'lead_dev'

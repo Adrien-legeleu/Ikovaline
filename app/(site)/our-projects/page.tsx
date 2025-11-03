@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ProjectsPageClient from '@/components/Projects/ProjectsPageClient';
+import Glow from '@/components/ui/glow';
 
 export const metadata: Metadata = {
   title: 'Projets, Ikovaline',
@@ -19,14 +20,18 @@ export default function PageProjets() {
     <main className="relative isolate py-20 ">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-100"
+        className="pointer-events-none absolute h-[50vh] inset-0 opacity-70 dark:opacity-100"
         style={{
           background:
             'repeating-linear-gradient(90deg, hsl(var(--primary) / 0.1) 0 1px, transparent 1px calc(12.5%))',
         }}
       />
-      <div className="absolute top-0 left-0 bg-gradient-to-b from-white dark:from-black to-transparent w-full h-32" />
-      <div className="absolute bottom-0 left-0 bg-gradient-to-t from-white dark:from-black to-transparent w-full h-32" />
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <Glow
+          variant="above"
+          className="animate-appear-zoom opacity-0 [animation-delay:1000ms]"
+        />
+      </div>
       <ProjectsPageClient />
     </main>
   );

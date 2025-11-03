@@ -19,14 +19,22 @@ function Calendar({
   captionLayout = 'label',
   formatters,
   components,
+  isAdmin = false,
   ...props
-}: React.ComponentProps<typeof DayPicker>) {
+}: React.ComponentProps<typeof DayPicker> & { isAdmin?: boolean }) {
   const defaultClassNames = getDefaultClassNames();
+
+  /**
+   * Règle d'activation:
+   * - admin => aucune restriction
+   * - pas admin => on interdit les dates avant aujourd'hui
+   */
+  const disabledRule = isAdmin ? undefined : { before: new Date() };
 
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      disabled={{ before: new Date() }} // ⛔ désactive toutes les dates avant aujourd'hui
+      disabled={disabledRule}
       className={cn(
         'bg-background group/calendar w-full rounded-[2rem] p-3 [--cell-size:2rem] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
         String.raw`rtl:**:[.rdp-button_next>svg]:rotate-180`,
@@ -113,33 +121,41 @@ function Calendar({
           'text-muted-foreground aria-selected:text-muted-foreground',
           defaultClassNames.outside
         ),
+
+        // style quand DayPicker marque un jour "disabled"
         disabled: cn(
           'text-muted-foreground opacity-50 cursor-not-allowed',
           defaultClassNames.disabled
-        ), // style dates désactivées
+        ),
+
         hidden: cn('invisible', defaultClassNames.hidden),
         ...classNames,
       }}
       components={{
-        Root: ({ className, rootRef, ...props }) => (
+        Root: ({ className, rootRef, ...p }) => (
           <div
             data-slot="calendar"
             ref={rootRef}
             className={cn(className)}
-            {...props}
+            {...p}
           />
         ),
-        Chevron: ({ className, orientation, ...props }) =>
+        Chevron: ({ className, orientation, ...p }) =>
           orientation === 'left' ? (
-            <ChevronLeftIcon className={cn('size-4', className)} {...props} />
+            <ChevronLeftIcon className={cn('size-4', className)} {...p} />
           ) : orientation === 'right' ? (
-            <ChevronRightIcon className={cn('size-4', className)} {...props} />
+            <ChevronRightIcon className={cn('size-4', className)} {...p} />
           ) : (
-            <ChevronDownIcon className={cn('size-4', className)} {...props} />
+            <ChevronDownIcon className={cn('size-4', className)} {...p} />
           ),
-        DayButton: CalendarDayButton,
-        WeekNumber: ({ children, ...props }) => (
-          <td {...props}>
+
+        // On passe isAdmin ici pour la logique des <button />
+        DayButton: (dayButtonProps) => (
+          <CalendarDayButton isAdmin={isAdmin} {...dayButtonProps} />
+        ),
+
+        WeekNumber: ({ children, ...p }) => (
+          <td {...p}>
             <div className="flex size-[--cell-size] items-center justify-center text-center">
               {children}
             </div>
@@ -153,14 +169,31 @@ function Calendar({
 }
 
 // ────────────────────────────────────────────────────────────
-// Custom Day Button (no shadcn Button)
+/**
+ * Custom Day Button:
+ * Avant : on faisait `disabled={modifiers.disabled}`
+ * Maintenant :
+ *   - si admin => on *ignore* le disabled "date passée".
+ *   - mais si le jour est vraiment disabled par autre chose (genre props.disabled custom future),
+ *     on le garde.
+ *
+ * Concrètement:
+ * - DayPicker nous passe `modifiers.disabled` si la date match "disabledRule"
+ * - Pour un admin, on retire ce flag si c'est UNIQUEMENT parce que la date est passée.
+ *
+ * On peut approximer : si !isAdmin => on garde le comportement
+ *                      si isAdmin => disabled = false
+ *
+ * (Si tu veux une logique plus fine, on peut analyser le jour par rapport à new Date()).
+ */
 // ────────────────────────────────────────────────────────────
 function CalendarDayButton({
   className,
   day,
   modifiers,
+  isAdmin = false,
   ...props
-}: React.ComponentProps<typeof DayButton>) {
+}: React.ComponentProps<typeof DayButton> & { isAdmin?: boolean }) {
   const defaultClassNames = getDefaultClassNames();
   const ref = React.useRef<HTMLButtonElement>(null);
 
@@ -174,10 +207,31 @@ function CalendarDayButton({
     !modifiers.range_end &&
     !modifiers.range_middle;
 
+  // si admin => force disabled=false pour les jours passés
+  // on considère que "passé" = < aujourd'hui minuit
+  const todayMidnight = React.useMemo(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }, []);
+
+  const isInPast = day.date < todayMidnight;
+
+  // disabled calculé:
+  // - si pas admin: utilise le disabled natif
+  // - si admin:
+  //    - si c'est juste parce que c'est une date passée -> pas disabled
+  //    - sinon (genre autre restriction future potentielle) -> reste disabled
+  const effectiveDisabled = !isAdmin
+    ? modifiers.disabled
+    : modifiers.disabled && !isInPast
+      ? true
+      : false;
+
   return (
     <button
       ref={ref}
-      disabled={modifiers.disabled} // rend le bouton inactif
+      disabled={effectiveDisabled}
       data-day={day.date.toLocaleDateString()}
       data-selected-single={isSelectedSingle || undefined}
       data-range-start={modifiers.range_start || undefined}

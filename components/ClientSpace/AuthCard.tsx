@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { motion, type Variants } from 'framer-motion';
 
 import { ProjectGaugeCard } from './ProgressCard';
+import StarClientsGoogle, { StarRow } from '../StarClientsGoogle';
 
 type Mode = 'signin' | 'signup';
 
@@ -252,7 +253,9 @@ export default function AuthCard({ mode }: { mode: Mode }) {
       setLoading(false);
     }
   }
+  const leftLaurelSrc = '/laurier-gauche.svg';
 
+  const rightLaurelSrc = '/laurier-droite.svg';
   return (
     <div className="min-h-[100dvh] w-[100dvw] overflow-hidden bg-background text-foreground grid md:grid-cols-2">
       {/* Top bar : retour + CTA switch signin/signup */}
@@ -492,28 +495,32 @@ export default function AuthCard({ mode }: { mode: Mode }) {
           className="absolute inset-4 rounded-[2rem] overflow-hidden"
         >
           <div className="relative h-full w-full">
-            {/* fond bleu clair */}
+            {/* fond bleu intense et harmonieux */}
             <div
               className="absolute inset-0"
               style={{
-                background:
-                  // plus clair, basé primary
-                  'radial-gradient(1200px 600px at 10% 0%, rgba(59,130,246,.35), transparent 60%), radial-gradient(1100px 600px at 90% 20%, rgba(147,197,253,.45), transparent 55%), radial-gradient(900px 900px at 70% 110%, rgba(191,219,254,.45), transparent 50%)',
+                background: `
+          radial-gradient(1200px 700px at 10% 0%, rgba(2,132,199,0.45), transparent 65%),
+          radial-gradient(1000px 600px at 85% 20%, rgba(56,189,248,0.5), transparent 60%),
+          radial-gradient(800px 800px at 70% 110%, rgba(125,211,252,0.45), transparent 55%)
+        `,
               }}
             />
-            {/* halos animés très doux */}
+
+            {/* halos animés “Ikovaline” plus vibrants */}
             <motion.div
-              className="absolute -top-12 -left-10 h-72 w-72 rounded-full bg-blue-300/40 blur-[90px]"
-              animate={{ x: [0, 10, -8, 0], y: [0, -8, 12, 0] }}
+              className="absolute -top-12 -left-10 h-72 w-72 rounded-full bg-sky-400/50 blur-[90px]"
+              animate={{ x: [0, 12, -10, 0], y: [0, -10, 14, 0] }}
+              transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.div
+              className="absolute -bottom-20 -right-14 h-80 w-80 rounded-full bg-sky-500/50 blur-[110px]"
+              animate={{ x: [0, -14, 12, 0], y: [0, 14, -10, 0] }}
               transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <motion.div
-              className="absolute -bottom-20 -right-14 h-80 w-80 rounded-full bg-blue-200/50 blur-[110px]"
-              animate={{ x: [0, -12, 10, 0], y: [0, 12, -8, 0] }}
-              transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            {/* voile blanc doux pour lisibilité générale */}
-            <div className="absolute inset-0 bg-white/35 backdrop-blur-md" />
+
+            {/* voile blanc doux pour lisibilité */}
+            <div className="absolute inset-0 bg-white/30 backdrop-blur-md" />
           </div>
         </motion.div>
 
@@ -526,64 +533,60 @@ export default function AuthCard({ mode }: { mode: Mode }) {
             transition={{ duration: 1.0, ease: EASE, delay: 0.25 }}
             className="text-center"
           >
-            <h2 className="text-slate-800 text-[28px] leading-tight sm:text-[36px] font-semibold">
+            <h2 className="text-slate-800 text-[28px] leading-tight mb-4 sm:text-[36px] font-semibold">
               Suivez & maîtrisez votre projet.
             </h2>
           </motion.div>
 
-          {/* Laurier + étoiles + 67+ avis (vrais lauriers via image) */}
-          <motion.div
-            initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 1.0, ease: EASE, delay: 0.42 }}
-            className="mt-4 flex items-center justify-center gap-2 text-slate-700"
-          >
-            <Image
-              src="/laurel-left.png"
-              alt="laurier"
-              width={40}
-              height={40}
-              className="opacity-90 rotate-12"
-              priority={false}
-            />
-            <span className="flex flex-col gap-1 items-center justify-center">
-              <StarRow />
-              <span className="text-xs tracking-[0.18em] font-semibold">
-                67+ AVIS
-              </span>
-            </span>
-            <Image
-              src="/laurel-right.png"
-              alt="laurier"
-              width={40}
-              height={40}
-              className="opacity-90 -rotate-12"
-              priority={false}
-            />
-          </motion.div>
+          <div className="z-10 pb-5">
+            <a
+              target="_blank"
+              href="https://www.google.com/search?rlz=1C1CHZN_frFR1084FR1084&q=Ikovaline%20Avis"
+              className="flex items-end justify-center gap-2 cursor-pointer"
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 1, ease: 'easeInOut', delay: 0.4 }}
+                className="mt-4 flex items-center justify-center gap-1 text-slate-700 dark:text-slate-100"
+              >
+                {/* 🌿 Laurier gauche */}
+                <Image
+                  src={leftLaurelSrc}
+                  alt="laurier gauche"
+                  width={46}
+                  height={46}
+                  className="opacity-90 rotate-12 drop-shadow-[0_0_16px_rgba(44,183,255,0.7)]"
+                />
+
+                {/* ⭐ Bloc central */}
+                <span className="flex flex-col gap-1 items-center justify-center">
+                  <StarRow />
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="text-xs tracking-[0.18em] font-semibold text-gray-700 dark:text-gray-300"
+                  >
+                    67+ AVIS
+                  </motion.span>
+                </span>
+
+                {/* 🌿 Laurier droit */}
+                <Image
+                  src={rightLaurelSrc}
+                  alt="laurier droit"
+                  width={46}
+                  height={46}
+                  className="opacity-85 -rotate-12 drop-shadow-[0_0_16px_rgba(44,183,255,0.7)]"
+                />
+              </motion.div>
+            </a>
+          </div>
 
           <ProjectGaugeCard percent={72} />
         </div>
       </section>
-    </div>
-  );
-}
-
-function StarRow() {
-  return (
-    <div className="flex items-center gap-1">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg
-          key={i}
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="text-yellow-200"
-        >
-          <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-        </svg>
-      ))}
     </div>
   );
 }

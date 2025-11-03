@@ -1,5 +1,4 @@
 'use client';
-
 import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,7 +15,6 @@ import {
   IconUsersGroup,
   IconBrandWhatsapp,
 } from '@tabler/icons-react';
-
 import { cn } from '@/lib/utils';
 import { Menu, MenuItem, HoveredLink } from '../ui/navbar-menu';
 import { HeaderResponsive } from './HeaderResponsive';
@@ -32,11 +30,11 @@ import {
   useTransform,
   useVelocity,
   useSpring,
+  cubicBezier,
 } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
-/* ====================================================== */
-/* 🔒 Hook: état auth + rôle sécurisé                     */
-/* ====================================================== */
+/* --- Auth helper --- */
 function useSessionRole() {
   const [logged, setLogged] = useState(false);
   const [role, setRole] = useState<'admin' | 'dev' | 'user' | null>(null);
@@ -44,56 +42,28 @@ function useSessionRole() {
 
   useEffect(() => {
     let mounted = true;
-
     async function load() {
-      setLoading(true);
       const {
         data: { user },
       } = await supabase.auth.getUser();
-
       if (!mounted) return;
       setLogged(!!user);
-
       if (user) {
         const { data } = await supabase
           .from('profiles')
           .select('role')
           .eq('id', user.id)
           .maybeSingle();
-
-        if (!mounted) return;
         setRole((data?.role as 'admin' | 'dev' | 'user') ?? 'user');
-        setLoading(false);
-      } else {
-        setRole(null);
-        setLoading(false);
       }
+      setLoading(false);
     }
-
     load();
-
-    const { data: sub } = supabase.auth.onAuthStateChange(
-      async (_e, session) => {
-        const u = session?.user ?? null;
-        setLogged(!!u);
-
-        if (u) {
-          setLoading(true);
-          const { data } = await supabase
-            .from('profiles')
-            .select('role')
-            .eq('id', u.id)
-            .maybeSingle();
-
-          setRole((data?.role as 'admin' | 'dev' | 'user') ?? 'user');
-          setLoading(false);
-        } else {
-          setRole(null);
-          setLoading(false);
-        }
-      }
-    );
-
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
+      const u = s?.user ?? null;
+      setLogged(!!u);
+      setRole(null);
+    });
     return () => {
       mounted = false;
       sub.subscription.unsubscribe();
@@ -102,7 +72,6 @@ function useSessionRole() {
 
   const spaceHref = useMemo(() => {
     if (!logged) return '/signin';
-    if (loading) return '/dashboard';
     switch (role) {
       case 'admin':
         return '/admin/dashboard';
@@ -117,106 +86,128 @@ function useSessionRole() {
 }
 
 /* ====================================================== */
-/* ✨ Header principal avec vrai effet scroll premium     */
+/* ✨ Header premium ultra fluide + transparence totale   */
 /* ====================================================== */
 export function Header({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   const { logged, spaceHref, loading } = useSessionRole();
   const pathname = usePathname();
-
-  // on check si le thème courant est dark pour adapter le verre (sinon t'avais blanc en dark etc)
-  useEffect(() => {
-    // check media query au mount, et écoute les changements
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const update = () => setIsDark(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-
   const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim();
 
-  const href = React.useMemo(() => {
-    const origin = typeof window !== 'undefined' ? window.location.origin : '';
-    const page = origin && pathname ? `${origin}${pathname}` : '';
-    const text = page
-      ? `Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?`
-      : 'Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?';
-
-    // wa.me attend un numéro sans + et le paramètre text encodé
-    const encoded = encodeURIComponent(text);
-    return `https://wa.me/${number}?text=${encoded}`;
+  // lien whatsapp
+  const href = useMemo(() => {
+    const text =
+      'Bonjour, je souhaite échanger avec vous, par messages ou par téléphone. Quand vous convient-il ?';
+    return number
+      ? `https://wa.me/${number}?text=${encodeURIComponent(text)}`
+      : '#';
   }, [number, pathname]);
 
-  if (!href) return null;
-
-  // === Effets scroll ===
+  /* ===== Scroll / motion values ===== */
   const { scrollY } = useScroll();
-
-  // t = 0 (haut) -> 1 (~160px)
-  const t = useTransform(scrollY, [0, 160], [0, 1]);
-
-  // Détecte le thème courant (pour le verre clair/sombre)
-  const [isDark, setIsDark] = React.useState(false);
-  React.useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const update = () => setIsDark(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-
-  // ----- MAGNETIC: déplacement selon vélocité du scroll -----
   const vel = useVelocity(scrollY);
 
-  // map la vélocité (px/s) -> translation Y (px).
-  // Descente rapide (vel>0) => y négatif (vers le haut) jusqu’à ~ -28px.
-  // Remontée (vel<0) => y positif (vers le bas) max ~ +14px.
-  const yTarget = useTransform(vel, (v) => {
-    const mapped = -v / 100;
-    const clamped = Math.max(Math.min(mapped, 14), -28);
-    return clamped;
+  // on lit scrollY -> on pilote un state bool pour savoir si on est tout en haut
+  const [isTop, setIsTop] = useState(true);
+  useEffect(() => {
+    // subscribe à scrollY pour maj isTop sans re-render sale
+    const unsub = scrollY.on('change', (v) => {
+      // seuil ultra faible genre 2px pour éviter le flicker
+      setIsTop(v < 2);
+    });
+    return () => unsub();
+  }, [scrollY]);
+
+  // easing / springs
+  const smoothEase = cubicBezier(0.25, 1, 0.5, 1);
+  const springCfg = { stiffness: 420, damping: 30, mass: 0.5 };
+
+  // t = progression du scroll (0 -> top)
+  const t = useTransform(scrollY, [0, 160], [0, 1]);
+
+  // rebond vertical façon Dynamic Island
+  const yTarget = useTransform(vel, (v) =>
+    Math.max(Math.min(-v / 110, 16), -32)
+  );
+
+  const y = useSpring(yTarget, springCfg);
+
+  // intensité absolue
+  const velAbs = useTransform(vel, (v) => Math.min(Math.abs(v), 1600));
+
+  // squash / stretch global
+  const baseScale = useTransform(y, [-48, 0, 28], [0.94, 1.0, 1.03]);
+  const bumpPx = useTransform(velAbs, [0, 200, 800, 1600], [0, 4, 12, 16]);
+
+  // hover dilation
+  const [hover, setHover] = useState(false);
+  const hoverSpring = useSpring(hover ? 1 : 0, {
+    stiffness: 140,
+    damping: 20,
+    mass: 0.4,
+  });
+  const hoverBump = useTransform(hoverSpring, (p) => 12 * p);
+  const hoverScale = useTransform(hoverSpring, (p) => 1 + 0.0 * p);
+
+  // hauteur dynamique
+  const navHeight = useTransform(
+    [t, bumpPx, hoverBump],
+    ([tv, b, hb]) =>
+      `${68 - 10 * (tv as number) + (b as number) + (hb as number)}px`
+  );
+
+  // rayon dynamique
+  const navRadius = useTransform([t, velAbs, hoverSpring], ([tv, va, hp]) => {
+    const base = 48 - 10 * (tv as number);
+    const punch = Math.min(8, (va as number) / 240);
+    const hoverPlus = 3 * (hp as number);
+    return `${Math.max(20, base - punch + hoverPlus)}px`;
   });
 
-  // spring pour l'inertie (magnétique)
-  const y = useSpring(yTarget, { stiffness: 520, damping: 42, mass: 0.25 });
+  // scale combiné
+  const scale = useTransform(
+    [baseScale, hoverScale],
+    ([a, b]) => (a as number) * (b as number)
+  );
 
-  // léger parallax (respire quand y bouge)
-  const scale = useTransform(y, [-28, 0, 14], [0.985, 1.0, 1.008]);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
 
-  // ----- GLASS qui rampe avec la distance scroll (t) -----
-  const bgColor = useTransform(t, (v) => {
-    const alpha = 0.8 * v;
-    return isDark ? `rgba(0,0,0,${alpha})` : `rgba(255,255,255,${alpha})`;
-  });
+  // background, blur, border, shadow -> transparents si isTop
+  const bgColor = useTransform(t, (v) =>
+    isTop
+      ? 'transparent'
+      : isDark
+        ? `rgba(10,10,10,${0.6 + 0.4 * v})`
+        : `rgba(255,255,255,${0.6 + 0.4 * v})`
+  );
+
+  const blurFx = useTransform(t, (v) =>
+    isTop ? 'none' : `blur(${18 * v}px) saturate(${1 + 0.3 * v})`
+  );
 
   const borderColor = useTransform(t, (v) =>
-    isDark ? `rgba(160,160,160,${0.35 * v})` : `rgba(255,255,255,${0.45 * v})`
+    isTop
+      ? 'transparent'
+      : isDark
+        ? 'rgba(255,255,255,0.08)'
+        : 'rgba(0,0,0,0.04)'
   );
 
-  // verre plus fin (moins saturé, un poil de contraste) + blur progressif
-  const blurFx = useTransform(
-    t,
-    (v) =>
-      `saturate(${1 + 0.12 * v}) contrast(${1 + 0.02 * v}) blur(${12 * v}px)`
-  );
-
-  // ombre multicouches douce + fin liseré interne (donne l’épaisseur)
-  const shadow = useTransform(
-    t,
-    (v) =>
-      `0 2px 6px rgba(0,0,0,${0.04 * v}),
-     0 12px 24px rgba(0,0,0,${0.06 * v}),
-     0 24px 48px rgba(0,0,0,${0.04 * v}),
-     inset 0 0.5px 0 rgba(255,255,255,${0.55 * v})`
+  const shadow = useTransform(t, (v) =>
+    isTop
+      ? 'none'
+      : `0 8px 22px rgba(0,0,0,${0.1 * v}),
+         0 24px 48px rgba(0,0,0,${0.08 * v}),
+         inset 0 1px 0 rgba(255,255,255,${0.2 * v})`
   );
 
   return (
     <>
-      {/* Mobile header */}
+      {/* Mobile version reste comme avant */}
       <HeaderResponsive />
 
-      {/* Desktop navbar */}
+      {/* Desktop */}
       <div
         className={cn(
           'fixed inset-x-0 top-0 z-[10000] hidden lg:block',
@@ -225,73 +216,57 @@ export function Header({ className }: { className?: string }) {
       >
         <div className="mx-auto mt-2 max-w-7xl px-4">
           <motion.nav
-            className={cn(
-              'flex items-center justify-between rounded-[3rem] ',
-              'transition-[color,background,box-shadow] duration-150',
-              'text-neutral-900 dark:text-neutral-100',
-              'will-change-transform'
-            )}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            transition={{ ease: smoothEase, duration: 0.65 }}
+            className="relative flex items-center justify-between text-neutral-900 dark:text-neutral-100"
             style={{
-              y, // ← magnétique
-              scale, // ← parallax subtil
+              y,
+              scale,
+              height: navHeight as any,
+              borderRadius: navRadius as any,
               backgroundColor: bgColor as any,
               backdropFilter: blurFx as any,
               WebkitBackdropFilter: blurFx as any,
-
               boxShadow: shadow as any,
               borderColor: borderColor as any,
               borderWidth: 1,
+              transition: 'all 0.6s cubic-bezier(0.25,1,0.5,1)',
             }}
+            whileTap={{ scale: 0.9 }}
           >
-            {/* overlays glass (subtils) */}
-            <motion.div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-[3rem] z-0 overflow-hidden"
-              style={{ opacity: t as any }}
-            >
-              {/* reflet doux en haut */}
-              <div
-                className="absolute inset-x-0 top-0 h-1/2 rounded-t-[inherit]"
-                style={{
-                  background:
-                    'linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0.10), rgba(255,255,255,0))',
-                }}
-              />
-              {/* vignette très légère en bas (assise/volume) */}
-              <div
-                className="absolute inset-x-0 -bottom-1 h-16 rounded-b-[0rem]"
-                style={{
-                  background:
-                    'linear-gradient(to top, rgba(0,0,0,0.04), rgba(0,0,0,0))',
-                }}
-              />
-            </motion.div>
-            <div className="relative z-[1] px-4 h-16 w-full flex items-center justify-between">
-              <Link
-                href="/"
-                aria-label="Accueil"
-                className="flex items-center gap-2"
+            {/* 👉 reflets / halos = seulement SI pas tout en haut */}
+            {!isTop && (
+              <motion.div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit]"
               >
-                {/* en light */}
+                <div className="absolute inset-x-0 top-0 h-1/2 rounded-t-[inherit] bg-gradient-to-b from-white/20 via-transparent to-transparent dark:from-white/10" />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/5 to-transparent" />
+              </motion.div>
+            )}
+
+            {/* contenu nav */}
+            <div className="relative z-[1] flex w-full items-center justify-between px-6">
+              {/* Logo */}
+              <Link href="/" className="flex items-center gap-2">
                 <Image
                   src={IkovalineLogo}
                   alt="Ikovaline"
                   width={120}
                   height={36}
-                  className="h-8 w-auto object-contain dark:hidden"
-                  priority
+                  className="h-8 dark:hidden"
                 />
-                {/* en dark */}
                 <Image
                   src={IkovalineLogoDark}
                   alt="Ikovaline"
                   width={120}
                   height={36}
-                  className="hidden h-8 w-auto object-contain dark:block"
+                  className="hidden h-8 dark:block"
                 />
               </Link>
 
-              {/* Navigation centre */}
+              {/* Menu centre */}
               <div className="flex min-w-0 flex-1 items-center justify-center">
                 <Menu setActive={setActive} upToZero>
                   <MenuItem
@@ -299,21 +274,7 @@ export function Header({ className }: { className?: string }) {
                     active={active}
                     item="Accueil"
                     link="/"
-                  >
-                    <div className="flex flex-col space-y-3 text-sm">
-                      <HoveredLink href="/#about">
-                        <IconUser stroke={2} />À Propos
-                      </HoveredLink>
-                      <HoveredLink href="/#services">
-                        <IconApps stroke={2} />
-                        Nos Services
-                      </HoveredLink>
-                      <HoveredLink href="/#review">
-                        <IconMessage stroke={2} />
-                        Témoignages
-                      </HoveredLink>
-                    </div>
-                  </MenuItem>
+                  ></MenuItem>
 
                   <MenuItem
                     setActive={setActive}
@@ -324,7 +285,7 @@ export function Header({ className }: { className?: string }) {
                     <div className="flex flex-col space-y-3 text-sm">
                       <HoveredLink href="/nos-services/#saas-apps">
                         <IconApps stroke={2} />
-                        Application Web, Mobile & sur-mesure
+                        Applications Web & Mobile
                       </HoveredLink>
                       <HoveredLink href="/nos-services/#automatisation-ia">
                         <IconInputAi stroke={2} />
@@ -332,15 +293,7 @@ export function Header({ className }: { className?: string }) {
                       </HoveredLink>
                       <HoveredLink href="/nos-services/#scaling">
                         <IconAdjustments stroke={2} />
-                        Stratégies Digitales & sur-mesure
-                      </HoveredLink>
-                      <HoveredLink href="/nos-services/#pourquoi-nous">
-                        <IconThumbUp stroke={2} />
-                        Notre différence
-                      </HoveredLink>
-                      <HoveredLink href="/nos-services/#faq">
-                        <IconHelpHexagon stroke={2} />
-                        FAQ
+                        Stratégie & Croissance
                       </HoveredLink>
                     </div>
                   </MenuItem>
@@ -354,32 +307,15 @@ export function Header({ className }: { className?: string }) {
                   <MenuItem
                     setActive={setActive}
                     active={active}
-                    item="Conseils Digitaux"
+                    item="Blog"
                     link="/blog"
                   />
-
                   <MenuItem
                     setActive={setActive}
                     active={active}
-                    item="À Propos"
+                    item="A Propos"
                     link="/about"
-                  >
-                    <div className="flex flex-col space-y-3 text-sm">
-                      <HoveredLink href="/about/#notre-histoire">
-                        <IconHistory stroke={2} />
-                        Notre Histoire
-                      </HoveredLink>
-                      <HoveredLink href="/about/#notre-vision">
-                        <IconUsersGroup stroke={2} />
-                        Notre Équipe
-                      </HoveredLink>
-                      <HoveredLink href="/about/#notre-garantie">
-                        <IconShieldCheck stroke={2} />
-                        Notre Garantie
-                      </HoveredLink>
-                    </div>
-                  </MenuItem>
-
+                  />
                   <MenuItem
                     setActive={setActive}
                     active={active}
@@ -389,53 +325,41 @@ export function Header({ className }: { className?: string }) {
                 </Menu>
               </div>
 
-              {/* Actions à droite */}
-              <div className="flex items-center justify-center gap-3">
+              {/* Actions droite */}
+              <div className="flex items-center gap-3">
                 <AnimatedThemeToggler />
 
                 {logged ? (
                   <Link
                     href={spaceHref}
-                    aria-disabled={loading}
                     className={cn(
-                      'rounded-3xl bg-primary shadow-lg !px-4 !py-2 text-xs font-semibold text-white transition',
-                      loading
-                        ? 'opacity-50 pointer-events-none cursor-default'
-                        : 'hover:opacity-95 active:scale-[0.98]'
+                      'flex h-9 items-center justify-center rounded-3xl bg-primary px-4 text-xs font-semibold text-white shadow-lg transition',
+                      'hover:scale-[1.02] active:scale-[0.97]'
                     )}
                   >
-                    {loading ? 'Chargement…' : 'Accéder à mon espace'}
+                    {loading ? 'Chargement…' : 'Mon espace'}
                   </Link>
                 ) : (
-                  <div className="flex items-center gap-2">
-                    <Link
-                      href="/signin"
-                      className="rounded-3xl bg-primary shadow-lg !px-4 items-center justify-center flex h-9 text-xs font-semibold text-white hover:opacity-95 active:scale-[0.98]"
-                    >
-                      Se connecter
-                    </Link>
-                  </div>
+                  <Link
+                    href="/signin"
+                    className="flex h-9 items-center justify-center rounded-3xl bg-primary px-4 text-xs font-semibold text-white shadow-lg hover:scale-[1.02] active:scale-[0.97]"
+                  >
+                    Se connecter
+                  </Link>
                 )}
 
                 <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Nous contacter sur WhatsApp"
-                  className={cn(
-                    'inline-flex items-center gap-1 rounded-3xl px-2 shadow-lg h-9 transition will-change-transform active:scale-[0.98]',
-                    'bg-[#25D366] text-white hover:opacity-90',
-                    'focus:outline-none focus:ring-2 focus:ring-white/70'
-                  )}
+                  className="inline-flex h-9 items-center gap-1 rounded-3xl bg-[#25D366] px-2 text-white shadow-lg transition hover:scale-[1.03] active:scale-[0.97]"
                 >
-                  <IconBrandWhatsapp className="lg:h-4 xl:h-5" />
+                  <IconBrandWhatsapp className="h-5 w-5" />
                 </a>
               </div>
             </div>
           </motion.nav>
         </div>
-
-        {/* Logo */}
       </div>
     </>
   );

@@ -10,13 +10,18 @@ import { ScrollManager } from '@/components/ScrollManager';
 import LazyExtraStyle from '@/app/LazyExtraStyle';
 
 import Script from 'next/script';
-import { Poppins } from 'next/font/google';
+import { Plus_Jakarta_Sans, Poppins } from 'next/font/google';
 import Favicon from '@/app/ikovaline_logo-favicon.png';
 import { Suspense } from 'react';
 
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['300', '400', '600', '700', '800'],
+  display: 'swap',
+});
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
@@ -56,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={poppins.className}>
+    <html lang="fr" className={jakarta.className}>
       <head>
         {/* Cookiebot */}
         <Script
@@ -148,12 +153,7 @@ export default function RootLayout({
         <Analytics />
         <LazyExtraStyle />
 
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {/* ⚠️ PAS de Header/Footer ici */}
           {children}
           <Toaster />

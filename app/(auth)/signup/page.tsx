@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import { ProjectGaugeCard } from '@/components/ClientSpace/ProgressCard';
+import { StarRow } from '@/components/StarClientsGoogle';
 
 /* ================= Animations ================= */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -33,7 +34,9 @@ const slideInPanel: Variants = {
     transition: { duration: 0.9, ease: EASE },
   },
 };
+const leftLaurelSrc = '/laurier-gauche.svg';
 
+const rightLaurelSrc = '/laurier-droite.svg';
 /* ================= Sous-composant ================= */
 function SignupInner() {
   const search = useSearchParams();
@@ -148,21 +151,84 @@ function SignupInner() {
           className="absolute inset-4 rounded-[2rem] overflow-hidden"
         >
           <div className="relative h-full w-full">
+            {/* fond bleu intense et harmonieux */}
             <div
               className="absolute inset-0"
               style={{
-                background:
-                  'radial-gradient(1200px 600px at 10% 0%, rgba(59,130,246,.35), transparent 60%), radial-gradient(1100px 600px at 90% 20%, rgba(147,197,253,.45), transparent 55%), radial-gradient(900px 900px at 70% 110%, rgba(191,219,254,.45), transparent 50%)',
+                background: `
+                radial-gradient(1200px 700px at 10% 0%, rgba(2,132,199,0.45), transparent 65%),
+                radial-gradient(1000px 600px at 85% 20%, rgba(56,189,248,0.5), transparent 60%),
+                radial-gradient(800px 800px at 70% 110%, rgba(125,211,252,0.45), transparent 55%)
+              `,
               }}
             />
-            <div className="absolute inset-0 bg-white/35 backdrop-blur-md" />
+
+            {/* halos animés “Ikovaline” plus vibrants */}
+            <motion.div
+              className="absolute -top-12 -left-10 h-72 w-72 rounded-full bg-sky-400/50 blur-[90px]"
+              animate={{ x: [0, 12, -10, 0], y: [0, -10, 14, 0] }}
+              transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.div
+              className="absolute -bottom-20 -right-14 h-80 w-80 rounded-full bg-sky-500/50 blur-[110px]"
+              animate={{ x: [0, -14, 12, 0], y: [0, 14, -10, 0] }}
+              transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            {/* voile blanc doux pour lisibilité */}
+            <div className="absolute inset-0 bg-white/30 backdrop-blur-md" />
           </div>
         </motion.div>
 
         <div className="relative z-10 mx-auto w-full max-w-[560px] px-2 text-center">
           <h2 className="text-slate-800 text-[28px] leading-tight sm:text-[36px] font-semibold mb-4">
-            Suivez & maîtrisez votre projet.
+            Lancez & propulsez votre projet.
           </h2>
+          <div className="z-10 pb-5">
+            <a
+              target="_blank"
+              href="https://www.google.com/search?rlz=1C1CHZN_frFR1084FR1084&q=Ikovaline%20Avis"
+              className="flex items-end justify-center gap-2 cursor-pointer"
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 1, ease: 'easeInOut', delay: 0.4 }}
+                className="mt-4 flex items-center justify-center gap-1 text-slate-700 dark:text-slate-100"
+              >
+                {/* 🌿 Laurier gauche */}
+                <Image
+                  src={leftLaurelSrc}
+                  alt="laurier gauche"
+                  width={46}
+                  height={46}
+                  className="opacity-90 rotate-12 drop-shadow-[0_0_16px_rgba(44,183,255,0.7)]"
+                />
+
+                {/* ⭐ Bloc central */}
+                <span className="flex flex-col gap-1 items-center justify-center">
+                  <StarRow />
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="text-xs tracking-[0.18em] font-semibold text-gray-700 dark:text-gray-300"
+                  >
+                    67+ AVIS
+                  </motion.span>
+                </span>
+
+                {/* 🌿 Laurier droit */}
+                <Image
+                  src={rightLaurelSrc}
+                  alt="laurier droit"
+                  width={46}
+                  height={46}
+                  className="opacity-85 -rotate-12 drop-shadow-[0_0_16px_rgba(44,183,255,0.7)]"
+                />
+              </motion.div>
+            </a>
+          </div>
           <ProjectGaugeCard percent={58} />
         </div>
       </section>
