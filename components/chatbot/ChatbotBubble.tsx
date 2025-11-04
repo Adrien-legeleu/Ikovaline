@@ -2,13 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import {
-  motion,
-  AnimatePresence,
-  useMotionValue,
-  useSpring,
-} from 'framer-motion';
-import type { Variants, Transition } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, Calendar, Mail, Info, BadgeCheck, Timer } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -25,11 +19,10 @@ import {
   DrawerClose,
 } from '@/components/ui/drawer';
 
-type ChatMsg = { role: 'user' | 'bot' | 'error'; text: string };
-
+type ChatMsg = { id: string; role: 'user' | 'bot' | 'error'; text: string };
 const ASSISTANT_NAME = 'IkovalineTalk';
-const MIN_THINKING_MS = 900;
-const CHAR_INTERVAL_MS = 18;
+const MIN_THINKING_MS = 600; // plus réactif
+const CHAR_INTERVAL_MS = 18; // dactylo fluide
 
 const SUGGESTIONS = [
   'Je veux une landing page pour une offre',
@@ -39,101 +32,112 @@ const SUGGESTIONS = [
   'SaaS / App avec abonnement Stripe',
 ];
 
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = React.useState(false);
+  React.useEffect(() => {
+    const m = window.matchMedia(query);
+    const onChange = () => setMatches(m.matches);
+    onChange();
+    m.addEventListener('change', onChange);
+    return () => m.removeEventListener('change', onChange);
+  }, [query]);
+  return matches;
+}
+
 export default function ChatbotBubble() {
+  const isDesktop = useMediaQuery('(min-width: 768px)');
   const [open, setOpen] = React.useState(false);
+
   const [messages, setMessages] = React.useState<ChatMsg[]>([]);
   const [input, setInput] = React.useState('');
   const [isThinking, setIsThinking] = React.useState(false);
   const [isTyping, setIsTyping] = React.useState(false);
 
-  // auto-follow scroll
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
-  const typingIntervalRef = React.useRef<number | null>(null);
+  const typingTimer = React.useRef<number | null>(null);
   const didIntro = React.useRef(false);
   const [autoFollow, setAutoFollow] = React.useState(true);
   const AUTOFOLLOW_EPS = 24;
 
-  React.useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = el;
-      const atBottom =
-        scrollTop + clientHeight >= scrollHeight - AUTOFOLLOW_EPS;
-      setAutoFollow(atBottom);
-    };
-    el.addEventListener('scroll', onScroll, { passive: true });
-    return () => el.removeEventListener('scroll', onScroll);
-  }, []);
-
-  React.useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || !autoFollow) return;
-    el.scrollTop = el.scrollHeight;
-  }, [messages, isThinking, isTyping, autoFollow]);
-
-  React.useEffect(() => {
-    if (open) setAutoFollow(true);
-  }, [open]);
-
-  // ===== Intro & typewriter
+  // Intro 1 seule fois quand on ouvre
   React.useEffect(() => {
     if (!open || didIntro.current || messages.length > 0) return;
     const intro =
       `Bonjour, je suis **${ASSISTANT_NAME}**.\n\n` +
       `Décrivez votre projet (landing, vitrine, e-commerce, tunnel, SaaS) et je vous donne une **estimation budget + délai**.`;
-    setMessages([{ role: 'bot', text: '' }]);
+    const id = crypto.randomUUID();
+    setMessages([{ id, role: 'bot', text: '' }]);
+    // dactylo de l’intro
+    startTyping(intro, id);
+    didIntro.current = true;
+  }, [open]); // eslint-disable-line
+
+  // Auto-follow: seulement si l’utilisateur est déjà en bas
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = el;
+      setAutoFollow(scrollTop + clientHeight >= scrollHeight - AUTOFOLLOW_EPS);
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Scroll vers le bas quand on ajoute du contenu, si autoFollow
+  React.useEffect(() => {
+    if (!autoFollow) return;
+    const el = scrollRef.current;
+    if (!el) return;
     requestAnimationFrame(() => {
-      startTyping(intro, 0);
-      didIntro.current = true;
+      el.scrollTo({ top: el.scrollHeight, behavior: 'auto' });
     });
-  }, [open, messages.length]);
+  }, [messages, isThinking, isTyping, autoFollow]);
 
   React.useEffect(() => {
     return () => {
-      if (typingIntervalRef.current)
-        window.clearInterval(typingIntervalRef.current);
+      if (typingTimer.current) window.clearInterval(typingTimer.current);
     };
   }, []);
 
-  const startTyping = (fullText: string, botIndex: number) => {
-    if (typingIntervalRef.current)
-      window.clearInterval(typingIntervalRef.current);
-    let i = 0;
+  function startTyping(fullText: string, targetId: string) {
+    if (typingTimer.current) window.clearInterval(typingTimer.current);
     setIsTyping(true);
-    typingIntervalRef.current = window.setInterval(() => {
+    let i = 0;
+    typingTimer.current = window.setInterval(() => {
       i++;
-      setMessages((prev) => {
-        if (!prev[botIndex]) return prev;
-        const arr = [...prev];
-        arr[botIndex] = { ...arr[botIndex], text: fullText.slice(0, i) };
-        return arr;
-      });
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === targetId ? { ...m, text: fullText.slice(0, i) } : m
+        )
+      );
       if (i >= fullText.length) {
-        if (typingIntervalRef.current) {
-          window.clearInterval(typingIntervalRef.current);
-          typingIntervalRef.current = null;
+        if (typingTimer.current) {
+          window.clearInterval(typingTimer.current);
+          typingTimer.current = null;
         }
         setIsTyping(false);
       }
     }, CHAR_INTERVAL_MS);
-  };
+  }
 
   async function sendMessage(payload?: string) {
     const text = (payload ?? input).trim();
-    if (!text || isThinking || isTyping) return;
+    if (!text || isThinking) return; // on autorise à taper même si le bot écrit
     setInput('');
 
-    const botIndex = messages.length + 1;
-    setIsThinking(true);
-    setIsTyping(false);
+    const userId = crypto.randomUUID();
+    const botId = crypto.randomUUID();
+
     setMessages((prev) => [
       ...prev,
-      { role: 'user', text },
-      { role: 'bot', text: '' },
+      { id: userId, role: 'user', text },
+      { id: botId, role: 'bot', text: '' }, // placeholder bot
     ]);
 
     try {
+      setIsThinking(true);
+
       const fetchPromise = (async () => {
         const res = await fetch('/api/chatbot', {
           method: 'POST',
@@ -145,6 +149,7 @@ export default function ChatbotBubble() {
           throw new Error(data.error || 'Erreur interne');
         return (data.reply as string) ?? 'Aucune réponse.';
       })();
+
       const delayPromise = new Promise((r) => setTimeout(r, MIN_THINKING_MS));
       const [reply] = (await Promise.all([fetchPromise, delayPromise])) as [
         string,
@@ -152,18 +157,21 @@ export default function ChatbotBubble() {
       ];
 
       setIsThinking(false);
-      startTyping(reply, botIndex);
+      startTyping(reply, botId);
     } catch (err: any) {
       setIsThinking(false);
       setIsTyping(false);
-      setMessages((prev) => {
-        const arr = [...prev];
-        arr[botIndex] = {
-          role: 'error',
-          text: err?.message || 'Erreur serveur',
-        };
-        return arr;
-      });
+      if (typingTimer.current) {
+        window.clearInterval(typingTimer.current);
+        typingTimer.current = null;
+      }
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.role === 'bot' && m.text === ''
+            ? { ...m, role: 'error', text: err?.message || 'Erreur serveur' }
+            : m
+        )
+      );
     }
   }
 
@@ -174,87 +182,8 @@ export default function ChatbotBubble() {
     }
   };
 
-  React.useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
-
-  /* ----------------------------- Desktop sheet (>= md) ----------------------------- */
-
-  // Dynamic island effect (desktop only, l’élément est hidden sur mobile)
-  const scaleX = useMotionValue(0.96);
-  const scaleY = useMotionValue(0.96);
-  const y = useMotionValue(32);
-  const sX = useSpring(scaleX, { stiffness: 260, damping: 22, mass: 0.85 });
-  const sY = useSpring(scaleY, { stiffness: 260, damping: 22, mass: 0.85 });
-  const sYpos = useSpring(y, { stiffness: 260, damping: 22, mass: 0.85 });
-
-  React.useEffect(() => {
-    if (open) {
-      scaleX.set(1.08);
-      scaleY.set(0.92);
-      y.set(0);
-      requestAnimationFrame(() => {
-        scaleX.set(1);
-        scaleY.set(1);
-      });
-    } else {
-      scaleX.set(0.96);
-      scaleY.set(0.96);
-      y.set(32);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
-
-  React.useEffect(() => {
-    let last = window.scrollY;
-    const onScroll = () => {
-      const dy = window.scrollY - last;
-      last = window.scrollY;
-      const raw = -dy / 4;
-      const k = Math.max(-24, Math.min(24, raw));
-      scaleX.set(1 + Math.abs(k) / 220);
-      scaleY.set(1 - Math.abs(k) / 380);
-      y.set(k * 0.7);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const springIn: Transition = {
-    type: 'spring',
-    stiffness: 220,
-    damping: 20,
-    mass: 0.9,
-  };
-  const springOut: Transition = {
-    type: 'spring',
-    stiffness: 260,
-    damping: 26,
-    mass: 0.85,
-  };
-  const sheetVariants: Variants = {
-    hidden: { opacity: 0, y: 32, scale: 0.9 },
-    show: { opacity: 1, y: 0, scale: 1, transition: springIn },
-    exit: {
-      opacity: 0,
-      scaleX: 0.94,
-      scaleY: 1.06,
-      y: 24,
-      transition: springOut,
-    },
-  };
-
-  /* ----------------------------- Shared UI blocks ----------------------------- */
-
   const Suggestions = () => (
-    <motion.div
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0, transition: { duration: 0.25 } }}
-      className="flex flex-col items-start py-2 gap-2"
-    >
+    <div className="flex flex-col items-start py-2 gap-2">
       <div
         className="inline-flex items-center gap-2 rounded-[3rem] px-3 py-1.5 text-[12px]
                       bg-black/[0.04] dark:bg-neutral-900/70 ring-1 ring-black/5 dark:ring-white/5"
@@ -263,8 +192,8 @@ export default function ChatbotBubble() {
         Suggestions
       </div>
       <div className="flex flex-wrap gap-2">
-        {SUGGESTIONS.map((s, idx) => (
-          <motion.button
+        {SUGGESTIONS.map((s) => (
+          <button
             key={s}
             onClick={() => sendMessage(s)}
             className="rounded-[3rem] px-3 py-1.5 text-[11px]
@@ -275,45 +204,30 @@ export default function ChatbotBubble() {
                        dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]
                        transition hover:bg-white/90 dark:hover:bg-neutral-900/85
                        hover:translate-y-[-1px] active:translate-y-0"
-            initial={{ opacity: 0, y: 8, scale: 0.96 }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              transition: {
-                type: 'spring',
-                stiffness: 360,
-                damping: 18,
-                delay: 0.05 * idx,
-              },
-            }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
           >
             {s}
-          </motion.button>
+          </button>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 
   const Messages = () => (
     <>
-      {messages.map((m, i) => {
+      {messages.map((m) => {
         const isUser = m.role === 'user';
         const isError = m.role === 'error';
         return (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`max-w-[92%] px-4 py-2 rounded-[2rem] shadow-sm whitespace-pre-wrap leading-relaxed ${
-              isUser
-                ? 'ml-auto bg-primary text-white'
-                : isError
-                  ? 'mr-auto bg-red-100 text-red-700 dark:bg-red-900/25 dark:text-red-200'
-                  : 'mr-auto bg-white/80 text-neutral-900 dark:bg-neutral-900/70 dark:text-neutral-50'
-            }`}
+          <div
+            key={m.id}
+            className={`max-w-[92%] px-4 py-2 rounded-[2rem] shadow-sm whitespace-pre-wrap leading-relaxed transition-colors
+              ${
+                isUser
+                  ? 'ml-auto bg-primary text-white'
+                  : isError
+                    ? 'mr-auto bg-red-100 text-red-700 dark:bg-red-900/25 dark:text-red-200'
+                    : 'mr-auto bg-white/80 text-neutral-900 dark:bg-neutral-900/70 dark:text-neutral-50'
+              }`}
           >
             {m.role === 'bot' ? (
               <ReactMarkdown
@@ -396,13 +310,13 @@ export default function ChatbotBubble() {
             ) : (
               m.text
             )}
-          </motion.div>
+          </div>
         );
       })}
 
-      {isThinking && !isTyping && (
-        <div className="mr-auto bg-white/70 dark:bg-neutral-900/70 rounded-[3rem] px-3 py-2 text-[11px] text-neutral-700 dark:text-neutral-200 animate-pulse shadow-sm">
-          IkovalineTalk réfléchit…
+      {(isThinking || isTyping) && (
+        <div className="mr-auto bg-white/70 dark:bg-neutral-900/70 rounded-[3rem] px-3 py-2 text-[11px] text-neutral-700 dark:text-neutral-200 shadow-sm">
+          {isThinking ? 'IkovalineTalk réfléchit…' : 'IkovalineTalk écrit…'}
         </div>
       )}
     </>
@@ -447,10 +361,11 @@ export default function ChatbotBubble() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
-          disabled={isThinking || isTyping}
+          // ⚠️ on n’empêche plus de taper quand le bot écrit
+          disabled={isThinking} // seulement pendant l’appel réseau
         />
         <button
-          disabled={!input.trim() || isThinking || isTyping}
+          disabled={!input.trim() || isThinking}
           onClick={() => sendMessage()}
           className="ml-2 rounded-full bg-primary text-white p-2 hover:opacity-95 transition disabled:opacity-40"
           aria-label="Envoyer"
@@ -463,35 +378,40 @@ export default function ChatbotBubble() {
 
   return (
     <>
-      {/* Bouton flottant (ouvre Drawer en mobile et Sheet en desktop) */}
       <IkovalineButtonFloating onClick={() => setOpen(true)} hidden={open} />
 
-      {/* -------------------- Desktop (>= md): sheet animé -------------------- */}
+      {/* Desktop Sheet */}
       <AnimatePresence>
-        {open && (
+        {open && isDesktop && (
           <>
-            {/* Backdrop desktop */}
-            <motion.button
-              className="fixed inset-0 z-[999998] bg-black/35 backdrop-blur-sm hidden md:block"
+            <motion.div
+              className="fixed inset-0 z-[999998] bg-black/35 backdrop-blur-sm"
               onClick={() => setOpen(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             />
-            {/* Sheet desktop */}
             <motion.div
-              style={{ translateY: sYpos, scaleX: sX, scaleY: sY }}
-              className="hidden md:flex fixed bottom-3 right-3 md:bottom-6 md:right-6 z-[999999]
+              className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[999999]
                          h-[75vh] max-h-[760px] w-[94vw] max-w-[500px]
-                         flex-col overflow-hidden p-1 rounded-[3rem]
+                         flex flex-col overflow-hidden p-1 rounded-[3rem]
                          bg-white/95 dark:bg-neutral-950/90 backdrop-blur-2xl
                          text-neutral-900 dark:text-neutral-50
                          shadow-[0_24px_70px_rgba(0,0,0,0.45)]
                          ring-1 ring-black/[0.02] dark:ring-white/[0.04]"
-              variants={sheetVariants}
-              initial="hidden"
-              animate="show"
-              exit="exit"
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                transition: { duration: 0.18 },
+              }}
+              exit={{
+                opacity: 0,
+                y: 16,
+                scale: 0.98,
+                transition: { duration: 0.16 },
+              }}
             >
               {/* Header */}
               <div className="flex items-center justify-between px-5 py-3 border-b border-black/5 dark:border-white/5 bg-white/60 dark:bg-neutral-950/70">
@@ -528,30 +448,18 @@ export default function ChatbotBubble() {
 
               {/* Badges */}
               <div className="px-5 pt-3 flex gap-2 flex-wrap">
-                <span
-                  className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px]
-                                 bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100
-                                 ring-1 ring-blue-200/70 dark:ring-blue-900"
-                >
+                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
                   <BadgeCheck size={12} /> 20+ projets
                 </span>
-                <span
-                  className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px]
-                                 bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100
-                                 ring-1 ring-sky-200/70 dark:ring-sky-900"
-                >
+                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-sky-200/70 dark:ring-sky-900">
                   <Info size={12} /> 67+ avis Google
                 </span>
-                <span
-                  className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px]
-                                 bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100
-                                 ring-1 ring-green-200/70 dark:ring-green-900"
-                >
+                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-green-200/70 dark:ring-green-900">
                   <Timer size={12} /> Délai moyen ~30j
                 </span>
               </div>
 
-              {/* Messages */}
+              {/* Flux */}
               <div
                 ref={scrollRef}
                 className="flex-1 overflow-y-auto px-5 py-3 space-y-3 text-sm
@@ -569,24 +477,18 @@ export default function ChatbotBubble() {
         )}
       </AnimatePresence>
 
-      {/* -------------------- Mobile (< md): Drawer shadcn/ui -------------------- */}
-      <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerContent
-          className="md:hidden z-[999999] border-t border-black/10 dark:border-white/10
-                     bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl"
-        >
+      {/* Mobile Drawer */}
+      <Drawer open={open && !isDesktop} onOpenChange={setOpen}>
+        <DrawerContent className="z-[999999] border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl">
           <DrawerHeader className="pb-2">
             <div className="flex items-center justify-between px-1">
               <div className="flex items-center gap-3">
-                <div
-                  className="h-9 w-9 rounded-xl grid place-items-center
-                                bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.04] dark:ring-white/[0.06]"
-                >
+                <div className="h-9 w-9 rounded-2xl grid place-items-center bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
                   <Image
                     src={IkovalineLogo}
                     alt="Ikovaline"
-                    width={24}
-                    height={24}
+                    width={40}
+                    height={40}
                   />
                 </div>
                 <div className="flex flex-col items-start justify-start leading-tight">
@@ -608,25 +510,13 @@ export default function ChatbotBubble() {
 
             {/* Badges */}
             <div className="px-1 pt-3 flex gap-2 flex-wrap">
-              <span
-                className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px]
-                               bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100
-                               ring-1 ring-blue-200/70 dark:ring-blue-900"
-              >
+              <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
                 <BadgeCheck size={12} /> 20+ projets
               </span>
-              <span
-                className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px]
-                               bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100
-                               ring-1 ring-sky-200/70 dark:ring-sky-900"
-              >
+              <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-sky-200/70 dark:ring-sky-900">
                 <Info size={12} /> 67+ avis
               </span>
-              <span
-                className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px]
-                               bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100
-                               ring-1 ring-green-200/70 dark:ring-green-900"
-              >
+              <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-green-200/70 dark:ring-green-900">
                 <Timer size={12} /> ~30j
               </span>
             </div>

@@ -283,13 +283,13 @@ export function HeaderResponsive() {
       targetOuterScale = 1 + clamped / 450; // (avant ~900)
 
       // inner qui bouge en sens inverse un peu plus fort
-      const opposite = -clamped * 0.55;
+      const opposite = -clamped * 0.85;
       targetInnerY = opposite;
 
       // pincement / étirement x2
       const intensity = Math.min(Math.abs(clamped) / 12, 1);
-      targetInnerScaleX = 1 + 0.05 * intensity; // avant 0.03
-      targetInnerScaleY = 1 - 0.05 * intensity; // avant 0.03
+      targetInnerScaleX = 1 + 0.03 * intensity; // avant 0.03
+      targetInnerScaleY = 1 - 0.03 * intensity; // avant 0.03
     };
 
     raf = requestAnimationFrame(animate);
