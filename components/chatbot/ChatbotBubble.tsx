@@ -404,7 +404,7 @@ export default function ChatbotBubble() {
   return (
     <>
       <IOSNoZoomCSS />
-      <div>
+      <div id="ikova-chat">
         <IkovalineButtonFloating onClick={openChat} hidden={open} />
 
         {/* Desktop: Dialog shadcn */}
@@ -490,6 +490,7 @@ export default function ChatbotBubble() {
           onOpenChange={(v) => (v ? setOpen(true) : closeChat())}
         >
           <DrawerContent
+            onOpenAutoFocus={(e) => e.preventDefault()}
             onPointerDownOutside={(e) => e.preventDefault()}
             onEscapeKeyDown={(e) => e.preventDefault()}
             className="z-[999999] border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl"
@@ -558,7 +559,7 @@ export default function ChatbotBubble() {
                 >
                   <input
                     ref={inputRef}
-                    className="flex-1 bg-transparent outline-none text-sm
+                    className="flex-1 bg-transparent  text-[16px]  outline-none text-sm
                      placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
                     placeholder="Décrivez votre projet…"
                     value={input}
