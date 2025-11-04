@@ -14,6 +14,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import IkovalineLogo from '@/public/images/logo/ikovaline-logo.svg';
 import IkovalineButtonFloating from './IkovaOrb';
+
 import {
   Drawer,
   DrawerContent,
@@ -28,9 +29,7 @@ type ChatMsg = { role: 'user' | 'bot' | 'error'; text: string };
 
 const ASSISTANT_NAME = 'IkovalineTalk';
 const MIN_THINKING_MS = 900;
-/* frappe plus fluide, moins de re-render */
 const CHAR_INTERVAL_MS = 18;
-const CHARS_PER_TICK = 2; // 2 caractères par “frame”
 
 const SUGGESTIONS = [
   'Je veux une landing page pour une offre',
@@ -40,6 +39,7 @@ const SUGGESTIONS = [
   'SaaS / App avec abonnement Stripe',
 ];
 
+/* ====== MQ ====== */
 function useMediaQuery(query: string) {
   const [matches, setMatches] = React.useState(false);
   React.useEffect(() => {
@@ -52,23 +52,41 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-/* anti-zoom iOS pour le drawer */
+/* ====== iOS no-zoom + viewport vars (keyboard/safe-area) ====== */
 function IOSNoZoomCSS() {
   return (
     <style
       dangerouslySetInnerHTML={{
         __html: `
 @supports (-webkit-touch-callout: none) {
-  #ikova-drawer { -webkit-text-size-adjust: 100%; touch-action: manipulation; }
-  #ikova-drawer input, #ikova-drawer textarea, #ikova-drawer select {
-    font-size: 16px !important;
-    -webkit-tap-highlight-color: transparent;
-  }
+  #ikova-drawer { -webkit-text-size-adjust:100%; touch-action: manipulation; }
+  #ikova-drawer input, #ikova-drawer textarea, #ikova-drawer select { font-size:16px !important; -webkit-tap-highlight-color:transparent; }
 }
 `,
       }}
     />
   );
+}
+function useIOSViewportVars() {
+  React.useEffect(() => {
+    const vv = (window as any).visualViewport as VisualViewport | undefined;
+    if (!vv) return;
+    const set = () => {
+      const kb = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+      document.documentElement.style.setProperty('--ikova-kb', `${kb}px`);
+      document.documentElement.style.setProperty(
+        '--ikova-vvh',
+        `${vv.height}px`
+      );
+    };
+    set();
+    vv.addEventListener('resize', set);
+    vv.addEventListener('scroll', set);
+    return () => {
+      vv.removeEventListener('resize', set);
+      vv.removeEventListener('scroll', set);
+    };
+  }, []);
 }
 
 export default function ChatbotBubble() {
@@ -78,32 +96,47 @@ export default function ChatbotBubble() {
   const [isThinking, setIsThinking] = React.useState(false);
   const [isTyping, setIsTyping] = React.useState(false);
 
-  const [autoFollow, setAutoFollow] = React.useState(true);
-  const AUTOFOLLOW_EPS = 24;
-
-  const scrollRef = React.useRef<HTMLDivElement | null>(null);
-  const didIntro = React.useRef(false);
-
-  /* index du message bot en cours de frappe (pour désactiver Markdown) */
-  const [typingIdx, setTypingIdx] = React.useState<number | null>(null);
-  const rafRef = React.useRef<number | null>(null);
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
+  const scrollRef = React.useRef<HTMLDivElement | null>(null);
+  const typingIntervalRef = React.useRef<number | null>(null);
+  const didIntro = React.useRef(false);
+
+  // ===== autoscroll: stop while user browses =====
+  const [autoFollow, setAutoFollow] = React.useState(true);
+  const userDraggingRef = React.useRef(false);
+  const AUTOFOLLOW_EPS = 24;
   React.useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
+
     const onScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } = el;
-      setAutoFollow(scrollTop + clientHeight >= scrollHeight - AUTOFOLLOW_EPS);
+      const atBottom =
+        scrollTop + clientHeight >= scrollHeight - AUTOFOLLOW_EPS;
+      if (atBottom && !userDraggingRef.current) setAutoFollow(true);
+      else setAutoFollow(false);
     };
+    const stop = () => (userDraggingRef.current = true);
+    const release = () => (userDraggingRef.current = false);
+
     el.addEventListener('scroll', onScroll, { passive: true });
-    return () => el.removeEventListener('scroll', onScroll);
+    el.addEventListener('wheel', stop, { passive: true });
+    el.addEventListener('touchstart', stop, { passive: true });
+    el.addEventListener('touchend', release, { passive: true });
+
+    return () => {
+      el.removeEventListener('scroll', onScroll);
+      el.removeEventListener('wheel', stop);
+      el.removeEventListener('touchstart', stop);
+      el.removeEventListener('touchend', release);
+    };
   }, []);
 
+  // ===== Dynamic-Island (desktop) =====
   const scaleX = useMotionValue(0.96);
   const scaleY = useMotionValue(0.96);
   const y = useMotionValue(32);
-
   const sX = useSpring(scaleX, { stiffness: 260, damping: 22, mass: 0.85 });
   const sY = useSpring(scaleY, { stiffness: 260, damping: 22, mass: 0.85 });
   const sYpos = useSpring(y, { stiffness: 260, damping: 22, mass: 0.85 });
@@ -138,6 +171,7 @@ export default function ChatbotBubble() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // ===== Intro 1x
   React.useEffect(() => {
     if (!open || didIntro.current || messages.length > 0) return;
     const intro =
@@ -150,6 +184,7 @@ export default function ChatbotBubble() {
     });
   }, [open, messages.length]);
 
+  // follow only if allowed
   React.useEffect(() => {
     const el = scrollRef.current;
     if (!el || !autoFollow) return;
@@ -158,43 +193,32 @@ export default function ChatbotBubble() {
 
   React.useEffect(() => {
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (typingIntervalRef.current)
+        window.clearInterval(typingIntervalRef.current);
     };
   }, []);
 
-  /* ===== Typing sans flash: RAF + texte brut pendant la frappe ===== */
   const startTyping = (fullText: string, botIndex: number) => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    setTypingIdx(botIndex);
-    setIsTyping(true);
-
+    if (typingIntervalRef.current)
+      window.clearInterval(typingIntervalRef.current);
     let i = 0;
-    let last = performance.now();
-
-    const step = (now: number) => {
-      // cadence similaire à CHAR_INTERVAL_MS, mais via RAF
-      if (now - last >= CHAR_INTERVAL_MS) {
-        i = Math.min(i + CHARS_PER_TICK, fullText.length);
-        last = now;
-
-        setMessages((prev) => {
-          if (!prev[botIndex]) return prev;
-          const arr = [...prev];
-          arr[botIndex] = { ...arr[botIndex], text: fullText.slice(0, i) };
-          return arr;
-        });
-      }
-
-      if (i < fullText.length) {
-        rafRef.current = requestAnimationFrame(step);
-      } else {
-        // fin de frappe : on active le rendu Markdown UNE FOIS
+    setIsTyping(true);
+    typingIntervalRef.current = window.setInterval(() => {
+      i++;
+      setMessages((prev) => {
+        if (!prev[botIndex]) return prev;
+        const arr = [...prev];
+        arr[botIndex] = { ...arr[botIndex], text: fullText.slice(0, i) };
+        return arr;
+      });
+      if (i >= fullText.length) {
+        if (typingIntervalRef.current) {
+          window.clearInterval(typingIntervalRef.current);
+          typingIntervalRef.current = null;
+        }
         setIsTyping(false);
-        setTypingIdx(null);
       }
-    };
-
-    rafRef.current = requestAnimationFrame(step);
+    }, CHAR_INTERVAL_MS);
   };
 
   async function sendMessage(payload?: string) {
@@ -204,6 +228,7 @@ export default function ChatbotBubble() {
 
     const botIndex = messages.length + 1;
     setIsThinking(true);
+    setIsTyping(false);
     setMessages((prev) => [
       ...prev,
       { role: 'user', text },
@@ -234,7 +259,6 @@ export default function ChatbotBubble() {
     } catch (err: any) {
       setIsThinking(false);
       setIsTyping(false);
-      setTypingIdx(null);
       setMessages((prev) => {
         const arr = [...prev];
         arr[botIndex] = {
@@ -261,6 +285,7 @@ export default function ChatbotBubble() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  // ===== Variants (desktop) =====
   const springIn: Transition = {
     type: 'spring',
     stiffness: 220,
@@ -273,7 +298,6 @@ export default function ChatbotBubble() {
     damping: 26,
     mass: 0.85,
   };
-
   const sheetVariants: Variants = {
     hidden: { opacity: 0, y: 32, scale: 0.9 },
     show: { opacity: 1, y: 0, scale: 1, transition: springIn },
@@ -286,6 +310,7 @@ export default function ChatbotBubble() {
     },
   };
 
+  /* ===== UI blocks ===== */
   const SuggestionsUI = (
     <motion.div
       initial={{ opacity: 0, y: 6 }}
@@ -301,14 +326,7 @@ export default function ChatbotBubble() {
           <motion.button
             key={s}
             onClick={() => sendMessage(s)}
-            className="rounded-[3rem] px-3 py-1.5 text-[11px]
-                       bg-white/60 dark:bg-neutral-900/60
-                       text-neutral-800 dark:text-neutral-100
-                       ring-1 ring-black/[0.02] dark:ring-white/[0.04]
-                       shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]
-                       dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]
-                       transition hover:bg-white/90 dark:hover:bg-neutral-900/85
-                       hover:translate-y-[-1px] active:translate-y-0"
+            className="rounded-[3rem] px-3 py-1.5 text-[11px] bg-white/60 dark:bg-neutral-900/60 text-neutral-800 dark:text-neutral-100 ring-1 ring-black/[0.02] dark:ring-white/[0.04] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:bg-white/90 dark:hover:bg-neutral-900/85 hover:translate-y-[-1px] active:translate-y-0"
             initial={{ opacity: 0, y: 8, scale: 0.96 }}
             animate={{
               opacity: 1,
@@ -336,12 +354,10 @@ export default function ChatbotBubble() {
       {messages.map((m, i) => {
         const isUser = m.role === 'user';
         const isError = m.role === 'error';
-        const isTypingThis = isTyping && typingIdx === i && m.role === 'bot';
-
         return (
           <motion.div
             key={i}
-            initial={false} /* évite toute ré-anim sur update */
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             className={`max-w-[92%] px-4 py-2 rounded-[2rem] shadow-sm whitespace-pre-wrap leading-relaxed ${
               isUser
@@ -350,75 +366,65 @@ export default function ChatbotBubble() {
                   ? 'mr-auto bg-red-100 text-red-700 dark:bg-red-900/25 dark:text-red-200'
                   : 'mr-auto bg-white/80 text-neutral-900 dark:bg-neutral-900/70 dark:text-neutral-50'
             }`}
-            style={{ contain: 'content' } as React.CSSProperties}
           >
             {m.role === 'bot' ? (
-              isTypingThis ? (
-                /* PENDANT LA FRAPPE: TEXTE BRUT → aucune parse markdown */
-                <span className="block">{m.text}</span>
-              ) : (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    h2: (props) => (
-                      <h2
-                        {...props}
-                        className="mt-2 mb-2 text-[13px] font-semibold uppercase tracking-wide text-neutral-700 dark:text-neutral-300"
-                      />
-                    ),
-                    h3: (props) => (
-                      <h3
-                        {...props}
-                        className="mt-2 mb-2 text-[13px] font-semibold text-neutral-800 dark:text-neutral-200"
-                      />
-                    ),
-                    p: (props) => (
-                      <p {...props} className="mb-2 leading-[1.55]" />
-                    ),
-                    ul: (props) => (
-                      <ul
-                        {...props}
-                        className="mb-2 ml-4 list-disc space-y-1"
-                      />
-                    ),
-                    ol: (props) => (
-                      <ol
-                        {...props}
-                        className="mb-2 ml-4 list-decimal space-y-1"
-                      />
-                    ),
-                    li: (props) => <li {...props} className="mb-0.5" />,
-                    a: (props) => (
-                      <a
-                        {...props}
-                        className="underline underline-offset-2 decoration-primary/50 hover:opacity-80 text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      />
-                    ),
-                    hr: () => (
-                      <div className="my-3 h-px bg-gradient-to-r from-transparent via-neutral-200/70 to-transparent dark:via-white/10" />
-                    ),
-                    code: ({ children, ...props }) => (
-                      <code
-                        {...props}
-                        className="rounded-md bg-neutral-900 text-white px-1.5 py-0.5 text-[11px]"
-                      >
-                        {children}
-                      </code>
-                    ),
-                  }}
-                >
-                  {m.text}
-                </ReactMarkdown>
-              )
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h2: (props) => (
+                    <h2
+                      {...props}
+                      className="mt-2 mb-2 text-[13px] font-semibold uppercase tracking-wide text-neutral-700 dark:text-neutral-300"
+                    />
+                  ),
+                  h3: (props) => (
+                    <h3
+                      {...props}
+                      className="mt-2 mb-2 text-[13px] font-semibold text-neutral-800 dark:text-neutral-200"
+                    />
+                  ),
+                  p: (props) => (
+                    <p {...props} className="mb-2 leading-[1.55]" />
+                  ),
+                  ul: (props) => (
+                    <ul {...props} className="mb-2 ml-4 list-disc space-y-1" />
+                  ),
+                  ol: (props) => (
+                    <ol
+                      {...props}
+                      className="mb-2 ml-4 list-decimal space-y-1"
+                    />
+                  ),
+                  li: (props) => <li {...props} className="mb-0.5" />,
+                  a: (props) => (
+                    <a
+                      {...props}
+                      className="underline underline-offset-2 decoration-primary/50 hover:opacity-80 text-primary"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  ),
+                  hr: () => (
+                    <div className="my-3 h-px bg-gradient-to-r from-transparent via-neutral-200/70 to-transparent dark:via-white/10" />
+                  ),
+                  code: ({ children, ...props }) => (
+                    <code
+                      {...props}
+                      className="rounded-md bg-neutral-900 text-white px-1.5 py-0.5 text-[11px]"
+                    >
+                      {children}
+                    </code>
+                  ),
+                }}
+              >
+                {m.text}
+              </ReactMarkdown>
             ) : (
               m.text
             )}
           </motion.div>
         );
       })}
-
       {(isThinking || isTyping) && (
         <div className="mr-auto bg-white/70 dark:bg-neutral-900/70 rounded-[3rem] px-3 py-2 text-[11px] text-neutral-700 dark:text-neutral-200 shadow-sm">
           {isThinking ? 'IkovalineTalk réfléchit…' : 'IkovalineTalk écrit…'}
@@ -427,11 +433,12 @@ export default function ChatbotBubble() {
     </>
   );
 
+  /* ===== RENDER ===== */
   return (
     <>
       <IkovalineButtonFloating onClick={() => setOpen(true)} hidden={open} />
 
-      {/* DESKTOP (≥ md) — inchangé */}
+      {/* ===== DESKTOP (>= md) — inchangé ===== */}
       {isDesktop && (
         <AnimatePresence>
           {open && (
@@ -443,7 +450,6 @@ export default function ChatbotBubble() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               />
-
               <motion.div
                 style={{ translateY: sYpos, scaleX: sX, scaleY: sY }}
                 className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-[999999] flex h-[75vh] max-h-[760px] w-[94vw] max-w-[500px] flex-col overflow-hidden p-1 rounded-[3rem] bg-white/95 dark:bg-neutral-950/90 backdrop-blur-2xl text-neutral-900 dark:text-neutral-50 shadow-[0_24px_70px_rgba(0,0,0,0.45)] ring-1 ring-black/[0.02] dark:ring-white/[0.04]"
@@ -501,14 +507,9 @@ export default function ChatbotBubble() {
                 >
                   {messages.length <= 1 && SuggestionsUI}
                   <MessagesList />
-                  {isThinking && !isTyping && (
-                    <div className="mr-auto bg-white/70 dark:bg-neutral-900/70 rounded-[3rem] px-3 py-2 text-[11px] text-neutral-700 dark:text-neutral-200 animate-pulse shadow-sm">
-                      IkovalineTalk réfléchit…
-                    </div>
-                  )}
                 </div>
 
-                {/* CTA */}
+                {/* CTAs */}
                 <div className="px-5 pb-3 pt-1 flex gap-2">
                   <a
                     href="https://calendly.com/florent-ghizzoni/meeting?month=2025-11"
@@ -555,10 +556,11 @@ export default function ChatbotBubble() {
         </AnimatePresence>
       )}
 
-      {/* MOBILE (< md) — Drawer sans zoom iOS */}
+      {/* ===== MOBILE (< md) — Drawer iOS-safe ===== */}
       {!isDesktop && (
         <>
           <IOSNoZoomCSS />
+          {useIOSViewportVars()}
           <Drawer
             open={open}
             onOpenChange={(v) => (v ? setOpen(true) : setOpen(false))}
@@ -567,6 +569,16 @@ export default function ChatbotBubble() {
               id="ikova-drawer"
               onOpenAutoFocus={(e) => e.preventDefault()}
               className="z-[999999] border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl"
+              style={{
+                // hauteur basée sur viewport visible + pas de trou blanc
+                height: 'min(86dvh, var(--ikova-vvh, 100dvh))',
+                // padding bas = safe-area + clavier
+                paddingBottom:
+                  'calc(env(safe-area-inset-bottom, 0px) + var(--ikova-kb, 0px))',
+                overscrollBehavior: 'contain',
+                WebkitTransform: 'translateZ(0)',
+                backfaceVisibility: 'hidden',
+              }}
             >
               <DrawerHeader className="pb-2 select-none">
                 <div className="flex items-center justify-between px-1">
@@ -598,6 +610,7 @@ export default function ChatbotBubble() {
                   </DrawerClose>
                 </div>
 
+                {/* Badges */}
                 <div className="px-1 pt-3 flex gap-2 flex-wrap">
                   <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
                     <BadgeCheck size={12} /> 20+ projets
@@ -611,21 +624,24 @@ export default function ChatbotBubble() {
                 </div>
               </DrawerHeader>
 
-              <div
-                ref={scrollRef}
-                className="max-h-[42vh] overflow-y-auto px-4 pb-2 space-y-3 text-sm overscroll-contain [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,.25)_transparent] dark:[scrollbar-color:rgba(255,255,255,.25)_transparent]"
-                style={{ WebkitOverflowScrolling: 'touch' as any }}
-              >
-                {messages.length <= 1 && SuggestionsUI}
-                <MessagesList />
-                {isThinking && !isTyping && (
-                  <div className="mr-auto bg-white/70 dark:bg-neutral-900/70 rounded-[3rem] px-3 py-2 text-[11px] text-neutral-700 dark:text-neutral-200 animate-pulse shadow-sm">
-                    IkovalineTalk réfléchit…
-                  </div>
-                )}
-              </div>
+              {/* Layout en grille: auto auto 1fr auto auto (pas de calculs fragiles) */}
+              <div className="grid grid-rows-[1fr_auto_auto] px-0">
+                {/* Zone scroll (1fr) */}
+                <div
+                  ref={scrollRef}
+                  className="overflow-y-auto px-4 pb-2 space-y-3 text-sm overscroll-contain [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,.25)_transparent] dark:[scrollbar-color:rgba(255,255,255,.25)_transparent]"
+                  style={{ WebkitOverflowScrolling: 'touch' as any }}
+                >
+                  {messages.length <= 1 && SuggestionsUI}
+                  <MessagesList />
+                  {isThinking && !isTyping && (
+                    <div className="mr-auto bg-white/70 dark:bg-neutral-900/70 rounded-[3rem] px-3 py-2 text-[11px] text-neutral-700 dark:text-neutral-200 animate-pulse shadow-sm">
+                      IkovalineTalk réfléchit…
+                    </div>
+                  )}
+                </div>
 
-              <DrawerFooter className="pt-2 gap-0">
+                {/* CTAs */}
                 <div className="px-5 pb-3 pt-1 flex gap-2 select-none">
                   <a
                     href="https://calendly.com/florent-ghizzoni/meeting?month=2025-11"
@@ -645,7 +661,8 @@ export default function ChatbotBubble() {
                   </a>
                 </div>
 
-                <div className="px-5 pb-4">
+                {/* Input */}
+                <DrawerFooter className="pt-2 gap-0 px-5 pb-[calc(8px+env(safe-area-inset-bottom,0px))]">
                   <div className="flex items-center bg-white/90 dark:bg-neutral-900/80 rounded-[3rem] px-3 py-2 ring-1 ring-black/[0.02] dark:ring-white/[0.02] shadow-lg shadow-black/5">
                     <input
                       className="flex-1 bg-transparent text-[16px] outline-none placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
@@ -673,8 +690,8 @@ export default function ChatbotBubble() {
                       <Send size={14} />
                     </button>
                   </div>
-                </div>
-              </DrawerFooter>
+                </DrawerFooter>
+              </div>
             </DrawerContent>
           </Drawer>
         </>
