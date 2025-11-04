@@ -1,11 +1,13 @@
 // app/api/chatbot/route.ts
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { createClient } from '@supabase/supabase-js';
 import { LLMLayerClient } from 'llmlayer';
+import { createHash, randomUUID } from 'crypto';
 import { CATALOG } from '@/lib/catalog';
 import { fetchIkovalineContext } from '@/lib/IkovalineKnowledge';
 
 export const runtime = 'nodejs';
-// Important: donne de l'air au serverless
 export const maxDuration = 60;
 export const preferredRegion = 'fra1';
 export const dynamic = 'force-dynamic';
@@ -14,10 +16,14 @@ const CONTACT_URL = 'https://ikovaline.com/contact';
 const CALENDAR_URL =
   'https://calendly.com/florent-ghizzoni/meeting?month=2025-11';
 
-// ————— Utils —————
-const apiKey = process.env.LLMLAYER_API_KEY;
+const apiKey = process.env.LLMLAYER_API_KEY!;
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY! // service role pour écrire malgré RLS
+);
 const client = new LLMLayerClient({ apiKey });
 
+// =========== Utils ===========
 function detectIntent(msg: string) {
   const m = msg
     .toLowerCase()
@@ -27,7 +33,7 @@ function detectIntent(msg: string) {
     warranty:
       /(garanti|garantie|sav|mainten|support|bug|correct|retour|retract|rembours|penalit|sla|astreinte|assistance|incident|ticket|hotline|disponibilite)/i,
     pricing:
-      /(prix|tarif|budget|cout|co[uû]t|combien|devis|grille|facturation|facture|ht|ttc)/i,
+      /(prix|tarif|budget|co[uû]t|combien|devis|grille|facturation|facture|ht|ttc)/i,
     timing:
       /(delai|deadline|livraison|temps|planning|quand|calendrier|roadmap|chrono)/i,
     terms:
@@ -55,16 +61,16 @@ function buildSlimCatalog() {
   const out: any = {};
   for (const [catId, cat] of Object.entries(CATALOG)) {
     out[catId] = {
-      name: cat.name,
-      tagline: cat.tagline,
-      hasAdsBudget: cat.hasAdsBudget,
-      tiers: cat.tiers.map((t) => ({
+      name: (cat as any).name,
+      tagline: (cat as any).tagline,
+      hasAdsBudget: (cat as any).hasAdsBudget,
+      tiers: (cat as any).tiers.map((t: any) => ({
         id: t.id,
         name: t.name,
         price: t.price,
         baseDelayDays: t.baseDelayDays,
       })),
-      options: cat.options.slice(0, 6).map((o) => ({
+      options: (cat as any).options.slice(0, 6).map((o: any) => ({
         id: o.id,
         label: o.label,
         price: o.price,
@@ -99,7 +105,6 @@ ${message}
 Règles: respecter l'intention; si WARRANTY/TERMS => pas de vente; sinon réponse courte, 1–2 reco prix+délais, 1 preuve; CTA compact si intérêt.`;
 }
 
-// Prend n’importe quelle forme de réponse du SDK
 function pickReply(r: any): string {
   if (!r) return '';
   if (typeof r === 'string') return r;
@@ -113,7 +118,6 @@ function pickReply(r: any): string {
   );
 }
 
-// Petit helper de timeout (pour le contexte uniquement)
 function withTimeout<T>(
   p: Promise<T>,
   ms: number,
@@ -131,14 +135,33 @@ function withTimeout<T>(
   });
 }
 
+function redactPII(t: string) {
+  return (t || '')
+    .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, '[email]')
+    .replace(/\b(\+?\d{1,3}[\s.-]?)?(\d{2}[\s.-]?){4}\d{2}\b/g, '[phone]');
+}
+
+function getOrCreateAnonId(): { value: string; isNew: boolean } {
+  const jar = cookies();
+  const existing = jar.get('ikova_chat_sid')?.value;
+  if (existing) return { value: existing, isNew: false };
+  return { value: randomUUID(), isNew: true };
+}
+
+function hashAnon(v: string) {
+  const salt = process.env.ANON_SALT || '';
+  return createHash('sha256')
+    .update(v + salt)
+    .digest('hex')
+    .slice(0, 32);
+}
+
+// =========== Route ===========
 export async function POST(req: Request) {
   try {
     if (!apiKey) {
       return NextResponse.json(
-        {
-          error:
-            'LLMLAYER_API_KEY manquant (Vercel > Project > Env Vars, Production & Preview)',
-        },
+        { error: 'LLMLAYER_API_KEY manquant (Vercel > Env Vars)' },
         { status: 500 }
       );
     }
@@ -149,14 +172,52 @@ export async function POST(req: Request) {
     } catch {
       return NextResponse.json({ error: 'JSON invalide' }, { status: 400 });
     }
-    const message: string = (payload?.message ?? '').toString();
-    if (!message.trim()) {
+
+    // ------ MODE FEEDBACK (même route) ------
+    if (payload?.feedback) {
+      const { messageId, rating, tags, comment } = payload.feedback as {
+        messageId?: string;
+        rating?: number;
+        tags?: string[];
+        comment?: string;
+      };
+
+      if (!messageId || (rating !== 1 && rating !== -1)) {
+        return NextResponse.json(
+          { error: 'Feedback invalide' },
+          { status: 400 }
+        );
+      }
+
+      const { error: fiErr } = await supabase.from('chat_feedback').insert({
+        message_id: messageId,
+        rating,
+        tags: Array.isArray(tags) ? tags : null,
+        comment: comment ? String(comment).slice(0, 2000) : null,
+      });
+
+      if (fiErr) {
+        return NextResponse.json({ error: fiErr.message }, { status: 500 });
+      }
+      return NextResponse.json({ ok: true });
+    }
+
+    // ------ MODE CHAT ------
+    const rawMessage: string = (payload?.message ?? '').toString();
+    if (!rawMessage.trim()) {
       return NextResponse.json({ error: 'Message invalide' }, { status: 400 });
     }
 
-    const intent = detectIntent(message);
+    const locale = (payload?.locale ?? 'fr-FR').toString();
+    const pagePath = (payload?.pagePath ?? '').toString();
+    const referrer = (payload?.referrer ?? '').toString();
+    const abBucket = (payload?.abBucket ?? '').toString();
+    const promptVersion = (payload?.promptVersion ?? '').toString();
+    let sessionId: string | undefined = payload?.sessionId || undefined;
 
-    // Contexte: on limite à 1500ms et on fallback si ça traîne
+    const intent = detectIntent(rawMessage);
+
+    // Contexte limité à 1500 ms
     let siteContext = '';
     try {
       siteContext = await withTimeout(
@@ -169,39 +230,126 @@ export async function POST(req: Request) {
         'Infos clés: agence web Next.js/React, 20+ projets, 67+ avis, cas clients (Teka Somba, Lynelec, Skillize).';
     }
 
-    const query = buildUserQuery(siteContext, message, intent);
+    const { value: anonCookie, isNew } = getOrCreateAnonId();
+    const anon_id = hashAnon(anonCookie);
 
-    // Appel LLM (laisse le runtime gérer jusqu’à 60s)
-    const llmResponse: any = await client.answer({
-      query,
-      model: 'openai/gpt-4o', // garde 4o (pas mini)
-      system_prompt: systemPrompt,
-      response_language: 'fr',
-      location: 'fr',
-      return_sources: false,
-      citations: false,
-      temperature: 0.2,
-      max_tokens: 420,
-    });
-
-    const reply = pickReply(llmResponse)?.trim();
-
-    if (!reply) {
-      const fallback = [
-        '### Reco rapide',
-        '• **Landing Page – Starter** dès ~1 090€ (livraison 7–10 j)',
-        '• **Site Vitrine – Starter** dès ~2 490€ (livraison 10–14 j)',
-        '',
-        '### Suite',
-        `- [📅 RDV 30 min](${CALENDAR_URL})`,
-        `- [✉️ Nous écrire](${CONTACT_URL})`,
-      ].join('\n');
-      return NextResponse.json({ reply: fallback });
+    // Session
+    if (!sessionId) {
+      const { data: s, error: se } = await supabase
+        .from('chat_sessions')
+        .insert({
+          anon_id,
+          consent: true,
+          locale,
+          referrer,
+          page_path: pagePath,
+          ab_bucket: abBucket || null,
+          prompt_version: promptVersion || null,
+        })
+        .select('id')
+        .single();
+      if (se) throw se;
+      sessionId = s.id as string;
+    } else {
+      await supabase
+        .from('chat_sessions')
+        .update({
+          last_seen: new Date().toISOString(),
+          locale,
+          page_path: pagePath,
+        })
+        .eq('id', sessionId);
     }
 
-    return NextResponse.json({ reply });
+    // Log user message (redacté)
+    const user_text = redactPII(rawMessage).slice(0, 8000);
+    const { error: muErr } = await supabase.from('chat_messages').insert({
+      session_id: sessionId,
+      role: 'user',
+      content: user_text,
+    });
+    if (muErr) throw muErr;
+
+    // Prompt & LLM
+    const query = buildUserQuery(siteContext, user_text, intent);
+    const started = Date.now();
+    let llmResponse: any;
+    let modelUsed = 'openai/gpt-4o';
+
+    try {
+      // Endpoint "answer" (LLMLayer)
+      llmResponse = await client.answer({
+        query,
+        model: modelUsed,
+        system_prompt: systemPrompt,
+        response_language: 'fr',
+        location: 'fr',
+        return_sources: false,
+        citations: false,
+        temperature: 0.2,
+        max_tokens: 420,
+      });
+    } catch {
+      // Fallback chat-compatible
+      // @ts-ignore
+      llmResponse = await client.chat.completions.create({
+        model: modelUsed,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: query },
+        ],
+        temperature: 0.2,
+        max_tokens: 420,
+      });
+    }
+
+    const latency_ms = Date.now() - started;
+    const reply = (pickReply(llmResponse) || '').trim();
+
+    // Usage (si dispo)
+    const usage = llmResponse?.usage || llmResponse?.choices?.[0]?.usage || {};
+    const tokens_in = usage.prompt_tokens ?? usage.input_tokens ?? null;
+    const tokens_out = usage.completion_tokens ?? usage.output_tokens ?? null;
+    const finish_reason =
+      llmResponse?.choices?.[0]?.finish_reason ??
+      llmResponse?.finish_reason ??
+      null;
+
+    // Log assistant + récupérer l'id
+    const { data: inserted, error: maErr } = await supabase
+      .from('chat_messages')
+      .insert({
+        session_id: sessionId,
+        role: 'assistant',
+        content: reply || '…',
+        model: modelUsed,
+        latency_ms,
+        tokens_in,
+        tokens_out,
+        finish_reason,
+      })
+      .select('id')
+      .single();
+    if (maErr) throw maErr;
+
+    // Réponse
+    const res = NextResponse.json({
+      reply: reply || fallbackReply(),
+      sessionId,
+      assistantMessageId: inserted?.id,
+    });
+
+    // Cookie de session anonyme (minuscule pour sameSite)
+    if (isNew) {
+      res.cookies.set('ikova_chat_sid', anonCookie, {
+        httpOnly: true,
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 24 * 180, // 180 jours
+        path: '/',
+      });
+    }
+    return res;
   } catch (err: any) {
-    // Normalise l’erreur pour éviter le HTML Next en prod
     const msg =
       err?.message ||
       err?.response?.data?.message ||
@@ -209,13 +357,11 @@ export async function POST(req: Request) {
       'Erreur serveur';
     const status = err?.response?.status || 500;
 
-    // Log minimal (éviter d’exposer clé)
     console.error('Chatbot API error:', {
       status,
       msg: String(msg).slice(0, 500),
     });
 
-    // 504 sur timeouts
     if (/abort|timeout/i.test(String(msg))) {
       return NextResponse.json(
         { error: 'Délai dépassé (réessaie dans un instant)' },
@@ -224,4 +370,14 @@ export async function POST(req: Request) {
     }
     return NextResponse.json({ error: msg }, { status });
   }
+}
+
+function fallbackReply() {
+  return [
+    '### Reco rapide',
+    '• **Landing Page – Starter** dès ~1 090€ (livraison 7–10 j)',
+    '• **Site Vitrine – Starter** dès ~2 490€ (livraison 10–14 j)',
+    '',
+    `- [📅 RDV 30 min](${CALENDAR_URL}) — [✉️ Nous écrire](${CONTACT_URL})`,
+  ].join('\n');
 }

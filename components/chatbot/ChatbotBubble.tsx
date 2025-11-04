@@ -9,13 +9,29 @@ import {
   useSpring,
 } from 'framer-motion';
 import type { Variants, Transition } from 'framer-motion';
-import { X, Send, Calendar, Mail, Info, BadgeCheck, Timer } from 'lucide-react';
+import {
+  X,
+  Send,
+  Calendar,
+  Mail,
+  Info,
+  BadgeCheck,
+  Timer,
+  ThumbsUp,
+  ThumbsDown,
+  Loader2,
+} from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import IkovalineLogo from '@/public/images/logo/ikovaline-logo.svg';
 import IkovalineButtonFloating from './IkovaOrb';
 
-type ChatMsg = { role: 'user' | 'bot' | 'error'; text: string };
+type ChatMsg = {
+  id?: string; // <- id message assistant (pour feedback)
+  role: 'user' | 'bot' | 'error';
+  text: string;
+  feedback?: 'up' | 'down'; // <- état feedback local
+};
 
 const ASSISTANT_NAME = 'IkovalineTalk';
 const MIN_THINKING_MS = 900;
@@ -35,13 +51,24 @@ export default function ChatbotBubble() {
   const [input, setInput] = React.useState('');
   const [isThinking, setIsThinking] = React.useState(false);
   const [isTyping, setIsTyping] = React.useState(false);
+
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
   const typingIntervalRef = React.useRef<number | null>(null);
   const didIntro = React.useRef(false);
-  // en haut du composant
+
+  // session (backend)
+  const sessionIdRef = React.useRef<string | null>(null);
+
+  // auto-follow scroll
   const [autoFollow, setAutoFollow] = React.useState(true);
-  const AUTOFOLLOW_EPS = 24; // px de tolérance pour considérer "au bas"
-  // après la création de scrollRef
+  const AUTOFOLLOW_EPS = 24;
+
+  // envoi feedback en cours (désactive les boutons)
+  const [sendingFeedbackId, setSendingFeedbackId] = React.useState<
+    string | null
+  >(null);
+
+  // ===== scroll container auto-follow
   React.useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -50,7 +77,6 @@ export default function ChatbotBubble() {
       const { scrollTop, scrollHeight, clientHeight } = el;
       const atBottom =
         scrollTop + clientHeight >= scrollHeight - AUTOFOLLOW_EPS;
-      // si l'utilisateur remonte -> autoFollow = false ; s'il revient en bas -> true
       setAutoFollow(atBottom);
     };
 
@@ -58,7 +84,7 @@ export default function ChatbotBubble() {
     return () => el.removeEventListener('scroll', onScroll);
   }, []);
 
-  // ===== Dynamic-Island (open/scroll) =====
+  // ===== Dynamic-Island (open/scroll)
   const scaleX = useMotionValue(0.96);
   const scaleY = useMotionValue(0.96);
   const y = useMotionValue(32);
@@ -81,7 +107,7 @@ export default function ChatbotBubble() {
       scaleY.set(0.96);
       y.set(32);
     }
-  }, [open]);
+  }, [open, scaleX, scaleY, y]);
 
   React.useEffect(() => {
     let last = window.scrollY;
@@ -95,9 +121,9 @@ export default function ChatbotBubble() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [scaleX, scaleY, y]);
 
-  // ===== Intro + 1er message (typewriter only first open) =====
+  // ===== Intro au premier open
   React.useEffect(() => {
     if (!open || didIntro.current || messages.length > 0) return;
     const intro =
@@ -110,6 +136,7 @@ export default function ChatbotBubble() {
     });
   }, [open, messages.length]);
 
+  // auto-scroll down quand nouveaux messages
   React.useEffect(() => {
     const el = scrollRef.current;
     if (!el || !autoFollow) return;
@@ -119,7 +146,7 @@ export default function ChatbotBubble() {
     if (open) setAutoFollow(true);
   }, [open]);
 
-  // cleanup
+  // cleanup typing interval
   React.useEffect(() => {
     return () => {
       if (typingIntervalRef.current)
@@ -127,6 +154,7 @@ export default function ChatbotBubble() {
     };
   }, []);
 
+  // ===== Typewriter
   const startTyping = (fullText: string, botIndex: number) => {
     if (typingIntervalRef.current)
       window.clearInterval(typingIntervalRef.current);
@@ -150,6 +178,32 @@ export default function ChatbotBubble() {
     }, CHAR_INTERVAL_MS);
   };
 
+  // ===== Feedback
+  async function sendFeedback(messageId: string, rating: 1 | -1, tag?: string) {
+    try {
+      setSendingFeedbackId(messageId);
+      await fetch('/api/chatbot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          feedback: { messageId, rating, tags: tag ? [tag] : undefined },
+        }),
+      });
+      setMessages((prev) => {
+        const arr = [...prev];
+        const i = arr.findIndex((m) => m.id === messageId);
+        if (i >= 0)
+          arr[i] = { ...arr[i], feedback: rating === 1 ? 'up' : 'down' };
+        return arr;
+      });
+    } catch {
+      // silencieux (option: toast)
+    } finally {
+      setSendingFeedbackId(null);
+    }
+  }
+
+  // ===== Envoi message
   async function sendMessage(payload?: string) {
     const text = (payload ?? input).trim();
     if (!text || isThinking || isTyping) return;
@@ -169,19 +223,49 @@ export default function ChatbotBubble() {
         const res = await fetch('/api/chatbot', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text }),
+          body: JSON.stringify({
+            message: text,
+            sessionId: sessionIdRef.current,
+            locale: navigator.language || 'fr-FR',
+            pagePath:
+              typeof window !== 'undefined' ? window.location.pathname : '',
+            referrer: typeof document !== 'undefined' ? document.referrer : '',
+            abBucket: 'A',
+            promptVersion: 'v1',
+          }),
         });
+
         const data = await res.json();
         if (!res.ok || data.error)
           throw new Error(data.error || 'Erreur interne');
-        return (data.reply as string) ?? 'Aucune réponse.';
+
+        if (data.sessionId && !sessionIdRef.current) {
+          sessionIdRef.current = data.sessionId;
+        }
+
+        return {
+          reply: (data.reply as string) ?? 'Aucune réponse.',
+          assistantMessageId: (data.assistantMessageId as string) || undefined,
+        };
       })();
 
-      const delayPromise = new Promise((r) => setTimeout(r, MIN_THINKING_MS));
-      const [reply] = (await Promise.all([fetchPromise, delayPromise])) as [
-        string,
-        unknown,
-      ];
+      const delayPromise = new Promise<void>((r) =>
+        setTimeout(r, MIN_THINKING_MS)
+      );
+      await delayPromise;
+
+      const { reply, assistantMessageId } = await fetchPromise;
+
+      // attacher l'id de message assistant (pour feedback)
+      if (assistantMessageId) {
+        setMessages((prev) => {
+          const arr = [...prev];
+          if (arr[botIndex]?.role === 'bot') {
+            arr[botIndex] = { ...arr[botIndex], id: assistantMessageId };
+          }
+          return arr;
+        });
+      }
 
       setIsThinking(false);
       startTyping(reply, botIndex);
@@ -206,15 +290,7 @@ export default function ChatbotBubble() {
     }
   };
 
-  React.useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
-
-  // ===== Variants =====
+  // ===== Variants
   const springIn: Transition = {
     type: 'spring',
     stiffness: 220,
@@ -247,13 +323,14 @@ export default function ChatbotBubble() {
       <AnimatePresence>
         {open && (
           <>
-            {/* Backdrop neutre (noir) */}
+            {/* Backdrop */}
             <motion.button
               className="fixed inset-0 z-[999998] bg-black/35 backdrop-blur-sm"
               onClick={() => setOpen(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              aria-label="Fermer la fenêtre"
             />
 
             {/* Sheet */}
@@ -286,8 +363,8 @@ export default function ChatbotBubble() {
                 <div className="flex items-center gap-3">
                   <div
                     className="relative h-10 w-10 rounded-2xl flex items-center justify-center
-                                  bg-white/90 dark:bg-neutral-900/70
-                                  ring-1 ring-black/[0.02] dark:ring-white/[0.02] overflow-hidden"
+                               bg-white/90 dark:bg-neutral-900/70
+                               ring-1 ring-black/[0.02] dark:ring-white/[0.02] overflow-hidden"
                   >
                     <Image
                       src={IkovalineLogo}
@@ -314,7 +391,7 @@ export default function ChatbotBubble() {
                 </button>
               </div>
 
-              {/* Badges sobres, neutres */}
+              {/* Badges */}
               <div className="px-5 pt-3 flex gap-2 flex-wrap">
                 <span
                   className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px]
@@ -349,7 +426,7 @@ export default function ChatbotBubble() {
                            [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,.25)_transparent]
                            dark:[scrollbar-color:rgba(255,255,255,.25)_transparent]"
               >
-                {/* Suggestions dans le flux */}
+                {/* Suggestions (si fil quasi vide) */}
                 {messages.length <= 1 && (
                   <motion.div
                     initial={{ opacity: 0, y: 6 }}
@@ -407,6 +484,8 @@ export default function ChatbotBubble() {
                 {messages.map((m, i) => {
                   const isUser = m.role === 'user';
                   const isError = m.role === 'error';
+                  const canFeedback = m.role === 'bot' && !!m.id;
+
                   return (
                     <motion.div
                       key={i}
@@ -421,86 +500,153 @@ export default function ChatbotBubble() {
                       }`}
                     >
                       {m.role === 'bot' ? (
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            h2: (props) => (
-                              <h2
-                                {...props}
-                                className="mt-2 mb-2 text-[13px] font-semibold uppercase tracking-wide text-neutral-700 dark:text-neutral-300"
-                              />
-                            ),
-                            h3: (props) => (
-                              <h3
-                                {...props}
-                                className="mt-2 mb-2 text-[13px] font-semibold text-neutral-800 dark:text-neutral-200"
-                              />
-                            ),
-                            p: (props) => (
-                              <p {...props} className="mb-2 leading-[1.55]" />
-                            ),
-                            ul: (props) => (
-                              <ul
-                                {...props}
-                                className="mb-2 ml-4 list-disc space-y-1"
-                              />
-                            ),
-                            ol: (props) => (
-                              <ol
-                                {...props}
-                                className="mb-2 ml-4 list-decimal space-y-1"
-                              />
-                            ),
-                            li: (props) => <li {...props} className="mb-0.5" />,
-                            a: (props) => (
-                              <a
-                                {...props}
-                                className="underline underline-offset-2 decoration-primary/50 hover:opacity-80 text-primary"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              />
-                            ),
-                            hr: () => (
-                              <div className="my-3 h-px bg-gradient-to-r from-transparent via-neutral-200/70 to-transparent dark:via-white/10" />
-                            ),
-                            code: ({ children, ...props }) => (
-                              <code
-                                {...props}
-                                className="rounded-md bg-neutral-900 text-white px-1.5 py-0.5 text-[11px]"
-                              >
-                                {children}
-                              </code>
-                            ),
-                            table: (props) => (
-                              <div className="my-2 overflow-x-auto rounded-2xl ring-1 ring-black/10 dark:ring-white/10">
-                                <table
+                        <>
+                          <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              h2: (props) => (
+                                <h2
                                   {...props}
-                                  className="min-w-[520px] w-full text-[12px] border-collapse bg-white/90 dark:bg-neutral-900/70 backdrop-blur"
+                                  className="mt-2 mb-2 text-[13px] font-semibold uppercase tracking-wide text-neutral-700 dark:text-neutral-300"
                                 />
-                              </div>
-                            ),
-                            thead: (props) => (
-                              <thead
-                                {...props}
-                                className="sticky top-0 bg-neutral-100 dark:bg-neutral-900/80"
-                              />
-                            ),
-                            th: (props) => (
-                              <th
-                                {...props}
-                                className="px-3 py-2 text-left font-semibold text-neutral-700 dark:text-neutral-200 border-b border-black/5 dark:border-white/10"
-                              />
-                            ),
-                            td: (props) => (
-                              <td
-                                {...props}
-                                className="px-3 py-2 text-neutral-800 dark:text-neutral-100 border-b border-black/5 dark:border-white/10 align-top"
-                              />
-                            ),
-                          }}
-                        >
-                          {m.text}
-                        </ReactMarkdown>
+                              ),
+                              h3: (props) => (
+                                <h3
+                                  {...props}
+                                  className="mt-2 mb-2 text-[13px] font-semibold text-neutral-800 dark:text-neutral-200"
+                                />
+                              ),
+                              p: (props) => (
+                                <p {...props} className="mb-2 leading-[1.55]" />
+                              ),
+                              ul: (props) => (
+                                <ul
+                                  {...props}
+                                  className="mb-2 ml-4 list-disc space-y-1"
+                                />
+                              ),
+                              ol: (props) => (
+                                <ol
+                                  {...props}
+                                  className="mb-2 ml-4 list-decimal space-y-1"
+                                />
+                              ),
+                              li: (props) => (
+                                <li {...props} className="mb-0.5" />
+                              ),
+                              a: (props) => (
+                                <a
+                                  {...props}
+                                  className="underline underline-offset-2 decoration-primary/50 hover:opacity-80 text-primary"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                />
+                              ),
+                              hr: () => (
+                                <div className="my-3 h-px bg-gradient-to-r from-transparent via-neutral-200/70 to-transparent dark:via-white/10" />
+                              ),
+                              code: ({ children, ...props }) => (
+                                <code
+                                  {...props}
+                                  className="rounded-md bg-neutral-900 text-white px-1.5 py-0.5 text-[11px]"
+                                >
+                                  {children}
+                                </code>
+                              ),
+                              table: (props) => (
+                                <div className="my-2 overflow-x-auto rounded-2xl ring-1 ring-black/10 dark:ring-white/10">
+                                  <table
+                                    {...props}
+                                    className="min-w-[520px] w-full text-[12px] border-collapse bg-white/90 dark:bg-neutral-900/70 backdrop-blur"
+                                  />
+                                </div>
+                              ),
+                              thead: (props) => (
+                                <thead
+                                  {...props}
+                                  className="sticky top-0 bg-neutral-100 dark:bg-neutral-900/80"
+                                />
+                              ),
+                              th: (props) => (
+                                <th
+                                  {...props}
+                                  className="px-3 py-2 text-left font-semibold text-neutral-700 dark:text-neutral-200 border-b border-black/5 dark:border-white/10"
+                                />
+                              ),
+                              td: (props) => (
+                                <td
+                                  {...props}
+                                  className="px-3 py-2 text-neutral-800 dark:text-neutral-100 border-b border-black/5 dark:border-white/10 align-top"
+                                />
+                              ),
+                            }}
+                          >
+                            {m.text}
+                          </ReactMarkdown>
+
+                          {/* Feedback row */}
+                          {canFeedback && (
+                            <div className="mt-2 flex items-center gap-1.5 text-[11px]">
+                              <span className="text-neutral-500 dark:text-neutral-400">
+                                Utile ?
+                              </span>
+
+                              <button
+                                type="button"
+                                aria-label="Utile"
+                                disabled={
+                                  sendingFeedbackId === m.id || !!m.feedback
+                                }
+                                onClick={() =>
+                                  m.id && sendFeedback(m.id, 1, 'helpful')
+                                }
+                                className={`inline-flex items-center gap-1 rounded-full px-2 py-1 ring-1 transition
+                                  ${
+                                    m.feedback === 'up'
+                                      ? 'bg-green-100 text-green-700 ring-green-200 dark:bg-green-900/30 dark:text-green-200 dark:ring-green-900'
+                                      : 'bg-white/70 text-neutral-700 ring-black/10 dark:bg-neutral-900/70 dark:text-neutral-200 dark:ring-white/10 hover:bg-white/90 dark:hover:bg-neutral-900/85'
+                                  }`}
+                              >
+                                {sendingFeedbackId === m.id ? (
+                                  <Loader2 size={12} className="animate-spin" />
+                                ) : (
+                                  <ThumbsUp size={12} />
+                                )}
+                                <span>Oui</span>
+                              </button>
+
+                              <button
+                                type="button"
+                                aria-label="Pas utile"
+                                disabled={
+                                  sendingFeedbackId === m.id || !!m.feedback
+                                }
+                                onClick={() =>
+                                  m.id && sendFeedback(m.id, -1, 'not-helpful')
+                                }
+                                className={`inline-flex items-center gap-1 rounded-full px-2 py-1 ring-1 transition
+                                  ${
+                                    m.feedback === 'down'
+                                      ? 'bg-red-100 text-red-700 ring-red-200 dark:bg-red-900/30 dark:text-red-200 dark:ring-red-900'
+                                      : 'bg-white/70 text-neutral-700 ring-black/10 dark:bg-neutral-900/70 dark:text-neutral-200 dark:ring-white/10 hover:bg-white/90 dark:hover:bg-neutral-900/85'
+                                  }`}
+                              >
+                                {sendingFeedbackId === m.id ? (
+                                  <Loader2 size={12} className="animate-spin" />
+                                ) : (
+                                  <ThumbsDown size={12} />
+                                )}
+                                <span>Non</span>
+                              </button>
+
+                              {m.feedback && (
+                                <span className="ml-1 text-neutral-500 dark:text-neutral-400">
+                                  Merci !
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </>
                       ) : (
                         m.text
                       )}
