@@ -208,98 +208,116 @@ export function HeaderResponsive() {
   const leftRef = React.useRef<HTMLAnchorElement>(null);
   const rightRef = React.useRef<HTMLDivElement>(null);
 
+  // 🍏 Effet Dynamic Island optimisé (scroll-only, GPU, auto-stop)
   React.useEffect(() => {
-    const barEl = barRef.current;
-    const innerEl = innerRef.current;
-    const leftEl = leftRef.current;
-    const rightEl = rightRef.current;
-    if (!barEl || !innerEl || !leftEl || !rightEl) return;
+    const bar = barRef.current;
+    const inner = innerRef.current;
+    const left = leftRef.current;
+    const right = rightRef.current;
+    if (!bar || !inner || !left || !right) return;
 
-    let curOuterY = 0;
-    let curOuterScale = 1;
-    let curInnerY = 0;
-    let curInnerScaleX = 1;
-    let curInnerScaleY = 1;
+    let curOY = 0,
+      curOS = 1;
+    let curIY = 0,
+      curISX = 1,
+      curISY = 1;
+    let toOY = 0,
+      toOS = 1;
+    let toIY = 0,
+      toISX = 1,
+      toISY = 1;
 
-    let targetOuterY = 0;
-    let targetOuterScale = 1;
-    let targetInnerY = 0;
-    let targetInnerScaleX = 1;
-    let targetInnerScaleY = 1;
-
-    let lastScrollY = window.scrollY;
+    let lastY = window.scrollY;
     let raf = 0;
+    let running = false;
+    let lastKick = 0;
 
-    const lerp = (from: number, to: number, f: number) =>
-      from + (to - from) * f;
+    const lerp = (a: number, b: number, f: number) => a + (b - a) * f;
 
-    const animate = () => {
-      // un peu plus de réactivité
-      curOuterY = lerp(curOuterY, targetOuterY, 0.22);
-      curOuterScale = lerp(curOuterScale, targetOuterScale, 0.22);
+    const setWillChange = (on: boolean) => {
+      const v = on ? 'transform' : '';
+      bar.style.willChange = v;
+      inner.style.willChange = v;
+      left.style.willChange = v;
+      right.style.willChange = v;
+    };
 
-      curInnerY = lerp(curInnerY, targetInnerY, 0.26);
-      curInnerScaleX = lerp(curInnerScaleX, targetInnerScaleX, 0.26);
-      curInnerScaleY = lerp(curInnerScaleY, targetInnerScaleY, 0.26);
+    const frame = () => {
+      // easing doux (CPU light)
+      curOY = lerp(curOY, toOY, 0.2);
+      curOS = lerp(curOS, toOS, 0.2);
+      curIY = lerp(curIY, toIY, 0.24);
+      curISX = lerp(curISX, toISX, 0.24);
+      curISY = lerp(curISY, toISY, 0.24);
 
-      barEl.style.transform = `translateY(${curOuterY.toFixed(
-        2
-      )}px) scale(${curOuterScale.toFixed(3)})`;
+      // GPU (translate3d) + pas de layout
+      bar.style.transform = `translate3d(0,${curOY.toFixed(2)}px,0) scale(${curOS.toFixed(3)})`;
+      inner.style.transform = `translate3d(0,${curIY.toFixed(2)}px,0) scale(${curISX.toFixed(3)},${curISY.toFixed(3)})`;
+      inner.style.transformOrigin = 'center center';
 
-      innerEl.style.transform = `translateY(${curInnerY.toFixed(
-        2
-      )}px) scale(${curInnerScaleX.toFixed(3)}, ${curInnerScaleY.toFixed(3)})`;
-      innerEl.style.transformOrigin = 'center center';
+      const childSX = curISX * 1.02;
+      const childSY = curISY * 0.97;
+      const childY = curIY * 0.7;
+      const tChild = `translate3d(0,${childY.toFixed(2)}px,0) scale(${childSX.toFixed(3)},${childSY.toFixed(3)})`;
+      left.style.transform = tChild;
+      left.style.transformOrigin = 'left center';
+      right.style.transform = tChild;
+      right.style.transformOrigin = 'right center';
 
-      // enfants un chouïa plus exagérés
-      const childScaleX = curInnerScaleX * 1.02;
-      const childScaleY = curInnerScaleY * 0.97;
-      const childY = curInnerY * 0.7;
+      // Stop auto quand stable et que le scroll s’est arrêté
+      const stable =
+        Math.abs(toOY - curOY) < 0.15 &&
+        Math.abs(toIY - curIY) < 0.15 &&
+        performance.now() - lastKick > 140;
 
-      leftEl.style.transform = `translateY(${childY.toFixed(
-        2
-      )}px) scale(${childScaleX.toFixed(3)}, ${childScaleY.toFixed(3)})`;
-      leftEl.style.transformOrigin = 'left center';
-
-      rightEl.style.transform = `translateY(${childY.toFixed(
-        2
-      )}px) scale(${childScaleX.toFixed(3)}, ${childScaleY.toFixed(3)})`;
-      rightEl.style.transformOrigin = 'right center';
-
-      raf = requestAnimationFrame(animate);
+      if (stable) {
+        running = false;
+        setWillChange(false);
+        return;
+      }
+      raf = requestAnimationFrame(frame);
     };
 
     const onScroll = () => {
-      const yNow = window.scrollY;
-      const dy = yNow - lastScrollY;
-      lastScrollY = yNow;
+      if (open) return; // pas d’anim si menu ouvert (évite conflits)
 
-      // 🔥 effet x2 : on divise moins, et on clamp plus large
-      const raw = -dy / 4; // (avant: /8)
-      const clamped = Math.max(Math.min(raw, 18), -22);
+      const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
 
-      // header qui “flotte” plus
-      targetOuterY = clamped;
-      targetOuterScale = 1 + clamped / 450; // (avant ~900)
+      // amplitude plus raisonnable (perf) + clamp
+      const raw = -dy / 4;
+      const clamp = Math.max(-16, Math.min(16, raw));
 
-      // inner qui bouge en sens inverse un peu plus fort
-      const opposite = -clamped * 0.85;
-      targetInnerY = opposite;
+      // ext. (bar) et int. (inner)
+      toOY = clamp;
+      toOS = 1 + clamp / 600; // évite les grosses scales coûteuses
+      const opposite = -clamp * 0.85;
+      toIY = opposite;
 
-      // pincement / étirement x2
-      const intensity = Math.min(Math.abs(clamped) / 12, 1);
-      targetInnerScaleX = 1 + 0.03 * intensity; // avant 0.03
-      targetInnerScaleY = 1 - 0.03 * intensity; // avant 0.03
+      // pincement léger
+      const k = Math.min(Math.abs(clamp) / 12, 1);
+      toISX = 1 + 0.028 * k;
+      toISY = 1 - 0.028 * k;
+
+      lastKick = performance.now();
+      if (!running) {
+        running = true;
+        setWillChange(true);
+        raf = requestAnimationFrame(frame);
+      }
     };
 
-    raf = requestAnimationFrame(animate);
-    window.addEventListener('scroll', onScroll, { passive: true });
+    const opts: AddEventListenerOptions = { passive: true };
+    window.addEventListener('scroll', onScroll, opts);
 
+    // clean
     return () => {
+      window.removeEventListener('scroll', onScroll, opts as any);
       cancelAnimationFrame(raf);
-      window.removeEventListener('scroll', onScroll);
+      setWillChange(false);
     };
-  }, []);
+  }, [open]); // re-monte l'effet si le menu s’ouvre (désactive l’anim)
 
   return (
     <>

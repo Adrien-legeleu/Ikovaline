@@ -2,13 +2,21 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, Calendar, Mail, Info, BadgeCheck, Timer } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 import IkovalineLogo from '@/public/images/logo/ikovaline-logo.svg';
 import IkovalineButtonFloating from './IkovaOrb';
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerContent,
@@ -20,9 +28,10 @@ import {
 } from '@/components/ui/drawer';
 
 type ChatMsg = { id: string; role: 'user' | 'bot' | 'error'; text: string };
+
 const ASSISTANT_NAME = 'IkovalineTalk';
-const MIN_THINKING_MS = 600; // plus réactif
-const CHAR_INTERVAL_MS = 18; // dactylo fluide
+const MIN_THINKING_MS = 600;
+const CHAR_INTERVAL_MS = 18;
 
 const SUGGESTIONS = [
   'Je veux une landing page pour une offre',
@@ -46,20 +55,44 @@ function useMediaQuery(query: string) {
 
 export default function ChatbotBubble() {
   const isDesktop = useMediaQuery('(min-width: 768px)');
-  const [open, setOpen] = React.useState(false);
 
+  // --- ouverture contrôlée + mode verrouillé ---
+  const [open, setOpen] = React.useState(false);
+  const [mode, setMode] = React.useState<'desktop' | 'mobile' | null>(null);
+  const openChat = React.useCallback(() => {
+    setMode(isDesktop ? 'desktop' : 'mobile');
+    setOpen(true);
+  }, [isDesktop]);
+  const closeChat = React.useCallback(() => {
+    setOpen(false);
+    setTimeout(() => setMode(null), 180);
+  }, []);
+
+  // --- state chat ---
   const [messages, setMessages] = React.useState<ChatMsg[]>([]);
   const [input, setInput] = React.useState('');
   const [isThinking, setIsThinking] = React.useState(false);
   const [isTyping, setIsTyping] = React.useState(false);
-
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
   const typingTimer = React.useRef<number | null>(null);
   const didIntro = React.useRef(false);
   const [autoFollow, setAutoFollow] = React.useState(true);
-  const AUTOFOLLOW_EPS = 24;
 
-  // Intro 1 seule fois quand on ouvre
+  // --- empêchez TOUTE propagation de keydown vers l’extérieur (fix ferme à chaque touche) ---
+  const stopKeyBubble = React.useCallback((e: React.KeyboardEvent) => {
+    e.stopPropagation();
+  }, []);
+
+  // Focus input à l’ouverture
+  React.useEffect(() => {
+    if (!open) return;
+    requestAnimationFrame(() =>
+      inputRef.current?.focus({ preventScroll: true })
+    );
+  }, [open]);
+
+  // Intro 1x
   React.useEffect(() => {
     if (!open || didIntro.current || messages.length > 0) return;
     const intro =
@@ -67,38 +100,36 @@ export default function ChatbotBubble() {
       `Décrivez votre projet (landing, vitrine, e-commerce, tunnel, SaaS) et je vous donne une **estimation budget + délai**.`;
     const id = crypto.randomUUID();
     setMessages([{ id, role: 'bot', text: '' }]);
-    // dactylo de l’intro
     startTyping(intro, id);
     didIntro.current = true;
   }, [open]); // eslint-disable-line
 
-  // Auto-follow: seulement si l’utilisateur est déjà en bas
+  // Auto-follow
   React.useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     const onScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } = el;
-      setAutoFollow(scrollTop + clientHeight >= scrollHeight - AUTOFOLLOW_EPS);
+      setAutoFollow(scrollTop + clientHeight >= scrollHeight - 24);
     };
     el.addEventListener('scroll', onScroll, { passive: true });
     return () => el.removeEventListener('scroll', onScroll);
   }, []);
-
-  // Scroll vers le bas quand on ajoute du contenu, si autoFollow
   React.useEffect(() => {
     if (!autoFollow) return;
     const el = scrollRef.current;
     if (!el) return;
-    requestAnimationFrame(() => {
-      el.scrollTo({ top: el.scrollHeight, behavior: 'auto' });
-    });
+    requestAnimationFrame(() =>
+      el.scrollTo({ top: el.scrollHeight, behavior: 'auto' })
+    );
   }, [messages, isThinking, isTyping, autoFollow]);
 
-  React.useEffect(() => {
-    return () => {
+  React.useEffect(
+    () => () => {
       if (typingTimer.current) window.clearInterval(typingTimer.current);
-    };
-  }, []);
+    },
+    []
+  );
 
   function startTyping(fullText: string, targetId: string) {
     if (typingTimer.current) window.clearInterval(typingTimer.current);
@@ -123,7 +154,7 @@ export default function ChatbotBubble() {
 
   async function sendMessage(payload?: string) {
     const text = (payload ?? input).trim();
-    if (!text || isThinking) return; // on autorise à taper même si le bot écrit
+    if (!text) return;
     setInput('');
 
     const userId = crypto.randomUUID();
@@ -132,12 +163,11 @@ export default function ChatbotBubble() {
     setMessages((prev) => [
       ...prev,
       { id: userId, role: 'user', text },
-      { id: botId, role: 'bot', text: '' }, // placeholder bot
+      { id: botId, role: 'bot', text: '' },
     ]);
 
     try {
       setIsThinking(true);
-
       const fetchPromise = (async () => {
         const res = await fetch('/api/chatbot', {
           method: 'POST',
@@ -149,7 +179,6 @@ export default function ChatbotBubble() {
           throw new Error(data.error || 'Erreur interne');
         return (data.reply as string) ?? 'Aucune réponse.';
       })();
-
       const delayPromise = new Promise((r) => setTimeout(r, MIN_THINKING_MS));
       const [reply] = (await Promise.all([fetchPromise, delayPromise])) as [
         string,
@@ -172,18 +201,24 @@ export default function ChatbotBubble() {
             : m
         )
       );
+    } finally {
+      requestAnimationFrame(() =>
+        inputRef.current?.focus({ preventScroll: true })
+      );
     }
   }
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    stopKeyBubble(e);
     if (e.key === 'Enter') {
       e.preventDefault();
       sendMessage();
     }
   };
 
+  // UI util components
   const Suggestions = () => (
-    <div className="flex flex-col items-start py-2 gap-2">
+    <div className="flex flex-col items-start py-2 gap-2 select-none">
       <div
         className="inline-flex items-center gap-2 rounded-[3rem] px-3 py-1.5 text-[12px]
                       bg-black/[0.04] dark:bg-neutral-900/70 ring-1 ring-black/5 dark:ring-white/5"
@@ -202,8 +237,7 @@ export default function ChatbotBubble() {
                        ring-1 ring-black/[0.02] dark:ring-white/[0.04]
                        shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]
                        dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]
-                       transition hover:bg-white/90 dark:hover:bg-neutral-900/85
-                       hover:translate-y-[-1px] active:translate-y-0"
+                       transition hover:bg-white/90 dark:hover:bg-neutral-900/85"
           >
             {s}
           </button>
@@ -212,7 +246,7 @@ export default function ChatbotBubble() {
     </div>
   );
 
-  const Messages = () => (
+  const MessagesList = () => (
     <>
       {messages.map((m) => {
         const isUser = m.role === 'user';
@@ -277,32 +311,6 @@ export default function ChatbotBubble() {
                       {children}
                     </code>
                   ),
-                  table: (props) => (
-                    <div className="my-2 overflow-x-auto rounded-2xl ring-1 ring-black/10 dark:ring-white/10">
-                      <table
-                        {...props}
-                        className="min-w-[520px] w-full text-[12px] border-collapse bg-white/90 dark:bg-neutral-900/70 backdrop-blur"
-                      />
-                    </div>
-                  ),
-                  thead: (props) => (
-                    <thead
-                      {...props}
-                      className="sticky top-0 bg-neutral-100 dark:bg-neutral-900/80"
-                    />
-                  ),
-                  th: (props) => (
-                    <th
-                      {...props}
-                      className="px-3 py-2 text-left font-semibold text-neutral-700 dark:text-neutral-200 border-b border-black/5 dark:border-white/10"
-                    />
-                  ),
-                  td: (props) => (
-                    <td
-                      {...props}
-                      className="px-3 py-2 text-neutral-800 dark:text-neutral-100 border-b border-black/5 dark:border-white/10 align-top"
-                    />
-                  ),
                 }}
               >
                 {m.text}
@@ -313,7 +321,6 @@ export default function ChatbotBubble() {
           </div>
         );
       })}
-
       {(isThinking || isTyping) && (
         <div className="mr-auto bg-white/70 dark:bg-neutral-900/70 rounded-[3rem] px-3 py-2 text-[11px] text-neutral-700 dark:text-neutral-200 shadow-sm">
           {isThinking ? 'IkovalineTalk réfléchit…' : 'IkovalineTalk écrit…'}
@@ -323,14 +330,13 @@ export default function ChatbotBubble() {
   );
 
   const CTAButtons = () => (
-    <div className="px-5 pb-3 pt-1 flex gap-2">
+    <div className="px-5 pb-3 pt-1 flex gap-2 select-none">
       <a
         href="https://calendly.com/florent-ghizzoni/meeting?month=2025-11"
         target="_blank"
         rel="noopener noreferrer"
         className="flex-1 inline-flex items-center justify-center gap-2 rounded-[3rem]
                    bg-primary text-white px-4 py-2.5 font-medium text-[13px]
-                   shadow-[0_8px_24px_-10px_rgba(0,0,0,0.35)]
                    ring-1 ring-primary/40 hover:brightness-[1.05] transition"
       >
         <Calendar size={14} /> RDV 30 min
@@ -356,16 +362,14 @@ export default function ChatbotBubble() {
                       ring-1 ring-black/[0.02] dark:ring-white/[0.02] shadow-lg shadow-black/5"
       >
         <input
-          className="flex-1 bg-transparent outline-none text-sm placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
+          className="flex-1 bg-transparent outline-none text-sm
+                     placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
           placeholder="Décrivez votre projet…"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={onKeyDown}
-          // ⚠️ on n’empêche plus de taper quand le bot écrit
-          disabled={isThinking} // seulement pendant l’appel réseau
         />
         <button
-          disabled={!input.trim() || isThinking}
+          disabled={!input.trim()}
           onClick={() => sendMessage()}
           className="ml-2 rounded-full bg-primary text-white p-2 hover:opacity-95 transition disabled:opacity-40"
           aria-label="Envoyer"
@@ -376,122 +380,110 @@ export default function ChatbotBubble() {
     </div>
   );
 
+  // --------- RENDER ----------
   return (
     <>
-      <IkovalineButtonFloating onClick={() => setOpen(true)} hidden={open} />
+      <IkovalineButtonFloating onClick={openChat} hidden={open} />
 
-      {/* Desktop Sheet */}
-      <AnimatePresence>
-        {open && isDesktop && (
-          <>
-            <motion.div
-              className="fixed inset-0 z-[999998] bg-black/35 backdrop-blur-sm"
-              onClick={() => setOpen(false)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-            <motion.div
-              className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[999999]
-                         h-[75vh] max-h-[760px] w-[94vw] max-w-[500px]
-                         flex flex-col overflow-hidden p-1 rounded-[3rem]
-                         bg-white/95 dark:bg-neutral-950/90 backdrop-blur-2xl
-                         text-neutral-900 dark:text-neutral-50
-                         shadow-[0_24px_70px_rgba(0,0,0,0.45)]
-                         ring-1 ring-black/[0.02] dark:ring-white/[0.04]"
-              initial={{ opacity: 0, y: 20, scale: 0.98 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                transition: { duration: 0.18 },
-              }}
-              exit={{
-                opacity: 0,
-                y: 16,
-                scale: 0.98,
-                transition: { duration: 0.16 },
-              }}
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between px-5 py-3 border-b border-black/5 dark:border-white/5 bg-white/60 dark:bg-neutral-950/70">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="relative h-10 w-10 rounded-2xl grid place-items-center
-                                  bg-white/90 dark:bg-neutral-900/70
-                                  ring-1 ring-black/[0.02] dark:ring-white/[0.02] overflow-hidden"
-                  >
-                    <Image
-                      src={IkovalineLogo}
-                      alt="Ikovaline"
-                      className="object-contain w-full h-full"
-                      priority
-                    />
-                  </div>
-                  <div className="flex flex-col leading-tight">
-                    <span className="text-sm font-semibold tracking-tight">
-                      IkovalineTalk
-                    </span>
-                    <span className="text-[11px] text-neutral-600 dark:text-neutral-400">
-                      Assistant projet — estimation rapide
-                    </span>
-                  </div>
+      {/* Desktop: Dialog shadcn */}
+      <Dialog
+        open={open && mode === 'desktop'}
+        onOpenChange={(v) => (v ? setOpen(true) : closeChat())}
+      >
+        <DialogContent
+          // Évite les fermetures “outside / escape / autoFocus” pendant saisie
+          onInteractOutside={(e) => e.preventDefault()}
+          onPointerDownOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
+          onCloseAutoFocus={(e) => e.preventDefault()}
+          className="p-0 outline-none border-0 bg-white/95 dark:bg-neutral-950/90 backdrop-blur-2xl
+                     text-neutral-900 dark:text-neutral-50 rounded-[2rem] sm:rounded-[3rem]
+                     w-[94vw] max-w-[500px] h-[75vh] max-h-[760px] overflow-hidden"
+        >
+          <DialogHeader className="px-5 py-3 border-b border-black/5 dark:border-white/5 bg-white/60 dark:bg-neutral-950/70 select-none">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-2xl grid place-items-center bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.02] dark:ring-white/[0.02] overflow-hidden">
+                  <Image
+                    src={IkovalineLogo}
+                    alt="Ikovaline"
+                    className="object-contain w-full h-full"
+                    priority
+                  />
                 </div>
+                <div className="flex flex-col leading-tight">
+                  <DialogTitle className="text-sm font-semibold tracking-tight">
+                    IkovalineTalk
+                  </DialogTitle>
+                  <DialogDescription className="text-[11px] text-neutral-600 dark:text-neutral-400">
+                    Assistant projet — estimation rapide
+                  </DialogDescription>
+                </div>
+              </div>
+              <DialogClose asChild>
                 <button
-                  onClick={() => setOpen(false)}
-                  className="rounded-xl p-2 hover:bg-black/5 dark:hover:bg-neutral-900/70 transition"
+                  className="rounded-xl p-2 hover:bg-black/5 dark:hover:bg-neutral-900/70"
                   aria-label="Fermer"
                 >
                   <X size={16} />
                 </button>
-              </div>
+              </DialogClose>
+            </div>
 
-              {/* Badges */}
-              <div className="px-5 pt-3 flex gap-2 flex-wrap">
-                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
-                  <BadgeCheck size={12} /> 20+ projets
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-sky-200/70 dark:ring-sky-900">
-                  <Info size={12} /> 67+ avis Google
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-green-200/70 dark:ring-green-900">
-                  <Timer size={12} /> Délai moyen ~30j
-                </span>
-              </div>
+            {/* Badges */}
+            <div className="pt-3 flex gap-2 flex-wrap">
+              <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
+                <BadgeCheck size={12} /> 20+ projets
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-sky-200/70 dark:ring-sky-900">
+                <Info size={12} /> 67+ avis
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-green-200/70 dark:ring-green-900">
+                <Timer size={12} /> ~30j
+              </span>
+            </div>
+          </DialogHeader>
 
-              {/* Flux */}
-              <div
-                ref={scrollRef}
-                className="flex-1 overflow-y-auto px-5 py-3 space-y-3 text-sm
-                           [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,.25)_transparent]
-                           dark:[scrollbar-color:rgba(255,255,255,.25)_transparent]"
-              >
-                {messages.length <= 1 && <Suggestions />}
-                <Messages />
-              </div>
+          <div
+            ref={scrollRef}
+            className="flex-1 overflow-y-auto px-5 py-3 space-y-3 text-sm
+                       [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,.25)_transparent]
+                       dark:[scrollbar-color:rgba(255,255,255,.25)_transparent]"
+            onKeyDownCapture={stopKeyBubble}
+          >
+            {messages.length <= 1 && <Suggestions />}
+            <MessagesList />
+          </div>
 
-              <CTAButtons />
-              <InputBar />
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+          <div className="select-none">
+            <CTAButtons />
+          </div>
+          <InputBar />
+        </DialogContent>
+      </Dialog>
 
-      {/* Mobile Drawer */}
-      <Drawer open={open && !isDesktop} onOpenChange={setOpen}>
-        <DrawerContent className="z-[999999] border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl">
-          <DrawerHeader className="pb-2">
+      {/* Mobile: Drawer shadcn */}
+      <Drawer
+        open={open && mode === 'mobile'}
+        onOpenChange={(v) => (v ? setOpen(true) : closeChat())}
+      >
+        <DrawerContent
+          onPointerDownOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
+          className="z-[999999] border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl"
+        >
+          <DrawerHeader className="pb-2 select-none">
             <div className="flex items-center justify-between px-1">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-2xl grid place-items-center bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
+                <div className="h-9 w-9 rounded-xl grid place-items-center bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
                   <Image
                     src={IkovalineLogo}
                     alt="Ikovaline"
-                    width={40}
-                    height={40}
+                    width={20}
+                    height={20}
                   />
                 </div>
-                <div className="flex flex-col items-start justify-start leading-tight">
+                <div className="flex flex-col leading-tight">
                   <DrawerTitle className="text-base">IkovalineTalk</DrawerTitle>
                   <DrawerDescription className="text-xs">
                     Assistant projet — estimation rapide
@@ -527,14 +519,41 @@ export default function ChatbotBubble() {
             className="max-h-[40vh] overflow-y-auto px-4 pb-2 space-y-3 text-sm
                        [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,.25)_transparent]
                        dark:[scrollbar-color:rgba(255,255,255,.25)_transparent]"
+            onKeyDownCapture={stopKeyBubble}
           >
             {messages.length <= 1 && <Suggestions />}
-            <Messages />
+            <MessagesList />
           </div>
 
           <DrawerFooter className="pt-2">
             <CTAButtons />
-            <InputBar />
+            <div className="px-5 pb-4">
+              <div
+                className="flex items-center bg-white/90 dark:bg-neutral-900/80 rounded-[3rem] px-3 py-2
+                      ring-1 ring-black/[0.02] dark:ring-white/[0.02] shadow-lg shadow-black/5"
+              >
+                <input
+                  ref={inputRef}
+                  className="flex-1 bg-transparent outline-none text-sm
+                     placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
+                  placeholder="Décrivez votre projet…"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={onInputKeyDown}
+                  autoCorrect="on"
+                  autoCapitalize="sentences"
+                  inputMode="text"
+                />
+                <button
+                  disabled={!input.trim()}
+                  onClick={() => sendMessage()}
+                  className="ml-2 rounded-full bg-primary text-white p-2 hover:opacity-95 transition disabled:opacity-40"
+                  aria-label="Envoyer"
+                >
+                  <Send size={14} />
+                </button>
+              </div>
+            </div>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
