@@ -41,6 +41,26 @@ const SUGGESTIONS = [
   'SaaS / App avec abonnement Stripe',
 ];
 
+// Place ce composant tout en haut de ChatbotBubble return()
+function IOSNoZoomCSS() {
+  return (
+    <style
+      dangerouslySetInnerHTML={{
+        __html: `
+@supports (-webkit-touch-callout: none) {
+  /* iOS only */
+  #ikova-chat input, 
+  #ikova-chat textarea, 
+  #ikova-chat select {
+    font-size: 16px !important;
+  }
+}
+`,
+      }}
+    />
+  );
+}
+
 function useMediaQuery(query: string) {
   const [matches, setMatches] = React.useState(false);
   React.useEffect(() => {
@@ -383,180 +403,185 @@ export default function ChatbotBubble() {
   // --------- RENDER ----------
   return (
     <>
-      <IkovalineButtonFloating onClick={openChat} hidden={open} />
+      <IOSNoZoomCSS />
+      <div>
+        <IkovalineButtonFloating onClick={openChat} hidden={open} />
 
-      {/* Desktop: Dialog shadcn */}
-      <Dialog
-        open={open && mode === 'desktop'}
-        onOpenChange={(v) => (v ? setOpen(true) : closeChat())}
-      >
-        <DialogContent
-          // Évite les fermetures “outside / escape / autoFocus” pendant saisie
-          onInteractOutside={(e) => e.preventDefault()}
-          onPointerDownOutside={(e) => e.preventDefault()}
-          onEscapeKeyDown={(e) => e.preventDefault()}
-          onCloseAutoFocus={(e) => e.preventDefault()}
-          className="p-0 outline-none border-0 bg-white/95 dark:bg-neutral-950/90 backdrop-blur-2xl
+        {/* Desktop: Dialog shadcn */}
+        <Dialog
+          open={open && mode === 'desktop'}
+          onOpenChange={(v) => (v ? setOpen(true) : closeChat())}
+        >
+          <DialogContent
+            // Évite les fermetures “outside / escape / autoFocus” pendant saisie
+            onInteractOutside={(e) => e.preventDefault()}
+            onPointerDownOutside={(e) => e.preventDefault()}
+            onEscapeKeyDown={(e) => e.preventDefault()}
+            onCloseAutoFocus={(e) => e.preventDefault()}
+            className="p-0 outline-none border-0 bg-white/95 dark:bg-neutral-950/90 backdrop-blur-2xl
                      text-neutral-900 dark:text-neutral-50 rounded-[2rem] sm:rounded-[3rem]
                      w-[94vw] max-w-[500px] h-[75vh] max-h-[760px] overflow-hidden"
-        >
-          <DialogHeader className="px-5 py-3 border-b border-black/5 dark:border-white/5 bg-white/60 dark:bg-neutral-950/70 select-none">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-2xl grid place-items-center bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.02] dark:ring-white/[0.02] overflow-hidden">
-                  <Image
-                    src={IkovalineLogo}
-                    alt="Ikovaline"
-                    className="object-contain w-full h-full"
-                    priority
-                  />
+          >
+            <DialogHeader className="px-5 py-3 border-b border-black/5 dark:border-white/5 bg-white/60 dark:bg-neutral-950/70 select-none">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-2xl grid place-items-center bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.02] dark:ring-white/[0.02] overflow-hidden">
+                    <Image
+                      src={IkovalineLogo}
+                      alt="Ikovaline"
+                      className="object-contain w-full h-full"
+                      priority
+                    />
+                  </div>
+                  <div className="flex flex-col leading-tight">
+                    <DialogTitle className="text-sm font-semibold tracking-tight">
+                      IkovalineTalk
+                    </DialogTitle>
+                    <DialogDescription className="text-[11px] text-neutral-600 dark:text-neutral-400">
+                      Assistant projet — estimation rapide
+                    </DialogDescription>
+                  </div>
                 </div>
-                <div className="flex flex-col leading-tight">
-                  <DialogTitle className="text-sm font-semibold tracking-tight">
-                    IkovalineTalk
-                  </DialogTitle>
-                  <DialogDescription className="text-[11px] text-neutral-600 dark:text-neutral-400">
-                    Assistant projet — estimation rapide
-                  </DialogDescription>
-                </div>
+                <DialogClose asChild>
+                  <button
+                    className="rounded-xl p-2 hover:bg-black/5 dark:hover:bg-neutral-900/70"
+                    aria-label="Fermer"
+                  >
+                    <X size={16} />
+                  </button>
+                </DialogClose>
               </div>
-              <DialogClose asChild>
-                <button
-                  className="rounded-xl p-2 hover:bg-black/5 dark:hover:bg-neutral-900/70"
-                  aria-label="Fermer"
-                >
-                  <X size={16} />
-                </button>
-              </DialogClose>
-            </div>
 
-            {/* Badges */}
-            <div className="pt-3 flex gap-2 flex-wrap">
-              <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
-                <BadgeCheck size={12} /> 20+ projets
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-sky-200/70 dark:ring-sky-900">
-                <Info size={12} /> 67+ avis
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-green-200/70 dark:ring-green-900">
-                <Timer size={12} /> ~30j
-              </span>
-            </div>
-          </DialogHeader>
+              {/* Badges */}
+              <div className="pt-3 flex gap-2 flex-wrap">
+                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
+                  <BadgeCheck size={12} /> 20+ projets
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-sky-200/70 dark:ring-sky-900">
+                  <Info size={12} /> 67+ avis
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-2 text-[9px] sm:text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-green-200/70 dark:ring-green-900">
+                  <Timer size={12} /> ~30j
+                </span>
+              </div>
+            </DialogHeader>
 
-          <div
-            ref={scrollRef}
-            className="flex-1 overflow-y-auto px-5 py-3 space-y-3 text-sm
+            <div
+              ref={scrollRef}
+              className="flex-1 overflow-y-auto px-5 py-3 space-y-3 text-sm
                        [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,.25)_transparent]
                        dark:[scrollbar-color:rgba(255,255,255,.25)_transparent]"
-            onKeyDownCapture={stopKeyBubble}
-          >
-            {messages.length <= 1 && <Suggestions />}
-            <MessagesList />
-          </div>
+              onKeyDownCapture={stopKeyBubble}
+            >
+              {messages.length <= 1 && <Suggestions />}
+              <MessagesList />
+            </div>
 
-          <div className="select-none">
-            <CTAButtons />
-          </div>
-          <InputBar />
-        </DialogContent>
-      </Dialog>
+            <div className="select-none">
+              <CTAButtons />
+            </div>
+            <InputBar />
+          </DialogContent>
+        </Dialog>
 
-      {/* Mobile: Drawer shadcn */}
-      <Drawer
-        open={open && mode === 'mobile'}
-        onOpenChange={(v) => (v ? setOpen(true) : closeChat())}
-      >
-        <DrawerContent
-          onPointerDownOutside={(e) => e.preventDefault()}
-          onEscapeKeyDown={(e) => e.preventDefault()}
-          className="z-[999999] border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl"
+        {/* Mobile: Drawer shadcn */}
+        <Drawer
+          open={open && mode === 'mobile'}
+          onOpenChange={(v) => (v ? setOpen(true) : closeChat())}
         >
-          <DrawerHeader className="pb-2 select-none">
-            <div className="flex items-center justify-between px-1">
-              <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-xl grid place-items-center bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
-                  <Image
-                    src={IkovalineLogo}
-                    alt="Ikovaline"
-                    width={20}
-                    height={20}
-                  />
+          <DrawerContent
+            onPointerDownOutside={(e) => e.preventDefault()}
+            onEscapeKeyDown={(e) => e.preventDefault()}
+            className="z-[999999] border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl"
+          >
+            <DrawerHeader className="pb-2 select-none">
+              <div className="flex items-center justify-between px-1">
+                <div className="flex items-center gap-3">
+                  <div className="h-11 w-11 rounded-2xl grid place-items-center bg-white/90 dark:bg-neutral-900/70 ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
+                    <Image
+                      src={IkovalineLogo}
+                      alt="Ikovaline"
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                  <div className="flex flex-col items-start justify-start leading-tight">
+                    <DrawerTitle className="text-base">
+                      IkovalineTalk
+                    </DrawerTitle>
+                    <DrawerDescription className="text-xs">
+                      Assistant projet, estimation rapide
+                    </DrawerDescription>
+                  </div>
                 </div>
-                <div className="flex flex-col leading-tight">
-                  <DrawerTitle className="text-base">IkovalineTalk</DrawerTitle>
-                  <DrawerDescription className="text-xs">
-                    Assistant projet — estimation rapide
-                  </DrawerDescription>
-                </div>
+                <DrawerClose asChild>
+                  <button
+                    aria-label="Fermer"
+                    className="rounded-xl p-2 hover:bg-black/5 dark:hover:bg-white/10"
+                  >
+                    <X size={16} />
+                  </button>
+                </DrawerClose>
               </div>
-              <DrawerClose asChild>
-                <button
-                  aria-label="Fermer"
-                  className="rounded-xl p-2 hover:bg-black/5 dark:hover:bg-white/10"
-                >
-                  <X size={16} />
-                </button>
-              </DrawerClose>
-            </div>
 
-            {/* Badges */}
-            <div className="px-1 pt-3 flex gap-2 flex-wrap">
-              <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
-                <BadgeCheck size={12} /> 20+ projets
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-sky-200/70 dark:ring-sky-900">
-                <Info size={12} /> 67+ avis
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-green-200/70 dark:ring-green-900">
-                <Timer size={12} /> ~30j
-              </span>
-            </div>
-          </DrawerHeader>
+              {/* Badges */}
+              <div className="px-1 pt-3 flex gap-2 flex-wrap">
+                <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-blue-200/70 dark:ring-blue-900">
+                  <BadgeCheck size={12} /> 20+ projets
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-sky-200/70 dark:ring-sky-900">
+                  <Info size={12} /> 67+ avis
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-[2rem] px-3 py-1.5 text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100 ring-1 ring-green-200/70 dark:ring-green-900">
+                  <Timer size={12} /> ~30j
+                </span>
+              </div>
+            </DrawerHeader>
 
-          <div
-            ref={scrollRef}
-            className="max-h-[40vh] overflow-y-auto px-4 pb-2 space-y-3 text-sm
+            <div
+              ref={scrollRef}
+              className="max-h-[40vh] overflow-y-auto px-4 pb-2 space-y-3 text-sm
                        [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,.25)_transparent]
                        dark:[scrollbar-color:rgba(255,255,255,.25)_transparent]"
-            onKeyDownCapture={stopKeyBubble}
-          >
-            {messages.length <= 1 && <Suggestions />}
-            <MessagesList />
-          </div>
+              onKeyDownCapture={stopKeyBubble}
+            >
+              {messages.length <= 1 && <Suggestions />}
+              <MessagesList />
+            </div>
 
-          <DrawerFooter className="pt-2">
-            <CTAButtons />
-            <div className="px-5 pb-4">
-              <div
-                className="flex items-center bg-white/90 dark:bg-neutral-900/80 rounded-[3rem] px-3 py-2
+            <DrawerFooter className="pt-2 gap-0">
+              <CTAButtons />
+              <div className="px-5 pb-4">
+                <div
+                  className="flex items-center bg-white/90 dark:bg-neutral-900/80 rounded-[3rem] px-3 py-2
                       ring-1 ring-black/[0.02] dark:ring-white/[0.02] shadow-lg shadow-black/5"
-              >
-                <input
-                  ref={inputRef}
-                  className="flex-1 bg-transparent outline-none text-sm
-                     placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
-                  placeholder="Décrivez votre projet…"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={onInputKeyDown}
-                  autoCorrect="on"
-                  autoCapitalize="sentences"
-                  inputMode="text"
-                />
-                <button
-                  disabled={!input.trim()}
-                  onClick={() => sendMessage()}
-                  className="ml-2 rounded-full bg-primary text-white p-2 hover:opacity-95 transition disabled:opacity-40"
-                  aria-label="Envoyer"
                 >
-                  <Send size={14} />
-                </button>
+                  <input
+                    ref={inputRef}
+                    className="flex-1 bg-transparent outline-none text-sm
+                     placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
+                    placeholder="Décrivez votre projet…"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={onInputKeyDown}
+                    autoCorrect="on"
+                    autoCapitalize="sentences"
+                    inputMode="text"
+                  />
+                  <button
+                    disabled={!input.trim()}
+                    onClick={() => sendMessage()}
+                    className="ml-2 rounded-full bg-primary text-white p-2 hover:opacity-95 transition disabled:opacity-40"
+                    aria-label="Envoyer"
+                  >
+                    <Send size={14} />
+                  </button>
+                </div>
               </div>
-            </div>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </div>
     </>
   );
 }
