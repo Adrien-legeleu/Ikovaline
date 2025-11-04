@@ -297,8 +297,8 @@ export function HeaderResponsive() {
 
       // pincement léger
       const k = Math.min(Math.abs(clamp) / 12, 1);
-      toISX = 1 + 0.028 * k;
-      toISY = 1 - 0.028 * k;
+      toISX = 1 + 0.008 * k;
+      toISY = 1 - 0.008 * k;
 
       lastKick = performance.now();
       if (!running) {
@@ -341,7 +341,7 @@ export function HeaderResponsive() {
               alt="Ikovaline"
               width={80}
               height={36}
-              className="h-6 w-auto object-contain dark:hidden"
+              className="h-7 w-auto object-contain dark:hidden"
               priority
             />
             <Image
@@ -349,7 +349,7 @@ export function HeaderResponsive() {
               alt="Ikovaline"
               width={80}
               height={36}
-              className="hidden h-6 w-auto object-contain dark:block"
+              className="hidden h-7 w-auto object-contain dark:block"
               priority
             />
           </Link>
@@ -366,7 +366,7 @@ export function HeaderResponsive() {
                 href={spaceHref}
                 aria-disabled={loading}
                 className={cn(
-                  'rounded-2xl bg-primary flex items-center justify-center h-[2.25rem] px-3 text-[12px] font-semibold text-white shadow-lg transition will-change-transform active:scale-[0.97]',
+                  'rounded-3xl bg-primary flex items-center justify-center h-[2.5rem] px-3 text-[12px] font-semibold text-white shadow-lg transition will-change-transform active:scale-[0.97]',
                   loading ? 'opacity-50 pointer-events-none' : ''
                 )}
               >
@@ -374,11 +374,11 @@ export function HeaderResponsive() {
               </Link>
             ) : loading ? (
               // skeleton pendant qu’on ne sait pas encore si la personne est connectée
-              <div className="h-[2.25rem] w-20 rounded-2xl bg-white/40 dark:bg-neutral-800 animate-pulse" />
+              <div className="h-[2.5rem] w-20 rounded-2xl bg-white/40 dark:bg-neutral-800 animate-pulse" />
             ) : (
               <Link
                 href="/signup"
-                className="rounded-2xl h-[2.25rem] flex items-center justify-center px-3 text-[12px] font-semibold bg-primary text-white will-change-transform active:scale-[0.97]"
+                className="rounded-3xl h-[2.5rem] flex items-center justify-center px-3 text-[12px] font-semibold bg-primary text-white will-change-transform active:scale-[0.97]"
               >
                 Lancer
               </Link>
@@ -387,9 +387,9 @@ export function HeaderResponsive() {
             <button
               onClick={() => setOpen(true)}
               aria-label="Ouvrir le menu"
-              className="grid size-9 place-items-center rounded-2xl bg-white/80 p-1 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/5 active:scale-[0.96] will-change-transform"
+              className="grid size-10 place-items-center rounded-2xl bg-white/80 p-1 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/5 active:scale-[0.96] will-change-transform"
             >
-              <IconMenu3 className="h-5 w-5" />
+              <IconMenu3 className="h-6 w-6" />
             </button>
           </div>
         </div>
@@ -470,26 +470,26 @@ export function HeaderResponsive() {
                   <Image
                     src={IkovalineLogo}
                     alt="Ikovaline"
-                    width={110}
-                    height={32}
-                    className="dark:hidden"
+                    width={140}
+                    height={40}
+                    className="dark:hidden h-7"
                   />
                   <Image
                     src={IkovalineLogoDark}
                     alt="Ikovaline"
-                    width={110}
-                    height={32}
-                    className="hidden dark:block"
+                    width={140}
+                    height={40}
+                    className="hidden h-7 dark:block"
                   />
                 </Link>
 
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Fermer le menu"
-                  className="grid size-9 place-items-center rounded-2xl bg-white/80 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/5 active:scale-[0.96] will-change-transform"
+                  className="grid size-10 place-items-center rounded-2xl bg-white/80 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/5 active:scale-[0.96] will-change-transform"
                   style={{ transformOrigin: 'right center' }}
                 >
-                  <IconX className="h-5 w-5" />
+                  <IconX className="h-6 w-6" />
                 </button>
               </div>
 
