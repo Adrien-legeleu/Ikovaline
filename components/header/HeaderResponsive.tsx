@@ -234,12 +234,13 @@ export function HeaderResponsive() {
       from + (to - from) * f;
 
     const animate = () => {
-      curOuterY = lerp(curOuterY, targetOuterY, 0.18);
-      curOuterScale = lerp(curOuterScale, targetOuterScale, 0.18);
+      // un peu plus de réactivité
+      curOuterY = lerp(curOuterY, targetOuterY, 0.22);
+      curOuterScale = lerp(curOuterScale, targetOuterScale, 0.22);
 
-      curInnerY = lerp(curInnerY, targetInnerY, 0.22);
-      curInnerScaleX = lerp(curInnerScaleX, targetInnerScaleX, 0.22);
-      curInnerScaleY = lerp(curInnerScaleY, targetInnerScaleY, 0.22);
+      curInnerY = lerp(curInnerY, targetInnerY, 0.26);
+      curInnerScaleX = lerp(curInnerScaleX, targetInnerScaleX, 0.26);
+      curInnerScaleY = lerp(curInnerScaleY, targetInnerScaleY, 0.26);
 
       barEl.style.transform = `translateY(${curOuterY.toFixed(
         2
@@ -250,9 +251,10 @@ export function HeaderResponsive() {
       )}px) scale(${curInnerScaleX.toFixed(3)}, ${curInnerScaleY.toFixed(3)})`;
       innerEl.style.transformOrigin = 'center center';
 
-      const childScaleX = curInnerScaleX * 1.012;
-      const childScaleY = curInnerScaleY * 0.988;
-      const childY = curInnerY * 0.55;
+      // enfants un chouïa plus exagérés
+      const childScaleX = curInnerScaleX * 1.02;
+      const childScaleY = curInnerScaleY * 0.97;
+      const childY = curInnerY * 0.7;
 
       leftEl.style.transform = `translateY(${childY.toFixed(
         2
@@ -272,18 +274,22 @@ export function HeaderResponsive() {
       const dy = yNow - lastScrollY;
       lastScrollY = yNow;
 
-      const raw = -dy / 8;
-      const clamped = Math.max(Math.min(raw, 10), -12);
+      // 🔥 effet x2 : on divise moins, et on clamp plus large
+      const raw = -dy / 4; // (avant: /8)
+      const clamped = Math.max(Math.min(raw, 18), -22);
 
+      // header qui “flotte” plus
       targetOuterY = clamped;
-      targetOuterScale = 1 + clamped / 900;
+      targetOuterScale = 1 + clamped / 450; // (avant ~900)
 
-      const opposite = -clamped * 0.4;
+      // inner qui bouge en sens inverse un peu plus fort
+      const opposite = -clamped * 0.55;
       targetInnerY = opposite;
 
+      // pincement / étirement x2
       const intensity = Math.min(Math.abs(clamped) / 12, 1);
-      targetInnerScaleX = 1 + 0.03 * intensity;
-      targetInnerScaleY = 1 - 0.03 * intensity;
+      targetInnerScaleX = 1 + 0.05 * intensity; // avant 0.03
+      targetInnerScaleY = 1 - 0.05 * intensity; // avant 0.03
     };
 
     raf = requestAnimationFrame(animate);
