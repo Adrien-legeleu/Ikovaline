@@ -301,7 +301,7 @@ export default function ChatbotBubble() {
                       IkovalineTalk
                     </span>
                     <span className="text-[11px] text-neutral-600 dark:text-neutral-400">
-                      Assistant projet — estimation rapide
+                      Assistant projet, estimation rapide
                     </span>
                   </div>
                 </div>
