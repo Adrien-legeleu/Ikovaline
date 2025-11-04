@@ -384,7 +384,7 @@ export default function Simulator() {
                     onClick={handleSend}
                     disabled={sending}
                     className="
-        w-full rounded-3xl bg-black/[0.04] text-black py-3
+        w-full rounded-3xl bg-black/[0.04] dark:bg-white/[0.04] text-black dark:text-white py-3
         font-semibold tracking-[-0.02em] text-sm
         hover:brightness-110 active:scale-[.99] transition
         disabled:opacity-60
