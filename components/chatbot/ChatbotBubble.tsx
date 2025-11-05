@@ -428,15 +428,7 @@ export default function ChatbotBubble() {
               >
                 {/* Suggestions (si fil quasi vide) */}
                 {messages.length <= 1 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.25 },
-                    }}
-                    className="flex flex-col items-start py-2 gap-2"
-                  >
+                  <motion.div className="flex flex-col items-start py-2 gap-2">
                     <div
                       className="inline-flex items-center gap-2 rounded-[3rem] px-3 py-1.5 text-[12px]
                                     bg-black/[0.04] dark:bg-neutral-900/70
@@ -458,20 +450,6 @@ export default function ChatbotBubble() {
                                      dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]
                                      transition hover:bg-white/90 dark:hover:bg-neutral-900/85
                                      hover:translate-y-[-1px] active:translate-y-0"
-                          initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                          animate={{
-                            opacity: 1,
-                            y: 0,
-                            scale: 1,
-                            transition: {
-                              type: 'spring',
-                              stiffness: 360,
-                              damping: 18,
-                              delay: 0.05 * idx,
-                            },
-                          }}
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.98 }}
                         >
                           {s}
                         </motion.button>
