@@ -30,7 +30,6 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       });
     })?.ready;
 
-    // animation optionnelle (sinon tu peux la virer)
     const { top, left, width, height } =
       buttonRef.current.getBoundingClientRect();
     const y = top + height / 2;
@@ -57,8 +56,18 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
 
   if (!mounted) return null;
 
+  const label =
+    resolvedTheme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre';
+
   return (
-    <button ref={buttonRef} onClick={changeTheme} className={cn(className)}>
+    <button
+      ref={buttonRef}
+      type="button"
+      onClick={changeTheme}
+      className={cn(className)}
+      aria-label={label}
+      title={label}
+    >
       {resolvedTheme === 'dark' ? (
         <SunDim className="h-6 w-6 lg:h-5 lg:w-5 xl:h-6 xl:w-6" />
       ) : (

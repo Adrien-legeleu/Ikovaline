@@ -39,7 +39,6 @@ const FAQ_FR: FaqItem[] = [
     answer:
       'À titre indicatif : site vitrine 2–4 semaines, e-commerce 4–8 semaines, MVP d’application 6–12 semaines. Nous travaillons par sprints avec des jalons (maquettes, développement, QA, mise en ligne). Un mode « express » est possible selon charge et périmètre.',
   },
-
   {
     question: 'Comment sécurisez-vous mes données ?',
     answer:
@@ -50,7 +49,7 @@ const FAQ_FR: FaqItem[] = [
     answer: (
       <>
         Ouvrez un ticket via{' '}
-        <Link href="/contact" className="underline underline-offset-2">
+        <Link href="/support" className="underline underline-offset-2">
           Support
         </Link>{' '}
         en décrivant le contexte (URL, capture, étape, message d’erreur). Un
@@ -67,9 +66,9 @@ export default function FAQ() {
       id="faq"
       className="relative mx-auto max-w-6xl sm:px-6 px-4 py-16 sm:py-20"
     >
-      {/* halo discret */}
+      {/* halo décoratif (ok de le masquer) */}
       <span
-        aria-hidden
+        aria-hidden="true"
         className="pointer-events-none absolute top-16 left-1/2 -translate-x-1/2 h-64 w-64 rounded-full blur-[160px] bg-sky-400/20 dark:bg-sky-600/20"
       />
 
@@ -89,7 +88,7 @@ export default function FAQ() {
       </div>
 
       {/* Masonry */}
-      <div aria-hidden>
+      <div>
         <div
           className="
             sm:columns-2 columns-2 lg:columns-3

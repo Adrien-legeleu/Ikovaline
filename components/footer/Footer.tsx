@@ -111,7 +111,7 @@ export default function Footer() {
       <div className="grid sm:grid-cols-40/60 max-w-5xl mx-auto grid-cols-1 px-2 max-sm:gap-10 text-left items-center justify-center">
         <div className="flex justify-left items-end w-full ">
           <div className="space-y-5">
-            <h2 className="text-4xl font-semibold flex  items-center max-sm:justify-center">
+            <h2 className="text-4xl font-semibold flex items-center max-sm:justify-center">
               <Image
                 src={IkovalineLogo}
                 alt="Ikovaline"
@@ -142,28 +142,33 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* ✅ UL parent -> LI -> UL enfant */}
         <ul className="grid lg:grid-cols-4 grid-cols-2 text-left gap-3 xs:gap-5">
           {footerLinks.map((section, index) => (
-            <ul key={index} className="space-y-2">
-              <li className="text-neutral-600 dark:text-neutral-300 font-bold">
+            <li key={index}>
+              <p className="text-neutral-600 dark:text-neutral-300 font-bold">
                 <Link
                   href={section.href}
                   className="hover:text-neutral-800 dark:hover:text-neutral-600"
                 >
                   {section.title}
                 </Link>
-              </li>
-              {section.links.map((link, linkIndex) => (
-                <li key={linkIndex}>
-                  <Link
-                    href={link.href}
-                    className="text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-700"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+              </p>
+
+              <ul className="mt-2 space-y-2">
+                {section.links.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <Link
+                      href={link.href}
+                      className="text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-700"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
           ))}
         </ul>
       </div>
