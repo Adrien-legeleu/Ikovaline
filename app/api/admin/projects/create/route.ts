@@ -2,22 +2,38 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const RESEND_API_KEY = process.env.RESEND_API_KEY!;
-const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL!;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL;
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
-const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-  auth: { persistSession: false },
-});
-const resend = new Resend(RESEND_API_KEY);
+// On crée le client admin seulement si les vars sont là
+const supabaseAdmin =
+  SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY
+    ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+        auth: { persistSession: false },
+      })
+    : null;
+
+// Resend devient optionnel : si pas de clé, pas d'email, mais ça ne crashe pas
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 /** Crée/assure un user Supabase et renvoie un lien recovery */
 async function ensureUserAndRecoveryLink(args: {
   email: string;
   fullName?: string | null;
 }) {
+  if (!supabaseAdmin) {
+    return {
+      error:
+        'Supabase admin non configuré (SUPABASE_SERVICE_ROLE_KEY manquant ?)',
+      userId: null,
+      link: null,
+      mode: 'error' as const,
+    };
+  }
+
   const { email, fullName } = args;
 
   // 1) chercher si le user existe
@@ -96,6 +112,16 @@ async function ensureUserAndRecoveryLink(args: {
 
 export async function POST(req: Request) {
   try {
+    if (!supabaseAdmin) {
+      console.error(
+        'Supabase admin non configuré (SUPABASE_URL ou SERVICE_ROLE_KEY manquant)'
+      );
+      return NextResponse.json(
+        { ok: false, error: 'Serveur mal configuré (Supabase admin)' },
+        { status: 500 }
+      );
+    }
+
     const body = await req.json();
 
     // Champs principaux
@@ -237,7 +263,7 @@ export async function POST(req: Request) {
       }
     }
 
-    // ---- 2) Insert projet (la plupart des colonnes peuvent être null/undefined)
+    // ---- 2) Insert projet
     const projectRow: any = {
       owner_user_id: invitedUserId ?? null,
       client_email: clientEmail,
@@ -283,7 +309,7 @@ export async function POST(req: Request) {
         typeof payment_installments === 'number' ? payment_installments : 1,
       payment_currency: currency,
 
-      extra: { ...(extra ?? {}), clientName }, // on garde le nom dans extra si pas de colonne dédiée
+      extra: { ...(extra ?? {}), clientName },
       created_at: new Date().toISOString(),
     };
 
@@ -330,8 +356,8 @@ export async function POST(req: Request) {
       console.warn('project_members insert warning', memErr);
     }
 
-    // ---- 4) Mail onboarding (UNIQUEMENT si inviteClient + recoveryLink ok)
-    if (inviteClient && recoveryLink) {
+    // ---- 4) Mail onboarding (seulement si invite + config Resend OK)
+    if (inviteClient && recoveryLink && resend && RESEND_FROM_EMAIL) {
       try {
         await resend.emails.send({
           from: RESEND_FROM_EMAIL,
@@ -360,12 +386,16 @@ export async function POST(req: Request) {
         console.error('Resend email send error', e);
         return NextResponse.json({
           ok: true,
-          warning: 'project created but email send failed',
+          warning: 'project created but email send failed (voir logs Resend)',
           project: projectData,
           invitedUserId,
           invitationMode,
         });
       }
+    } else if (inviteClient && !resend) {
+      console.warn(
+        'inviteClient=true mais RESEND_API_KEY absent → projet créé sans envoi d’email'
+      );
     }
 
     // ---- 5) OK final
