@@ -45,9 +45,7 @@ export default function WhatsAppButton({
         className,
       ].join(' ')}
     >
-      <IconBrandWhatsapp className="h-5 w-5" />
-      {/* Texte VISIBLE du lien */}
-      <span className="text-sm font-medium">{label}</span>
+      <IconBrandWhatsapp className="h-6 w-6" />
     </a>
   );
 }
