@@ -62,11 +62,10 @@ export default function ParallaxProjectItem({
         <Image
           src={coverImage}
           alt={titre}
-          width={500}
-          height={500}
+          width={200}
+          height={200}
           className="h-full w-full rounded-[3rem] object-cover"
           priority={false}
-          unoptimized
         />
       </div>
 
