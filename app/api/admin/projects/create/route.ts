@@ -36,7 +36,7 @@ async function ensureUserAndRecoveryLink(args: {
 
   const { email, fullName } = args;
 
-  // 1) chercher si le user existe
+  // 1) chercher / créer user
   const listRes = await supabaseAdmin.auth.admin.listUsers({
     // @ts-expect-error champ non typé dans sdk
     search: email,
@@ -45,7 +45,6 @@ async function ensureUserAndRecoveryLink(args: {
   let user = listRes.data?.users?.find((u: any) => u.email === email) ?? null;
   let mode: 'existing' | 'created' = 'existing';
 
-  // 2) créer si absent
   if (!user) {
     const createRes = await supabaseAdmin.auth.admin.createUser({
       email,
@@ -65,7 +64,7 @@ async function ensureUserAndRecoveryLink(args: {
 
   const userId = user?.id ?? null;
 
-  // 3) s'assurer du profile
+  // 2) profil
   if (userId) {
     const { data: profileRow } = await supabaseAdmin
       .from('profiles')
@@ -85,7 +84,7 @@ async function ensureUserAndRecoveryLink(args: {
     }
   }
 
-  // 4) lien recovery (onboarding)
+  // 3) lien recovery
   const recoveryRes = await supabaseAdmin.auth.admin.generateLink({
     type: 'recovery',
     email,
@@ -93,6 +92,7 @@ async function ensureUserAndRecoveryLink(args: {
       redirectTo: `${SITE_URL}/welcome`,
     },
   });
+
   if (recoveryRes.error) {
     return {
       error: `generateLink(recovery) failed: ${recoveryRes.error.message}`,
@@ -102,10 +102,21 @@ async function ensureUserAndRecoveryLink(args: {
     };
   }
 
+  // tente properties.action_link puis data.action_link
+  const data: any = recoveryRes.data;
+  const link = data?.properties?.action_link ?? data?.action_link ?? null;
+
+  if (!link) {
+    console.warn(
+      'generateLink(recovery) OK mais aucun action_link retourné',
+      recoveryRes.data
+    );
+  }
+
   return {
     error: null,
     userId,
-    link: recoveryRes.data.properties?.action_link ?? null,
+    link,
     mode,
   };
 }
@@ -357,30 +368,40 @@ export async function POST(req: Request) {
     }
 
     // ---- 4) Mail onboarding (seulement si invite + config Resend OK)
-    if (inviteClient && recoveryLink && resend && RESEND_FROM_EMAIL) {
+    // ---- 4) Mail onboarding (seulement si invite + config Resend OK)
+    if (inviteClient && resend && RESEND_FROM_EMAIL) {
+      const url = recoveryLink || `${SITE_URL}/welcome`;
+
+      if (!recoveryLink) {
+        console.warn(
+          'inviteClient=true mais recoveryLink null, fallback sur',
+          url
+        );
+      }
+
       try {
         await resend.emails.send({
           from: RESEND_FROM_EMAIL,
           to: clientEmail,
           subject: `Accès à votre projet — ${safeTitle}`,
           html: `
-            <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0b1226">
-              <h2 style="margin:0 0 8px 0;">Bonjour ${clientName ?? ''},</h2>
-              <p style="margin:0 0 12px 0;color:#334155">
-                Votre espace client pour <strong>${safeTitle}</strong> est prêt.
-                Cliquez ci-dessous pour définir votre mot de passe
-                et accéder à votre tableau de bord.
-              </p>
-              <p style="margin:14px 0;">
-                <a href="${recoveryLink}" style="display:inline-block;padding:10px 16px;background:#0ea5e9;color:#fff;border-radius:12px;text-decoration:none;font-weight:600">
-                  Accéder à mon espace
-                </a>
-              </p>
-              <p style="margin:0;color:#7c8598;font-size:13px">
-                Si vous n’êtes pas à l’origine de cette demande, ignorez ce message.
-              </p>
-            </div>
-          `,
+        <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0b1226">
+          <h2 style="margin:0 0 8px 0;">Bonjour ${clientName ?? ''},</h2>
+          <p style="margin:0 0 12px 0;color:#334155">
+            Votre espace client pour <strong>${safeTitle}</strong> est prêt.
+            Cliquez ci-dessous pour définir votre mot de passe
+            et accéder à votre tableau de bord.
+          </p>
+          <p style="margin:14px 0;">
+            <a href="${url}" style="display:inline-block;padding:10px 16px;background:#0ea5e9;color:#fff;border-radius:12px;text-decoration:none;font-weight:600">
+              Accéder à mon espace
+            </a>
+          </p>
+          <p style="margin:0;color:#7c8598;font-size:13px">
+            Si vous n’êtes pas à l’origine de cette demande, ignorez ce message.
+          </p>
+        </div>
+      `,
         });
       } catch (e) {
         console.error('Resend email send error', e);
