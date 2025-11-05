@@ -149,8 +149,7 @@ export default function IkovalineButtonFloating({ onClick, hidden }: Props) {
         ref={innerRef}
         className={cn(
           'relative flex items-center justify-center w-[64px] h-[64px] rounded-[1.6rem]',
-          'bg-white/80 dark:bg-[#0e1116]/80 backdrop-blur-xl',
-          'shadow-[0_18px_40px_rgba(0,0,0,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.9)]'
+          'bg-white dark:bg-[#0e1116] '
         )}
       >
         <div className="relative h-12 w-12 flex items-center justify-center">

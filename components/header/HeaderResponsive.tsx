@@ -486,7 +486,7 @@ export function HeaderResponsive() {
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Fermer le menu"
-                  className="grid size-10 place-items-center rounded-2xl bg-white/80 text-neutral-900 shadow-sm ring-1 ring-black/[0.04] backdrop-blur dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/5 active:scale-[0.96] will-change-transform"
+                  className="grid size-10 place-items-center rounded-2xl bg-white text-neutral-900 shadow-sm ring-1 ring-black/[0.04] dark:bg-neutral-900/70 dark:text-neutral-100 dark:ring-white/5 active:scale-[0.96] will-change-transform"
                   style={{ transformOrigin: 'right center' }}
                 >
                   <IconX className="h-6 w-6" />
