@@ -2,21 +2,20 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
-// On crée le client admin seulement si les vars sont là
-const supabaseAdmin =
-  SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY
-    ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-        auth: { persistSession: false },
-      })
-    : null;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const RESEND_FROM_EMAIL =
+  process.env.RESEND_FROM_EMAIL ?? 'Ikovaline <contact@ikovaline.com>';
 
-// Resend devient optionnel : si pas de clé, pas d'email, mais ça ne crashe pas
+// Supabase admin
+const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+  auth: { persistSession: false },
+});
+
+// Resend (comme sur ta route de contact)
 const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 /** Crée/assure un user Supabase et renvoie un lien recovery */
@@ -24,19 +23,9 @@ async function ensureUserAndRecoveryLink(args: {
   email: string;
   fullName?: string | null;
 }) {
-  if (!supabaseAdmin) {
-    return {
-      error:
-        'Supabase admin non configuré (SUPABASE_SERVICE_ROLE_KEY manquant ?)',
-      userId: null,
-      link: null,
-      mode: 'error' as const,
-    };
-  }
-
   const { email, fullName } = args;
 
-  // 1) chercher / créer user
+  // 1) chercher si le user existe
   const listRes = await supabaseAdmin.auth.admin.listUsers({
     // @ts-expect-error champ non typé dans sdk
     search: email,
@@ -45,6 +34,7 @@ async function ensureUserAndRecoveryLink(args: {
   let user = listRes.data?.users?.find((u: any) => u.email === email) ?? null;
   let mode: 'existing' | 'created' = 'existing';
 
+  // 2) créer si absent
   if (!user) {
     const createRes = await supabaseAdmin.auth.admin.createUser({
       email,
@@ -64,7 +54,7 @@ async function ensureUserAndRecoveryLink(args: {
 
   const userId = user?.id ?? null;
 
-  // 2) profil
+  // 3) s'assurer du profile
   if (userId) {
     const { data: profileRow } = await supabaseAdmin
       .from('profiles')
@@ -84,7 +74,7 @@ async function ensureUserAndRecoveryLink(args: {
     }
   }
 
-  // 3) lien recovery
+  // 4) lien recovery (onboarding)
   const recoveryRes = await supabaseAdmin.auth.admin.generateLink({
     type: 'recovery',
     email,
@@ -92,7 +82,6 @@ async function ensureUserAndRecoveryLink(args: {
       redirectTo: `${SITE_URL}/welcome`,
     },
   });
-
   if (recoveryRes.error) {
     return {
       error: `generateLink(recovery) failed: ${recoveryRes.error.message}`,
@@ -102,7 +91,7 @@ async function ensureUserAndRecoveryLink(args: {
     };
   }
 
-  // tente properties.action_link puis data.action_link
+  // certains SDK renvoient data.action_link, d’autres data.properties.action_link
   const data: any = recoveryRes.data;
   const link = data?.properties?.action_link ?? data?.action_link ?? null;
 
@@ -123,16 +112,6 @@ async function ensureUserAndRecoveryLink(args: {
 
 export async function POST(req: Request) {
   try {
-    if (!supabaseAdmin) {
-      console.error(
-        'Supabase admin non configuré (SUPABASE_URL ou SERVICE_ROLE_KEY manquant)'
-      );
-      return NextResponse.json(
-        { ok: false, error: 'Serveur mal configuré (Supabase admin)' },
-        { status: 500 }
-      );
-    }
-
     const body = await req.json();
 
     // Champs principaux
@@ -145,7 +124,7 @@ export async function POST(req: Request) {
 
     const clientName: string | undefined = body.clientName ?? body.client_name;
 
-    // Offre (désormais facultative)
+    // Offre (facultative)
     const offer_category: string | undefined =
       body.offer_category ?? body.offerCategory;
     const offer_tier: string | undefined = body.offer_tier ?? body.offerTier;
@@ -235,7 +214,7 @@ export async function POST(req: Request) {
       ? body.devEmails
       : [];
 
-    // ---- ✅ Validations MINIMALES : email + nom du client
+    // ---- validations mini
     if (!clientEmail) {
       return NextResponse.json(
         { ok: false, error: 'clientEmail required' },
@@ -367,44 +346,42 @@ export async function POST(req: Request) {
       console.warn('project_members insert warning', memErr);
     }
 
-    // ---- 4) Mail onboarding (seulement si invite + config Resend OK)
-    // ---- 4) Mail onboarding (seulement si invite + config Resend OK)
+    // ---- 4) Mail onboarding (style ta route de contact)
     if (inviteClient && resend && RESEND_FROM_EMAIL) {
       const url = recoveryLink || `${SITE_URL}/welcome`;
+      const subject = `Accès à votre projet — ${safeTitle}`;
 
-      if (!recoveryLink) {
-        console.warn(
-          'inviteClient=true mais recoveryLink null, fallback sur',
-          url
-        );
-      }
-
-      try {
-        await resend.emails.send({
-          from: RESEND_FROM_EMAIL,
-          to: clientEmail,
-          subject: `Accès à votre projet — ${safeTitle}`,
-          html: `
-        <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0b1226">
-          <h2 style="margin:0 0 8px 0;">Bonjour ${clientName ?? ''},</h2>
-          <p style="margin:0 0 12px 0;color:#334155">
-            Votre espace client pour <strong>${safeTitle}</strong> est prêt.
-            Cliquez ci-dessous pour définir votre mot de passe
-            et accéder à votre tableau de bord.
+      const html = `
+        <div style="font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f9fafb; padding:24px; border-radius:12px;">
+          <h2 style="color:#0ea5e9;margin:0 0 12px 0;">${subject}</h2>
+          <p style="margin:0 0 12px 0;color:#334155;">
+            Bonjour ${clientName ?? ''},<br/>
+            Votre espace client Ikovaline pour <strong>${safeTitle}</strong> est prêt.
           </p>
-          <p style="margin:14px 0;">
-            <a href="${url}" style="display:inline-block;padding:10px 16px;background:#0ea5e9;color:#fff;border-radius:12px;text-decoration:none;font-weight:600">
+          <p style="margin:0 0 16px 0;color:#334155;">
+            Cliquez sur le bouton ci-dessous pour définir votre mot de passe et accéder à votre tableau de bord :
+          </p>
+          <p style="margin:0 0 20px 0;">
+            <a href="${url}" style="display:inline-block;padding:10px 16px;background:#0ea5e9;color:#fff;border-radius:12px;text-decoration:none;font-weight:600;">
               Accéder à mon espace
             </a>
           </p>
-          <p style="margin:0;color:#7c8598;font-size:13px">
-            Si vous n’êtes pas à l’origine de cette demande, ignorez ce message.
+          <p style="margin:0;color:#7c8598;font-size:13px;">
+            Si vous n’êtes pas à l’origine de cette demande, vous pouvez ignorer ce message.
           </p>
         </div>
-      `,
+      `;
+
+      try {
+        await resend.emails.send({
+          from: 'Ikovaline <contact@ikovaline.com>',
+          to: clientEmail,
+          subject,
+          html,
         });
-      } catch (e) {
-        console.error('Resend email send error', e);
+      } catch (err) {
+        console.error('❌ Erreur envoi email onboarding', err);
+        // on ne bloque pas la création du projet pour un échec email
         return NextResponse.json({
           ok: true,
           warning: 'project created but email send failed (voir logs Resend)',
@@ -413,10 +390,6 @@ export async function POST(req: Request) {
           invitationMode,
         });
       }
-    } else if (inviteClient && !resend) {
-      console.warn(
-        'inviteClient=true mais RESEND_API_KEY absent → projet créé sans envoi d’email'
-      );
     }
 
     // ---- 5) OK final
