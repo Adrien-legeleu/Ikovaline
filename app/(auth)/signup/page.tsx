@@ -5,7 +5,7 @@ import { Suspense, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Plus } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import { ProjectGaugeCard } from '@/components/ClientSpace/ProgressCard';
 import { StarRow } from '@/components/StarClientsGoogle';
@@ -212,9 +212,9 @@ function SignupInner() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1 }}
-                    className="text-xs tracking-[0.18em] font-semibold text-gray-700 dark:text-gray-300"
+                    className="text-xs tracking-wider font-semibold text-gray-700 dark:text-gray-300"
                   >
-                    67+ AVIS
+                    67+ avis
                   </motion.span>
                 </span>
 

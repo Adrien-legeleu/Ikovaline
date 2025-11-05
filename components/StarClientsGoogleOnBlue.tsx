@@ -71,9 +71,9 @@ export default function StarClientsGoogleOnBlue() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              className="text-xs tracking-[0.18em] font-semibold text-white/80"
+              className="text-xs tracking-wider font-semibold text-white/80"
             >
-              67+ AVIS
+              67+ avis
             </motion.span>
           </span>
 

@@ -5,10 +5,7 @@ import { motion, cubicBezier } from 'framer-motion';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
-import {
-  createProjectAction,
-  CreateProjectPayload,
-} from '@/components/ClientSpace/Admin/_actions';
+import { createProjectAction } from '@/components/ClientSpace/Admin/_actions';
 import { CATALOG, getVisibleOptions } from '@/lib/catalog';
 import { supabase } from '@/lib/SupabaseClient';
 
@@ -34,14 +31,7 @@ import {
 import { Calendar } from '@/components/ui/calendar';
 
 // Icons
-import {
-  Plus,
-  Calendar as CalIcon,
-  Upload,
-  X,
-  UserPlus,
-  UserMinus,
-} from 'lucide-react';
+import { Calendar as CalIcon, UserPlus, UserMinus } from 'lucide-react';
 
 // ================== LISTES METIER ==================
 const LANG_LIST = ['FR', 'EN', 'ES', 'DE', 'IT', 'PT', 'AR', 'Autres'] as const;
@@ -73,7 +63,6 @@ const GOAL_LIST = [
 type Dev = { email: string };
 
 const ease = cubicBezier(0.16, 1, 0.3, 1);
-
 const CARD =
   'rounded-[2rem] border border-neutral-200/60 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 shadow-sm p-6 md:p-8';
 
@@ -214,13 +203,13 @@ export default function NewProjectClient() {
   const [clientEmail, setClientEmail] = useState('');
   const [clientName, setClientName] = useState('');
 
-  // Offre
+  // Offre (toutes OPTIONNELLES désormais)
   const [category, setCategory] = useState<keyof typeof CATALOG>('landing');
   const [tier, setTier] = useState(CATALOG['landing'].tiers[0].id);
   const [price, setPrice] = useState<number>(CATALOG['landing'].tiers[0].price);
   const [currency, setCurrency] = useState<'EUR' | 'USD'>('EUR');
 
-  // Détails projet
+  // Détails projet (OPTIONNELS)
   const [title, setTitle] = useState('');
   const [description, setDesc] = useState('');
   const [industry, setIndustry] = useState('');
@@ -263,7 +252,7 @@ export default function NewProjectClient() {
     []
   );
 
-  // KPI/projet
+  // KPI/projet (OPTIONNELS)
   const [status, setStatus] = useState<
     'draft' | 'scheduled' | 'in_progress' | 'paused' | 'completed' | 'cancelled'
   >('in_progress');
@@ -282,7 +271,7 @@ export default function NewProjectClient() {
 
   const [progress, setProgress] = useState<number>(0);
 
-  // Paiements
+  // Paiements (OPTIONNELS)
   const [paymentTotal, setPaymentTotal] = useState<number | ''>('');
   const [paymentCaptured, setPaymentCaptured] = useState<number | ''>('');
   const [paymentInstallments, setPaymentInstallments] = useState<number>(1);
@@ -341,7 +330,7 @@ export default function NewProjectClient() {
     if (status === 'completed') {
       setProgress(100);
       setBillingStatus('paid_full');
-      setInviteClient(false); // historique -> pas d'invite
+      setInviteClient(false);
     }
   }, [status]);
 
@@ -416,30 +405,18 @@ export default function NewProjectClient() {
   const onSubmit = () => {
     setToast(null);
 
-    // sécurité front : champs minimum
+    // ✅ Seuls champs obligatoires
     if (!isValidEmail(clientEmail)) {
       setToast('Email client invalide.');
       return;
     }
-    if (!title.trim()) {
-      setToast('Le titre du projet est obligatoire.');
-      return;
-    }
-    if (!price || Number.isNaN(Number(price))) {
-      setToast('Prix vendu invalide.');
-      return;
-    }
-    if (!status) {
-      setToast('Statut requis.');
-      return;
-    }
-    if (!category || !tier || !currency) {
-      setToast('Catégorie, palier et devise requis.');
+    if (!clientName.trim()) {
+      setToast('Le nom du client est obligatoire.');
       return;
     }
 
     startTransition(async () => {
-      // 1) upload fichiers
+      // 1) upload fichiers (facultatif)
       const briefPaths = await uploadFilesToBucket(
         'uploads',
         briefFiles,
@@ -459,24 +436,25 @@ export default function NewProjectClient() {
             .filter(Boolean)
         : [];
 
-      // 3) build payload TYPÉ (sans as const)
-      const payload: CreateProjectPayload = {
+      // 3) payload minimal + champs optionnels
+      const payload = {
         // client / invite
         clientEmail: clientEmail.trim(),
-        clientName: clientName.trim() || undefined,
+        clientName: clientName.trim(),
         inviteClient,
 
-        // core
-        title: title.trim(),
+        // core (optionnels)
+        title: title.trim() || undefined,
         description: description.trim() || undefined,
         industry: industry.trim() || undefined,
 
-        offerCategory: category, // CategoryId est string compatible avec string
+        // Offre (optionnelle)
+        offerCategory: category,
         offerTier: tier,
-        offerPrice: Number(price),
+        offerPrice: Number(price) || undefined,
         currency,
 
-        // options
+        // options (optionnelles)
         selectedOptions: [...selectedOptionIds, ...selectedAdminExtraIds],
 
         // pub
@@ -503,7 +481,7 @@ export default function NewProjectClient() {
         // équipe
         devEmails: devs.map((d) => d.email.trim()).filter(Boolean),
 
-        // KPI / statut / factu
+        // KPI / statut / factu (optionnels)
         status,
         billingStatus,
         riskLevel,
@@ -533,7 +511,7 @@ export default function NewProjectClient() {
           tone: tones,
           goal: goal || null,
         },
-      };
+      } as any; // on assouplit le typage côté action
 
       const res = await createProjectAction(payload);
 
@@ -569,7 +547,7 @@ export default function NewProjectClient() {
           Créer un projet
         </h1>
         <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-          Rattache un client, renseigne l’offre et les paramètres clés.
+          Rattache un client. Tout le reste est facultatif.
         </p>
       </motion.div>
 
@@ -628,7 +606,7 @@ export default function NewProjectClient() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Field label="Email du client">
+          <Field label="Email du client *">
             <Input
               type="email"
               placeholder="client@domaine.com"
@@ -637,11 +615,12 @@ export default function NewProjectClient() {
               required
             />
           </Field>
-          <Field label="Nom (optionnel)">
+          <Field label="Nom du client *">
             <Input
               placeholder="Ex. Jeanne Dupont"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
+              required
             />
           </Field>
         </div>
@@ -656,11 +635,11 @@ export default function NewProjectClient() {
       >
         <Section
           title="Offre"
-          subtitle="Catégorie & palier vendus (Starter, Premium, Ultra…)."
+          subtitle="Tout est facultatif. Sélectionne si tu veux pré-remplir."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Field label="Catégorie">
+          <Field label="Catégorie (facultatif)">
             <Select
               value={category}
               onValueChange={(val: string) => {
@@ -700,14 +679,13 @@ export default function NewProjectClient() {
             </div>
           </Field>
 
-          <Field label="Prix vendu">
+          <Field label="Prix vendu (facultatif)">
             <div className="flex items-center gap-2">
               <Input
                 type="number"
                 inputMode="decimal"
                 value={String(price)}
                 onChange={(e) => setPrice(Number(e.target.value || 0))}
-                required
               />
               <Select
                 value={currency}
@@ -727,7 +705,7 @@ export default function NewProjectClient() {
             <div className="text-xs text-neutral-500 mt-1">TTC</div>
           </Field>
 
-          <Field label="Publicité">
+          <Field label="Publicité (facultatif)">
             <div className="flex items-center justify-between rounded-xl bg-neutral-50 dark:bg-neutral-800/60 p-4">
               <div>
                 <div className="text-sm font-medium">Campagne publicitaire</div>
@@ -796,15 +774,17 @@ export default function NewProjectClient() {
         transition={{ duration: 0.35, ease }}
         className={CARD}
       >
-        <Section title="Détails" subtitle="Contexte, références, dépôts…" />
+        <Section
+          title="Détails"
+          subtitle="Contexte, références, dépôts… (facultatifs)"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Field label="Titre du projet">
+          <Field label="Titre du projet (facultatif)">
             <Input
               placeholder="Ex. Refonte site e-commerce"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              required
             />
           </Field>
 
@@ -986,7 +966,7 @@ export default function NewProjectClient() {
       >
         <Section
           title="Statut & Facturation"
-          subtitle="Pilotage du projet (statut, avancement, facturation)."
+          subtitle="Pilotage du projet (facultatif)."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -1170,14 +1150,7 @@ export default function NewProjectClient() {
         <Button
           type="button"
           disabled={
-            isPending ||
-            !clientEmail.trim() ||
-            !title.trim() ||
-            !price ||
-            !status ||
-            !category ||
-            !tier ||
-            !currency
+            isPending || !isValidEmail(clientEmail) || !clientName.trim()
           }
           onClick={onSubmit}
           className="px-8 py-6 text-base bg-primary hover:opacity-95 text-white"

@@ -1,4 +1,3 @@
-// app/projects/[id]/page.tsx
 export const dynamic = 'force-dynamic';
 
 import { cookies } from 'next/headers';
@@ -31,7 +30,7 @@ export default async function ProjectDetail({ params }: Props) {
     );
   }
 
-  // --- Projet (la policy RLS peut déjà filtrer; on garde le check app pour être clair) ---
+  // --- Projet (RLS protège déjà) ---
   const { data: proj } = await supabase
     .from('projects')
     .select('*')
@@ -75,7 +74,7 @@ export default async function ProjectDetail({ params }: Props) {
     );
   }
 
-  // --- Siblings: si collaborateur “pur”, on ne liste pas les autres projets du client/owner
+  // --- Siblings: ordre des projets pour ce client / owner ---
   let siblings: { id: string; created_at: string }[] = [];
   if (!isCollaborator && proj.owner_user_id) {
     const { data } = await supabase
@@ -99,15 +98,15 @@ export default async function ProjectDetail({ params }: Props) {
   const humanIndex = index >= 0 ? index + 1 : 1;
   const displayTitle = (proj.title || '').trim() || `Projet ${humanIndex}`;
 
-  // --- Updates (RLS sur project_updates à calquer sur projects)
-  const { data: updates } = await supabase
+  // --- Updates (même structure que l’admin : done / next / blockers) ---
+  const { data: updates = [] } = await supabase
     .from('project_updates')
-    .select('id,progress,message,created_at')
+    .select('id,progress,headline,done,next,blockers,created_at')
     .eq('project_id', proj.id)
     .order('created_at', { ascending: false });
 
-  // --- Contrat signé (si tu gardes un tableau de fichiers)
-  const signedPdf =
+  // --- Contrat signé : on garde le PATH, pas une URL brute ---
+  const signedContractPath =
     Array.isArray(proj.signed_contract_files) &&
     proj.signed_contract_files.length > 0
       ? proj.signed_contract_files[0]
@@ -117,8 +116,8 @@ export default async function ProjectDetail({ params }: Props) {
     <ClientProjectPage
       proj={proj}
       displayTitle={displayTitle}
-      updates={updates ?? []}
-      signedPdf={signedPdf}
+      updates={updates}
+      signedContractPath={signedContractPath}
     />
   );
 }

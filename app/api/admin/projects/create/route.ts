@@ -22,7 +22,7 @@ async function ensureUserAndRecoveryLink(args: {
 
   // 1) chercher si le user existe
   const listRes = await supabaseAdmin.auth.admin.listUsers({
-    // @ts-expect-error: param {search} pas typé dans sdk
+    // @ts-expect-error champ non typé dans sdk
     search: email,
   });
 
@@ -98,7 +98,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // Supporte les deux conventions (nouvelle et ancienne)
+    // Champs principaux
     const title: string | undefined = body.title ?? body.projectTitle;
     const description: string | undefined =
       body.description ?? body.projectDescription;
@@ -108,36 +108,53 @@ export async function POST(req: Request) {
 
     const clientName: string | undefined = body.clientName ?? body.client_name;
 
-    const offer_category: string | undefined = body.offer_category;
-    const offer_tier: string | undefined = body.offer_tier;
-    const offer_price: number | undefined = body.offer_price;
+    // Offre (désormais facultative)
+    const offer_category: string | undefined =
+      body.offer_category ?? body.offerCategory;
+    const offer_tier: string | undefined = body.offer_tier ?? body.offerTier;
+    const offer_price: number | undefined =
+      typeof body.offer_price === 'number'
+        ? body.offer_price
+        : typeof body.offerPrice === 'number'
+          ? body.offerPrice
+          : undefined;
+
     const currency: 'EUR' | 'USD' = (body.currency as 'EUR' | 'USD') ?? 'EUR';
 
-    const selected_options: string[] = Array.isArray(body.selected_options)
-      ? body.selected_options
+    const selected_options: string[] = Array.isArray(
+      body.selected_options ?? body.selectedOptions
+    )
+      ? (body.selected_options ?? body.selectedOptions)
       : [];
 
-    const wants_ads: boolean = !!body.wants_ads;
+    const wants_ads: boolean = !!(body.wants_ads ?? body.wantsAds);
     const ads_budget: number | null =
-      typeof body.ads_budget === 'number' ? body.ads_budget : null;
+      typeof (body.ads_budget ?? body.adsBudget) === 'number'
+        ? (body.ads_budget ?? body.adsBudget)
+        : null;
 
-    const start_at: string | null = body.start_at ?? null; // ISO
+    const start_at: string | null = body.start_at ?? body.startAt ?? null; // ISO
     const deadline: string | null = body.deadline ?? null; // YYYY-MM-DD
 
-    const maintenance_type: string | null = body.maintenance_type ?? null;
-    const maintenance_start: string | null = body.maintenance_start ?? null;
-    const maintenance_end: string | null = body.maintenance_end ?? null;
+    const maintenance_type: string | null =
+      body.maintenance_type ?? body.maintenanceType ?? null;
+    const maintenance_start: string | null =
+      body.maintenance_start ?? body.maintenanceStart ?? null;
+    const maintenance_end: string | null =
+      body.maintenance_end ?? body.maintenanceEnd ?? null;
 
-    const repo_url: string | null = body.repo_url ?? null;
+    const repo_url: string | null = body.repo_url ?? body.repoUrl ?? null;
     const urls: string[] = Array.isArray(body.urls) ? body.urls : [];
 
-    const brief_files: string[] = Array.isArray(body.brief_files)
-      ? body.brief_files
+    const brief_files: string[] = Array.isArray(
+      body.brief_files ?? body.briefFiles
+    )
+      ? (body.brief_files ?? body.briefFiles)
       : [];
     const signed_contract_files: string[] = Array.isArray(
-      body.signed_contract_files
+      body.signed_contract_files ?? body.signedContractFiles
     )
-      ? body.signed_contract_files
+      ? (body.signed_contract_files ?? body.signedContractFiles)
       : [];
 
     const status:
@@ -181,28 +198,23 @@ export async function POST(req: Request) {
       ? body.devEmails
       : [];
 
-    // ---- Validations minimales
-    if (!title) {
-      return NextResponse.json(
-        { ok: false, error: 'title required' },
-        { status: 400 }
-      );
-    }
+    // ---- ✅ Validations MINIMALES : email + nom du client
     if (!clientEmail) {
       return NextResponse.json(
         { ok: false, error: 'clientEmail required' },
         { status: 400 }
       );
     }
-    if (!offer_category || !offer_tier || typeof offer_price !== 'number') {
+    if (!clientName || !String(clientName).trim()) {
       return NextResponse.json(
-        {
-          ok: false,
-          error: 'offer_category, offer_tier, offer_price required',
-        },
+        { ok: false, error: 'clientName required' },
         { status: 400 }
       );
     }
+
+    // Titre par défaut si absent
+    const safeTitle =
+      title?.trim() || `Projet ${new Date().toISOString().slice(0, 10)}`;
 
     // ---- 1) Invitation (optionnelle)
     let invitedUserId: string | null = null;
@@ -217,8 +229,7 @@ export async function POST(req: Request) {
 
       if (invite.error) {
         console.error('ensureUserAndRecoveryLink error', invite.error);
-        // On n’interrompt pas la création du projet,
-        // mais on remonte un warning côté réponse.
+        // on continue quand même la création du projet
       } else {
         invitedUserId = invite.userId ?? null;
         invitationMode = (invite.mode as 'created' | 'existing') ?? null;
@@ -226,18 +237,18 @@ export async function POST(req: Request) {
       }
     }
 
-    // ---- 2) Insert projet
+    // ---- 2) Insert projet (la plupart des colonnes peuvent être null/undefined)
     const projectRow: any = {
       owner_user_id: invitedUserId ?? null,
       client_email: clientEmail,
 
-      title,
+      title: safeTitle,
       description: description ?? null,
       industry: body.industry ?? null,
 
-      offer_category,
-      offer_tier,
-      offer_price,
+      offer_category: offer_category ?? null,
+      offer_tier: offer_tier ?? null,
+      offer_price: typeof offer_price === 'number' ? offer_price : null,
       selected_options,
       currency,
 
@@ -264,7 +275,6 @@ export async function POST(req: Request) {
       risk_level,
       priority,
 
-      // déductions utiles
       total_sold: typeof offer_price === 'number' ? offer_price : null,
       payment_total: typeof payment_total === 'number' ? payment_total : null,
       payment_captured:
@@ -273,7 +283,7 @@ export async function POST(req: Request) {
         typeof payment_installments === 'number' ? payment_installments : 1,
       payment_currency: currency,
 
-      extra: extra ?? {},
+      extra: { ...(extra ?? {}), clientName }, // on garde le nom dans extra si pas de colonne dédiée
       created_at: new Date().toISOString(),
     };
 
@@ -294,7 +304,7 @@ export async function POST(req: Request) {
     // ---- 3) project_members
     const membersToInsert: any[] = [];
 
-    // Owner (client) — même si pas invité, on garde la trace par invited_email
+    // Owner (client)
     membersToInsert.push({
       project_id: projectData.id,
       user_id: invitedUserId ?? null,
@@ -326,12 +336,12 @@ export async function POST(req: Request) {
         await resend.emails.send({
           from: RESEND_FROM_EMAIL,
           to: clientEmail,
-          subject: `Accès à votre projet — ${title}`,
+          subject: `Accès à votre projet — ${safeTitle}`,
           html: `
             <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0b1226">
               <h2 style="margin:0 0 8px 0;">Bonjour ${clientName ?? ''},</h2>
               <p style="margin:0 0 12px 0;color:#334155">
-                Votre espace client pour <strong>${title}</strong> est prêt.
+                Votre espace client pour <strong>${safeTitle}</strong> est prêt.
                 Cliquez ci-dessous pour définir votre mot de passe
                 et accéder à votre tableau de bord.
               </p>

@@ -1,4 +1,5 @@
 'use client';
+
 import {
   CATALOG,
   type CategoryId,
@@ -26,6 +27,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import ProgressGauge from '@/components/ClientSpace/Dashboard/ProgressGauge';
+import { supabase } from '@/lib/SupabaseClient';
 
 const ease = cubicBezier(0.16, 1, 0.3, 1);
 
@@ -33,16 +35,19 @@ const ease = cubicBezier(0.16, 1, 0.3, 1);
 
 type Update = {
   id: string;
-  progress: number;
+  progress: number | null;
+  headline: string | null;
+  done: string[];
+  next: string[];
+  blockers: string[];
   created_at: string;
-  message: { done?: string[]; next?: string[] };
 };
 
 type ClientProjectPageProps = {
   proj: any;
   displayTitle: string;
   updates: Update[];
-  signedPdf: string | null;
+  signedContractPath: string | null; // <- path dans le bucket signed-pdfs
 };
 
 type TeamItem = {
@@ -65,7 +70,49 @@ type Collab = {
   created_at: string;
 };
 
-/* ========================= Page ========================= */
+/* ========================= Hooks ========================= */
+
+/** Génère des URLs signées pour un bucket privé (ex: `signed-pdfs`, `uploads`). */
+function useSignedUrls(
+  bucket: string,
+  paths: string[],
+  expiresSeconds = 60 * 60 * 24 * 7
+) {
+  const [map, setMap] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!paths.length) {
+      setMap({});
+      return;
+    }
+
+    (async () => {
+      const entries: [string, string][] = [];
+      for (const p of paths) {
+        const { data, error } = await supabase.storage
+          .from(bucket)
+          .createSignedUrl(p, expiresSeconds);
+        if (error) {
+          console.warn('Signed URL error for', p, error.message);
+          entries.push([p, '']);
+        } else {
+          entries.push([p, data?.signedUrl || '']);
+        }
+      }
+      if (!cancelled) setMap(Object.fromEntries(entries));
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bucket, JSON.stringify(paths), expiresSeconds]);
+
+  return map;
+}
+
+/* ========================= Helpers ========================= */
+
 function resolveOptionLabels(
   categoryId: string | undefined,
   tierId: string | undefined,
@@ -75,22 +122,43 @@ function resolveOptionLabels(
   const cat = CATALOG[categoryId as CategoryId];
   if (!cat) return selected;
 
-  // On ignore le filtrage par tier ici, on affiche juste le label si l’option existe
   const map = new Map(cat.options.map((o) => [o.id, o.label]));
   return selected.map((k) => map.get(k) ?? k);
 }
+
+/* ========================= Page ========================= */
 
 export default function ClientProjectPage({
   proj,
   displayTitle,
   updates,
-  signedPdf,
+  signedContractPath,
 }: ClientProjectPageProps) {
   const progress = clamp(proj.progress ?? 0, 0, 100);
+
   const last = useMemo<Update | null>(
-    () => (updates && updates.length > 0 ? updates[0] : null),
+    () => (updates && updates.length > 0 ? (updates[0] as Update) : null),
     [updates]
   );
+
+  // Contrats / briefs : PATHS dans les buckets
+  const contractPaths = Array.isArray(proj.signed_contract_files)
+    ? proj.signed_contract_files
+    : [];
+  const briefPaths = Array.isArray(proj.brief_files) ? proj.brief_files : [];
+
+  const signedMap = useSignedUrls('signed-pdfs', contractPaths);
+  const briefsMap = useSignedUrls('uploads', briefPaths);
+
+  const signedPdfUrl =
+    signedContractPath && signedMap[signedContractPath]
+      ? signedMap[signedContractPath]
+      : null;
+
+  const briefUrls = briefPaths.map((p: string) => ({
+    path: p,
+    url: briefsMap[p] || '',
+  }));
 
   return (
     <section className="space-y-8">
@@ -110,7 +178,7 @@ export default function ClientProjectPage({
             />
 
             {proj.description ? (
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
+              <p className="text-sm text-muted-foreground bg-sky-50 border-sky-100 p-4 rounded-3xl text-sky-800 leading-relaxed max-w-2xl">
                 {proj.description}
               </p>
             ) : null}
@@ -143,30 +211,34 @@ export default function ClientProjectPage({
             {/* Last update */}
             {last && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <SmallPane>
-                  <div className="text-[11px] uppercase text-muted-foreground mb-1 flex items-center gap-1.5">
+                <div className="rounded-3xl bg-emerald-50  ring-1 ring-emerald-50 p-5 shadow-[0_16px_30px_rgba(0,0,0,0.07)]">
+                  <div className="text-[11px] uppercase mb-1 flex text-emerald-800 items-center gap-1.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
                     Fait dernièrement
                   </div>
-                  <div className="text-sm leading-relaxed">
-                    {last.message?.done?.length ? last.message.done[0] : '—'}
+                  <div className="text-sm text-emerald-900leading-relaxed">
+                    {Array.isArray(last.done) && last.done.length
+                      ? last.done[0]
+                      : '—'}
                   </div>
-                </SmallPane>
+                </div>
 
-                <SmallPane>
-                  <div className="text-[11px] uppercase text-muted-foreground mb-1 flex items-center gap-1.5">
+                <div className="rounded-3xl bg-sky-50  ring-1 ring-sky-50 p-5 shadow-[0_16px_30px_rgba(0,0,0,0.07)]">
+                  <div className="text-[11px] uppercase mb-1 text-sky-800 flex items-center gap-1.5">
                     <ListTodo className="h-3.5 w-3.5 text-primary" />
                     Prochaine étape
                   </div>
-                  <div className="text-sm leading-relaxed">
-                    {last.message?.next?.length ? last.message.next[0] : '—'}
+                  <div className="text-sm text-sky-900 leading-relaxed">
+                    {Array.isArray(last.next) && last.next.length
+                      ? last.next[0]
+                      : '—'}
                   </div>
-                </SmallPane>
+                </div>
 
                 <div className="sm:col-span-2 text-[11px] text-muted-foreground flex flex-wrap items-center gap-2">
                   <Clock className="h-3.5 w-3.5" />
                   <span>
-                    {formatDateShort(last.created_at)} — {last.progress}%
+                    {formatDateShort(last.created_at)} — {last.progress ?? 0}%
                     atteint
                   </span>
                 </div>
@@ -195,7 +267,7 @@ export default function ClientProjectPage({
       {/* ===== CONTENT (BENTO GRID ≥ md) ===== */}
       <div className="grid gap-6 md:grid-cols-12">
         {/* Bloc gauche large */}
-        <div className="md:col-span-7 space-y-6">
+        <div className="md:col-span-7 md:row-span-5 space-y-6">
           <SectionCard
             icon={<Zap className="h-4 w-4 text-primary" />}
             sectionLabel="Suivi du projet"
@@ -238,9 +310,13 @@ export default function ClientProjectPage({
             icon={<FileText className="h-4 w-4 text-primary" />}
             sectionLabel="Documents"
             title="Contrat & Offre"
-            description="Contrat signé et périmètre vendu."
+            description="Contrat signé, briefs, périmètre vendu."
           >
-            <OfferBlock proj={proj} signedPdf={signedPdf} />
+            <OfferBlock
+              proj={proj}
+              signedPdfUrl={signedPdfUrl}
+              briefUrls={briefUrls}
+            />
           </SectionCard>
         </div>
 
@@ -410,7 +486,7 @@ function StaffCard({
           {items.map((m) => (
             <li
               key={m.id}
-              className="flex items-center justify-between rounded-[1rem] bg-black/5 dark:bg-white/10 px-4 py-3"
+              className="flex items-center justify-between rounded-[1rem] bg-black/5 dark:bg:white/10 px-4 py-3"
             >
               <div className="min-w-0">
                 <div className="text-sm font-medium break-words">
@@ -418,8 +494,6 @@ function StaffCard({
                 </div>
                 <div className="text-xs opacity-70">{m.staff_role}</div>
               </div>
-
-              {/* ⛔ Le client / collaborateur ne peut pas retirer les devs */}
               {canManageStaff ? (
                 <button
                   onClick={() => remove(m.user_id)}
@@ -519,7 +593,7 @@ function CollaboratorsCard({ projectId }: { projectId: string }) {
           {items.map((m) => (
             <li
               key={m.id}
-              className="flex items-center justify-between rounded-[1rem] bg-black/5 dark:bg-white/10 px-4 py-3"
+              className="flex items-center justify-between rounded-[1rem] bg-black/5 dark:bg:white/10 px-4 py-3"
             >
               <div className="min-w-0">
                 <div className="text-sm font-medium break-words">
@@ -547,7 +621,7 @@ function CollaboratorsCard({ projectId }: { projectId: string }) {
       >
         <input
           type="email"
-          className="h-10 rounded-[0.9rem] px-3 bg-black/5 dark:bg-white/10 outline-none"
+          className="h-10 rounded-[0.9rem] px-3 bg-black/5 dark:bg:white/10 outline-none"
           placeholder="email@entreprise.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -555,7 +629,9 @@ function CollaboratorsCard({ projectId }: { projectId: string }) {
         />
         <button
           disabled={submitting}
-          className={`h-10 rounded-[0.9rem] px-4 bg-primary text-white text-sm font-medium transition ${submitting ? 'opacity-70 pointer-events-none' : ''}`}
+          className={`h-10 rounded-[0.9rem] px-4 bg-primary text-white text-sm font-medium transition ${
+            submitting ? 'opacity-70 pointer-events-none' : ''
+          }`}
         >
           Inviter
         </button>
@@ -632,7 +708,7 @@ function ProjectLinks({
                   href={u}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.07] ring-1 ring-black/10 dark:ring-white/10 hover:bg-black/[0.07] dark:hover:bg-white/[0.12] px-3 py-1.5 text-[12px] font-medium transition max-w-[220px]"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-black/[0.04] dark:bg:white/[0.07] ring-1 ring-black/10 dark:ring:white/10 hover:bg-black/[0.07] dark:hover:bg:white/[0.12] px-3 py-1.5 text-[12px] font-medium transition max-w-[220px]"
                   title={u}
                 >
                   <LinkIcon className="h-3.5 w-3.5 opacity-70 shrink-0" />
@@ -704,10 +780,12 @@ function BillingFacts({ proj }: { proj: any }) {
 
 function OfferBlock({
   proj,
-  signedPdf,
+  signedPdfUrl,
+  briefUrls,
 }: {
   proj: any;
-  signedPdf: string | null;
+  signedPdfUrl: string | null;
+  briefUrls: { path: string; url: string }[];
 }) {
   const optionLabels = resolveOptionLabels(
     proj?.offer_category,
@@ -720,9 +798,9 @@ function OfferBlock({
       <Row
         label="Contrat signé"
         value={
-          signedPdf ? (
+          signedPdfUrl ? (
             <a
-              href={signedPdf}
+              href={signedPdfUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-primary text-white px-3 py-1.5 text-xs font-medium hover:opacity-90 active:scale-[.99] transition shadow-[0_14px_30px_rgba(59,130,246,0.4)] dark:shadow-[0_14px_30px_rgba(59,130,246,0.3)]"
@@ -731,12 +809,41 @@ function OfferBlock({
               Ouvrir PDF
             </a>
           ) : (
-            <span className="inline-flex items-center gap-2 rounded-full bg-black/[0.04] dark:bg-white/[0.07] ring-1 ring-black/10 dark:ring-white/10 px-3 py-1.5 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-2 rounded-full bg-black/[0.04] dark:bg:white/[0.07] ring-1 ring-black/10 dark:ring:white/10 px-3 py-1.5 text-xs text-muted-foreground">
               <FileText className="h-4 w-4 opacity-70" /> —
             </span>
           )
         }
       />
+
+      {/* Briefs */}
+      <div className="space-y-2">
+        <div className="text-[11px] uppercase text-muted-foreground flex items-center gap-1.5 font-medium">
+          <FileText className="h-3.5 w-3.5" />
+          Briefs (PDF / images)
+        </div>
+        {briefUrls.length ? (
+          <ul className="space-y-1">
+            {briefUrls.map((b) => (
+              <li key={b.path}>
+                <a
+                  href={b.url || '#'}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-xs underline underline-offset-4 break-all"
+                >
+                  <FileText className="h-2.5 w-2.5 opacity-70" />
+                  voir le fichier
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="text-xs text-muted-foreground">
+            Aucun brief enregistré.
+          </div>
+        )}
+      </div>
 
       <div className="space-y-2">
         <div className="text-[11px] uppercase text-muted-foreground flex items-center gap-1.5 font-medium">
@@ -744,17 +851,17 @@ function OfferBlock({
           Offre vendue
         </div>
 
-        <div className="rounded-[1rem] bg-black/[0.04] dark:bg-white/[0.07] ring-1 ring-black/10 dark:ring-white/10 p-3 text-xs leading-relaxed">
+        <div className="rounded-3xl bg-black/[0.04] dark:bg:white/[0.07] ring-1 ring-black/5 dark:ring:white/10 p-5 text-xs leading-relaxed">
           <div className="font-medium text-foreground text-[13px]">
             {proj.offer_category} · {proj.offer_tier}
           </div>
 
-          <div className="text-muted-foreground mt-2 flex flex-wrap gap-1.5">
+          <div className="text-muted-foreground mt-2 flex flex-wrap gap-3">
             {optionLabels.length ? (
               optionLabels.map((label, i) => (
                 <span
                   key={label + i}
-                  className="inline-flex items-center rounded-full bg-primary/10 text-primary ring-1 ring-primary/30 px-2 py-0.5 text-[10px] font-medium"
+                  className="inline-flex items-center rounded-3xl bg-primary/10 text-primary ring-1 ring-primary/15 px-3 py-2 text-[11px] font-medium"
                 >
                   {label}
                 </span>
@@ -802,7 +909,7 @@ function EditableTitleClient({
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full rounded-[1rem] bg-black/[0.03] dark:bg-white/[0.07] ring-1 ring-black/10 dark:ring-white/10 px-3 py-2 text-xl lg:text-2xl font-semibold tracking-tight leading-tight outline-none focus:ring-2 focus:ring-primary/40 dark:focus:ring-primary/40"
+            className="w-full rounded-[1rem] bg-black/[0.03] dark:bg:white/[0.07] ring-1 ring-black/10 dark:ring:white/10 px-3 py-2 text-xl lg:text-2xl font-semibold tracking-tight leading-tight outline-none focus:ring-2 focus:ring-primary/40 dark:focus:ring-primary/40"
           />
           <div className="flex items-center gap-2 text-sm">
             <button
@@ -817,7 +924,7 @@ function EditableTitleClient({
                 setTitle(initialTitle);
                 setEditing(false);
               }}
-              className="inline-flex items-center rounded-[0.75rem] bg-black/[0.05] dark:bg-white/[0.08] ring-1 ring-black/10 dark:ring-white/10 px-3 py-2 text-xs font-medium hover:bg-black/[0.07] dark:hover:bg-white/[0.12] transition"
+              className="inline-flex items-center rounded-[0.75rem] bg-black/[0.05] dark:bg:white/[0.08] ring-1 ring-black/10 dark:ring:white/10 px-3 py-2 text-xs font-medium hover:bg-black/[0.07] dark:hover:bg:white/[0.12] transition"
             >
               Annuler
             </button>
@@ -830,7 +937,7 @@ function EditableTitleClient({
           </h1>
           <button
             onClick={() => setEditing(true)}
-            className="opacity-0 group-hover:opacity-100 transition-opacity inline-flex items-center gap-1 rounded-[0.75rem] bg-black/[0.05] dark:bg-white/[0.08] ring-1 ring-black/10 dark:ring-white/10 px-2 py-1 text-[10px] font-medium hover:bg-black/[0.07] dark:hover:bg-white/[0.12]"
+            className="opacity-0 group-hover:opacity-100 transition-opacity inline-flex items-center gap-1 rounded-[0.75rem] bg-black/[0.05] dark:bg:white/[0.08] ring-1 ring-black/10 dark:ring:white/10 px-2 py-1 text-[10px] font-medium hover:bg-black/[0.07] dark:hover:bg:white/[0.12]"
             title="Renommer le projet"
             aria-label="Renommer le projet"
           >
@@ -860,51 +967,58 @@ function UpdatesTimeline({ updates }: { updates: Update[] }) {
   }
 
   return (
-    <ol className="relative pl-4 space-y-6">
-      {updates.map((u) => (
-        <li key={u.id} className="relative space-y-3">
-          <div className="absolute left-[-10px] top-[2px] h-4 w-4 rounded-full bg-primary shadow-[0_0_20px_rgba(59,130,246,0.6)] ring-2 ring-white dark:ring-[#0e1116]" />
-          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-            <div className="text-sm font-medium">Progression {u.progress}%</div>
-            <div className="text-[11px] text-muted-foreground">
-              {formatDateShort(u.created_at)}
-            </div>
-          </div>
+    <ol className="relative pl-4 space-y-6 py-5">
+      {updates.map((u) => {
+        const doneList = Array.isArray(u.done) ? u.done : [];
+        const nextList = Array.isArray(u.next) ? u.next : [];
 
-          {u.message?.done?.length ? (
-            <div className="text-[13px] leading-relaxed">
-              <div className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-[11px] font-medium uppercase">
-                <CheckCircle2 className="h-3.5 w-3.5" />
-                Fait
+        return (
+          <li key={u.id} className="relative space-y-3">
+            <div className="absolute left-[-18px] top-[4px] h-3 w-3 rounded-full bg-primary shadow-[0_0_20px_rgba(59,130,246,0.6)] ring-2 ring-white dark:ring-[#0e1116]" />
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <div className="text-sm pl-1 font-medium">
+                Progression <strong>{u.progress ?? 0}%</strong>
               </div>
-              <ul className="list-disc list-inside mt-1 space-y-0.5">
-                {u.message.done.map((d, i) => (
-                  <li key={`done-${i}`} className="text-[13px]">
-                    {d}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-
-          {u.message?.next?.length ? (
-            <div className="text-[13px] leading-relaxed">
-              <div className="inline-flex items-center gap-1 text-primary text-[11px] font-medium uppercase">
-                <ListTodo className="h-3.5 w-3.5" />À venir
+              <div className="text-[11px] text-muted-foreground">
+                {formatDateShort(u.created_at)}
               </div>
-              <ul className="list-disc list-inside mt-1 space-y-0.5">
-                {u.message.next.map((n, i) => (
-                  <li key={`next-${i}`} className="text-[13px]">
-                    {n}
-                  </li>
-                ))}
-              </ul>
             </div>
-          ) : null}
 
-          <div className="h-px w-full bg-black/5 dark:bg-white/10" />
-        </li>
-      ))}
+            {doneList.length ? (
+              <div className="text-[13px] p-5 rounded-3xl bg-emerald-50 border border-emerald-50 leading-relaxed">
+                <div className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-[11px] font-medium uppercase">
+                  <CheckCircle2 className="h-3.5 w-3.5" />
+                  Fait
+                </div>
+                <ul className="mt-1 space-y-0.5">
+                  {doneList.map((d, i) => (
+                    <li key={`done-${i}`} className="text-[13px]">
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {nextList.length ? (
+              <div className="text-[13px] p-5 rounded-3xl bg-sky-50 border border-sky-50 leading-relaxed">
+                <div className="inline-flex items-center gap-1 text-primary text-[11px] font-medium uppercase">
+                  <ListTodo className="h-3.5 w-3.5" />À venir
+                </div>
+                <ul className=" mt-1 space-y-0.5">
+                  {nextList.map((n, i) => (
+                    <li key={`next-${i}`} className="text-[13px]">
+                      {n}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            <div className="h-px w-full bg-black/5 dark:bg:white/10" />
+          </li>
+        );
+      })}
     </ol>
   );
 }
@@ -974,7 +1088,7 @@ function SectionCard({
 
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-4">
+    <div className="flex items-center gap-4">
       <div className="text-[11px] uppercase text-muted-foreground w-28 shrink-0 leading-relaxed">
         {label}
       </div>
@@ -983,17 +1097,9 @@ function Row({ label, value }: { label: string; value: React.ReactNode }) {
   );
 }
 
-function SmallPane({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="rounded-[1rem] bg-black/[0.04] dark:bg-white/[0.07] ring-1 ring-black/10 dark:ring-white/10 p-3 shadow-[0_16px_30px_rgba(0,0,0,0.07)]">
-      {children}
-    </div>
-  );
-}
-
 function MetaChip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 bg-black/[0.04] dark:bg-white/[0.07] ring-1 ring-black/10 dark:ring-white/10 text-[11px] leading-none">
+    <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-2.5  bg-black/[0.04] dark:bg:white/[0.07] ring-1 ring-black/10 dark:ring:white/10 text-[11px] leading-none">
       {children}
     </span>
   );
@@ -1006,33 +1112,33 @@ function StatusChip({ status }: { status?: string }) {
   const map: Record<string, { text: string; cls: string }> = {
     draft: {
       text: 'Brouillon',
-      cls: 'bg-gray-500/10 text-gray-700 dark:text-gray-300 ring-1 ring-gray-500/30',
+      cls: 'bg-gray-50 text-gray-700 dark:text-gray-300 ring-1 ring-gray-100',
     },
     scheduled: {
       text: 'Planifié',
-      cls: 'bg-amber-400/10 text-amber-700 dark:text-amber-300 ring-1 ring-amber-400/30',
+      cls: 'bg-amber-50 text-amber-700 dark:text-amber-300 ring-1 ring-amber-100',
     },
     in_progress: {
       text: 'En cours',
-      cls: 'bg-blue-500/10 text-blue-700 dark:text-blue-300 ring-1 ring-blue-500/30',
+      cls: 'bg-blue-50 text-blue-700 dark:text-blue-300 ring-1 ring-blue-100',
     },
     paused: {
       text: 'En pause',
-      cls: 'bg-amber-500/10 text-amber-700 dark:text-amber-300 ring-1 ring-amber-500/30',
+      cls: 'bg-amber-50 text-amber-700 dark:text-amber-300 ring-1 ring-amber-100',
     },
     completed: {
       text: 'Terminé',
-      cls: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30',
+      cls: 'bg-emerald-50 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-100',
     },
     cancelled: {
       text: 'Annulé',
-      cls: 'bg-rose-500/10 text-rose-700 dark:text-rose-300 ring-1 ring-rose-500/30',
+      cls: 'bg-rose-50 text-rose-700 dark:text-rose-300 ring-1 ring-rose-100',
     },
   };
   const { text, cls } = map[s] ?? map['draft'];
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium leading-none ${cls}`}
+      className={`inline-flex items-center rounded-full px-4 py-2.5 text-[11px] font-medium leading-none ${cls}`}
     >
       {text}
     </span>
@@ -1043,24 +1149,24 @@ function PriorityChip({ level }: { level?: string }) {
   const l = (level ?? 'normal').toLowerCase();
   if (l === 'critical')
     return (
-      <span className="inline-flex items-center rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 ring-1 ring-rose-500/30 px-2.5 py-1 text-[11px] font-medium leading-none">
+      <span className="inline-flex items-center rounded-full bg-rose-50 text-rose-600 dark:text-rose-400 ring-1 ring-rose-100 px-3 py-2.5  text-[11px] font-medium leading-none">
         Critique
       </span>
     );
   if (l === 'high')
     return (
-      <span className="inline-flex items-center rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 ring-1 ring-amber-500/30 px-2.5 py-1 text-[11px] font-medium leading-none">
+      <span className="inline-flex items-center rounded-full bg-amber-50 text-amber-700 dark:text-amber-400 ring-1 ring-amber-100 px-3 py-2.5  text-[11px] font-medium leading-none">
         Haute
       </span>
     );
   if (l === 'normal')
     return (
-      <span className="inline-flex items-center rounded-full bg-primary/10 text-primary ring-1 ring-primary/30 px-2.5 py-1 text-[11px] font-medium leading-none">
+      <span className="inline-flex items-center rounded-full bg-primary/10 text-primary ring-1 ring-primary/20 px-3 py-2.5 text-[11px] font-medium leading-none">
         Normale
       </span>
     );
   return (
-    <span className="inline-flex items-center rounded-full bg-black/[0.04] dark:bg-white/[0.07] ring-1 ring-black/10 dark:ring-white/10 px-2.5 py-1 text-[11px] font-medium leading-none">
+    <span className="inline-flex items-center rounded-full bg-black/[0.04] dark:bg:white/[0.07] ring-1 ring-black/8 dark:ring:white/10 px-3 py-2.5 text-[11px] font-medium leading-none">
       {level || '—'}
     </span>
   );
@@ -1070,20 +1176,20 @@ function RiskChip({ level }: { level?: string }) {
   const l = (level ?? 'normal').toLowerCase();
   if (l === 'urgent')
     return (
-      <span className="inline-flex items-center rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 ring-1 ring-rose-500/30 px-2.5 py-1 text-[11px] font-medium leading-none">
-        <ShieldAlert className="h-3.5 w-3.5 mr-1" />
+      <span className="inline-flex items-center rounded-full bg-rose-50 text-rose-700 dark:text-rose-400 ring-1 ring-rose-100 px-3 py-2.5  text-[11px] font-medium leading-none">
+        <ShieldAlert className="h-3.5 w-3.5 mr-1 opacity-70" />
         Urgent
       </span>
     );
   if (l === 'attention')
     return (
-      <span className="inline-flex items-center rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 ring-1 ring-amber-500/30 px-2.5 py-1 text-[11px] font-medium leading-none">
-        <AlertTriangle className="h-3.5 w-3.5 mr-1" />À surveiller
+      <span className="inline-flex items-center rounded-full bg-amber-50 text-amber-700 dark:text-amber-400 ring-1 ring-amber-100 px-3 py-2.5 text-[11px] font-medium leading-none">
+        <AlertTriangle className="h-3.5 w-3.5 mr-1 opacity-70" />À surveiller
       </span>
     );
   return (
-    <span className="inline-flex items-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 ring-1 ring-emerald-500/30 px-2.5 py-1 text-[11px] font-medium leading-none">
-      <ShieldCheck className="h-3.5 w-3.5 mr-1" />
+    <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-600 dark:text-emerald-400 ring-1 ring-emerald-100 px-3 py-2.5 text-[11px] font-medium leading-none">
+      <ShieldCheck className="h-3.5 w-3.5 mr-1 opacity-70" />
       OK
     </span>
   );
@@ -1093,30 +1199,30 @@ function BillingChip({ status }: { status?: string }) {
   const s = (status ?? '').toLowerCase();
   if (s === 'late')
     return (
-      <span className="inline-flex items-center rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 ring-1 ring-rose-500/30 px-2.5 py-1 text-[11px] font-medium leading-none">
+      <span className="inline-flex items-center rounded-full bg-rose-50 text-rose-600 dark:text-rose-400 ring-1 ring-rose-100 px-3 py-2.5 text-[11px] font-medium leading-none">
         Retard paiement
       </span>
     );
   if (s === 'paid_full')
     return (
-      <span className="inline-flex items-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 ring-1 ring-emerald-500/30 px-2.5 py-1 text-[11px] font-medium leading-none">
+      <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-600 dark:text-emerald-400 ring-1 ring-emerald-100 px-3 py-2.5  text-[11px] font-medium leading-none">
         Payé
       </span>
     );
   if (s === 'deposit_paid')
     return (
-      <span className="inline-flex items-center rounded-full bg-primary/10 text-primary ring-1 ring-primary/30 px-2.5 py-1 text-[11px] font-medium leading-none">
+      <span className="inline-flex items-center rounded-full bg-primary/10 text-primary ring-1 ring-primary/20 px-3 py-2.5 text-[11px] font-medium leading-none">
         Acompte OK
       </span>
     );
   if (s === 'in_progress')
     return (
-      <span className="inline-flex items-center rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-300 ring-1 ring-blue-500/30 px-2.5 py-1 text-[11px] font-medium leading-none">
+      <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 dark:text-blue-300 ring-1 ring-blue-100 px-3 py-2.5 text-[11px] font-medium leading-none">
         En cours
       </span>
     );
   return (
-    <span className="inline-flex items-center rounded-full bg-black/[0.04] dark:bg-white/[0.07] ring-1 ring-black/10 dark:ring-white/10 px-2.5 py-1 text-[11px] font-medium leading-none">
+    <span className="inline-flex items-center rounded-full bg-black/[0.04] dark:bg:white/[0.07] ring-1 ring-black/8 dark:ring:white/10 px-3 py-2.5 text-[11px] font-medium leading-none">
       {status || '—'}
     </span>
   );

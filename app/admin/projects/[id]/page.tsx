@@ -1,9 +1,8 @@
-// app/admin/projects/[id]/page.tsx
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 import ProjectDetailClient, {
-  type View,
-  type Update,
+  Update,
+  View,
 } from '@/components/ClientSpace/Admin/ProjectDetailClient';
 import ProjectTeamAdmin from '@/components/ClientSpace/Admin/ProjectTeamAdmin';
 
@@ -22,22 +21,27 @@ type ProjectRow = {
   description: string | null;
   client_email: string | null;
   owner_user_id: string | null;
+
   offer_tier: string | null;
   offer_category: string | null;
   offer_price: number | null;
   ads_budget: number | null;
   urls: string[] | null;
   repo_url: string | null;
-  extra: any | null;
+
+  selected_options: string[] | null;
   signed_contract_files: string[] | null;
+  brief_files: string[] | null; // 👈 AJOUTÉ
+
+  extra: any | null;
   billing_status: string | null;
   priority: string | null;
   risk_level: string | null;
+  currency: 'EUR' | 'USD' | null;
 };
 
 export default async function AdminProjectDetail({ params }: Props) {
   const cookieStore = await cookies();
-
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -91,11 +95,14 @@ export default async function AdminProjectDetail({ params }: Props) {
         'ads_budget',
         'urls',
         'repo_url',
-        'extra',
+        'selected_options',
         'signed_contract_files',
+        'brief_files', // 👈 AJOUTÉ ICI AUSSI
+        'extra',
         'billing_status',
         'priority',
         'risk_level',
+        'currency',
       ].join(',')
     )
     .eq('id', params.id)
@@ -149,7 +156,7 @@ export default async function AdminProjectDetail({ params }: Props) {
     created_at: String(u.created_at),
   }));
 
-  // construire la view attendue par ProjectDetailClient
+  // mapping DB -> View
   const view: View = {
     id: proj.id,
     title: proj.title || 'Projet',
@@ -167,26 +174,42 @@ export default async function AdminProjectDetail({ params }: Props) {
     price_euros: proj.offer_price ?? null,
     ads_budget: proj.ads_budget ?? null,
 
-    domain: proj.extra?.domain || '',
-    goal: proj.extra?.goal || '',
-    langs: Array.isArray(proj.extra?.languages) ? proj.extra.languages : [],
-    tones: Array.isArray(proj.extra?.tone) ? proj.extra.tone : [],
     urls: Array.isArray(proj.urls) ? proj.urls : [],
-    links: Array.isArray(proj.extra?.links) ? proj.extra.links : [],
+    links: proj.extra?.client_links ?? [],
+    goal: proj.extra?.goal ?? '',
+    domain: proj.extra?.domain ?? '',
+    langs: proj.extra?.languages ?? [],
+    tones: proj.extra?.tone ?? [],
 
-    contractSignedUrl: proj.signed_contract_files?.[0] ?? null,
+    selected_options: Array.isArray(proj.selected_options)
+      ? proj.selected_options
+      : [],
+
+    signed_contract_files: Array.isArray(proj.signed_contract_files)
+      ? proj.signed_contract_files
+      : [],
+
+    brief_files: Array.isArray(proj.brief_files) // 👈 AJOUTÉ ICI AUSSI
+      ? proj.brief_files
+      : [],
+
     contractStatus: proj.billing_status ?? null,
+
     repo_url: proj.repo_url ?? null,
     priority: proj.priority ?? null,
     risk_level: proj.risk_level ?? null,
+
+    currency: (proj.currency ?? 'EUR') as 'EUR' | 'USD',
   };
 
   return (
-    <section className="px-2 pb-16 space-y-8">
-      <ProjectDetailClient mode="admin" view={view} updates={updates} />
-
-      {/* bloc équipe admin (invite / remove) */}
-      <ProjectTeamAdmin projectId={proj.id} />
+    <section className="w-full">
+      <div className="mx-auto w-full max-w-7xl px-2 py-8">
+        <ProjectDetailClient mode="admin" view={view} updates={updates} />
+        <div className="mt-10">
+          <ProjectTeamAdmin projectId={proj.id} />
+        </div>
+      </div>
     </section>
   );
 }
