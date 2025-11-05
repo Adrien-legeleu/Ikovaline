@@ -134,8 +134,8 @@ const SERVICES = [
 
 function DesktopGridServices() {
   return (
-    <section className="bg-transparent hidden md:block">
-      <div className="relative z-10 mx-auto px-4">
+    <section className="bg-transparent block">
+      <div className="relative z-10 mx-auto sm:px-4 px-2">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
           {SERVICES.map((s, idx) => {
             const Icon = s.icon;
@@ -221,7 +221,7 @@ function DesktopGridServices() {
 function MobileServicesList() {
   return (
     <section className="md:hidden bg-transparent">
-      <div className="mx-auto px-4 space-y-6 pb-10">
+      <div className="mx-auto px-8 w-full overflow-hidden space-y-6 pb-10">
         {SERVICES.map((s) => {
           const Icon = s.icon;
           return (
@@ -292,9 +292,6 @@ function MobileServicesList() {
 export default function ServicesGridRefined() {
   return (
     <>
-      {/* mobile list (< md) */}
-      <MobileServicesList />
-
       {/* desktop grid (md+) */}
       <DesktopGridServices />
     </>
