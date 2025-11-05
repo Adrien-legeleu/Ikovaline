@@ -184,154 +184,12 @@ export function HeaderResponsive() {
 
   const { logged, loading, spaceHref } = useSessionRole();
 
-  // lock scroll body quand menu est ouvert
-  React.useEffect(() => {
-    document.documentElement.classList.toggle('overflow-hidden', open);
-    return () => {
-      document.documentElement.classList.remove('overflow-hidden');
-    };
-  }, [open]);
-
-  // ESC pour fermer le menu
-  React.useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
-
-  /* ====================================================== */
-  /* 🍏 Effet Dynamic Island fluide                        */
-  /* ====================================================== */
-
-  const barRef = React.useRef<HTMLElement>(null);
-  const innerRef = React.useRef<HTMLDivElement>(null);
-  const leftRef = React.useRef<HTMLAnchorElement>(null);
-  const rightRef = React.useRef<HTMLDivElement>(null);
-
-  // 🍏 Effet Dynamic Island optimisé (scroll-only, GPU, auto-stop)
-  React.useEffect(() => {
-    const bar = barRef.current;
-    const inner = innerRef.current;
-    const left = leftRef.current;
-    const right = rightRef.current;
-    if (!bar || !inner || !left || !right) return;
-
-    let curOY = 0,
-      curOS = 1;
-    let curIY = 0,
-      curISX = 1,
-      curISY = 1;
-    let toOY = 0,
-      toOS = 1;
-    let toIY = 0,
-      toISX = 1,
-      toISY = 1;
-
-    let lastY = window.scrollY;
-    let raf = 0;
-    let running = false;
-    let lastKick = 0;
-
-    const lerp = (a: number, b: number, f: number) => a + (b - a) * f;
-
-    const setWillChange = (on: boolean) => {
-      const v = on ? 'transform' : '';
-      bar.style.willChange = v;
-      inner.style.willChange = v;
-      left.style.willChange = v;
-      right.style.willChange = v;
-    };
-
-    const frame = () => {
-      // easing doux (CPU light)
-      curOY = lerp(curOY, toOY, 0.2);
-      curOS = lerp(curOS, toOS, 0.2);
-      curIY = lerp(curIY, toIY, 0.24);
-      curISX = lerp(curISX, toISX, 0.24);
-      curISY = lerp(curISY, toISY, 0.24);
-
-      // GPU (translate3d) + pas de layout
-      bar.style.transform = `translate3d(0,${curOY.toFixed(2)}px,0) scale(${curOS.toFixed(3)})`;
-      inner.style.transform = `translate3d(0,${curIY.toFixed(2)}px,0) scale(${curISX.toFixed(3)},${curISY.toFixed(3)})`;
-      inner.style.transformOrigin = 'center center';
-
-      const childSX = curISX * 1.02;
-      const childSY = curISY * 0.97;
-      const childY = curIY * 0.7;
-      const tChild = `translate3d(0,${childY.toFixed(2)}px,0) scale(${childSX.toFixed(3)},${childSY.toFixed(3)})`;
-      left.style.transform = tChild;
-      left.style.transformOrigin = 'left center';
-      right.style.transform = tChild;
-      right.style.transformOrigin = 'right center';
-
-      // Stop auto quand stable et que le scroll s’est arrêté
-      const stable =
-        Math.abs(toOY - curOY) < 0.15 &&
-        Math.abs(toIY - curIY) < 0.15 &&
-        performance.now() - lastKick > 140;
-
-      if (stable) {
-        running = false;
-        setWillChange(false);
-        return;
-      }
-      raf = requestAnimationFrame(frame);
-    };
-
-    const onScroll = () => {
-      if (open) return; // pas d’anim si menu ouvert (évite conflits)
-
-      const y = window.scrollY;
-      const dy = y - lastY;
-      lastY = y;
-
-      // amplitude plus raisonnable (perf) + clamp
-      const raw = -dy / 4;
-      const clamp = Math.max(-16, Math.min(16, raw));
-
-      // ext. (bar) et int. (inner)
-      toOY = clamp;
-      toOS = 1 + clamp / 600; // évite les grosses scales coûteuses
-      const opposite = -clamp * 0.85;
-      toIY = opposite;
-
-      // pincement léger
-      const k = Math.min(Math.abs(clamp) / 12, 1);
-      toISX = 1 + 0.008 * k;
-      toISY = 1 - 0.008 * k;
-
-      lastKick = performance.now();
-      if (!running) {
-        running = true;
-        setWillChange(true);
-        raf = requestAnimationFrame(frame);
-      }
-    };
-
-    const opts: AddEventListenerOptions = { passive: true };
-    window.addEventListener('scroll', onScroll, opts);
-
-    // clean
-    return () => {
-      window.removeEventListener('scroll', onScroll, opts as any);
-      cancelAnimationFrame(raf);
-      setWillChange(false);
-    };
-  }, [open]); // re-monte l'effet si le menu s’ouvre (désactive l’anim)
-
   return (
     <>
       {/* ===== Header mobile flottant ===== */}
-      <header
-        ref={barRef}
-        className="fixed inset-x-0 top-0 z-[10000000000000] will-change-transform lg:hidden"
-      >
-        <div
-          ref={innerRef}
-          className="flex items-center justify-between px-4 py-2 will-change-transform"
-        >
+      <header className="fixed inset-x-0 top-0 z-[10000000000000] will-change-transform lg:hidden">
+        <div className="flex items-center justify-between px-4 py-2 will-change-transform">
           <Link
-            ref={leftRef}
             href="/"
             aria-label="Accueil"
             className="flex items-center gap-2 will-change-transform"
@@ -354,10 +212,7 @@ export function HeaderResponsive() {
             />
           </Link>
 
-          <div
-            ref={rightRef}
-            className="flex items-center gap-3 will-change-transform"
-          >
+          <div className="flex items-center gap-3 will-change-transform">
             <AnimatedThemeToggler />
 
             {/* ✅ CTA sécurisé : pas de mauvais lien pendant le chargement */}
