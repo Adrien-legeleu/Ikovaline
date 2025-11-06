@@ -1,85 +1,94 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/SupabaseClient';
 
 export default function FinishPage() {
   const router = useRouter();
-  const search = useSearchParams();
-  const nextParam = search.get('next') || undefined;
   const [status, setStatus] = useState<'loading' | 'error'>('loading');
 
   useEffect(() => {
     const run = async () => {
-      // 1️⃣ Consommer le token dans l’URL (hash) et créer la session
-      const { data, error } = await supabase.auth.exchangeCodeForSession(
-        window.location.href
-      );
+      try {
+        // 1️⃣ Supabase lit le hash (#...) et crée la session
+        const { error } = await supabase.auth.exchangeCodeForSession(
+          window.location.href
+        );
 
-      if (error) {
-        console.error(error);
+        if (error) {
+          console.error('exchangeCodeForSession error', error);
+          setStatus('error');
+          return;
+        }
+
+        // 2️⃣ On sync la session dans les cookies HTTP-only (ton /api/auth/set)
+        const { data: sessionData, error: sErr } =
+          await supabase.auth.getSession();
+
+        if (!sErr && sessionData.session) {
+          await fetch('/api/auth/set', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              event: 'SIGNED_IN',
+              session: {
+                access_token: sessionData.session.access_token,
+                refresh_token: sessionData.session.refresh_token,
+              },
+              persist: true, // tu peux adapter si tu veux gérer "rememberMe"
+            }),
+          });
+        }
+
+        // 3️⃣ Récupération de l'user
+        const { data: userData } = await supabase.auth.getUser();
+        const user = userData.user;
+        if (!user) {
+          setStatus('error');
+          return;
+        }
+
+        // 4️⃣ On récupère le rôle dans la table profiles
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+
+        // 5️⃣ On lit le ?next=… à partir de l’URL (✔️ sans useSearchParams)
+        const url = new URL(window.location.href);
+        const nextParam = url.searchParams.get('next') || undefined;
+
+        // 6️⃣ Redirection selon rôle
+        if (!profile?.role) {
+          router.replace(nextParam || '/dashboard');
+          return;
+        }
+
+        switch (profile.role) {
+          case 'admin':
+            router.replace('/admin/dashboard');
+            break;
+          case 'dev':
+            router.replace('/dev/projects');
+            break;
+          default:
+            if (nextParam) {
+              router.replace(nextParam);
+            } else {
+              router.replace('/dashboard');
+            }
+            break;
+        }
+      } catch (err) {
+        console.error('FinishPage error', err);
         setStatus('error');
-        return;
-      }
-
-      // 2️⃣ Synchroniser la session côté backend (cookies HTTP-only)
-      const { data: sessionData, error: sErr } =
-        await supabase.auth.getSession();
-      if (!sErr && sessionData.session) {
-        await fetch('/api/auth/set', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            event: 'SIGNED_IN',
-            session: {
-              access_token: sessionData.session.access_token,
-              refresh_token: sessionData.session.refresh_token,
-            },
-            persist: true,
-          }),
-        });
-      }
-
-      // 3️⃣ Rôle + redirection
-      const { data: userData } = await supabase.auth.getUser();
-      const user = userData.user;
-      if (!user) {
-        setStatus('error');
-        return;
-      }
-
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', user.id)
-        .single();
-
-      // ⬇️ pas besoin de setStatus('ok'), on redirige direct
-      if (!profile?.role) {
-        router.replace('/dashboard');
-        return;
-      }
-
-      switch (profile.role) {
-        case 'admin':
-          router.replace('/admin/dashboard');
-          break;
-        case 'dev':
-          router.replace('/dev/projects');
-          break;
-        default:
-          if (nextParam) {
-            router.replace(nextParam);
-          } else {
-            router.replace('/dashboard');
-          }
-          break;
       }
     };
 
     run();
-  }, [router, search, nextParam]);
+  }, [router]);
 
   if (status === 'loading') {
     return (
