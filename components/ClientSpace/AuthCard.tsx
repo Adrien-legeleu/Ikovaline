@@ -348,7 +348,6 @@ export default function AuthCard({ mode }: { mode: Mode }) {
                 />
               </div>
             </motion.div>
-
             {/* Password */}
             <motion.div variants={fadeUpSoft}>
               <label className="text-sm pl-1 font-medium text-muted-foreground">
@@ -388,7 +387,6 @@ export default function AuthCard({ mode }: { mode: Mode }) {
                 </div>
               </div>
             </motion.div>
-
             {/* Rester connecté (exactement comme demandé) */}
             <motion.div
               variants={fadeUpSoft}
@@ -406,14 +404,12 @@ export default function AuthCard({ mode }: { mode: Mode }) {
                 Mot de passe oublié
               </Link>
             </motion.div>
-
             {/* hidden input pour poster la valeur aussi en FormData (optionnel mais safe) */}
             <input
               type="hidden"
               name="rememberMe"
               value={rememberMe ? '1' : '0'}
             />
-
             {/* Submit */}
             <motion.button
               variants={fadeUpSoft}
@@ -428,7 +424,6 @@ export default function AuthCard({ mode }: { mode: Mode }) {
                   ? 'Se connecter'
                   : 'Créer mon compte'}
             </motion.button>
-
             {/* Magic link */}
             <motion.div
               variants={fadeUpSoft}
@@ -437,6 +432,7 @@ export default function AuthCard({ mode }: { mode: Mode }) {
               <span className="text-xs  px-3 relative z-10 bg-white">ou</span>
               <div className="absolute inset-x-0 h-px bg-border" />
             </motion.div>
+
             <motion.button
               variants={fadeUpSoft}
               type="button"
@@ -453,39 +449,37 @@ export default function AuthCard({ mode }: { mode: Mode }) {
                 try {
                   setLoading(true);
 
-                  // 🔑 Flow officiel Supabase : signInWithOtp
-                  const { error } = await supabase.auth.signInWithOtp({
-                    email,
-                    options: {
-                      // URL de retour après clic sur le lien
-                      emailRedirectTo:
-                        typeof window !== 'undefined'
-                          ? `${window.location.origin}/finish${
-                              nextParam
-                                ? `?next=${encodeURIComponent(nextParam)}`
-                                : ''
-                            }`
-                          : 'https://ikovaline.com/finish',
-                    },
+                  // 🔥 Appel à ton API qui gère tout
+                  const res = await fetch('/api/auth/magic-link', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      email,
+                      next: nextParam,
+                    }),
                   });
 
-                  if (error) throw error;
+                  const data = await res.json();
+
+                  if (!res.ok) {
+                    throw new Error(data.error || "Erreur lors de l'envoi");
+                  }
 
                   alert(
-                    '✅ Un lien de connexion t’a été envoyé par e-mail. Clique dessus pour accéder à ton espace.'
+                    '✅ Email envoyé ! Vérifie ta boîte de réception et clique sur le lien pour te connecter.'
                   );
                 } catch (error: any) {
                   console.error(error);
                   alert(
-                    error?.message ??
-                      "❌ Impossible d'envoyer le lien de connexion pour le moment. Réessaie dans quelques instants."
+                    error?.message ||
+                      "❌ Impossible d'envoyer l'email. Réessaie dans un instant."
                   );
                 } finally {
                   setLoading(false);
                 }
               }}
               className="w-full rounded-[1.1rem] border border-border/50 py-4 font-medium flex items-center justify-center gap-2
-             hover:bg-foreground/5 transition-colors"
+     hover:bg-foreground/5 transition-colors"
             >
               <IconMail className="w-5 h-5" />
               <span>Se connecter par e-mail</span>
