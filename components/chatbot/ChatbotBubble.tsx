@@ -509,7 +509,7 @@ export default function ChatbotBubble() {
                 text-neutral-900 dark:text-neutral-50
                 ${
                   mode === 'home'
-                    ? ' bg-gradient-to-b from-[#016FFF] via-[#01B7FF] to-80% to-white dark:from-[#016fffb5] dark:via-[#01b7ffcc] dark:to-[#020202]'
+                    ? ' bg-gradient-to-b from-[#1270ec] via-[#01B7FF] to-80% to-white dark:from-[#016fffb5] dark:via-[#01b7ffcc] dark:to-[#020202]'
                     : 'bg-white dark:bg-neutral-950'
                 }
               `}
@@ -666,13 +666,13 @@ export default function ChatbotBubble() {
 
                       {/* Badges */}
                       <div className="px-5 pb-3 pt-1 bg-white/95 dark:bg-neutral-950/95 flex gap-2 flex-wrap">
-                        <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-1.5 text-[8px] xss:text-[10px] sm:text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100">
+                        <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-1.5 text-[8px] xss:text-[9.4px] sm:text-[11px] bg-blue-100 dark:bg-blue-950 text-neutral-800 dark:text-neutral-100">
                           <BadgeCheck size={12} /> 20+ projets
                         </span>
-                        <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-1.5 text-[8px] xss:text-[10px] sm:text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100">
+                        <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-1.5 text-[8px] xss:text-[9.4px] sm:text-[11px] bg-sky-100 dark:bg-sky-950 text-neutral-800 dark:text-neutral-100">
                           <Info size={12} /> 67+ avis Google
                         </span>
-                        <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-1.5 text-[8px] xss:text-[10px] sm:text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100">
+                        <span className="inline-flex items-center gap-1 rounded-[3rem] px-3 py-1.5 text-[8px] xss:text-[9.4px] sm:text-[11px] bg-green-100 dark:bg-green-950 text-neutral-800 dark:text-neutral-100">
                           <Timer size={12} /> Délai moyen ~30j
                         </span>
                       </div>
