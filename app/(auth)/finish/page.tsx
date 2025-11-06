@@ -14,6 +14,7 @@ export default function FinishPage() {
         const { error } = await supabase.auth.exchangeCodeForSession(
           window.location.href
         );
+
         if (error) {
           console.error('exchangeCodeForSession error', error);
           setStatus('error');
