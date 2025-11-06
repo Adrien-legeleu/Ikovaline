@@ -449,26 +449,25 @@ export default function AuthCard({ mode }: { mode: Mode }) {
                   return alert('Entre ton e-mail avant de continuer.');
                 const email = emailInput.value.trim();
                 if (!email) return alert('Adresse e-mail requise.');
+
                 try {
                   setLoading(true);
 
-                  // ⚙️ Base URL : soit la variable publique, soit l'URL actuelle du site
-                  const base =
-                    process.env.NEXT_PUBLIC_SITE_URL ??
-                    (typeof window !== 'undefined'
-                      ? window.location.origin
-                      : '');
-
-                  const redirectTo = nextParam
-                    ? `${base}/finish?next=${encodeURIComponent(nextParam)}`
-                    : `${base}/finish`;
-
-                  const { error } = await supabase.auth.signInWithOtp({
-                    email,
-                    options: { emailRedirectTo: redirectTo },
+                  const res = await fetch('/api/auth/magic-link', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      email,
+                      next: nextParam ?? null,
+                    }),
                   });
 
-                  if (error) throw error;
+                  if (!res.ok) {
+                    const data = await res.json().catch(() => null);
+                    throw new Error(
+                      data?.error || 'Erreur lors de l’envoi du lien.'
+                    );
+                  }
 
                   alert(
                     '✅ Un lien de connexion t’a été envoyé par e-mail. Clique dessus pour accéder à ton espace.'
