@@ -502,7 +502,7 @@ export default function ChatbotBubble() {
               style={{ translateY: sYpos, scaleX: sX, scaleY: sY }}
               className={`
                 fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-[999999]
-                flex h-[85vh] max-h-[800px] w-[94vw] max-w-[500px]
+                flex md:h-[85vh] h-[75vh] max-h-[800px] w-[94vw] max-w-[500px]
                 overflow-hidden rounded-[3rem]
                 shadow-[0_24px_70px_rgba(0,0,0,0.45)]
                 backdrop-blur-2xl
