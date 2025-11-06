@@ -11,18 +11,15 @@ export default function FinishPage() {
   useEffect(() => {
     const run = async () => {
       try {
-        // 1️⃣ Supabase lit le hash (#...) et crée la session
         const { error } = await supabase.auth.exchangeCodeForSession(
           window.location.href
         );
-
         if (error) {
           console.error('exchangeCodeForSession error', error);
           setStatus('error');
           return;
         }
 
-        // 2️⃣ On sync la session dans les cookies HTTP-only (ton /api/auth/set)
         const { data: sessionData, error: sErr } =
           await supabase.auth.getSession();
 
@@ -36,12 +33,11 @@ export default function FinishPage() {
                 access_token: sessionData.session.access_token,
                 refresh_token: sessionData.session.refresh_token,
               },
-              persist: true, // tu peux adapter si tu veux gérer "rememberMe"
+              persist: true,
             }),
           });
         }
 
-        // 3️⃣ Récupération de l'user
         const { data: userData } = await supabase.auth.getUser();
         const user = userData.user;
         if (!user) {
@@ -49,18 +45,15 @@ export default function FinishPage() {
           return;
         }
 
-        // 4️⃣ On récupère le rôle dans la table profiles
         const { data: profile } = await supabase
           .from('profiles')
           .select('role')
           .eq('id', user.id)
           .single();
 
-        // 5️⃣ On lit le ?next=… à partir de l’URL (✔️ sans useSearchParams)
         const url = new URL(window.location.href);
         const nextParam = url.searchParams.get('next') || undefined;
 
-        // 6️⃣ Redirection selon rôle
         if (!profile?.role) {
           router.replace(nextParam || '/dashboard');
           return;
@@ -74,11 +67,7 @@ export default function FinishPage() {
             router.replace('/dev/projects');
             break;
           default:
-            if (nextParam) {
-              router.replace(nextParam);
-            } else {
-              router.replace('/dashboard');
-            }
+            router.replace(nextParam || '/dashboard');
             break;
         }
       } catch (err) {
@@ -98,7 +87,6 @@ export default function FinishPage() {
     );
   }
 
-  // status === 'error'
   return (
     <div className="min-h-screen flex items-center justify-center">
       <p className="text-red-600 text-center">
