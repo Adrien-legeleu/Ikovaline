@@ -168,10 +168,7 @@ export default function Simulator() {
   }
 
   return (
-    <section
-      id="simulator-root"
-      className="relative w-full py-12 bg-background"
-    >
+    <section className="relative w-full py-12 bg-background">
       <div className="mx-auto max-w-7xl px-4 bg-background md:px-8">
         {/* Intro */}
         <motion.div
@@ -198,7 +195,7 @@ export default function Simulator() {
         {/* Step 1: Catégories */}
         <AnimatePresence mode="wait">
           {!category && (
-            <motion.div className="mt-10">
+            <motion.div className="mt-10" id="simulator-root">
               <CategoryGrid
                 onPick={(c) => {
                   setCategory(c);
