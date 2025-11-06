@@ -509,7 +509,7 @@ export default function ChatbotBubble() {
                 text-neutral-900 dark:text-neutral-50
                 ${
                   mode === 'home'
-                    ? ' bg-gradient-to-b from-[#1270ec] via-[#01B7FF] to-80% to-white dark:from-[#016fffb5] dark:via-[#01b7ffcc] dark:to-[#020202]'
+                    ? ' bg-gradient-to-b from-[#1286ec] via-[#01B7FF] to-80% to-white dark:from-[#1286ecb4] dark:via-[#01b7ffcc] dark:to-[#020202]'
                     : 'bg-white dark:bg-neutral-950'
                 }
               `}
@@ -538,7 +538,7 @@ export default function ChatbotBubble() {
                                 priority
                               />
                             </div>
-                            <span className="text-xl font-extrabold tracking-widest mix-blend-overlay">
+                            <span className="text-xl font-extrabold tracking-widest !mix-blend-overlay">
                               IkovalineTalk
                             </span>
                           </div>
