@@ -453,36 +453,39 @@ export default function AuthCard({ mode }: { mode: Mode }) {
                 try {
                   setLoading(true);
 
-                  const res = await fetch('/api/auth/magic-link', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      email,
-                      next: nextParam ?? null,
-                    }),
+                  // 🔑 Flow officiel Supabase : signInWithOtp
+                  const { error } = await supabase.auth.signInWithOtp({
+                    email,
+                    options: {
+                      // URL de retour après clic sur le lien
+                      emailRedirectTo:
+                        typeof window !== 'undefined'
+                          ? `${window.location.origin}/finish${
+                              nextParam
+                                ? `?next=${encodeURIComponent(nextParam)}`
+                                : ''
+                            }`
+                          : 'https://ikovaline.com/finish',
+                    },
                   });
 
-                  if (!res.ok) {
-                    const data = await res.json().catch(() => null);
-                    throw new Error(
-                      data?.error || 'Erreur lors de l’envoi du lien.'
-                    );
-                  }
+                  if (error) throw error;
 
                   alert(
                     '✅ Un lien de connexion t’a été envoyé par e-mail. Clique dessus pour accéder à ton espace.'
                   );
-                } catch (error) {
+                } catch (error: any) {
                   console.error(error);
                   alert(
-                    "❌ Impossible d'envoyer le lien de connexion pour le moment. Réessaie dans quelques instants."
+                    error?.message ??
+                      "❌ Impossible d'envoyer le lien de connexion pour le moment. Réessaie dans quelques instants."
                   );
                 } finally {
                   setLoading(false);
                 }
               }}
               className="w-full rounded-[1.1rem] border border-border/50 py-4 font-medium flex items-center justify-center gap-2
-                         hover:bg-foreground/5 transition-colors"
+             hover:bg-foreground/5 transition-colors"
             >
               <IconMail className="w-5 h-5" />
               <span>Se connecter par e-mail</span>
