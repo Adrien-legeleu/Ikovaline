@@ -451,25 +451,32 @@ export default function AuthCard({ mode }: { mode: Mode }) {
                 if (!email) return alert('Adresse e-mail requise.');
                 try {
                   setLoading(true);
+
+                  // ⚙️ Base URL : soit la variable publique, soit l'URL actuelle du site
                   const base =
                     process.env.NEXT_PUBLIC_SITE_URL ??
-                    (process.env.NODE_ENV === 'production'
-                      ? 'https://ikovaline.com'
-                      : 'http://localhost:3000');
+                    (typeof window !== 'undefined'
+                      ? window.location.origin
+                      : '');
+
                   const redirectTo = nextParam
                     ? `${base}/finish?next=${encodeURIComponent(nextParam)}`
                     : `${base}/finish`;
+
                   const { error } = await supabase.auth.signInWithOtp({
                     email,
                     options: { emailRedirectTo: redirectTo },
                   });
+
                   if (error) throw error;
+
                   alert(
                     '✅ Un lien de connexion t’a été envoyé par e-mail. Clique dessus pour accéder à ton espace.'
                   );
-                } catch (err: any) {
+                } catch (error) {
+                  console.error(error);
                   alert(
-                    err?.message ?? 'Erreur lors de l’envoi du lien magique.'
+                    "❌ Impossible d'envoyer le lien de connexion pour le moment. Réessaie dans quelques instants."
                   );
                 } finally {
                   setLoading(false);
