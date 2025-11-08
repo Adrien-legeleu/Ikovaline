@@ -2,12 +2,25 @@
 'use client';
 
 import { useEffect, useMemo, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 type Weight = { seg: number; label: string; pct: number };
 
+// Couleurs pour chaque segment (alternance de teintes primary)
+const SEGMENT_COLORS = [
+  'hsl(var(--primary) / 0.95)', // seg 1 - Jackpot
+  'hsl(var(--primary) / 0.75)', // seg 2
+  'hsl(var(--primary) / 0.55)', // seg 3
+  'hsl(var(--primary) / 0.35)', // seg 4
+  'hsl(var(--primary) / 0.95)', // seg 5
+  'hsl(var(--primary) / 0.75)', // seg 6
+  'hsl(var(--primary) / 0.55)', // seg 7
+  'hsl(var(--primary) / 0.35)', // seg 8
+];
+
 export function RouletteWheel({
   weights,
-  targetSeg, // segment gagnant (1..8) -> or null (avant tirage)
+  targetSeg,
   spinning,
 }: {
   weights: Weight[];
@@ -15,106 +28,266 @@ export function RouletteWheel({
   spinning: boolean;
 }) {
   const wheelRef = useRef<HTMLDivElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // mapping visuel : 8 secteurs de 45°
   const segAngles = useMemo(
     () =>
       Array.from({ length: 8 }, (_, i) => ({
         seg: i + 1,
-        start: i * 45,
-        center: i * 45 + 22.5,
+        startAngle: (i * 360) / 8,
+        endAngle: ((i + 1) * 360) / 8,
+        centerAngle: (i * 360) / 8 + 22.5,
       })),
     []
   );
 
-  // anime la roue quand targetSeg change
+  // Dessiner la roue sur canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || weights.length === 0) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const size = 400;
+    const centerX = size / 2;
+    const centerY = size / 2;
+    const radius = size / 2;
+
+    canvas.width = size;
+    canvas.height = size;
+
+    // Effacer
+    ctx.clearRect(0, 0, size, size);
+
+    // Dessiner chaque segment
+    segAngles.forEach(({ seg, startAngle, endAngle }) => {
+      const w = weights.find((x) => x.seg === seg);
+      const label = w?.label ?? `Seg ${seg}`;
+
+      // Convertir en radians
+      const startRad = (startAngle - 90) * (Math.PI / 180);
+      const endRad = (endAngle - 90) * (Math.PI / 180);
+
+      // Dessiner le segment
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.arc(centerX, centerY, radius, startRad, endRad);
+      ctx.closePath();
+
+      // Remplir avec couleur
+      ctx.fillStyle = SEGMENT_COLORS[seg - 1];
+      ctx.fill();
+
+      // Bordure blanche fine
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Texte
+      const textAngle = (startAngle + endAngle) / 2;
+      const textRad = (textAngle - 90) * (Math.PI / 180);
+      const textRadius = radius * 0.7;
+      const textX = centerX + Math.cos(textRad) * textRadius;
+      const textY = centerY + Math.sin(textRad) * textRadius;
+
+      ctx.save();
+      ctx.translate(textX, textY);
+      ctx.rotate(textRad + Math.PI / 2);
+
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 16px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      // Ombre pour lisibilité
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowBlur = 4;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 2;
+
+      ctx.fillText(label, 0, 0);
+
+      ctx.restore();
+    });
+  }, [weights, segAngles]);
+
+  // Animation de rotation
   useEffect(() => {
     const wheel = wheelRef.current;
     if (!wheel || !targetSeg) return;
 
     const index = targetSeg - 1;
     const degPerSeg = 360 / 8;
-    // 4 tours complets + centre du segment choisi, aiguille en haut
-    const stopDeg = 360 * 4 + index * degPerSeg + degPerSeg / 2;
+    // 5 tours complets + position du segment
+    const stopDeg = 360 * 5 + index * degPerSeg + degPerSeg / 2;
 
-    // reset avant anim si besoin
     wheel.style.transition = 'none';
     wheel.style.transform = `rotate(0deg)`;
-    // petit rafraîchissement
+
     requestAnimationFrame(() => {
-      wheel.style.transition = 'transform 3.7s cubic-bezier(.15,.9,.2,1)';
+      wheel.style.transition = 'transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)';
       wheel.style.transform = `rotate(${stopDeg}deg)`;
     });
   }, [targetSeg]);
 
   return (
-    <div className="relative">
-      {/* Aiguille */}
-      <div
-        aria-hidden
-        className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 w-0 h-0"
-        style={{
-          borderLeft: '10px solid transparent',
-          borderRight: '10px solid transparent',
-          borderBottom: '16px solid currentColor',
+    <div className="relative flex items-center justify-center">
+      {/* Aiguille fixe */}
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-30">
+        <motion.div
+          animate={{
+            y: spinning ? [0, -8, 0] : 0,
+          }}
+          transition={{
+            duration: 0.6,
+            repeat: spinning ? Infinity : 0,
+            ease: 'easeInOut',
+          }}
+        >
+          <svg width="40" height="48" viewBox="0 0 40 48" fill="none">
+            <path
+              d="M20 8 L32 28 L20 24 L8 28 Z"
+              fill="white"
+              stroke="hsl(var(--primary))"
+              strokeWidth="3"
+              filter="drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))"
+            />
+          </svg>
+        </motion.div>
+      </div>
+
+      {/* Glow animé */}
+      <motion.div
+        className="absolute inset-0 rounded-full blur-3xl opacity-20 pointer-events-none"
+        style={{ background: 'hsl(var(--primary))' }}
+        animate={{
+          scale: spinning ? [1, 1.2, 1] : 1,
+          opacity: spinning ? [0.2, 0.4, 0.2] : 0.2,
         }}
+        transition={{ duration: 2, repeat: spinning ? Infinity : 0 }}
       />
 
       {/* Roue */}
-      <div
-        ref={wheelRef}
-        className={[
-          'w-80 h-80 rounded-full border-[10px]',
-          'border-zinc-200/60 dark:border-zinc-800',
-          'shadow-[inset_0_10px_40px_rgba(0,0,0,.25),0_10px_30px_rgba(0,0,0,.25)]',
-          'relative overflow-hidden',
-        ].join(' ')}
-        style={
-          {
-            background:
-              'conic-gradient(var(--segA) 0deg, var(--segA) 45deg, var(--segB) 45deg, var(--segB) 90deg, var(--segA) 90deg, var(--segA) 135deg, var(--segB) 135deg, var(--segB) 180deg, var(--segA) 180deg, var(--segA) 225deg, var(--segB) 225deg, var(--segB) 270deg, var(--segA) 270deg, var(--segA) 315deg, var(--segB) 315deg, var(--segB) 360deg)',
-            // teintes light/dark subtiles
-            // segA/segB alternés pour effet horlogerie
-            // @ts-ignore
-            '--segA':
-              'color-mix(in srgb, var(--ringColor, #dfe6ee) 82%, transparent)',
-            '--segB':
-              'color-mix(in srgb, var(--ringColor, #cfd8e3) 72%, transparent)',
-          } as React.CSSProperties
-        }
-      >
-        {/* anneau interne "verre" */}
-        <div className="absolute inset-0 grid place-items-center">
-          <div className="w-[86%] h-[86%] rounded-full bg-white/40 dark:bg-white/5 border border-black/5 dark:border-white/10 backdrop-blur-[1.5px] relative">
-            {/* Libellés par segment */}
-            {segAngles.map(({ seg, center }) => {
-              const w = weights.find((x) => x.seg === seg);
-              const label = w?.label ?? `Seg ${seg}`;
-              return (
-                <div
-                  key={seg}
-                  className="absolute left-1/2 top-1/2 origin-[0px_0px] text-[11px] md:text-[12px] text-zinc-800 dark:text-zinc-200"
-                  style={{
-                    transform: `rotate(${center}deg) translate(0, -36%)`,
-                  }}
-                >
-                  <div
-                    className="px-2 py-1 rounded-lg bg-white/70 dark:bg-black/40 border border-black/5 dark:border-white/10 shadow-sm"
-                    style={{ transform: `rotate(${-center}deg)` }}
-                  >
-                    {label}
-                  </div>
-                </div>
-              );
-            })}
+      <div className="relative">
+        <div
+          ref={wheelRef}
+          className="relative w-[400px] h-[400px] max-w-[85vw] max-h-[85vw] rounded-full"
+          style={{
+            boxShadow: '0 30px 90px -20px rgba(0, 0, 0, 0.3)',
+          }}
+        >
+          {/* Canvas pour dessiner les segments */}
+          <canvas ref={canvasRef} className="w-full h-full rounded-full" />
+
+          {/* Centre avec logo */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <motion.div
+              className="w-32 h-32 rounded-full flex items-center justify-center"
+              style={{
+                background:
+                  'linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%)',
+                boxShadow:
+                  '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.05)',
+              }}
+              animate={{
+                boxShadow: spinning
+                  ? [
+                      '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.05)',
+                      '0 12px 40px rgba(0, 0, 0, 0.25), inset 0 4px 16px rgba(0, 0, 0, 0.08)',
+                      '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.05)',
+                    ]
+                  : '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.05)',
+              }}
+              transition={{ duration: 1.5, repeat: spinning ? Infinity : 0 }}
+            >
+              {/* Dark overlay for dark mode */}
+              <div className="absolute inset-0 rounded-full bg-neutral-900 opacity-0 dark:opacity-90 transition-opacity" />
+
+              <motion.div
+                className="relative text-5xl font-black text-primary"
+                animate={{
+                  scale: spinning ? [1, 1.05, 1] : 1,
+                }}
+                transition={{
+                  duration: 0.8,
+                  repeat: spinning ? Infinity : 0,
+                  ease: 'easeInOut',
+                }}
+              >
+                IK
+              </motion.div>
+            </motion.div>
           </div>
         </div>
+
+        {/* Bordure décorative */}
+        <div
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{
+            boxShadow: 'inset 0 0 0 8px rgba(255, 255, 255, 0.1)',
+          }}
+        />
       </div>
 
-      {/* micro-légende */}
-      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-zinc-500 dark:text-zinc-400">
-        {spinning ? 'Rotation...' : 'Aiguille = résultat'}
-      </div>
+      {/* Particules pendant rotation */}
+      {spinning && (
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 24 }).map((_, i) => {
+            const angle = (i * 360) / 24;
+            const delay = (i * 0.8) / 24;
+
+            return (
+              <motion.div
+                key={i}
+                className="absolute top-1/2 left-1/2"
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  background: `hsl(var(--primary) / ${0.8 - (i % 3) * 0.2})`,
+                }}
+                initial={{
+                  x: 0,
+                  y: 0,
+                  opacity: 0,
+                  scale: 0,
+                }}
+                animate={{
+                  x: Math.cos((angle * Math.PI) / 180) * 240,
+                  y: Math.sin((angle * Math.PI) / 180) * 240,
+                  opacity: [0, 1, 0],
+                  scale: [0, 1.5, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              />
+            );
+          })}
+        </div>
+      )}
+
+      {/* Ring tournant pendant rotation */}
+      {spinning && (
+        <motion.div
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{
+            border: '3px solid hsl(var(--primary) / 0.3)',
+          }}
+          animate={{
+            rotate: 360,
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            rotate: { duration: 3, repeat: Infinity, ease: 'linear' },
+            scale: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' },
+          }}
+        />
+      )}
     </div>
   );
 }

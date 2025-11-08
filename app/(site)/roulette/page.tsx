@@ -1,8 +1,10 @@
-// app/roulette/page.tsx
+// app/(site)/roulette/page.tsx
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { RouletteWheel } from '@/components/roulette/RouletteWheel';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, Gift, Users, TrendingUp, Mail } from 'lucide-react';
 
 type Weight = { seg: number; label: string; pct: number };
 
@@ -28,7 +30,6 @@ export default function RoulettePage() {
   } | null>(null);
 
   const [inviteUrl, setInviteUrl] = useState<string | null>(null);
-  const [acceptingInvite, setAcceptingInvite] = useState(false);
   const [probLoading, setProbLoading] = useState(false);
 
   const searchParams =
@@ -66,23 +67,18 @@ export default function RoulettePage() {
     }
   }, []);
 
-  // Si un code d'invite est présent, on l'accepte au moment où l'email est connu
   useEffect(() => {
     if (!inviteCode || !email) return;
     (async () => {
-      setAcceptingInvite(true);
       await fetch('/api/roulette/accept', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ inviteCode, inviteeEmail: email }),
       });
-      setAcceptingInvite(false);
-      // recharger les probabilités après accept
       fetchProbs(email);
     })();
   }, [inviteCode, email, fetchProbs]);
 
-  // Quand l'email change → charger probabilités
   useEffect(() => {
     if (email) fetchProbs(email);
   }, [email, fetchProbs]);
@@ -114,9 +110,7 @@ export default function RoulettePage() {
       return;
     }
 
-    // Lancer l’animation
     setTargetSeg(data.seg as number);
-    // attendre la fin (3.7s) + marge
     setTimeout(() => {
       setResult({
         seg: data.seg,
@@ -125,7 +119,6 @@ export default function RoulettePage() {
         expiresAt: data.expiresAt,
       });
       setSpinning(false);
-      // recharger eligibilité (désormais faux) et poids (boosts reset)
       fetchProbs(email);
     }, 3850);
   }
@@ -147,182 +140,331 @@ export default function RoulettePage() {
   );
 
   return (
-    <div className="min-h-[100svh] bg-white text-zinc-900 dark:bg-[#0B0D10] dark:text-[#E9EDF2]">
-      <div className="max-w-5xl mx-auto px-6 py-10">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-              Roue Ikovaline
-            </h1>
-            <p className="mt-1 text-zinc-600 dark:text-zinc-400">
-              1 rotation / email • récompense garantie • validité 14 jours • non
-              cumulable
-            </p>
-          </div>
-          {/* Email */}
-          <div className="flex items-center gap-2">
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="votre@email.com"
-              inputMode="email"
-              className="h-11 rounded-xl px-4 bg-white dark:bg-[#12171D] border border-zinc-200 dark:border-[#1A2026] outline-none shadow-sm w-72"
-              aria-label="Adresse e-mail"
-            />
-            <button
-              onClick={() => fetchProbs(email)}
-              className="h-11 rounded-xl px-4 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
-            >
-              Voir mes chances
-            </button>
-          </div>
-        </div>
-
-        {/* Status Eligibility */}
-        <div className="mt-3 text-sm">
-          {eligible === true && (
-            <span className="text-emerald-600 dark:text-emerald-400">
-              ✅ Vous pouvez jouer maintenant.
-            </span>
-          )}
-          {eligible === false && (
-            <span className="text-amber-600 dark:text-amber-400">
-              ⏳ Vous avez déjà joué. Prochain essai possible le{' '}
-              {nextEligibleAt
-                ? new Date(nextEligibleAt).toLocaleString('fr-FR')
-                : 'plus tard'}
-              .
-            </span>
-          )}
-          {probLoading && (
-            <span className="ml-2 opacity-70">Mise à jour des chances…</span>
-          )}
-          {acceptingInvite && (
-            <span className="ml-2 opacity-70">Validation de l’invitation…</span>
-          )}
-        </div>
-
-        {/* Layout */}
-        <div className="mt-8 grid md:grid-cols-2 gap-8">
-          {/* Roue */}
-          <div className="grid place-items-center">
-            <RouletteWheel
-              weights={weights ?? []}
-              targetSeg={targetSeg}
-              spinning={spinning}
-            />
-            <button
-              onClick={spin}
-              disabled={!canSpin}
-              className="mt-6 h-12 px-6 rounded-xl font-medium bg-zinc-900 text-white enabled:hover:opacity-90 disabled:opacity-40 dark:bg-white dark:text-zinc-900"
-            >
-              {spinning ? 'Rotation…' : 'Je tente ma chance'}
-            </button>
-            <div className="mt-4 text-xs text-zinc-600 dark:text-zinc-400">
-              Jackpot −50 % :{' '}
-              {weights?.find((w) => w.seg === 1)?.pct.toFixed(2) ?? '0.00'} %
-              actuellement
-            </div>
-          </div>
-
-          {/* Panneau chances + parrainage */}
-          <div>
-            {/* Chances */}
-            <div className="rounded-2xl border border-zinc-200 dark:border-[#1A2026] bg-white dark:bg-[#12161D] shadow-sm">
-              <div className="px-4 py-3 border-b border-zinc-200/70 dark:border-white/10 flex items-center justify-between">
-                <div className="font-medium">Chances actuelles</div>
-                <div className="text-sm opacity-70">
-                  Total : {totalPct.toFixed(2)}%
-                </div>
-              </div>
-              <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {(weights ?? []).map((w) => (
-                  <div
-                    key={w.seg}
-                    className="flex items-center justify-between rounded-lg px-3 py-2 bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-white/10"
-                  >
-                    <span>{w.label}</span>
-                    <span className="tabular-nums">{w.pct.toFixed(2)}%</span>
-                  </div>
-                ))}
-              </div>
-              {boosts &&
-              (boosts.add2 || boosts.add3 || boosts.add5 || boosts.add7) ? (
-                <div className="px-4 pb-3 text-xs text-emerald-700 dark:text-emerald-400">
-                  Boosts actifs : +{boosts.add7} pts (−50 €), +{boosts.add3} pts
-                  (−10 %), +{boosts.add2} pts (−20 %), +{boosts.add5} pts (−100
-                  €)
-                </div>
-              ) : (
-                <div className="px-4 pb-3 text-xs text-zinc-600 dark:text-zinc-400">
-                  Astuce : invitez un ami pour augmenter vos chances de gagner
-                  une **grosse** remise.
-                </div>
-              )}
-            </div>
-
-            {/* Parrainage */}
-            <div className="mt-6 rounded-2xl border border-zinc-200 dark:border-[#1A2026] bg-white dark:bg-[#12161D] shadow-sm p-4">
-              <div className="font-medium">Parrainage</div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                1 filleul validé ⇒ +5 pts répartis (−50 €, −10 %, −20 %, −100 €)
-                pour votre <b>prochaine</b> rotation. Cap : 3 boosts / 30 jours.
-              </p>
-              <div className="mt-3 flex gap-2">
-                <button
-                  onClick={createInvite}
-                  disabled={!email}
-                  className="h-11 rounded-xl px-4 bg-zinc-900 text-white disabled:opacity-40 dark:bg-white dark:text-zinc-900"
-                >
-                  Générer mon lien d’invitation
-                </button>
-                {inviteUrl && (
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(inviteUrl!);
-                    }}
-                    className="h-11 rounded-xl px-4 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700"
-                  >
-                    Copier le lien
-                  </button>
-                )}
-              </div>
-              {inviteUrl && (
-                <div className="mt-2 text-xs break-all text-zinc-600 dark:text-zinc-400">
-                  {inviteUrl}
-                </div>
-              )}
-            </div>
-
-            {/* Résultat */}
-            {result && (
-              <div className="mt-6 rounded-2xl border border-zinc-200 dark:border-[#1A2026] bg-white dark:bg-[#12161D] shadow-sm p-4">
-                <div className="text-lg">
-                  🎁 Gagné : <b>{result.prize}</b>
-                </div>
-                <div className="text-sm mt-2">
-                  Code : <b>{result.code}</b> — valable jusqu’au{' '}
-                  {new Date(result.expiresAt).toLocaleDateString('fr-FR')}
-                </div>
-                <div className="text-xs text-zinc-600 dark:text-zinc-400 mt-2">
-                  Utilisez ce code dans votre brief / réponse email. Nous
-                  appliquerons la remise sur votre devis/facture (paiement par
-                  RIB).
-                </div>
-              </div>
-            )}
-
-            {/* Légal */}
-            <div className="mt-6 text-xs text-zinc-500 dark:text-zinc-400">
-              Jackpot −50 % : activé uniquement lors d’événements annoncés.
-              Remises % plafonnées (cap), remises fixes avec seuils. 1 rotation
-              / 30 j par email. Validité 14 j. Non cumulable. Probabilités
-              affichées = réelles à l’instant T.
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="h-screen w-full text-5xl flex items-center justify-center">
+      Arrive Bientôt
     </div>
+    // <div className="min-h-[100svh] bg-white dark:bg-black relative overflow-hidden">
+    //   {/* Background animé subtil */}
+    //   <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    //     <motion.div
+    //       className="absolute top-20 -left-32 w-80 h-80 rounded-full blur-3xl opacity-10"
+    //       style={{ background: 'hsl(var(--primary))' }}
+    //       animate={{
+    //         x: [0, 30, 0],
+    //         y: [0, -20, 0],
+    //         scale: [1, 1.1, 1],
+    //       }}
+    //       transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+    //     />
+    //     <motion.div
+    //       className="absolute bottom-32 -right-32 w-80 h-80 rounded-full blur-3xl opacity-10"
+    //       style={{ background: 'hsl(var(--primary))' }}
+    //       animate={{
+    //         x: [0, -30, 0],
+    //         y: [0, 20, 0],
+    //         scale: [1.1, 1, 1.1],
+    //       }}
+    //       transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+    //     />
+    //   </div>
+
+    //   <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10">
+    //     {/* Header */}
+    //     <motion.div
+    //       initial={{ opacity: 0, y: 20 }}
+    //       animate={{ opacity: 1, y: 0 }}
+    //       transition={{ duration: 0.6 }}
+    //       className="text-center mb-12 md:mb-16"
+    //     >
+    //       <motion.div
+    //         initial={{ scale: 0.9, opacity: 0 }}
+    //         animate={{ scale: 1, opacity: 1 }}
+    //         transition={{ duration: 0.5, delay: 0.1 }}
+    //         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 mb-4"
+    //       >
+    //         <Sparkles className="w-4 h-4 text-primary" />
+    //         <span className="text-sm font-semibold text-primary">
+    //           Offre exclusive
+    //         </span>
+    //       </motion.div>
+
+    //       <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-3">
+    //         La Roue <span className="text-primary">Ikovaline</span>
+    //       </h1>
+    //       <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
+    //         Une rotation par email • Récompense garantie • 14 jours de validité
+    //       </p>
+    //     </motion.div>
+
+    //     {/* Email Section */}
+    //     <motion.div
+    //       initial={{ opacity: 0, y: 20 }}
+    //       animate={{ opacity: 1, y: 0 }}
+    //       transition={{ duration: 0.6, delay: 0.2 }}
+    //       className="max-w-lg mx-auto mb-8"
+    //     >
+    //       <div className="rounded-[2rem] bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]">
+    //         <div className="relative">
+    //           <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+    //           <input
+    //             value={email}
+    //             onChange={(e) => setEmail(e.target.value)}
+    //             placeholder="votre@email.com"
+    //             inputMode="email"
+    //             className="w-full rounded-2xl pl-12 pr-6 py-4 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white placeholder:text-neutral-400 outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+    //             aria-label="Adresse e-mail"
+    //           />
+    //         </div>
+    //         <button
+    //           onClick={() => fetchProbs(email)}
+    //           disabled={probLoading}
+    //           className="w-full mt-3 rounded-2xl px-6 py-4 bg-primary text-white font-semibold hover:opacity-90 transition-all disabled:opacity-50"
+    //         >
+    //           {probLoading ? 'Chargement...' : 'Voir mes chances'}
+    //         </button>
+    //       </div>
+
+    //       {/* Status */}
+    //       <AnimatePresence mode="wait">
+    //         {eligible === true && (
+    //           <motion.div
+    //             initial={{ opacity: 0, y: -10 }}
+    //             animate={{ opacity: 1, y: 0 }}
+    //             exit={{ opacity: 0, y: -10 }}
+    //             className="mt-3 text-center text-sm text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-2"
+    //           >
+    //             <motion.div
+    //               className="w-2 h-2 rounded-full bg-emerald-500"
+    //               animate={{ scale: [1, 1.2, 1], opacity: [1, 0.5, 1] }}
+    //               transition={{ duration: 2, repeat: Infinity }}
+    //             />
+    //             Vous pouvez jouer maintenant
+    //           </motion.div>
+    //         )}
+    //         {eligible === false && (
+    //           <motion.div
+    //             initial={{ opacity: 0, y: -10 }}
+    //             animate={{ opacity: 1, y: 0 }}
+    //             exit={{ opacity: 0, y: -10 }}
+    //             className="mt-3 text-center text-sm text-amber-600 dark:text-amber-400"
+    //           >
+    //             ⏳ Prochain essai :{' '}
+    //             {nextEligibleAt
+    //               ? new Date(nextEligibleAt).toLocaleDateString('fr-FR')
+    //               : 'plus tard'}
+    //           </motion.div>
+    //         )}
+    //       </AnimatePresence>
+    //     </motion.div>
+
+    //     {/* Main Grid */}
+    //     <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
+    //       {/* Roue */}
+    //       <motion.div
+    //         initial={{ opacity: 0, scale: 0.95 }}
+    //         animate={{ opacity: 1, scale: 1 }}
+    //         transition={{ duration: 0.6, delay: 0.3 }}
+    //         className="flex flex-col items-center"
+    //       >
+    //         <RouletteWheel
+    //           weights={weights ?? []}
+    //           targetSeg={targetSeg}
+    //           spinning={spinning}
+    //         />
+
+    //         <motion.button
+    //           onClick={spin}
+    //           disabled={!canSpin}
+    //           whileHover={{ scale: canSpin ? 1.03 : 1 }}
+    //           whileTap={{ scale: canSpin ? 0.97 : 1 }}
+    //           className="mt-8 px-12 py-4 rounded-2xl bg-primary text-white font-bold text-base shadow-[0_20px_40px_-15px] shadow-primary/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+    //         >
+    //           {spinning ? (
+    //             <span className="flex items-center gap-3">
+    //               <motion.div
+    //                 animate={{ rotate: 360 }}
+    //                 transition={{
+    //                   duration: 1,
+    //                   repeat: Infinity,
+    //                   ease: 'linear',
+    //                 }}
+    //                 className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+    //               />
+    //               Rotation en cours...
+    //             </span>
+    //           ) : (
+    //             'Je tente ma chance'
+    //           )}
+    //         </motion.button>
+
+    //         {weights && (
+    //           <motion.p
+    //             initial={{ opacity: 0 }}
+    //             animate={{ opacity: 1 }}
+    //             transition={{ delay: 0.5 }}
+    //             className="mt-6 text-sm text-neutral-500 dark:text-neutral-400"
+    //           >
+    //             Jackpot −50% :{' '}
+    //             <span className="font-semibold text-primary">
+    //               {weights.find((w) => w.seg === 1)?.pct.toFixed(2)}%
+    //             </span>
+    //           </motion.p>
+    //         )}
+    //       </motion.div>
+
+    //       {/* Panels */}
+    //       <motion.div
+    //         initial={{ opacity: 0, x: 20 }}
+    //         animate={{ opacity: 1, x: 0 }}
+    //         transition={{ duration: 0.6, delay: 0.4 }}
+    //         className="space-y-6"
+    //       >
+    //         {/* Chances */}
+    //         <div className="rounded-[2rem] bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]">
+    //           <div className="flex items-center gap-3 mb-5">
+    //             <div className="p-2.5 rounded-xl bg-primary/10">
+    //               <TrendingUp className="w-5 h-5 text-primary" />
+    //             </div>
+    //             <div>
+    //               <h3 className="font-semibold text-base">Vos chances</h3>
+    //               <p className="text-xs text-neutral-500 dark:text-neutral-400">
+    //                 Total : {totalPct.toFixed(1)}%
+    //               </p>
+    //             </div>
+    //           </div>
+
+    //           <div className="grid grid-cols-2 gap-2.5">
+    //             {(weights ?? []).map((w, i) => (
+    //               <motion.div
+    //                 key={w.seg}
+    //                 initial={{ opacity: 0, y: 10 }}
+    //                 animate={{ opacity: 1, y: 0 }}
+    //                 transition={{ delay: 0.5 + i * 0.05 }}
+    //                 className="rounded-xl bg-white dark:bg-neutral-950 p-3 shadow-sm"
+    //               >
+    //                 <div className="text-[10px] text-neutral-500 dark:text-neutral-400 mb-0.5 truncate">
+    //                   {w.label}
+    //                 </div>
+    //                 <div className="text-xl font-bold text-primary">
+    //                   {w.pct.toFixed(1)}%
+    //                 </div>
+    //               </motion.div>
+    //             ))}
+    //           </div>
+
+    //           {boosts &&
+    //             (boosts.add2 || boosts.add3 || boosts.add5 || boosts.add7) && (
+    //               <motion.div
+    //                 initial={{ opacity: 0 }}
+    //                 animate={{ opacity: 1 }}
+    //                 className="mt-4 p-3 rounded-xl bg-emerald-500/10"
+    //               >
+    //                 <p className="text-xs text-emerald-700 dark:text-emerald-400">
+    //                   🚀 Boosts actifs : +
+    //                   {boosts.add7 + boosts.add3 + boosts.add2 + boosts.add5}{' '}
+    //                   pts
+    //                 </p>
+    //               </motion.div>
+    //             )}
+    //         </div>
+
+    //         {/* Referral */}
+    //         <div className="rounded-[2rem] bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]">
+    //           <div className="flex items-center gap-3 mb-4">
+    //             <div className="p-2.5 rounded-xl bg-primary/10">
+    //               <Users className="w-5 h-5 text-primary" />
+    //             </div>
+    //             <div>
+    //               <h3 className="font-semibold text-base">Parrainage</h3>
+    //               <p className="text-xs text-neutral-500 dark:text-neutral-400">
+    //                 +5 pts par filleul
+    //               </p>
+    //             </div>
+    //           </div>
+
+    //           <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+    //             Invitez un ami et gagnez des points bonus pour votre prochaine
+    //             rotation
+    //           </p>
+
+    //           <div className="space-y-2.5">
+    //             <button
+    //               onClick={createInvite}
+    //               disabled={!email}
+    //               className="w-full rounded-xl px-5 py-3 bg-primary text-white text-sm font-semibold hover:opacity-90 transition-all disabled:opacity-50"
+    //             >
+    //               Générer mon lien
+    //             </button>
+
+    //             {inviteUrl && (
+    //               <motion.div
+    //                 initial={{ opacity: 0, height: 0 }}
+    //                 animate={{ opacity: 1, height: 'auto' }}
+    //                 className="space-y-2"
+    //               >
+    //                 <button
+    //                   onClick={() => navigator.clipboard.writeText(inviteUrl)}
+    //                   className="w-full rounded-xl px-5 py-3 bg-neutral-100 dark:bg-neutral-800 text-sm font-medium hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all"
+    //                 >
+    //                   Copier le lien
+    //                 </button>
+    //                 <p className="text-[10px] text-neutral-500 break-all px-2">
+    //                   {inviteUrl}
+    //                 </p>
+    //               </motion.div>
+    //             )}
+    //           </div>
+    //         </div>
+
+    //         {/* Result */}
+    //         <AnimatePresence>
+    //           {result && (
+    //             <motion.div
+    //               initial={{ opacity: 0, scale: 0.9, y: 20 }}
+    //               animate={{ opacity: 1, scale: 1, y: 0 }}
+    //               exit={{ opacity: 0, scale: 0.9, y: -20 }}
+    //               className="rounded-[2rem] bg-gradient-to-br from-primary to-primary/80 p-6 shadow-[0_20px_60px_-15px] shadow-primary/40"
+    //             >
+    //               <div className="flex items-center gap-3 mb-4">
+    //                 <Gift className="w-7 h-7 text-white" />
+    //                 <h3 className="font-bold text-xl text-white">
+    //                   Félicitations !
+    //                 </h3>
+    //               </div>
+
+    //               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-white space-y-3">
+    //                 <p className="text-base">
+    //                   Vous avez gagné : <strong>{result.prize}</strong>
+    //                 </p>
+    //                 <div className="p-3 rounded-lg bg-white/20 backdrop-blur-sm">
+    //                   <p className="text-xs opacity-80 mb-1">Votre code :</p>
+    //                   <p className="font-mono text-lg font-bold">
+    //                     {result.code}
+    //                   </p>
+    //                 </div>
+    //                 <p className="text-xs opacity-80">
+    //                   Valable jusqu'au{' '}
+    //                   {new Date(result.expiresAt).toLocaleDateString('fr-FR')}
+    //                 </p>
+    //               </div>
+    //             </motion.div>
+    //           )}
+    //         </AnimatePresence>
+    //       </motion.div>
+    //     </div>
+
+    //     {/* Footer */}
+    //     <motion.div
+    //       initial={{ opacity: 0 }}
+    //       animate={{ opacity: 1 }}
+    //       transition={{ delay: 0.8 }}
+    //       className="mt-16 text-center text-[11px] text-neutral-500 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed"
+    //     >
+    //       Jackpot −50% activé lors d'événements annoncés. Remises % plafonnées,
+    //       remises fixes avec seuils. 1 rotation/30j par email. Validité 14j. Non
+    //       cumulable. Probabilités réelles affichées.
+    //     </motion.div>
+    //   </div>
+    // </div>
   );
 }
