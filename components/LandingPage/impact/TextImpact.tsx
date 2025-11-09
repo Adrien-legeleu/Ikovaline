@@ -97,12 +97,12 @@ function LeftGlass({
       />
 
       {/* header */}
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-tight drop-shadow-[0_1px_8px_rgba(0,0,0,0.2)]">
+      <h2 className="text-3xl md:text-4xl text-white/90 font-semibold tracking-[-0.02em] leading-tight ">
         {title}
         <br />
         {subtitle}
       </h2>
-      <p className="mt-4 text-[16px] md:text-[17px] font-medium leading-relaxed text-white/90">
+      <p className="mt-4 text-[16px] md:text-[17px] font-medium leading-relaxed text-white/80">
         Moins d’effets, plus d’impact, un delivery net et maîtrisé.
       </p>
 

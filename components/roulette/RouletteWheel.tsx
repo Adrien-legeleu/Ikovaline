@@ -1,21 +1,19 @@
-// components/roulette/RouletteWheel.tsx
+// file: components/roulette/RouletteWheel.tsx
 'use client';
-
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 type Weight = { seg: number; label: string; pct: number };
 
-// Couleurs pour chaque segment (alternance de teintes primary)
 const SEGMENT_COLORS = [
-  'hsl(var(--primary) / 0.95)', // seg 1 - Jackpot
-  'hsl(var(--primary) / 0.75)', // seg 2
-  'hsl(var(--primary) / 0.55)', // seg 3
-  'hsl(var(--primary) / 0.35)', // seg 4
-  'hsl(var(--primary) / 0.95)', // seg 5
-  'hsl(var(--primary) / 0.75)', // seg 6
-  'hsl(var(--primary) / 0.55)', // seg 7
-  'hsl(var(--primary) / 0.35)', // seg 8
+  'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90))',
+  'linear-gradient(135deg, rgba(255,255,255,0.90), rgba(255,255,255,0.86))',
+  'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90))',
+  'linear-gradient(135deg, rgba(255,255,255,0.90), rgba(255,255,255,0.86))',
+  'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90))',
+  'linear-gradient(135deg, rgba(255,255,255,0.90), rgba(255,255,255,0.86))',
+  'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90))',
+  'linear-gradient(135deg, rgba(255,255,255,0.90), rgba(255,255,255,0.86))',
 ];
 
 export function RouletteWheel({
@@ -29,6 +27,7 @@ export function RouletteWheel({
 }) {
   const wheelRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [finalAngle, setFinalAngle] = useState<number>(0);
 
   const segAngles = useMemo(
     () =>
@@ -41,253 +40,203 @@ export function RouletteWheel({
     []
   );
 
-  // Dessiner la roue sur canvas
+  // Dessin HiDPI + métal/verre
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || weights.length === 0) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const size = 400;
-    const centerX = size / 2;
-    const centerY = size / 2;
-    const radius = size / 2;
+    const dpr = window.devicePixelRatio || 1;
+    const size = 420;
+    const cx = size / 2,
+      cy = size / 2,
+      r = size / 2;
 
-    canvas.width = size;
-    canvas.height = size;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    canvas.style.width = `${size}px`;
+    canvas.style.height = `${size}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Effacer
     ctx.clearRect(0, 0, size, size);
 
-    // Dessiner chaque segment
+    // Anneau métal brossé
+    const grad = ctx.createLinearGradient(0, 0, size, size);
+    grad.addColorStop(0, 'rgba(200,200,200,0.5)');
+    grad.addColorStop(0.5, 'rgba(255,255,255,0.7)');
+    grad.addColorStop(1, 'rgba(180,180,180,0.5)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, r - 2, 0, Math.PI * 2);
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = grad;
+    ctx.stroke();
+
+    // Segments
     segAngles.forEach(({ seg, startAngle, endAngle }) => {
-      const w = weights.find((x) => x.seg === seg);
-      const label = w?.label ?? `Seg ${seg}`;
+      const start = (startAngle - 90) * (Math.PI / 180);
+      const end = (endAngle - 90) * (Math.PI / 180);
 
-      // Convertir en radians
-      const startRad = (startAngle - 90) * (Math.PI / 180);
-      const endRad = (endAngle - 90) * (Math.PI / 180);
-
-      // Dessiner le segment
       ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.arc(centerX, centerY, radius, startRad, endRad);
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r - 12, start, end);
       ctx.closePath();
 
-      // Remplir avec couleur
-      ctx.fillStyle = SEGMENT_COLORS[seg - 1];
+      // Remplissage verre
+      const g = ctx.createRadialGradient(cx, cy, r * 0.2, cx, cy, r);
+      g.addColorStop(0, 'rgba(255,255,255,0.95)');
+      g.addColorStop(1, 'rgba(255,255,255,0.85)');
+      ctx.fillStyle = g;
       ctx.fill();
 
-      // Bordure blanche fine
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.lineWidth = 2;
+      // Séparateurs
+      ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+      ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // Texte
-      const textAngle = (startAngle + endAngle) / 2;
-      const textRad = (textAngle - 90) * (Math.PI / 180);
-      const textRadius = radius * 0.7;
-      const textX = centerX + Math.cos(textRad) * textRadius;
-      const textY = centerY + Math.sin(textRad) * textRadius;
+      // Label
+      const label = weights.find((x) => x.seg === seg)?.label ?? `Seg ${seg}`;
+      const midRad = (start + end) / 2;
+      const tx = cx + Math.cos(midRad) * (r * 0.62);
+      const ty = cy + Math.sin(midRad) * (r * 0.62);
 
       ctx.save();
-      ctx.translate(textX, textY);
-      ctx.rotate(textRad + Math.PI / 2);
-
-      ctx.fillStyle = 'white';
-      ctx.font = 'bold 16px Inter, sans-serif';
+      ctx.translate(tx, ty);
+      ctx.rotate(midRad + Math.PI / 2);
+      ctx.font = '600 14px Inter, system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-
-      // Ombre pour lisibilité
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-      ctx.shadowBlur = 4;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 2;
-
+      ctx.fillStyle = 'rgba(20,20,20,0.9)';
       ctx.fillText(label, 0, 0);
-
       ctx.restore();
     });
   }, [weights, segAngles]);
 
-  // Animation de rotation
+  // Rotation inertielle + micro-bounce final
   useEffect(() => {
     const wheel = wheelRef.current;
-    if (!wheel || !targetSeg) return;
+    if (!wheel || !targetSeg || !spinning) return;
 
     const index = targetSeg - 1;
     const degPerSeg = 360 / 8;
-    // 5 tours complets + position du segment
-    const stopDeg = 360 * 5 + index * degPerSeg + degPerSeg / 2;
+    const targetAngle = index * degPerSeg + degPerSeg / 2;
+    const base = 360 * 4 - targetAngle; // 4 tours + alignement
 
+    // reset
     wheel.style.transition = 'none';
     wheel.style.transform = `rotate(0deg)`;
 
     requestAnimationFrame(() => {
-      wheel.style.transition = 'transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)';
-      wheel.style.transform = `rotate(${stopDeg}deg)`;
+      requestAnimationFrame(() => {
+        wheel.style.transition = 'transform 3.8s cubic-bezier(.16,1,.3,1)';
+        wheel.style.transform = `rotate(${base}deg)`;
+        setFinalAngle(base);
+      });
     });
-  }, [targetSeg]);
+
+    const onEnd = () => {
+      // micro-bounce (verre): -4° puis +4° puis settle
+      wheel.style.transition = 'transform 180ms cubic-bezier(.16,1,.3,1)';
+      wheel.style.transform = `rotate(${base - 4}deg)`;
+      setTimeout(() => {
+        wheel.style.transform = `rotate(${base + 3}deg)`;
+        setTimeout(() => {
+          wheel.style.transform = `rotate(${base}deg)`;
+        }, 110);
+      }, 110);
+      wheel.removeEventListener('transitionend', onEnd);
+    };
+    wheel.addEventListener('transitionend', onEnd);
+
+    return () => wheel.removeEventListener('transitionend', onEnd);
+  }, [targetSeg, spinning]);
+
+  const hasWeights = weights.length > 0;
 
   return (
     <div className="relative flex items-center justify-center">
-      {/* Aiguille fixe */}
+      {/* Aiguille */}
       <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-30">
         <motion.div
-          animate={{
-            y: spinning ? [0, -8, 0] : 0,
-          }}
+          animate={{ y: spinning ? [0, -6, 0] : 0 }}
           transition={{
             duration: 0.6,
             repeat: spinning ? Infinity : 0,
             ease: 'easeInOut',
           }}
         >
-          <svg width="40" height="48" viewBox="0 0 40 48" fill="none">
+          <svg
+            width="42"
+            height="52"
+            viewBox="0 0 42 52"
+            className="drop-shadow-2xl"
+          >
             <path
-              d="M20 8 L32 28 L20 24 L8 28 Z"
+              d="M21 10 L34 30 L21 26 L8 30 Z"
               fill="white"
               stroke="hsl(var(--primary))"
               strokeWidth="3"
-              filter="drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))"
             />
           </svg>
         </motion.div>
       </div>
 
-      {/* Glow animé */}
+      {/* Halo pendant spin */}
       <motion.div
-        className="absolute inset-0 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: 'hsl(var(--primary))' }}
-        animate={{
-          scale: spinning ? [1, 1.2, 1] : 1,
-          opacity: spinning ? [0.2, 0.4, 0.2] : 0.2,
+        className="absolute inset-0 rounded-full opacity-0 pointer-events-none"
+        style={{
+          boxShadow:
+            '0 0 0 80px hsl(var(--primary) / 0.05), inset 0 0 60px hsl(var(--primary) / 0.12)',
         }}
-        transition={{ duration: 2, repeat: spinning ? Infinity : 0 }}
+        animate={{ opacity: spinning ? [0.12, 0.24, 0.12] : 0 }}
+        transition={{ duration: 2.2, repeat: spinning ? Infinity : 0 }}
       />
 
       {/* Roue */}
       <div className="relative">
         <div
           ref={wheelRef}
-          className="relative w-[400px] h-[400px] max-w-[85vw] max-h-[85vw] rounded-full"
+          className={`relative w-[420px] h-[420px] max-w-[85vw] max-h-[85vw] rounded-full transition-opacity ${hasWeights ? 'opacity-100' : 'opacity-40'}`}
           style={{
-            boxShadow: '0 30px 90px -20px rgba(0, 0, 0, 0.3)',
+            boxShadow:
+              '0 36px 120px -34px rgba(0,0,0,.35), inset 0 2px 12px rgba(0,0,0,.06)',
           }}
+          aria-label="Roue Ikovaline"
+          role="img"
         >
-          {/* Canvas pour dessiner les segments */}
           <canvas ref={canvasRef} className="w-full h-full rounded-full" />
 
-          {/* Centre avec logo */}
+          {/* Centre verre + logo */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.div
-              className="w-32 h-32 rounded-full flex items-center justify-center"
+              className="w-36 h-36 rounded-full flex items-center justify-center relative overflow-hidden"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%)',
+                  'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95))',
                 boxShadow:
-                  '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.05)',
+                  '0 8px 32px rgba(0,0,0,.18), inset 0 2px 10px rgba(0,0,0,.06)',
               }}
-              animate={{
-                boxShadow: spinning
-                  ? [
-                      '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.05)',
-                      '0 12px 40px rgba(0, 0, 0, 0.25), inset 0 4px 16px rgba(0, 0, 0, 0.08)',
-                      '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.05)',
-                    ]
-                  : '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.05)',
+              animate={{ scale: spinning ? [1, 1.02, 1] : 1 }}
+              transition={{
+                duration: 1.2,
+                repeat: spinning ? Infinity : 0,
+                ease: 'easeInOut',
               }}
-              transition={{ duration: 1.5, repeat: spinning ? Infinity : 0 }}
             >
-              {/* Dark overlay for dark mode */}
               <div className="absolute inset-0 rounded-full bg-neutral-900 opacity-0 dark:opacity-90 transition-opacity" />
-
-              <motion.div
-                className="relative text-5xl font-black text-primary"
-                animate={{
-                  scale: spinning ? [1, 1.05, 1] : 1,
-                }}
-                transition={{
-                  duration: 0.8,
-                  repeat: spinning ? Infinity : 0,
-                  ease: 'easeInOut',
-                }}
-              >
+              <div className="relative text-5xl font-black text-primary select-none">
                 IK
-              </motion.div>
+              </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Bordure décorative */}
+        {/* Liseré verre */}
         <div
           className="absolute inset-0 rounded-full pointer-events-none"
-          style={{
-            boxShadow: 'inset 0 0 0 8px rgba(255, 255, 255, 0.1)',
-          }}
+          style={{ boxShadow: 'inset 0 0 0 8px rgba(255,255,255,.08)' }}
         />
       </div>
-
-      {/* Particules pendant rotation */}
-      {spinning && (
-        <div className="absolute inset-0 pointer-events-none">
-          {Array.from({ length: 24 }).map((_, i) => {
-            const angle = (i * 360) / 24;
-            const delay = (i * 0.8) / 24;
-
-            return (
-              <motion.div
-                key={i}
-                className="absolute top-1/2 left-1/2"
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  background: `hsl(var(--primary) / ${0.8 - (i % 3) * 0.2})`,
-                }}
-                initial={{
-                  x: 0,
-                  y: 0,
-                  opacity: 0,
-                  scale: 0,
-                }}
-                animate={{
-                  x: Math.cos((angle * Math.PI) / 180) * 240,
-                  y: Math.sin((angle * Math.PI) / 180) * 240,
-                  opacity: [0, 1, 0],
-                  scale: [0, 1.5, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              />
-            );
-          })}
-        </div>
-      )}
-
-      {/* Ring tournant pendant rotation */}
-      {spinning && (
-        <motion.div
-          className="absolute inset-0 rounded-full pointer-events-none"
-          style={{
-            border: '3px solid hsl(var(--primary) / 0.3)',
-          }}
-          animate={{
-            rotate: 360,
-            scale: [1, 1.05, 1],
-          }}
-          transition={{
-            rotate: { duration: 3, repeat: Infinity, ease: 'linear' },
-            scale: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' },
-          }}
-        />
-      )}
     </div>
   );
 }

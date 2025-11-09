@@ -46,7 +46,7 @@ export default function CallToAction({ title, desc, textBtn }: Props) {
         >
           <div className="relative z-[2] flex flex-col items-center gap-2 justify-center text-white">
             <StarClientsGoogleOnBlue />
-            <h2 className="mt-4 text-3xl text-center leading-10 sm:text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
+            <h2 className="mt-4 text-3xl text-center leading-10 sm:text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
               {title}
             </h2>
             <p className="mt-4 max-w-xl text-center text-[15px] leading-7 text-white/85 font-medium">

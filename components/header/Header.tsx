@@ -198,7 +198,7 @@ export function Header({ className }: { className?: string }) {
     isTop
       ? 'none'
       : `0 8px 22px rgba(0,0,0,${0.1 * v}),
-         0 24px 48px rgba(0,0,0,${0.08 * v}),
+         0 4px 48px rgba(0,0,0,${0.005 * v}),
          inset 0 1px 0 rgba(255,255,255,${0.2 * v})`
   );
 
@@ -242,7 +242,7 @@ export function Header({ className }: { className?: string }) {
                 className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit]"
               >
                 <div className="absolute inset-x-0 top-0 h-1/2 rounded-t-[inherit] bg-gradient-to-b from-white/20 via-transparent to-transparent dark:from-white/10" />
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/5 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/[0.06] to-transparent" />
               </motion.div>
             )}
 

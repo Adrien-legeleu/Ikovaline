@@ -545,7 +545,7 @@ export default function ChatbotBubble() {
 
                           <button
                             onClick={() => setOpen(false)}
-                            className="rounded-full mix-blend-overlay p-2 hover:bg-black/10 transition"
+                            className="rounded-full -overlay p-2 hover:bg-black/10 transition"
                             aria-label="Fermer"
                           >
                             <X size={20} />

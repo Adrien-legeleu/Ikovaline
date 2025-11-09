@@ -36,9 +36,9 @@ export default function ParallaxProjectsGrid({
       : undefined
   );
 
-  const yCol1 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const yCol1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const yCol2 = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const yCol3 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const yCol3 = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   // répartition en 3 colonnes
   const third = Math.ceil(items.length / 3);

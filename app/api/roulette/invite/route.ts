@@ -1,33 +1,52 @@
-// app/api/roulette/invite/route.ts
+// file: app/api/roulette/invite/route.ts
 import { NextResponse } from 'next/server';
-import { getAdminSupabase } from '@/lib/supabaseAdmin';
-import crypto from 'crypto';
+import { getAdminSupabase } from '@/app/api/_lib/supabaseAdmin';
+import { normalizeEmail } from '@/lib/email';
+import { randomBytes } from 'crypto';
 
-function genInvite() {
-  return `IKVR-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+function genInviteCode() {
+  return 'R-' + randomBytes(4).toString('hex');
 }
 
 export async function POST(req: Request) {
-  const supa = getAdminSupabase();
   const { referrerEmail } = await req.json().catch(() => ({}));
   if (!referrerEmail)
-    return NextResponse.json(
-      { error: 'referrerEmail required' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: 'email_required' }, { status: 400 });
 
-  const invite = genInvite();
-  const { error } = await supa.from('roulette_referrals').insert({
-    referrer_email: referrerEmail,
-    invite_code: invite,
-  });
-  if (error)
-    return NextResponse.json({ error: 'insert_failed' }, { status: 500 });
+  const email_norm = normalizeEmail(referrerEmail);
+  const db = getAdminSupabase();
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-  return NextResponse.json({
-    ok: true,
-    invite,
-    url: `${baseUrl}/roulette?invite=${invite}`,
-  });
+  // s'assurer que le parrain existe
+  await db
+    .from('roulette_users')
+    .upsert({ email: referrerEmail, email_norm }, { onConflict: 'email_norm' });
+
+  let code = genInviteCode();
+  // boucle simple pour éviter collision
+  // (rare mais on assure l'unicité)
+  // eslint-disable-next-line no-constant-condition
+  for (let i = 0; i < 3; i++) {
+    const ins = await db
+      .from('roulette_referrals')
+      .insert({
+        referrer_email: referrerEmail,
+        referrer_email_norm: email_norm,
+        invite_code: code,
+      })
+      .select('invite_code')
+      .single();
+
+    if (!ins.error) break;
+    code = genInviteCode();
+    if (i === 2)
+      return NextResponse.json(
+        { error: 'failed_generating_code' },
+        { status: 500 }
+      );
+  }
+
+  const base = process.env.NEXT_PUBLIC_SITE_URL!.replace(/\/+$/, '');
+  const url = `${base}/roulette?invite=${encodeURIComponent(code)}`;
+
+  return NextResponse.json({ ok: true, url });
 }
