@@ -8,7 +8,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getAdminSupabase } from '@/lib/supabaseAdmin';
+import { getAdminSupabase } from '@/app/api/_lib/supabaseAdmin';
 import type { ReferralSummary } from '@/lib/roulette/types';
 
 /**

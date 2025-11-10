@@ -1,6 +1,6 @@
 // app/api/roulette/probabilities/route.ts
 import { NextResponse } from 'next/server';
-import { getAdminSupabase } from '@/lib/supabaseAdmin';
+import { getAdminSupabase } from '@/app/api/_lib/supabaseAdmin';
 
 export async function POST(req: Request) {
   const supa = getAdminSupabase();

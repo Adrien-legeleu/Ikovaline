@@ -1,6 +1,6 @@
 // app/api/roulette/status/route.ts
 import { NextResponse } from 'next/server';
-import { getAdminSupabase } from '@/lib/supabaseAdmin';
+import { getAdminSupabase } from '@/app/api/_lib/supabaseAdmin';
 
 type ConvRow = { seg: number; label: string; point_factor_pct: number };
 type AllocRow = { seg: number; points: number };
@@ -94,8 +94,20 @@ export async function POST(req: Request) {
     .order('seg');
 
   if (convErr || !conversion || conversion.length !== 8) {
+    console.error('❌ Erreur roulette_conversion:', {
+      error: convErr,
+      rowCount: conversion?.length ?? 0,
+      expectedRows: 8,
+      message: convErr?.message,
+      details: convErr?.details,
+      hint: convErr?.hint,
+    });
     return NextResponse.json(
-      { error: 'conversion not configured' },
+      {
+        error: 'conversion not configured',
+        details: convErr?.message || `Expected 8 rows, got ${conversion?.length ?? 0}`,
+        hint: 'Run POST /api/roulette/init-conversion to initialize the table'
+      },
       { status: 500 }
     );
   }
