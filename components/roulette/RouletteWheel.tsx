@@ -1,313 +1,263 @@
-// file: components/roulette/RouletteWheel.tsx
-'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-
-type Weight = { seg: number; label: string; pct: number };
-
 /**
- * Couleurs par type de segment (design premium clair)
- * - Jackpot : doré / premium
- * - Gros bons d'achat : vert
- * - Réductions : bleu
- * - Petit -5% : gris/bleu doux
+ * RouletteWheel - Composant de la roulette avec animation
+ *
+ * Convention d'angle :
+ * - 0° = haut (12h)
+ * - Rotation sens horaire
+ * - La flèche est fixe en haut
+ * - On fait tourner la roue, pas la flèche
+ *
+ * La roue affiche les segments selon leurs pourcentages
+ * L'animation applique une rotation finale calculée par le backend
  */
-const getSegmentColor = (seg: number): string => {
-  switch (seg) {
-    case 1: // Jackpot 50%
-      return 'linear-gradient(135deg, rgba(255, 223, 130, 0.95), rgba(255, 193, 70, 0.90))'; // Doré
-    case 2: // -20%
-      return 'linear-gradient(135deg, rgba(147, 197, 253, 0.92), rgba(96, 165, 250, 0.88))'; // Bleu clair
-    case 3: // -10%
-      return 'linear-gradient(135deg, rgba(191, 219, 254, 0.90), rgba(147, 197, 253, 0.85))'; // Bleu très clair
-    case 4: // -150€
-      return 'linear-gradient(135deg, rgba(134, 239, 172, 0.95), rgba(74, 222, 128, 0.90))'; // Vert clair
-    case 5: // -100€
-      return 'linear-gradient(135deg, rgba(167, 243, 208, 0.92), rgba(110, 231, 183, 0.88))'; // Vert menthe
-    case 6: // -75€
-      return 'linear-gradient(135deg, rgba(196, 245, 217, 0.90), rgba(134, 239, 172, 0.85))'; // Vert pâle
-    case 7: // -50€
-      return 'linear-gradient(135deg, rgba(209, 250, 229, 0.90), rgba(167, 243, 208, 0.85))'; // Vert très pâle
-    case 8: // -5%
-      return 'linear-gradient(135deg, rgba(226, 232, 240, 0.90), rgba(203, 213, 225, 0.85))'; // Gris-bleu doux
-    default:
-      return 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.90))';
-  }
-};
+
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import type { RouletteSegment } from '@/lib/roulette/types';
+
+interface RouletteWheelProps {
+  segments: RouletteSegment[];
+  finalRotation?: number;
+  isSpinning: boolean;
+  onSpinComplete?: () => void;
+}
 
 export function RouletteWheel({
-  weights,
-  targetSeg,
-  spinning,
-}: {
-  weights: Weight[];
-  targetSeg: number | null;
-  spinning: boolean;
-}) {
-  const wheelRef = useRef<HTMLDivElement | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [finalAngle, setFinalAngle] = useState<number>(0);
+  segments,
+  finalRotation,
+  isSpinning,
+  onSpinComplete,
+}: RouletteWheelProps) {
+  const wheelRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [currentRotation, setCurrentRotation] = useState(0);
 
-  /**
-   * Calcul des angles PROPORTIONNELS aux probabilités
-   * ⚠️ FILTRE les segments avec pct <= 0 (ne doivent PAS apparaître sur la roue)
-   */
-  const segAngles = useMemo(() => {
-    // Filtrer les segments actifs (pct > 0)
-    const activeWeights = weights.filter((w) => w.pct > 0);
-
-    if (activeWeights.length === 0) {
-      // Cas d'erreur : aucun segment actif → afficher 8 segments égaux
-      return Array.from({ length: 8 }, (_, i) => ({
-        seg: i + 1,
-        startAngle: (i * 360) / 8,
-        endAngle: ((i + 1) * 360) / 8,
-        centerAngle: (i * 360) / 8 + 22.5,
-        pct: 12.5,
-      }));
-    }
-
-    // Calcul des angles proportionnels
-    let currentAngle = 0;
-    const totalPct = activeWeights.reduce((sum, w) => sum + w.pct, 0);
-
-    return activeWeights.map((w) => {
-      const angleSize = (w.pct / totalPct) * 360;
-      const result = {
-        seg: w.seg,
-        startAngle: currentAngle,
-        endAngle: currentAngle + angleSize,
-        centerAngle: currentAngle + angleSize / 2,
-        pct: w.pct,
-      };
-      currentAngle += angleSize;
-      return result;
-    });
-  }, [weights]);
-
-  // Dessin HiDPI avec couleurs différenciées et segments proportionnels
+  // Dessiner la roue sur le canvas
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas || segAngles.length === 0) return;
+    if (!canvas || segments.length === 0) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const size = 420;
-    const cx = size / 2,
-      cy = size / 2,
-      r = size / 2;
+    const size = 400;
+    const cx = size / 2;
+    const cy = size / 2;
+    const radius = size / 2 - 20;
 
+    // Configuration du canvas pour HiDPI
     canvas.width = size * dpr;
     canvas.height = size * dpr;
     canvas.style.width = `${size}px`;
     canvas.style.height = `${size}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.scale(dpr, dpr);
 
+    // Effacer le canvas
     ctx.clearRect(0, 0, size, size);
 
-    // Anneau métal brossé (bordure extérieure)
-    const grad = ctx.createLinearGradient(0, 0, size, size);
-    grad.addColorStop(0, 'rgba(200,200,200,0.5)');
-    grad.addColorStop(0.5, 'rgba(255,255,255,0.7)');
-    grad.addColorStop(1, 'rgba(180,180,180,0.5)');
-    ctx.beginPath();
-    ctx.arc(cx, cy, r - 2, 0, Math.PI * 2);
-    ctx.lineWidth = 10;
-    ctx.strokeStyle = grad;
-    ctx.stroke();
+    // Dessiner chaque segment
+    segments.forEach((segment) => {
+      // Convertir les angles (notre convention : 0° = haut)
+      // Canvas utilise 0° = droite, donc on soustrait 90°
+      const startRad = ((segment.start_angle - 90) * Math.PI) / 180;
+      const endRad = ((segment.end_angle - 90) * Math.PI) / 180;
 
-    // Dessiner chaque segment PROPORTIONNELLEMENT
-    segAngles.forEach(({ seg, startAngle, endAngle }) => {
-      const start = (startAngle - 90) * (Math.PI / 180);
-      const end = (endAngle - 90) * (Math.PI / 180);
-
+      // Dessiner le segment
       ctx.beginPath();
       ctx.moveTo(cx, cy);
-      ctx.arc(cx, cy, r - 12, start, end);
+      ctx.arc(cx, cy, radius, startRad, endRad);
       ctx.closePath();
 
-      // Couleur différenciée par type de segment
-      const colorGradient = getSegmentColor(seg);
-      // Parser le gradient pour créer un radial gradient
-      // Pour simplifier, on utilise des couleurs solides basées sur le segment
-      const colors = extractColorsFromGradient(colorGradient);
-      const g = ctx.createRadialGradient(cx, cy, r * 0.2, cx, cy, r);
-      g.addColorStop(0, colors[0]);
-      g.addColorStop(1, colors[1]);
-      ctx.fillStyle = g;
+      // Couleur de fond
+      ctx.fillStyle = segment.color;
       ctx.fill();
 
-      // Séparateurs (bordures entre segments)
-      ctx.strokeStyle = 'rgba(0,0,0,0.12)';
+      // Bordure
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Label
-      const label = weights.find((x) => x.seg === seg)?.label ?? `Seg ${seg}`;
-      const midRad = (start + end) / 2;
-      const tx = cx + Math.cos(midRad) * (r * 0.62);
-      const ty = cy + Math.sin(midRad) * (r * 0.62);
+      // Texte du segment
+      const midAngle = (segment.start_angle + segment.end_angle) / 2;
+      const midRad = ((midAngle - 90) * Math.PI) / 180;
+      const textRadius = radius * 0.7;
+      const textX = cx + Math.cos(midRad) * textRadius;
+      const textY = cy + Math.sin(midRad) * textRadius;
 
       ctx.save();
-      ctx.translate(tx, ty);
+      ctx.translate(textX, textY);
       ctx.rotate(midRad + Math.PI / 2);
 
-      // Taille de police adaptée à la taille du segment
-      const angleDiff = endAngle - startAngle;
-      const fontSize = angleDiff > 30 ? 14 : angleDiff > 15 ? 12 : 10;
+      // Icône
+      if (segment.icon) {
+        ctx.font = '24px system-ui';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(segment.icon, 0, -15);
+      }
 
-      ctx.font = `600 ${fontSize}px Inter, system-ui, sans-serif`;
+      // Label
+      ctx.font = 'bold 14px system-ui';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillStyle = 'rgba(20,20,20,0.95)';
-      ctx.fillText(label, 0, 0);
+      ctx.fillStyle = segment.text_color;
+      ctx.fillText(segment.label, 0, 5);
+
+      // Valeur
+      ctx.font = '12px system-ui';
+      ctx.fillText(segment.value, 0, 20);
+
       ctx.restore();
     });
-  }, [weights, segAngles]);
 
-  /**
-   * Extrait les couleurs d'un gradient linear-gradient CSS
-   */
-  function extractColorsFromGradient(gradient: string): [string, string] {
-    const match = gradient.match(/rgba?\([^)]+\)/g);
-    if (match && match.length >= 2) {
-      return [match[0], match[1]];
-    }
-    return ['rgba(255,255,255,0.95)', 'rgba(255,255,255,0.85)'];
-  }
+    // Cercle central
+    ctx.beginPath();
+    ctx.arc(cx, cy, 60, 0, Math.PI * 2);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
 
-  // Rotation inertielle + micro-bounce final (avec angles PROPORTIONNELS)
+    // Logo au centre
+    ctx.font = 'bold 20px system-ui';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#3B82F6'; // blue-600
+    ctx.fillText('IK', cx, cy);
+
+  }, [segments]);
+
+  // Animation de rotation
   useEffect(() => {
+    if (!isSpinning || finalRotation === undefined || !wheelRef.current) return;
+
     const wheel = wheelRef.current;
-    if (!wheel || !targetSeg || !spinning) return;
 
-    // Trouver le segment cible dans segAngles
-    const targetSegment = segAngles.find((s) => s.seg === targetSeg);
-    if (!targetSegment) {
-      console.warn('Target segment not found:', targetSeg);
-      return;
-    }
-
-    // Angle cible = milieu du segment (centerAngle)
-    const targetAngle = targetSegment.centerAngle;
-    const base = 360 * 4 - targetAngle; // 4 tours + alignement au centre du segment
-
-    // reset
+    // Reset
     wheel.style.transition = 'none';
-    wheel.style.transform = `rotate(0deg)`;
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
 
+    // Forcer un reflow pour s'assurer que le reset est appliqué
+    void wheel.offsetHeight;
+
+    // Démarrer l'animation
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        wheel.style.transition = 'transform 3.8s cubic-bezier(.16,1,.3,1)';
-        wheel.style.transform = `rotate(${base}deg)`;
-        setFinalAngle(base);
-      });
+      wheel.style.transition = 'transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)';
+      wheel.style.transform = `rotate(${finalRotation}deg)`;
+      setCurrentRotation(finalRotation);
     });
 
-    const onEnd = () => {
-      // micro-bounce (verre): -4° puis +4° puis settle
-      wheel.style.transition = 'transform 180ms cubic-bezier(.16,1,.3,1)';
-      wheel.style.transform = `rotate(${base - 4}deg)`;
+    // Callback quand l'animation est terminée
+    const handleTransitionEnd = () => {
+      // Petit bounce pour plus de dynamisme
+      wheel.style.transition = 'transform 0.2s ease-out';
+      wheel.style.transform = `rotate(${finalRotation - 5}deg)`;
+
       setTimeout(() => {
-        wheel.style.transform = `rotate(${base + 3}deg)`;
+        wheel.style.transition = 'transform 0.3s ease-out';
+        wheel.style.transform = `rotate(${finalRotation}deg)`;
+
         setTimeout(() => {
-          wheel.style.transform = `rotate(${base}deg)`;
-        }, 110);
-      }, 110);
-      wheel.removeEventListener('transitionend', onEnd);
+          onSpinComplete?.();
+        }, 300);
+      }, 200);
     };
-    wheel.addEventListener('transitionend', onEnd);
 
-    return () => wheel.removeEventListener('transitionend', onEnd);
-  }, [targetSeg, spinning, segAngles]);
+    wheel.addEventListener('transitionend', handleTransitionEnd, { once: true });
 
-  const hasWeights = weights.length > 0;
+    return () => {
+      wheel.removeEventListener('transitionend', handleTransitionEnd);
+    };
+  }, [isSpinning, finalRotation, currentRotation, onSpinComplete]);
 
   return (
     <div className="relative flex items-center justify-center">
-      {/* Aiguille */}
-      <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-30">
+      {/* Flèche (fixe en haut) */}
+      <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20">
         <motion.div
-          animate={{ y: spinning ? [0, -6, 0] : 0 }}
+          animate={{
+            y: isSpinning ? [0, -8, 0] : 0,
+          }}
           transition={{
-            duration: 0.6,
-            repeat: spinning ? Infinity : 0,
+            duration: 0.5,
+            repeat: isSpinning ? Infinity : 0,
             ease: 'easeInOut',
           }}
         >
-          <svg
-            width="42"
-            height="52"
-            viewBox="0 0 42 52"
-            className="drop-shadow-2xl"
-          >
+          <svg width="40" height="50" viewBox="0 0 40 50" className="drop-shadow-lg">
+            <defs>
+              <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#EF4444" />
+                <stop offset="100%" stopColor="#DC2626" />
+              </linearGradient>
+            </defs>
             <path
-              d="M21 10 L34 30 L21 26 L8 30 Z"
-              fill="white"
-              stroke="hsl(var(--primary))"
-              strokeWidth="3"
+              d="M 20 5 L 35 25 L 20 20 L 5 25 Z"
+              fill="url(#arrowGradient)"
+              stroke="white"
+              strokeWidth="2"
             />
           </svg>
         </motion.div>
       </div>
 
-      {/* Halo pendant spin */}
-      <motion.div
-        className="absolute inset-0 rounded-full opacity-0 pointer-events-none"
-        style={{
-          boxShadow:
-            '0 0 0 80px hsl(var(--primary) / 0.05), inset 0 0 60px hsl(var(--primary) / 0.12)',
-        }}
-        animate={{ opacity: spinning ? [0.12, 0.24, 0.12] : 0 }}
-        transition={{ duration: 2.2, repeat: spinning ? Infinity : 0 }}
-      />
+      {/* Glow effect pendant le spin */}
+      {isSpinning && (
+        <motion.div
+          className="absolute inset-0 rounded-full blur-2xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      )}
 
       {/* Roue */}
       <div className="relative">
         <div
           ref={wheelRef}
-          className={`relative w-[420px] h-[420px] max-w-[85vw] max-h-[85vw] rounded-full transition-opacity ${hasWeights ? 'opacity-100' : 'opacity-40'}`}
+          className="relative w-[400px] h-[400px] rounded-full shadow-2xl"
           style={{
-            boxShadow:
-              '0 36px 120px -34px rgba(0,0,0,.35), inset 0 2px 12px rgba(0,0,0,.06)',
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.1)',
           }}
-          aria-label="Roue Ikovaline"
-          role="img"
         >
-          <canvas ref={canvasRef} className="w-full h-full rounded-full" />
-
-          {/* Centre verre + logo */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <motion.div
-              className="w-36 h-36 rounded-full flex items-center justify-center relative overflow-hidden"
-              style={{
-                background:
-                  'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95))',
-                boxShadow:
-                  '0 8px 32px rgba(0,0,0,.18), inset 0 2px 10px rgba(0,0,0,.06)',
-              }}
-              animate={{ scale: spinning ? [1, 1.02, 1] : 1 }}
-              transition={{
-                duration: 1.2,
-                repeat: spinning ? Infinity : 0,
-                ease: 'easeInOut',
-              }}
-            >
-              <div className="absolute inset-0 rounded-full bg-neutral-900 opacity-0 dark:opacity-90 transition-opacity" />
-              <div className="relative text-5xl font-black text-primary select-none">
-                IK
-              </div>
-            </motion.div>
-          </div>
+          <canvas
+            ref={canvasRef}
+            className="w-full h-full rounded-full"
+          />
         </div>
 
-        {/* Liseré verre */}
+        {/* Bordure décorative */}
         <div
           className="absolute inset-0 rounded-full pointer-events-none"
-          style={{ boxShadow: 'inset 0 0 0 8px rgba(255,255,255,.08)' }}
+          style={{
+            boxShadow: 'inset 0 0 0 8px rgba(255, 255, 255, 0.2)',
+          }}
         />
       </div>
+
+      {/* Message si pas de segments */}
+      {segments.length === 0 && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center p-6 bg-white/90 rounded-xl shadow-lg">
+            <p className="text-sm text-neutral-600">
+              Configurez vos points pour voir la roulette
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
