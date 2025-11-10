@@ -1,20 +1,11 @@
 // file: components/roulette/RouletteWheel.tsx
 'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
+
+import { useEffect, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { segmentShortLabel } from '@/lib/roulette/segments';
 
 type Weight = { seg: number; label: string; pct: number };
-
-const SEGMENT_COLORS = [
-  'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90))',
-  'linear-gradient(135deg, rgba(255,255,255,0.90), rgba(255,255,255,0.86))',
-  'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90))',
-  'linear-gradient(135deg, rgba(255,255,255,0.90), rgba(255,255,255,0.86))',
-  'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90))',
-  'linear-gradient(135deg, rgba(255,255,255,0.90), rgba(255,255,255,0.86))',
-  'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90))',
-  'linear-gradient(135deg, rgba(255,255,255,0.90), rgba(255,255,255,0.86))',
-];
 
 export function RouletteWheel({
   weights,
@@ -27,20 +18,18 @@ export function RouletteWheel({
 }) {
   const wheelRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [finalAngle, setFinalAngle] = useState<number>(0);
 
   const segAngles = useMemo(
     () =>
       Array.from({ length: 8 }, (_, i) => ({
-        seg: i + 1,
+        seg: (i + 1) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8,
         startAngle: (i * 360) / 8,
         endAngle: ((i + 1) * 360) / 8,
-        centerAngle: (i * 360) / 8 + 22.5,
       })),
     []
   );
 
-  // Dessin HiDPI + métal/verre
+  // Dessin HiDPI + alternance primary/blanc + typo large
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || weights.length === 0) return;
@@ -48,10 +37,10 @@ export function RouletteWheel({
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const size = 420;
-    const cx = size / 2,
-      cy = size / 2,
-      r = size / 2;
+    const size = 460;
+    const cx = size / 2;
+    const cy = size / 2;
+    const r = size / 2;
 
     canvas.width = size * dpr;
     canvas.height = size * dpr;
@@ -61,58 +50,76 @@ export function RouletteWheel({
 
     ctx.clearRect(0, 0, size, size);
 
-    // Anneau métal brossé
-    const grad = ctx.createLinearGradient(0, 0, size, size);
-    grad.addColorStop(0, 'rgba(200,200,200,0.5)');
-    grad.addColorStop(0.5, 'rgba(255,255,255,0.7)');
-    grad.addColorStop(1, 'rgba(180,180,180,0.5)');
+    // Couleur primary récupérée depuis le CSS (ex: "220 90% 56%") → "hsl(220 90% 56%)"
+    const root = getComputedStyle(document.documentElement);
+    const primaryParts = root.getPropertyValue('--primary').trim();
+    const primaryColor = primaryParts ? `hsl(${primaryParts})` : '#2563eb';
+
+    // Anneau externe (métal brossé)
+    const ring = ctx.createLinearGradient(0, 0, size, size);
+    ring.addColorStop(0, 'rgba(210,210,210,0.55)');
+    ring.addColorStop(0.5, 'rgba(255,255,255,0.85)');
+    ring.addColorStop(1, 'rgba(185,185,185,0.55)');
     ctx.beginPath();
     ctx.arc(cx, cy, r - 2, 0, Math.PI * 2);
-    ctx.lineWidth = 10;
-    ctx.strokeStyle = grad;
+    ctx.lineWidth = 12;
+    ctx.strokeStyle = ring;
     ctx.stroke();
 
-    // Segments
-    segAngles.forEach(({ seg, startAngle, endAngle }) => {
+    segAngles.forEach(({ seg, startAngle, endAngle }, i) => {
       const start = (startAngle - 90) * (Math.PI / 180);
       const end = (endAngle - 90) * (Math.PI / 180);
 
       ctx.beginPath();
       ctx.moveTo(cx, cy);
-      ctx.arc(cx, cy, r - 12, start, end);
+      ctx.arc(cx, cy, r - 14, start, end);
       ctx.closePath();
 
-      // Remplissage verre
-      const g = ctx.createRadialGradient(cx, cy, r * 0.2, cx, cy, r);
-      g.addColorStop(0, 'rgba(255,255,255,0.95)');
-      g.addColorStop(1, 'rgba(255,255,255,0.85)');
-      ctx.fillStyle = g;
+      // Alternance : pair = primary, impair = blanc/verre
+      if (i % 2 === 0) {
+        // segment en primary (simple, pas de var() dans la couleur)
+        const g = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
+        g.addColorStop(0, primaryColor);
+        g.addColorStop(1, 'rgba(255,255,255,0.12)');
+        ctx.fillStyle = g;
+      } else {
+        const g2 = ctx.createRadialGradient(cx, cy, r * 0.25, cx, cy, r);
+        g2.addColorStop(0, 'rgba(255,255,255,0.98)');
+        g2.addColorStop(1, 'rgba(245,245,245,0.9)');
+        ctx.fillStyle = g2;
+      }
       ctx.fill();
 
-      // Séparateurs
-      ctx.strokeStyle = 'rgba(0,0,0,0.06)';
-      ctx.lineWidth = 1.5;
+      // Séparateurs subtils
+      ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+      ctx.lineWidth = 1.6;
       ctx.stroke();
 
-      // Label
-      const label = weights.find((x) => x.seg === seg)?.label ?? `Seg ${seg}`;
-      const midRad = (start + end) / 2;
-      const tx = cx + Math.cos(midRad) * (r * 0.62);
-      const ty = cy + Math.sin(midRad) * (r * 0.62);
+      // Label court au centre du segment
+      const label = segmentShortLabel(seg);
+      const mid = (start + end) / 2;
+      const tx = cx + Math.cos(mid) * (r * 0.62);
+      const ty = cy + Math.sin(mid) * (r * 0.62);
 
       ctx.save();
       ctx.translate(tx, ty);
-      ctx.rotate(midRad + Math.PI / 2);
-      ctx.font = '600 14px Inter, system-ui, sans-serif';
+      ctx.rotate(mid + Math.PI / 2);
+      ctx.font = '800 18px Inter, system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillStyle = 'rgba(20,20,20,0.9)';
+
+      // Couleur du texte : blanc sur primary, sombre sur blanc
+      ctx.fillStyle = i % 2 === 0 ? 'white' : 'rgba(22,22,22,0.95)';
+      ctx.shadowColor =
+        i % 2 === 0 ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.25)';
+      ctx.shadowBlur = 6;
+      ctx.shadowOffsetY = 2;
       ctx.fillText(label, 0, 0);
       ctx.restore();
     });
   }, [weights, segAngles]);
 
-  // Rotation inertielle + micro-bounce final
+  // Rotation inertielle + micro-bounce
   useEffect(() => {
     const wheel = wheelRef.current;
     if (!wheel || !targetSeg || !spinning) return;
@@ -122,20 +129,17 @@ export function RouletteWheel({
     const targetAngle = index * degPerSeg + degPerSeg / 2;
     const base = 360 * 4 - targetAngle; // 4 tours + alignement
 
-    // reset
     wheel.style.transition = 'none';
     wheel.style.transform = `rotate(0deg)`;
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        wheel.style.transition = 'transform 3.8s cubic-bezier(.16,1,.3,1)';
+        wheel.style.transition = 'transform 3.9s cubic-bezier(.16,1,.3,1)';
         wheel.style.transform = `rotate(${base}deg)`;
-        setFinalAngle(base);
       });
     });
 
     const onEnd = () => {
-      // micro-bounce (verre): -4° puis +4° puis settle
       wheel.style.transition = 'transform 180ms cubic-bezier(.16,1,.3,1)';
       wheel.style.transform = `rotate(${base - 4}deg)`;
       setTimeout(() => {
@@ -166,13 +170,13 @@ export function RouletteWheel({
           }}
         >
           <svg
-            width="42"
-            height="52"
-            viewBox="0 0 42 52"
+            width="46"
+            height="56"
+            viewBox="0 0 46 56"
             className="drop-shadow-2xl"
           >
             <path
-              d="M21 10 L34 30 L21 26 L8 30 Z"
+              d="M23 10 L38 32 L23 27 L8 32 Z"
               fill="white"
               stroke="hsl(var(--primary))"
               strokeWidth="3"
@@ -186,7 +190,7 @@ export function RouletteWheel({
         className="absolute inset-0 rounded-full opacity-0 pointer-events-none"
         style={{
           boxShadow:
-            '0 0 0 80px hsl(var(--primary) / 0.05), inset 0 0 60px hsl(var(--primary) / 0.12)',
+            '0 0 0 90px hsl(var(--primary) / 0.05), inset 0 0 60px hsl(var(--primary) / 0.12)',
         }}
         animate={{ opacity: spinning ? [0.12, 0.24, 0.12] : 0 }}
         transition={{ duration: 2.2, repeat: spinning ? Infinity : 0 }}
@@ -196,20 +200,21 @@ export function RouletteWheel({
       <div className="relative">
         <div
           ref={wheelRef}
-          className={`relative w-[420px] h-[420px] max-w-[85vw] max-h-[85vw] rounded-full transition-opacity ${hasWeights ? 'opacity-100' : 'opacity-40'}`}
+          className={`relative w-[460px] h-[460px] max-w-[90vw] max-h-[90vw] rounded-full transition-opacity ${
+            hasWeights ? 'opacity-100' : 'opacity-40'
+          }`}
           style={{
             boxShadow:
-              '0 36px 120px -34px rgba(0,0,0,.35), inset 0 2px 12px rgba(0,0,0,.06)',
+              '0 38px 120px -36px rgba(0,0,0,.35), inset 0 2px 12px rgba(0,0,0,.06)',
           }}
           aria-label="Roue Ikovaline"
           role="img"
         >
           <canvas ref={canvasRef} className="w-full h-full rounded-full" />
-
           {/* Centre verre + logo */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.div
-              className="w-36 h-36 rounded-full flex items-center justify-center relative overflow-hidden"
+              className="w-40 h-40 rounded-full flex items-center justify-center relative overflow-hidden"
               style={{
                 background:
                   'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95))',

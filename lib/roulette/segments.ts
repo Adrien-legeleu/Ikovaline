@@ -1,4 +1,4 @@
-// lib/roulette/segments.ts
+// file: lib/roulette/segments.ts
 export type SegmentId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 export type Rule =
@@ -24,3 +24,30 @@ export const SEGMENTS: Record<SegmentId, { label: string; rules: Rule }> = {
   7: { label: '−50 €', rules: { kind: 'AMOUNT', value: 50, minOrder: 700 } },
   8: { label: '−5 %', rules: { kind: 'PERCENT', value: 5, cap: 50 } },
 };
+
+// Libellé court pour la ROUE (1 mot/valeur)
+export const SEGMENT_SHORT_LABEL: Record<SegmentId, string> = {
+  1: 'JACKPOT',
+  2: '−20%',
+  3: '−10%',
+  4: '−150€',
+  5: '−100€',
+  6: '−75€',
+  7: '−50€',
+  8: '−5%',
+};
+
+export function segmentShortLabel(id: SegmentId): string {
+  return SEGMENT_SHORT_LABEL[id];
+}
+
+// Texte lisible des règles (tooltip éventuel)
+export function describeRule(rule: Rule): string {
+  if (rule.kind === 'PERCENT') {
+    const cap = rule.cap ? ` (cap ${rule.cap}€)` : '';
+    const ex = rule.excludeSaaS ? ' • hors SaaS' : '';
+    return `Remise ${rule.value}%${cap}${ex}`;
+  }
+  const min = rule.minOrder ? ` (min ${rule.minOrder}€)` : '';
+  return `Remise ${rule.value}€${min}`;
+}
