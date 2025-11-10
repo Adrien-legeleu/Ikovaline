@@ -1,6 +1,6 @@
-// app/api/game/play/route.ts
-import { createServerSupabaseClient } from '@/lib/supabaseServer';
-import { NextResponse } from 'next/server';
+// app/api/coffres/play/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { getAdminSupabase } from '@/lib/supabaseAdmin';
 
 interface Reward {
   id: string;
@@ -26,25 +26,24 @@ function selectReward(rewards: Reward[]): Reward {
   return rewards[rewards.length - 1];
 }
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   try {
-    const supabase = await createServerSupabaseClient();
+    const { userId } = await request.json();
 
-    // Récupérer l'utilisateur connecté
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
-
-    if (authError || !user) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
+    if (!userId || typeof userId !== 'string') {
+      return NextResponse.json(
+        { error: 'userId requis' },
+        { status: 400 }
+      );
     }
+
+    const supabase = getAdminSupabase();
 
     // Trouver un tour disponible (le plus ancien)
     const { data: availableRounds, error: roundsError } = await supabase
       .from('game_rounds')
       .select('*')
-      .eq('user_id', user.id)
+      .eq('user_id', userId)
       .eq('status', 'available')
       .order('created_at', { ascending: true })
       .limit(1);
@@ -87,7 +86,7 @@ export async function POST() {
     const { data: gameResult, error: resultError } = await supabase
       .from('game_results')
       .insert({
-        user_id: user.id,
+        user_id: userId,
         game_round_id: gameRound.id,
         reward_id: selectedReward.id,
       })
@@ -113,8 +112,14 @@ export async function POST() {
 
     if (updateError) {
       console.error('Erreur mise à jour round:', updateError);
-      // On continue quand même, le résultat a été enregistré
     }
+
+    // Compter les tours restants
+    const { count: remainingRounds } = await supabase
+      .from('game_rounds')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .eq('status', 'available');
 
     return NextResponse.json({
       success: true,
@@ -125,9 +130,10 @@ export async function POST() {
         description: selectedReward.description,
       },
       gameResult,
+      remainingRounds: remainingRounds || 0,
     });
   } catch (error) {
-    console.error('Erreur API /api/game/play:', error);
+    console.error('Erreur API /api/coffres/play:', error);
     return NextResponse.json(
       { error: 'Erreur serveur interne' },
       { status: 500 }
