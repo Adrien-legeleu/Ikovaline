@@ -13,7 +13,10 @@ export async function POST() {
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Vous devez être connecté' },
+        { status: 401 }
+      );
     }
 
     // Vérifier s'il existe déjà des tours pour cet utilisateur

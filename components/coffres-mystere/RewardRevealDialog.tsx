@@ -40,12 +40,12 @@ function Confetti() {
             left: `${particle.x}%`,
             top: '-10px',
             backgroundColor: [
-              '#ff7a00',
-              '#ff3c00',
-              '#22c55e',
               '#3b82f6',
-              '#a855f7',
-              '#f59e0b',
+              '#2563eb',
+              '#22c55e',
+              '#06b6d4',
+              '#8b5cf6',
+              '#eab308',
             ][Math.floor(Math.random() * 6)],
           }}
           initial={{ y: -20, opacity: 1, rotate: 0 }}

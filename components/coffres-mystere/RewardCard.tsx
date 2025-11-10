@@ -25,15 +25,15 @@ const getTierConfig = (tier: RewardTier) => {
     case 'jackpot':
       return {
         badge: 'JACKPOT',
-        gradient: 'from-purple-600 via-pink-600 to-red-600',
+        gradient: 'from-purple-600 via-pink-600 to-rose-600',
         borderGlow: 'shadow-[0_0_30px_rgba(168,85,247,0.6)]',
-        badgeBg: 'bg-gradient-to-r from-yellow-400 to-orange-500',
+        badgeBg: 'bg-gradient-to-r from-yellow-400 to-amber-500',
         badgeText: 'text-white',
       };
     case 'legendary':
       return {
         badge: 'LÉGENDAIRE',
-        gradient: 'from-yellow-500 via-orange-500 to-red-500',
+        gradient: 'from-yellow-500 via-amber-500 to-orange-500',
         borderGlow: 'shadow-[0_0_25px_rgba(251,191,36,0.5)]',
         badgeBg: 'bg-gradient-to-r from-yellow-400 to-amber-500',
         badgeText: 'text-gray-900',
@@ -187,7 +187,7 @@ export default function RewardCard({
           {onUse && (
             <motion.button
               onClick={onUse}
-              className="mt-4 px-6 py-2.5 bg-gradient-to-r from-[#ff7a00] to-[#ff3c00] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="mt-4 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               initial={{ y: 20, opacity: 0 }}

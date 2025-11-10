@@ -13,7 +13,10 @@ export async function POST(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Vous devez être connecté pour parrainer' },
+        { status: 401 }
+      );
     }
 
     const { referredEmail } = await request.json();

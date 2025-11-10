@@ -12,7 +12,10 @@ import {
   Edit2,
   Save,
   X,
+  LogIn,
 } from 'lucide-react';
+import { supabase } from '@/lib/SupabaseClient';
+import Link from 'next/link';
 
 interface RewardUser {
   id: string;
@@ -21,6 +24,7 @@ interface RewardUser {
 }
 
 export default function ParrainagePage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [rewardUser, setRewardUser] = useState<RewardUser | null>(null);
   const [availableRounds, setAvailableRounds] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,8 +36,28 @@ export default function ParrainagePage() {
   const [isInviting, setIsInviting] = useState(false);
 
   useEffect(() => {
-    loadUserData();
+    checkAuth();
   }, []);
+
+  const checkAuth = async () => {
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        setIsAuthenticated(true);
+        await loadUserData();
+      } else {
+        setIsAuthenticated(false);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error('Erreur vérification auth:', error);
+      setIsAuthenticated(false);
+      setIsLoading(false);
+    }
+  };
 
   const loadUserData = async () => {
     try {
@@ -169,6 +193,68 @@ Cordialement`;
     );
   }
 
+  // Not authenticated view
+  if (isAuthenticated === false) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Parrainage{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+                Ikovaline
+              </span>
+            </h1>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Partagez votre code et gagnez des tours bonus pour chaque filleul
+              validé !
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="max-w-md mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 p-8 text-center"
+          >
+            <div className="mb-6">
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <LogIn className="w-10 h-10 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                Connexion requise
+              </h2>
+              <p className="text-gray-600">
+                Pour accéder à votre code de parrainage et inviter des amis,
+                veuillez vous connecter ou créer un compte.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <Link
+                href="/login"
+                className="block w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Se connecter
+              </Link>
+              <Link
+                href="/signup"
+                className="block w-full px-6 py-3 bg-white border-2 border-blue-600 text-blue-600 font-semibold rounded-full hover:bg-blue-50 transition-all duration-300"
+              >
+                Créer un compte
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
+
+  // Authenticated view
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12 px-4">
       <div className="max-w-4xl mx-auto">
@@ -180,7 +266,7 @@ Cordialement`;
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Parrainage{' '}
-            <span className="bg-gradient-to-r from-[#ff7a00] to-[#ff3c00] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
               Ikovaline
             </span>
           </h1>
@@ -207,7 +293,7 @@ Cordialement`;
           {!isEditingCode ? (
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="flex-1 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100">
+                <div className="flex-1 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
                   <p className="text-sm text-gray-600 mb-2">Votre code :</p>
                   <p className="text-3xl font-bold text-gray-900 tracking-wider">
                     {rewardUser?.referral_code}
@@ -250,7 +336,7 @@ Cordialement`;
 
                 <button
                   onClick={handleShareEmail}
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff7a00] to-[#ff3c00] hover:opacity-90 text-white rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:opacity-90 text-white rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
                 >
                   <Mail className="w-5 h-5" />
                   Email
@@ -307,7 +393,7 @@ Cordialement`;
           className="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 mb-8"
         >
           <div className="flex items-center gap-3 mb-6">
-            <Users className="w-6 h-6 text-purple-600" />
+            <Users className="w-6 h-6 text-blue-600" />
             <h2 className="text-2xl font-bold text-gray-900">
               Inviter un filleul
             </h2>
@@ -322,7 +408,7 @@ Cordialement`;
                 type="email"
                 value={referredEmail}
                 onChange={(e) => setReferredEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="email@exemple.com"
               />
             </div>
@@ -330,7 +416,7 @@ Cordialement`;
             <button
               onClick={handleInviteEmail}
               disabled={isInviting || !referredEmail}
-              className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 disabled:opacity-50 text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
+              className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:opacity-90 disabled:opacity-50 text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
             >
               {isInviting ? 'Envoi...' : 'Envoyer l\'invitation'}
             </button>
@@ -347,7 +433,7 @@ Cordialement`;
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl shadow-xl p-8 text-white"
+          className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-3xl shadow-xl p-8 text-white"
         >
           <h2 className="text-2xl font-bold mb-6">Vos statistiques</h2>
 
@@ -372,12 +458,12 @@ Cordialement`;
           </div>
 
           <div className="mt-6 text-center">
-            <a
-              href="/client/coffres"
+            <Link
+              href="/coffres"
               className="inline-block px-8 py-3 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg"
             >
               Ouvrir mes coffres
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
