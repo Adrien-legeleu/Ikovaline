@@ -99,16 +99,16 @@ export default function MaxBidSimulator() {
   return (
     <section className="relative w-full min-h-screen py-12 pt-32 bg-white dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
-        {/* Glows ambiants */}
+        {/* Glows ambiants — même style que LeakMap */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[700px] h-[700px] bg-primary/3 dark:bg-primary/5 rounded-full blur-[140px] animate-pulse" />
+          <div className="absolute top-0 left-1/4 w-[700px] h-[700px] bg-primary/3 dark:bg-primary/10 rounded-full blur-[140px] animate-pulse" />
           <div
-            className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-primary/2 dark:bg-primary/4 rounded-full blur-[120px] animate-pulse"
+            className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-primary/2 dark:bg-primary/10 rounded-full blur-[120px] animate-pulse"
             style={{ animationDelay: '2s' }}
           />
         </div>
 
-        {/* Hero */}
+        {/* Hero — même structure que LeakMap */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ export default function MaxBidSimulator() {
                          bg-gradient-to-r from-primary/10 via-primary/5 to-transparent backdrop-blur-xl text-primary"
             >
               <div className="h-1 w-1 rounded-full bg-primary animate-pulse" />
-              Calculateur d'enchères
+              Calculateur d&apos;enchères
             </motion.div>
 
             <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none">
@@ -148,19 +148,19 @@ export default function MaxBidSimulator() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_420px] lg:gap-12">
           {/* ===== GAUCHE : INPUTS ===== */}
           <div className="space-y-6">
-            {/* Card sliders */}
+            {/* Card sliders business — même card que LeakMap */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="group relative rounded-[3rem] overflow-hidden
                          bg-gradient-to-br from-white via-neutral-50/50 to-neutral-100/30
-                         dark:from-neutral-900/50 dark:via-neutral-900/30 dark:to-neutral-900/20
+                         dark:from-neutral-900/70 dark:via-neutral-900/40 dark:to-neutral-900/30
                          backdrop-blur-2xl p-8
                          shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)]
-                         dark:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.4)]
+                         dark:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)]
                          transition-shadow duration-500 hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.12)]
-                         dark:hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.6)]"
+                         dark:hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.7)]"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -213,19 +213,19 @@ export default function MaxBidSimulator() {
               </div>
             </motion.div>
 
-            {/* Card taux de conversion */}
+            {/* Card taux de conversion — même card que LeakMap */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="group relative rounded-[3rem] overflow-hidden
                          bg-gradient-to-br from-white via-neutral-50/50 to-neutral-100/30
-                         dark:from-neutral-900/50 dark:via-neutral-900/30 dark:to-neutral-900/20
+                         dark:from-neutral-900/70 dark:via-neutral-900/40 dark:to-neutral-900/30
                          backdrop-blur-2xl p-8
                          shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)]
-                         dark:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.4)]
+                         dark:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)]
                          transition-shadow duration-500 hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.12)]
-                         dark:hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.6)]"
+                         dark:hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.7)]"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -279,69 +279,62 @@ export default function MaxBidSimulator() {
 
           {/* ===== DROITE : RÉSULTATS ===== */}
           <div className="space-y-6 lg:sticky lg:top-8 lg:self-start">
-            {/* Hero card - Enchères max */}
+            {/* Hero card - Enchères max — style LeakMap (sky + dark) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="group relative rounded-[3rem] overflow-hidden"
             >
-              {/* Gradient sky comme LeakMap */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-100 via-sky-50 to-sky-100" />
-
-              {/* Texture lumineuse */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.15),transparent_60%)]" />
-
-              {/* Orbs animés */}
-              <div className="absolute -top-24 -right-24 w-72 h-72 bg-white/8 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-100 via-sky-50 to-sky-100 dark:from-sky-950 dark:via-sky-900 dark:to-sky-950" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.15),transparent_60%)] dark:bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.06),transparent_60%)]" />
+              <div className="absolute -top-24 -right-24 w-72 h-72 bg-white/8 dark:bg-white/5 rounded-full blur-3xl animate-pulse" />
               <div
-                className="absolute -bottom-24 -left-24 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse"
+                className="absolute -bottom-24 -left-24 w-72 h-72 bg-white/5 dark:bg-white/3 rounded-full blur-3xl animate-pulse"
                 style={{ animationDelay: '2s' }}
               />
 
               <div className="relative p-10 space-y-6">
-                <div className="flex items-center gap-2 text-sky-700/60 text-[10px] font-bold tracking-[0.15em] uppercase">
-                  <div className="h-1 w-1 rounded-full bg-sky-700/60 animate-pulse" />
+                <div className="flex items-center gap-2 text-sky-700/60 dark:text-sky-200/70 text-[10px] font-bold tracking-[0.15em] uppercase">
+                  <div className="h-1 w-1 rounded-full bg-sky-700/60 dark:bg-sky-200/70 animate-pulse" />
                   Enchères maximum
                 </div>
 
                 {/* CPC max */}
                 <div className="space-y-2">
-                  <div className="text-sm font-semibold text-sky-700/60">
+                  <div className="text-sm font-semibold text-sky-700/60 dark:text-sky-200/80">
                     CPC max (coût par clic)
                   </div>
-                  <div className="text-5xl font-black text-sky-700 tracking-tighter leading-none tabular-nums">
+                  <div className="text-5xl font-black text-sky-700 dark:text-sky-100 tracking-tighter leading-none tabular-nums">
                     {cpcMax > 0 ? formatCurrency(cpcMax).split(' ')[0] : '—'}
                   </div>
                   {cpcMax > 0 && (
-                    <div className="text-3xl font-bold text-sky-700/70">
+                    <div className="text-3xl font-bold text-sky-700/70 dark:text-sky-200/80">
                       {formatCurrency(cpcMax).split(' ')[1]}
                     </div>
                   )}
                 </div>
 
-                {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-sky-200 dark:via-sky-800 to-transparent" />
 
                 {/* CPL max */}
                 <div className="space-y-2">
-                  <div className="text-sm font-semibold text-sky-700/60">
+                  <div className="text-sm font-semibold text-sky-700/60 dark:text-sky-200/80">
                     CPL max (coût par lead)
                   </div>
-                  <div className="text-3xl font-black text-sky-700 tabular-nums">
+                  <div className="text-3xl font-black text-sky-700 dark:text-sky-100 tabular-nums">
                     {cplMax > 0 ? formatCurrency(cplMax) : '—'}
                   </div>
                 </div>
 
-                {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-sky-200 dark:via-sky-800 to-transparent" />
 
                 {/* CAC max */}
                 <div className="space-y-2">
-                  <div className="text-sm font-semibold text-sky-700/60">
+                  <div className="text-sm font-semibold text-sky-700/60 dark:text-sky-200/80">
                     CAC max (coût par client)
                   </div>
-                  <div className="text-3xl font-black text-sky-700 tabular-nums">
+                  <div className="text-3xl font-black text-sky-700 dark:text-sky-100 tabular-nums">
                     {formatCurrency(cacMax)}
                   </div>
                 </div>
@@ -355,8 +348,9 @@ export default function MaxBidSimulator() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="rounded-[3rem] overflow-hidden
                          bg-gradient-to-br from-primary/10 via-primary/5 to-transparent
+                         dark:from-primary/20 dark:via-primary/10 dark:to-transparent
                          backdrop-blur-2xl p-6
-                         shadow-[0_4px_20px_rgba(var(--primary),0.15)]"
+                         shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -416,10 +410,10 @@ export default function MaxBidSimulator() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="rounded-[3rem] overflow-hidden
                          bg-gradient-to-br from-white via-neutral-50/50 to-neutral-100/30
-                         dark:from-neutral-900/50 dark:via-neutral-900/30 dark:to-neutral-900/20
+                         dark:from-neutral-900/70 dark:via-neutral-900/40 dark:to-neutral-900/30
                          backdrop-blur-2xl p-6
                          shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)]
-                         dark:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.4)]"
+                         dark:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)]"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -447,7 +441,7 @@ export default function MaxBidSimulator() {
               </div>
             </motion.div>
 
-            {/* Actions */}
+            {/* Actions — CTA & modal même style que LeakMap */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -456,9 +450,9 @@ export default function MaxBidSimulator() {
             >
               <Button
                 size="lg"
-                className="group relative h-14 rounded-2xl bg-primary text-white font-bold text-base 
-                           shadow-[0_8px_30px_rgba(var(--primary),0.25)] 
-                           hover:shadow-[0_12px_40px_rgba(var(--primary),0.35)] 
+                className="group relative h-14 rounded-[2rem] bg-primary text-white font-bold text-base 
+                           shadow-[0_8px_30px_rgba(0,0,0,0.25)] 
+                           hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)] 
                            transition-all duration-300 hover:scale-[1.02] overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -485,9 +479,9 @@ export default function MaxBidSimulator() {
                   <Button
                     size="lg"
                     variant="ghost"
-                    className="h-14 rounded-2xl font-semibold text-base
+                    className="h-14 rounded-[2rem] font-semibold text-base
                                bg-gradient-to-r from-neutral-100/50 to-neutral-50/30
-                               dark:from-neutral-900/50 dark:to-neutral-800/30
+                               dark:from-neutral-900/70 dark:to-neutral-800/40
                                hover:from-neutral-100 hover:to-neutral-50
                                dark:hover:from-neutral-900 dark:hover:to-neutral-800
                                transition-all duration-300"
@@ -496,10 +490,11 @@ export default function MaxBidSimulator() {
                   </Button>
                 </DialogTrigger>
                 <DialogContent
-                  className="max-w-3xl rounded-[3rem] bg-white/95 dark:bg-neutral-950/95 backdrop-blur-2xl p-0 
-                                          shadow-[0_20px_80px_-12px_rgba(0,0,0,0.25)]"
+                  className="max-w-3xl w-[min(100vw-2rem,900px)] max-h-[80vh] overflow-y-auto rounded-3xl 
+                             bg-white/95 dark:bg-neutral-950/95 backdrop-blur-2xl p-0 
+                             shadow-[0_20px_80px_-12px_rgba(0,0,0,0.25)]"
                 >
-                  <div className="relative overflow-hidden rounded-t-[3rem] bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-10">
+                  <div className="relative overflow-hidden rounded-t-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent dark:from-primary/20 dark:via-primary/10 dark:to-transparent p-10">
                     <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
                     <DialogHeader>
                       <DialogTitle className="relative text-4xl font-black tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -513,7 +508,7 @@ export default function MaxBidSimulator() {
 
                   <div className="p-10 space-y-8">
                     {/* Formules */}
-                    <div className="rounded-2xl bg-gradient-to-br from-neutral-100/50 to-neutral-50/30 dark:from-neutral-900/50 dark:to-neutral-800/30 p-6 space-y-4">
+                    <div className="rounded-2xl bg-gradient-to-br from-neutral-100/50 to-neutral-50/30 dark:from-neutral-900/60 dark:to-neutral-800/40 p-6 space-y-4">
                       <h4 className="font-bold text-lg mb-4 flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
                         <div className="h-2 w-2 rounded-full bg-primary" />
                         Formules de calcul
@@ -560,8 +555,8 @@ export default function MaxBidSimulator() {
                         <strong className="text-neutral-900 dark:text-neutral-100">
                           CAC max
                         </strong>{' '}
-                        = combien tu peux payer pour l'acquérir en restant dans
-                        la part de CA que tu as choisi.
+                        = combien tu peux payer pour l&apos;acquérir en restant
+                        dans la part de CA que tu as choisi.
                       </p>
                       <p>
                         En remontant le funnel avec tes taux de conversion, ça
@@ -586,7 +581,7 @@ export default function MaxBidSimulator() {
                     </div>
 
                     {/* Références */}
-                    <div className="rounded-2xl bg-gradient-to-br from-primary/5 to-transparent p-6">
+                    <div className="rounded-2xl bg-gradient-to-br from-primary/5 to-transparent dark:from-primary/10 dark:to-transparent p-6">
                       <h4 className="font-bold text-lg mb-4 flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
                         <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
                         Références
@@ -626,7 +621,7 @@ export default function MaxBidSimulator() {
   );
 }
 
-/* ===== Slider ultra-minimaliste (style LeakMap) ===== */
+/* ===== Slider ultra-minimaliste (copié sur LeakMap) ===== */
 function RefSlider({
   label,
   value,
@@ -656,6 +651,11 @@ function RefSlider({
     return formatNumber(v, step < 1 ? 1 : 0);
   };
 
+  const formatted = formatValue(safeValue);
+  const parts = formatted.split(' ');
+  const main = parts[0] ?? formatted;
+  const unit = parts[1] ?? '';
+
   return (
     <div className="space-y-5">
       <div className="flex items-baseline justify-between">
@@ -664,11 +664,11 @@ function RefSlider({
         </label>
         <div className="flex items-baseline gap-2">
           <div className="text-4xl font-black text-neutral-900 dark:text-neutral-100 tabular-nums tracking-tight">
-            {formatValue(safeValue).split(' ')[0]}
+            {main}
           </div>
-          {formatValue(safeValue).split(' ')[1] && (
+          {unit && (
             <div className="text-xl font-bold text-neutral-500 dark:text-neutral-400">
-              {formatValue(safeValue).split(' ')[1]}
+              {unit}
             </div>
           )}
         </div>
@@ -692,10 +692,10 @@ function RefSlider({
           style={{ left: `${pct}%` }}
         >
           <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-primary blur-lg opacity-50 group-hover:opacity-70 transition-opacity" />
+            <div className="absolute inset-0 rounded-full bg-primary blur-lg opacity-20 group-hover:opacity-30 transition-opacity" />
             <div
               className="relative h-7 w-7 rounded-full bg-white dark:bg-neutral-950 
-                            shadow-[0_0_0_1.5px_hsl(var(--primary)/0.5),0_4px_12px_rgba(0,0,0,0.2)] 
+                            shadow-[0_0_0_1.5px_hsl(var(--primary)/0.3),0_4px_1px_rgba(0,0,0,0.01)] 
                             flex items-center justify-center"
             >
               <div className="h-1 w-1 rounded-full bg-primary" />

@@ -181,12 +181,27 @@ export default function Simulator() {
           className="space-y-6 mb-20"
         >
           <div className="text-center space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-primary bg-primary/10 dark:text-primary dark:bg-primary/20 shadow-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[10px] font-bold tracking-[0.2em] uppercase
+                         bg-gradient-to-r from-primary/10 via-primary/5 to-transparent backdrop-blur-xl text-primary"
+            >
+              <div className="h-1 w-1 rounded-full bg-primary animate-pulse" />
               Studio de Projet
-            </div>
-            <h2 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight">
-              Composez votre projet
-            </h2>
+            </motion.div>
+
+            <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none">
+              <span className="bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 dark:from-neutral-100 dark:via-neutral-200 dark:to-neutral-300 bg-clip-text text-transparent">
+                Ikovaline
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
+                Launch
+              </span>
+            </h1>
+
             <p className="mt-2 text-black/70 dark:text-white/70">
               Choisissez une catégorie pour démarrer.
             </p>

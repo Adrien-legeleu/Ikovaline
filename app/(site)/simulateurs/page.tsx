@@ -6,11 +6,9 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const mock = '/simulateur/launch.png';
-
 export default function SimulatorsIndex() {
   return (
-    <main className="bg-white dark:bg-neutral-950 py-20 text-neutral-900 overflow-hidden min-h-screen">
+    <main className="bg-white dark:bg-neutral-950 py-20 text-neutral-900 overflow-hidden min-h-screen relative">
       {/* Mesh gradient ultra-subtil */}
       <div
         aria-hidden
@@ -30,7 +28,7 @@ export default function SimulatorsIndex() {
         />
       </div>
 
-      <section className="mx-auto max-w-8xl z-10 relative px-6 pt-6 pb-32">
+      <section className="mx-auto max-w-7xl lg:max-w-6xl xl:max-w-7xl z-10 relative px-6 pt-6 pb-32">
         {/* Hero section ultra-minimaliste */}
         <motion.header
           initial={{ opacity: 0, y: 20 }}
@@ -73,69 +71,94 @@ export default function SimulatorsIndex() {
 
         {/* Bento Grid */}
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[280px]">
-            {/* Launch - HERO (2 colonnes sur desktop) */}
+          {/* Layout 2 colonnes : Launch à gauche, le reste à droite */}
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1.5fr)] gap-6 items-stretch">
+            {/* Launch - grande card à gauche */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="md:col-span-2 md:row-span-2"
+              className="h-full"
             >
               <SimulatorCardHero
                 href="/simulateurs/launch"
                 title="Ikovaline Launch"
                 description="Simulateur de projet web"
                 badge="Vedette"
-                image={mock}
+                imageLight="/simulateur/launch.png"
+                imageDark="/simulateur/launch-dark.png"
               />
             </motion.div>
 
-            {/* LeakMap */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <SimulatorCard
-                href="/simulateurs/money-leak-map"
-                title="LeakMap"
-                description="Fuites revenus"
-                image={mock}
-              />
-            </motion.div>
+            {/* Colonne de droite : LeakMap + MaxBid en haut, Bientôt en dessous */}
+            <div className="space-y-6 h-full flex flex-col">
+              {/* LeakMap + MaxBid côte à côte */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1"
+              >
+                <SimulatorCard
+                  href="/simulateurs/money-leak-map"
+                  title="LeakMap"
+                  description="Map des fuites de revenus"
+                  imageLight="/simulateur/leakmap.png"
+                  imageDark="/simulateur/leakmap-dark.png"
+                />
 
-            {/* MaxBid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <SimulatorCard
-                href="/simulateurs/maxbid"
-                title="MaxBid"
-                description="Enchères maximum"
-                image={mock}
-              />
-            </motion.div>
+                <SimulatorCard
+                  href="/simulateurs/maxbid"
+                  title="MaxBid"
+                  description="Enchères maximum rentables"
+                  imageLight="/simulateur/maxbid.png"
+                  imageDark="/simulateur/maxbid-dark.png"
+                />
+              </motion.div>
 
-            {/* Bientôt */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="group relative rounded-[3rem] overflow-hidden
-                         bg-gradient-to-br from-neutral-50 via-neutral-50/50 to-transparent
-                         dark:from-neutral-900/30 dark:via-neutral-900/20 dark:to-transparent
-                         backdrop-blur-xl flex items-center justify-center
-                         transition-all duration-700 hover:scale-[1.02]"
-            >
-              {/* Glow subtil */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              {/* Bientôt — prend la place des deux offres en dessous */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="group relative rounded-[3rem] overflow-hidden
+                           bg-gradient-to-br from-neutral-50 via-neutral-50/50 to-transparent
+                           dark:from-neutral-900/40 dark:via-neutral-900/30 dark:to-transparent
+                           backdrop-blur-xl flex items-center justify-between gap-4
+                           px-8 py-7
+                           transition-all duration-700 hover:scale-[1.02]
+                           shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)]
+                           dark:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.5)]
+                           hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.15)]
+                           dark:hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.7)]"
+              >
+                {/* Glow subtil */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-              <span className="relative text-sm font-semibold text-neutral-400 dark:text-neutral-600 tracking-wider uppercase">
-                Bientôt
-              </span>
-            </motion.div>
+                <div className="relative space-y-1">
+                  <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500">
+                    Prochain outil
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm sm:text-base font-semibold text-neutral-700 dark:text-neutral-200">
+                      Bientôt disponible
+                    </span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary/70 animate-pulse" />
+                  </div>
+                </div>
+
+                <div className="relative hidden sm:flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+                  <span>Tu veux un simulateur en particulier ?</span>
+                  <a
+                    target="_blank"
+                    href={'https://www.instagram.com/adrien.lgx_/'}
+                    className="inline-flex items-center rounded-full border border-neutral-200/70 dark:border-neutral-700/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em]"
+                  >
+                    Dis-le moi
+                  </a>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -149,13 +172,15 @@ function SimulatorCardHero({
   title,
   description,
   badge,
-  image,
+  imageLight,
+  imageDark,
 }: {
   href: string;
   title: string;
   description: string;
   badge: string;
-  image: string;
+  imageLight: string;
+  imageDark: string;
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -198,13 +223,26 @@ function SimulatorCardHero({
         {/* Masque gradient pour fondu */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-neutral-900 z-10 pointer-events-none" />
 
+        {/* Light */}
         <Image
-          src={image}
+          src={imageLight}
           alt={`Aperçu ${title}`}
           width={1200}
           height={900}
           className={`w-full h-full object-cover object-top select-none transition-all duration-700 
+                     block dark:hidden
                      ${isHovered ? 'scale-110 blur-[2px] brightness-110' : 'scale-100 blur-0'}`}
+          priority
+        />
+        {/* Dark */}
+        <Image
+          src={imageDark}
+          alt={`Aperçu ${title} (dark)`}
+          width={1200}
+          height={900}
+          className={`w-full h-full object-cover object-top select-none transition-all duration-700 
+                     hidden dark:block
+                     ${isHovered ? 'scale-110 blur-[2px] brightness-[1.08]' : 'scale-100 blur-0'}`}
           priority
         />
       </div>
@@ -256,12 +294,14 @@ function SimulatorCard({
   href,
   title,
   description,
-  image,
+  imageLight,
+  imageDark,
 }: {
   href: string;
   title: string;
   description: string;
-  image: string;
+  imageLight: string;
+  imageDark: string;
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -292,13 +332,26 @@ function SimulatorCard({
         {/* Masque gradient pour fondu */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-neutral-900 z-10 pointer-events-none" />
 
+        {/* Light */}
         <Image
-          src={image}
+          src={imageLight}
           alt={`Aperçu ${title}`}
           width={1200}
           height={900}
           className={`w-full h-full object-cover object-top select-none transition-all duration-700 
+                     block dark:hidden
                      ${isHovered ? 'scale-110 blur-[2px] brightness-110' : 'scale-100 blur-0'}`}
+          priority
+        />
+        {/* Dark */}
+        <Image
+          src={imageDark}
+          alt={`Aperçu ${title} (dark)`}
+          width={1200}
+          height={900}
+          className={`w-full h-full object-cover object-top select-none transition-all duration-700 
+                     hidden dark:block
+                     ${isHovered ? 'scale-110 blur-[2px] brightness-[1.08]' : 'scale-100 blur-0'}`}
           priority
         />
       </div>
