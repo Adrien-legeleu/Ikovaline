@@ -231,7 +231,7 @@ function SimulatorCardHero({
           height={900}
           className={`w-full h-full object-cover object-top select-none transition-all duration-700 
                      block dark:hidden
-                     ${isHovered ? 'scale-110 blur-[2px] brightness-110' : 'scale-100 blur-0'}`}
+                     ${isHovered ? 'scale-110 blur-[2px] ' : 'scale-100 blur-0'}`}
           priority
         />
         {/* Dark */}
@@ -242,7 +242,7 @@ function SimulatorCardHero({
           height={900}
           className={`w-full h-full object-cover object-top select-none transition-all duration-700 
                      hidden dark:block
-                     ${isHovered ? 'scale-110 blur-[2px] brightness-[1.08]' : 'scale-100 blur-0'}`}
+                     ${isHovered ? 'scale-110 blur-[2px] ' : 'scale-100 blur-0'}`}
           priority
         />
       </div>
@@ -340,7 +340,7 @@ function SimulatorCard({
           height={900}
           className={`w-full h-full object-cover object-top select-none transition-all duration-700 
                      block dark:hidden
-                     ${isHovered ? 'scale-110 blur-[2px] brightness-110' : 'scale-100 blur-0'}`}
+                     ${isHovered ? 'scale-110 blur-[2px] ' : 'scale-100 blur-0'}`}
           priority
         />
         {/* Dark */}
@@ -351,7 +351,7 @@ function SimulatorCard({
           height={900}
           className={`w-full h-full object-cover object-top select-none transition-all duration-700 
                      hidden dark:block
-                     ${isHovered ? 'scale-110 blur-[2px] brightness-[1.08]' : 'scale-100 blur-0'}`}
+                     ${isHovered ? 'scale-110 blur-[2px] ' : 'scale-100 blur-0'}`}
           priority
         />
       </div>
