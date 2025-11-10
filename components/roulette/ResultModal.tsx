@@ -1,145 +1,61 @@
-// components/roulette/ResultModal.tsx
+/**
+ * ResultModal - Modal de résultat du spin
+ * Affiche la récompense gagnée avec animation et confettis
+ */
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Gift,
-  Copy,
-  Check,
-  X,
-  MessageCircle,
-  Mail as MailIcon,
-} from 'lucide-react';
+import { Gift, Copy, Check, X, ExternalLink } from 'lucide-react';
+import type { SpinResult } from '@/lib/roulette/types';
 
-type ResultModalProps = {
+interface ResultModalProps {
   isOpen: boolean;
   onClose: () => void;
-  prize: string;
-  code: string;
-  expiresAt: string;
-  email: string;
-};
+  result: SpinResult | null;
+}
 
-export function ResultModal({
-  isOpen,
-  onClose,
-  prize,
-  code,
-  expiresAt,
-  email,
-}: ResultModalProps) {
+export function ResultModal({ isOpen, onClose, result }: ResultModalProps) {
   const [copied, setCopied] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-  const salesEmail = process.env.NEXT_PUBLIC_SALES_EMAIL;
-
-  const dateFR = new Date(expiresAt).toLocaleDateString('fr-FR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  });
-
-  // Sanitize WhatsApp number
-  const sanitizedWhatsappNumber = whatsappNumber?.replace(/[\s\+\(\)\-]/g, '');
-
-  // WhatsApp message
-  const whatsappMessage = `Bonjour Ikovaline 👋
-Je viens de gagner « ${prize} » sur la Roue Ikovaline.
-Mon code : ${code}
-Valide jusqu'au : ${dateFR}
-Email : ${email}
-J'aimerais démarrer un projet avec vous. Merci de revenir vers moi.`;
-
-  const whatsappHref = sanitizedWhatsappNumber
-    ? `https://wa.me/${sanitizedWhatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
-    : undefined;
-
-  // Email
-  const emailSubject = `Code Ikovaline ${code} – Je souhaite démarrer`;
-  const emailBody = `Bonjour Ikovaline,
-
-Je viens de gagner « ${prize} » sur la Roue Ikovaline.
-Code : ${code}
-Valide jusqu'au : ${dateFR}
-Email utilisé : ${email}
-
-Je souhaite démarrer un projet avec vous (Landing / Vitrine / Tunnel / E-commerce / SaaS).
-Merci de me recontacter.
-
-——
-Message généré depuis la page Roulette Ikovaline`;
-
-  const emailHref = salesEmail
-    ? `mailto:${salesEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
-    : undefined;
-
-  // Copy code handler
   const handleCopy = async () => {
+    if (!result?.spin.reward_code) return;
+
     try {
-      await navigator.clipboard.writeText(code);
+      await navigator.clipboard.writeText(result.spin.reward_code);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1200);
-    } catch (err) {
-      console.error('Failed to copy:', err);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error('Erreur lors de la copie:', error);
     }
   };
 
-  // Trigger confetti on open
+  // Confetti animation on open
   useEffect(() => {
     if (isOpen) {
       setShowConfetti(true);
-      const timer = setTimeout(() => setShowConfetti(false), 1200);
+      const timer = setTimeout(() => setShowConfetti(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
-  // Keyboard handler
+  // Escape key handler
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
+      if (e.key === 'Escape' && isOpen) onClose();
     };
 
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen, onClose]);
 
-  // Focus trap
-  useEffect(() => {
-    if (!isOpen) return;
+  if (!result) return null;
 
-    const focusableElements = document.querySelectorAll(
-      '[role="dialog"] button, [role="dialog"] a'
-    );
-    const firstElement = focusableElements[0] as HTMLElement;
-    const lastElement = focusableElements[
-      focusableElements.length - 1
-    ] as HTMLElement;
-
-    const handleTab = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return;
-
-      if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
-          e.preventDefault();
-          lastElement?.focus();
-        }
-      } else {
-        if (document.activeElement === lastElement) {
-          e.preventDefault();
-          firstElement?.focus();
-        }
-      }
-    };
-
-    document.addEventListener('keydown', handleTab);
-    firstElement?.focus();
-
-    return () => document.removeEventListener('keydown', handleTab);
-  }, [isOpen]);
+  const hasReward = result.reward !== null;
+  const rewardConfig = result.reward_config;
+  const rewardCode = result.spin.reward_code;
 
   return (
     <AnimatePresence>
@@ -150,10 +66,8 @@ Message généré depuis la page Roulette Ikovaline`;
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-xl z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
             onClick={onClose}
-            aria-hidden="true"
           />
 
           {/* Modal */}
@@ -161,230 +75,208 @@ Message généré depuis la page Roulette Ikovaline`;
             <motion.div
               role="dialog"
               aria-modal="true"
-              aria-labelledby="result-modal-title"
-              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 20 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-lg pointer-events-auto"
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: 'spring', damping: 20 }}
+              className="relative w-full max-w-md pointer-events-auto"
             >
-              {/* Card */}
-              <div className="relative rounded-[2rem] bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl shadow-[0_30px_90px_-20px_rgba(0,0,0,0.4)] overflow-hidden">
-                {/* Gradient overlay */}
+              <div className="relative rounded-3xl bg-white shadow-2xl overflow-hidden">
+                {/* Background gradient */}
                 <div
-                  className="absolute inset-0 opacity-5 pointer-events-none"
+                  className="absolute inset-0 opacity-10"
                   style={{
-                    background:
-                      'linear-gradient(135deg, hsl(var(--primary)) 0%, transparent 70%)',
+                    background: `linear-gradient(135deg, ${rewardConfig?.color || '#3B82F6'} 0%, transparent 70%)`,
                   }}
-                />
-
-                {/* Glow effect */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.15 }}
-                  className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl pointer-events-none"
-                  style={{ background: 'hsl(var(--primary))' }}
                 />
 
                 {/* Close button */}
                 <button
                   onClick={onClose}
-                  className="absolute top-5 right-5 p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors z-10"
+                  className="absolute top-4 right-4 p-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 transition-colors z-10"
                   aria-label="Fermer"
                 >
-                  <X className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
+                  <X className="w-5 h-5 text-neutral-600" />
                 </button>
 
                 {/* Content */}
                 <div className="relative p-8">
-                  {/* Icon + Title */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <motion.div
-                      initial={{ scale: 0, rotate: -180 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{
-                        delay: 0.1,
-                        type: 'spring',
-                        stiffness: 200,
-                      }}
-                      className="p-3 rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20"
+                  {/* Icon */}
+                  <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{
+                      delay: 0.2,
+                      type: 'spring',
+                      stiffness: 200,
+                    }}
+                    className="flex justify-center mb-6"
+                  >
+                    <div
+                      className="w-24 h-24 rounded-2xl flex items-center justify-center text-5xl shadow-xl"
+                      style={{ backgroundColor: rewardConfig?.color || '#3B82F6' }}
                     >
-                      <Gift className="w-8 h-8 text-white" />
-                    </motion.div>
-                    <div>
-                      <h2
-                        id="result-modal-title"
-                        className="text-2xl font-bold text-neutral-900 dark:text-white"
-                      >
-                        Félicitations !
-                      </h2>
-                      <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-                        Votre gain est confirmé
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Prize */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 }}
-                    className="mb-6"
-                  >
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-2">
-                      Vous avez gagné
-                    </p>
-                    <p className="text-2xl font-bold text-primary">{prize}</p>
-                  </motion.div>
-
-                  {/* Code block */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="mb-6 p-5 rounded-2xl bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-700"
-                  >
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-2 uppercase tracking-wide font-semibold">
-                      Votre code
-                    </p>
-                    <div className="flex items-center justify-between gap-4">
-                      <p className="font-mono text-2xl font-bold text-neutral-900 dark:text-white tracking-wider">
-                        {code}
-                      </p>
-                      <button
-                        onClick={handleCopy}
-                        className="shrink-0 p-3 rounded-xl bg-primary hover:opacity-90 transition-all active:scale-95"
-                        aria-label="Copier le code"
-                      >
-                        <AnimatePresence mode="wait">
-                          {copied ? (
-                            <motion.div
-                              key="check"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              exit={{ scale: 0 }}
-                            >
-                              <Check className="w-5 h-5 text-white" />
-                            </motion.div>
-                          ) : (
-                            <motion.div
-                              key="copy"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              exit={{ scale: 0 }}
-                            >
-                              <Copy className="w-5 h-5 text-white" />
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </button>
+                      {rewardConfig?.icon || '🎁'}
                     </div>
                   </motion.div>
 
-                  {/* Expiry */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.25 }}
-                    className="text-sm text-neutral-500 dark:text-neutral-400 mb-6 text-center"
-                  >
-                    Valable jusqu'au{' '}
-                    <span className="font-semibold text-neutral-700 dark:text-neutral-300">
-                      {dateFR}
-                    </span>
-                  </motion.p>
-
-                  {/* CTA Buttons */}
+                  {/* Title */}
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="space-y-3"
+                    className="text-center mb-8"
                   >
-                    {whatsappHref && (
-                      <a
-                        href={whatsappHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-3 w-full px-6 py-4 rounded-2xl bg-[#25D366] hover:bg-[#22c55e] text-white font-semibold shadow-lg shadow-[#25D366]/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
-                      >
-                        <MessageCircle className="w-5 h-5" />
-                        Démarrer sur WhatsApp
-                      </a>
-                    )}
-
-                    {emailHref && (
-                      <a
-                        href={emailHref}
-                        className="flex items-center justify-center gap-3 w-full px-6 py-4 rounded-2xl bg-primary hover:opacity-90 text-white font-semibold shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
-                      >
-                        <MailIcon className="w-5 h-5" />
-                        Démarrer par Email
-                      </a>
-                    )}
+                    <h2 className="text-3xl font-bold text-neutral-900 mb-2">
+                      {hasReward ? 'Félicitations !' : 'Dommage !'}
+                    </h2>
+                    <p className="text-neutral-600">
+                      {hasReward
+                        ? 'Vous avez gagné'
+                        : 'Pas de chance cette fois-ci'}
+                    </p>
                   </motion.div>
 
-                  {/* Footer note */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.35 }}
-                    className="mt-6 text-xs text-neutral-500 dark:text-neutral-400 text-center leading-relaxed"
-                  >
-                    Code envoyé par e-mail. À coller dans votre brief ou
-                    répondre au mail. Remise appliquée sur devis/facture
-                    (paiement par RIB).
-                  </motion.p>
+                  {/* Reward */}
+                  {hasReward && (
+                    <>
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="mb-6"
+                      >
+                        <div className="p-6 rounded-2xl bg-gradient-to-br from-neutral-50 to-neutral-100 border border-neutral-200 text-center">
+                          <div className="text-sm text-neutral-600 mb-2">
+                            {result.reward?.label}
+                          </div>
+                          <div className="text-4xl font-bold text-blue-600">
+                            {rewardConfig?.value}
+                          </div>
+                          <div className="text-xs text-neutral-500 mt-2">
+                            {result.reward?.description}
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      {/* Code */}
+                      {rewardCode && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.5 }}
+                          className="mb-6"
+                        >
+                          <div className="text-xs text-neutral-600 mb-2 font-semibold uppercase tracking-wide">
+                            Votre code de réduction
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="flex-1 px-4 py-3 bg-neutral-100 rounded-xl font-mono text-lg font-bold text-neutral-900">
+                              {rewardCode}
+                            </div>
+                            <button
+                              onClick={handleCopy}
+                              className="p-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                              aria-label="Copier le code"
+                            >
+                              {copied ? (
+                                <Check className="w-5 h-5" />
+                              ) : (
+                                <Copy className="w-5 h-5" />
+                              )}
+                            </button>
+                          </div>
+                          {copied && (
+                            <p className="text-xs text-green-600 mt-2">
+                              ✓ Code copié !
+                            </p>
+                          )}
+                        </motion.div>
+                      )}
+
+                      {/* CTA */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 }}
+                      >
+                        <a
+                          href="/contact"
+                          className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+                        >
+                          <ExternalLink className="w-5 h-5" />
+                          Utiliser ma réduction
+                        </a>
+                        <p className="text-xs text-neutral-500 text-center mt-3">
+                          Contactez-nous pour démarrer votre projet et profiter de votre réduction
+                        </p>
+                      </motion.div>
+                    </>
+                  )}
+
+                  {/* No reward */}
+                  {!hasReward && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="text-center"
+                    >
+                      <p className="text-neutral-600 mb-6">
+                        Réessayez votre chance lors de votre prochain passage !
+                      </p>
+                      <button
+                        onClick={onClose}
+                        className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:bg-neutral-800 transition-colors"
+                      >
+                        Fermer
+                      </button>
+                    </motion.div>
+                  )}
                 </div>
               </div>
             </motion.div>
           </div>
 
           {/* Confetti */}
-          {showConfetti && (
-            <div className="fixed inset-0 z-40 pointer-events-none">
-              {Array.from({ length: 30 }).map((_, i) => {
+          {showConfetti && hasReward && (
+            <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden">
+              {Array.from({ length: 40 }).map((_, i) => {
                 const colors = [
-                  'hsl(var(--primary))',
-                  'hsl(var(--primary) / 0.7)',
+                  rewardConfig?.color || '#3B82F6',
                   '#FFD700',
                   '#FFA500',
+                  '#FF6B9D',
+                  '#4ADE80',
                 ];
-                const randomColor =
-                  colors[Math.floor(Math.random() * colors.length)];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 const randomX = Math.random() * 100;
-                const randomDelay = Math.random() * 0.3;
-                const randomDuration = 0.8 + Math.random() * 0.4;
+                const randomDelay = Math.random() * 0.5;
+                const randomDuration = 1 + Math.random() * 1;
+                const randomRotate = Math.random() * 720 - 360;
 
                 return (
                   <motion.div
                     key={i}
-                    className="absolute"
+                    className="absolute rounded-full"
                     style={{
                       left: `${randomX}%`,
                       top: '-10%',
-                      width: 8,
-                      height: 8,
+                      width: Math.random() * 10 + 5,
+                      height: Math.random() * 10 + 5,
                       background: randomColor,
-                      borderRadius: Math.random() > 0.5 ? '50%' : '0',
                     }}
-                    initial={{
-                      y: 0,
-                      x: 0,
-                      rotate: 0,
-                      opacity: 1,
-                    }}
+                    initial={{ y: 0, rotate: 0, opacity: 1 }}
                     animate={{
-                      y: window.innerHeight * 1.2,
-                      x: (Math.random() - 0.5) * 200,
-                      rotate: Math.random() * 720 - 360,
+                      y: window.innerHeight + 100,
+                      x: (Math.random() - 0.5) * 300,
+                      rotate: randomRotate,
                       opacity: [1, 1, 0],
                     }}
                     transition={{
                       duration: randomDuration,
                       delay: randomDelay,
-                      ease: [0.25, 0.46, 0.45, 0.94],
+                      ease: 'easeIn',
                     }}
                   />
                 );
