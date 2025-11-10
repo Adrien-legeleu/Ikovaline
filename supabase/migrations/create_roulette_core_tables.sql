@@ -1,8 +1,6 @@
 -- ================================
--- MIGRATION : Roulette Ikovaline V2 - Tables simplifiées
+-- MIGRATION : Tables essentielles pour la roulette (sans referrals)
 -- ================================
--- Ce fichier crée les tables utilisées par le nouveau système de roulette
--- basé sur email (pas auth.users)
 
 -- ================================
 -- 1) Table des utilisateurs de la roulette
@@ -16,7 +14,6 @@ CREATE TABLE IF NOT EXISTS public.roulette_users (
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 
--- Index pour recherche par email
 CREATE INDEX IF NOT EXISTS idx_roulette_users_email
   ON public.roulette_users (email);
 
@@ -44,7 +41,6 @@ CREATE TABLE IF NOT EXISTS public.roulette_allocation (
   PRIMARY KEY (email_norm, seg)
 );
 
--- Index pour recherche par utilisateur
 CREATE INDEX IF NOT EXISTS idx_roulette_allocation_email
   ON public.roulette_allocation (email_norm);
 
@@ -62,41 +58,14 @@ CREATE TABLE IF NOT EXISTS public.roulette_codes (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 
--- Index pour recherche par utilisateur
 CREATE INDEX IF NOT EXISTS idx_roulette_codes_email
   ON public.roulette_codes (email_norm);
 
--- Index pour recherche par code
 CREATE INDEX IF NOT EXISTS idx_roulette_codes_code
   ON public.roulette_codes (code);
 
 -- ================================
--- 5) Table de parrainage (version simplifiée)
--- ================================
-CREATE TABLE IF NOT EXISTS public.roulette_referrals (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  referrer_email text NOT NULL,
-  referrer_email_norm text NOT NULL REFERENCES public.roulette_users (email_norm) ON DELETE CASCADE,
-  invitee_email text,
-  invitee_email_norm text REFERENCES public.roulette_users (email_norm) ON DELETE CASCADE,
-  invite_code text NOT NULL UNIQUE,
-  accepted boolean NOT NULL DEFAULT false,
-  accepted_at timestamptz,
-  credited boolean NOT NULL DEFAULT false,
-  credited_at timestamptz,
-  created_at timestamptz NOT NULL DEFAULT now()
-);
-
--- Index pour recherche par parrain
-CREATE INDEX IF NOT EXISTS idx_roulette_referrals_referrer
-  ON public.roulette_referrals (referrer_email_norm);
-
--- Index pour recherche par code d'invitation
-CREATE INDEX IF NOT EXISTS idx_roulette_referrals_invite_code
-  ON public.roulette_referrals (invite_code);
-
--- ================================
--- 6) Insertion des coefficients de conversion par défaut
+-- 5) Insertion des 8 coefficients de conversion
 -- ================================
 INSERT INTO public.roulette_conversion (seg, label, point_factor_pct) VALUES
   (1, 'Jackpot −50%', 0.05),
@@ -112,7 +81,7 @@ ON CONFLICT (seg) DO UPDATE SET
   point_factor_pct = EXCLUDED.point_factor_pct;
 
 -- ================================
--- 7) Fonction de mise à jour automatique de updated_at
+-- 6) Fonction pour updated_at automatique
 -- ================================
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
@@ -122,14 +91,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Trigger pour roulette_users
+-- Triggers
 DROP TRIGGER IF EXISTS update_roulette_users_updated_at ON public.roulette_users;
 CREATE TRIGGER update_roulette_users_updated_at
   BEFORE UPDATE ON public.roulette_users
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
--- Trigger pour roulette_allocation
 DROP TRIGGER IF EXISTS update_roulette_allocation_updated_at ON public.roulette_allocation;
 CREATE TRIGGER update_roulette_allocation_updated_at
   BEFORE UPDATE ON public.roulette_allocation
