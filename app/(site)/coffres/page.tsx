@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Gift, Sparkles, Lock, LogIn } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Gift, Sparkles, Lock, Mail, Loader2 } from 'lucide-react';
 import RewardRevealDialog from '@/components/coffres-mystere/RewardRevealDialog';
-import { supabase } from '@/lib/SupabaseClient';
-import Link from 'next/link';
+import ParrainageSection from '@/components/coffres-mystere/ParrainageSection';
+import { useSearchParams } from 'next/navigation';
 
 interface Reward {
   id: string;
@@ -14,68 +14,112 @@ interface Reward {
   reward_key: string;
 }
 
+interface UserData {
+  userId: string;
+  email: string;
+  rewardUser: {
+    referral_code: string;
+  };
+  availableRounds: number;
+  validatedReferrals: number;
+  isNewUser: boolean;
+}
+
 export default function CoffresPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const searchParams = useSearchParams();
+  const referralCode = searchParams?.get('ref');
+
+  const [email, setEmail] = useState('');
+  const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [availableRounds, setAvailableRounds] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedChest, setSelectedChest] = useState<number | null>(null);
   const [revealedReward, setRevealedReward] = useState<Reward | null>(null);
   const [showDialog, setShowDialog] = useState(false);
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const checkAuth = async () => {
+    if (!email || isSubmittingEmail) return;
+
+    setIsSubmittingEmail(true);
+
     try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const res = await fetch('/api/coffres/init', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          referralCode: referralCode || undefined,
+        }),
+      });
 
-      if (user) {
-        setIsAuthenticated(true);
-        await loadUserData();
-      } else {
-        setIsAuthenticated(false);
-        setIsLoading(false);
+      if (!res.ok) {
+        const error = await res.json();
+        alert(error.error || 'Erreur lors de la validation de l\'email');
+        return;
       }
+
+      const data = await res.json();
+      setUserData(data);
+      setAvailableRounds(data.availableRounds);
+
+      // Sauvegarder l'email dans localStorage
+      localStorage.setItem('ikovaline_user_email', email);
+      localStorage.setItem('ikovaline_user_id', data.userId);
     } catch (error) {
-      console.error('Erreur vérification auth:', error);
-      setIsAuthenticated(false);
-      setIsLoading(false);
+      console.error('Erreur lors de la soumission de l\'email:', error);
+      alert('Erreur serveur');
+    } finally {
+      setIsSubmittingEmail(false);
     }
   };
 
-  const loadUserData = async () => {
+  // Récupérer l'email du localStorage au chargement
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('ikovaline_user_email');
+    const savedUserId = localStorage.getItem('ikovaline_user_id');
+
+    if (savedEmail && savedUserId) {
+      setEmail(savedEmail);
+      // Recharger les données de l'utilisateur
+      loadUserData(savedEmail);
+    }
+  }, []);
+
+  const loadUserData = async (userEmail: string) => {
+    setIsSubmittingEmail(true);
     try {
-      // Ensure initial round
-      await fetch('/api/game/ensure-initial-round', {
+      const res = await fetch('/api/coffres/init', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: userEmail }),
       });
 
-      // Get available rounds
-      const res = await fetch('/api/game/rounds');
       if (res.ok) {
         const data = await res.json();
+        setUserData(data);
         setAvailableRounds(data.availableRounds);
       }
     } catch (error) {
-      console.error('Erreur chargement données:', error);
+      console.error('Erreur lors du rechargement des données:', error);
     } finally {
-      setIsLoading(false);
+      setIsSubmittingEmail(false);
     }
   };
 
   const handleChestClick = async (chestIndex: number) => {
-    if (isPlaying || availableRounds === 0) return;
+    if (isPlaying || availableRounds === 0 || !userData) return;
 
     setIsPlaying(true);
     setSelectedChest(chestIndex);
 
     try {
-      const res = await fetch('/api/game/play', {
+      const res = await fetch('/api/coffres/play', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: userData.userId }),
       });
 
       if (!res.ok) {
@@ -92,7 +136,7 @@ export default function CoffresPage() {
       setTimeout(() => {
         setRevealedReward(data.reward);
         setShowDialog(true);
-        setAvailableRounds((prev) => Math.max(0, prev - 1));
+        setAvailableRounds(data.remainingRounds);
         setIsPlaying(false);
         setSelectedChest(null);
       }, 1500);
@@ -109,26 +153,23 @@ export default function CoffresPage() {
     setRevealedReward(null);
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600">Chargement...</p>
-        </div>
-      </div>
-    );
-  }
+  const handleLogout = () => {
+    localStorage.removeItem('ikovaline_user_email');
+    localStorage.removeItem('ikovaline_user_id');
+    setUserData(null);
+    setEmail('');
+    setAvailableRounds(0);
+  };
 
-  // Not authenticated view
-  if (isAuthenticated === false) {
+  // Email form view
+  if (!userData || isSubmittingEmail) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12 px-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12 px-4 flex items-center justify-center">
+        <div className="max-w-md w-full">
           <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="text-center mb-12"
+            className="text-center mb-8"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Coffres Mystères{' '}
@@ -136,9 +177,8 @@ export default function CoffresPage() {
                 Ikovaline
               </span>
             </h1>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Tentez votre chance et remportez des réductions exclusives sur vos
-              projets digitaux !
+            <p className="text-gray-600 text-lg">
+              Tentez votre chance et remportez des réductions exclusives !
             </p>
           </motion.div>
 
@@ -146,64 +186,61 @@ export default function CoffresPage() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="max-w-md mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 p-8 text-center"
+            className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8"
           >
-            <div className="mb-6">
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <LogIn className="w-10 h-10 text-blue-600" />
+            {referralCode && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+                <p className="text-sm text-green-800 text-center">
+                  🎉 Vous avez été parrainé ! Vous allez recevoir <strong>1 tour gratuit</strong>
+                </p>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Connexion requise
-              </h2>
-              <p className="text-gray-600">
-                Pour jouer aux coffres mystères et gagner des réductions,
-                veuillez vous connecter ou créer un compte.
-              </p>
-            </div>
+            )}
 
-            <div className="space-y-3">
-              <Link
-                href="/login"
-                className="block w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                Se connecter
-              </Link>
-              <Link
-                href="/signup"
-                className="block w-full px-6 py-3 bg-white border-2 border-blue-600 text-blue-600 font-semibold rounded-full hover:bg-blue-50 transition-all duration-300"
-              >
-                Créer un compte
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Preview chests (locked) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-12">
-            {[0, 1, 2].map((index) => (
-              <motion.div
-                key={index}
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 + index * 0.1 }}
-                className="relative"
-              >
-                <div className="relative w-full aspect-square rounded-3xl p-8 bg-gray-100 opacity-50">
-                  <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                    <Lock className="w-20 h-20 text-gray-300 mb-4" />
-                    <span className="text-gray-400 font-semibold text-lg">
-                      Coffre {index + 1}
-                    </span>
-                  </div>
+            <form onSubmit={handleEmailSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Votre adresse email
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="exemple@email.com"
+                    required
+                    disabled={isSubmittingEmail}
+                  />
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmittingEmail || !email}
+                className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:opacity-90 disabled:opacity-50 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+              >
+                {isSubmittingEmail ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Chargement...
+                  </>
+                ) : (
+                  'Commencer à jouer'
+                )}
+              </button>
+            </form>
+
+            <p className="text-xs text-gray-500 text-center mt-4">
+              En continuant, vous acceptez de recevoir des informations sur Ikovaline.
+            </p>
+          </motion.div>
         </div>
       </div>
     );
   }
 
-  // Authenticated view
+  // Main game view
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -211,7 +248,7 @@ export default function CoffresPage() {
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Coffres Mystères{' '}
@@ -219,9 +256,17 @@ export default function CoffresPage() {
               Ikovaline
             </span>
           </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Tentez votre chance et remportez des réductions exclusives sur vos
-            projets digitaux !
+          <p className="text-gray-600 text-lg mb-2">
+            Tentez votre chance et remportez des réductions exclusives !
+          </p>
+          <p className="text-sm text-gray-500">
+            Connecté en tant que : <strong>{userData.email}</strong>{' '}
+            <button
+              onClick={handleLogout}
+              className="text-blue-600 hover:underline ml-2"
+            >
+              Changer
+            </button>
           </p>
         </motion.div>
 
@@ -347,22 +392,13 @@ export default function CoffresPage() {
           ))}
         </div>
 
-        {/* CTA Parrainage */}
-        {availableRounds === 0 && (
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="text-center"
-          >
-            <Link
-              href="/parrainage"
-              className="inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              Parrainer pour gagner des tours
-            </Link>
-          </motion.div>
-        )}
+        {/* Parrainage Section */}
+        <div className="max-w-4xl mx-auto">
+          <ParrainageSection
+            referralCode={userData.rewardUser.referral_code}
+            validatedReferrals={userData.validatedReferrals}
+          />
+        </div>
       </div>
 
       {/* Reward Dialog */}
