@@ -48,7 +48,8 @@ export function InviteCard({
         <div className="flex-1">
           <h3 className="font-semibold text-base">Parrainage</h3>
           <p className="text-xs text-neutral-500">
-            +1 essai pour le parrain quand le filleul effectue un spin
+            +1 essai <b className="text-primary">+ 25 points</b> quand le
+            filleul effectue son premier spin
           </p>
         </div>
         <button

@@ -44,12 +44,17 @@ export function AllocationPanel({
         <div className="p-2.5 rounded-xl bg-primary/10">
           <SlidersHorizontal className="w-5 h-5 text-primary" />
         </div>
-        <div>
+        <div className="flex-1">
           <h3 className="font-semibold text-base">Répartition des points</h3>
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             Somme : <b className="tabular-nums">{sum}</b> /{' '}
             <b className="tabular-nums">{wallet}</b> pts
           </p>
+          {wallet > 100 && (
+            <p className="text-xs text-green-600 dark:text-green-400 mt-0.5">
+              ✨ +{wallet - 100} pts bonus parrainage !
+            </p>
+          )}
         </div>
       </div>
 

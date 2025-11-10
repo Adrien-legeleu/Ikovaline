@@ -106,6 +106,15 @@ export async function POST(req: Request) {
     code: string;
     expires_at: string;
   };
+
+  // ✨ PARRAINAGE : Créditer le parrain si c'est le premier spin du filleul
+  try {
+    await creditReferrerOnFirstSpin(db, email_norm);
+  } catch (err) {
+    console.error('Error crediting referrer:', err);
+    // Ne pas bloquer le spin si le crédit parrain échoue
+  }
+
   return NextResponse.json({
     ok: true,
     seg,
@@ -113,4 +122,68 @@ export async function POST(req: Request) {
     code,
     expiresAt: expires_at,
   });
+}
+
+/**
+ * Crédite le parrain avec +25 points et +1 essai au premier spin du filleul
+ *
+ * LOGIQUE PARRAINAGE :
+ * - Quand un filleul fait son premier spin, son parrain gagne :
+ *   ✅ +1 essai (tries_left)
+ *   ✅ +25 points (points_wallet) à répartir comme il veut
+ * - Le filleul peut relancer si le parrain a des tries_left
+ * - Un filleul ne peut créditer son parrain qu'une seule fois
+ */
+async function creditReferrerOnFirstSpin(
+  db: ReturnType<typeof getAdminSupabase>,
+  invitee_email_norm: string
+) {
+  // Trouver la relation de parrainage acceptée et non encore créditée
+  const { data: referral } = await db
+    .from('roulette_referrals')
+    .select('id, referrer_email, referrer_email_norm, credited')
+    .eq('invitee_email_norm', invitee_email_norm)
+    .eq('accepted', true)
+    .maybeSingle();
+
+  if (!referral || referral.credited) {
+    // Pas de parrainage ou déjà crédité
+    return;
+  }
+
+  // Récupérer les valeurs actuelles du parrain
+  const { data: referrerUser } = await db
+    .from('roulette_users')
+    .select('points_wallet, tries_left')
+    .eq('email_norm', referral.referrer_email_norm)
+    .single();
+
+  if (!referrerUser) {
+    console.error('Referrer user not found');
+    return;
+  }
+
+  // Créditer le parrain : +25 points + +1 essai
+  const { error: updateError } = await db
+    .from('roulette_users')
+    .update({
+      points_wallet: referrerUser.points_wallet + 25,
+      tries_left: referrerUser.tries_left + 1,
+    })
+    .eq('email_norm', referral.referrer_email_norm);
+
+  if (updateError) {
+    console.error('Error updating referrer wallet:', updateError);
+    throw updateError;
+  }
+
+  // Marquer le parrainage comme crédité
+  await db
+    .from('roulette_referrals')
+    .update({ credited: true, credited_at: new Date().toISOString() })
+    .eq('id', referral.id);
+
+  console.log(
+    `✅ Parrain ${referral.referrer_email} crédité : +25 pts, +1 essai (filleul: ${invitee_email_norm})`
+  );
 }
