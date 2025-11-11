@@ -16,7 +16,6 @@ interface RewardCardProps {
   description: string;
   rewardKey: string;
   tier?: RewardTier;
-  onUse?: () => void;
   onClose?: () => void;
 }
 
@@ -89,7 +88,6 @@ export default function RewardCard({
   description,
   rewardKey,
   tier: propTier,
-  onUse,
   onClose,
 }: RewardCardProps) {
   const tier = propTier || getRewardKeyToTier(rewardKey);
@@ -182,21 +180,6 @@ export default function RewardCard({
           >
             Valable sur un projet Ikovaline
           </motion.p>
-
-          {/* Action button */}
-          {onUse && (
-            <motion.button
-              onClick={onUse}
-              className="mt-4 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              Utiliser maintenant
-            </motion.button>
-          )}
         </div>
       </div>
     </motion.div>

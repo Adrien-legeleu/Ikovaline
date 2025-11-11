@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import RewardCard, { type RewardTier } from './RewardCard';
+import RewardCard from './RewardCard';
 
 interface RewardRevealDialogProps {
   isOpen: boolean;
