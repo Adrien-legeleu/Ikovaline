@@ -59,7 +59,7 @@ const landing: CategoryDef = {
       id: 'starter',
       name: 'Starter',
       price: 1090,
-      baseDelayDays: 7,
+      baseDelayDays: 5,
       includes: [
         '1 page complète responsive',
         'Design premium',
@@ -69,7 +69,7 @@ const landing: CategoryDef = {
     {
       id: 'pro',
       name: 'Pro',
-      price: 1590,
+      price: 2290,
       baseDelayDays: 10,
       includes: [
         'Sections dynamiques',
