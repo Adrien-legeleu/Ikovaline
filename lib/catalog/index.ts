@@ -69,8 +69,8 @@ const landing: CategoryDef = {
     {
       id: 'pro',
       name: 'Pro',
-      price: 1590,
-      baseDelayDays: 10,
+      price: 2290,
+      baseDelayDays: 5,
       includes: [
         'Sections dynamiques',
         'CMS',
