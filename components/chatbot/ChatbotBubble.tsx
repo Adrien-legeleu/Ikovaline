@@ -538,7 +538,7 @@ export default function ChatbotBubble() {
                                 priority
                               />
                             </div>
-                            <span className="text-xl font-extrabold tracking-widest !mix-blend-overlay">
+                            <span className="text-xl font-extrabold tracking-widest text-white/90">
                               IkovalineTalk
                             </span>
                           </div>
@@ -552,15 +552,15 @@ export default function ChatbotBubble() {
                           </button>
                         </div>
 
-                        <p className="text-md font-bold mix-blend-overlay mix mb-1">
+                        <p className="text-md font-bold text-white/90 mix mb-1">
                           Bonjour,
                         </p>
-                        <h2 className="text-2xl font-semibold mix-blend-overlay leading-snug">
+                        <h2 className="text-2xl font-semibold text-white/90 leading-snug">
                           Comment pouvons-nous
                           <br />
                           vous aider ?
                         </h2>
-                        <p className="mt-3 text-sm font-bold mix-blend-overlay max-w-xs">
+                        <p className="mt-3 text-sm font-bold text-white/90 max-w-xs">
                           Décrivez votre besoin ou laissez IkovalineTalk vous
                           guider pour estimer budget et délai.
                         </p>
