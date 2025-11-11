@@ -15,6 +15,7 @@ import {
   IconUsersGroup,
   IconBrandWhatsapp,
 } from '@tabler/icons-react';
+import { BookOpen, Gauge } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Menu, MenuItem, HoveredLink } from '../ui/navbar-menu';
 import { HeaderResponsive } from './HeaderResponsive';
@@ -110,9 +111,7 @@ export function Header({ className }: { className?: string }) {
   // on lit scrollY -> on pilote un state bool pour savoir si on est tout en haut
   const [isTop, setIsTop] = useState(true);
   useEffect(() => {
-    // subscribe à scrollY pour maj isTop sans re-render sale
     const unsub = scrollY.on('change', (v) => {
-      // seuil ultra faible genre 2px pour éviter le flicker
       setIsTop(v < 2);
     });
     return () => unsub();
@@ -304,12 +303,63 @@ export function Header({ className }: { className?: string }) {
                     item="Nos Projets"
                     link="/our-projects"
                   />
+
+                  {/* 🔥 Remplacement de "Blog" par "Ressources" */}
                   <MenuItem
                     setActive={setActive}
                     active={active}
-                    item="Blog"
-                    link="/blog"
-                  />
+                    item="Ressources"
+                    link="/simulateurs"
+                  >
+                    <div className="grid grid-cols-2 max-w-xl mx-auto gap-8 text-sm">
+                      {/* Colonne gauche : Blog */}
+                      <div className="flex flex-col space-y-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">
+                          Contenus
+                        </p>
+                        <HoveredLink href="/blog">
+                          <div className="flex items-start gap-3">
+                            <div className="mt-0.5 flex min-h-7 min-w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
+                              <BookOpen className="h-4 w-4" />
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="text-sm font-medium">
+                                Blog Ikovaline
+                              </span>
+                              <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                                Articles, études de cas & insights pour scaler
+                                votre business sereinement.
+                              </span>
+                            </div>
+                          </div>
+                        </HoveredLink>
+                      </div>
+
+                      {/* Colonne droite : Simulateurs */}
+                      <div className="flex flex-col space-y-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">
+                          Simulateurs
+                        </p>
+                        <HoveredLink href="/simulateurs">
+                          <div className="flex items-start gap-3">
+                            <div className="mt-0.5 flex min-h-7 min-w-7 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
+                              <Gauge className="h-4 w-4" />
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="text-sm font-medium">
+                                Nos simulateurs
+                              </span>
+                              <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                                Mesurez vos fuites de revenus, ROI marketing &
+                                gains potentiels en quelques clics.
+                              </span>
+                            </div>
+                          </div>
+                        </HoveredLink>
+                      </div>
+                    </div>
+                  </MenuItem>
+
                   <MenuItem
                     setActive={setActive}
                     active={active}
