@@ -11,7 +11,7 @@ import LazyExtraStyle from '@/app/LazyExtraStyle';
 
 import Script from 'next/script';
 import { Plus_Jakarta_Sans, Poppins } from 'next/font/google';
-import Favicon from '@/app/ikovaline_logo-favicon.png';
+import Favicon from '@/app/ikovaline-logo.svg';
 import { Suspense } from 'react';
 
 const poppins = Poppins({
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/logo/ikovaline_logo.png',
+        url: '/images/logo/ikovaline-logo.svg',
         width: 1200,
         height: 630,
         alt: 'Ikovaline Logo',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: 'Ikovaline - Expert Marketing Digital et Transformation',
     description:
       'Boostez votre visibilité avec Ikovaline, start-up étudiante experte en marketing digital et stratégies de transformation numérique.',
-    images: ['/images/logo/ikovaline_logo.png'],
+    images: ['/images/logo/ikovaline-logo.svg'],
   },
   icons: [{ rel: 'icon', url: Favicon.src }],
 };
