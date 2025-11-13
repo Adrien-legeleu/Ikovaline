@@ -120,11 +120,11 @@ function Background({ reduce }: { reduce: boolean | null }) {
       initial={reduce ? undefined : { opacity: 0 }}
       animate={reduce ? undefined : { opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="absolute inset-0 z-0 flex [mask-image:radial-gradient(circle_at_center,white_0%,black_40%,transparent_90%)]"
+      className="absolute inset-0 z-0 flex md:[mask-image:radial-gradient(circle_at_center,white_0%,black_40%,transparent_90%)] [mask-image:radial-gradient(circle_at_center,white_0%,black_70%,transparent_90%)]"
       aria-hidden
     >
       {/* Fond bleu */}
-      <div className="absolute inset-0 md:bg-primary/70 md:dark:bg-primary/50 bg-primary/40" />
+      <div className="absolute inset-0 md:bg-primary/70 md:dark:bg-primary/50 bg-primary/60" />
       {/* Bruit */}
       <Noise />
       {/* Stripes (DOM minimal, reflow throttlé) */}
