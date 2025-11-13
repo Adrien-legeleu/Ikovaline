@@ -124,14 +124,14 @@ function Background({ reduce }: { reduce: boolean | null }) {
       aria-hidden
     >
       {/* Fond bleu */}
-      <div className="absolute inset-0 md:bg-primary/60 md:dark:bg-primary/50 bg-primary/40" />
+      <div className="absolute inset-0 md:bg-primary/70 md:dark:bg-primary/50 bg-primary/40" />
       {/* Bruit */}
       <Noise />
       {/* Stripes (DOM minimal, reflow throttlé) */}
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className="h-full w-20 bg-gradient-to-r border-primary/15 border-[0.5px] from-slate-100 to-white shadow-[2px_0_0_0_#e5e7eb] dark:from-neutral-900 dark:to-neutral-950 dark:shadow-[2px_0_0_0_#262626]"
+          className="h-full w-20 bg-gradient-to-r border-primary/20 dark:border-primary/15 border-[0.5px] from-slate-100 to-white  dark:from-neutral-900 dark:to-neutral-950 shadow-[2px_0_0_0_#262626]"
         />
       ))}
     </motion.div>
