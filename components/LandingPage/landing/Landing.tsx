@@ -26,6 +26,7 @@ const Services = dynamic(
 );
 import Link from 'next/link';
 import WhatsAppButton from '@/components/WhatsappButton';
+import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 
 export default function HeroNoiseLight() {
   const reduce = useReducedMotion();
@@ -58,8 +59,8 @@ export default function HeroNoiseLight() {
           transition={{ duration: 0.3, delay: 0.15 }}
           className="mx-auto mt-8 max-w-xl text-center text-sm text-slate-600 md:text-lg dark:text-slate-300"
         >
-          Ikovaline, conçoit des solutions digitales sur mesure pour développer
-          vos projets et accélérer votre croissance digital.
+          Ikovaline développe vos projets Web, App & SaaS sur mesure, de l’idée
+          à la mise en ligne.
         </motion.p>
 
         {/* CTA */}
@@ -69,11 +70,8 @@ export default function HeroNoiseLight() {
           transition={{ duration: 0.3, delay: 0.25 }}
           className="mt-8 flex w-full  items-center justify-center gap-4 flex-row"
         >
-          <Link
-            href="/signup"
-            className="rounded-3xl bg-primary px-6 py-3 text-base font-semibold text-white hover:opacity-95"
-          >
-            Lancer mon projet
+          <Link href="/signup">
+            <InteractiveHoverButton> Lancer mon projet</InteractiveHoverButton>
           </Link>
           <WhatsAppButton
             className="px-6 py-3 sm:hidden gap-2 rounded-lg flex items-center justify-center"

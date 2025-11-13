@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-zalando {
+  font-family: 'Zalando Sans SemiExpanded', sans-serif;
+}
 html,
 body {
   scroll-behavior: smooth;

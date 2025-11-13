@@ -66,7 +66,7 @@ export default function StarClientsGoogle() {
               transition={{ delay: 1 }}
               className="text-xs tracking-wider font-semibold text-gray-700 dark:text-gray-300"
             >
-              67+ avis
+              70+ avis
             </motion.span>
           </span>
 

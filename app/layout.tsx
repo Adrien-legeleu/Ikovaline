@@ -1,4 +1,5 @@
-// app/layout.tsx  (ROOT LAYOUT OBLIGATOIRE)
+// app/layout.tsx
+
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -10,20 +11,9 @@ import { ScrollManager } from '@/components/ScrollManager';
 import LazyExtraStyle from '@/app/LazyExtraStyle';
 
 import Script from 'next/script';
-import { Plus_Jakarta_Sans, Poppins } from 'next/font/google';
-import Favicon from '@/app/ikovaline-logo.png';
 import { Suspense } from 'react';
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['300', '400', '600', '700', '800'],
-  display: 'swap',
-});
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  display: 'swap',
-});
+import Favicon from '@/app/ikovaline-logo.png';
 
 export const metadata: Metadata = {
   title: 'Ikovaline – Experts en visibilité digitale pour PME et entrepreneurs',
@@ -61,8 +51,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={jakarta.className}>
+    <html lang="fr" className="font-zalando antialiased">
       <head>
+        {/* ------ IMPORT GOOGLE FONTS (Zalando + Montserrat) ------ */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Zalando+Sans+SemiExpanded:ital,wght@0,200..900;1,200..900&display=swap"
+          rel="stylesheet"
+        />
+
         {/* Cookiebot */}
         <Script
           id="Cookiebot"
@@ -72,7 +75,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
 
-        {/* Consent Mode v2 — défaut denied */}
+        {/* Consent Mode default */}
         <Script id="gcm-default" strategy="beforeInteractive">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){ dataLayer.push(arguments); }
@@ -84,29 +87,9 @@ export default function RootLayout({
             functionality_storage: 'granted',
             security_storage: 'granted'
           });
-          gtag('set', 'ads_data_redaction', true);
-          window.addEventListener('CookieConsentDeclaration', function() {
-            try {
-              var c = window.Cookiebot?.consented || {};
-              var analyticsGranted = !!c.statistics;
-              var marketingGranted  = !!c.marketing;
-              gtag('consent', 'update', {
-                analytics_storage: analyticsGranted ? 'granted' : 'denied',
-                ad_storage:       marketingGranted  ? 'granted' : 'denied',
-                ad_user_data:     marketingGranted  ? 'granted' : 'denied',
-                ad_personalization: marketingGranted ? 'granted' : 'denied'
-              });
-            } catch(e){}
-          });
         `}</Script>
 
-        {/* Préconnect */}
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Preconnect divers */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://analytics.ahrefs.com" />
@@ -117,13 +100,13 @@ export default function RootLayout({
           id="gtm-main"
           strategy="afterInteractive"
         >{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
-          j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-          f.parentNode.insertBefore(j,f);
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-NDKCHTFH');`}</Script>
 
-        {/* Ahrefs (bloqué avant consent) */}
+        {/* Ahrefs */}
         <Script
           id="ahrefs-analytics"
           src="https://analytics.ahrefs.com/analytics.js"
@@ -134,11 +117,11 @@ export default function RootLayout({
         />
       </head>
 
-      <body className="antialiased">
+      <body className="font-zalando antialiased">
         {/* GTM noscript */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-NDKCHTFH"
+            src="https://www.googletagmanager.com/s.html?id=GTM-NDKCHTFH"
             height="0"
             width="0"
             style={{ display: 'none', visibility: 'hidden' }}
@@ -154,7 +137,6 @@ export default function RootLayout({
         <LazyExtraStyle />
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          {/* ⚠️ PAS de Header/Footer ici */}
           {children}
           <Toaster />
         </ThemeProvider>

@@ -51,6 +51,20 @@ export const PROJECTS_FR: Project[] = [
     lien: 'https://sturmayr.netlify.app/',
   },
   {
+    id: 'musee-plaisance',
+    titre: 'Musée de la Plaisance',
+    services: ['Site culturel', 'Patrimoine', 'Événements'],
+    coverImage: '/images/museedelaplaisance.com_(Nest Hub Max).png',
+    lien: 'https://museedelaplaisance.com',
+  },
+  {
+    id: 'motionlabs-2025',
+    titre: 'MotionLab',
+    services: ['Prise de rdv', 'UI/UX salon', 'Landing'],
+    coverImage: '/images/motion-lab.agency_(Nest Hub Max).png',
+    lien: 'https://motion-lab.agency/',
+  },
+  {
     id: 'or-lumiere-2025',
     titre: 'Or & Lumière',
     services: ['E-commerce', 'Luxe', 'Mise en avant produits'],
@@ -82,13 +96,6 @@ export const PROJECTS_FR: Project[] = [
     lien: 'https://inovaya.com',
   },
 
-  {
-    id: 'musee-plaisance',
-    titre: 'Musée de la Plaisance',
-    services: ['Site culturel', 'Patrimoine', 'Événements'],
-    coverImage: '/images/museedelaplaisance.com_(Nest Hub Max).png',
-    lien: 'https://museedelaplaisance.com',
-  },
   {
     id: 'or-lumiere-alt',
     titre: 'Or & Lumière (alt)',
